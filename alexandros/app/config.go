@@ -44,7 +44,7 @@ func CreateNewConfig(env string) (*AlexandrosHandler, error) {
 	var cfg models.Config
 
 	if healthCheck {
-		vaultConfig, err := configFromVault()
+		vaultConfig, err := cfg.ConfigFromVault()
 		if err != nil {
 			log.Print(err)
 			return nil, err

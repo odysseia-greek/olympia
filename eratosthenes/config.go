@@ -27,7 +27,7 @@ func dialGrpcService(addr string) (*grpc.ClientConn, error) {
 // If successful, it returns the retrieved secret and nil error.
 // If the maximum number of attempts is reached without success, it returns
 // an error indicating the failure.
-func configFromVault(optionalName ...string) (*pb.ElasticConfigVault, error) {
+func ConfigFromVault(optionalName ...string) (*pb.ElasticConfigVault, error) {
 	var name string
 
 	if len(optionalName) > 0 && optionalName[0] != "" {
