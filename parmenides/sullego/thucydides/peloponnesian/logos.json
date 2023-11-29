@@ -1,0 +1,8978 @@
+{
+  "logos": [
+    {
+      "method": "",
+      "category": "",
+      "greek": "γῆ",
+      "translation": "earth",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δή",
+      "translation": "interactional particle",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μή",
+      "translation": "not",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅς",
+      "translation": "who, that, which: relative pronoun",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅς",
+      "translation": "possessive pronoun",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τῇ",
+      "translation": "here, there",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὡς",
+      "translation": "as, how",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἅμα",
+      "translation": "at once, at the same time",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄρα",
+      "translation": "particle: 'so'",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βία",
+      "translation": "bodily strength, force, power, might",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διά",
+      "translation": "through c. gen.; because of c. acc.",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίς",
+      "translation": "twice, doubly",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰς",
+      "translation": "into, to c. acc.",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἷς",
+      "translation": "one",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἤδη",
+      "translation": "already",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πως",
+      "translation": "somehow, in some way",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πῶς",
+      "translation": "how? in what way",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τίη",
+      "translation": "why? wherefore?",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τις",
+      "translation": "any one, any thing, some one, some thing;",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τίς",
+      "translation": "who? which?",
+      "chapter": 1
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χρή",
+      "translation": "it is fated, necessary",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄγος",
+      "translation": "pollution, expiation",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγών",
+      "translation": "a gathering; a contest, a struggle, a trial",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκοή",
+      "translation": "a hearing, the sound heard",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνήρ",
+      "translation": "a man",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀρχή",
+      "translation": "a beginning, rule, office, empire",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βιός",
+      "translation": "a bow",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βίος",
+      "translation": "life",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίκη",
+      "translation": "(custom, usage) justice, lawsuit, penalty",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔθος",
+      "translation": "custom, habit",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑκών",
+      "translation": "willing, of free will, readily",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐμός",
+      "translation": "mine",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑξῆς",
+      "translation": "one after another, in order, in a row",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔτος",
+      "translation": "a year",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡδύς",
+      "translation": "sweet",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θεός",
+      "translation": "god",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θήκη",
+      "translation": "a case to put anything in, a box, chest",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἴσος",
+      "translation": "equal to, the same as; adv. perhaps",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κώμη",
+      "translation": "country town",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μάχη",
+      "translation": "battle, fight, combat",
+      "chapter": 2
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μονή",
+      "translation": "a staying, abiding, tarrying, stay",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναῦς",
+      "translation": "a ship",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νέος",
+      "translation": "young, youthful",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁδός",
+      "translation": "a way, path, track, journey",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἷος",
+      "translation": "(such a kind) as; for οἷός τε see οἷος III.",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁμῶς",
+      "translation": "equally, likewise, alike",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅμως",
+      "translation": "all the same, nevertheless",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅπως",
+      "translation": "how, that, in order that, as",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀργή",
+      "translation": "natural impulse",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅσος",
+      "translation": "as much/many as",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παῖς",
+      "translation": "a child",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρά",
+      "translation": "from the side of, c. gen., beside, alongside of, c. dat., to the side of, motion alongside of, c. acc.",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρός",
+      "translation": "(w. gen.) from; (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ῥόος",
+      "translation": "a stream, flow, current",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σῶμα",
+      "translation": "the body",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τιμή",
+      "translation": "that which is paid in token of worth",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τύχη",
+      "translation": "(good) fortune, luck, chance",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "υἱός",
+      "translation": "a son",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑμός",
+      "translation": "your",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὕψος",
+      "translation": "height",
+      "chapter": 3
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χηλή",
+      "translation": "a horse’s hoof; breakwater, spur of a mountain",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χώρα",
+      "translation": "land",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγορά",
+      "translation": "an assembly of the people",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀδεής",
+      "translation": "without fear, fearless; causing no fear",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰτία",
+      "translation": "a charge, accusation",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄλλος",
+      "translation": "other, another",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄλλως",
+      "translation": "in another way",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄξιος",
+      "translation": "worthy",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπάτη",
+      "translation": "a trick, fraud, deceit",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀρετή",
+      "translation": "goodness, excellence",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄρχων",
+      "translation": "a ruler, commander, chief, captain",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὖθις",
+      "translation": "back, back again",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτός",
+      "translation": "unemph.",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γένος",
+      "translation": "race, stock, family",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γνώμη",
+      "translation": "a means of knowing, a mark, token",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γραφή",
+      "translation": "drawing, writing; indictment",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δεξιά",
+      "translation": "the right hand",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δῆλος",
+      "translation": "visible, conspicuous",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγγύς",
+      "translation": "near, nigh, at hand",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔθνος",
+      "translation": "a number of people accustomed to live together",
+      "chapter": 4
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔθνος",
+      "translation": "a company",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔθνος",
+      "translation": "body of men",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἶδον",
+      "translation": "to see",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰκός",
+      "translation": "like truth",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἶπον",
+      "translation": "to speak, say",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλπίς",
+      "translation": "hope, expectation",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐντός",
+      "translation": "within, inside",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔργον",
+      "translation": "work",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔρυμα",
+      "translation": "a fence, guard",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὐθύς",
+      "translation": "straight, direct",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ζημία",
+      "translation": "loss, damage",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡμέρα",
+      "translation": "day",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἥσσων",
+      "translation": "less, weaker",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἴδιος",
+      "translation": "one's own, pertaining to oneself",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱερόν",
+      "translation": "sanctuary",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱερός",
+      "translation": "super-human, mighty, divine, wonderful",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἰσχύς",
+      "translation": "strength",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κακός",
+      "translation": "bad",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καλός",
+      "translation": "beautiful",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λόγος",
+      "translation": "the word",
+      "chapter": 5
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέρος",
+      "translation": "a part, share",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μῆκος",
+      "translation": "length",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μήτηρ",
+      "translation": "a mother",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μῖσος",
+      "translation": "hate, hatred",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μοῖρα",
+      "translation": "a part, portion; fate",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μόνος",
+      "translation": "alone, left alone, forsaken solitary",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεῦμα",
+      "translation": "a nod",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νῆσος",
+      "translation": "an island",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νομός",
+      "translation": "place of pasture; district (nome), esp. in Egypt",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νόμος",
+      "translation": "usage, custom, law, ordinance",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ξένος",
+      "translation": "a guest, guest-friend, stranger; foreign",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἶκος",
+      "translation": "a house, abode, dwelling",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅπλον",
+      "translation": "a tool, implement, (pl.) arms, weapons",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅρκος",
+      "translation": "the object by which one swears, the witness of an oath",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅστις",
+      "translation": "indef. relative or indirect interrogative",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὗτος",
+      "translation": "this; that",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὕτως",
+      "translation": "so, in this manner",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πατήρ",
+      "translation": "a father",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεζός",
+      "translation": "on foot",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεῖρα",
+      "translation": "a trial, attempt, essay, experiment",
+      "chapter": 6
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλέος",
+      "translation": "full.",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλέως",
+      "translation": "full of",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλόος",
+      "translation": "a sailing, voyage",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πόλις",
+      "translation": "a city",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολύς",
+      "translation": "much, many",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πόνος",
+      "translation": "work",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ῥητός",
+      "translation": "stated, specified",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σαφής",
+      "translation": "clear, plain, distinct, manifest",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σῖτος",
+      "translation": "corn, grain",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκευή",
+      "translation": "equipment, attire, apparel, dress",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στόμα",
+      "translation": "the mouth",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σφεῖς",
+      "translation": "personal and (ind.) reflexive pronoun",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σχολή",
+      "translation": "spare time, leisure, rest, ease; σχολῇ scarcely",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τάχος",
+      "translation": "swiftness, speed, fleetness, velocity",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ταχύς",
+      "translation": "quick, swift, fleet",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τέλος",
+      "translation": "the fulfilment",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τόλμα",
+      "translation": "courage, to undertake",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τρεῖς",
+      "translation": "three",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τροπή",
+      "translation": "a turn, turning",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τροφή",
+      "translation": "nourishment, food, victuals",
+      "chapter": 7
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φιλία",
+      "translation": "friendly love, affection, friendship",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φίλος",
+      "translation": "friend; loved, beloved, dear",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φόβος",
+      "translation": "fear, panic, flight",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φόνος",
+      "translation": "murder, homicide, slaughter",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φόρος",
+      "translation": "tribute, payment",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χάρις",
+      "translation": "gratitude, favor, grace, charm",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χρεία",
+      "translation": "use, advantage, service",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χρῆμα",
+      "translation": "thing, (pl.) goods, property, money",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ψῆφος",
+      "translation": "a small stone, a pebble; vote",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ψιλός",
+      "translation": "bare, stripped; (soldier) without heavy armor, light troops",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ψόγος",
+      "translation": "a blamable fault, a blemish, flaw",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγαθός",
+      "translation": "good",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄδηλος",
+      "translation": "not seen",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἴτιος",
+      "translation": "to blame, blameworthy, culpable",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀληθής",
+      "translation": "unconcealed, true",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀμαθής",
+      "translation": "unlearned, ignorant, stupid, boorish",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀμαθία",
+      "translation": "ignorance",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνάγκη",
+      "translation": "force, constraint, necessity",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄνεμος",
+      "translation": "wind",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀξίωμα",
+      "translation": "that of which one is thought worthy, an honour",
+      "chapter": 8
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄοκνος",
+      "translation": "without hesitation, untiring",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπορία",
+      "translation": "difficulty of passing",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄπορος",
+      "translation": "without passage",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀφανής",
+      "translation": "unseen, invisible, viewless",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βίαιος",
+      "translation": "forcible, violent",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βοηθός",
+      "translation": "assisting, auxiliary",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βραδύς",
+      "translation": "slow",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βραχύς",
+      "translation": "short",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γράμμα",
+      "translation": "(drawing, scratch) letter, character, writing, document",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δεινός",
+      "translation": "fearful, terrible, dread, dire",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δεξιός",
+      "translation": "on the right hand",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίωξις",
+      "translation": "chase, pursuit",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δοῦλος",
+      "translation": "slave",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δραχμή",
+      "translation": "a handful; a drachma",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δρόμος",
+      "translation": "a course, running, race",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑκατόν",
+      "translation": "a hundred",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔκδεια",
+      "translation": "a falling short, being in arrear",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔλασις",
+      "translation": "a driving away, banishing",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐναγής",
+      "translation": "under a curse, excommunicate, accurst",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔξοδος",
+      "translation": "a going out; an exit",
+      "chapter": 9
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐρέτης",
+      "translation": "a rower",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕτερος",
+      "translation": "the one; the other (of two)",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὔνοια",
+      "translation": "good-will, favour, kindness",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔφοδος",
+      "translation": "accessible",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔφοδος",
+      "translation": "a way towards, approach",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔφορος",
+      "translation": "an overseer, guardian, ruler",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐχθρός",
+      "translation": "hated, hateful; enemy",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡγεμών",
+      "translation": "leader, guide",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡλικία",
+      "translation": "time of life, age",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἥμισυς",
+      "translation": "half",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡσυχία",
+      "translation": "stillness, rest, quiet",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱκανός",
+      "translation": "becoming, befitting, sufficing",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱκέτης",
+      "translation": "one who comes to seek protection, a suppliant",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱππεύς",
+      "translation": "a horseman",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἰσθμός",
+      "translation": "neck, narrow passage",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καιρός",
+      "translation": "time; the right moment, opportunity",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καῖρος",
+      "translation": "the row of thrums",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καλύβη",
+      "translation": "a hut, cabin, cell",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κέρδος",
+      "translation": "gain, profit, advantage",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κοινός",
+      "translation": "common, shared in common",
+      "chapter": 10
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κόλπος",
+      "translation": "bosom; gulf",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κρίσις",
+      "translation": "a separating, power of distinguishing",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κτῆσις",
+      "translation": "acquisition",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κτίσις",
+      "translation": "a founding, foundation",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κώλυμα",
+      "translation": "a hindrance, impediment",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κωλύμη",
+      "translation": "hindering",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λῃστής",
+      "translation": "a robber, plunderer",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μακρός",
+      "translation": "long",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μᾶλλον",
+      "translation": "more, rather",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μελέτη",
+      "translation": "care, attention",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μηδείς",
+      "translation": "(and not one); not one, no-one",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μικρός",
+      "translation": "small, little",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μισθός",
+      "translation": "wages, pay, hire",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μόριον",
+      "translation": "a piece, portion, section",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναύτης",
+      "translation": "a sailor, seaman; a fellow sailor",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεκρός",
+      "translation": "a dead body, corpse",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἴκημα",
+      "translation": "any inhabited place, a dwellingplace",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀλίγος",
+      "translation": "few, little, scanty, small",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁμιλία",
+      "translation": "a being together, communion, intercourse, converse, company",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅμοιος",
+      "translation": "like, resembling",
+      "chapter": 11
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὄρυγμα",
+      "translation": "a trench, ditch, moat",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὐδείς",
+      "translation": "not one, nobody",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πάθημα",
+      "translation": "anything that befals one, a suffering, calamity, misfortune",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πίστις",
+      "translation": "trust, belief; pledge, security",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πιστός",
+      "translation": "liquid (medicines)",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πιστός",
+      "translation": "to be trusted",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλείων",
+      "translation": "more, larger",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλῆθος",
+      "translation": "a great number, a throng, crowd, multitude",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλήρης",
+      "translation": "filled",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλοῖον",
+      "translation": "a floating vessel, a ship, vessel",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρᾶγμα",
+      "translation": "that which has been done, a deed, act",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρῶτος",
+      "translation": "first",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ῥᾴδιος",
+      "translation": "easy, ready, easy to make",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σιτίον",
+      "translation": "grain, corn: food made from grain, bread",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκάφος",
+      "translation": "a digging, hoeing",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκάφος",
+      "translation": "the hull of a ship",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σπάνις",
+      "translation": "scarcity, rareness, dearth, lack of",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σπονδή",
+      "translation": "drink-offering; (pl.) truce, treaty",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στενός",
+      "translation": "narrow, strait",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στόλος",
+      "translation": "an expedition; a voyage; equipment",
+      "chapter": 12
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τεῖχος",
+      "translation": "a wall",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τροπός",
+      "translation": "a twisted leathern thong",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τρόπος",
+      "translation": "a turn, direction, course, way; character",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φυλακή",
+      "translation": "a watching",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χείρων",
+      "translation": "worse, meaner, inferior",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χρόνος",
+      "translation": "time",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χωρίον",
+      "translation": "a particular place, a place, spot, district",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγγελία",
+      "translation": "a message, tidings, news",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄγγελος",
+      "translation": "a messenger, envoy",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰσχύνη",
+      "translation": "shame done one, disgrace, dishonour",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκριβής",
+      "translation": "exact, accurate, precise, made",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀλλήλων",
+      "translation": "of one another, to one another, one another",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἁμαρτία",
+      "translation": "a failure, fault, sin",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀμείνων",
+      "translation": "better, abler, stronger, braver",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνεψιός",
+      "translation": "a first-cousin, cousin",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνοκωχή",
+      "translation": "a stay, cessation",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀξίωσις",
+      "translation": "a thinking worthy",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπειρία",
+      "translation": "want of skill, inexperience",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄπειρος",
+      "translation": "without trial, inexperienced",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄπιστος",
+      "translation": "not to be trusted",
+      "chapter": 13
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποικία",
+      "translation": "a settlement far from home, a colony settlement",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄποικος",
+      "translation": "away from home",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀριθμός",
+      "translation": "number",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄριστος",
+      "translation": "best",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀσθενής",
+      "translation": "without strength, weak, feeble, weakly",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄσμενος",
+      "translation": "well-pleased, glad",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀσφαλής",
+      "translation": "not liable to fall, immoveable, steadfast, firm",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄτολμος",
+      "translation": "daring nothing, wanting courage, spiritless, cowardly",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βέβαιος",
+      "translation": "firm, steady, steadfast, sure, certain",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γεωργία",
+      "translation": "tillage, agriculture, farming",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέκατος",
+      "translation": "tenth",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διάνοια",
+      "translation": "a thought, intention, purpose",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαρκής",
+      "translation": "quite sufficient",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαφορά",
+      "translation": "difference, distinction",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίκαιος",
+      "translation": "just, observant of custom, correct, balanced",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διπλόος",
+      "translation": "twofold, double",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δύναμις",
+      "translation": "power, might, strength",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δυνατός",
+      "translation": "strong, mighty, able",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔγκλημα",
+      "translation": "an accusation, charge, complaint",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰκότως",
+      "translation": "in all likelihood, suitably, fairly, reasonably, naturally",
+      "chapter": 14
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕκαστος",
+      "translation": "every, every one, each, each one",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκεῖνος",
+      "translation": "that over there, that",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔκπλοος",
+      "translation": "a sailing out, leaving port",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλάσσων",
+      "translation": "smaller, less",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐμπορία",
+      "translation": "commerce, trade, traffic",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔνδηλος",
+      "translation": "visible, manifest, clear",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξουσία",
+      "translation": "power",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑτοῖμος",
+      "translation": "at hand, ready, prepared",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὔδοξος",
+      "translation": "of good repute, honoured, famous, glorious",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἥκιστος",
+      "translation": "least",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἤπειρος",
+      "translation": "terra-firma, the land",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἰδιώτης",
+      "translation": "a private person, an individual",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱκετεία",
+      "translation": "supplication",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταβοή",
+      "translation": "an outcry against",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λῃστεία",
+      "translation": "a robber's life, robbery, piracy, buccaneering",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λυπηρός",
+      "translation": "painful, distressing",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μενετός",
+      "translation": "inclined to wait, patient",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μνηστήρ",
+      "translation": "a wooer, suitor",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μυθώδης",
+      "translation": "legendary, fabulous",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκεῖος",
+      "translation": "in or of the house",
+      "chapter": 15
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἴκησις",
+      "translation": "the act of dwelling, habitation",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκήτωρ",
+      "translation": "an inhabitant; a colonist",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁπλίτης",
+      "translation": "heavy-armed, armed",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παλαιός",
+      "translation": "old in years",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πανταχῆ",
+      "translation": "everywhere",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεμπτός",
+      "translation": "sent",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πέμπτος",
+      "translation": "the fifth, oneself with four others",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλοῦτος",
+      "translation": "wealth, riches",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλώϊμος",
+      "translation": "fit for sailing",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ποιητής",
+      "translation": "one who makes, a maker",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πόλεμος",
+      "translation": "battle, fight, war",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πόλισμα",
+      "translation": "a city, town",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολίτης",
+      "translation": "(fellow) citizen",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ποταμός",
+      "translation": "a river, stream",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρέσβυς",
+      "translation": "an old man; pl. ambassadors",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σεισμός",
+      "translation": "a shaking, shock",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σημεῖον",
+      "translation": "a sign, a mark, token",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκυτάλη",
+      "translation": "a staff, cudgel, club",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατιά",
+      "translation": "army",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατός",
+      "translation": "an encamped army",
+      "chapter": 16
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμφορά",
+      "translation": "an event, circumstance, chance, hap",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύνεσις",
+      "translation": "comprehension, understanding",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνετός",
+      "translation": "intelligent, sagacious, wise",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνήθης",
+      "translation": "dwelling",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνθήκη",
+      "translation": "a composition",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύνοδος",
+      "translation": "an assembly, meeting",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σφραγίς",
+      "translation": "a seal, signet, seal-ring",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σωτηρία",
+      "translation": "a saving, deliverance, preservation, safety",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τελευτή",
+      "translation": "a finishing, completion, accomplishment",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τέμενος",
+      "translation": "a piece of land cut off, assigned as a domain",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τιμωρία",
+      "translation": "help, aid, assistance, succour",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοξότης",
+      "translation": "a bowman, archer",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τριήρης",
+      "translation": "trireme",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὕστερον",
+      "translation": "the afterbirth",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὕστερος",
+      "translation": "latter, last",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φανερός",
+      "translation": "open to sight, visible, manifest, evident",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φρουρός",
+      "translation": "a watcher, guard",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χαλεπός",
+      "translation": "hard to bear, painful; difficult",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ψήφισμα",
+      "translation": "a proposition carried by vote",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὠφέλεια",
+      "translation": "help, aid, succour, assistance",
+      "chapter": 17
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀδύνατος",
+      "translation": "unable, impossible",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰγιαλός",
+      "translation": "the sea-shore, beach, strand",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκρίβεια",
+      "translation": "exactness, minute accuracy, precision",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκρόασις",
+      "translation": "a hearing",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνανδρία",
+      "translation": "want of manhood",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄνθρωπος",
+      "translation": "man, person, human",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντεῖπον",
+      "translation": "to speak against",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄπρακτος",
+      "translation": "doing nothing, ineffectual, unprofitable",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀργύριον",
+      "translation": "a piece of silver, a silver coin",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀσθένεια",
+      "translation": "want of strength, weakness, feebleness, sickliness",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀσφάλεια",
+      "translation": "security against stumbling",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτήκοος",
+      "translation": "one who has himself heard, an ear-witness",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄφρακτος",
+      "translation": "unfenced, unfortified, unguarded",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βάρβαρος",
+      "translation": "barbarous",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βασιλεία",
+      "translation": "a kingdom, dominion",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βασίλεια",
+      "translation": "a queen, princess",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βασιλεύς",
+      "translation": "a king, chief",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βούλησις",
+      "translation": "a willing",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δεύτερος",
+      "translation": "second",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διακονία",
+      "translation": "the office of a διάκονος, service",
+      "chapter": 18
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διάκονος",
+      "translation": "a servant, waiting-man",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διάφορος",
+      "translation": "different, unlike",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δικαίωμα",
+      "translation": "an act by which wrong is set right",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δικαστής",
+      "translation": "a judge",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δούλωσις",
+      "translation": "enslaving, subjugation",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγκρατής",
+      "translation": "in possession of power",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑκάτερος",
+      "translation": "each of two, either, each singly",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκκλησία",
+      "translation": "an assembly of the citizens regularly summoned, the legislative assembly",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔμπειρος",
+      "translation": "experienced",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐναντίος",
+      "translation": "opposite",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνιαυτός",
+      "translation": "year",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξήγησις",
+      "translation": "a statement, narrative",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐοικότως",
+      "translation": "similarly, like",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιμαχία",
+      "translation": "a defensive alliance",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιστολή",
+      "translation": "a message, command, commission",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιφανής",
+      "translation": "coming to light, appearing; remarkable, distinguished",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡγεμονία",
+      "translation": "a leading the way, going first",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡμέτερος",
+      "translation": "our",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θεραπεία",
+      "translation": "a waiting on, service",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱκέτευμα",
+      "translation": "a mode of supplication",
+      "chapter": 19
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κελήτιον",
+      "translation": "dim. of κέλης, yacht with one bank of oars",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κίνδυνος",
+      "translation": "a danger, risk, hazard, venture, enterprise",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λῃστικός",
+      "translation": "inclined to rob, piratical, buccaneering",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέτοικος",
+      "translation": "settler from abroad, resident alien; adj. changing oneʼs abode",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναυάγιον",
+      "translation": "a piece of wreck",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναυμαχία",
+      "translation": "a sea-fight",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναυτικός",
+      "translation": "seafaring, naval",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεώτατος",
+      "translation": "youngest",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεώτερος",
+      "translation": "younger",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νησιώτης",
+      "translation": "an islander",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκιστής",
+      "translation": "a coloniser, founder of a city",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πατρικός",
+      "translation": "derived from one's fathers, paternal, hereditary",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεντέτης",
+      "translation": "of five years",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλεῖστος",
+      "translation": "most, largest",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολέμιος",
+      "translation": "hostile; enemy",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολιτεία",
+      "translation": "citizenship, citizen body, constitution",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρεσβεία",
+      "translation": "age, seniority; embassy",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρέσβεια",
+      "translation": "old woman",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προεῖπον",
+      "translation": "to tell",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προθυμία",
+      "translation": "readiness, willingness, eagerness, zeal",
+      "chapter": 20
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσκοπή",
+      "translation": "a looking out for",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόσοδος",
+      "translation": "approach, income",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόσχημα",
+      "translation": "that which is held before",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόσωπον",
+      "translation": "the face, visage, countenance",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρότερος",
+      "translation": "before, earlier",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προφανής",
+      "translation": "shewing itself",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόφασις",
+      "translation": "that which is alleged as the cause, an allegation, plea",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκεπτέος",
+      "translation": "one must reflect",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατεία",
+      "translation": "an expedition, campaign",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συγγενής",
+      "translation": "born with, congenital, natural, in-born",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύγχυσις",
+      "translation": "a commixture, confusion",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύλληψις",
+      "translation": "a taking together: a seizing, arresting",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμμαχία",
+      "translation": "an alliance offensive and defensive",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμμαχίς",
+      "translation": "allied",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύμμαχος",
+      "translation": "fighting along with, allied with",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύμφορος",
+      "translation": "accompanying; suitable, useful, profitable",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συντυχία",
+      "translation": "an occurrence, a hap, chance, event, incident",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σφέτερος",
+      "translation": "their own, their",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σχολαῖος",
+      "translation": "at one's leisure, leisurely, tardy",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοιοῦτος",
+      "translation": "such as this",
+      "chapter": 21
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοσοῦτος",
+      "translation": "so large, so tall",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τρόπαιον",
+      "translation": "a trophy",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τροπαῖος",
+      "translation": "of or for rout, defeat; causing rout",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τυραννίς",
+      "translation": "kingly power, sovereignty",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τύραννος",
+      "translation": "an absolute sovereign",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑμέτερος",
+      "translation": "your, yours",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπηρεσία",
+      "translation": "the body of rowers and sailors, the ship's crew",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑποτελής",
+      "translation": "subject to pay taxes, taxable, tributary",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὠφέλιμος",
+      "translation": "useful, advantageous, beneficial",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκήρυκτος",
+      "translation": "unannounced, unproclaimed",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκραιφνής",
+      "translation": "unmixed, pure",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀλλότριος",
+      "translation": "of/belonging to another",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀλόγιστος",
+      "translation": "unreasoning, inconsiderate, thoughtless, heedless",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀμφότερος",
+      "translation": "each of two, both",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναγκαῖος",
+      "translation": "necessary, forcible (subst. kin, necessities for life)",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνάστασις",
+      "translation": "a raising up",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντιλογία",
+      "translation": "contradiction, controversy, disputation",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντίπαλος",
+      "translation": "wrestling against",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνύποπτος",
+      "translation": "without suspicion, unsuspected",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀξιόλογος",
+      "translation": "worthy of mention, noteworthy",
+      "chapter": 22
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀξιόχρεως",
+      "translation": "worthy of a thing",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπεικότως",
+      "translation": "unreasonably",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπόστασις",
+      "translation": "a standing away from",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτόνομος",
+      "translation": "living under one's own laws, independent",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀχρηματία",
+      "translation": "want of money",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βασίλειος",
+      "translation": "of the king, kingly, royal",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διάφραγμα",
+      "translation": "a partition-wall, barrier",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δικαίωσις",
+      "translation": "a setting right, doing justice to: punishment",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διπλάσιος",
+      "translation": "twofold, double, twice as much as, twice as many as, as long as",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐθελοντής",
+      "translation": "volunteer",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλάχιστος",
+      "translation": "the smallest, least",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλευθερία",
+      "translation": "freedom, liberty",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλεύθερος",
+      "translation": "free",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιζήμιος",
+      "translation": "bringing loss upon, hurtful, prejudicial",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπικουρία",
+      "translation": "aid, succour",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπίφθονος",
+      "translation": "liable to envy",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιχώριος",
+      "translation": "in or of the country, local, native",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὐεργεσία",
+      "translation": "well-doing",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὐεργέτης",
+      "translation": "a well-doer, benefactor",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὐόργητος",
+      "translation": "good-tempered",
+      "chapter": 23
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θαλάσσιος",
+      "translation": "of, in, on, from the sea",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατάλυσις",
+      "translation": "a dissolving, dissolution; lodging, resting place",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κηρύκειον",
+      "translation": "a herald's wand",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κράτιστος",
+      "translation": "strongest, mightiest",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μαρτύριον",
+      "translation": "a testimony, proof",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μηδέτερος",
+      "translation": "neither of the two",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκουμένη",
+      "translation": "the inhabited world",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀλιγαρχία",
+      "translation": "an oligarchy, government in the hands of a few families",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παράλογος",
+      "translation": "beyond calculation, unexpected, unlooked for",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρασκευή",
+      "translation": "preparation",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεζομαχία",
+      "translation": "a battle by land",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περίοικος",
+      "translation": "dwelling round",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιουσία",
+      "translation": "supersum",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολιορκία",
+      "translation": "a besieging, siege",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσαγωγή",
+      "translation": "a bringing to",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόσοικος",
+      "translation": "dwelling near to, bordering on, neighbouring",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσφιλής",
+      "translation": "dear, beloved",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σατραπεία",
+      "translation": "a satrapy, the office",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στράτευμα",
+      "translation": "an expedition, campaign",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατηγός",
+      "translation": "the leader",
+      "chapter": 24
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σωφροσύνη",
+      "translation": "soundness of mind, moderation, discretion",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τεκμήριον",
+      "translation": "a sure signs.",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπαίθριος",
+      "translation": "under the sky, in the open air, a-field",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπόμνησις",
+      "translation": "a reminding",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑστεραῖος",
+      "translation": "on the day after, the next day",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χειμέριος",
+      "translation": "wintry, stormy",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀείμνηστος",
+      "translation": "ever to be remembered",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰχμάλωτος",
+      "translation": "taken by the spear, captive to one's spear, taken prisoner",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκοντιστής",
+      "translation": "a darter, javelin-man",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκρωτήριον",
+      "translation": "any prominent part",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναίσθητος",
+      "translation": "insensate, unfeeling",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποχρώντως",
+      "translation": "enough, sufficiently",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀτείχιστος",
+      "translation": "unwalled, unfortified",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐθαίρετος",
+      "translation": "self-chosen, self-elected",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξαπίναιος",
+      "translation": "sudden, unexpected.",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιστολεύς",
+      "translation": "secretary",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτήδειος",
+      "translation": "suitable; useful, necessary; deserving; associate",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτήδευμα",
+      "translation": "a pursuit, business, practice",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατάστρωμα",
+      "translation": "that which is spread over",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κυβερνήτης",
+      "translation": "a steersman, helmsman, pilot",
+      "chapter": 25
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λογογράφος",
+      "translation": "a prose-writer",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μητρόπολις",
+      "translation": "the mother-state",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραίνεσις",
+      "translation": "an exhortation, address",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραίρεσις",
+      "translation": "a taking away from beside, curtailing",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλεονέκτης",
+      "translation": "one who has",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολεμητέος",
+      "translation": "one must go to war",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρέσβευσις",
+      "translation": "dispatch on an embassy",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσαγωγός",
+      "translation": "attractive, persuasive",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προφυλακὶς",
+      "translation": "look-out",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμβόλαιος",
+      "translation": "of or concerning contracts",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τελευταῖος",
+      "translation": "last",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπόσπονδος",
+      "translation": "under a treaty, bound",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑποχείριος",
+      "translation": "under the hand, in hand",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χαλκίοικος",
+      "translation": "dwelling in a brasen house",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀβασάνιστος",
+      "translation": "not examined by torture, untortured",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνεπίκλητος",
+      "translation": "unaccused, unblamed",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπαράσκευος",
+      "translation": "without preparation, unprepared",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαχείρισις",
+      "translation": "management, administration",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραπλήσιος",
+      "translation": "coming near, nearly resembling, such-like",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατόπεδον",
+      "translation": "the ground on which soldiers are encamped, a camp, encampment",
+      "chapter": 26
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνεξέλεγκτος",
+      "translation": "unquestioned, impossible to be questioned",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀτυράννευτος",
+      "translation": "not ruled by tyrants",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτειχισμός",
+      "translation": "the building a fort on the enemy’s frontier, the occupation of it",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λιποστράτιον",
+      "translation": "desertion of the army, refusal to serve",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μετανάστασις",
+      "translation": "migration",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀλιγανθρωπία",
+      "translation": "scantiness of men",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραθαλάσσιος",
+      "translation": "beside the sea, lying on the sea-side, maritime",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεντηκόντορος",
+      "translation": "a ship of burden with fifty oars",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμβουλευτέος",
+      "translation": "to be given as advice",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τριακονταέτης",
+      "translation": "thirty years old",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φῖλος [\u003e φιλία",
+      "translation": "friendship]",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πω",
+      "translation": "up to this time, yet",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πῶ",
+      "translation": "where?",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τῷ",
+      "translation": "therefore, in this wise, thereupon",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄγω",
+      "translation": "to lead",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέω",
+      "translation": "to bind, tie, fetter",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέω",
+      "translation": "to lack, miss, stand in need of",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐάω",
+      "translation": "to let, suffer, allow, permit",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγώ",
+      "translation": "I (first person pronoun)",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔξω",
+      "translation": "out",
+      "chapter": 27
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐρῶ",
+      "translation": "[I will say]",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔχω",
+      "translation": "to have",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἥκω",
+      "translation": "to have come, be present, be here",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λύω",
+      "translation": "to loose",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἴρω",
+      "translation": "to take up, raise, lift up",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄρχω",
+      "translation": "(to be first) to rule, to begin",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βιάω",
+      "translation": "to constrain",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δράω",
+      "translation": "to do",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἴκω",
+      "translation": "give way",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰμί",
+      "translation": "to be",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἶμι",
+      "translation": "come, go",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕλκω",
+      "translation": "to draw, drag",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔργω",
+      "translation": "to bar one's way",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔρδω",
+      "translation": "to do",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔχθω",
+      "translation": "to hate",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κάτω",
+      "translation": "down, downwards",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λέγω",
+      "translation": "to pick; to say",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μένω",
+      "translation": "to stay at home, stay where one is, not stir",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μήπω",
+      "translation": "not yet",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νέμω",
+      "translation": "to deal out, distribute, dispense",
+      "chapter": 28
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁράω",
+      "translation": "to see",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παύω",
+      "translation": "to make to cease",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλέω",
+      "translation": "to sail, go by sea",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σῴζω",
+      "translation": "to save, keep",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φέρω",
+      "translation": "to bear",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φημί",
+      "translation": "to say, to claim",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χράω",
+      "translation": "to fall upon, attack, assail",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χράω",
+      "translation": "proclaim an oracle, (rare) furnish; mid.: consult an oracle, lend",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἱρέω",
+      "translation": "to take, (mid.) to choose",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκούω",
+      "translation": "to hear",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀμύνω",
+      "translation": "to keep off, ward off",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνάγω",
+      "translation": "to lead up; mid. set sail",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνθέω",
+      "translation": "to blossom, bloom",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀξιόω",
+      "translation": "to think worthy of; to expect",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπάγω",
+      "translation": "to lead away, carry off",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀρκέω",
+      "translation": "to ward off; to be sufficient",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βάλλω",
+      "translation": "to throw",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βιάζω",
+      "translation": "to constrain",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γράφω",
+      "translation": "to scratch, draw, write",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δείδω",
+      "translation": "to fear",
+      "chapter": 29
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δηϊόω",
+      "translation": "cut down, slay",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δηλόω",
+      "translation": "to make visible",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δοκέω",
+      "translation": "seem, impers. it seems best..",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐθέλω",
+      "translation": "to will, wish, purpose",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνδύω",
+      "translation": "to go into",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπάγω",
+      "translation": "to bring on",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπέχω",
+      "translation": "to hold on; hold out; hold back; adjourn; occupy",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐτάζω",
+      "translation": "to examine, test",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐφίζω",
+      "translation": "to set upon",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θάπτω",
+      "translation": "to bury, to honour with funeral rites",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱδρύω",
+      "translation": "to make to sit down, to seat",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἱερόω",
+      "translation": "to hallow, consecrate, dedicate",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἰσχύω",
+      "translation": "to be strong",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καλέω",
+      "translation": "to call, summon",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κινέω",
+      "translation": "to set in motion, to move",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κρίνω",
+      "translation": "to pick out, choose, judge, determine",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κτίζω",
+      "translation": "to found",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κωλύω",
+      "translation": "to let, hinder, check, prevent",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λείπω",
+      "translation": "to leave, quit",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λυπέω",
+      "translation": "to give pain to, to pain, distress, grieve, vex, annoy",
+      "chapter": 30
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέλλω",
+      "translation": "to think of doing, intend to do, to be about to do",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νικάω",
+      "translation": "to conquer, prevail, vanquish",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκέω",
+      "translation": "to inhabit, occupy",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁρμάω",
+      "translation": "to set in motion, urge",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁρμέω",
+      "translation": "to be moored, lie at anchor",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πάσχω",
+      "translation": "to experience, to suffer",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πείθω",
+      "translation": "to prevail upon, win over, persuade",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πείρω",
+      "translation": "to pierce quite through, fix",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πέμπω",
+      "translation": "to send, despatch",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ποιέω",
+      "translation": "to make, to do",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πταίω",
+      "translation": "to make to stumble",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τάσσω",
+      "translation": "to arrange, put in order",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τηρέω",
+      "translation": "to watch over, protect, guard",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τιμάω",
+      "translation": "to honor; to value something at a price (gen.)",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τρέπω",
+      "translation": "to turn",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑμνέω",
+      "translation": "to sing, laud, sing of",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπέχω",
+      "translation": "to hold under, uphold; undergo, suffer, be accountable",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φαίνω",
+      "translation": "to bring to light, make to appear",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φάσκω",
+      "translation": "to say, affirm, assert",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φεύγω",
+      "translation": "to flee, take flight, run away",
+      "chapter": 31
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φοβέω",
+      "translation": "to put to flight, to terrify; mid. to fear",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φράζω",
+      "translation": "to point out, shew, indicate",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χραύω",
+      "translation": "to scrape, graze, wound slightly",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χωρέω",
+      "translation": "give way, draw back, retire, withdraw",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγείρω",
+      "translation": "to bring together, gather together",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγνοέω",
+      "translation": "not to perceive, be ignorant of",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀδικέω",
+      "translation": "to do wrong",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀκμάζω",
+      "translation": "to be in full bloom, be at one's prime",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναδέω",
+      "translation": "to bind",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντερῶ",
+      "translation": "to speak against, gainsay",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντέχω",
+      "translation": "to hold out against, withstand",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπορέω",
+      "translation": "to be at a loss",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπωθέω",
+      "translation": "to thrust away, push back",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἁρπάζω",
+      "translation": "to snatch away, carry off",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀτυχέω",
+      "translation": "to be unlucky",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐξάνω",
+      "translation": "to make large, increase, augment",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀφίημι",
+      "translation": "to send forth, discharge",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βλάπτω",
+      "translation": "to disable, hinder (Hom.); to harm, damage",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βοηθέω",
+      "translation": "to come to aid, to succour, assist, aid",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαλύω",
+      "translation": "to loose one from another, to part asunder, undo",
+      "chapter": 32
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίδωμι",
+      "translation": "to give",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δουλόω",
+      "translation": "to make a slave of, enslave",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγείρω",
+      "translation": "to awaken, wake up, rouse",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕζομαι",
+      "translation": "to seat oneself, sit",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκπλέω",
+      "translation": "to sail out, sail away, weigh anchor",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκφέρω",
+      "translation": "to carry out of",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλαύνω",
+      "translation": "to drive, drive on, set in motion",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλπίζω",
+      "translation": "to hope for, look for, expect",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔνειμι",
+      "translation": "to be in; to be possible",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔξειμι",
+      "translation": "go out",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξίημι",
+      "translation": "to send out, let",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπαίρω",
+      "translation": "to lift up and set on",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπείγω",
+      "translation": "to press down, weigh down; mid. hasten",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιθέω",
+      "translation": "to run at",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐρωτάω",
+      "translation": "to ask",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ζωγρέω",
+      "translation": "to take alive, revive",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἥδομαι",
+      "translation": "to enjoy oneself, take delight, take one's pleasure",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θαρσέω",
+      "translation": "to be of good courage, take courage",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἵστημι",
+      "translation": "to make to stand",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατάγω",
+      "translation": "to lead down",
+      "chapter": 33
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατέχω",
+      "translation": "to hold fast",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κελεύω",
+      "translation": "to urge",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κολάζω",
+      "translation": "to curtail, dock, prune",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κομίζω",
+      "translation": "to take care of, provide for",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κοσμέω",
+      "translation": "to order, arrange",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κρατέω",
+      "translation": "to be strong, mighty, powerful",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κρύπτω",
+      "translation": "to hide, cover, cloak",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κτείνω",
+      "translation": "to kill, slay",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μετέχω",
+      "translation": "to partake of, enjoy a share of, share in, take part in",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μηκύνω",
+      "translation": "to lengthen, prolong, extend",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νομίζω",
+      "translation": "to have as a custom; to believe",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκίζω",
+      "translation": "to found as a colony",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἴομαι",
+      "translation": "to suppose, think, deem, imagine",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀργίζω",
+      "translation": "to make angry, provoke to anger, irritate",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρέχω",
+      "translation": "to furnish, provide, supply",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πειράω",
+      "translation": "to attempt, endeavour, try",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πληρόω",
+      "translation": "to make full",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πορεύω",
+      "translation": "to make to go, carry, convey",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πορίζω",
+      "translation": "to carry: to bring about, to furnish, provide, supply, procure, cause",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πράσσω",
+      "translation": "do, (w. adv) fare, (mid.) charge payment",
+      "chapter": 34
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προέχω",
+      "translation": "to hold before, to pretend; to jut out, to excel",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκηνάω",
+      "translation": "to dwell, live",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκηνέω",
+      "translation": "to be or dwell in a tent",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σκοπέω",
+      "translation": "to look at",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σπεύδω",
+      "translation": "to set a-going, to urge on, hasten, quicken",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνάγω",
+      "translation": "to bring together, gather together, collect, convene",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σφάλλω",
+      "translation": "to make to fall, throw down, overthrow",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τίθημι",
+      "translation": "to set, put, place",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τολμάω",
+      "translation": "to undertake, take heart",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπάρχω",
+      "translation": "to begin; to exist",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φθείρω",
+      "translation": "to ruin, waste, spoil, destroy",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φοιτάω",
+      "translation": "to go to and fro, up and down, to stalk",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φονεύω",
+      "translation": "to murder, kill, slay",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ψηφίζω",
+      "translation": "(mid.) to vote; (act.) to count with pebbles",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὠφελέω",
+      "translation": "to help, aid, assist, to be of use",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀγγέλλω",
+      "translation": "to bear a message",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰσχύνω",
+      "translation": "to make ugly, disfigure, mar",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναιρέω",
+      "translation": "to take up; to destroy",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνειλέω",
+      "translation": "to roll up together",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπιστέω",
+      "translation": "to disbelieve, distrust; to disobey",
+      "chapter": 35
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποπλέω",
+      "translation": "to sail away, sail off",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄχθομαι",
+      "translation": "to be loaded; to be annoyed",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βιοτεύω",
+      "translation": "to live",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βουλεύω",
+      "translation": "to take counsel, deliberate, concert measures",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέχομαι",
+      "translation": "to take, accept, receive",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διασῴζω",
+      "translation": "to preserve through",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαφέρω",
+      "translation": "to carry through; be different from, excel",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δικαιόω",
+      "translation": "to set right",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δύναμαι",
+      "translation": "to be able, capable, strong enough",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγκαλέω",
+      "translation": "to call in; bring a charge or accusation",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσπλέω",
+      "translation": "to sail into, enter",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσωθέω",
+      "translation": "to thrust into",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκνικάω",
+      "translation": "to achieve by force",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκπέμπω",
+      "translation": "to send out",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκπίπτω",
+      "translation": "to fall out of",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκτείνω",
+      "translation": "to stretch out",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλασσόω",
+      "translation": "to make less",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνοικέω",
+      "translation": "to dwell in",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξαρτύω",
+      "translation": "to get ready, equip thoroughly, fit out",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπαινέω",
+      "translation": "to approve, applaud, commend",
+      "chapter": 36
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπαμύνω",
+      "translation": "to come to aid, defend, assist",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιμένω",
+      "translation": "to stay on, tarry",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιπλέω",
+      "translation": "to sail upon",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιφέρω",
+      "translation": "to bring, put",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιχράω",
+      "translation": "touch",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔρχομαι",
+      "translation": "to come",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὑρίσκω",
+      "translation": "to find",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡγέομαι",
+      "translation": "to lead; to consider, believe",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡσυχάζω",
+      "translation": "to be still, keep quiet, be at rest",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θαυμάζω",
+      "translation": "to wonder, marvel, be astonished",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καθαίρω",
+      "translation": "to make pure",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταδύω",
+      "translation": "to go down, sink, set",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταθέω",
+      "translation": "to run down",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταλύω",
+      "translation": "to put down, destroy; settle (disputes); lodge, rest",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κηρύσσω",
+      "translation": "to be a herald, officiate as herald",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κρατύνω",
+      "translation": "to strengthen",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κτάομαι",
+      "translation": "to procure for oneself, to get, gain, acquire",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λαμβάνω",
+      "translation": "to take, seize, receive",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λανθάνω",
+      "translation": "to escape notice, to be unknown, unseen, unnoticed",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μανθάνω",
+      "translation": "to learn",
+      "chapter": 37
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μάχομαι",
+      "translation": "to fight",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέτειμι",
+      "translation": "be among; (+dat and gen) have a share in",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκειόω",
+      "translation": "to make one's own",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἴχομαι",
+      "translation": "to be gone, to have gone",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πάρειμι",
+      "translation": "be present",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρίημι",
+      "translation": "to pass over, let go, relax, yield, allow",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περαιόω",
+      "translation": "to carry to the opposite side, carry over",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πιστεύω",
+      "translation": "to trust, trust to",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολεμέω",
+      "translation": "to be at war",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολεμόω",
+      "translation": "to make hostile, make an enemy of",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόειμι",
+      "translation": "go forward",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προλέγω",
+      "translation": "pick before; foretell; proclaim",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προνοέω",
+      "translation": "to perceive before, foresee",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προοράω",
+      "translation": "to see before one, to take forethought",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσάγω",
+      "translation": "to bring to",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσέχω",
+      "translation": "to hold to, offer",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσήκω",
+      "translation": "to have come; to belong to, to fit",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προφέρω",
+      "translation": "to bring before",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σημαίνω",
+      "translation": "to shew by a sign, indicate, make known, point out",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμπλέω",
+      "translation": "to sail in company with",
+      "chapter": 38
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμφέρω",
+      "translation": "to bring together; impers. to benefit",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τειχίζω",
+      "translation": "to build a wall",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τιμωρέω",
+      "translation": "to help, aid, succour",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τυγχάνω",
+      "translation": "(with gen.) to hit the mark, to get; (with pple) to happen to, to actually",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπακούω",
+      "translation": "to listen, hearken, give ear",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπομένω",
+      "translation": "to stay behind, survive",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φρουρέω",
+      "translation": "to keep watch",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φυλάσσω",
+      "translation": "to keep watch and ward, keep guard",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χράομαι",
+      "translation": "use, experience",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἁμαρτάνω",
+      "translation": "to miss, miss the mark",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναγκάζω",
+      "translation": "to force, compel",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνακαλέω",
+      "translation": "call on, invoke; call back, recall",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναπείθω",
+      "translation": "to bring over, convince",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναχωρέω",
+      "translation": "to go back",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνίστημι",
+      "translation": "to make to stand up, raise up",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνοικίζω",
+      "translation": "to remove up the country",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντανάγω",
+      "translation": "to lead up against",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντιλέγω",
+      "translation": "to speak against, gainsay, contradict",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποβαίνω",
+      "translation": "to step off from",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποβάλλω",
+      "translation": "to throw off",
+      "chapter": 39
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποκρίνω",
+      "translation": "to separate, set apart; mid. answer",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπολείπω",
+      "translation": "to leave over",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπόλλυμι",
+      "translation": "to destroy, kill; to lose",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποφαίνω",
+      "translation": "to shew fort, display, produce",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποφεύγω",
+      "translation": "to flee from, escape",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποχωρέω",
+      "translation": "to go from",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀραρίσκω",
+      "translation": "to join, join together, fasten",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀφεστήξω",
+      "translation": "I shall be absent, away from",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀφίστημι",
+      "translation": "to put away, remove; (mid.) revolt",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "βούλομαι",
+      "translation": "to will, wish, be willing",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γίγνομαι",
+      "translation": "become, be born",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γιγνώσκω",
+      "translation": "to learn to know, to perceive, mark, learn",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δείκνυμι",
+      "translation": "to show",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαβαίνω",
+      "translation": "to cross (a river, etc.); to stand with feet apart",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διακωλύω",
+      "translation": "to hinder, prevent",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαλείπω",
+      "translation": "to leave an interval between",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαμέλλω",
+      "translation": "to be always going",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαπέμπω",
+      "translation": "to send off in different directions, send to and fro, send about",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διεκπλέω",
+      "translation": "to sail out through",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγχειρέω",
+      "translation": "to put one's hand in",
+      "chapter": 40
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσακούω",
+      "translation": "to hearken",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσβαίνω",
+      "translation": "to go into",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσβάλλω",
+      "translation": "to throw into, put into",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσπίπτω",
+      "translation": "to fall into",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκδίδωμι",
+      "translation": "to give up, surrender",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκκομίζω",
+      "translation": "to carry out",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκπορίζω",
+      "translation": "to invent, contrive",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνδοιάζω",
+      "translation": "to be in doubt, at a loss",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξελαύνω",
+      "translation": "to drive out from",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξοτρύνω",
+      "translation": "to stir up, urge on, excite",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπέρομαι",
+      "translation": "to ask besides",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιβαίνω",
+      "translation": "to go upon",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιθυμέω",
+      "translation": "to set one's heart upon",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπικαλέω",
+      "translation": "to call upon",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιπίπτω",
+      "translation": "to fall upon",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτάσσω",
+      "translation": "to put upon one as a duty, to enjoin",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτρέπω",
+      "translation": "to turn over to, entrust, command",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑτοιμάζω",
+      "translation": "to make ready, prepare",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐφέζομαι",
+      "translation": "to sit upon",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἡσσάομαι",
+      "translation": "to be less than another, inferior to",
+      "chapter": 41
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θεραπεύω",
+      "translation": "to be an attendant, do service",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καθαιρέω",
+      "translation": "to take down",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταβοάω",
+      "translation": "to cry down, cry out against",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατανοέω",
+      "translation": "to observe well, to understand",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατορθόω",
+      "translation": "to set upright, erect",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέμφομαι",
+      "translation": "to blame, censure, find fault with",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μιμνήσκω",
+      "translation": "to remind",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναυμαχέω",
+      "translation": "to fight in a ship",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ναυπηγέω",
+      "translation": "to build ships",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραινέω",
+      "translation": "to exhort, recommend, advise",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περίειμι",
+      "translation": "be superior, survive, be left over",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιέργω",
+      "translation": "to inclose all round, encompass",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιμένω",
+      "translation": "to wait for, await",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιοράω",
+      "translation": "to look over, overlook",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολιτεύω",
+      "translation": "to live as a citizen",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρεσβεύω",
+      "translation": "to be the elder; to be an ambassador",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προβαίνω",
+      "translation": "to step on, step forward, advance",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προδηλόω",
+      "translation": "to make clear beforehand, shew plainly",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προκαλέω",
+      "translation": "to call forth",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προπέμπω",
+      "translation": "to send before, send on",
+      "chapter": 42
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόσειμι",
+      "translation": "approach",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσπλέω",
+      "translation": "to sail towards",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προτιμάω",
+      "translation": "to honour",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προχωρέω",
+      "translation": "to go forward, advance",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στασιάζω",
+      "translation": "to rebel, revolt, rise in rebellion",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατεύω",
+      "translation": "to serve in war, serve as a soldier, do military service, take the field, march",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συγγράφω",
+      "translation": "to write down, describe, compose",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμβαίνω",
+      "translation": "meet, agree, happen",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνθάπτω",
+      "translation": "to bury together, join in burying",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπερφέρω",
+      "translation": "to bear or carry over, transfer; to surpass, excel",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπολείπω",
+      "translation": "to leave remaining",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑποτοπέω",
+      "translation": "to suspect, surmise",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑποχωρέω",
+      "translation": "to go back, retire, recoil",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰτιάομαι",
+      "translation": "to charge, accuse, censure, blame",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἁλίσκομαι",
+      "translation": "to be caught, conquered, caught in the act",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀλλοτριόω",
+      "translation": "to estrange from",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνθίστημι",
+      "translation": "to set against",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπαγγέλλω",
+      "translation": "to bring tidings, report, announce",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπαλλάσσω",
+      "translation": "to set free, release, deliver",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπέρχομαι",
+      "translation": "to go away, depart from",
+      "chapter": 43
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποδίδωμι",
+      "translation": "to give back, give what is due; (mid.) sell",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποθνῄσκω",
+      "translation": "to die, be killed",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποκτείνω",
+      "translation": "to kill, slay",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποστέλλω",
+      "translation": "to send off",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποστερέω",
+      "translation": "to rob, despoil, bereave",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διάκειμαι",
+      "translation": "to be in a certain state, to be disposed",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διακομίζω",
+      "translation": "to carry over",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διασπείρω",
+      "translation": "to scatter abroad, throw about",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαφθείρω",
+      "translation": "to destroy, ruin; to corrupt",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διέρχομαι",
+      "translation": "to go through, pass through",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δορυφορέω",
+      "translation": "to attend as a bodyguard",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσβιβάζω",
+      "translation": "to put on board ship",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσκομίζω",
+      "translation": "to carry into",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐλευθερόω",
+      "translation": "to free, set free",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνδέχομαι",
+      "translation": "to take upon oneself; to be possible",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐξηγέομαι",
+      "translation": "to be leader of",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπείρομαι",
+      "translation": "ask besides",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπέρχομαι",
+      "translation": "come near; come upon; attack",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιφοιτάω",
+      "translation": "to come habitually to, visit again and again",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιψηφίζω",
+      "translation": "to put a question to the vote",
+      "chapter": 44
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐργάζομαι",
+      "translation": "to work, labour",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καθέζομαι",
+      "translation": "to sit down, take one's seat",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καθίστημι",
+      "translation": "to set down, place",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταβάλλω",
+      "translation": "to throw down, overthrow",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταφωράω",
+      "translation": "to catch in a theft: to catch in the act, detect, discover",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατηγορέω",
+      "translation": "to speak against, to accuse",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατοικίζω",
+      "translation": "settle",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κινδυνεύω",
+      "translation": "to be daring, to make a venture, take the risk, do a daring thing",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μεθίστημι",
+      "translation": "to place in another way, to change",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μεταβάλλω",
+      "translation": "to throw into a different position, to turn quickly",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μεταποιέω",
+      "translation": "to alter the make of",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεωτερίζω",
+      "translation": "to attempt anything new, make a violent",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἰκοδομέω",
+      "translation": "to build a house",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραβάλλω",
+      "translation": "to throw beside",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρακαλέω",
+      "translation": "to call to",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιπίπτω",
+      "translation": "to fall around, so as to embrace",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιποιέω",
+      "translation": "to make to remain over and above, to keep safe, preserve",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πολιορκέω",
+      "translation": "to hem in a city, blockade, beleaguer, besiege",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προοφείλω",
+      "translation": "to owe beforehand",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσκοπέω",
+      "translation": "to see, consider beforehand; provide for; make provision against",
+      "chapter": 45
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσοικέω",
+      "translation": "to dwell by",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσπέμπω",
+      "translation": "to send to",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσπίπτω",
+      "translation": "to fall upon, strike against",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσποιέω",
+      "translation": "to make over to; mid. procure, pretend",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατηγέω",
+      "translation": "to be general",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνίστημι",
+      "translation": "to set together, combine, associate, unite, band together",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνόμνυμι",
+      "translation": "to swear together",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συντίθημι",
+      "translation": "to put together",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τεχνάομαι",
+      "translation": "to make by art, to execute skilfully",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τυραννεύω",
+      "translation": "to be a monarch, an absolute ruler",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "φιλοδικέω",
+      "translation": "to be fond of litigation",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αἰσθάνομαι",
+      "translation": "to perceive, apprehend by the senses, to see, hear, feel",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀναδιδάσκω",
+      "translation": "to teach otherwise",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντιδίδωμι",
+      "translation": "to give in return, repay",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντικελεύω",
+      "translation": "to command in turn",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπανίστημι",
+      "translation": "to make rise up and depart, send away",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποδέχομαι",
+      "translation": "to accept from",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπολαμβάνω",
+      "translation": "to take away, receive one’s due, cut off",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποτειχίζω",
+      "translation": "to wall off",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀφικνέομαι",
+      "translation": "to come to",
+      "chapter": 46
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαμαρτάνω",
+      "translation": "to go astray from",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διανοέομαι",
+      "translation": "to be minded, intend, purpose",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγγίγνομαι",
+      "translation": "to be born or bred in; be innate, be native",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσαγγέλλω",
+      "translation": "to go in and announce",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰσέρχομαι",
+      "translation": "to go in",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνθυμέομαι",
+      "translation": "to lay to heart, consider well, reflect on, ponder",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπαναχωρέω",
+      "translation": "to go back again, to retreat, return",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιβουλεύω",
+      "translation": "to plot against",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπικτάομαι",
+      "translation": "to gain",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιπάρειμι",
+      "translation": "go on high ground in parallel with",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιτροπεύω",
+      "translation": "to be a trustee, administrator, guardian, governor",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὐνομέομαι",
+      "translation": "to have good laws, to be orderly",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταστρέφω",
+      "translation": "to turn down, trample on",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατατίθημι",
+      "translation": "to place, put",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μετέρχομαι",
+      "translation": "to come",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραγγέλλω",
+      "translation": "to transmit as a message; give orders",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραδίδωμι",
+      "translation": "to hand over, to surrender",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρατίθημι",
+      "translation": "to place beside",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρέρχομαι",
+      "translation": "to go by, beside",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιέννυμι",
+      "translation": "to put round",
+      "chapter": 47
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περισκοπέω",
+      "translation": "to look round",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προαγορεύω",
+      "translation": "to tell beforehand",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσομιλέω",
+      "translation": "to hold intercourse with, live",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προστίθημι",
+      "translation": "to add, to apply, to close (a door); mid. to join (a group), take as an ally",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πυνθάνομαι",
+      "translation": "to learn by hearsay",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συλλαμβάνω",
+      "translation": "to collect, gather together",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμβουλεύω",
+      "translation": "to advise, counsel",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνέρχομαι",
+      "translation": "come together, meet",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συρρήγνυμι",
+      "translation": "to break in pieces",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ταλαιπωρέω",
+      "translation": "to go through hard labour, to suffer hardship",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπαναχωρέω",
+      "translation": "to retire slowly",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπολαμβάνω",
+      "translation": "take up; understand, interpret; assume; reply, rejoin",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνδραποδίζω",
+      "translation": "to reduce to slavery, enslave",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντεπιτάσσω",
+      "translation": "to order in turn",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπεχθάνομαι",
+      "translation": "to be hated, incur hatred, be roused to hatred",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀποδείκνυμι",
+      "translation": "display, appoint, demonstrate",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπολογέομαι",
+      "translation": "to speak in defence, defend oneself",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐγκαθίστημι",
+      "translation": "to place",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκλογίζομαι",
+      "translation": "to compute, calculate",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκπολιορκέω",
+      "translation": "to force a besieged town to surrender",
+      "chapter": 48
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιγίγνομαι",
+      "translation": "to be born after, come into being after",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιμείγνυμι",
+      "translation": "add by mixing",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιστρατεύω",
+      "translation": "to march against, make war upon",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταλαμβάνω",
+      "translation": "to seize upon, lay hold of",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μετανίστημι",
+      "translation": "to remove",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραλαμβάνω",
+      "translation": "to receive from",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρασκευάζω",
+      "translation": "to get ready, prepare",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παρατυγχάνω",
+      "translation": "to happen to be near, be among",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περιαγγέλλω",
+      "translation": "to announce by messages sent round",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προγίγνομαι",
+      "translation": "to come forwards",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσδέχομαι",
+      "translation": "to receive favourably, accept",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσλαμβάνω",
+      "translation": "to take or receive in addition",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προστυγχάνω",
+      "translation": "to obtain one's share of",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σιδηροφορέω",
+      "translation": "to bear iron, wear arms, go armed",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συμμείγνυμι",
+      "translation": "mix together, commingle",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συνομολογέω",
+      "translation": "to say the same thing with, to agree with",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τεκμαίρομαι",
+      "translation": "to fix by a mark",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπισχνέομαι",
+      "translation": "to promise",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντεπιτίθημι",
+      "translation": "entrust in answer; mid. counter attack",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαγωνίζομαι",
+      "translation": "to contend, struggle",
+      "chapter": 49
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διακινδυνεύω",
+      "translation": "to run all risks, make a desperate attempt, hazard all",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διαμνημονεύω",
+      "translation": "to call to mind, remember",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατεργάζομαι",
+      "translation": "to effect by labour, to achieve, accomplish",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μεταγιγνώσκω",
+      "translation": "to change one's mind, to repent",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προδιαφθείρω",
+      "translation": "to ruin beforehand",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προκαταφεύγω",
+      "translation": "to escape to a place of safety before",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προσβιάζομαι",
+      "translation": "to compel, constrain",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατοπεδεύω",
+      "translation": "to encamp, bivouac, take up a position",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀντικαθίστημι",
+      "translation": "to lay down",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διασκεδάννυμι",
+      "translation": "to scatter abroad, scatter to the winds, disperse",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπιταλαιπωρέω",
+      "translation": "to labour yet more",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προαισθάνομαι",
+      "translation": "to perceive",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "συναγωνίζομαι",
+      "translation": "to contend along with, to share in a contest",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προδιαγιγνώσκω",
+      "translation": "to perceive or understand beforehand",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "προπαρασκευάζω",
+      "translation": "to prepare beforehand",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἤ",
+      "translation": "either..or; than",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ᾗ",
+      "translation": "which way, where, whither, in",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁ",
+      "translation": "the",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὦ",
+      "translation": "O! oh!",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄν",
+      "translation": "modal particle",
+      "chapter": 50
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὖ",
+      "translation": "again, anew, afresh, once more",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γε",
+      "translation": "at least, at any rate",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέ",
+      "translation": "but",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἰ",
+      "translation": "conj. if, whether; part. w/wishes, adv. w/imperatives",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐκ",
+      "translation": "from out of",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐν",
+      "translation": "in, among. c. dat.",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕξ",
+      "translation": "six",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εὖ",
+      "translation": "well",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὐ",
+      "translation": "not",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὗ",
+      "translation": "where",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὗ",
+      "translation": "him, her (οὗ οἷ ἕ)",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύ",
+      "translation": "you (personal pronoun)",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τε",
+      "translation": "and",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀεί",
+      "translation": "always, for ever",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀνά",
+      "translation": "up, upon",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπό",
+      "translation": "from, away from. c. gen.",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γάρ",
+      "translation": "for",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δεῖ",
+      "translation": "it is necessary",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δύο",
+      "translation": "two",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐάν",
+      "translation": "if",
+      "chapter": 51
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπί",
+      "translation": "on, upon with gen., dat., and acc.",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔτι",
+      "translation": "yet, as yet, still, besides",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἵνα",
+      "translation": "in order that (conj.); where (rel. adv.)",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καί",
+      "translation": "and, also",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέν",
+      "translation": "on the one hand, on the other hand",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μήν",
+      "translation": "now verily, full surely",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νέα",
+      "translation": "fallow land (LSJ νειός)",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νῦν",
+      "translation": "now at this very time",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νύξ",
+      "translation": "the night",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅδε",
+      "translation": "this",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅτι",
+      "translation": "adv. + superl., as...as possible; ὅτι μή except",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅτι",
+      "translation": "conj.: that, because",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὖν",
+      "translation": "so, then, therefore",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πᾶς",
+      "translation": "all, the whole",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "που",
+      "translation": "anywhere, somewhere",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρό",
+      "translation": "before",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύν",
+      "translation": "along with, in company with, together with",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπό",
+      "translation": "from under, by, c. gen. under, c. dat., towards c. acc.",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄγαν",
+      "translation": "very, much, very much",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀλλά",
+      "translation": "otherwise, but",
+      "chapter": 52
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄνευ",
+      "translation": "without",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἅπας",
+      "translation": "quite all, the whole",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄσσα",
+      "translation": "something, some",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄττα",
+      "translation": "form of address: \"father\"",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γοῦν",
+      "translation": "at least then, at any rate, any way",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δέκα",
+      "translation": "ten",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίχα",
+      "translation": "in two, asunder",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δόξα",
+      "translation": "a notion",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπεί",
+      "translation": "after, since, when",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑπτά",
+      "translation": "seven",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἰδέα",
+      "translation": "form",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κατά",
+      "translation": "down, against with gen.; according to, throughout with acc.",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μάλα",
+      "translation": "very, very much, exceedingly",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μετά",
+      "translation": "(w gen) with, among; (w acc) after",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μηδέ",
+      "translation": "but not",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μήτε",
+      "translation": "neither / nor",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οἶδα",
+      "translation": "to know",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὄντα",
+      "translation": "(things which exist) the present; the truth; property \u003e εἰμί",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅταν",
+      "translation": "when, whenever",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὐδέ",
+      "translation": "and/but not; not even",
+      "chapter": 53
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὔτε",
+      "translation": "neither / nor",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "περί",
+      "translation": "around, round about with gen., dat., and acc.",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πλήν",
+      "translation": "except",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ποτε",
+      "translation": "ever, sometime",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρίν",
+      "translation": "before; (after negated main clause) until",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοτέ",
+      "translation": "at times, now and then",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τότε",
+      "translation": "at that time, then",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὑπέρ",
+      "translation": "over, above, w. gen, over, beyond, w. acc.",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὥστε",
+      "translation": "so that",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτοῦ",
+      "translation": "at the very place, just here, just there",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γενεά",
+      "translation": "race, stock, family",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γέρας",
+      "translation": "a gift of honour",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δῆθεν",
+      "translation": "really, in very truth",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἴπερ",
+      "translation": "strengthd. for εἰ, if indeed",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἴωθα",
+      "translation": "to be accustomed",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἕνεκα",
+      "translation": "on account of, for the sake of, because of, for",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔοικα",
+      "translation": "to be like; to look like",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑπτάς",
+      "translation": "period of seven days",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κέρας",
+      "translation": "the horn of an animal",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "κῆρυξ",
+      "translation": "a herald, pursuivant, marshal, public messenger",
+      "chapter": 54
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "λιμήν",
+      "translation": "a harbour, haven, creek",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέγας",
+      "translation": "big, great",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέχρι",
+      "translation": "until (prep. and conj. w. aor.), as long as (conj. w. pres.)",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὅσπερ",
+      "translation": "the very man who, the very thing which",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πάλαι",
+      "translation": "long ago, in olden time, in days of yore, in time gone by",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πάλιν",
+      "translation": "back, backwards",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πέλας",
+      "translation": "near, hard by, close",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πέντε",
+      "translation": "five",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ποθεν",
+      "translation": "from some place",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πόθεν",
+      "translation": "whence? (i.e., from where?)",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὥσπερ",
+      "translation": "just as if, even as",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἄλλοθι",
+      "translation": "elsewhere, in another place, in a strange",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτίκα",
+      "translation": "forthwith, straightway, at once",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "γλῶσσα",
+      "translation": "the tongue",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δίαιτα",
+      "translation": "a way of living, mode of life",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑαυτοῦ",
+      "translation": "himself, herself, themselves",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "εἴκοσι",
+      "translation": "twenty",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔξεστι",
+      "translation": "it is allowed, it is in one's power, is possible",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔξωθεν",
+      "translation": "from without",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἔπειτα",
+      "translation": "then, next",
+      "chapter": 55
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καίπερ",
+      "translation": "although, albeit",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καίτοι",
+      "translation": "and indeed, and further; and yet",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μέντοι",
+      "translation": "however, nevertheless; of course (answers)",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μεταξύ",
+      "translation": "betwixt, between",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "νεωστί",
+      "translation": "lately, just now",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὐκέτι",
+      "translation": "no more, no longer, no further",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πώποτε",
+      "translation": "ever yet",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "σύμπας",
+      "translation": "all together, all at once, all in a body",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "χίλιοι",
+      "translation": "a thousand",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "αὐτόθεν",
+      "translation": "from the very spot",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δυώδεκα",
+      "translation": "twelve",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνταῦθα",
+      "translation": "here, there; at that juncture",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐπώχατο",
+      "translation": "were kept shut",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "θάλασσα",
+      "translation": "the sea",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μάλιστα",
+      "translation": "most",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "οὐδαμοῦ",
+      "translation": "nowhere",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πρόοιδα",
+      "translation": "to know beforehand",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοιόσδε",
+      "translation": "such a",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τοσόσδε",
+      "translation": "so strong, so able",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τράπεζα",
+      "translation": "four-legged a table",
+      "chapter": 56
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἀπορέω [",
+      "translation": "(Ion.) \u003e ἀφοράω]",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐντεῦθεν",
+      "translation": "hence",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑξήκοντα",
+      "translation": "sixty",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "μηδέποτε",
+      "translation": "never",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τέσσαρες",
+      "translation": "four",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "διακόσιοι",
+      "translation": "two hundred",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "δισχίλιοι",
+      "translation": "two thousand",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑκκαίδεκα",
+      "translation": "sixteen",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑξακόσιοι",
+      "translation": "six hundred",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὁποτέρωσε",
+      "translation": "to whichever of two sides",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παραυτίκα",
+      "translation": "immediately, forthwith, straightway",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "παριτητέα",
+      "translation": "one must come forward",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τριάκοντα",
+      "translation": "thirty",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἐνενήκοντα",
+      "translation": "ninety",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "καταντικρύ",
+      "translation": "right opposite (adv or prep)",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ὀκτακόσιοι",
+      "translation": "eight hundred",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πανταχόθεν",
+      "translation": "from all places, from all quarters, on every side",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεντήκοντα",
+      "translation": "fifty",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "ἑβδομήκοντα",
+      "translation": "seventy",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "πεντακόσιοι",
+      "translation": "five hundred",
+      "chapter": 57
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τετρακόσιοι",
+      "translation": "four hundred",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "τεσσαράκοντα",
+      "translation": "forty",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "στρατιῶτις (ναῦς)",
+      "translation": "a troop-transport ship, (fem. adj.) soldier-",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κάρ",
+      "translation": "a Carian",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἅλυς",
+      "translation": "Halys",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἠϊών",
+      "translation": "Eïon, town in Thrace, at the mouth of the Strymon",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τρώς",
+      "translation": "Tros",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Χίος",
+      "translation": "Chios (island)",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Χῖος",
+      "translation": "Chian (inhabitant of Chios)",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀθήνη",
+      "translation": "Athena",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀχαΐα",
+      "translation": "Achaia in Peloponnese; later, the Roman province of Greece",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Δῆλος",
+      "translation": "Delos",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Εἵλως",
+      "translation": "a Helot",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἑλένη",
+      "translation": "Helen",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἑλλάς",
+      "translation": "Hellas",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἕλλην",
+      "translation": "Hellen; Greek",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θρᾴκη",
+      "translation": "Thrace",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἰθώμη",
+      "translation": "Ithome",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἴωνες",
+      "translation": "Ionians",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κίμων",
+      "translation": "Cimon",
+      "chapter": 58
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κῦρος",
+      "translation": "Cyrus",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λιβύη",
+      "translation": "Libya, the north part of Africa",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λίβυς",
+      "translation": "a Libyan",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μαρέη",
+      "translation": "Marea",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μῆδος",
+      "translation": "a Mede, Median",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μίνως",
+      "translation": "Minos",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πηγαί",
+      "translation": "Pegae",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πύδνα",
+      "translation": "Pydna",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σάμος",
+      "translation": "Samos",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τρῳάς",
+      "translation": "Troas",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φάρος",
+      "translation": "Pharos (island near Alexandria; island in Adriatic (sts. m.))",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀθῆναι",
+      "translation": "the city of Athens",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Αἴγινα",
+      "translation": "Aegina",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἁλιεῖς",
+      "translation": "Halieis",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀττική",
+      "translation": "Attica",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Δελφοί",
+      "translation": "Delphi; Delphians",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Εὔβοια",
+      "translation": "Euboea",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἠλεῖος",
+      "translation": "from Elis",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θάσιος",
+      "translation": "of or from Thasos, Thasian",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἰνάρως",
+      "translation": "Inaros",
+      "chapter": 59
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἰόνιος",
+      "translation": "of/called after Io",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κάριος",
+      "translation": "Carian, (fem. noun) Caria",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κυρήνη",
+      "translation": "Cyrene",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λέσβος",
+      "translation": "Lesbos",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μάρεια",
+      "translation": "Marea",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μέγαρα",
+      "translation": "town of Megara",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μυκήνη",
+      "translation": "Mycene, Mycenae",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Νίσαια",
+      "translation": "Nisaea",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ξέρξης",
+      "translation": "Xerxes",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Περσίς",
+      "translation": "Persian",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σάμιος",
+      "translation": "of Samos",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σπάρτη",
+      "translation": "Sparta",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σύβοτα",
+      "translation": "Sybota, \"swine-pastures\", islets near Corcyra",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φοῖνιξ",
+      "translation": "a Phoenician",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φωκεύς",
+      "translation": "a Phocian",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀττικός",
+      "translation": "Attic, Athenian",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Βοιωτία",
+      "translation": "Boeotia",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Βοιωτός",
+      "translation": "a Boeotian",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Δαρεῖος",
+      "translation": "Darius",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Δωριεύς",
+      "translation": "a Dorian, descendant of Dorus",
+      "chapter": 60
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Καλλίας",
+      "translation": "Callias",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κέρκυρα",
+      "translation": "Corcyra",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κολωναί",
+      "translation": "Colonae, town in Troas",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κροῖσος",
+      "translation": "Croesus",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λέσβιος",
+      "translation": "Lesbian, of Lesbos",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μαραθών",
+      "translation": "Marathon",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μηδικός",
+      "translation": "Median, of the Medes",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μίλητος",
+      "translation": "Miletus",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ὀλυμπία",
+      "translation": "Olympia",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ὄλυνθος",
+      "translation": "Olynthus",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ὀρέστης",
+      "translation": "Orestes; pl., the Orestae, an Epirot people",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Παλλήνη",
+      "translation": "Pallene",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σικελία",
+      "translation": "Sicily",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Στρυμών",
+      "translation": "the Strymon",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τάναγρα",
+      "translation": "Tanagra",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τροιζήν",
+      "translation": "Troezen",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τρωϊκός",
+      "translation": "Trojan",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φάληρον",
+      "translation": "Phaleron",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀθηναῖος",
+      "translation": "Athenian, of Athens",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀθήναιος",
+      "translation": "Athenaeus",
+      "chapter": 61
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Αἴγυπτος",
+      "translation": "Egypt (f.); king Aegyptus (m.)",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀριστεύς",
+      "translation": "Aristeus",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἑρμιονίς",
+      "translation": "of the town of Hermione",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θεσσαλία",
+      "translation": "Thessaly",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θεσσαλός",
+      "translation": "Thessalian",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κόρινθος",
+      "translation": "Corinth, (masc) Korinthos son of Zeus, founder of Corinth",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κυκλάδες",
+      "translation": "Cyclades",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λεωνίδης",
+      "translation": "Leonidas",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μεγαρεύς",
+      "translation": "a citizen of Megara",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Παμφυλία",
+      "translation": "Pamphylia",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Περικλῆς",
+      "translation": "Pericles",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Περσικός",
+      "translation": "Persian",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πλαταιαί",
+      "translation": "Plataeae",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ποσειδῶν",
+      "translation": "Poseidon",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ταίναρος",
+      "translation": "Taenarus",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φαρνάκης",
+      "translation": "Pharnaces king of Pontus",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Φάρσαλος",
+      "translation": "Pharsalos",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀγαμέμνων",
+      "translation": "Agamemnon, lit. the very steadfast",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Αἰγύπτιος",
+      "translation": "Egyptian",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Αἰσιμίδης",
+      "translation": "Aesimedes",
+      "chapter": 62
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀρτάβαζος",
+      "translation": "Artabazus",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Βοττιαῖος",
+      "translation": "of Bottiaea, Bottiaean",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Βυζάντιον",
+      "translation": "Byzantium (no LSJ entry; see Byzantium)",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἑλληνικός",
+      "translation": "Hellenic, Greek",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἐπίδαμνος",
+      "translation": "Epidamnus, later Dyrrhachium, Durazzo, Durrës",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Εὐρύβατος",
+      "translation": "Eurybatus, legendary traitor",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Εὐρυμέδων",
+      "translation": "Eurymedon",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἰλλυρικός",
+      "translation": "of Illyria",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κορίνθιος",
+      "translation": "Corinthian",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λευκάδιος",
+      "translation": "of Leucas",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μακεδονία",
+      "translation": "Macedon",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μεγαβάτης",
+      "translation": "Megabates",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Μιλτιάδης",
+      "translation": "Miltiades",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ξάνθιππος",
+      "translation": "Xanthippus",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ὀρχομενός",
+      "translation": "Orchomenus",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Παυσανίας",
+      "translation": "Pausanias",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πειραιεύς",
+      "translation": "Peiraeus",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ποτείδαια",
+      "translation": "Potidea",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σικυώνιος",
+      "translation": "of Sicyon",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Τυνδάρεος",
+      "translation": "Tyndarus, Tyndareus, husband of Leda",
+      "chapter": 63
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Χαιρώνεια",
+      "translation": "Chaeronea",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Χαλκιδεύς",
+      "translation": "Chalcidian, of Chalcis",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀλέξανδρος",
+      "translation": "Alexander",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀνακτόριον",
+      "translation": "Anactorium, city on Ambraciot gulf",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀνακτόριος",
+      "translation": "Anactorian, of Anactorium",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀρταξέρξης",
+      "translation": "Artaxerxes",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Δασκυλῖτις",
+      "translation": "of Dascylion",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἐπιδάμνιος",
+      "translation": "Epidamnian, citizen of Epidamnus",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἐπιδαύριος",
+      "translation": "of Epidaurus",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θουκυδίδης",
+      "translation": "Thucydides",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κερκυραῖος",
+      "translation": "of Corcyra, Corfu",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λακεδαίμων",
+      "translation": "Lacedaemon",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Σπαρτιάτης",
+      "translation": "a Spartan",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Χερσόνησος",
+      "translation": "the (Thracian) Chersonese; the Crimea",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ψαμμήτιχος",
+      "translation": "Psammetichus",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ἀμβρακιώτης",
+      "translation": "inhabitant of Ambracia",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Κλεόμβροτος",
+      "translation": "Cleombrotus",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Ποτειδεάτης",
+      "translation": "inhabitant of Potidaea",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Θεμιστοκλέης",
+      "translation": "Themistocles",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πελοπόννησος",
+      "translation": "the Peloponnesus",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Λακεδαιμόνιος",
+      "translation": "Spartan",
+      "chapter": 64
+    },
+    {
+      "method": "",
+      "category": "",
+      "greek": "Πελοποννήσιος",
+      "translation": "Peloponnesian (of people)",
+      "chapter": 64
+    }
+  ]
+}
