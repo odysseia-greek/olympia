@@ -12,6 +12,8 @@ The goal is for people to learn or rehearse ancient Greek. Some of it is in Dutc
   - [Sokrates - Σωκράτης](#sokrates---σωκράτης)
 - [Gateway](#gateway)
   - [Homeros - Ὅμηρος](#Homeros---Ὅμηρος)
+- [Init](#init)
+  - [Periandros - Περίανδρος](#periandros---περίανδρος)
 - [Tests](#tests)
   - [Hippokrates - Ἱπποκράτης](#Hippokrates---Ἱπποκράτης)
   
@@ -56,6 +58,16 @@ Sokrates (on the right) is a figure of mythical propertions. He could stare at t
 Αἶψα γὰρ ἐν κακότητι βροτοὶ καταγηράσκουσιν - Hardship can age a person overnight
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Homer_British_Museum.jpg" alt="Homeros" width="200"/>
+
+## Init
+
+### Periandros - Περίανδρος
+
+Περίανδρος δὲ ἦν Κυψέλου παῖς οὗτος ὁ τῷ Θρασυβούλῳ τὸ χρηστήριον μηνύσας· ἐτυράννευε δὲ ὁ Περίανδρος Κορίνθου - Periander, who disclosed the oracle's answer to Thrasybulus, was the son of Cypselus, and sovereign of Corinth
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Periander_Pio-Clementino_Inv276.jpg" alt="Periandros" width="200"/>
+
+Tyrant of Corinth.
 
 ## Tests
 
