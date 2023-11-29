@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
-	pb "github.com/odysseia-greek/eupalinos/proto"
 	configs "github.com/odysseia-greek/olympia/melissos/config"
 	"strings"
 	"sync"
@@ -15,7 +15,9 @@ import (
 )
 
 type MelissosHandler struct {
-	Config *configs.Config
+	Config       *configs.Config
+	Duration     time.Duration
+	TimeFinished int64
 }
 
 func (m *MelissosHandler) HandleParmenides() bool {
@@ -254,5 +256,35 @@ func (m *MelissosHandler) PrintProgress() {
 	for {
 		logging.Info(fmt.Sprintf("documents processed: %d | documents created: %d | documents updated: %d", m.Config.Processed, m.Config.Created, m.Config.Updated))
 		time.Sleep(20 * time.Second)
+	}
+}
+
+func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
+	start := time.Now()
+	ticker := time.NewTicker(m.Duration)
+	defer ticker.Stop()
+
+	for ts := range ticker.C {
+		if ts.Sub(start).Milliseconds() >= m.TimeFinished {
+			c <- false
+		}
+
+		job, err := m.Config.Kube.Workload().GetJob(m.Config.Namespace, m.Config.Job)
+		if err != nil {
+			logging.Error(err.Error())
+		}
+
+		conditionFound := false
+		if job.Status.Active == 0 {
+			for _, condition := range job.Status.Conditions {
+				if condition.Type == "Complete" {
+					conditionFound = true
+				}
+			}
+		}
+
+		if conditionFound {
+			c <- true
+		}
 	}
 }

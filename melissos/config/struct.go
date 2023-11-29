@@ -2,6 +2,7 @@ package config
 
 import (
 	elastic "github.com/odysseia-greek/agora/aristoteles"
+	"github.com/odysseia-greek/agora/thales"
 	"time"
 )
 
@@ -15,4 +16,7 @@ type Config struct {
 	Channel      string
 	DutchChannel string
 	WaitTime     time.Duration
+	Kube         thales.KubeClient
+	Namespace    string
+	Job          string
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/config"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/app"
+	"github.com/odysseia-greek/olympia/eratosthenes"
 	"log"
 	"os"
 )
@@ -44,7 +45,7 @@ func CreateNewConfig(env string) (*AlexandrosHandler, error) {
 	var cfg models.Config
 
 	if healthCheck {
-		vaultConfig, err := cfg.ConfigFromVault()
+		vaultConfig, err := eratosthenes.ConfigFromVault()
 		if err != nil {
 			log.Print(err)
 			return nil, err

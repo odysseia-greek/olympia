@@ -2,7 +2,7 @@ package app
 
 import (
 	"context"
-	pb "github.com/odysseia-greek/eupalinos/proto"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"google.golang.org/grpc"
 )
 

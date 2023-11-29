@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	uuid2 "github.com/google/uuid"
-	pb "github.com/odysseia-greek/eupalinos/proto"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"google.golang.org/grpc"
 	"os"
 	"strconv"

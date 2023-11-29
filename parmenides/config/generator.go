@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"github.com/odysseia-greek/agora/plato/config"
-	pb "github.com/odysseia-greek/eupalinos/proto"
+	"github.com/odysseia-greek/olympia/eratosthenes"
 	"google.golang.org/grpc"
 )
 
@@ -29,7 +30,7 @@ func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 	var cfg models.Config
 
 	if healthCheck {
-		vaultConfig, err := config.ConfigFromVault()
+		vaultConfig, err := eratosthenes.ConfigFromVault()
 		if err != nil {
 			return nil, nil, err
 		}

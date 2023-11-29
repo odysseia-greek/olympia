@@ -4,9 +4,11 @@ import (
 	"context"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/eupalinos/proto"
+	"github.com/odysseia-greek/agora/thales"
+	"github.com/odysseia-greek/olympia/eratosthenes"
 	"google.golang.org/grpc"
 	"os"
 	"time"
@@ -33,8 +35,15 @@ func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 
 	var cfg models.Config
 
+	kube, err := thales.CreateKubeClient(healthCheck)
+	if err != nil {
+		return nil, nil, err
+	}
+	ns := config.StringFromEnv(config.EnvNamespace, config.DefaultNamespace)
+	job := config.StringFromEnv(config.EnvJobName, config.DefaultJobName)
+
 	if healthCheck {
-		vaultConfig, err := config.ConfigFromVault()
+		vaultConfig, err := eratosthenes.ConfigFromVault()
 		if err != nil {
 			return nil, nil, err
 		}
@@ -86,6 +95,9 @@ func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 		Channel:      channel,
 		DutchChannel: config.DefaultDutchChannel,
 		WaitTime:     waitDuration,
+		Kube:         kube,
+		Job:          job,
+		Namespace:    ns,
 	}, conn, nil
 }
 
