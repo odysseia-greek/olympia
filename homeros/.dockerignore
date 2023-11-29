@@ -1,0 +1,9 @@
+venv
+.idea
+.code
+Dockerfile
+Makefile
+__pycache__
+.DS_Store
+.git
+config/tracing-config.json

@@ -1,0 +1,37 @@
+spectaql:
+  faviconFile: ./docs/favicon.png
+  displayAllServers: true
+
+introspection:
+  removeTrailingPeriodFromDescriptions: false
+  url: http://k3s-odysseia.greek/graphql
+  queryNameStrategy: capitalizeFirst
+  fieldExpansionDepth: 3
+
+info:
+  title: Homeros
+  description: Homeros is the gateway to use the odysseia-greek platform
+  termsOfService: there are no TOS at this moment, use at your own risk we take no responsibility
+  contact:
+    name: odysseia-greek
+    url: https://github.com/odysseia-greek
+    email: joerivrijaldenhoven@odysseia.io
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  x-introItems:
+    - title: Quote
+      description: Αἶψα γὰρ ἐν κακότητι βροτοὶ καταγηράσκουσιν - Hardship can age a person overnight
+    - title: Links
+      description:
+        https://github.com/odysseia-greek/olympia/homeros
+        https://github.com/anvilco/spectaql
+
+
+servers:
+  - url: http://k3s-odysseia.greek/graphql
+    description: k3s
+    production: false
+  - url: https://odysseia-greek.com/graphql
+    description: Production
+    production: true
