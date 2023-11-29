@@ -1,0 +1,40 @@
+{
+  "operationScores": [
+    {
+      "operation": "dictionary",
+      "score": 100
+    },
+    {
+      "operation": "grammar",
+      "score": 100
+    },
+    {
+      "operation": "authors",
+      "score": 100
+    },
+    {
+      "operation": "sentence",
+      "score": 100
+    },
+    {
+      "operation": "text",
+      "score": 100
+    },
+    {
+      "operation": "methods",
+      "score": 100
+    },
+    {
+      "operation": "answer",
+      "score": 100
+    },
+    {
+      "operation": "quiz",
+      "score": 100
+    },
+    {
+      "operation": "status",
+      "score": 100
+    }
+  ]
+}
