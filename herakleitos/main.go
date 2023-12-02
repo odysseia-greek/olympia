@@ -1,11 +1,14 @@
 package main
 
 import (
+	"context"
 	"embed"
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
+	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
 	"github.com/odysseia-greek/olympia/herakleitos/app"
 	"github.com/odysseia-greek/olympia/herakleitos/config"
 	"log"
@@ -90,5 +93,13 @@ func main() {
 	wg.Wait()
 	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Config.Created)))
 	logging.Info(fmt.Sprintf("texts found in rhema: %s", strconv.Itoa(documents)))
+
+	logging.Debug("closing Ptolemaios because job is done")
+	// just setting a code that could be used later to check is if it was sent from an actual service
+	uuidCode := uuid.New().String()
+	_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+	if err != nil {
+		logging.Error(err.Error())
+	}
 	os.Exit(0)
 }

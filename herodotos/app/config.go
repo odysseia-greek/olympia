@@ -1,13 +1,20 @@
 package app
 
 import (
+	"context"
+	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/app"
-	"github.com/odysseia-greek/olympia/eratosthenes"
+	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/app"
+	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"google.golang.org/grpc/metadata"
 	"log"
 	"os"
+	"time"
 )
 
 const (
@@ -23,18 +30,31 @@ func CreateNewConfig(env string) (*HerodotosHandler, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
-
+	ambassador := ptolemaios.NewClientAmbassador()
 	if healthCheck {
-		vaultConfig, err := eratosthenes.ConfigFromVault()
+		if healthCheck {
+			healthy := ambassador.WaitForHealthyState()
+			if !healthy {
+				logging.Info("tracing service not ready - restarting seems the only option")
+				os.Exit(1)
+			}
+		}
+
+		traceId := uuid.New().String()
+		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+		defer cancel()
+		md := metadata.New(map[string]string{service.HeaderKey: traceId})
+		ctx = metadata.NewOutgoingContext(context.Background(), md)
+		vaultConfig, err := ambassador.GetSecret(ctx, &pb.VaultRequest{})
 		if err != nil {
-			log.Print(err)
+			logging.Error(err.Error())
 			return nil, err
 		}
 
-		service := aristoteles.ElasticService(tls)
+		elasticService := aristoteles.ElasticService(tls)
 
 		cfg = models.Config{
-			Service:     service,
+			Service:     elasticService,
 			Username:    vaultConfig.ElasticUsername,
 			Password:    vaultConfig.ElasticPassword,
 			ElasticCERT: vaultConfig.ElasticCERT,
