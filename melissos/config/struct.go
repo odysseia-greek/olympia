@@ -3,6 +3,7 @@ package config
 import (
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/thales"
+	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/app"
 	"time"
 )
 
@@ -19,4 +20,5 @@ type Config struct {
 	Kube         thales.KubeClient
 	Namespace    string
 	Job          string
+	Ambassador   *ptolemaios.ClientAmbassador
 }

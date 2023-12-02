@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
+	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
 	"github.com/odysseia-greek/olympia/melissos/app"
 	"github.com/odysseia-greek/olympia/melissos/config"
 	"log"
@@ -68,6 +71,14 @@ func main() {
 		if finishedDutch {
 			logging.System("Finished Run")
 			conn.Close()
+
+			logging.Debug("closing Ptolemaios because job is done")
+			// just setting a code that could be used later to check is if it was sent from an actual service
+			uuidCode := uuid.New().String()
+			_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+			if err != nil {
+				logging.Error(err.Error())
+			}
 			os.Exit(0)
 		}
 	}

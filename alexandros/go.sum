@@ -31,6 +31,7 @@ github.com/odysseia-greek/attike/aristophanes v0.3.0 h1:nS/VOE25H3Y7t1cz2xkSgLlC
 github.com/odysseia-greek/attike/aristophanes v0.3.0/go.mod h1:vo4eS6TQBShRa5sM0QzvQDTaXtrhxbIrR77jX/IhLMM=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.1 h1:8MtW9pxtIaFRZi9xQwvXS5xwg71ADaMOTgmzURUY3Bw=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.1/go.mod h1:4xNTe13Om1PqHRA14nbQvIdxexSVwmis0YlIdYNTZ/U=
+github.com/odysseia-greek/delphi/ptolemaios v0.0.3/go.mod h1:i/hlaggMbOPOvEpAEMjvCGB7tiZv5EIvJL23gy6vT3g=
 github.com/odysseia-greek/olympia/eratosthenes v0.0.2 h1:PQ5xliOHWZLjwkKrgPWmT22repWFPdrQbFE8s2uqbnw=
 github.com/odysseia-greek/olympia/eratosthenes v0.0.2/go.mod h1:QJiXzWMkfSM0SHk8nhYELM84V9ZD0taE1APIQtoltBY=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=

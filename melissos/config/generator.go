@@ -2,14 +2,18 @@ package config
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/service"
 	"github.com/odysseia-greek/agora/thales"
-	"github.com/odysseia-greek/olympia/eratosthenes"
+	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/app"
+	pbp "github.com/odysseia-greek/delphi/ptolemaios/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
 )
@@ -27,7 +31,7 @@ type EupalinosClient interface {
 
 func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 	healthCheck := true
-	if env == "LOCAL" || env == "TEST" {
+	if env == "DEVELOPMENT" {
 		healthCheck = false
 	}
 	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
@@ -42,16 +46,31 @@ func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 	ns := config.StringFromEnv(config.EnvNamespace, config.DefaultNamespace)
 	job := config.StringFromEnv(config.EnvJobName, config.DefaultJobName)
 
+	ambassador := ptolemaios.NewClientAmbassador()
 	if healthCheck {
-		vaultConfig, err := eratosthenes.ConfigFromVault()
+		if healthCheck {
+			healthy := ambassador.WaitForHealthyState()
+			if !healthy {
+				logging.Info("tracing service not ready - restarting seems the only option")
+				os.Exit(1)
+			}
+		}
+
+		traceId := uuid.New().String()
+		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+		defer cancel()
+		md := metadata.New(map[string]string{service.HeaderKey: traceId})
+		ctx = metadata.NewOutgoingContext(context.Background(), md)
+		vaultConfig, err := ambassador.GetSecret(ctx, &pbp.VaultRequest{})
 		if err != nil {
+			logging.Error(err.Error())
 			return nil, nil, err
 		}
 
-		service := aristoteles.ElasticService(tls)
+		elasticService := aristoteles.ElasticService(tls)
 
 		cfg = models.Config{
-			Service:     service,
+			Service:     elasticService,
 			Username:    vaultConfig.ElasticUsername,
 			Password:    vaultConfig.ElasticPassword,
 			ElasticCERT: vaultConfig.ElasticCERT,
@@ -98,6 +117,7 @@ func CreateNewConfig(env string) (*Config, *grpc.ClientConn, error) {
 		Kube:         kube,
 		Job:          job,
 		Namespace:    ns,
+		Ambassador:   ambassador,
 	}, conn, nil
 }
 
