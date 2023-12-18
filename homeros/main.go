@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/olympia/homeros/app"
-	"github.com/odysseia-greek/olympia/homeros/handlers"
+	"github.com/odysseia-greek/olympia/homeros/routing"
 	"github.com/odysseia-greek/olympia/homeros/schemas"
 	"net/http"
 	"os"
@@ -35,9 +34,9 @@ func main() {
 	logging.System("starting up and getting env variables")
 
 	handler := schemas.HomerosHandler()
-	tracingConfig := handlers.InitTracingConfig()
+	tracingConfig := routing.InitTracingConfig()
 
-	srv := app.InitRoutes(handler.Tracer, tracingConfig, handler.Randomizer)
+	srv := routing.InitRoutes(handler.Tracer, tracingConfig, handler.Randomizer)
 
 	logging.System(fmt.Sprintf("running on port %s", port))
 	err := http.ListenAndServe(port, srv)

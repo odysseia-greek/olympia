@@ -26,3 +26,6 @@ generate_swagger:
 	  -H 'accept: application/yaml' \
 	  -H 'Content-Type: application/json' \
       -d '@./alexandros/docs/swagger.json' > ./alexandros/docs/openapi.yaml
+
+tidy-all:
+	find . -name "go.mod" -type f -execdir sh -c 'go mod tidy && go fmt ./...' \;

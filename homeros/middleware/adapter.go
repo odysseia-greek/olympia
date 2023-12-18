@@ -8,9 +8,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/randomizer"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/app"
+	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
-	"github.com/odysseia-greek/olympia/homeros/handlers"
+	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"io"
 	"io/ioutil"
 	"log"
@@ -65,7 +65,7 @@ func SetCorsHeaders() Adapter {
 //
 // Returns:
 // An Adapter that wraps an http.Handler and performs the described middleware actions.
-func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *handlers.TraceConfig, randomizer randomizer.Random) Adapter {
+func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			bodyBytes, err := io.ReadAll(r.Body)

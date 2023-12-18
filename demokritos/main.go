@@ -9,8 +9,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/demokritos/app"
-	"github.com/odysseia-greek/olympia/demokritos/config"
+	"github.com/odysseia-greek/olympia/demokritos/seeder"
 	"log"
 	"os"
 	"path"
@@ -45,7 +44,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	demokritosConfig, err := config.CreateNewConfig(env)
+	handler, err := seeder.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -57,8 +56,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	handler := app.DemokritosHandler{Config: demokritosConfig}
 
 	err = handler.DeleteIndexAtStartUp()
 	if err != nil {
@@ -99,13 +96,13 @@ func main() {
 
 	wg.Wait()
 
-	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Config.Created)))
+	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Created)))
 	logging.Info(fmt.Sprintf("words found in sullego: %s", strconv.Itoa(documents)))
 
 	logging.Debug("closing Ptolemaios because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service
 	uuidCode := uuid.New().String()
-	_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+	_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
 	if err != nil {
 		logging.Error(err.Error())
 	}

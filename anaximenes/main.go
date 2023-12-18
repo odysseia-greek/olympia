@@ -5,14 +5,11 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/anaximenes/app"
-	"github.com/odysseia-greek/olympia/anaximenes/config"
+	"github.com/odysseia-greek/olympia/anaximenes/seeder"
 	"log"
 	"os"
 	"strings"
 )
-
-var documents int
 
 func main() {
 	//https://patorjk.com/software/taag/#p=display&f=Crawford2&t=ANAXIMENES
@@ -35,13 +32,12 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	anaximenesConfig, err := config.CreateNewConfig(env)
+	handler, err := seeder.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
 	}
 
-	handler := app.AnaximenesConfig{Config: anaximenesConfig}
 	err = handler.DeleteIndexAtStartUp()
 	if err != nil {
 		logging.Debug("cannot delete index which means an aliased version exist and should not be deleted")
@@ -54,10 +50,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	logging.Debug("closing Ptolemaios because job is done")
+	logging.Debug("closing ptolemaios because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service
 	uuidCode := uuid.New().String()
-	_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+	_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
 	if err != nil {
 		logging.Error(err.Error())
 	}

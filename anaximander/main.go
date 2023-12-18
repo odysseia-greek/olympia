@@ -9,8 +9,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/anaximander/app"
-	"github.com/odysseia-greek/olympia/anaximander/config"
+	"github.com/odysseia-greek/olympia/anaximander/seeder"
 	"log"
 	"os"
 	"path"
@@ -46,7 +45,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	anaximanderConfig, err := config.CreateNewConfig(env)
+	handler, err := seeder.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -59,7 +58,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	handler := app.AnaximanderHandler{Config: anaximanderConfig}
 	err = handler.DeleteIndexAtStartUp()
 	if err != nil {
 		log.Fatal(err)
@@ -125,12 +123,12 @@ func main() {
 		}
 	}
 	// Countdown reached 0, exit the program
-	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Config.Created)))
+	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Created)))
 
 	logging.Debug("closing Ptolemaios because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service
 	uuidCode := uuid.New().String()
-	_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+	_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
 	if err != nil {
 		logging.Error(err.Error())
 	}

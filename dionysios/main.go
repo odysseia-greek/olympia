@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/olympia/dionysios/app"
-	"github.com/odysseia-greek/olympia/dionysios/config"
+	"github.com/odysseia-greek/olympia/dionysios/grammar"
 	"log"
 	"net/http"
 	"os"
@@ -38,19 +37,19 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	dionysiosConfig, err := config.CreateNewConfig(env)
+	dionysiosConfig, err := grammar.CreateNewConfig(env)
 	if err != nil {
 		log.Print(err)
 		log.Fatal("death has found me")
 	}
 
-	declensionConfig, _ := app.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
+	declensionConfig, _ := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
 	dionysiosConfig.DeclensionConfig = *declensionConfig
 
 	// Start a goroutine to periodically update the grammar config
 	go updateGrammarConfig(dionysiosConfig)
 
-	srv := app.InitRoutes(dionysiosConfig)
+	srv := grammar.InitRoutes(dionysiosConfig)
 
 	log.Printf("%s : %s", "running on port", port)
 	err = http.ListenAndServe(port, srv)
@@ -61,12 +60,12 @@ func main() {
 
 // updateGrammarConfig periodically fetches the grammar config from Elasticsearch
 // and updates the provided dionysiosConfig if there is any difference.
-func updateGrammarConfig(dionysiosConfig *config.Config) {
+func updateGrammarConfig(dionysiosConfig *grammar.DionysosHandler) {
 	ticker := time.NewTicker(2 * time.Minute)
 	for {
 		select {
 		case <-ticker.C:
-			declensionConfig, err := app.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
+			declensionConfig, err := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
 			if err != nil {
 				log.Printf("failed to fetch updated declension config: %s", err)
 				continue // Retry on the next tick
