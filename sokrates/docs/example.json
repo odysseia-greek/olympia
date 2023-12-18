@@ -1,0 +1,27 @@
+{
+  "quizzes": [
+    {
+      "chapter": 1,
+      "method": "homer",
+      "category": "iliad",
+      "words": [
+        {
+          "original": "γῆ",
+          "translation": "earth",
+          "timesCorrect": 0,
+          "timesIncorrect": 0
+        },
+        {
+          "original": "γῆ",
+          "translation": "earth",
+          "timesCorrect": 0,
+          "timesIncorrect": 0
+        }
+      ],
+      "progress": {
+        "totalWords": 20,
+        "averageAccuracy": null
+      }
+    }
+  ]
+}

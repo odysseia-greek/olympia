@@ -6,8 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/melissos/app"
-	"github.com/odysseia-greek/olympia/melissos/config"
+	"github.com/odysseia-greek/olympia/melissos/seeder"
 	"log"
 	"os"
 	"strings"
@@ -34,21 +33,14 @@ func main() {
 	logging.Debug("creating config")
 
 	env := os.Getenv("ENV")
-
-	melissosConfig, conn, err := config.CreateNewConfig(env)
-	if err != nil {
-		logging.Error(err.Error())
-		log.Fatal("death has found me")
-	}
-
 	duration := time.Millisecond * 5000
 	minute := time.Minute * 60
 	timeFinished := minute.Milliseconds()
 
-	handler := app.MelissosHandler{
-		Config:       melissosConfig,
-		Duration:     duration,
-		TimeFinished: timeFinished,
+	handler, conn, err := seeder.CreateNewConfig(env, duration, timeFinished)
+	if err != nil {
+		logging.Error(err.Error())
+		log.Fatal("death has found me")
 	}
 
 	done := make(chan bool)
@@ -60,7 +52,7 @@ func main() {
 	select {
 
 	case <-done:
-		logging.Info(fmt.Sprintf("%s job finished", melissosConfig.Job))
+		logging.Info(fmt.Sprintf("%s job finished", handler.Job))
 	}
 
 	go handler.PrintProgress()
@@ -75,7 +67,7 @@ func main() {
 			logging.Debug("closing Ptolemaios because job is done")
 			// just setting a code that could be used later to check is if it was sent from an actual service
 			uuidCode := uuid.New().String()
-			_, err = handler.Config.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
+			_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})
 			if err != nil {
 				logging.Error(err.Error())
 			}

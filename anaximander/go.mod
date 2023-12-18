@@ -1,12 +1,16 @@
 module github.com/odysseia-greek/olympia/anaximander
 
-go 1.20
+go 1.21
+
+toolchain go1.21.4
 
 require (
+	github.com/google/uuid v1.3.1
 	github.com/odysseia-greek/agora/aristoteles v0.1.1
-	github.com/odysseia-greek/agora/plato v0.1.1
-	github.com/odysseia-greek/delphi/ptolemaios v0.0.3
+	github.com/odysseia-greek/agora/plato v0.1.4
+	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.8.4
+	google.golang.org/grpc v1.59.0
 )
 
 require (
@@ -29,7 +33,7 @@ require (
 	github.com/hashicorp/vault/api/auth/kubernetes v0.5.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	github.com/odysseia-greek/agora/diogenes v0.1.0 // indirect
+	github.com/odysseia-greek/agora/diogenes v0.1.4 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
@@ -39,7 +43,6 @@ require (
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d // indirect
-	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

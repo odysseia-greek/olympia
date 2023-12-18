@@ -5,21 +5,21 @@ import (
 	"fmt"
 	"github.com/graphql-go/graphql"
 	plato "github.com/odysseia-greek/agora/plato/config"
-	"github.com/odysseia-greek/olympia/homeros/handlers"
+	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"log"
 	"os"
 	"sync"
 )
 
 var (
-	handler            *handlers.HomerosHandler
+	handler            *gateway.HomerosHandler
 	homerosHandlerOnce sync.Once
 )
 
-func HomerosHandler() *handlers.HomerosHandler {
+func HomerosHandler() *gateway.HomerosHandler {
 	homerosHandlerOnce.Do(func() {
 		env := os.Getenv("ENV")
-		homerosHandler, err := handlers.CreateNewConfig(env)
+		homerosHandler, err := gateway.CreateNewConfig(env)
 		if err != nil {
 			log.Print(err)
 		}

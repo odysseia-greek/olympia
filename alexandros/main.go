@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/olympia/alexandros/app"
+	"github.com/odysseia-greek/olympia/alexandros/dictionary"
 	"log"
 	"net/http"
 	"os"
@@ -34,13 +34,13 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	alexandrosConfig, err := app.CreateNewConfig(env)
+	alexandrosConfig, err := dictionary.CreateNewConfig(env)
 	if err != nil {
 		log.Print(err)
 		log.Fatal("death has found me")
 	}
 
-	srv := app.InitRoutes(alexandrosConfig)
+	srv := dictionary.InitRoutes(alexandrosConfig)
 
 	log.Printf("%s : %s", "running on port", port)
 	err = http.ListenAndServe(port, srv)

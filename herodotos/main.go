@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/olympia/herodotos/app"
+	"github.com/odysseia-greek/olympia/herodotos/text"
 	"log"
 	"net/http"
 	"os"
@@ -34,13 +34,13 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	herodotosConfig, err := app.CreateNewConfig(env)
+	herodotosConfig, err := text.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
 	}
 
-	srv := app.InitRoutes(herodotosConfig)
+	srv := text.InitRoutes(herodotosConfig)
 
 	log.Printf("%s : %s", "running on port", port)
 	err = http.ListenAndServe(port, srv)
