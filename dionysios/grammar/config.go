@@ -15,18 +15,21 @@ import (
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
 )
 
 const (
-	defaultIndex string = "grammar"
+	defaultIndex             string = "grammar"
+	EnvAggregatorAddress            = "ARISTARCHOS_ADDRESS"
+	DEFAULTAGGREGATORADDRESS        = "aristarchos:50053"
 )
 
 func CreateNewConfig(env string) (*DionysosHandler, error) {
 	healthCheck := true
-	if env == "LOCAL" || env == "TEST" {
+	if env == "DEVELOPMENT" {
 		healthCheck = false
 	}
 	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
@@ -98,6 +101,16 @@ func CreateNewConfig(env string) (*DionysosHandler, error) {
 		}
 	}
 
+	aggregatorAddress := config.StringFromEnv(EnvAggregatorAddress, DEFAULTAGGREGATORADDRESS)
+	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	if healthCheck {
+		healthy := aggregator.WaitForHealthyState()
+		if !healthy {
+			logging.Debug("aggregator service not ready - restarting seems the only option")
+			os.Exit(1)
+		}
+	}
+
 	return &DionysosHandler{
 		Elastic:          elastic,
 		Cache:            cache,
@@ -105,6 +118,7 @@ func CreateNewConfig(env string) (*DionysosHandler, error) {
 		Client:           client,
 		DeclensionConfig: plato.DeclensionConfig{},
 		Tracer:           tracer,
+		Aggregator:       aggregator,
 	}, nil
 }
 

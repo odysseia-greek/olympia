@@ -11,6 +11,7 @@ import (
 	plato "github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"log"
 	"net/http"
 	"strings"
@@ -24,6 +25,7 @@ type DionysosHandler struct {
 	Client           service.OdysseiaClient
 	DeclensionConfig models.DeclensionConfig
 	Tracer           *aristophanes.ClientTracer
+	Aggregator       *aristarchos.ClientAggregator
 }
 
 // PingPong pongs the ping

@@ -35,8 +35,11 @@ type ClientAggregator struct {
 	scholar pb.AristarchosClient
 }
 
-func NewClientAggregator() *ClientAggregator {
-	conn, _ := grpc.Dial(DEFAULTADDRESS, grpc.WithInsecure())
+func NewClientAggregator(address string) *ClientAggregator {
+	if address == "" {
+		address = DEFAULTADDRESS
+	}
+	conn, _ := grpc.Dial(address, grpc.WithInsecure())
 	client := pb.NewAristarchosClient(conn)
 	return &ClientAggregator{scholar: client}
 }
