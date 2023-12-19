@@ -9,8 +9,8 @@ build:
   local:
     push: false
   artifacts:
-    - image: ghcr.io/odysseia-greek/alexandros
-      context: alexandros
+    - image: ghcr.io/odysseia-greek/aristarchos
+      context: aristarchos
       docker:
         target: debug
       sync:
@@ -20,6 +20,6 @@ build:
 
 manifests:
   rawYaml:
-    - alexandros/infra/manifest.yaml
+    - aristarchos/infra/manifest.yaml
 profiles:
   - name: dev

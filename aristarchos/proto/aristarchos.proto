@@ -1,0 +1,59 @@
+syntax = "proto3";
+option go_package = "github.com/odysseia-greek/olympia/aristarchos/proto";
+
+package olympia_aristarchos;
+
+
+service Aristarchos {
+  rpc CreateNewEntry (AggregatorCreationRequest) returns (AggregatorCreationResponse) {}
+  rpc RetrieveEntry (AggregatorRequest) returns (RootWordResponse) {}
+  rpc RetrieveSearchWords (AggregatorRequest) returns (SearchWordResponse) {}
+  rpc Health (HealthRequest) returns (HealthResponse) {}
+}
+
+message AggregatorRequest {
+  string root_word = 1;
+}
+
+message AggregatorCreationRequest {
+  string word = 1;
+  string rule = 2;
+  string root_word = 3;
+  string translation = 4;
+}
+
+message AggregatorCreationResponse {
+  bool created = 1;
+  bool updated = 2;
+}
+
+message SearchWordResponse {
+  repeated string word = 1;
+}
+
+message ConjugationForm {
+  string number = 1;
+  string person = 2;
+  string word = 3;
+}
+
+message Conjugation {
+  string tense = 1;
+  string mood = 2;
+  string aspect = 3;
+  repeated ConjugationForm forms = 4;
+}
+
+message RootWordResponse {
+  string rootWord = 1;
+  repeated string translations = 2;
+  repeated Conjugation conjugations = 3;
+}
+
+message HealthResponse {
+  bool health = 1;
+}
+
+message HealthRequest {
+
+}

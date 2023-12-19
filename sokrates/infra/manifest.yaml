@@ -3,22 +3,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: alexandros-dev
+ name: sokrates-dev
  namespace: odysseia
  labels:
-   app: alexandros-dev
+   app: sokrates-dev
 spec:
  replicas: 1
  selector:
    matchLabels:
-     app: alexandros-dev
+     app: sokrates-dev
  template:
    metadata:
      labels:
-       app: alexandros-dev
+       app: sokrates-dev
      annotations:
        odysseia-greek/role: api
-       odysseia-greek/access: dictionary
+       odysseia-greek/access: quiz
        perikles/accesses: solon
    spec:
      initContainers:
@@ -106,8 +106,8 @@ spec:
            - name: elastic-internal-tls
              mountPath: /app/config/elastic
              readOnly: true
-       - name: "alexandros"
-         image: ghcr.io/odysseia-greek/alexandros:v0.0.11
+       - name: "sokrates"
+         image: ghcr.io/odysseia-greek/sokrates:v0.0.11
 
          imagePullPolicy: Never
          env:
@@ -123,7 +123,7 @@ spec:
                  fieldPath: metadata.annotations['odysseia-greek/access']
          envFrom:
            - configMapRef:
-               name: alexandros
+               name: sokrates
          volumeMounts:
            - name: solon-certs
              mountPath: /etc/certs/solon
@@ -147,7 +147,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: alexandros-dev
+  name: sokrates-dev
 spec:
   ports:
     - port: 5000
@@ -157,4 +157,4 @@ spec:
       name: delve
       targetPort: delve
   selector:
-    app: alexandros-dev
+    app: sokrates-dev
