@@ -15,11 +15,19 @@ message AggregatorRequest {
   string root_word = 1;
 }
 
+enum PartOfSpeech {
+  UNKNOWN_CATEGORY = 0;
+  VERB = 1;
+  NOUN = 2;
+  PARTICIPLE = 3;
+}
+
 message AggregatorCreationRequest {
   string word = 1;
   string rule = 2;
   string root_word = 3;
   string translation = 4;
+  PartOfSpeech part_of_speech = 5;
 }
 
 message AggregatorCreationResponse {
@@ -31,23 +39,26 @@ message SearchWordResponse {
   repeated string word = 1;
 }
 
-message ConjugationForm {
-  string number = 1;
-  string person = 2;
-  string word = 3;
+message GrammaticalForm {
+  string person = 1;
+  string number = 2;
+  string gender = 3;
+  string case = 4;
+  string word = 5;
 }
 
-message Conjugation {
+message GrammaticalCategory {
   string tense = 1;
   string mood = 2;
   string aspect = 3;
-  repeated ConjugationForm forms = 4;
+  repeated GrammaticalForm forms = 4;
 }
 
 message RootWordResponse {
   string rootWord = 1;
-  repeated string translations = 2;
-  repeated Conjugation conjugations = 3;
+  PartOfSpeech part_of_speech = 2;
+  repeated string translations = 3;
+  repeated GrammaticalCategory categories = 4;
 }
 
 message HealthResponse {

@@ -147,7 +147,7 @@ spec:
         - name: "dionysios"
           image: ghcr.io/odysseia-greek/dionysios:v0.0.11
 
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           env:
             - name: POD_NAME
               valueFrom:
@@ -169,18 +169,6 @@ spec:
               name: http
             - containerPort: 2345
               name: delve
-          livenessProbe:
-            httpGet:
-              path: /dionysios/v1/health
-              port: 5000
-            initialDelaySeconds: 20
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /dionysios/v1/ping
-              port: 5000
-            initialDelaySeconds: 1
-            periodSeconds: 20
       volumes:
         - name: vault-server-tls
           secret:

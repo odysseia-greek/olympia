@@ -3,15 +3,19 @@ package grammar
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
 	plato "github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
+	"google.golang.org/grpc/metadata"
 	"log"
 	"net/http"
 	"strings"
@@ -254,6 +258,35 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		}
 		middleware.ResponseWithJson(w, e)
 		return
+	}
+
+	for _, declension := range declensions.Results {
+		ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+		defer cancel()
+		md := metadata.New(map[string]string{service.HeaderKey: traceID})
+		ctx = metadata.NewOutgoingContext(context.Background(), md)
+
+		if declension.Rule != "preposition" {
+			request := pba.AggregatorCreationRequest{
+				Word:        declension.Word,
+				Rule:        declension.Rule,
+				RootWord:    declension.RootWord,
+				Translation: declension.Translation,
+			}
+			entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
+			if err != nil {
+				logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
+			}
+
+			logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
+
+			test, _ := d.Aggregator.RetrieveEntry(ctx, &pba.AggregatorRequest{
+				RootWord: declension.RootWord,
+			})
+
+			l, _ := json.Marshal(test)
+			logging.Debug(string(l))
+		}
 	}
 
 	stringifiedDeclension, _ := declensions.Marshal()

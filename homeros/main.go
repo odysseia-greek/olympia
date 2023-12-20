@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"github.com/odysseia-greek/olympia/homeros/routing"
 	"github.com/odysseia-greek/olympia/homeros/schemas"
 	"net/http"
@@ -34,7 +35,7 @@ func main() {
 	logging.System("starting up and getting env variables")
 
 	handler := schemas.HomerosHandler()
-	tracingConfig := routing.InitTracingConfig()
+	tracingConfig := gateway.InitTracingConfig()
 
 	srv := routing.InitRoutes(handler.Tracer, tracingConfig, handler.Randomizer)
 

@@ -8,16 +8,12 @@ require (
 	github.com/odysseia-greek/agora/archytas v0.1.1
 	github.com/odysseia-greek/agora/aristoteles v0.1.2
 	github.com/odysseia-greek/agora/plato v0.1.4
-	github.com/odysseia-greek/olympia/aristarchos v0.0.1
 	github.com/odysseia-greek/attike/aristophanes v0.4.0
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
+	github.com/odysseia-greek/olympia/aristarchos v0.0.2
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/text v0.14.0
 	google.golang.org/grpc v1.60.0
-)
-
-replace (
-	github.com/odysseia-greek/olympia/aristarchos => /Users/joerivrij/go/src/github.com/odysseia-greek/olympia/aristarchos
 )
 
 require (
