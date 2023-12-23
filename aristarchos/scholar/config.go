@@ -22,11 +22,13 @@ const (
 	defaultIndex string = "aggregator"
 )
 
+var Tracer *aristophanes.ClientTracer
+
 func CreateNewConfig() (*AggregatorServiceImpl, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	tracer := aristophanes.NewClientTracer()
-	healthy := tracer.WaitForHealthyState()
+	Tracer = aristophanes.NewClientTracer()
+	healthy := Tracer.WaitForHealthyState()
 	if !healthy {
 		logging.Error("tracing service not ready - restarting seems the only option")
 		os.Exit(1)
@@ -51,9 +53,10 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 		Operation:     "/delphi_ptolemaios.Ptolemaios/GetSecret",
 	}
 
-	trace, err := tracer.StartTrace(ctx, payload)
+	trace, err := Tracer.StartTrace(ctx, payload)
 	if err != nil {
 		logging.Error(err.Error())
+		return nil, err
 	}
 
 	logging.Trace(fmt.Sprintf("traceID: %s |", trace.CombinedId))
@@ -92,7 +95,7 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 		ResponseBody: "redacted",
 	}
 
-	_, err = tracer.CloseTrace(context.Background(), traceCloser)
+	_, err = Tracer.CloseTrace(context.Background(), traceCloser)
 	logging.Trace(fmt.Sprintf("trace closed with id: %s", traceID))
 	if err != nil {
 		return nil, err
@@ -112,6 +115,5 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 	return &AggregatorServiceImpl{
 		Index:   index,
 		Elastic: elastic,
-		Tracer:  tracer,
 	}, nil
 }

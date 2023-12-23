@@ -35,7 +35,7 @@ func main() {
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
 
-	scholar, err := scholar.CreateNewConfig()
+	config, err := scholar.CreateNewConfig()
 	if err != nil {
 		log.Print(err)
 		log.Fatal("death has found me")
@@ -48,9 +48,9 @@ func main() {
 
 	var server *grpc.Server
 
-	server = grpc.NewServer()
+	server = grpc.NewServer(grpc.UnaryInterceptor(scholar.AggregatorInterceptor))
 
-	pb.RegisterAristarchosServer(server, scholar)
+	pb.RegisterAristarchosServer(server, config)
 
 	logging.Info(fmt.Sprintf("Server listening on %s", port))
 	if err := server.Serve(listener); err != nil {

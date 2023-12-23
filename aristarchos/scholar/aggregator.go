@@ -3,7 +3,6 @@ package scholar
 import (
 	"context"
 	"github.com/odysseia-greek/agora/aristoteles"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/olympia/aristarchos/proto"
 	"google.golang.org/grpc"
 	"time"
@@ -23,7 +22,6 @@ const (
 type AggregatorServiceImpl struct {
 	Elastic aristoteles.Client
 	Index   string
-	Tracer  *aristophanes.ClientTracer
 	pb.UnimplementedAristarchosServer
 }
 

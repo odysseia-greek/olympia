@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/olympia/dionysios/grammar"
@@ -39,7 +40,7 @@ func main() {
 
 	dionysiosConfig, err := grammar.CreateNewConfig(env)
 	if err != nil {
-		log.Print(err)
+		logging.Error(err.Error())
 		log.Fatal("death has found me")
 	}
 
@@ -51,7 +52,7 @@ func main() {
 
 	srv := grammar.InitRoutes(dionysiosConfig)
 
-	log.Printf("%s : %s", "running on port", port)
+	logging.Debug(fmt.Sprintf("%s : %s", "running on port", port))
 	err = http.ListenAndServe(port, srv)
 	if err != nil {
 		panic(err)
@@ -67,12 +68,12 @@ func updateGrammarConfig(dionysiosConfig *grammar.DionysosHandler) {
 		case <-ticker.C:
 			declensionConfig, err := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
 			if err != nil {
-				log.Printf("failed to fetch updated declension config: %s", err)
+				logging.Debug(fmt.Sprint("failed to fetch updated declension config: %s", err.Error()))
 				continue // Retry on the next tick
 			}
 
 			if !isSameDeclensionConfig(*declensionConfig, dionysiosConfig.DeclensionConfig) {
-				log.Print("Detected a difference in the grammar config. Updating...")
+				logging.Debug("Detected a difference in the grammar config. Updating...")
 				dionysiosConfig.DeclensionConfig = *declensionConfig
 			}
 		}

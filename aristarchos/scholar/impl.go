@@ -6,13 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/service"
-	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
 	pb "github.com/odysseia-greek/olympia/aristarchos/proto"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 	"strings"
-	"time"
 )
 
 const (
@@ -26,53 +21,15 @@ func (a *AggregatorServiceImpl) Health(context.Context, *pb.HealthRequest) (*pb.
 }
 
 func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.AggregatorCreationRequest) (*pb.AggregatorCreationResponse, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	var requestId string
-	if ok {
-		headerValue := md.Get(service.HeaderKey)
-		if len(headerValue) > 0 {
-			requestId = headerValue[0]
-		}
-
-		splitID := strings.Split(requestId, "+")
-
-		traceCall := false
-		var traceID, spanID string
-
-		if len(splitID) >= 3 {
-			traceCall = splitID[2] == "1"
-		}
-
-		if len(splitID) >= 1 {
-			traceID = splitID[0]
-		}
-		if len(splitID) >= 2 {
-			spanID = splitID[1]
-		}
-
-		if traceCall {
-			traceReceived := &pbar.TraceRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Method:       "CreateNewEntry",
-			}
-
-			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-			defer cancel()
-			go a.Tracer.Trace(ctx, traceReceived)
-		}
-
-		logging.Trace(fmt.Sprintf("found traceId: %s", traceID))
-
-		responseMd := metadata.New(map[string]string{service.HeaderKey: traceID})
-		grpc.SendHeader(ctx, responseMd)
-	}
-
 	createNewWord := false
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 	if err != nil {
-		return &pb.AggregatorCreationResponse{Created: false, Updated: false}, err
+		if strings.Contains(err.Error(), "404") {
+			createNewWord = true
+		} else {
+			return &pb.AggregatorCreationResponse{Created: false, Updated: false}, err
+		}
 	} else if len(response.Hits.Hits) == 0 {
 		createNewWord = true
 	}
@@ -161,48 +118,6 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 }
 
 func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.AggregatorRequest) (*pb.RootWordResponse, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	var requestId string
-	if ok {
-		headerValue := md.Get(service.HeaderKey)
-		if len(headerValue) > 0 {
-			requestId = headerValue[0]
-		}
-
-		splitID := strings.Split(requestId, "+")
-
-		traceCall := false
-		var traceID, spanID string
-
-		if len(splitID) >= 3 {
-			traceCall = splitID[2] == "1"
-		}
-
-		if len(splitID) >= 1 {
-			traceID = splitID[0]
-		}
-		if len(splitID) >= 2 {
-			spanID = splitID[1]
-		}
-
-		if traceCall {
-			traceReceived := &pbar.TraceRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Method:       "RetrieveEntry",
-			}
-
-			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-			defer cancel()
-			go a.Tracer.Trace(ctx, traceReceived)
-		}
-
-		logging.Trace(fmt.Sprintf("found traceId: %s", traceID))
-
-		responseMd := metadata.New(map[string]string{service.HeaderKey: traceID})
-		grpc.SendHeader(ctx, responseMd)
-	}
-
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 	if err != nil {
@@ -232,6 +147,7 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 				Gender: form.Gender,
 				Case:   form.Case,
 				Word:   form.Word,
+				Rule:   form.Rule,
 			}
 			conjPB.Forms = append(conjPB.Forms, formPB)
 		}
@@ -243,47 +159,6 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 }
 
 func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request *pb.AggregatorRequest) (*pb.SearchWordResponse, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-	var requestId string
-	if ok {
-		headerValue := md.Get(service.HeaderKey)
-		if len(headerValue) > 0 {
-			requestId = headerValue[0]
-		}
-
-		splitID := strings.Split(requestId, "+")
-
-		traceCall := false
-		var traceID, spanID string
-
-		if len(splitID) >= 3 {
-			traceCall = splitID[2] == "1"
-		}
-
-		if len(splitID) >= 1 {
-			traceID = splitID[0]
-		}
-		if len(splitID) >= 2 {
-			spanID = splitID[1]
-		}
-
-		if traceCall {
-			traceReceived := &pbar.TraceRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Method:       "RetrieveSearchWords",
-			}
-
-			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-			defer cancel()
-			go a.Tracer.Trace(ctx, traceReceived)
-		}
-
-		logging.Trace(fmt.Sprintf("found traceId: %s", traceID))
-		responseMd := metadata.New(map[string]string{service.HeaderKey: traceID})
-		grpc.SendHeader(ctx, responseMd)
-	}
-
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 	if err != nil {
@@ -328,6 +203,7 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 				Person: strings.TrimSpace(form[0]),
 				Number: strings.TrimSpace(form[1]),
 				Word:   request.Word,
+				Rule:   request.Rule,
 			}
 			conj = GrammaticalCategory{
 				Tense:  strings.TrimSpace(ruleSet[3]),
@@ -343,6 +219,7 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 				Gender: strings.TrimSpace(ruleSet[2]),
 				Case:   strings.TrimSpace(ruleSet[3]),
 				Word:   request.Word,
+				Rule:   request.Rule,
 			}
 			conj = GrammaticalCategory{
 				Forms: []GrammaticalForm{conjForm},
@@ -356,12 +233,22 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 				Gender: strings.TrimSpace(ruleSet[2]),
 				Case:   strings.TrimSpace(ruleSet[3]),
 				Word:   request.Word,
+				Rule:   request.Rule,
 			}
 			conj = GrammaticalCategory{
 				Tense:  strings.TrimSpace(form[1]),
 				Aspect: strings.TrimSpace(form[0]),
 				Forms:  []GrammaticalForm{conjForm},
 			}
+		}
+	case pb.PartOfSpeech_PREPOSITION:
+		conjForm = GrammaticalForm{
+			Word: request.Word,
+			Rule: request.Rule,
+		}
+
+		conj = GrammaticalCategory{
+			Forms: []GrammaticalForm{conjForm},
 		}
 	default:
 		return nil, errors.New("unsupported grammatical category")
@@ -380,6 +267,8 @@ func mapCategoryToEnum(category string) pb.PartOfSpeech {
 		return pb.PartOfSpeech_NOUN
 	case "participle":
 		return pb.PartOfSpeech_PARTICIPLE
+	case "preposition":
+		return pb.PartOfSpeech_PREPOSITION
 	default:
 		return pb.PartOfSpeech_UNKNOWN_CATEGORY
 	}
@@ -393,6 +282,8 @@ func mapEnumToCategory(category pb.PartOfSpeech) string {
 		return "noun"
 	case pb.PartOfSpeech_PARTICIPLE:
 		return "participle"
+	case pb.PartOfSpeech_PREPOSITION:
+		return "preposition"
 	default:
 		return "UNKNOWN"
 	}

@@ -141,8 +141,8 @@ github.com/odysseia-greek/attike/aristophanes v0.4.0 h1:rIeyDJzoVEyyEKSk5bWlwbpO
 github.com/odysseia-greek/attike/aristophanes v0.4.0/go.mod h1:uA6okEuAaK2TI7Owy+wKpKG2rfp/BrmowM1iulF4hlY=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4/go.mod h1:vfNlFMTer0uYUbUFFRQhc0uY/tLSYnsbveRBYm/vUdM=
-github.com/odysseia-greek/olympia/aristarchos v0.0.2 h1:fZ5Qi77+fh97B47uIKsv1KI4rJaubYW+OiNzyeFYZB8=
-github.com/odysseia-greek/olympia/aristarchos v0.0.2/go.mod h1:Z6VNxIOl9oczaM1/i0C6H95rxkGFRO3tPnKnLh2Mv1A=
+github.com/odysseia-greek/olympia/aristarchos v0.0.3 h1:DG4BNormXwCGoGp8uVr216EGCEsGuuk73oAgUX1K9vQ=
+github.com/odysseia-greek/olympia/aristarchos v0.0.3/go.mod h1:Z6VNxIOl9oczaM1/i0C6H95rxkGFRO3tPnKnLh2Mv1A=
 github.com/odysseia-greek/plato v0.7.6 h1:W9UB1YZ11xJPEaXF7Viiq5a1sv9QsSJnyhCAbF+4ezY=
 github.com/odysseia-greek/plato v0.7.6/go.mod h1:hSpTBob2iHyvKjtJnFYIPgosHUO67oNc7yDB2eHQZ4g=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=

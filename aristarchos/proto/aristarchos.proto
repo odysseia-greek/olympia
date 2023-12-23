@@ -20,6 +20,7 @@ enum PartOfSpeech {
   VERB = 1;
   NOUN = 2;
   PARTICIPLE = 3;
+  PREPOSITION = 4;
 }
 
 message AggregatorCreationRequest {
@@ -45,6 +46,7 @@ message GrammaticalForm {
   string gender = 3;
   string case = 4;
   string word = 5;
+  string rule = 6;
 }
 
 message GrammaticalCategory {

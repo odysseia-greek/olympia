@@ -3,7 +3,6 @@ module github.com/odysseia-greek/olympia/aristarchos
 go 1.21.4
 
 require (
-	github.com/google/uuid v1.5.0
 	github.com/odysseia-greek/agora/aristoteles v0.1.2
 	github.com/odysseia-greek/agora/plato v0.1.4
 	github.com/odysseia-greek/attike/aristophanes v0.4.0
@@ -20,6 +19,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.11.1 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/google/uuid v1.5.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect

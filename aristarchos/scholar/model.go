@@ -8,6 +8,7 @@ type GrammaticalForm struct {
 	Gender string `json:"gender,omitempty"`
 	Case   string `json:"case,omitempty"`
 	Word   string `json:"word"`
+	Rule   string `json:"rule"`
 }
 
 type GrammaticalCategory struct {
