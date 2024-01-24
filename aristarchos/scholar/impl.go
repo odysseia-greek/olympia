@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/transform"
 	pb "github.com/odysseia-greek/olympia/aristarchos/proto"
 	"strings"
 )
@@ -21,6 +22,9 @@ func (a *AggregatorServiceImpl) Health(context.Context, *pb.HealthRequest) (*pb.
 }
 
 func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.AggregatorCreationRequest) (*pb.AggregatorCreationResponse, error) {
+	parsedWord := transform.RemoveAccents(request.RootWord)
+	request.RootWord = parsedWord
+
 	createNewWord := false
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
@@ -118,6 +122,9 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 }
 
 func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.AggregatorRequest) (*pb.RootWordResponse, error) {
+	parsedWord := transform.RemoveAccents(request.RootWord)
+	request.RootWord = parsedWord
+
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 	if err != nil {
@@ -159,6 +166,9 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 }
 
 func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request *pb.AggregatorRequest) (*pb.SearchWordResponse, error) {
+	parsedWord := transform.RemoveAccents(request.RootWord)
+	request.RootWord = parsedWord
+
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 	if err != nil {

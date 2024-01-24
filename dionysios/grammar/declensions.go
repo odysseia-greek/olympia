@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"golang.org/x/text/runes"
@@ -198,7 +199,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		// If no declensions are found, query the word in the Alexandros dictionary directly
 		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
 		if err != nil {
-			log.Print("no result for single word continuing loop")
+			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
 		}
 
 		if len(singleSearchResult) > 0 {
@@ -234,7 +235,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 	if results.Results == nil {
 		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
 		if err != nil {
-			log.Print("no result for single word continuing loop")
+			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
 		}
 
 		if len(singleSearchResult) > 0 {

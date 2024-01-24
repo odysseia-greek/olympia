@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/olympia/sokrates/quiz"
 	"log"
@@ -36,12 +37,13 @@ func main() {
 
 	sokratesConfig, err := quiz.CreateNewConfig(env)
 	if err != nil {
-		logging.Error(err.Error())
+		log.Print(err)
 		log.Fatal("death has found me")
 	}
+
 	srv := quiz.InitRoutes(sokratesConfig)
 
-	log.Printf("%s : %s", "running on port", port)
+	logging.System(fmt.Sprintf("%s : %s", "running on port", port))
 	err = http.ListenAndServe(port, srv)
 	if err != nil {
 		panic(err)

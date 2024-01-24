@@ -34,9 +34,12 @@ func main() {
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
 
+	//# this configmap sets tls to true which means the service will try and create tls connctiosn while it shouldnt
+	//# probably a fix needed in plato. Good time to see if it can be trimmed down a bit
 	handler := schemas.HomerosHandler()
 	tracingConfig := gateway.InitTracingConfig()
 
+	logging.Debug(fmt.Sprintf("%v", handler))
 	srv := routing.InitRoutes(handler.Tracer, tracingConfig, handler.Randomizer)
 
 	logging.System(fmt.Sprintf("running on port %s", port))

@@ -117,8 +117,31 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 	strippedWord := transform.RemoveAccents(s)
 
 	term := "greek"
-	query := m.Elastic.Builder().MatchQuery(term, strippedWord)
-	response, err := m.Elastic.Query().Match(m.Index, query)
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"bool": map[string]interface{}{
+				"should": []interface{}{
+					map[string]interface{}{
+						"prefix": map[string]interface{}{
+							fmt.Sprintf("%s.keyword", term): fmt.Sprintf("%s,", strippedWord),
+						},
+					},
+					map[string]interface{}{
+						"prefix": map[string]interface{}{
+							fmt.Sprintf("%s.keyword", term): fmt.Sprintf("%s ", strippedWord),
+						},
+					},
+					map[string]interface{}{
+						"term": map[string]interface{}{
+							fmt.Sprintf("%s.keyword", term): strippedWord,
+						},
+					},
+				},
+			},
+		},
+		"size": 100,
+	}
+	response, err := m.Elastic.Query().MatchWithScroll(m.Index, query)
 
 	if err != nil {
 		return err

@@ -16,20 +16,6 @@ const (
 	TraceId           string = "hippokrates-traceid"
 )
 
-func (l *OdysseiaFixture) aQueryIsMadeForAllMethods() error {
-	response, err := l.client.Sokrates().GetMethods(TraceId)
-	if err != nil {
-		return err
-	}
-
-	var methods models.Methods
-	err = json.NewDecoder(response.Body).Decode(&methods)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, methods)
-
-	return nil
-}
-
 func (l *OdysseiaFixture) aRandomMethodIsQueriedForCategories() error {
 	methods := l.ctx.Value(ResponseBody).(models.Methods)
 

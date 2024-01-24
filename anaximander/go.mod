@@ -1,16 +1,14 @@
 module github.com/odysseia-greek/olympia/anaximander
 
-go 1.21
-
-toolchain go1.21.4
+go 1.21.4
 
 require (
-	github.com/google/uuid v1.3.1
-	github.com/odysseia-greek/agora/aristoteles v0.1.1
-	github.com/odysseia-greek/agora/plato v0.1.4
+	github.com/google/uuid v1.5.0
+	github.com/odysseia-greek/agora/aristoteles v0.1.4
+	github.com/odysseia-greek/agora/plato v0.1.12
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.8.4
-	google.golang.org/grpc v1.59.0
+	google.golang.org/grpc v1.60.1
 )
 
 require (
@@ -42,7 +40,7 @@ require (
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20231002182017-d307bd883b97 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

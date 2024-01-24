@@ -1,0 +1,370 @@
+[
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Thalia",
+    "set": 1,
+    "content": [
+      {
+        "translation": "[interactional particle: S\u0026H on same page]",
+        "greek": "δή"
+      },
+      {
+        "translation": "who, that, which: relative pronoun",
+        "greek": "ὅς"
+      },
+      {
+        "translation": "into, to c. acc.",
+        "greek": "εἰς"
+      },
+      {
+        "translation": "a man",
+        "greek": "ἀνήρ"
+      },
+      {
+        "translation": "a woman",
+        "greek": "γυνή"
+      },
+      {
+        "translation": "battle, fight, combat",
+        "greek": "μάχη"
+      },
+      {
+        "translation": "from the side of, c. gen., beside, alongside of, c. dat., to the side of, motion alongside of, c. acc.",
+        "greek": "παρά"
+      },
+      {
+        "translation": "a charge, accusation",
+        "greek": "αἰτία"
+      },
+      {
+        "translation": "other, another",
+        "greek": "ἄλλος"
+      },
+      {
+        "translation": "unemph.",
+        "greek": "αὐτός"
+      },
+      {
+        "translation": "will, determination; council, senate",
+        "greek": "βουλή"
+      },
+      {
+        "translation": "this; that",
+        "greek": "οὗτος"
+      },
+      {
+        "translation": "thing, (pl.) goods, property, money",
+        "greek": "χρῆμα"
+      },
+      {
+        "translation": "injustice",
+        "greek": "ἀδικία"
+      },
+      {
+        "translation": "a driving away, banishing",
+        "greek": "ἔλασις"
+      },
+      {
+        "translation": "one who heals, a mediciner, physician",
+        "greek": "ἰατρός"
+      },
+      {
+        "translation": "a child",
+        "greek": "τέκνον"
+      },
+      {
+        "translation": "a taking especially",
+        "greek": "αἵρεσις"
+      },
+      {
+        "translation": "best",
+        "greek": "ἄριστος"
+      },
+      {
+        "translation": "given up, delivered over, surrendered",
+        "greek": "ἔκδοτος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Thalia",
+    "set": 2,
+    "content": [
+      {
+        "translation": "that over there, that",
+        "greek": "ἐκεῖνος"
+      },
+      {
+        "translation": "a daughter",
+        "greek": "θυγάτηρ"
+      },
+      {
+        "translation": "the eye",
+        "greek": "ὀφθαλμός"
+      },
+      {
+        "translation": "before, earlier",
+        "greek": "πρότερος"
+      },
+      {
+        "translation": "to lead",
+        "greek": "ἄγω"
+      },
+      {
+        "translation": "to pay honour to",
+        "greek": "τίω"
+      },
+      {
+        "translation": "(to be first) to rule, to begin",
+        "greek": "ἄρχω"
+      },
+      {
+        "translation": "to be",
+        "greek": "εἰμί"
+      },
+      {
+        "translation": "to pay a price",
+        "greek": "τίνω"
+      },
+      {
+        "translation": "to ask, beg; postulate",
+        "greek": "αἰτέω"
+      },
+      {
+        "translation": "to blossom, bloom",
+        "greek": "ἀνθέω"
+      },
+      {
+        "translation": "to conquer, prevail, vanquish",
+        "greek": "νικάω"
+      },
+      {
+        "translation": "to send, despatch",
+        "greek": "πέμπω"
+      },
+      {
+        "translation": "to make, to do",
+        "greek": "ποιέω"
+      },
+      {
+        "translation": "do, (w. adv) fare, (mid.) charge payment",
+        "greek": "πράσσω"
+      },
+      {
+        "translation": "to begin; to exist",
+        "greek": "ὑπάρχω"
+      },
+      {
+        "translation": "to tear",
+        "greek": "ἀποσπάω"
+      },
+      {
+        "translation": "become, be born",
+        "greek": "γίγνομαι"
+      },
+      {
+        "translation": "to throw into, put into",
+        "greek": "εἰσβάλλω"
+      },
+      {
+        "translation": "to set one's heart upon",
+        "greek": "ἐπιθυμέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Thalia",
+    "set": 3,
+    "content": [
+      {
+        "translation": "to blame, censure, find fault with",
+        "greek": "μέμφομαι"
+      },
+      {
+        "translation": "to serve in war, serve as a soldier, do military service, take the field, march",
+        "greek": "στρατεύω"
+      },
+      {
+        "translation": "to resist, oppose",
+        "greek": "ἀντιόομαι"
+      },
+      {
+        "translation": "the",
+        "greek": "ὁ"
+      },
+      {
+        "translation": "but",
+        "greek": "δέ"
+      },
+      {
+        "translation": "from out of",
+        "greek": "ἐκ"
+      },
+      {
+        "translation": "in, among. c. dat.",
+        "greek": "ἐν"
+      },
+      {
+        "translation": "and",
+        "greek": "τε"
+      },
+      {
+        "translation": "from, away from. c. gen.",
+        "greek": "ἀπό"
+      },
+      {
+        "translation": "for",
+        "greek": "γάρ"
+      },
+      {
+        "translation": "wherefore, on which account",
+        "greek": "διό"
+      },
+      {
+        "translation": "on, upon with gen., dat., and acc.",
+        "greek": "ἐπί"
+      },
+      {
+        "translation": "and, also",
+        "greek": "καί"
+      },
+      {
+        "translation": "him, her, it",
+        "greek": "μιν"
+      },
+      {
+        "translation": "when",
+        "greek": "ὅτε"
+      },
+      {
+        "translation": "adv. + superl., as...as possible; ὅτι μή except",
+        "greek": "ὅτι"
+      },
+      {
+        "translation": "quite all, the whole",
+        "greek": "ἅπας"
+      },
+      {
+        "translation": "(w gen) with, among; (w acc) after",
+        "greek": "μετά"
+      },
+      {
+        "translation": "at the very place, just here, just there",
+        "greek": "αὐτοῦ"
+      },
+      {
+        "translation": "a herald, pursuivant, marshal, public messenger",
+        "greek": "κῆρυξ"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Thalia",
+    "set": 4,
+    "content": [
+      {
+        "translation": "big, great",
+        "greek": "μέγας"
+      },
+      {
+        "translation": "such a",
+        "greek": "τοιόσδε"
+      },
+      {
+        "translation": "Asia",
+        "greek": "Ἀσία"
+      },
+      {
+        "translation": "Hellen; Greek",
+        "greek": "Ἕλλην"
+      },
+      {
+        "translation": "Ionians",
+        "greek": "Ἴωνες"
+      },
+      {
+        "translation": "Cyrus",
+        "greek": "Κῦρος"
+      },
+      {
+        "translation": "Amasis",
+        "greek": "Ἄμασις"
+      },
+      {
+        "translation": "a Persian; Perses (pr.n.)",
+        "greek": "Πέρσης"
+      },
+      {
+        "translation": "a Scythian",
+        "greek": "Σκύθης"
+      },
+      {
+        "translation": "Aeolian",
+        "greek": "Αἰολεύς"
+      },
+      {
+        "translation": "Babylon",
+        "greek": "Βαβυλών"
+      },
+      {
+        "translation": "Darius",
+        "greek": "Δαρεῖος"
+      },
+      {
+        "translation": "Median, of the Medes",
+        "greek": "Μηδικός"
+      },
+      {
+        "translation": "Egypt (f.); king Aegyptus (m.)",
+        "greek": "Αἴγυπτος"
+      },
+      {
+        "translation": "Cambyses",
+        "greek": "Καμβύσης"
+      },
+      {
+        "translation": "Egyptian",
+        "greek": "Αἰγύπτιος"
+      },
+      {
+        "translation": "to make like an Egyptian",
+        "greek": "Αἰγυπτιόω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  }
+]

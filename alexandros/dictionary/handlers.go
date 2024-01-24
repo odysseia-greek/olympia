@@ -9,6 +9,7 @@ import (
 	plato "github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/transform"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"net/http"
@@ -23,14 +24,16 @@ type AlexandrosHandler struct {
 }
 
 const (
-	fuzzy       string = "fuzzy"
-	phrase      string = "phrase"
-	exact       string = "exact"
+	partial  string = "partial"
+	extended string = "extended"
+	exact    string = "exact"
+	fuzzy    string = "fuzzy"
+
 	defaultLang string = "greek"
 )
 
 var allowedLanguages = []string{"greek", "english", "dutch"}
-var allowedMatchModes = []string{fuzzy, exact, phrase}
+var allowedMatchModes = []string{partial, exact, extended, fuzzy}
 
 // pingPong is used to check the reachability of the API. It returns a "pong" response when called, indicating that the API is reachable.
 func (a *AlexandrosHandler) pingPong(w http.ResponseWriter, req *http.Request) {
@@ -161,7 +164,7 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 	//		 title: word
 	//     + name: mode
 	//       in: query
-	//       description: Determines a number of query modes; fuzzy, exact or phrase
+	//       description: Determines a number of query modes; fuzzy, exact, extended or partial
 	//		 example: false
 	//       required: false
 	//       type: string
@@ -240,9 +243,17 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	query := a.processQuery(mode, language, queryWord)
+	var wordToQuery string
+	if mode == fuzzy {
+		wordToQuery = extractBaseWord(queryWord)
+	} else {
+		wordToQuery = strings.ToLower(queryWord)
+	}
+
+	query := a.processQuery(mode, language, wordToQuery)
 
 	response, err := a.Elastic.Query().Match(a.Index, query)
+
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -329,8 +340,8 @@ func (a *AlexandrosHandler) cleanSearchResult(results []models.Meros) []models.M
 // ProcessQuery constructs the appropriate Elasticsearch query based on the provided mode and language.
 func (a *AlexandrosHandler) processQuery(option string, language string, queryWord string) map[string]interface{} {
 	switch option {
-	case fuzzy:
-		// Process fuzzy matching query
+	case partial:
+		// Process partial matching query
 		// Example implementation:
 		return map[string]interface{}{
 			"query": map[string]interface{}{
@@ -344,10 +355,10 @@ func (a *AlexandrosHandler) processQuery(option string, language string, queryWo
 					},
 				},
 			},
-			"size": 50,
+			"size": 20,
 		}
 
-	case phrase:
+	case extended:
 		// Process phrase matching query
 		// Example implementation:
 		return map[string]interface{}{
@@ -356,6 +367,7 @@ func (a *AlexandrosHandler) processQuery(option string, language string, queryWo
 					language: queryWord,
 				},
 			},
+			"size": 20,
 		}
 
 	case exact:
@@ -367,7 +379,12 @@ func (a *AlexandrosHandler) processQuery(option string, language string, queryWo
 					"should": []interface{}{
 						map[string]interface{}{
 							"prefix": map[string]interface{}{
-								fmt.Sprintf("%s.keyword", language): queryWord,
+								fmt.Sprintf("%s.keyword", language): fmt.Sprintf("%s,", queryWord),
+							},
+						},
+						map[string]interface{}{
+							"prefix": map[string]interface{}{
+								fmt.Sprintf("%s.keyword", language): fmt.Sprintf("%s ", queryWord),
 							},
 						},
 						map[string]interface{}{
@@ -378,6 +395,22 @@ func (a *AlexandrosHandler) processQuery(option string, language string, queryWo
 					},
 				},
 			},
+			"size": 10,
+		}
+
+	case fuzzy:
+		// Process fuzzy matching query (with 2 levenshtein)
+		// Example implementation:
+		return map[string]interface{}{
+			"query": map[string]interface{}{
+				"fuzzy": map[string]interface{}{
+					language: map[string]interface{}{
+						"value":     queryWord,
+						"fuzziness": 2,
+					},
+				},
+			},
+			"size": 5,
 		}
 
 	default:
@@ -430,4 +463,35 @@ func (a *AlexandrosHandler) validateQueryParam(queryParam, field string, allowed
 	}
 
 	return fmt.Errorf("invalid %s value. Please choose one of the following: %s", field, strings.Join(allowedValues, ", "))
+}
+
+func extractBaseWord(queryWord string) string {
+	// Normalize and split the input
+	strippedWord := transform.RemoveAccents(strings.ToLower(queryWord))
+	splitWord := strings.Split(strippedWord, " ")
+
+	// Known Greek pronouns
+	greekPronouns := map[string]bool{"η": true, "ο": true, "το": true}
+
+	// Function to clean punctuation from a word
+	cleanWord := func(word string) string {
+		return strings.Trim(word, ",.!?-") // Add any other punctuation as needed
+	}
+
+	// Iterate through the words
+	for _, word := range splitWord {
+		cleanedWord := cleanWord(word)
+
+		if strings.HasPrefix(cleanedWord, "-") {
+			// Skip words starting with "-"
+			continue
+		}
+
+		if _, isPronoun := greekPronouns[cleanedWord]; !isPronoun {
+			// If the word is not a pronoun, it's likely the correct word
+			return cleanedWord
+		}
+	}
+
+	return queryWord
 }

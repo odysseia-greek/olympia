@@ -8,8 +8,8 @@ require (
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.3
 	github.com/odysseia-greek/agora/archytas v0.1.1
-	github.com/odysseia-greek/agora/plato v0.1.4
-	github.com/odysseia-greek/attike/aristophanes v0.4.0
+	github.com/odysseia-greek/agora/plato v0.1.12
+	github.com/odysseia-greek/attike/aristophanes v0.4.1
 	github.com/stretchr/testify v1.8.4
 )
 
@@ -29,18 +29,17 @@ require (
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/flatbuffers v1.12.1 // indirect
 	github.com/klauspost/compress v1.12.3 // indirect
-	github.com/odysseia-greek/aristoteles v0.6.0 // indirect
-	github.com/odysseia-greek/plato v0.7.6 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
+	github.com/odysseia-greek/agora/aristoteles v0.1.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
 	go.opencensus.io v0.22.5 // indirect
 	golang.org/x/net v0.16.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231002182017-d307bd883b97 // indirect
-	google.golang.org/grpc v1.60.0 // indirect
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/grpc v1.60.1 // indirect
+	google.golang.org/protobuf v1.32.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

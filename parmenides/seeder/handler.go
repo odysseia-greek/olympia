@@ -3,6 +3,7 @@ package seeder
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
@@ -74,55 +75,52 @@ func (p *ParmenidesHandler) CreateIndexAtStartup() error {
 	return nil
 }
 
-func (p *ParmenidesHandler) Add(logoi models.Logos, wg *sync.WaitGroup, method, category string) error {
+func (p *ParmenidesHandler) AddWithQueue(quizzes []models.AuthorBasedQuiz, wg *sync.WaitGroup) error {
 	defer wg.Done()
 	var buf bytes.Buffer
 
 	var currBatch int
 
-	for _, word := range logoi.Logos {
+	for _, quiz := range quizzes {
 		currBatch++
+		for _, word := range quiz.Content {
+			meros := models.Meros{
+				Greek:    word.Greek,
+				English:  word.Translation,
+				Original: word.Greek,
+			}
 
-		meros := models.Meros{
-			Greek:      word.Greek,
-			English:    word.Translation,
-			LinkedWord: "",
-			Original:   word.Greek,
+			alternateChannel := false
+			if quiz.QuizMetadata.Language == "Dutch" {
+				meros.Dutch = word.Translation
+				meros.English = ""
+				alternateChannel = true
+			}
+
+			jsonsifiedMeros, _ := meros.Marshal()
+			msg := &pb.Epistello{
+				Data:    string(jsonsifiedMeros),
+				Channel: p.Channel,
+			}
+
+			if alternateChannel {
+				msg.Channel = p.DutchChannel
+			}
+
+			err := p.EnqueueTask(context.Background(), msg)
+			if err != nil {
+				logging.Error(err.Error())
+			}
 		}
-
-		alternateChannel := false
-		if method == "mouseion" {
-			meros.Dutch = word.Translation
-			meros.English = ""
-			alternateChannel = true
-		}
-
-		jsonsifiedMeros, _ := meros.Marshal()
-		msg := &pb.Epistello{
-			Data:    string(jsonsifiedMeros), // Your JSON data here
-			Channel: p.Channel,
-		}
-
-		if alternateChannel {
-			msg.Channel = p.DutchChannel
-		}
-
-		err := p.EnqueueTask(context.Background(), msg)
-		if err != nil {
-			logging.Error(err.Error())
-		}
-
-		word.Category = category
-		word.Method = method
 
 		meta := []byte(fmt.Sprintf(`{ "index": {} }%s`, "\n"))
-		jsonifiedWord, _ := word.Marshal()
+		jsonifiedWord, _ := json.Marshal(quiz)
 		jsonifiedWord = append(jsonifiedWord, "\n"...)
 		buf.Grow(len(meta) + len(jsonifiedWord))
 		buf.Write(meta)
 		buf.Write(jsonifiedWord)
 
-		if currBatch == len(logoi.Logos) {
+		if currBatch == len(quizzes) {
 			res, err := p.Elastic.Document().Bulk(buf, p.Index)
 			if err != nil {
 				logging.Error(err.Error())
@@ -132,6 +130,19 @@ func (p *ParmenidesHandler) Add(logoi models.Logos, wg *sync.WaitGroup, method, 
 			p.Created = p.Created + len(res.Items)
 		}
 	}
+	return nil
+}
+
+func (p *ParmenidesHandler) AddWithoutQueue(content []byte, wg *sync.WaitGroup) error {
+	defer wg.Done()
+
+	_, err := p.Elastic.Index().CreateDocument(p.Index, content)
+	if err != nil {
+		return err
+	}
+
+	p.Created += 1
+
 	return nil
 }
 

@@ -1,0 +1,6090 @@
+[
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 1,
+    "content": [
+      {
+        "translation": "earth",
+        "greek": "γῆ"
+      },
+      {
+        "translation": "interactional particle",
+        "greek": "δή"
+      },
+      {
+        "translation": "not",
+        "greek": "μή"
+      },
+      {
+        "translation": "who, that, which: relative pronoun",
+        "greek": "ὅς"
+      },
+      {
+        "translation": "possessive pronoun",
+        "greek": "ὅς"
+      },
+      {
+        "translation": "here, there",
+        "greek": "τῇ"
+      },
+      {
+        "translation": "as, how",
+        "greek": "ὡς"
+      },
+      {
+        "translation": "at once, at the same time",
+        "greek": "ἅμα"
+      },
+      {
+        "translation": "particle: 'so'",
+        "greek": "ἄρα"
+      },
+      {
+        "translation": "bodily strength, force, power, might",
+        "greek": "βία"
+      },
+      {
+        "translation": "through c. gen.; because of c. acc.",
+        "greek": "διά"
+      },
+      {
+        "translation": "twice, doubly",
+        "greek": "δίς"
+      },
+      {
+        "translation": "into, to c. acc.",
+        "greek": "εἰς"
+      },
+      {
+        "translation": "one",
+        "greek": "εἷς"
+      },
+      {
+        "translation": "already",
+        "greek": "ἤδη"
+      },
+      {
+        "translation": "somehow, in some way",
+        "greek": "πως"
+      },
+      {
+        "translation": "how? in what way",
+        "greek": "πῶς"
+      },
+      {
+        "translation": "why? wherefore?",
+        "greek": "τίη"
+      },
+      {
+        "translation": "any one, any thing, some one, some thing;",
+        "greek": "τις"
+      },
+      {
+        "translation": "who? which?",
+        "greek": "τίς"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 2,
+    "content": [
+      {
+        "translation": "it is fated, necessary",
+        "greek": "χρή"
+      },
+      {
+        "translation": "pollution, expiation",
+        "greek": "ἄγος"
+      },
+      {
+        "translation": "a gathering; a contest, a struggle, a trial",
+        "greek": "ἀγών"
+      },
+      {
+        "translation": "a hearing, the sound heard",
+        "greek": "ἀκοή"
+      },
+      {
+        "translation": "a man",
+        "greek": "ἀνήρ"
+      },
+      {
+        "translation": "a beginning, rule, office, empire",
+        "greek": "ἀρχή"
+      },
+      {
+        "translation": "a bow",
+        "greek": "βιός"
+      },
+      {
+        "translation": "life",
+        "greek": "βίος"
+      },
+      {
+        "translation": "(custom, usage) justice, lawsuit, penalty",
+        "greek": "δίκη"
+      },
+      {
+        "translation": "custom, habit",
+        "greek": "ἔθος"
+      },
+      {
+        "translation": "willing, of free will, readily",
+        "greek": "ἑκών"
+      },
+      {
+        "translation": "mine",
+        "greek": "ἐμός"
+      },
+      {
+        "translation": "one after another, in order, in a row",
+        "greek": "ἑξῆς"
+      },
+      {
+        "translation": "a year",
+        "greek": "ἔτος"
+      },
+      {
+        "translation": "sweet",
+        "greek": "ἡδύς"
+      },
+      {
+        "translation": "god",
+        "greek": "θεός"
+      },
+      {
+        "translation": "a case to put anything in, a box, chest",
+        "greek": "θήκη"
+      },
+      {
+        "translation": "equal to, the same as; adv. perhaps",
+        "greek": "ἴσος"
+      },
+      {
+        "translation": "country town",
+        "greek": "κώμη"
+      },
+      {
+        "translation": "battle, fight, combat",
+        "greek": "μάχη"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 3,
+    "content": [
+      {
+        "translation": "a staying, abiding, tarrying, stay",
+        "greek": "μονή"
+      },
+      {
+        "translation": "a ship",
+        "greek": "ναῦς"
+      },
+      {
+        "translation": "young, youthful",
+        "greek": "νέος"
+      },
+      {
+        "translation": "a way, path, track, journey",
+        "greek": "ὁδός"
+      },
+      {
+        "translation": "(such a kind) as; for οἷός τε see οἷος III.",
+        "greek": "οἷος"
+      },
+      {
+        "translation": "equally, likewise, alike",
+        "greek": "ὁμῶς"
+      },
+      {
+        "translation": "all the same, nevertheless",
+        "greek": "ὅμως"
+      },
+      {
+        "translation": "how, that, in order that, as",
+        "greek": "ὅπως"
+      },
+      {
+        "translation": "natural impulse",
+        "greek": "ὀργή"
+      },
+      {
+        "translation": "as much/many as",
+        "greek": "ὅσος"
+      },
+      {
+        "translation": "a child",
+        "greek": "παῖς"
+      },
+      {
+        "translation": "from the side of, c. gen., beside, alongside of, c. dat., to the side of, motion alongside of, c. acc.",
+        "greek": "παρά"
+      },
+      {
+        "translation": "(w. gen.) from; (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "greek": "πρός"
+      },
+      {
+        "translation": "a stream, flow, current",
+        "greek": "ῥόος"
+      },
+      {
+        "translation": "the body",
+        "greek": "σῶμα"
+      },
+      {
+        "translation": "that which is paid in token of worth",
+        "greek": "τιμή"
+      },
+      {
+        "translation": "(good) fortune, luck, chance",
+        "greek": "τύχη"
+      },
+      {
+        "translation": "a son",
+        "greek": "υἱός"
+      },
+      {
+        "translation": "your",
+        "greek": "ὑμός"
+      },
+      {
+        "translation": "height",
+        "greek": "ὕψος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 4,
+    "content": [
+      {
+        "translation": "a horse’s hoof; breakwater, spur of a mountain",
+        "greek": "χηλή"
+      },
+      {
+        "translation": "land",
+        "greek": "χώρα"
+      },
+      {
+        "translation": "an assembly of the people",
+        "greek": "ἀγορά"
+      },
+      {
+        "translation": "without fear, fearless; causing no fear",
+        "greek": "ἀδεής"
+      },
+      {
+        "translation": "a charge, accusation",
+        "greek": "αἰτία"
+      },
+      {
+        "translation": "other, another",
+        "greek": "ἄλλος"
+      },
+      {
+        "translation": "in another way",
+        "greek": "ἄλλως"
+      },
+      {
+        "translation": "worthy",
+        "greek": "ἄξιος"
+      },
+      {
+        "translation": "a trick, fraud, deceit",
+        "greek": "ἀπάτη"
+      },
+      {
+        "translation": "goodness, excellence",
+        "greek": "ἀρετή"
+      },
+      {
+        "translation": "a ruler, commander, chief, captain",
+        "greek": "ἄρχων"
+      },
+      {
+        "translation": "back, back again",
+        "greek": "αὖθις"
+      },
+      {
+        "translation": "unemph.",
+        "greek": "αὐτός"
+      },
+      {
+        "translation": "race, stock, family",
+        "greek": "γένος"
+      },
+      {
+        "translation": "a means of knowing, a mark, token",
+        "greek": "γνώμη"
+      },
+      {
+        "translation": "drawing, writing; indictment",
+        "greek": "γραφή"
+      },
+      {
+        "translation": "the right hand",
+        "greek": "δεξιά"
+      },
+      {
+        "translation": "visible, conspicuous",
+        "greek": "δῆλος"
+      },
+      {
+        "translation": "near, nigh, at hand",
+        "greek": "ἐγγύς"
+      },
+      {
+        "translation": "a number of people accustomed to live together",
+        "greek": "ἔθνος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 5,
+    "content": [
+      {
+        "translation": "a company",
+        "greek": "ἔθνος"
+      },
+      {
+        "translation": "body of men",
+        "greek": "ἔθνος"
+      },
+      {
+        "translation": "to see",
+        "greek": "εἶδον"
+      },
+      {
+        "translation": "like truth",
+        "greek": "εἰκός"
+      },
+      {
+        "translation": "to speak, say",
+        "greek": "εἶπον"
+      },
+      {
+        "translation": "hope, expectation",
+        "greek": "ἐλπίς"
+      },
+      {
+        "translation": "within, inside",
+        "greek": "ἐντός"
+      },
+      {
+        "translation": "work",
+        "greek": "ἔργον"
+      },
+      {
+        "translation": "a fence, guard",
+        "greek": "ἔρυμα"
+      },
+      {
+        "translation": "straight, direct",
+        "greek": "εὐθύς"
+      },
+      {
+        "translation": "loss, damage",
+        "greek": "ζημία"
+      },
+      {
+        "translation": "day",
+        "greek": "ἡμέρα"
+      },
+      {
+        "translation": "less, weaker",
+        "greek": "ἥσσων"
+      },
+      {
+        "translation": "one's own, pertaining to oneself",
+        "greek": "ἴδιος"
+      },
+      {
+        "translation": "sanctuary",
+        "greek": "ἱερόν"
+      },
+      {
+        "translation": "super-human, mighty, divine, wonderful",
+        "greek": "ἱερός"
+      },
+      {
+        "translation": "strength",
+        "greek": "ἰσχύς"
+      },
+      {
+        "translation": "bad",
+        "greek": "κακός"
+      },
+      {
+        "translation": "beautiful",
+        "greek": "καλός"
+      },
+      {
+        "translation": "the word",
+        "greek": "λόγος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 6,
+    "content": [
+      {
+        "translation": "a part, share",
+        "greek": "μέρος"
+      },
+      {
+        "translation": "length",
+        "greek": "μῆκος"
+      },
+      {
+        "translation": "a mother",
+        "greek": "μήτηρ"
+      },
+      {
+        "translation": "hate, hatred",
+        "greek": "μῖσος"
+      },
+      {
+        "translation": "a part, portion; fate",
+        "greek": "μοῖρα"
+      },
+      {
+        "translation": "alone, left alone, forsaken solitary",
+        "greek": "μόνος"
+      },
+      {
+        "translation": "a nod",
+        "greek": "νεῦμα"
+      },
+      {
+        "translation": "an island",
+        "greek": "νῆσος"
+      },
+      {
+        "translation": "place of pasture; district (nome), esp. in Egypt",
+        "greek": "νομός"
+      },
+      {
+        "translation": "usage, custom, law, ordinance",
+        "greek": "νόμος"
+      },
+      {
+        "translation": "a guest, guest-friend, stranger; foreign",
+        "greek": "ξένος"
+      },
+      {
+        "translation": "a house, abode, dwelling",
+        "greek": "οἶκος"
+      },
+      {
+        "translation": "a tool, implement, (pl.) arms, weapons",
+        "greek": "ὅπλον"
+      },
+      {
+        "translation": "the object by which one swears, the witness of an oath",
+        "greek": "ὅρκος"
+      },
+      {
+        "translation": "indef. relative or indirect interrogative",
+        "greek": "ὅστις"
+      },
+      {
+        "translation": "this; that",
+        "greek": "οὗτος"
+      },
+      {
+        "translation": "so, in this manner",
+        "greek": "οὕτως"
+      },
+      {
+        "translation": "a father",
+        "greek": "πατήρ"
+      },
+      {
+        "translation": "on foot",
+        "greek": "πεζός"
+      },
+      {
+        "translation": "a trial, attempt, essay, experiment",
+        "greek": "πεῖρα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 7,
+    "content": [
+      {
+        "translation": "full.",
+        "greek": "πλέος"
+      },
+      {
+        "translation": "full of",
+        "greek": "πλέως"
+      },
+      {
+        "translation": "a sailing, voyage",
+        "greek": "πλόος"
+      },
+      {
+        "translation": "a city",
+        "greek": "πόλις"
+      },
+      {
+        "translation": "much, many",
+        "greek": "πολύς"
+      },
+      {
+        "translation": "work",
+        "greek": "πόνος"
+      },
+      {
+        "translation": "stated, specified",
+        "greek": "ῥητός"
+      },
+      {
+        "translation": "clear, plain, distinct, manifest",
+        "greek": "σαφής"
+      },
+      {
+        "translation": "corn, grain",
+        "greek": "σῖτος"
+      },
+      {
+        "translation": "equipment, attire, apparel, dress",
+        "greek": "σκευή"
+      },
+      {
+        "translation": "the mouth",
+        "greek": "στόμα"
+      },
+      {
+        "translation": "personal and (ind.) reflexive pronoun",
+        "greek": "σφεῖς"
+      },
+      {
+        "translation": "spare time, leisure, rest, ease; σχολῇ scarcely",
+        "greek": "σχολή"
+      },
+      {
+        "translation": "swiftness, speed, fleetness, velocity",
+        "greek": "τάχος"
+      },
+      {
+        "translation": "quick, swift, fleet",
+        "greek": "ταχύς"
+      },
+      {
+        "translation": "the fulfilment",
+        "greek": "τέλος"
+      },
+      {
+        "translation": "courage, to undertake",
+        "greek": "τόλμα"
+      },
+      {
+        "translation": "three",
+        "greek": "τρεῖς"
+      },
+      {
+        "translation": "a turn, turning",
+        "greek": "τροπή"
+      },
+      {
+        "translation": "nourishment, food, victuals",
+        "greek": "τροφή"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 8,
+    "content": [
+      {
+        "translation": "friendly love, affection, friendship",
+        "greek": "φιλία"
+      },
+      {
+        "translation": "friend; loved, beloved, dear",
+        "greek": "φίλος"
+      },
+      {
+        "translation": "fear, panic, flight",
+        "greek": "φόβος"
+      },
+      {
+        "translation": "murder, homicide, slaughter",
+        "greek": "φόνος"
+      },
+      {
+        "translation": "tribute, payment",
+        "greek": "φόρος"
+      },
+      {
+        "translation": "gratitude, favor, grace, charm",
+        "greek": "χάρις"
+      },
+      {
+        "translation": "use, advantage, service",
+        "greek": "χρεία"
+      },
+      {
+        "translation": "thing, (pl.) goods, property, money",
+        "greek": "χρῆμα"
+      },
+      {
+        "translation": "a small stone, a pebble; vote",
+        "greek": "ψῆφος"
+      },
+      {
+        "translation": "bare, stripped; (soldier) without heavy armor, light troops",
+        "greek": "ψιλός"
+      },
+      {
+        "translation": "a blamable fault, a blemish, flaw",
+        "greek": "ψόγος"
+      },
+      {
+        "translation": "good",
+        "greek": "ἀγαθός"
+      },
+      {
+        "translation": "not seen",
+        "greek": "ἄδηλος"
+      },
+      {
+        "translation": "to blame, blameworthy, culpable",
+        "greek": "αἴτιος"
+      },
+      {
+        "translation": "unconcealed, true",
+        "greek": "ἀληθής"
+      },
+      {
+        "translation": "unlearned, ignorant, stupid, boorish",
+        "greek": "ἀμαθής"
+      },
+      {
+        "translation": "ignorance",
+        "greek": "ἀμαθία"
+      },
+      {
+        "translation": "force, constraint, necessity",
+        "greek": "ἀνάγκη"
+      },
+      {
+        "translation": "wind",
+        "greek": "ἄνεμος"
+      },
+      {
+        "translation": "that of which one is thought worthy, an honour",
+        "greek": "ἀξίωμα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 9,
+    "content": [
+      {
+        "translation": "without hesitation, untiring",
+        "greek": "ἄοκνος"
+      },
+      {
+        "translation": "difficulty of passing",
+        "greek": "ἀπορία"
+      },
+      {
+        "translation": "without passage",
+        "greek": "ἄπορος"
+      },
+      {
+        "translation": "unseen, invisible, viewless",
+        "greek": "ἀφανής"
+      },
+      {
+        "translation": "forcible, violent",
+        "greek": "βίαιος"
+      },
+      {
+        "translation": "assisting, auxiliary",
+        "greek": "βοηθός"
+      },
+      {
+        "translation": "slow",
+        "greek": "βραδύς"
+      },
+      {
+        "translation": "short",
+        "greek": "βραχύς"
+      },
+      {
+        "translation": "(drawing, scratch) letter, character, writing, document",
+        "greek": "γράμμα"
+      },
+      {
+        "translation": "fearful, terrible, dread, dire",
+        "greek": "δεινός"
+      },
+      {
+        "translation": "on the right hand",
+        "greek": "δεξιός"
+      },
+      {
+        "translation": "chase, pursuit",
+        "greek": "δίωξις"
+      },
+      {
+        "translation": "slave",
+        "greek": "δοῦλος"
+      },
+      {
+        "translation": "a handful; a drachma",
+        "greek": "δραχμή"
+      },
+      {
+        "translation": "a course, running, race",
+        "greek": "δρόμος"
+      },
+      {
+        "translation": "a hundred",
+        "greek": "ἑκατόν"
+      },
+      {
+        "translation": "a falling short, being in arrear",
+        "greek": "ἔκδεια"
+      },
+      {
+        "translation": "a driving away, banishing",
+        "greek": "ἔλασις"
+      },
+      {
+        "translation": "under a curse, excommunicate, accurst",
+        "greek": "ἐναγής"
+      },
+      {
+        "translation": "a going out; an exit",
+        "greek": "ἔξοδος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 10,
+    "content": [
+      {
+        "translation": "a rower",
+        "greek": "ἐρέτης"
+      },
+      {
+        "translation": "the one; the other (of two)",
+        "greek": "ἕτερος"
+      },
+      {
+        "translation": "good-will, favour, kindness",
+        "greek": "εὔνοια"
+      },
+      {
+        "translation": "accessible",
+        "greek": "ἔφοδος"
+      },
+      {
+        "translation": "a way towards, approach",
+        "greek": "ἔφοδος"
+      },
+      {
+        "translation": "an overseer, guardian, ruler",
+        "greek": "ἔφορος"
+      },
+      {
+        "translation": "hated, hateful; enemy",
+        "greek": "ἐχθρός"
+      },
+      {
+        "translation": "leader, guide",
+        "greek": "ἡγεμών"
+      },
+      {
+        "translation": "time of life, age",
+        "greek": "ἡλικία"
+      },
+      {
+        "translation": "half",
+        "greek": "ἥμισυς"
+      },
+      {
+        "translation": "stillness, rest, quiet",
+        "greek": "ἡσυχία"
+      },
+      {
+        "translation": "becoming, befitting, sufficing",
+        "greek": "ἱκανός"
+      },
+      {
+        "translation": "one who comes to seek protection, a suppliant",
+        "greek": "ἱκέτης"
+      },
+      {
+        "translation": "a horseman",
+        "greek": "ἱππεύς"
+      },
+      {
+        "translation": "neck, narrow passage",
+        "greek": "ἰσθμός"
+      },
+      {
+        "translation": "time; the right moment, opportunity",
+        "greek": "καιρός"
+      },
+      {
+        "translation": "the row of thrums",
+        "greek": "καῖρος"
+      },
+      {
+        "translation": "a hut, cabin, cell",
+        "greek": "καλύβη"
+      },
+      {
+        "translation": "gain, profit, advantage",
+        "greek": "κέρδος"
+      },
+      {
+        "translation": "common, shared in common",
+        "greek": "κοινός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 11,
+    "content": [
+      {
+        "translation": "bosom; gulf",
+        "greek": "κόλπος"
+      },
+      {
+        "translation": "a separating, power of distinguishing",
+        "greek": "κρίσις"
+      },
+      {
+        "translation": "acquisition",
+        "greek": "κτῆσις"
+      },
+      {
+        "translation": "a founding, foundation",
+        "greek": "κτίσις"
+      },
+      {
+        "translation": "a hindrance, impediment",
+        "greek": "κώλυμα"
+      },
+      {
+        "translation": "hindering",
+        "greek": "κωλύμη"
+      },
+      {
+        "translation": "a robber, plunderer",
+        "greek": "λῃστής"
+      },
+      {
+        "translation": "long",
+        "greek": "μακρός"
+      },
+      {
+        "translation": "more, rather",
+        "greek": "μᾶλλον"
+      },
+      {
+        "translation": "care, attention",
+        "greek": "μελέτη"
+      },
+      {
+        "translation": "(and not one); not one, no-one",
+        "greek": "μηδείς"
+      },
+      {
+        "translation": "small, little",
+        "greek": "μικρός"
+      },
+      {
+        "translation": "wages, pay, hire",
+        "greek": "μισθός"
+      },
+      {
+        "translation": "a piece, portion, section",
+        "greek": "μόριον"
+      },
+      {
+        "translation": "a sailor, seaman; a fellow sailor",
+        "greek": "ναύτης"
+      },
+      {
+        "translation": "a dead body, corpse",
+        "greek": "νεκρός"
+      },
+      {
+        "translation": "any inhabited place, a dwellingplace",
+        "greek": "οἴκημα"
+      },
+      {
+        "translation": "few, little, scanty, small",
+        "greek": "ὀλίγος"
+      },
+      {
+        "translation": "a being together, communion, intercourse, converse, company",
+        "greek": "ὁμιλία"
+      },
+      {
+        "translation": "like, resembling",
+        "greek": "ὅμοιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 12,
+    "content": [
+      {
+        "translation": "a trench, ditch, moat",
+        "greek": "ὄρυγμα"
+      },
+      {
+        "translation": "not one, nobody",
+        "greek": "οὐδείς"
+      },
+      {
+        "translation": "anything that befals one, a suffering, calamity, misfortune",
+        "greek": "πάθημα"
+      },
+      {
+        "translation": "trust, belief; pledge, security",
+        "greek": "πίστις"
+      },
+      {
+        "translation": "liquid (medicines)",
+        "greek": "πιστός"
+      },
+      {
+        "translation": "to be trusted",
+        "greek": "πιστός"
+      },
+      {
+        "translation": "more, larger",
+        "greek": "πλείων"
+      },
+      {
+        "translation": "a great number, a throng, crowd, multitude",
+        "greek": "πλῆθος"
+      },
+      {
+        "translation": "filled",
+        "greek": "πλήρης"
+      },
+      {
+        "translation": "a floating vessel, a ship, vessel",
+        "greek": "πλοῖον"
+      },
+      {
+        "translation": "that which has been done, a deed, act",
+        "greek": "πρᾶγμα"
+      },
+      {
+        "translation": "first",
+        "greek": "πρῶτος"
+      },
+      {
+        "translation": "easy, ready, easy to make",
+        "greek": "ῥᾴδιος"
+      },
+      {
+        "translation": "grain, corn: food made from grain, bread",
+        "greek": "σιτίον"
+      },
+      {
+        "translation": "a digging, hoeing",
+        "greek": "σκάφος"
+      },
+      {
+        "translation": "the hull of a ship",
+        "greek": "σκάφος"
+      },
+      {
+        "translation": "scarcity, rareness, dearth, lack of",
+        "greek": "σπάνις"
+      },
+      {
+        "translation": "drink-offering; (pl.) truce, treaty",
+        "greek": "σπονδή"
+      },
+      {
+        "translation": "narrow, strait",
+        "greek": "στενός"
+      },
+      {
+        "translation": "an expedition; a voyage; equipment",
+        "greek": "στόλος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 13,
+    "content": [
+      {
+        "translation": "a wall",
+        "greek": "τεῖχος"
+      },
+      {
+        "translation": "a twisted leathern thong",
+        "greek": "τροπός"
+      },
+      {
+        "translation": "a turn, direction, course, way; character",
+        "greek": "τρόπος"
+      },
+      {
+        "translation": "a watching",
+        "greek": "φυλακή"
+      },
+      {
+        "translation": "worse, meaner, inferior",
+        "greek": "χείρων"
+      },
+      {
+        "translation": "time",
+        "greek": "χρόνος"
+      },
+      {
+        "translation": "a particular place, a place, spot, district",
+        "greek": "χωρίον"
+      },
+      {
+        "translation": "a message, tidings, news",
+        "greek": "ἀγγελία"
+      },
+      {
+        "translation": "a messenger, envoy",
+        "greek": "ἄγγελος"
+      },
+      {
+        "translation": "shame done one, disgrace, dishonour",
+        "greek": "αἰσχύνη"
+      },
+      {
+        "translation": "exact, accurate, precise, made",
+        "greek": "ἀκριβής"
+      },
+      {
+        "translation": "of one another, to one another, one another",
+        "greek": "ἀλλήλων"
+      },
+      {
+        "translation": "a failure, fault, sin",
+        "greek": "ἁμαρτία"
+      },
+      {
+        "translation": "better, abler, stronger, braver",
+        "greek": "ἀμείνων"
+      },
+      {
+        "translation": "a first-cousin, cousin",
+        "greek": "ἀνεψιός"
+      },
+      {
+        "translation": "a stay, cessation",
+        "greek": "ἀνοκωχή"
+      },
+      {
+        "translation": "a thinking worthy",
+        "greek": "ἀξίωσις"
+      },
+      {
+        "translation": "want of skill, inexperience",
+        "greek": "ἀπειρία"
+      },
+      {
+        "translation": "without trial, inexperienced",
+        "greek": "ἄπειρος"
+      },
+      {
+        "translation": "not to be trusted",
+        "greek": "ἄπιστος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 14,
+    "content": [
+      {
+        "translation": "a settlement far from home, a colony settlement",
+        "greek": "ἀποικία"
+      },
+      {
+        "translation": "away from home",
+        "greek": "ἄποικος"
+      },
+      {
+        "translation": "number",
+        "greek": "ἀριθμός"
+      },
+      {
+        "translation": "best",
+        "greek": "ἄριστος"
+      },
+      {
+        "translation": "without strength, weak, feeble, weakly",
+        "greek": "ἀσθενής"
+      },
+      {
+        "translation": "well-pleased, glad",
+        "greek": "ἄσμενος"
+      },
+      {
+        "translation": "not liable to fall, immoveable, steadfast, firm",
+        "greek": "ἀσφαλής"
+      },
+      {
+        "translation": "daring nothing, wanting courage, spiritless, cowardly",
+        "greek": "ἄτολμος"
+      },
+      {
+        "translation": "firm, steady, steadfast, sure, certain",
+        "greek": "βέβαιος"
+      },
+      {
+        "translation": "tillage, agriculture, farming",
+        "greek": "γεωργία"
+      },
+      {
+        "translation": "tenth",
+        "greek": "δέκατος"
+      },
+      {
+        "translation": "a thought, intention, purpose",
+        "greek": "διάνοια"
+      },
+      {
+        "translation": "quite sufficient",
+        "greek": "διαρκής"
+      },
+      {
+        "translation": "difference, distinction",
+        "greek": "διαφορά"
+      },
+      {
+        "translation": "just, observant of custom, correct, balanced",
+        "greek": "δίκαιος"
+      },
+      {
+        "translation": "twofold, double",
+        "greek": "διπλόος"
+      },
+      {
+        "translation": "power, might, strength",
+        "greek": "δύναμις"
+      },
+      {
+        "translation": "strong, mighty, able",
+        "greek": "δυνατός"
+      },
+      {
+        "translation": "an accusation, charge, complaint",
+        "greek": "ἔγκλημα"
+      },
+      {
+        "translation": "in all likelihood, suitably, fairly, reasonably, naturally",
+        "greek": "εἰκότως"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 15,
+    "content": [
+      {
+        "translation": "every, every one, each, each one",
+        "greek": "ἕκαστος"
+      },
+      {
+        "translation": "that over there, that",
+        "greek": "ἐκεῖνος"
+      },
+      {
+        "translation": "a sailing out, leaving port",
+        "greek": "ἔκπλοος"
+      },
+      {
+        "translation": "smaller, less",
+        "greek": "ἐλάσσων"
+      },
+      {
+        "translation": "commerce, trade, traffic",
+        "greek": "ἐμπορία"
+      },
+      {
+        "translation": "visible, manifest, clear",
+        "greek": "ἔνδηλος"
+      },
+      {
+        "translation": "power",
+        "greek": "ἐξουσία"
+      },
+      {
+        "translation": "at hand, ready, prepared",
+        "greek": "ἑτοῖμος"
+      },
+      {
+        "translation": "of good repute, honoured, famous, glorious",
+        "greek": "εὔδοξος"
+      },
+      {
+        "translation": "least",
+        "greek": "ἥκιστος"
+      },
+      {
+        "translation": "terra-firma, the land",
+        "greek": "ἤπειρος"
+      },
+      {
+        "translation": "a private person, an individual",
+        "greek": "ἰδιώτης"
+      },
+      {
+        "translation": "supplication",
+        "greek": "ἱκετεία"
+      },
+      {
+        "translation": "an outcry against",
+        "greek": "καταβοή"
+      },
+      {
+        "translation": "a robber's life, robbery, piracy, buccaneering",
+        "greek": "λῃστεία"
+      },
+      {
+        "translation": "painful, distressing",
+        "greek": "λυπηρός"
+      },
+      {
+        "translation": "inclined to wait, patient",
+        "greek": "μενετός"
+      },
+      {
+        "translation": "a wooer, suitor",
+        "greek": "μνηστήρ"
+      },
+      {
+        "translation": "legendary, fabulous",
+        "greek": "μυθώδης"
+      },
+      {
+        "translation": "in or of the house",
+        "greek": "οἰκεῖος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 16,
+    "content": [
+      {
+        "translation": "the act of dwelling, habitation",
+        "greek": "οἴκησις"
+      },
+      {
+        "translation": "an inhabitant; a colonist",
+        "greek": "οἰκήτωρ"
+      },
+      {
+        "translation": "heavy-armed, armed",
+        "greek": "ὁπλίτης"
+      },
+      {
+        "translation": "old in years",
+        "greek": "παλαιός"
+      },
+      {
+        "translation": "everywhere",
+        "greek": "πανταχῆ"
+      },
+      {
+        "translation": "sent",
+        "greek": "πεμπτός"
+      },
+      {
+        "translation": "the fifth, oneself with four others",
+        "greek": "πέμπτος"
+      },
+      {
+        "translation": "wealth, riches",
+        "greek": "πλοῦτος"
+      },
+      {
+        "translation": "fit for sailing",
+        "greek": "πλώϊμος"
+      },
+      {
+        "translation": "one who makes, a maker",
+        "greek": "ποιητής"
+      },
+      {
+        "translation": "battle, fight, war",
+        "greek": "πόλεμος"
+      },
+      {
+        "translation": "a city, town",
+        "greek": "πόλισμα"
+      },
+      {
+        "translation": "(fellow) citizen",
+        "greek": "πολίτης"
+      },
+      {
+        "translation": "a river, stream",
+        "greek": "ποταμός"
+      },
+      {
+        "translation": "an old man; pl. ambassadors",
+        "greek": "πρέσβυς"
+      },
+      {
+        "translation": "a shaking, shock",
+        "greek": "σεισμός"
+      },
+      {
+        "translation": "a sign, a mark, token",
+        "greek": "σημεῖον"
+      },
+      {
+        "translation": "a staff, cudgel, club",
+        "greek": "σκυτάλη"
+      },
+      {
+        "translation": "army",
+        "greek": "στρατιά"
+      },
+      {
+        "translation": "an encamped army",
+        "greek": "στρατός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 17,
+    "content": [
+      {
+        "translation": "an event, circumstance, chance, hap",
+        "greek": "συμφορά"
+      },
+      {
+        "translation": "comprehension, understanding",
+        "greek": "σύνεσις"
+      },
+      {
+        "translation": "intelligent, sagacious, wise",
+        "greek": "συνετός"
+      },
+      {
+        "translation": "dwelling",
+        "greek": "συνήθης"
+      },
+      {
+        "translation": "a composition",
+        "greek": "συνθήκη"
+      },
+      {
+        "translation": "an assembly, meeting",
+        "greek": "σύνοδος"
+      },
+      {
+        "translation": "a seal, signet, seal-ring",
+        "greek": "σφραγίς"
+      },
+      {
+        "translation": "a saving, deliverance, preservation, safety",
+        "greek": "σωτηρία"
+      },
+      {
+        "translation": "a finishing, completion, accomplishment",
+        "greek": "τελευτή"
+      },
+      {
+        "translation": "a piece of land cut off, assigned as a domain",
+        "greek": "τέμενος"
+      },
+      {
+        "translation": "help, aid, assistance, succour",
+        "greek": "τιμωρία"
+      },
+      {
+        "translation": "a bowman, archer",
+        "greek": "τοξότης"
+      },
+      {
+        "translation": "trireme",
+        "greek": "τριήρης"
+      },
+      {
+        "translation": "the afterbirth",
+        "greek": "ὕστερον"
+      },
+      {
+        "translation": "latter, last",
+        "greek": "ὕστερος"
+      },
+      {
+        "translation": "open to sight, visible, manifest, evident",
+        "greek": "φανερός"
+      },
+      {
+        "translation": "a watcher, guard",
+        "greek": "φρουρός"
+      },
+      {
+        "translation": "hard to bear, painful; difficult",
+        "greek": "χαλεπός"
+      },
+      {
+        "translation": "a proposition carried by vote",
+        "greek": "ψήφισμα"
+      },
+      {
+        "translation": "help, aid, succour, assistance",
+        "greek": "ὠφέλεια"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 18,
+    "content": [
+      {
+        "translation": "unable, impossible",
+        "greek": "ἀδύνατος"
+      },
+      {
+        "translation": "the sea-shore, beach, strand",
+        "greek": "αἰγιαλός"
+      },
+      {
+        "translation": "exactness, minute accuracy, precision",
+        "greek": "ἀκρίβεια"
+      },
+      {
+        "translation": "a hearing",
+        "greek": "ἀκρόασις"
+      },
+      {
+        "translation": "want of manhood",
+        "greek": "ἀνανδρία"
+      },
+      {
+        "translation": "man, person, human",
+        "greek": "ἄνθρωπος"
+      },
+      {
+        "translation": "to speak against",
+        "greek": "ἀντεῖπον"
+      },
+      {
+        "translation": "doing nothing, ineffectual, unprofitable",
+        "greek": "ἄπρακτος"
+      },
+      {
+        "translation": "a piece of silver, a silver coin",
+        "greek": "ἀργύριον"
+      },
+      {
+        "translation": "want of strength, weakness, feebleness, sickliness",
+        "greek": "ἀσθένεια"
+      },
+      {
+        "translation": "security against stumbling",
+        "greek": "ἀσφάλεια"
+      },
+      {
+        "translation": "one who has himself heard, an ear-witness",
+        "greek": "αὐτήκοος"
+      },
+      {
+        "translation": "unfenced, unfortified, unguarded",
+        "greek": "ἄφρακτος"
+      },
+      {
+        "translation": "barbarous",
+        "greek": "βάρβαρος"
+      },
+      {
+        "translation": "a kingdom, dominion",
+        "greek": "βασιλεία"
+      },
+      {
+        "translation": "a queen, princess",
+        "greek": "βασίλεια"
+      },
+      {
+        "translation": "a king, chief",
+        "greek": "βασιλεύς"
+      },
+      {
+        "translation": "a willing",
+        "greek": "βούλησις"
+      },
+      {
+        "translation": "second",
+        "greek": "δεύτερος"
+      },
+      {
+        "translation": "the office of a διάκονος, service",
+        "greek": "διακονία"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 19,
+    "content": [
+      {
+        "translation": "a servant, waiting-man",
+        "greek": "διάκονος"
+      },
+      {
+        "translation": "different, unlike",
+        "greek": "διάφορος"
+      },
+      {
+        "translation": "an act by which wrong is set right",
+        "greek": "δικαίωμα"
+      },
+      {
+        "translation": "a judge",
+        "greek": "δικαστής"
+      },
+      {
+        "translation": "enslaving, subjugation",
+        "greek": "δούλωσις"
+      },
+      {
+        "translation": "in possession of power",
+        "greek": "ἐγκρατής"
+      },
+      {
+        "translation": "each of two, either, each singly",
+        "greek": "ἑκάτερος"
+      },
+      {
+        "translation": "an assembly of the citizens regularly summoned, the legislative assembly",
+        "greek": "ἐκκλησία"
+      },
+      {
+        "translation": "experienced",
+        "greek": "ἔμπειρος"
+      },
+      {
+        "translation": "opposite",
+        "greek": "ἐναντίος"
+      },
+      {
+        "translation": "year",
+        "greek": "ἐνιαυτός"
+      },
+      {
+        "translation": "a statement, narrative",
+        "greek": "ἐξήγησις"
+      },
+      {
+        "translation": "similarly, like",
+        "greek": "ἐοικότως"
+      },
+      {
+        "translation": "a defensive alliance",
+        "greek": "ἐπιμαχία"
+      },
+      {
+        "translation": "a message, command, commission",
+        "greek": "ἐπιστολή"
+      },
+      {
+        "translation": "coming to light, appearing; remarkable, distinguished",
+        "greek": "ἐπιφανής"
+      },
+      {
+        "translation": "a leading the way, going first",
+        "greek": "ἡγεμονία"
+      },
+      {
+        "translation": "our",
+        "greek": "ἡμέτερος"
+      },
+      {
+        "translation": "a waiting on, service",
+        "greek": "θεραπεία"
+      },
+      {
+        "translation": "a mode of supplication",
+        "greek": "ἱκέτευμα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 20,
+    "content": [
+      {
+        "translation": "dim. of κέλης, yacht with one bank of oars",
+        "greek": "κελήτιον"
+      },
+      {
+        "translation": "a danger, risk, hazard, venture, enterprise",
+        "greek": "κίνδυνος"
+      },
+      {
+        "translation": "inclined to rob, piratical, buccaneering",
+        "greek": "λῃστικός"
+      },
+      {
+        "translation": "settler from abroad, resident alien; adj. changing oneʼs abode",
+        "greek": "μέτοικος"
+      },
+      {
+        "translation": "a piece of wreck",
+        "greek": "ναυάγιον"
+      },
+      {
+        "translation": "a sea-fight",
+        "greek": "ναυμαχία"
+      },
+      {
+        "translation": "seafaring, naval",
+        "greek": "ναυτικός"
+      },
+      {
+        "translation": "youngest",
+        "greek": "νεώτατος"
+      },
+      {
+        "translation": "younger",
+        "greek": "νεώτερος"
+      },
+      {
+        "translation": "an islander",
+        "greek": "νησιώτης"
+      },
+      {
+        "translation": "a coloniser, founder of a city",
+        "greek": "οἰκιστής"
+      },
+      {
+        "translation": "derived from one's fathers, paternal, hereditary",
+        "greek": "πατρικός"
+      },
+      {
+        "translation": "of five years",
+        "greek": "πεντέτης"
+      },
+      {
+        "translation": "most, largest",
+        "greek": "πλεῖστος"
+      },
+      {
+        "translation": "hostile; enemy",
+        "greek": "πολέμιος"
+      },
+      {
+        "translation": "citizenship, citizen body, constitution",
+        "greek": "πολιτεία"
+      },
+      {
+        "translation": "age, seniority; embassy",
+        "greek": "πρεσβεία"
+      },
+      {
+        "translation": "old woman",
+        "greek": "πρέσβεια"
+      },
+      {
+        "translation": "to tell",
+        "greek": "προεῖπον"
+      },
+      {
+        "translation": "readiness, willingness, eagerness, zeal",
+        "greek": "προθυμία"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 21,
+    "content": [
+      {
+        "translation": "a looking out for",
+        "greek": "προσκοπή"
+      },
+      {
+        "translation": "approach, income",
+        "greek": "πρόσοδος"
+      },
+      {
+        "translation": "that which is held before",
+        "greek": "πρόσχημα"
+      },
+      {
+        "translation": "the face, visage, countenance",
+        "greek": "πρόσωπον"
+      },
+      {
+        "translation": "before, earlier",
+        "greek": "πρότερος"
+      },
+      {
+        "translation": "shewing itself",
+        "greek": "προφανής"
+      },
+      {
+        "translation": "that which is alleged as the cause, an allegation, plea",
+        "greek": "πρόφασις"
+      },
+      {
+        "translation": "one must reflect",
+        "greek": "σκεπτέος"
+      },
+      {
+        "translation": "an expedition, campaign",
+        "greek": "στρατεία"
+      },
+      {
+        "translation": "born with, congenital, natural, in-born",
+        "greek": "συγγενής"
+      },
+      {
+        "translation": "a commixture, confusion",
+        "greek": "σύγχυσις"
+      },
+      {
+        "translation": "a taking together: a seizing, arresting",
+        "greek": "σύλληψις"
+      },
+      {
+        "translation": "an alliance offensive and defensive",
+        "greek": "συμμαχία"
+      },
+      {
+        "translation": "allied",
+        "greek": "συμμαχίς"
+      },
+      {
+        "translation": "fighting along with, allied with",
+        "greek": "σύμμαχος"
+      },
+      {
+        "translation": "accompanying; suitable, useful, profitable",
+        "greek": "σύμφορος"
+      },
+      {
+        "translation": "an occurrence, a hap, chance, event, incident",
+        "greek": "συντυχία"
+      },
+      {
+        "translation": "their own, their",
+        "greek": "σφέτερος"
+      },
+      {
+        "translation": "at one's leisure, leisurely, tardy",
+        "greek": "σχολαῖος"
+      },
+      {
+        "translation": "such as this",
+        "greek": "τοιοῦτος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 22,
+    "content": [
+      {
+        "translation": "so large, so tall",
+        "greek": "τοσοῦτος"
+      },
+      {
+        "translation": "a trophy",
+        "greek": "τρόπαιον"
+      },
+      {
+        "translation": "of or for rout, defeat; causing rout",
+        "greek": "τροπαῖος"
+      },
+      {
+        "translation": "kingly power, sovereignty",
+        "greek": "τυραννίς"
+      },
+      {
+        "translation": "an absolute sovereign",
+        "greek": "τύραννος"
+      },
+      {
+        "translation": "your, yours",
+        "greek": "ὑμέτερος"
+      },
+      {
+        "translation": "the body of rowers and sailors, the ship's crew",
+        "greek": "ὑπηρεσία"
+      },
+      {
+        "translation": "subject to pay taxes, taxable, tributary",
+        "greek": "ὑποτελής"
+      },
+      {
+        "translation": "useful, advantageous, beneficial",
+        "greek": "ὠφέλιμος"
+      },
+      {
+        "translation": "unannounced, unproclaimed",
+        "greek": "ἀκήρυκτος"
+      },
+      {
+        "translation": "unmixed, pure",
+        "greek": "ἀκραιφνής"
+      },
+      {
+        "translation": "of/belonging to another",
+        "greek": "ἀλλότριος"
+      },
+      {
+        "translation": "unreasoning, inconsiderate, thoughtless, heedless",
+        "greek": "ἀλόγιστος"
+      },
+      {
+        "translation": "each of two, both",
+        "greek": "ἀμφότερος"
+      },
+      {
+        "translation": "necessary, forcible (subst. kin, necessities for life)",
+        "greek": "ἀναγκαῖος"
+      },
+      {
+        "translation": "a raising up",
+        "greek": "ἀνάστασις"
+      },
+      {
+        "translation": "contradiction, controversy, disputation",
+        "greek": "ἀντιλογία"
+      },
+      {
+        "translation": "wrestling against",
+        "greek": "ἀντίπαλος"
+      },
+      {
+        "translation": "without suspicion, unsuspected",
+        "greek": "ἀνύποπτος"
+      },
+      {
+        "translation": "worthy of mention, noteworthy",
+        "greek": "ἀξιόλογος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 23,
+    "content": [
+      {
+        "translation": "worthy of a thing",
+        "greek": "ἀξιόχρεως"
+      },
+      {
+        "translation": "unreasonably",
+        "greek": "ἀπεικότως"
+      },
+      {
+        "translation": "a standing away from",
+        "greek": "ἀπόστασις"
+      },
+      {
+        "translation": "living under one's own laws, independent",
+        "greek": "αὐτόνομος"
+      },
+      {
+        "translation": "want of money",
+        "greek": "ἀχρηματία"
+      },
+      {
+        "translation": "of the king, kingly, royal",
+        "greek": "βασίλειος"
+      },
+      {
+        "translation": "a partition-wall, barrier",
+        "greek": "διάφραγμα"
+      },
+      {
+        "translation": "a setting right, doing justice to: punishment",
+        "greek": "δικαίωσις"
+      },
+      {
+        "translation": "twofold, double, twice as much as, twice as many as, as long as",
+        "greek": "διπλάσιος"
+      },
+      {
+        "translation": "volunteer",
+        "greek": "ἐθελοντής"
+      },
+      {
+        "translation": "the smallest, least",
+        "greek": "ἐλάχιστος"
+      },
+      {
+        "translation": "freedom, liberty",
+        "greek": "ἐλευθερία"
+      },
+      {
+        "translation": "free",
+        "greek": "ἐλεύθερος"
+      },
+      {
+        "translation": "bringing loss upon, hurtful, prejudicial",
+        "greek": "ἐπιζήμιος"
+      },
+      {
+        "translation": "aid, succour",
+        "greek": "ἐπικουρία"
+      },
+      {
+        "translation": "liable to envy",
+        "greek": "ἐπίφθονος"
+      },
+      {
+        "translation": "in or of the country, local, native",
+        "greek": "ἐπιχώριος"
+      },
+      {
+        "translation": "well-doing",
+        "greek": "εὐεργεσία"
+      },
+      {
+        "translation": "a well-doer, benefactor",
+        "greek": "εὐεργέτης"
+      },
+      {
+        "translation": "good-tempered",
+        "greek": "εὐόργητος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 24,
+    "content": [
+      {
+        "translation": "of, in, on, from the sea",
+        "greek": "θαλάσσιος"
+      },
+      {
+        "translation": "a dissolving, dissolution; lodging, resting place",
+        "greek": "κατάλυσις"
+      },
+      {
+        "translation": "a herald's wand",
+        "greek": "κηρύκειον"
+      },
+      {
+        "translation": "strongest, mightiest",
+        "greek": "κράτιστος"
+      },
+      {
+        "translation": "a testimony, proof",
+        "greek": "μαρτύριον"
+      },
+      {
+        "translation": "neither of the two",
+        "greek": "μηδέτερος"
+      },
+      {
+        "translation": "the inhabited world",
+        "greek": "οἰκουμένη"
+      },
+      {
+        "translation": "an oligarchy, government in the hands of a few families",
+        "greek": "ὀλιγαρχία"
+      },
+      {
+        "translation": "beyond calculation, unexpected, unlooked for",
+        "greek": "παράλογος"
+      },
+      {
+        "translation": "preparation",
+        "greek": "παρασκευή"
+      },
+      {
+        "translation": "a battle by land",
+        "greek": "πεζομαχία"
+      },
+      {
+        "translation": "dwelling round",
+        "greek": "περίοικος"
+      },
+      {
+        "translation": "supersum",
+        "greek": "περιουσία"
+      },
+      {
+        "translation": "a besieging, siege",
+        "greek": "πολιορκία"
+      },
+      {
+        "translation": "a bringing to",
+        "greek": "προσαγωγή"
+      },
+      {
+        "translation": "dwelling near to, bordering on, neighbouring",
+        "greek": "πρόσοικος"
+      },
+      {
+        "translation": "dear, beloved",
+        "greek": "προσφιλής"
+      },
+      {
+        "translation": "a satrapy, the office",
+        "greek": "σατραπεία"
+      },
+      {
+        "translation": "an expedition, campaign",
+        "greek": "στράτευμα"
+      },
+      {
+        "translation": "the leader",
+        "greek": "στρατηγός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 25,
+    "content": [
+      {
+        "translation": "soundness of mind, moderation, discretion",
+        "greek": "σωφροσύνη"
+      },
+      {
+        "translation": "a sure signs.",
+        "greek": "τεκμήριον"
+      },
+      {
+        "translation": "under the sky, in the open air, a-field",
+        "greek": "ὑπαίθριος"
+      },
+      {
+        "translation": "a reminding",
+        "greek": "ὑπόμνησις"
+      },
+      {
+        "translation": "on the day after, the next day",
+        "greek": "ὑστεραῖος"
+      },
+      {
+        "translation": "wintry, stormy",
+        "greek": "χειμέριος"
+      },
+      {
+        "translation": "ever to be remembered",
+        "greek": "ἀείμνηστος"
+      },
+      {
+        "translation": "taken by the spear, captive to one's spear, taken prisoner",
+        "greek": "αἰχμάλωτος"
+      },
+      {
+        "translation": "a darter, javelin-man",
+        "greek": "ἀκοντιστής"
+      },
+      {
+        "translation": "any prominent part",
+        "greek": "ἀκρωτήριον"
+      },
+      {
+        "translation": "insensate, unfeeling",
+        "greek": "ἀναίσθητος"
+      },
+      {
+        "translation": "enough, sufficiently",
+        "greek": "ἀποχρώντως"
+      },
+      {
+        "translation": "unwalled, unfortified",
+        "greek": "ἀτείχιστος"
+      },
+      {
+        "translation": "self-chosen, self-elected",
+        "greek": "αὐθαίρετος"
+      },
+      {
+        "translation": "sudden, unexpected.",
+        "greek": "ἐξαπίναιος"
+      },
+      {
+        "translation": "secretary",
+        "greek": "ἐπιστολεύς"
+      },
+      {
+        "translation": "suitable; useful, necessary; deserving; associate",
+        "greek": "ἐπιτήδειος"
+      },
+      {
+        "translation": "a pursuit, business, practice",
+        "greek": "ἐπιτήδευμα"
+      },
+      {
+        "translation": "that which is spread over",
+        "greek": "κατάστρωμα"
+      },
+      {
+        "translation": "a steersman, helmsman, pilot",
+        "greek": "κυβερνήτης"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 26,
+    "content": [
+      {
+        "translation": "a prose-writer",
+        "greek": "λογογράφος"
+      },
+      {
+        "translation": "the mother-state",
+        "greek": "μητρόπολις"
+      },
+      {
+        "translation": "an exhortation, address",
+        "greek": "παραίνεσις"
+      },
+      {
+        "translation": "a taking away from beside, curtailing",
+        "greek": "παραίρεσις"
+      },
+      {
+        "translation": "one who has",
+        "greek": "πλεονέκτης"
+      },
+      {
+        "translation": "one must go to war",
+        "greek": "πολεμητέος"
+      },
+      {
+        "translation": "dispatch on an embassy",
+        "greek": "πρέσβευσις"
+      },
+      {
+        "translation": "attractive, persuasive",
+        "greek": "προσαγωγός"
+      },
+      {
+        "translation": "look-out",
+        "greek": "προφυλακὶς"
+      },
+      {
+        "translation": "of or concerning contracts",
+        "greek": "συμβόλαιος"
+      },
+      {
+        "translation": "last",
+        "greek": "τελευταῖος"
+      },
+      {
+        "translation": "under a treaty, bound",
+        "greek": "ὑπόσπονδος"
+      },
+      {
+        "translation": "under the hand, in hand",
+        "greek": "ὑποχείριος"
+      },
+      {
+        "translation": "dwelling in a brasen house",
+        "greek": "χαλκίοικος"
+      },
+      {
+        "translation": "not examined by torture, untortured",
+        "greek": "ἀβασάνιστος"
+      },
+      {
+        "translation": "unaccused, unblamed",
+        "greek": "ἀνεπίκλητος"
+      },
+      {
+        "translation": "without preparation, unprepared",
+        "greek": "ἀπαράσκευος"
+      },
+      {
+        "translation": "management, administration",
+        "greek": "διαχείρισις"
+      },
+      {
+        "translation": "coming near, nearly resembling, such-like",
+        "greek": "παραπλήσιος"
+      },
+      {
+        "translation": "the ground on which soldiers are encamped, a camp, encampment",
+        "greek": "στρατόπεδον"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 27,
+    "content": [
+      {
+        "translation": "unquestioned, impossible to be questioned",
+        "greek": "ἀνεξέλεγκτος"
+      },
+      {
+        "translation": "not ruled by tyrants",
+        "greek": "ἀτυράννευτος"
+      },
+      {
+        "translation": "the building a fort on the enemy’s frontier, the occupation of it",
+        "greek": "ἐπιτειχισμός"
+      },
+      {
+        "translation": "desertion of the army, refusal to serve",
+        "greek": "λιποστράτιον"
+      },
+      {
+        "translation": "migration",
+        "greek": "μετανάστασις"
+      },
+      {
+        "translation": "scantiness of men",
+        "greek": "ὀλιγανθρωπία"
+      },
+      {
+        "translation": "beside the sea, lying on the sea-side, maritime",
+        "greek": "παραθαλάσσιος"
+      },
+      {
+        "translation": "a ship of burden with fifty oars",
+        "greek": "πεντηκόντορος"
+      },
+      {
+        "translation": "to be given as advice",
+        "greek": "συμβουλευτέος"
+      },
+      {
+        "translation": "thirty years old",
+        "greek": "τριακονταέτης"
+      },
+      {
+        "translation": "friendship]",
+        "greek": "φῖλος [\u003e φιλία"
+      },
+      {
+        "translation": "up to this time, yet",
+        "greek": "πω"
+      },
+      {
+        "translation": "where?",
+        "greek": "πῶ"
+      },
+      {
+        "translation": "therefore, in this wise, thereupon",
+        "greek": "τῷ"
+      },
+      {
+        "translation": "to lead",
+        "greek": "ἄγω"
+      },
+      {
+        "translation": "to bind, tie, fetter",
+        "greek": "δέω"
+      },
+      {
+        "translation": "to lack, miss, stand in need of",
+        "greek": "δέω"
+      },
+      {
+        "translation": "to let, suffer, allow, permit",
+        "greek": "ἐάω"
+      },
+      {
+        "translation": "I (first person pronoun)",
+        "greek": "ἐγώ"
+      },
+      {
+        "translation": "out",
+        "greek": "ἔξω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 28,
+    "content": [
+      {
+        "translation": "[I will say]",
+        "greek": "ἐρῶ"
+      },
+      {
+        "translation": "to have",
+        "greek": "ἔχω"
+      },
+      {
+        "translation": "to have come, be present, be here",
+        "greek": "ἥκω"
+      },
+      {
+        "translation": "to loose",
+        "greek": "λύω"
+      },
+      {
+        "translation": "to take up, raise, lift up",
+        "greek": "αἴρω"
+      },
+      {
+        "translation": "(to be first) to rule, to begin",
+        "greek": "ἄρχω"
+      },
+      {
+        "translation": "to constrain",
+        "greek": "βιάω"
+      },
+      {
+        "translation": "to do",
+        "greek": "δράω"
+      },
+      {
+        "translation": "give way",
+        "greek": "εἴκω"
+      },
+      {
+        "translation": "to be",
+        "greek": "εἰμί"
+      },
+      {
+        "translation": "come, go",
+        "greek": "εἶμι"
+      },
+      {
+        "translation": "to draw, drag",
+        "greek": "ἕλκω"
+      },
+      {
+        "translation": "to bar one's way",
+        "greek": "ἔργω"
+      },
+      {
+        "translation": "to do",
+        "greek": "ἔρδω"
+      },
+      {
+        "translation": "to hate",
+        "greek": "ἔχθω"
+      },
+      {
+        "translation": "down, downwards",
+        "greek": "κάτω"
+      },
+      {
+        "translation": "to pick; to say",
+        "greek": "λέγω"
+      },
+      {
+        "translation": "to stay at home, stay where one is, not stir",
+        "greek": "μένω"
+      },
+      {
+        "translation": "not yet",
+        "greek": "μήπω"
+      },
+      {
+        "translation": "to deal out, distribute, dispense",
+        "greek": "νέμω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 29,
+    "content": [
+      {
+        "translation": "to see",
+        "greek": "ὁράω"
+      },
+      {
+        "translation": "to make to cease",
+        "greek": "παύω"
+      },
+      {
+        "translation": "to sail, go by sea",
+        "greek": "πλέω"
+      },
+      {
+        "translation": "to save, keep",
+        "greek": "σῴζω"
+      },
+      {
+        "translation": "to bear",
+        "greek": "φέρω"
+      },
+      {
+        "translation": "to say, to claim",
+        "greek": "φημί"
+      },
+      {
+        "translation": "to fall upon, attack, assail",
+        "greek": "χράω"
+      },
+      {
+        "translation": "proclaim an oracle, (rare) furnish; mid.: consult an oracle, lend",
+        "greek": "χράω"
+      },
+      {
+        "translation": "to take, (mid.) to choose",
+        "greek": "αἱρέω"
+      },
+      {
+        "translation": "to hear",
+        "greek": "ἀκούω"
+      },
+      {
+        "translation": "to keep off, ward off",
+        "greek": "ἀμύνω"
+      },
+      {
+        "translation": "to lead up; mid. set sail",
+        "greek": "ἀνάγω"
+      },
+      {
+        "translation": "to blossom, bloom",
+        "greek": "ἀνθέω"
+      },
+      {
+        "translation": "to think worthy of; to expect",
+        "greek": "ἀξιόω"
+      },
+      {
+        "translation": "to lead away, carry off",
+        "greek": "ἀπάγω"
+      },
+      {
+        "translation": "to ward off; to be sufficient",
+        "greek": "ἀρκέω"
+      },
+      {
+        "translation": "to throw",
+        "greek": "βάλλω"
+      },
+      {
+        "translation": "to constrain",
+        "greek": "βιάζω"
+      },
+      {
+        "translation": "to scratch, draw, write",
+        "greek": "γράφω"
+      },
+      {
+        "translation": "to fear",
+        "greek": "δείδω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 30,
+    "content": [
+      {
+        "translation": "cut down, slay",
+        "greek": "δηϊόω"
+      },
+      {
+        "translation": "to make visible",
+        "greek": "δηλόω"
+      },
+      {
+        "translation": "seem, impers. it seems best..",
+        "greek": "δοκέω"
+      },
+      {
+        "translation": "to will, wish, purpose",
+        "greek": "ἐθέλω"
+      },
+      {
+        "translation": "to go into",
+        "greek": "ἐνδύω"
+      },
+      {
+        "translation": "to bring on",
+        "greek": "ἐπάγω"
+      },
+      {
+        "translation": "to hold on; hold out; hold back; adjourn; occupy",
+        "greek": "ἐπέχω"
+      },
+      {
+        "translation": "to examine, test",
+        "greek": "ἐτάζω"
+      },
+      {
+        "translation": "to set upon",
+        "greek": "ἐφίζω"
+      },
+      {
+        "translation": "to bury, to honour with funeral rites",
+        "greek": "θάπτω"
+      },
+      {
+        "translation": "to make to sit down, to seat",
+        "greek": "ἱδρύω"
+      },
+      {
+        "translation": "to hallow, consecrate, dedicate",
+        "greek": "ἱερόω"
+      },
+      {
+        "translation": "to be strong",
+        "greek": "ἰσχύω"
+      },
+      {
+        "translation": "to call, summon",
+        "greek": "καλέω"
+      },
+      {
+        "translation": "to set in motion, to move",
+        "greek": "κινέω"
+      },
+      {
+        "translation": "to pick out, choose, judge, determine",
+        "greek": "κρίνω"
+      },
+      {
+        "translation": "to found",
+        "greek": "κτίζω"
+      },
+      {
+        "translation": "to let, hinder, check, prevent",
+        "greek": "κωλύω"
+      },
+      {
+        "translation": "to leave, quit",
+        "greek": "λείπω"
+      },
+      {
+        "translation": "to give pain to, to pain, distress, grieve, vex, annoy",
+        "greek": "λυπέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 31,
+    "content": [
+      {
+        "translation": "to think of doing, intend to do, to be about to do",
+        "greek": "μέλλω"
+      },
+      {
+        "translation": "to conquer, prevail, vanquish",
+        "greek": "νικάω"
+      },
+      {
+        "translation": "to inhabit, occupy",
+        "greek": "οἰκέω"
+      },
+      {
+        "translation": "to set in motion, urge",
+        "greek": "ὁρμάω"
+      },
+      {
+        "translation": "to be moored, lie at anchor",
+        "greek": "ὁρμέω"
+      },
+      {
+        "translation": "to experience, to suffer",
+        "greek": "πάσχω"
+      },
+      {
+        "translation": "to prevail upon, win over, persuade",
+        "greek": "πείθω"
+      },
+      {
+        "translation": "to pierce quite through, fix",
+        "greek": "πείρω"
+      },
+      {
+        "translation": "to send, despatch",
+        "greek": "πέμπω"
+      },
+      {
+        "translation": "to make, to do",
+        "greek": "ποιέω"
+      },
+      {
+        "translation": "to make to stumble",
+        "greek": "πταίω"
+      },
+      {
+        "translation": "to arrange, put in order",
+        "greek": "τάσσω"
+      },
+      {
+        "translation": "to watch over, protect, guard",
+        "greek": "τηρέω"
+      },
+      {
+        "translation": "to honor; to value something at a price (gen.)",
+        "greek": "τιμάω"
+      },
+      {
+        "translation": "to turn",
+        "greek": "τρέπω"
+      },
+      {
+        "translation": "to sing, laud, sing of",
+        "greek": "ὑμνέω"
+      },
+      {
+        "translation": "to hold under, uphold; undergo, suffer, be accountable",
+        "greek": "ὑπέχω"
+      },
+      {
+        "translation": "to bring to light, make to appear",
+        "greek": "φαίνω"
+      },
+      {
+        "translation": "to say, affirm, assert",
+        "greek": "φάσκω"
+      },
+      {
+        "translation": "to flee, take flight, run away",
+        "greek": "φεύγω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 32,
+    "content": [
+      {
+        "translation": "to put to flight, to terrify; mid. to fear",
+        "greek": "φοβέω"
+      },
+      {
+        "translation": "to point out, shew, indicate",
+        "greek": "φράζω"
+      },
+      {
+        "translation": "to scrape, graze, wound slightly",
+        "greek": "χραύω"
+      },
+      {
+        "translation": "give way, draw back, retire, withdraw",
+        "greek": "χωρέω"
+      },
+      {
+        "translation": "to bring together, gather together",
+        "greek": "ἀγείρω"
+      },
+      {
+        "translation": "not to perceive, be ignorant of",
+        "greek": "ἀγνοέω"
+      },
+      {
+        "translation": "to do wrong",
+        "greek": "ἀδικέω"
+      },
+      {
+        "translation": "to be in full bloom, be at one's prime",
+        "greek": "ἀκμάζω"
+      },
+      {
+        "translation": "to bind",
+        "greek": "ἀναδέω"
+      },
+      {
+        "translation": "to speak against, gainsay",
+        "greek": "ἀντερῶ"
+      },
+      {
+        "translation": "to hold out against, withstand",
+        "greek": "ἀντέχω"
+      },
+      {
+        "translation": "to be at a loss",
+        "greek": "ἀπορέω"
+      },
+      {
+        "translation": "to thrust away, push back",
+        "greek": "ἀπωθέω"
+      },
+      {
+        "translation": "to snatch away, carry off",
+        "greek": "ἁρπάζω"
+      },
+      {
+        "translation": "to be unlucky",
+        "greek": "ἀτυχέω"
+      },
+      {
+        "translation": "to make large, increase, augment",
+        "greek": "αὐξάνω"
+      },
+      {
+        "translation": "to send forth, discharge",
+        "greek": "ἀφίημι"
+      },
+      {
+        "translation": "to disable, hinder (Hom.); to harm, damage",
+        "greek": "βλάπτω"
+      },
+      {
+        "translation": "to come to aid, to succour, assist, aid",
+        "greek": "βοηθέω"
+      },
+      {
+        "translation": "to loose one from another, to part asunder, undo",
+        "greek": "διαλύω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 33,
+    "content": [
+      {
+        "translation": "to give",
+        "greek": "δίδωμι"
+      },
+      {
+        "translation": "to make a slave of, enslave",
+        "greek": "δουλόω"
+      },
+      {
+        "translation": "to awaken, wake up, rouse",
+        "greek": "ἐγείρω"
+      },
+      {
+        "translation": "to seat oneself, sit",
+        "greek": "ἕζομαι"
+      },
+      {
+        "translation": "to sail out, sail away, weigh anchor",
+        "greek": "ἐκπλέω"
+      },
+      {
+        "translation": "to carry out of",
+        "greek": "ἐκφέρω"
+      },
+      {
+        "translation": "to drive, drive on, set in motion",
+        "greek": "ἐλαύνω"
+      },
+      {
+        "translation": "to hope for, look for, expect",
+        "greek": "ἐλπίζω"
+      },
+      {
+        "translation": "to be in; to be possible",
+        "greek": "ἔνειμι"
+      },
+      {
+        "translation": "go out",
+        "greek": "ἔξειμι"
+      },
+      {
+        "translation": "to send out, let",
+        "greek": "ἐξίημι"
+      },
+      {
+        "translation": "to lift up and set on",
+        "greek": "ἐπαίρω"
+      },
+      {
+        "translation": "to press down, weigh down; mid. hasten",
+        "greek": "ἐπείγω"
+      },
+      {
+        "translation": "to run at",
+        "greek": "ἐπιθέω"
+      },
+      {
+        "translation": "to ask",
+        "greek": "ἐρωτάω"
+      },
+      {
+        "translation": "to take alive, revive",
+        "greek": "ζωγρέω"
+      },
+      {
+        "translation": "to enjoy oneself, take delight, take one's pleasure",
+        "greek": "ἥδομαι"
+      },
+      {
+        "translation": "to be of good courage, take courage",
+        "greek": "θαρσέω"
+      },
+      {
+        "translation": "to make to stand",
+        "greek": "ἵστημι"
+      },
+      {
+        "translation": "to lead down",
+        "greek": "κατάγω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 34,
+    "content": [
+      {
+        "translation": "to hold fast",
+        "greek": "κατέχω"
+      },
+      {
+        "translation": "to urge",
+        "greek": "κελεύω"
+      },
+      {
+        "translation": "to curtail, dock, prune",
+        "greek": "κολάζω"
+      },
+      {
+        "translation": "to take care of, provide for",
+        "greek": "κομίζω"
+      },
+      {
+        "translation": "to order, arrange",
+        "greek": "κοσμέω"
+      },
+      {
+        "translation": "to be strong, mighty, powerful",
+        "greek": "κρατέω"
+      },
+      {
+        "translation": "to hide, cover, cloak",
+        "greek": "κρύπτω"
+      },
+      {
+        "translation": "to kill, slay",
+        "greek": "κτείνω"
+      },
+      {
+        "translation": "to partake of, enjoy a share of, share in, take part in",
+        "greek": "μετέχω"
+      },
+      {
+        "translation": "to lengthen, prolong, extend",
+        "greek": "μηκύνω"
+      },
+      {
+        "translation": "to have as a custom; to believe",
+        "greek": "νομίζω"
+      },
+      {
+        "translation": "to found as a colony",
+        "greek": "οἰκίζω"
+      },
+      {
+        "translation": "to suppose, think, deem, imagine",
+        "greek": "οἴομαι"
+      },
+      {
+        "translation": "to make angry, provoke to anger, irritate",
+        "greek": "ὀργίζω"
+      },
+      {
+        "translation": "to furnish, provide, supply",
+        "greek": "παρέχω"
+      },
+      {
+        "translation": "to attempt, endeavour, try",
+        "greek": "πειράω"
+      },
+      {
+        "translation": "to make full",
+        "greek": "πληρόω"
+      },
+      {
+        "translation": "to make to go, carry, convey",
+        "greek": "πορεύω"
+      },
+      {
+        "translation": "to carry: to bring about, to furnish, provide, supply, procure, cause",
+        "greek": "πορίζω"
+      },
+      {
+        "translation": "do, (w. adv) fare, (mid.) charge payment",
+        "greek": "πράσσω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 35,
+    "content": [
+      {
+        "translation": "to hold before, to pretend; to jut out, to excel",
+        "greek": "προέχω"
+      },
+      {
+        "translation": "to dwell, live",
+        "greek": "σκηνάω"
+      },
+      {
+        "translation": "to be or dwell in a tent",
+        "greek": "σκηνέω"
+      },
+      {
+        "translation": "to look at",
+        "greek": "σκοπέω"
+      },
+      {
+        "translation": "to set a-going, to urge on, hasten, quicken",
+        "greek": "σπεύδω"
+      },
+      {
+        "translation": "to bring together, gather together, collect, convene",
+        "greek": "συνάγω"
+      },
+      {
+        "translation": "to make to fall, throw down, overthrow",
+        "greek": "σφάλλω"
+      },
+      {
+        "translation": "to set, put, place",
+        "greek": "τίθημι"
+      },
+      {
+        "translation": "to undertake, take heart",
+        "greek": "τολμάω"
+      },
+      {
+        "translation": "to begin; to exist",
+        "greek": "ὑπάρχω"
+      },
+      {
+        "translation": "to ruin, waste, spoil, destroy",
+        "greek": "φθείρω"
+      },
+      {
+        "translation": "to go to and fro, up and down, to stalk",
+        "greek": "φοιτάω"
+      },
+      {
+        "translation": "to murder, kill, slay",
+        "greek": "φονεύω"
+      },
+      {
+        "translation": "(mid.) to vote; (act.) to count with pebbles",
+        "greek": "ψηφίζω"
+      },
+      {
+        "translation": "to help, aid, assist, to be of use",
+        "greek": "ὠφελέω"
+      },
+      {
+        "translation": "to bear a message",
+        "greek": "ἀγγέλλω"
+      },
+      {
+        "translation": "to make ugly, disfigure, mar",
+        "greek": "αἰσχύνω"
+      },
+      {
+        "translation": "to take up; to destroy",
+        "greek": "ἀναιρέω"
+      },
+      {
+        "translation": "to roll up together",
+        "greek": "ἀνειλέω"
+      },
+      {
+        "translation": "to disbelieve, distrust; to disobey",
+        "greek": "ἀπιστέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 36,
+    "content": [
+      {
+        "translation": "to sail away, sail off",
+        "greek": "ἀποπλέω"
+      },
+      {
+        "translation": "to be loaded; to be annoyed",
+        "greek": "ἄχθομαι"
+      },
+      {
+        "translation": "to live",
+        "greek": "βιοτεύω"
+      },
+      {
+        "translation": "to take counsel, deliberate, concert measures",
+        "greek": "βουλεύω"
+      },
+      {
+        "translation": "to take, accept, receive",
+        "greek": "δέχομαι"
+      },
+      {
+        "translation": "to preserve through",
+        "greek": "διασῴζω"
+      },
+      {
+        "translation": "to carry through; be different from, excel",
+        "greek": "διαφέρω"
+      },
+      {
+        "translation": "to set right",
+        "greek": "δικαιόω"
+      },
+      {
+        "translation": "to be able, capable, strong enough",
+        "greek": "δύναμαι"
+      },
+      {
+        "translation": "to call in; bring a charge or accusation",
+        "greek": "ἐγκαλέω"
+      },
+      {
+        "translation": "to sail into, enter",
+        "greek": "εἰσπλέω"
+      },
+      {
+        "translation": "to thrust into",
+        "greek": "εἰσωθέω"
+      },
+      {
+        "translation": "to achieve by force",
+        "greek": "ἐκνικάω"
+      },
+      {
+        "translation": "to send out",
+        "greek": "ἐκπέμπω"
+      },
+      {
+        "translation": "to fall out of",
+        "greek": "ἐκπίπτω"
+      },
+      {
+        "translation": "to stretch out",
+        "greek": "ἐκτείνω"
+      },
+      {
+        "translation": "to make less",
+        "greek": "ἐλασσόω"
+      },
+      {
+        "translation": "to dwell in",
+        "greek": "ἐνοικέω"
+      },
+      {
+        "translation": "to get ready, equip thoroughly, fit out",
+        "greek": "ἐξαρτύω"
+      },
+      {
+        "translation": "to approve, applaud, commend",
+        "greek": "ἐπαινέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 37,
+    "content": [
+      {
+        "translation": "to come to aid, defend, assist",
+        "greek": "ἐπαμύνω"
+      },
+      {
+        "translation": "to stay on, tarry",
+        "greek": "ἐπιμένω"
+      },
+      {
+        "translation": "to sail upon",
+        "greek": "ἐπιπλέω"
+      },
+      {
+        "translation": "to bring, put",
+        "greek": "ἐπιφέρω"
+      },
+      {
+        "translation": "touch",
+        "greek": "ἐπιχράω"
+      },
+      {
+        "translation": "to come",
+        "greek": "ἔρχομαι"
+      },
+      {
+        "translation": "to find",
+        "greek": "εὑρίσκω"
+      },
+      {
+        "translation": "to lead; to consider, believe",
+        "greek": "ἡγέομαι"
+      },
+      {
+        "translation": "to be still, keep quiet, be at rest",
+        "greek": "ἡσυχάζω"
+      },
+      {
+        "translation": "to wonder, marvel, be astonished",
+        "greek": "θαυμάζω"
+      },
+      {
+        "translation": "to make pure",
+        "greek": "καθαίρω"
+      },
+      {
+        "translation": "to go down, sink, set",
+        "greek": "καταδύω"
+      },
+      {
+        "translation": "to run down",
+        "greek": "καταθέω"
+      },
+      {
+        "translation": "to put down, destroy; settle (disputes); lodge, rest",
+        "greek": "καταλύω"
+      },
+      {
+        "translation": "to be a herald, officiate as herald",
+        "greek": "κηρύσσω"
+      },
+      {
+        "translation": "to strengthen",
+        "greek": "κρατύνω"
+      },
+      {
+        "translation": "to procure for oneself, to get, gain, acquire",
+        "greek": "κτάομαι"
+      },
+      {
+        "translation": "to take, seize, receive",
+        "greek": "λαμβάνω"
+      },
+      {
+        "translation": "to escape notice, to be unknown, unseen, unnoticed",
+        "greek": "λανθάνω"
+      },
+      {
+        "translation": "to learn",
+        "greek": "μανθάνω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 38,
+    "content": [
+      {
+        "translation": "to fight",
+        "greek": "μάχομαι"
+      },
+      {
+        "translation": "be among; (+dat and gen) have a share in",
+        "greek": "μέτειμι"
+      },
+      {
+        "translation": "to make one's own",
+        "greek": "οἰκειόω"
+      },
+      {
+        "translation": "to be gone, to have gone",
+        "greek": "οἴχομαι"
+      },
+      {
+        "translation": "be present",
+        "greek": "πάρειμι"
+      },
+      {
+        "translation": "to pass over, let go, relax, yield, allow",
+        "greek": "παρίημι"
+      },
+      {
+        "translation": "to carry to the opposite side, carry over",
+        "greek": "περαιόω"
+      },
+      {
+        "translation": "to trust, trust to",
+        "greek": "πιστεύω"
+      },
+      {
+        "translation": "to be at war",
+        "greek": "πολεμέω"
+      },
+      {
+        "translation": "to make hostile, make an enemy of",
+        "greek": "πολεμόω"
+      },
+      {
+        "translation": "go forward",
+        "greek": "πρόειμι"
+      },
+      {
+        "translation": "pick before; foretell; proclaim",
+        "greek": "προλέγω"
+      },
+      {
+        "translation": "to perceive before, foresee",
+        "greek": "προνοέω"
+      },
+      {
+        "translation": "to see before one, to take forethought",
+        "greek": "προοράω"
+      },
+      {
+        "translation": "to bring to",
+        "greek": "προσάγω"
+      },
+      {
+        "translation": "to hold to, offer",
+        "greek": "προσέχω"
+      },
+      {
+        "translation": "to have come; to belong to, to fit",
+        "greek": "προσήκω"
+      },
+      {
+        "translation": "to bring before",
+        "greek": "προφέρω"
+      },
+      {
+        "translation": "to shew by a sign, indicate, make known, point out",
+        "greek": "σημαίνω"
+      },
+      {
+        "translation": "to sail in company with",
+        "greek": "συμπλέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 39,
+    "content": [
+      {
+        "translation": "to bring together; impers. to benefit",
+        "greek": "συμφέρω"
+      },
+      {
+        "translation": "to build a wall",
+        "greek": "τειχίζω"
+      },
+      {
+        "translation": "to help, aid, succour",
+        "greek": "τιμωρέω"
+      },
+      {
+        "translation": "(with gen.) to hit the mark, to get; (with pple) to happen to, to actually",
+        "greek": "τυγχάνω"
+      },
+      {
+        "translation": "to listen, hearken, give ear",
+        "greek": "ὑπακούω"
+      },
+      {
+        "translation": "to stay behind, survive",
+        "greek": "ὑπομένω"
+      },
+      {
+        "translation": "to keep watch",
+        "greek": "φρουρέω"
+      },
+      {
+        "translation": "to keep watch and ward, keep guard",
+        "greek": "φυλάσσω"
+      },
+      {
+        "translation": "use, experience",
+        "greek": "χράομαι"
+      },
+      {
+        "translation": "to miss, miss the mark",
+        "greek": "ἁμαρτάνω"
+      },
+      {
+        "translation": "to force, compel",
+        "greek": "ἀναγκάζω"
+      },
+      {
+        "translation": "call on, invoke; call back, recall",
+        "greek": "ἀνακαλέω"
+      },
+      {
+        "translation": "to bring over, convince",
+        "greek": "ἀναπείθω"
+      },
+      {
+        "translation": "to go back",
+        "greek": "ἀναχωρέω"
+      },
+      {
+        "translation": "to make to stand up, raise up",
+        "greek": "ἀνίστημι"
+      },
+      {
+        "translation": "to remove up the country",
+        "greek": "ἀνοικίζω"
+      },
+      {
+        "translation": "to lead up against",
+        "greek": "ἀντανάγω"
+      },
+      {
+        "translation": "to speak against, gainsay, contradict",
+        "greek": "ἀντιλέγω"
+      },
+      {
+        "translation": "to step off from",
+        "greek": "ἀποβαίνω"
+      },
+      {
+        "translation": "to throw off",
+        "greek": "ἀποβάλλω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 40,
+    "content": [
+      {
+        "translation": "to separate, set apart; mid. answer",
+        "greek": "ἀποκρίνω"
+      },
+      {
+        "translation": "to leave over",
+        "greek": "ἀπολείπω"
+      },
+      {
+        "translation": "to destroy, kill; to lose",
+        "greek": "ἀπόλλυμι"
+      },
+      {
+        "translation": "to shew fort, display, produce",
+        "greek": "ἀποφαίνω"
+      },
+      {
+        "translation": "to flee from, escape",
+        "greek": "ἀποφεύγω"
+      },
+      {
+        "translation": "to go from",
+        "greek": "ἀποχωρέω"
+      },
+      {
+        "translation": "to join, join together, fasten",
+        "greek": "ἀραρίσκω"
+      },
+      {
+        "translation": "I shall be absent, away from",
+        "greek": "ἀφεστήξω"
+      },
+      {
+        "translation": "to put away, remove; (mid.) revolt",
+        "greek": "ἀφίστημι"
+      },
+      {
+        "translation": "to will, wish, be willing",
+        "greek": "βούλομαι"
+      },
+      {
+        "translation": "become, be born",
+        "greek": "γίγνομαι"
+      },
+      {
+        "translation": "to learn to know, to perceive, mark, learn",
+        "greek": "γιγνώσκω"
+      },
+      {
+        "translation": "to show",
+        "greek": "δείκνυμι"
+      },
+      {
+        "translation": "to cross (a river, etc.); to stand with feet apart",
+        "greek": "διαβαίνω"
+      },
+      {
+        "translation": "to hinder, prevent",
+        "greek": "διακωλύω"
+      },
+      {
+        "translation": "to leave an interval between",
+        "greek": "διαλείπω"
+      },
+      {
+        "translation": "to be always going",
+        "greek": "διαμέλλω"
+      },
+      {
+        "translation": "to send off in different directions, send to and fro, send about",
+        "greek": "διαπέμπω"
+      },
+      {
+        "translation": "to sail out through",
+        "greek": "διεκπλέω"
+      },
+      {
+        "translation": "to put one's hand in",
+        "greek": "ἐγχειρέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 41,
+    "content": [
+      {
+        "translation": "to hearken",
+        "greek": "εἰσακούω"
+      },
+      {
+        "translation": "to go into",
+        "greek": "εἰσβαίνω"
+      },
+      {
+        "translation": "to throw into, put into",
+        "greek": "εἰσβάλλω"
+      },
+      {
+        "translation": "to fall into",
+        "greek": "εἰσπίπτω"
+      },
+      {
+        "translation": "to give up, surrender",
+        "greek": "ἐκδίδωμι"
+      },
+      {
+        "translation": "to carry out",
+        "greek": "ἐκκομίζω"
+      },
+      {
+        "translation": "to invent, contrive",
+        "greek": "ἐκπορίζω"
+      },
+      {
+        "translation": "to be in doubt, at a loss",
+        "greek": "ἐνδοιάζω"
+      },
+      {
+        "translation": "to drive out from",
+        "greek": "ἐξελαύνω"
+      },
+      {
+        "translation": "to stir up, urge on, excite",
+        "greek": "ἐξοτρύνω"
+      },
+      {
+        "translation": "to ask besides",
+        "greek": "ἐπέρομαι"
+      },
+      {
+        "translation": "to go upon",
+        "greek": "ἐπιβαίνω"
+      },
+      {
+        "translation": "to set one's heart upon",
+        "greek": "ἐπιθυμέω"
+      },
+      {
+        "translation": "to call upon",
+        "greek": "ἐπικαλέω"
+      },
+      {
+        "translation": "to fall upon",
+        "greek": "ἐπιπίπτω"
+      },
+      {
+        "translation": "to put upon one as a duty, to enjoin",
+        "greek": "ἐπιτάσσω"
+      },
+      {
+        "translation": "to turn over to, entrust, command",
+        "greek": "ἐπιτρέπω"
+      },
+      {
+        "translation": "to make ready, prepare",
+        "greek": "ἑτοιμάζω"
+      },
+      {
+        "translation": "to sit upon",
+        "greek": "ἐφέζομαι"
+      },
+      {
+        "translation": "to be less than another, inferior to",
+        "greek": "ἡσσάομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 42,
+    "content": [
+      {
+        "translation": "to be an attendant, do service",
+        "greek": "θεραπεύω"
+      },
+      {
+        "translation": "to take down",
+        "greek": "καθαιρέω"
+      },
+      {
+        "translation": "to cry down, cry out against",
+        "greek": "καταβοάω"
+      },
+      {
+        "translation": "to observe well, to understand",
+        "greek": "κατανοέω"
+      },
+      {
+        "translation": "to set upright, erect",
+        "greek": "κατορθόω"
+      },
+      {
+        "translation": "to blame, censure, find fault with",
+        "greek": "μέμφομαι"
+      },
+      {
+        "translation": "to remind",
+        "greek": "μιμνήσκω"
+      },
+      {
+        "translation": "to fight in a ship",
+        "greek": "ναυμαχέω"
+      },
+      {
+        "translation": "to build ships",
+        "greek": "ναυπηγέω"
+      },
+      {
+        "translation": "to exhort, recommend, advise",
+        "greek": "παραινέω"
+      },
+      {
+        "translation": "be superior, survive, be left over",
+        "greek": "περίειμι"
+      },
+      {
+        "translation": "to inclose all round, encompass",
+        "greek": "περιέργω"
+      },
+      {
+        "translation": "to wait for, await",
+        "greek": "περιμένω"
+      },
+      {
+        "translation": "to look over, overlook",
+        "greek": "περιοράω"
+      },
+      {
+        "translation": "to live as a citizen",
+        "greek": "πολιτεύω"
+      },
+      {
+        "translation": "to be the elder; to be an ambassador",
+        "greek": "πρεσβεύω"
+      },
+      {
+        "translation": "to step on, step forward, advance",
+        "greek": "προβαίνω"
+      },
+      {
+        "translation": "to make clear beforehand, shew plainly",
+        "greek": "προδηλόω"
+      },
+      {
+        "translation": "to call forth",
+        "greek": "προκαλέω"
+      },
+      {
+        "translation": "to send before, send on",
+        "greek": "προπέμπω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 43,
+    "content": [
+      {
+        "translation": "approach",
+        "greek": "πρόσειμι"
+      },
+      {
+        "translation": "to sail towards",
+        "greek": "προσπλέω"
+      },
+      {
+        "translation": "to honour",
+        "greek": "προτιμάω"
+      },
+      {
+        "translation": "to go forward, advance",
+        "greek": "προχωρέω"
+      },
+      {
+        "translation": "to rebel, revolt, rise in rebellion",
+        "greek": "στασιάζω"
+      },
+      {
+        "translation": "to serve in war, serve as a soldier, do military service, take the field, march",
+        "greek": "στρατεύω"
+      },
+      {
+        "translation": "to write down, describe, compose",
+        "greek": "συγγράφω"
+      },
+      {
+        "translation": "meet, agree, happen",
+        "greek": "συμβαίνω"
+      },
+      {
+        "translation": "to bury together, join in burying",
+        "greek": "συνθάπτω"
+      },
+      {
+        "translation": "to bear or carry over, transfer; to surpass, excel",
+        "greek": "ὑπερφέρω"
+      },
+      {
+        "translation": "to leave remaining",
+        "greek": "ὑπολείπω"
+      },
+      {
+        "translation": "to suspect, surmise",
+        "greek": "ὑποτοπέω"
+      },
+      {
+        "translation": "to go back, retire, recoil",
+        "greek": "ὑποχωρέω"
+      },
+      {
+        "translation": "to charge, accuse, censure, blame",
+        "greek": "αἰτιάομαι"
+      },
+      {
+        "translation": "to be caught, conquered, caught in the act",
+        "greek": "ἁλίσκομαι"
+      },
+      {
+        "translation": "to estrange from",
+        "greek": "ἀλλοτριόω"
+      },
+      {
+        "translation": "to set against",
+        "greek": "ἀνθίστημι"
+      },
+      {
+        "translation": "to bring tidings, report, announce",
+        "greek": "ἀπαγγέλλω"
+      },
+      {
+        "translation": "to set free, release, deliver",
+        "greek": "ἀπαλλάσσω"
+      },
+      {
+        "translation": "to go away, depart from",
+        "greek": "ἀπέρχομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 44,
+    "content": [
+      {
+        "translation": "to give back, give what is due; (mid.) sell",
+        "greek": "ἀποδίδωμι"
+      },
+      {
+        "translation": "to die, be killed",
+        "greek": "ἀποθνῄσκω"
+      },
+      {
+        "translation": "to kill, slay",
+        "greek": "ἀποκτείνω"
+      },
+      {
+        "translation": "to send off",
+        "greek": "ἀποστέλλω"
+      },
+      {
+        "translation": "to rob, despoil, bereave",
+        "greek": "ἀποστερέω"
+      },
+      {
+        "translation": "to be in a certain state, to be disposed",
+        "greek": "διάκειμαι"
+      },
+      {
+        "translation": "to carry over",
+        "greek": "διακομίζω"
+      },
+      {
+        "translation": "to scatter abroad, throw about",
+        "greek": "διασπείρω"
+      },
+      {
+        "translation": "to destroy, ruin; to corrupt",
+        "greek": "διαφθείρω"
+      },
+      {
+        "translation": "to go through, pass through",
+        "greek": "διέρχομαι"
+      },
+      {
+        "translation": "to attend as a bodyguard",
+        "greek": "δορυφορέω"
+      },
+      {
+        "translation": "to put on board ship",
+        "greek": "εἰσβιβάζω"
+      },
+      {
+        "translation": "to carry into",
+        "greek": "εἰσκομίζω"
+      },
+      {
+        "translation": "to free, set free",
+        "greek": "ἐλευθερόω"
+      },
+      {
+        "translation": "to take upon oneself; to be possible",
+        "greek": "ἐνδέχομαι"
+      },
+      {
+        "translation": "to be leader of",
+        "greek": "ἐξηγέομαι"
+      },
+      {
+        "translation": "ask besides",
+        "greek": "ἐπείρομαι"
+      },
+      {
+        "translation": "come near; come upon; attack",
+        "greek": "ἐπέρχομαι"
+      },
+      {
+        "translation": "to come habitually to, visit again and again",
+        "greek": "ἐπιφοιτάω"
+      },
+      {
+        "translation": "to put a question to the vote",
+        "greek": "ἐπιψηφίζω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 45,
+    "content": [
+      {
+        "translation": "to work, labour",
+        "greek": "ἐργάζομαι"
+      },
+      {
+        "translation": "to sit down, take one's seat",
+        "greek": "καθέζομαι"
+      },
+      {
+        "translation": "to set down, place",
+        "greek": "καθίστημι"
+      },
+      {
+        "translation": "to throw down, overthrow",
+        "greek": "καταβάλλω"
+      },
+      {
+        "translation": "to catch in a theft: to catch in the act, detect, discover",
+        "greek": "καταφωράω"
+      },
+      {
+        "translation": "to speak against, to accuse",
+        "greek": "κατηγορέω"
+      },
+      {
+        "translation": "settle",
+        "greek": "κατοικίζω"
+      },
+      {
+        "translation": "to be daring, to make a venture, take the risk, do a daring thing",
+        "greek": "κινδυνεύω"
+      },
+      {
+        "translation": "to place in another way, to change",
+        "greek": "μεθίστημι"
+      },
+      {
+        "translation": "to throw into a different position, to turn quickly",
+        "greek": "μεταβάλλω"
+      },
+      {
+        "translation": "to alter the make of",
+        "greek": "μεταποιέω"
+      },
+      {
+        "translation": "to attempt anything new, make a violent",
+        "greek": "νεωτερίζω"
+      },
+      {
+        "translation": "to build a house",
+        "greek": "οἰκοδομέω"
+      },
+      {
+        "translation": "to throw beside",
+        "greek": "παραβάλλω"
+      },
+      {
+        "translation": "to call to",
+        "greek": "παρακαλέω"
+      },
+      {
+        "translation": "to fall around, so as to embrace",
+        "greek": "περιπίπτω"
+      },
+      {
+        "translation": "to make to remain over and above, to keep safe, preserve",
+        "greek": "περιποιέω"
+      },
+      {
+        "translation": "to hem in a city, blockade, beleaguer, besiege",
+        "greek": "πολιορκέω"
+      },
+      {
+        "translation": "to owe beforehand",
+        "greek": "προοφείλω"
+      },
+      {
+        "translation": "to see, consider beforehand; provide for; make provision against",
+        "greek": "προσκοπέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 46,
+    "content": [
+      {
+        "translation": "to dwell by",
+        "greek": "προσοικέω"
+      },
+      {
+        "translation": "to send to",
+        "greek": "προσπέμπω"
+      },
+      {
+        "translation": "to fall upon, strike against",
+        "greek": "προσπίπτω"
+      },
+      {
+        "translation": "to make over to; mid. procure, pretend",
+        "greek": "προσποιέω"
+      },
+      {
+        "translation": "to be general",
+        "greek": "στρατηγέω"
+      },
+      {
+        "translation": "to set together, combine, associate, unite, band together",
+        "greek": "συνίστημι"
+      },
+      {
+        "translation": "to swear together",
+        "greek": "συνόμνυμι"
+      },
+      {
+        "translation": "to put together",
+        "greek": "συντίθημι"
+      },
+      {
+        "translation": "to make by art, to execute skilfully",
+        "greek": "τεχνάομαι"
+      },
+      {
+        "translation": "to be a monarch, an absolute ruler",
+        "greek": "τυραννεύω"
+      },
+      {
+        "translation": "to be fond of litigation",
+        "greek": "φιλοδικέω"
+      },
+      {
+        "translation": "to perceive, apprehend by the senses, to see, hear, feel",
+        "greek": "αἰσθάνομαι"
+      },
+      {
+        "translation": "to teach otherwise",
+        "greek": "ἀναδιδάσκω"
+      },
+      {
+        "translation": "to give in return, repay",
+        "greek": "ἀντιδίδωμι"
+      },
+      {
+        "translation": "to command in turn",
+        "greek": "ἀντικελεύω"
+      },
+      {
+        "translation": "to make rise up and depart, send away",
+        "greek": "ἀπανίστημι"
+      },
+      {
+        "translation": "to accept from",
+        "greek": "ἀποδέχομαι"
+      },
+      {
+        "translation": "to take away, receive one’s due, cut off",
+        "greek": "ἀπολαμβάνω"
+      },
+      {
+        "translation": "to wall off",
+        "greek": "ἀποτειχίζω"
+      },
+      {
+        "translation": "to come to",
+        "greek": "ἀφικνέομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 47,
+    "content": [
+      {
+        "translation": "to go astray from",
+        "greek": "διαμαρτάνω"
+      },
+      {
+        "translation": "to be minded, intend, purpose",
+        "greek": "διανοέομαι"
+      },
+      {
+        "translation": "to be born or bred in; be innate, be native",
+        "greek": "ἐγγίγνομαι"
+      },
+      {
+        "translation": "to go in and announce",
+        "greek": "εἰσαγγέλλω"
+      },
+      {
+        "translation": "to go in",
+        "greek": "εἰσέρχομαι"
+      },
+      {
+        "translation": "to lay to heart, consider well, reflect on, ponder",
+        "greek": "ἐνθυμέομαι"
+      },
+      {
+        "translation": "to go back again, to retreat, return",
+        "greek": "ἐπαναχωρέω"
+      },
+      {
+        "translation": "to plot against",
+        "greek": "ἐπιβουλεύω"
+      },
+      {
+        "translation": "to gain",
+        "greek": "ἐπικτάομαι"
+      },
+      {
+        "translation": "go on high ground in parallel with",
+        "greek": "ἐπιπάρειμι"
+      },
+      {
+        "translation": "to be a trustee, administrator, guardian, governor",
+        "greek": "ἐπιτροπεύω"
+      },
+      {
+        "translation": "to have good laws, to be orderly",
+        "greek": "εὐνομέομαι"
+      },
+      {
+        "translation": "to turn down, trample on",
+        "greek": "καταστρέφω"
+      },
+      {
+        "translation": "to place, put",
+        "greek": "κατατίθημι"
+      },
+      {
+        "translation": "to come",
+        "greek": "μετέρχομαι"
+      },
+      {
+        "translation": "to transmit as a message; give orders",
+        "greek": "παραγγέλλω"
+      },
+      {
+        "translation": "to hand over, to surrender",
+        "greek": "παραδίδωμι"
+      },
+      {
+        "translation": "to place beside",
+        "greek": "παρατίθημι"
+      },
+      {
+        "translation": "to go by, beside",
+        "greek": "παρέρχομαι"
+      },
+      {
+        "translation": "to put round",
+        "greek": "περιέννυμι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 48,
+    "content": [
+      {
+        "translation": "to look round",
+        "greek": "περισκοπέω"
+      },
+      {
+        "translation": "to tell beforehand",
+        "greek": "προαγορεύω"
+      },
+      {
+        "translation": "to hold intercourse with, live",
+        "greek": "προσομιλέω"
+      },
+      {
+        "translation": "to add, to apply, to close (a door); mid. to join (a group), take as an ally",
+        "greek": "προστίθημι"
+      },
+      {
+        "translation": "to learn by hearsay",
+        "greek": "πυνθάνομαι"
+      },
+      {
+        "translation": "to collect, gather together",
+        "greek": "συλλαμβάνω"
+      },
+      {
+        "translation": "to advise, counsel",
+        "greek": "συμβουλεύω"
+      },
+      {
+        "translation": "come together, meet",
+        "greek": "συνέρχομαι"
+      },
+      {
+        "translation": "to break in pieces",
+        "greek": "συρρήγνυμι"
+      },
+      {
+        "translation": "to go through hard labour, to suffer hardship",
+        "greek": "ταλαιπωρέω"
+      },
+      {
+        "translation": "to retire slowly",
+        "greek": "ὑπαναχωρέω"
+      },
+      {
+        "translation": "take up; understand, interpret; assume; reply, rejoin",
+        "greek": "ὑπολαμβάνω"
+      },
+      {
+        "translation": "to reduce to slavery, enslave",
+        "greek": "ἀνδραποδίζω"
+      },
+      {
+        "translation": "to order in turn",
+        "greek": "ἀντεπιτάσσω"
+      },
+      {
+        "translation": "to be hated, incur hatred, be roused to hatred",
+        "greek": "ἀπεχθάνομαι"
+      },
+      {
+        "translation": "display, appoint, demonstrate",
+        "greek": "ἀποδείκνυμι"
+      },
+      {
+        "translation": "to speak in defence, defend oneself",
+        "greek": "ἀπολογέομαι"
+      },
+      {
+        "translation": "to place",
+        "greek": "ἐγκαθίστημι"
+      },
+      {
+        "translation": "to compute, calculate",
+        "greek": "ἐκλογίζομαι"
+      },
+      {
+        "translation": "to force a besieged town to surrender",
+        "greek": "ἐκπολιορκέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 49,
+    "content": [
+      {
+        "translation": "to be born after, come into being after",
+        "greek": "ἐπιγίγνομαι"
+      },
+      {
+        "translation": "add by mixing",
+        "greek": "ἐπιμείγνυμι"
+      },
+      {
+        "translation": "to march against, make war upon",
+        "greek": "ἐπιστρατεύω"
+      },
+      {
+        "translation": "to seize upon, lay hold of",
+        "greek": "καταλαμβάνω"
+      },
+      {
+        "translation": "to remove",
+        "greek": "μετανίστημι"
+      },
+      {
+        "translation": "to receive from",
+        "greek": "παραλαμβάνω"
+      },
+      {
+        "translation": "to get ready, prepare",
+        "greek": "παρασκευάζω"
+      },
+      {
+        "translation": "to happen to be near, be among",
+        "greek": "παρατυγχάνω"
+      },
+      {
+        "translation": "to announce by messages sent round",
+        "greek": "περιαγγέλλω"
+      },
+      {
+        "translation": "to come forwards",
+        "greek": "προγίγνομαι"
+      },
+      {
+        "translation": "to receive favourably, accept",
+        "greek": "προσδέχομαι"
+      },
+      {
+        "translation": "to take or receive in addition",
+        "greek": "προσλαμβάνω"
+      },
+      {
+        "translation": "to obtain one's share of",
+        "greek": "προστυγχάνω"
+      },
+      {
+        "translation": "to bear iron, wear arms, go armed",
+        "greek": "σιδηροφορέω"
+      },
+      {
+        "translation": "mix together, commingle",
+        "greek": "συμμείγνυμι"
+      },
+      {
+        "translation": "to say the same thing with, to agree with",
+        "greek": "συνομολογέω"
+      },
+      {
+        "translation": "to fix by a mark",
+        "greek": "τεκμαίρομαι"
+      },
+      {
+        "translation": "to promise",
+        "greek": "ὑπισχνέομαι"
+      },
+      {
+        "translation": "entrust in answer; mid. counter attack",
+        "greek": "ἀντεπιτίθημι"
+      },
+      {
+        "translation": "to contend, struggle",
+        "greek": "διαγωνίζομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 50,
+    "content": [
+      {
+        "translation": "to run all risks, make a desperate attempt, hazard all",
+        "greek": "διακινδυνεύω"
+      },
+      {
+        "translation": "to call to mind, remember",
+        "greek": "διαμνημονεύω"
+      },
+      {
+        "translation": "to effect by labour, to achieve, accomplish",
+        "greek": "κατεργάζομαι"
+      },
+      {
+        "translation": "to change one's mind, to repent",
+        "greek": "μεταγιγνώσκω"
+      },
+      {
+        "translation": "to ruin beforehand",
+        "greek": "προδιαφθείρω"
+      },
+      {
+        "translation": "to escape to a place of safety before",
+        "greek": "προκαταφεύγω"
+      },
+      {
+        "translation": "to compel, constrain",
+        "greek": "προσβιάζομαι"
+      },
+      {
+        "translation": "to encamp, bivouac, take up a position",
+        "greek": "στρατοπεδεύω"
+      },
+      {
+        "translation": "to lay down",
+        "greek": "ἀντικαθίστημι"
+      },
+      {
+        "translation": "to scatter abroad, scatter to the winds, disperse",
+        "greek": "διασκεδάννυμι"
+      },
+      {
+        "translation": "to labour yet more",
+        "greek": "ἐπιταλαιπωρέω"
+      },
+      {
+        "translation": "to perceive",
+        "greek": "προαισθάνομαι"
+      },
+      {
+        "translation": "to contend along with, to share in a contest",
+        "greek": "συναγωνίζομαι"
+      },
+      {
+        "translation": "to perceive or understand beforehand",
+        "greek": "προδιαγιγνώσκω"
+      },
+      {
+        "translation": "to prepare beforehand",
+        "greek": "προπαρασκευάζω"
+      },
+      {
+        "translation": "either..or; than",
+        "greek": "ἤ"
+      },
+      {
+        "translation": "which way, where, whither, in",
+        "greek": "ᾗ"
+      },
+      {
+        "translation": "the",
+        "greek": "ὁ"
+      },
+      {
+        "translation": "O! oh!",
+        "greek": "ὦ"
+      },
+      {
+        "translation": "modal particle",
+        "greek": "ἄν"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 51,
+    "content": [
+      {
+        "translation": "again, anew, afresh, once more",
+        "greek": "αὖ"
+      },
+      {
+        "translation": "at least, at any rate",
+        "greek": "γε"
+      },
+      {
+        "translation": "but",
+        "greek": "δέ"
+      },
+      {
+        "translation": "conj. if, whether; part. w/wishes, adv. w/imperatives",
+        "greek": "εἰ"
+      },
+      {
+        "translation": "from out of",
+        "greek": "ἐκ"
+      },
+      {
+        "translation": "in, among. c. dat.",
+        "greek": "ἐν"
+      },
+      {
+        "translation": "six",
+        "greek": "ἕξ"
+      },
+      {
+        "translation": "well",
+        "greek": "εὖ"
+      },
+      {
+        "translation": "not",
+        "greek": "οὐ"
+      },
+      {
+        "translation": "where",
+        "greek": "οὗ"
+      },
+      {
+        "translation": "him, her (οὗ οἷ ἕ)",
+        "greek": "οὗ"
+      },
+      {
+        "translation": "you (personal pronoun)",
+        "greek": "σύ"
+      },
+      {
+        "translation": "and",
+        "greek": "τε"
+      },
+      {
+        "translation": "always, for ever",
+        "greek": "ἀεί"
+      },
+      {
+        "translation": "up, upon",
+        "greek": "ἀνά"
+      },
+      {
+        "translation": "from, away from. c. gen.",
+        "greek": "ἀπό"
+      },
+      {
+        "translation": "for",
+        "greek": "γάρ"
+      },
+      {
+        "translation": "it is necessary",
+        "greek": "δεῖ"
+      },
+      {
+        "translation": "two",
+        "greek": "δύο"
+      },
+      {
+        "translation": "if",
+        "greek": "ἐάν"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 52,
+    "content": [
+      {
+        "translation": "on, upon with gen., dat., and acc.",
+        "greek": "ἐπί"
+      },
+      {
+        "translation": "yet, as yet, still, besides",
+        "greek": "ἔτι"
+      },
+      {
+        "translation": "in order that (conj.); where (rel. adv.)",
+        "greek": "ἵνα"
+      },
+      {
+        "translation": "and, also",
+        "greek": "καί"
+      },
+      {
+        "translation": "on the one hand, on the other hand",
+        "greek": "μέν"
+      },
+      {
+        "translation": "now verily, full surely",
+        "greek": "μήν"
+      },
+      {
+        "translation": "fallow land (LSJ νειός)",
+        "greek": "νέα"
+      },
+      {
+        "translation": "now at this very time",
+        "greek": "νῦν"
+      },
+      {
+        "translation": "the night",
+        "greek": "νύξ"
+      },
+      {
+        "translation": "this",
+        "greek": "ὅδε"
+      },
+      {
+        "translation": "adv. + superl., as...as possible; ὅτι μή except",
+        "greek": "ὅτι"
+      },
+      {
+        "translation": "conj.: that, because",
+        "greek": "ὅτι"
+      },
+      {
+        "translation": "so, then, therefore",
+        "greek": "οὖν"
+      },
+      {
+        "translation": "all, the whole",
+        "greek": "πᾶς"
+      },
+      {
+        "translation": "anywhere, somewhere",
+        "greek": "που"
+      },
+      {
+        "translation": "before",
+        "greek": "πρό"
+      },
+      {
+        "translation": "along with, in company with, together with",
+        "greek": "σύν"
+      },
+      {
+        "translation": "from under, by, c. gen. under, c. dat., towards c. acc.",
+        "greek": "ὑπό"
+      },
+      {
+        "translation": "very, much, very much",
+        "greek": "ἄγαν"
+      },
+      {
+        "translation": "otherwise, but",
+        "greek": "ἀλλά"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 53,
+    "content": [
+      {
+        "translation": "without",
+        "greek": "ἄνευ"
+      },
+      {
+        "translation": "quite all, the whole",
+        "greek": "ἅπας"
+      },
+      {
+        "translation": "something, some",
+        "greek": "ἄσσα"
+      },
+      {
+        "translation": "form of address: \"father\"",
+        "greek": "ἄττα"
+      },
+      {
+        "translation": "at least then, at any rate, any way",
+        "greek": "γοῦν"
+      },
+      {
+        "translation": "ten",
+        "greek": "δέκα"
+      },
+      {
+        "translation": "in two, asunder",
+        "greek": "δίχα"
+      },
+      {
+        "translation": "a notion",
+        "greek": "δόξα"
+      },
+      {
+        "translation": "after, since, when",
+        "greek": "ἐπεί"
+      },
+      {
+        "translation": "seven",
+        "greek": "ἑπτά"
+      },
+      {
+        "translation": "form",
+        "greek": "ἰδέα"
+      },
+      {
+        "translation": "down, against with gen.; according to, throughout with acc.",
+        "greek": "κατά"
+      },
+      {
+        "translation": "very, very much, exceedingly",
+        "greek": "μάλα"
+      },
+      {
+        "translation": "(w gen) with, among; (w acc) after",
+        "greek": "μετά"
+      },
+      {
+        "translation": "but not",
+        "greek": "μηδέ"
+      },
+      {
+        "translation": "neither / nor",
+        "greek": "μήτε"
+      },
+      {
+        "translation": "to know",
+        "greek": "οἶδα"
+      },
+      {
+        "translation": "(things which exist) the present; the truth; property \u003e εἰμί",
+        "greek": "ὄντα"
+      },
+      {
+        "translation": "when, whenever",
+        "greek": "ὅταν"
+      },
+      {
+        "translation": "and/but not; not even",
+        "greek": "οὐδέ"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 54,
+    "content": [
+      {
+        "translation": "neither / nor",
+        "greek": "οὔτε"
+      },
+      {
+        "translation": "around, round about with gen., dat., and acc.",
+        "greek": "περί"
+      },
+      {
+        "translation": "except",
+        "greek": "πλήν"
+      },
+      {
+        "translation": "ever, sometime",
+        "greek": "ποτε"
+      },
+      {
+        "translation": "before; (after negated main clause) until",
+        "greek": "πρίν"
+      },
+      {
+        "translation": "at times, now and then",
+        "greek": "τοτέ"
+      },
+      {
+        "translation": "at that time, then",
+        "greek": "τότε"
+      },
+      {
+        "translation": "over, above, w. gen, over, beyond, w. acc.",
+        "greek": "ὑπέρ"
+      },
+      {
+        "translation": "so that",
+        "greek": "ὥστε"
+      },
+      {
+        "translation": "at the very place, just here, just there",
+        "greek": "αὐτοῦ"
+      },
+      {
+        "translation": "race, stock, family",
+        "greek": "γενεά"
+      },
+      {
+        "translation": "a gift of honour",
+        "greek": "γέρας"
+      },
+      {
+        "translation": "really, in very truth",
+        "greek": "δῆθεν"
+      },
+      {
+        "translation": "strengthd. for εἰ, if indeed",
+        "greek": "εἴπερ"
+      },
+      {
+        "translation": "to be accustomed",
+        "greek": "εἴωθα"
+      },
+      {
+        "translation": "on account of, for the sake of, because of, for",
+        "greek": "ἕνεκα"
+      },
+      {
+        "translation": "to be like; to look like",
+        "greek": "ἔοικα"
+      },
+      {
+        "translation": "period of seven days",
+        "greek": "ἑπτάς"
+      },
+      {
+        "translation": "the horn of an animal",
+        "greek": "κέρας"
+      },
+      {
+        "translation": "a herald, pursuivant, marshal, public messenger",
+        "greek": "κῆρυξ"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 55,
+    "content": [
+      {
+        "translation": "a harbour, haven, creek",
+        "greek": "λιμήν"
+      },
+      {
+        "translation": "big, great",
+        "greek": "μέγας"
+      },
+      {
+        "translation": "until (prep. and conj. w. aor.), as long as (conj. w. pres.)",
+        "greek": "μέχρι"
+      },
+      {
+        "translation": "the very man who, the very thing which",
+        "greek": "ὅσπερ"
+      },
+      {
+        "translation": "long ago, in olden time, in days of yore, in time gone by",
+        "greek": "πάλαι"
+      },
+      {
+        "translation": "back, backwards",
+        "greek": "πάλιν"
+      },
+      {
+        "translation": "near, hard by, close",
+        "greek": "πέλας"
+      },
+      {
+        "translation": "five",
+        "greek": "πέντε"
+      },
+      {
+        "translation": "from some place",
+        "greek": "ποθεν"
+      },
+      {
+        "translation": "whence? (i.e., from where?)",
+        "greek": "πόθεν"
+      },
+      {
+        "translation": "just as if, even as",
+        "greek": "ὥσπερ"
+      },
+      {
+        "translation": "elsewhere, in another place, in a strange",
+        "greek": "ἄλλοθι"
+      },
+      {
+        "translation": "forthwith, straightway, at once",
+        "greek": "αὐτίκα"
+      },
+      {
+        "translation": "the tongue",
+        "greek": "γλῶσσα"
+      },
+      {
+        "translation": "a way of living, mode of life",
+        "greek": "δίαιτα"
+      },
+      {
+        "translation": "himself, herself, themselves",
+        "greek": "ἑαυτοῦ"
+      },
+      {
+        "translation": "twenty",
+        "greek": "εἴκοσι"
+      },
+      {
+        "translation": "it is allowed, it is in one's power, is possible",
+        "greek": "ἔξεστι"
+      },
+      {
+        "translation": "from without",
+        "greek": "ἔξωθεν"
+      },
+      {
+        "translation": "then, next",
+        "greek": "ἔπειτα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 56,
+    "content": [
+      {
+        "translation": "although, albeit",
+        "greek": "καίπερ"
+      },
+      {
+        "translation": "and indeed, and further; and yet",
+        "greek": "καίτοι"
+      },
+      {
+        "translation": "however, nevertheless; of course (answers)",
+        "greek": "μέντοι"
+      },
+      {
+        "translation": "betwixt, between",
+        "greek": "μεταξύ"
+      },
+      {
+        "translation": "lately, just now",
+        "greek": "νεωστί"
+      },
+      {
+        "translation": "no more, no longer, no further",
+        "greek": "οὐκέτι"
+      },
+      {
+        "translation": "ever yet",
+        "greek": "πώποτε"
+      },
+      {
+        "translation": "all together, all at once, all in a body",
+        "greek": "σύμπας"
+      },
+      {
+        "translation": "a thousand",
+        "greek": "χίλιοι"
+      },
+      {
+        "translation": "from the very spot",
+        "greek": "αὐτόθεν"
+      },
+      {
+        "translation": "twelve",
+        "greek": "δυώδεκα"
+      },
+      {
+        "translation": "here, there; at that juncture",
+        "greek": "ἐνταῦθα"
+      },
+      {
+        "translation": "were kept shut",
+        "greek": "ἐπώχατο"
+      },
+      {
+        "translation": "the sea",
+        "greek": "θάλασσα"
+      },
+      {
+        "translation": "most",
+        "greek": "μάλιστα"
+      },
+      {
+        "translation": "nowhere",
+        "greek": "οὐδαμοῦ"
+      },
+      {
+        "translation": "to know beforehand",
+        "greek": "πρόοιδα"
+      },
+      {
+        "translation": "such a",
+        "greek": "τοιόσδε"
+      },
+      {
+        "translation": "so strong, so able",
+        "greek": "τοσόσδε"
+      },
+      {
+        "translation": "four-legged a table",
+        "greek": "τράπεζα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 57,
+    "content": [
+      {
+        "translation": "(Ion.) \u003e ἀφοράω]",
+        "greek": "ἀπορέω ["
+      },
+      {
+        "translation": "hence",
+        "greek": "ἐντεῦθεν"
+      },
+      {
+        "translation": "sixty",
+        "greek": "ἑξήκοντα"
+      },
+      {
+        "translation": "never",
+        "greek": "μηδέποτε"
+      },
+      {
+        "translation": "four",
+        "greek": "τέσσαρες"
+      },
+      {
+        "translation": "two hundred",
+        "greek": "διακόσιοι"
+      },
+      {
+        "translation": "two thousand",
+        "greek": "δισχίλιοι"
+      },
+      {
+        "translation": "sixteen",
+        "greek": "ἑκκαίδεκα"
+      },
+      {
+        "translation": "six hundred",
+        "greek": "ἑξακόσιοι"
+      },
+      {
+        "translation": "to whichever of two sides",
+        "greek": "ὁποτέρωσε"
+      },
+      {
+        "translation": "immediately, forthwith, straightway",
+        "greek": "παραυτίκα"
+      },
+      {
+        "translation": "one must come forward",
+        "greek": "παριτητέα"
+      },
+      {
+        "translation": "thirty",
+        "greek": "τριάκοντα"
+      },
+      {
+        "translation": "ninety",
+        "greek": "ἐνενήκοντα"
+      },
+      {
+        "translation": "right opposite (adv or prep)",
+        "greek": "καταντικρύ"
+      },
+      {
+        "translation": "eight hundred",
+        "greek": "ὀκτακόσιοι"
+      },
+      {
+        "translation": "from all places, from all quarters, on every side",
+        "greek": "πανταχόθεν"
+      },
+      {
+        "translation": "fifty",
+        "greek": "πεντήκοντα"
+      },
+      {
+        "translation": "seventy",
+        "greek": "ἑβδομήκοντα"
+      },
+      {
+        "translation": "five hundred",
+        "greek": "πεντακόσιοι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 58,
+    "content": [
+      {
+        "translation": "four hundred",
+        "greek": "τετρακόσιοι"
+      },
+      {
+        "translation": "forty",
+        "greek": "τεσσαράκοντα"
+      },
+      {
+        "translation": "a troop-transport ship, (fem. adj.) soldier-",
+        "greek": "στρατιῶτις (ναῦς)"
+      },
+      {
+        "translation": "a Carian",
+        "greek": "Κάρ"
+      },
+      {
+        "translation": "Halys",
+        "greek": "Ἅλυς"
+      },
+      {
+        "translation": "Eïon, town in Thrace, at the mouth of the Strymon",
+        "greek": "Ἠϊών"
+      },
+      {
+        "translation": "Tros",
+        "greek": "Τρώς"
+      },
+      {
+        "translation": "Chios (island)",
+        "greek": "Χίος"
+      },
+      {
+        "translation": "Chian (inhabitant of Chios)",
+        "greek": "Χῖος"
+      },
+      {
+        "translation": "Athena",
+        "greek": "Ἀθήνη"
+      },
+      {
+        "translation": "Achaia in Peloponnese; later, the Roman province of Greece",
+        "greek": "Ἀχαΐα"
+      },
+      {
+        "translation": "Delos",
+        "greek": "Δῆλος"
+      },
+      {
+        "translation": "a Helot",
+        "greek": "Εἵλως"
+      },
+      {
+        "translation": "Helen",
+        "greek": "Ἑλένη"
+      },
+      {
+        "translation": "Hellas",
+        "greek": "Ἑλλάς"
+      },
+      {
+        "translation": "Hellen; Greek",
+        "greek": "Ἕλλην"
+      },
+      {
+        "translation": "Thrace",
+        "greek": "Θρᾴκη"
+      },
+      {
+        "translation": "Ithome",
+        "greek": "Ἰθώμη"
+      },
+      {
+        "translation": "Ionians",
+        "greek": "Ἴωνες"
+      },
+      {
+        "translation": "Cimon",
+        "greek": "Κίμων"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 59,
+    "content": [
+      {
+        "translation": "Cyrus",
+        "greek": "Κῦρος"
+      },
+      {
+        "translation": "Libya, the north part of Africa",
+        "greek": "Λιβύη"
+      },
+      {
+        "translation": "a Libyan",
+        "greek": "Λίβυς"
+      },
+      {
+        "translation": "Marea",
+        "greek": "Μαρέη"
+      },
+      {
+        "translation": "a Mede, Median",
+        "greek": "Μῆδος"
+      },
+      {
+        "translation": "Minos",
+        "greek": "Μίνως"
+      },
+      {
+        "translation": "Pegae",
+        "greek": "Πηγαί"
+      },
+      {
+        "translation": "Pydna",
+        "greek": "Πύδνα"
+      },
+      {
+        "translation": "Samos",
+        "greek": "Σάμος"
+      },
+      {
+        "translation": "Troas",
+        "greek": "Τρῳάς"
+      },
+      {
+        "translation": "Pharos (island near Alexandria; island in Adriatic (sts. m.))",
+        "greek": "Φάρος"
+      },
+      {
+        "translation": "the city of Athens",
+        "greek": "Ἀθῆναι"
+      },
+      {
+        "translation": "Aegina",
+        "greek": "Αἴγινα"
+      },
+      {
+        "translation": "Halieis",
+        "greek": "Ἁλιεῖς"
+      },
+      {
+        "translation": "Attica",
+        "greek": "Ἀττική"
+      },
+      {
+        "translation": "Delphi; Delphians",
+        "greek": "Δελφοί"
+      },
+      {
+        "translation": "Euboea",
+        "greek": "Εὔβοια"
+      },
+      {
+        "translation": "from Elis",
+        "greek": "Ἠλεῖος"
+      },
+      {
+        "translation": "of or from Thasos, Thasian",
+        "greek": "Θάσιος"
+      },
+      {
+        "translation": "Inaros",
+        "greek": "Ἰνάρως"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 60,
+    "content": [
+      {
+        "translation": "of/called after Io",
+        "greek": "Ἰόνιος"
+      },
+      {
+        "translation": "Carian, (fem. noun) Caria",
+        "greek": "Κάριος"
+      },
+      {
+        "translation": "Cyrene",
+        "greek": "Κυρήνη"
+      },
+      {
+        "translation": "Lesbos",
+        "greek": "Λέσβος"
+      },
+      {
+        "translation": "Marea",
+        "greek": "Μάρεια"
+      },
+      {
+        "translation": "town of Megara",
+        "greek": "Μέγαρα"
+      },
+      {
+        "translation": "Mycene, Mycenae",
+        "greek": "Μυκήνη"
+      },
+      {
+        "translation": "Nisaea",
+        "greek": "Νίσαια"
+      },
+      {
+        "translation": "Xerxes",
+        "greek": "Ξέρξης"
+      },
+      {
+        "translation": "Persian",
+        "greek": "Περσίς"
+      },
+      {
+        "translation": "of Samos",
+        "greek": "Σάμιος"
+      },
+      {
+        "translation": "Sparta",
+        "greek": "Σπάρτη"
+      },
+      {
+        "translation": "Sybota, \"swine-pastures\", islets near Corcyra",
+        "greek": "Σύβοτα"
+      },
+      {
+        "translation": "a Phoenician",
+        "greek": "Φοῖνιξ"
+      },
+      {
+        "translation": "a Phocian",
+        "greek": "Φωκεύς"
+      },
+      {
+        "translation": "Attic, Athenian",
+        "greek": "Ἀττικός"
+      },
+      {
+        "translation": "Boeotia",
+        "greek": "Βοιωτία"
+      },
+      {
+        "translation": "a Boeotian",
+        "greek": "Βοιωτός"
+      },
+      {
+        "translation": "Darius",
+        "greek": "Δαρεῖος"
+      },
+      {
+        "translation": "a Dorian, descendant of Dorus",
+        "greek": "Δωριεύς"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 61,
+    "content": [
+      {
+        "translation": "Callias",
+        "greek": "Καλλίας"
+      },
+      {
+        "translation": "Corcyra",
+        "greek": "Κέρκυρα"
+      },
+      {
+        "translation": "Colonae, town in Troas",
+        "greek": "Κολωναί"
+      },
+      {
+        "translation": "Croesus",
+        "greek": "Κροῖσος"
+      },
+      {
+        "translation": "Lesbian, of Lesbos",
+        "greek": "Λέσβιος"
+      },
+      {
+        "translation": "Marathon",
+        "greek": "Μαραθών"
+      },
+      {
+        "translation": "Median, of the Medes",
+        "greek": "Μηδικός"
+      },
+      {
+        "translation": "Miletus",
+        "greek": "Μίλητος"
+      },
+      {
+        "translation": "Olympia",
+        "greek": "Ὀλυμπία"
+      },
+      {
+        "translation": "Olynthus",
+        "greek": "Ὄλυνθος"
+      },
+      {
+        "translation": "Orestes; pl., the Orestae, an Epirot people",
+        "greek": "Ὀρέστης"
+      },
+      {
+        "translation": "Pallene",
+        "greek": "Παλλήνη"
+      },
+      {
+        "translation": "Sicily",
+        "greek": "Σικελία"
+      },
+      {
+        "translation": "the Strymon",
+        "greek": "Στρυμών"
+      },
+      {
+        "translation": "Tanagra",
+        "greek": "Τάναγρα"
+      },
+      {
+        "translation": "Troezen",
+        "greek": "Τροιζήν"
+      },
+      {
+        "translation": "Trojan",
+        "greek": "Τρωϊκός"
+      },
+      {
+        "translation": "Phaleron",
+        "greek": "Φάληρον"
+      },
+      {
+        "translation": "Athenian, of Athens",
+        "greek": "Ἀθηναῖος"
+      },
+      {
+        "translation": "Athenaeus",
+        "greek": "Ἀθήναιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 62,
+    "content": [
+      {
+        "translation": "Egypt (f.); king Aegyptus (m.)",
+        "greek": "Αἴγυπτος"
+      },
+      {
+        "translation": "Aristeus",
+        "greek": "Ἀριστεύς"
+      },
+      {
+        "translation": "of the town of Hermione",
+        "greek": "Ἑρμιονίς"
+      },
+      {
+        "translation": "Thessaly",
+        "greek": "Θεσσαλία"
+      },
+      {
+        "translation": "Thessalian",
+        "greek": "Θεσσαλός"
+      },
+      {
+        "translation": "Corinth, (masc) Korinthos son of Zeus, founder of Corinth",
+        "greek": "Κόρινθος"
+      },
+      {
+        "translation": "Cyclades",
+        "greek": "Κυκλάδες"
+      },
+      {
+        "translation": "Leonidas",
+        "greek": "Λεωνίδης"
+      },
+      {
+        "translation": "a citizen of Megara",
+        "greek": "Μεγαρεύς"
+      },
+      {
+        "translation": "Pamphylia",
+        "greek": "Παμφυλία"
+      },
+      {
+        "translation": "Pericles",
+        "greek": "Περικλῆς"
+      },
+      {
+        "translation": "Persian",
+        "greek": "Περσικός"
+      },
+      {
+        "translation": "Plataeae",
+        "greek": "Πλαταιαί"
+      },
+      {
+        "translation": "Poseidon",
+        "greek": "Ποσειδῶν"
+      },
+      {
+        "translation": "Taenarus",
+        "greek": "Ταίναρος"
+      },
+      {
+        "translation": "Pharnaces king of Pontus",
+        "greek": "Φαρνάκης"
+      },
+      {
+        "translation": "Pharsalos",
+        "greek": "Φάρσαλος"
+      },
+      {
+        "translation": "Agamemnon, lit. the very steadfast",
+        "greek": "Ἀγαμέμνων"
+      },
+      {
+        "translation": "Egyptian",
+        "greek": "Αἰγύπτιος"
+      },
+      {
+        "translation": "Aesimedes",
+        "greek": "Αἰσιμίδης"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 63,
+    "content": [
+      {
+        "translation": "Artabazus",
+        "greek": "Ἀρτάβαζος"
+      },
+      {
+        "translation": "of Bottiaea, Bottiaean",
+        "greek": "Βοττιαῖος"
+      },
+      {
+        "translation": "Byzantium (no LSJ entry; see Byzantium)",
+        "greek": "Βυζάντιον"
+      },
+      {
+        "translation": "Hellenic, Greek",
+        "greek": "Ἑλληνικός"
+      },
+      {
+        "translation": "Epidamnus, later Dyrrhachium, Durazzo, Durrës",
+        "greek": "Ἐπίδαμνος"
+      },
+      {
+        "translation": "Eurybatus, legendary traitor",
+        "greek": "Εὐρύβατος"
+      },
+      {
+        "translation": "Eurymedon",
+        "greek": "Εὐρυμέδων"
+      },
+      {
+        "translation": "of Illyria",
+        "greek": "Ἰλλυρικός"
+      },
+      {
+        "translation": "Corinthian",
+        "greek": "Κορίνθιος"
+      },
+      {
+        "translation": "of Leucas",
+        "greek": "Λευκάδιος"
+      },
+      {
+        "translation": "Macedon",
+        "greek": "Μακεδονία"
+      },
+      {
+        "translation": "Megabates",
+        "greek": "Μεγαβάτης"
+      },
+      {
+        "translation": "Miltiades",
+        "greek": "Μιλτιάδης"
+      },
+      {
+        "translation": "Xanthippus",
+        "greek": "Ξάνθιππος"
+      },
+      {
+        "translation": "Orchomenus",
+        "greek": "Ὀρχομενός"
+      },
+      {
+        "translation": "Pausanias",
+        "greek": "Παυσανίας"
+      },
+      {
+        "translation": "Peiraeus",
+        "greek": "Πειραιεύς"
+      },
+      {
+        "translation": "Potidea",
+        "greek": "Ποτείδαια"
+      },
+      {
+        "translation": "of Sicyon",
+        "greek": "Σικυώνιος"
+      },
+      {
+        "translation": "Tyndarus, Tyndareus, husband of Leda",
+        "greek": "Τυνδάρεος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Thucydides - Peloponnesian",
+    "set": 64,
+    "content": [
+      {
+        "translation": "Chaeronea",
+        "greek": "Χαιρώνεια"
+      },
+      {
+        "translation": "Chalcidian, of Chalcis",
+        "greek": "Χαλκιδεύς"
+      },
+      {
+        "translation": "Alexander",
+        "greek": "Ἀλέξανδρος"
+      },
+      {
+        "translation": "Anactorium, city on Ambraciot gulf",
+        "greek": "Ἀνακτόριον"
+      },
+      {
+        "translation": "Anactorian, of Anactorium",
+        "greek": "Ἀνακτόριος"
+      },
+      {
+        "translation": "Artaxerxes",
+        "greek": "Ἀρταξέρξης"
+      },
+      {
+        "translation": "of Dascylion",
+        "greek": "Δασκυλῖτις"
+      },
+      {
+        "translation": "Epidamnian, citizen of Epidamnus",
+        "greek": "Ἐπιδάμνιος"
+      },
+      {
+        "translation": "of Epidaurus",
+        "greek": "Ἐπιδαύριος"
+      },
+      {
+        "translation": "Thucydides",
+        "greek": "Θουκυδίδης"
+      },
+      {
+        "translation": "of Corcyra, Corfu",
+        "greek": "Κερκυραῖος"
+      },
+      {
+        "translation": "Lacedaemon",
+        "greek": "Λακεδαίμων"
+      },
+      {
+        "translation": "a Spartan",
+        "greek": "Σπαρτιάτης"
+      },
+      {
+        "translation": "the (Thracian) Chersonese; the Crimea",
+        "greek": "Χερσόνησος"
+      },
+      {
+        "translation": "Psammetichus",
+        "greek": "Ψαμμήτιχος"
+      },
+      {
+        "translation": "inhabitant of Ambracia",
+        "greek": "Ἀμβρακιώτης"
+      },
+      {
+        "translation": "Cleombrotus",
+        "greek": "Κλεόμβροτος"
+      },
+      {
+        "translation": "inhabitant of Potidaea",
+        "greek": "Ποτειδεάτης"
+      },
+      {
+        "translation": "Themistocles",
+        "greek": "Θεμιστοκλέης"
+      },
+      {
+        "translation": "the Peloponnesus",
+        "greek": "Πελοπόννησος"
+      },
+      {
+        "translation": "Spartan",
+        "greek": "Λακεδαιμόνιος"
+      },
+      {
+        "translation": "Peloponnesian (of people)",
+        "greek": "Πελοποννήσιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  }
+]

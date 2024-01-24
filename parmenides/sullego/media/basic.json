@@ -1,0 +1,129 @@
+{
+  "quizMetadata": {
+    "language": "English"
+  },
+  "quizType": "media",
+  "set": 1,
+  "content": [
+    {
+      "greek": "ὁ λόγος",
+      "translation": "word",
+      "imageURL": "logos.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ χρόνος",
+      "translation": "time",
+      "imageURL": "time.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ ποταμός",
+      "translation": "river",
+      "imageURL": "river.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ πόλεμος",
+      "translation": "war",
+      "imageURL": "war.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή ναυτικός",
+      "translation": "seafaring, naval",
+      "imageURL": "naval.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή στρατιά",
+      "translation": "army",
+      "imageURL": "army.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "τό δένδρον",
+      "translation": "tree",
+      "imageURL": "tree.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή ἀγαθός",
+      "translation": "good",
+      "imageURL": "good.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή κακός",
+      "translation": "bad",
+      "imageURL": "bad.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ ἵππος",
+      "translation": "horse",
+      "imageURL": "horse.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ θεός",
+      "translation": "god",
+      "imageURL": "god.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή θεά",
+      "translation": "goddess",
+      "imageURL": "goddess.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ οἶνος",
+      "translation": "wine",
+      "imageURL": "wine.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή θάλασσα",
+      "translation": "sea",
+      "imageURL": "sea.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή γέφυρα",
+      "translation": "bridge",
+      "imageURL": "bridge.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή σελήνη",
+      "translation": "moon",
+      "imageURL": "moon.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ ἥλιος",
+      "translation": "sun",
+      "imageURL": "sun.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή ἀσπίς",
+      "translation": "shield",
+      "imageURL": "shield.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ή γυνή, γυναικός",
+      "translation": "woman",
+      "imageURL": "woman.webp",
+      "audioFile": ""
+    },
+    {
+      "greek": "ὁ ἀνήρ, ἀνδρός",
+      "translation": "man",
+      "imageURL": "man.webp",
+      "audioFile": ""
+    }
+  ]
+}

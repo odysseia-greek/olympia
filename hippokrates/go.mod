@@ -1,11 +1,11 @@
 module github.com/odysseia-greek/olympia/hippokrates
 
-go 1.20
+go 1.21.4
 
 require (
 	github.com/cucumber/godog v0.13.0
 	github.com/google/uuid v1.4.0
-	github.com/odysseia-greek/agora/plato v0.1.1
+	github.com/odysseia-greek/agora/plato v0.1.9
 	github.com/odysseia-greek/olympia/homeros v0.0.1
 	golang.org/x/exp v0.0.0-20231127185646-65229373498e
 	golang.org/x/text v0.14.0

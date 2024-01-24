@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/graphql-go/graphql"
 	plato "github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"log"
 	"os"
@@ -141,70 +142,92 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		},
 
 		// Sokrates
-		"methods": &graphql.Field{
-			Type:        graphql.NewList(methods),
-			Description: "Ask Sokrates for the methods",
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				ctx := p.Context
-
-				// Get the traceID
-				traceID, ok := ctx.Value(plato.HeaderKey).(string)
-				if !ok {
-					return nil, errors.New("failed to get request from context")
-				}
-
-				return handler.Methods(traceID)
-			},
-		},
-
 		"quiz": &graphql.Field{
-			Type:        quiz,
-			Description: "Create a new question from Sokrates",
+			Type: graphql.NewUnion(graphql.UnionConfig{
+				Name:  "QuizResponseUnion",
+				Types: []*graphql.Object{quizResponseType, dialogueQuizType},
+				ResolveType: func(p graphql.ResolveTypeParams) *graphql.Object {
+					if _, ok := p.Value.(*models.QuizResponse); ok {
+						return quizResponseType
+					}
+					if _, ok := p.Value.(*models.DialogueQuiz); ok {
+						return dialogueQuizType
+					}
+					return nil
+				},
+			}),
 			Args: graphql.FieldConfigArgument{
-				"method": &graphql.ArgumentConfig{
+				"theme": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
-				"category": &graphql.ArgumentConfig{
+				"set": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
-				"chapter": &graphql.ArgumentConfig{
+				"quizType": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				ctx := p.Context
-
-				// Get the traceID
 				traceID, ok := ctx.Value(plato.HeaderKey).(string)
 				if !ok {
 					return nil, errors.New("failed to get request from context")
 				}
 
-				method, isOK := p.Args["method"].(string)
+				theme, _ := p.Args["theme"].(string)
+				set, isOK := p.Args["set"].(string)
 				if !isOK {
-					return nil, fmt.Errorf("expected argument method")
+					return nil, fmt.Errorf("expected argument set")
 				}
-				category, isOK := p.Args["category"].(string)
+				quizType, isOK := p.Args["quizType"].(string)
 				if !isOK {
-					return nil, fmt.Errorf("expected argument category")
+					return nil, fmt.Errorf("expected argument quizType")
 				}
-				chapter, isOK := p.Args["chapter"].(string)
-				if !isOK {
-					return nil, fmt.Errorf("expected argument chapter")
+
+				if quizType == models.DIALOGUE {
+					return handler.CreateDialogueQuiz(theme, set, quizType, traceID)
+				} else {
+					return handler.CreateQuiz(theme, set, quizType, traceID)
 				}
-				return handler.CreateQuestion(method, category, chapter, traceID)
+
 			},
 		},
 
 		"answer": &graphql.Field{
-			Type:        answer,
-			Description: "Check the answer given",
+			Type: graphql.NewUnion(graphql.UnionConfig{
+				Name:  "AnswerUnion",
+				Types: []*graphql.Object{comprehensiveAnswer, dialogueAnswerType},
+				ResolveType: func(p graphql.ResolveTypeParams) *graphql.Object {
+					if _, ok := p.Value.(*models.ComprehensiveResponse); ok {
+						return comprehensiveAnswer
+					}
+					if _, ok := p.Value.(*models.DialogueAnswer); ok {
+						return dialogueAnswerType
+					}
+					return nil
+				},
+			}),
 			Args: graphql.FieldConfigArgument{
+				"theme": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"set": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"quizType": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
 				"quizWord": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
-				"answerProvided": &graphql.ArgumentConfig{
+				"answer": &graphql.ArgumentConfig{
 					Type: graphql.String,
+				},
+				"comprehensive": &graphql.ArgumentConfig{
+					Type: graphql.Boolean,
+				},
+				"dialogue": &graphql.ArgumentConfig{
+					Type: graphql.NewList(dialogueInputType),
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
@@ -216,15 +239,84 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					return nil, errors.New("failed to get request from context")
 				}
 
-				quizWord, isOK := p.Args["quizWord"].(string)
+				set, isOK := p.Args["set"].(string)
 				if !isOK {
-					return nil, fmt.Errorf("expected argument method")
+					return nil, fmt.Errorf("expected argument set")
 				}
-				answerProvided, isOK := p.Args["answerProvided"].(string)
+				quizType, isOK := p.Args["quizType"].(string)
 				if !isOK {
-					return nil, fmt.Errorf("expected argument chapter")
+					return nil, fmt.Errorf("expected argument quizType")
 				}
-				return handler.CheckQuestion(quizWord, answerProvided, traceID)
+
+				theme, _ := p.Args["theme"].(string)
+				quizWord, _ := p.Args["quizWord"].(string)
+				answer, _ := p.Args["answer"].(string)
+				comprehensive, _ := p.Args["comprehensive"].(bool)
+				dialogueList, _ := p.Args["dialogue"].([]interface{})
+
+				var dialogue []models.DialogueContent
+				for _, item := range dialogueList {
+					itemMap, ok := item.(map[string]interface{})
+					if !ok {
+						return nil, fmt.Errorf("each dialogue item must be a map")
+					}
+
+					var dialogueItem models.DialogueContent
+					if translation, ok := itemMap["translation"].(string); ok {
+						dialogueItem.Translation = translation
+					}
+					if greek, ok := itemMap["greek"].(string); ok {
+						dialogueItem.Greek = greek
+					}
+					if place, ok := itemMap["place"].(int); ok {
+						dialogueItem.Place = place
+					}
+					if speaker, ok := itemMap["speaker"].(string); ok {
+						dialogueItem.Speaker = speaker
+					}
+
+					dialogue = append(dialogue, dialogueItem)
+				}
+
+				answerRequest := models.AnswerRequest{
+					Theme:         theme,
+					Set:           set,
+					QuizType:      quizType,
+					Comprehensive: comprehensive,
+					Answer:        answer,
+					Dialogue:      dialogue,
+					QuizWord:      quizWord,
+				}
+
+				if quizType == models.DIALOGUE {
+					return handler.CheckDialogue(answerRequest, traceID)
+				} else {
+					return handler.Check(answerRequest, traceID)
+				}
+			},
+		},
+
+		"options": &graphql.Field{
+			Type:        aggregateResultType,
+			Description: "returns the options for a specific quiztype",
+			Args: graphql.FieldConfigArgument{
+				"quizType": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				ctx := p.Context
+				// Get the traceID
+				traceID, ok := ctx.Value(plato.HeaderKey).(string)
+				if !ok {
+					return nil, errors.New("failed to get request from context")
+				}
+
+				quizType, isOK := p.Args["quizType"].(string)
+				if !isOK {
+					return nil, fmt.Errorf("expected argument quizType")
+				}
+				return handler.Options(quizType, traceID)
 			},
 		},
 

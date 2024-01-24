@@ -73,8 +73,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ElasticSearchError'
       x-codegen-request-body-name: Application
-  /createQuestion:
-    get:
+  /create:
+    post:
       tags:
       - questions
       description: Creates a new question from a method - category - chapter combination
@@ -145,12 +145,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Health'
-  /methods:
+  /options:
     get:
       tags:
-      - methods
-      description: Finds all methods available
-      operationId: methods
+      - options
+      description: Finds all themes available
+      operationId: options
       responses:
         200:
           description: Methods
@@ -170,104 +170,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ElasticSearchError'
-  /methods/{method}/categories:
-    get:
-      tags:
-      - methods
-      description: Finds all categories for a method
-      operationId: categories
-      parameters:
-      - name: method
-        in: query
-        description: method to be used
-        required: true
-        schema:
-          type: string
-          format: method
-      responses:
-        200:
-          description: Categories
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Categories'
-        400:
-          description: ValidationError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationError'
-        405:
-          description: MethodError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MethodError'
-        502:
-          description: ElasticSearchError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ElasticSearchError'
-  /methods/{method}/categories/{category}/chapters:
-    get:
-      tags:
-      - methods
-      description: Finds the highest chapter for a combination of method and categories
-      operationId: highestChapter
-      parameters:
-      - name: method
-        in: query
-        description: method to be used
-        required: true
-        schema:
-          type: string
-          format: method
-      - name: category
-        in: query
-        description: category to be used
-        required: true
-        schema:
-          type: string
-          format: category
-      responses:
-        200:
-          description: LastChapterResponse
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LastChapterResponse'
-        400:
-          description: ValidationError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationError'
-        405:
-          description: MethodError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MethodError'
-        502:
-          description: ElasticSearchError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ElasticSearchError'
-  /ping:
-    get:
-      tags:
-      - status
-      description: Checks if api is reachable
-      operationId: ping
-      responses:
-        200:
-          description: ResultModel
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResultModel'
 components:
   schemas:
     Author:

@@ -1,0 +1,15 @@
+{
+  "rhemai": [
+    {
+      "author": "Pausanias",
+      "greek": "τῶν δὲ ἡμέρων οἱ Ἀρκάδες δένδρων ἁπάντων πλὴν ῥοιᾶς ἐσκομίζουσιν ἐς τὸ ἱερόν. ἐν δεξιᾷ δὲ ἐξιόντι ἐκ τοῦ ναοῦ κάτοπτρον ἡρμοσμένον ἐστὶν ἐν τῷ τοίχῳ· τοῦτο ἤν τις προσβλέπῃ τὸ κάτοπτρον, ἑαυτὸν μὲν ἤτοι παντάπασιν ἀμυδρῶς ἢ οὐδὲ ὄψεται τὴν ἀρχήν, τὰ δὲ ἀγάλματα τῶν θεῶν καὶ αὐτὰ καὶ τὸν θρόνον ἔστιν ἐναργῶς θεάσασθαι.",
+      "translations" : [
+        "The Arcadians bring into the sanctuary the fruit of all cultivated trees except the pomegranate. On the right as you go out of the temple there is a mirror fitted into the wall. If anyone looks into this mirror, he will see himself very dimly indeed or not at all, but the actual images of the gods and the throne can be seen quite clearly."
+      ],
+      "book": 8,
+      "chapter":  37,
+      "section": 7,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0525.tlg001.perseus-grc2:8.37.7"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import (
 	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
 	"log"
 	"os"
@@ -124,9 +125,21 @@ func CreateNewConfig(env string) (*HerodotosHandler, error) {
 	}
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
+
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
+	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	if healthCheck {
+		healthy := aggregator.WaitForHealthyState()
+		if !healthy {
+			logging.Debug("aggregator service not ready - restarting seems the only option")
+			os.Exit(1)
+		}
+	}
+
 	return &HerodotosHandler{
-		Index:   index,
-		Elastic: elastic,
-		Tracer:  tracer,
+		Index:      index,
+		Elastic:    elastic,
+		Tracer:     tracer,
+		Aggregator: aggregator,
 	}, nil
 }

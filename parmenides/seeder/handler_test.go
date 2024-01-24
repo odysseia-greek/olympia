@@ -7,7 +7,6 @@ import (
 	pb "github.com/odysseia-greek/agora/eupalinos/proto"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/stretchr/testify/assert"
-	"sync"
 	"testing"
 )
 
@@ -23,29 +22,8 @@ func TestParmenidesHandlerAdd(t *testing.T) {
 	},
 	}
 
-	method := "testmethod"
-	category := "testcategory"
 	channel := "testchannel"
 	mockClient := &MockEupalinosClient{}
-
-	t.Run("CreatedWithQueue", func(t *testing.T) {
-		file := "createDocument"
-		status := 200
-		var wg sync.WaitGroup
-		wg.Add(1)
-		mockElasticClient, err := elastic.NewMockClient(file, status)
-		assert.Nil(t, err)
-
-		testHandler := ParmenidesHandler{
-			Elastic:   mockElasticClient,
-			Index:     index,
-			Created:   0,
-			Channel:   channel,
-			Eupalinos: mockClient,
-		}
-		err = testHandler.Add(body, &wg, method, category)
-		assert.Nil(t, err)
-	})
 
 	t.Run("EnqueueTask", func(t *testing.T) {
 		testHandler := ParmenidesHandler{
@@ -66,24 +44,6 @@ func TestParmenidesHandlerAdd(t *testing.T) {
 		assert.Nil(t, err)
 	})
 
-	t.Run("NotCreated", func(t *testing.T) {
-		file := "createIndex"
-		status := 502
-		var wg sync.WaitGroup
-		wg.Add(1)
-		mockElasticClient, err := elastic.NewMockClient(file, status)
-		assert.Nil(t, err)
-
-		testHandler := ParmenidesHandler{
-			Elastic:   mockElasticClient,
-			Index:     index,
-			Created:   0,
-			Eupalinos: mockClient,
-		}
-
-		err = testHandler.Add(body, &wg, method, category)
-		assert.NotNil(t, err)
-	})
 }
 
 func TestHandlerDeleteIndex(t *testing.T) {

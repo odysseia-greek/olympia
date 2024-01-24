@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/olympia/alexandros/dictionary"
 	"log"
@@ -42,7 +43,7 @@ func main() {
 
 	srv := dictionary.InitRoutes(alexandrosConfig)
 
-	log.Printf("%s : %s", "running on port", port)
+	logging.System(fmt.Sprint("%s : %s", "running on port", port))
 	err = http.ListenAndServe(port, srv)
 	if err != nil {
 		panic(err)

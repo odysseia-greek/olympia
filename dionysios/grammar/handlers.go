@@ -16,7 +16,6 @@ import (
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -175,11 +174,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		}
 
 		go d.Tracer.Trace(context.Background(), traceReceived)
+		logging.Trace(fmt.Sprintf("found traceId: %s", traceID))
 	}
 
 	w.Header().Set(plato.HeaderKey, requestId)
-
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
 
 	queryWord := req.URL.Query().Get("word")
 
@@ -220,6 +218,47 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 					},
 				},
 			}
+
+			for _, declension := range cache.Results {
+				ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+				defer cancel()
+				md := metadata.New(map[string]string{service.HeaderKey: requestId})
+				ctx = metadata.NewOutgoingContext(context.Background(), md)
+
+				speech := pba.PartOfSpeech_VERB
+
+				if strings.Contains(declension.Rule, "noun") {
+					speech = pba.PartOfSpeech_NOUN
+				}
+
+				if strings.Contains(declension.Rule, "part") {
+					speech = pba.PartOfSpeech_PARTICIPLE
+				}
+
+				request := pba.AggregatorCreationRequest{
+					Word:         declension.Word,
+					Rule:         declension.Rule,
+					RootWord:     declension.RootWord,
+					Translation:  declension.Translation,
+					PartOfSpeech: speech,
+				}
+
+				test, _ := d.Aggregator.RetrieveEntry(ctx, &pba.AggregatorRequest{
+					RootWord: declension.RootWord,
+				})
+
+				l, _ := json.Marshal(test)
+				logging.Debug(string(l))
+
+				entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
+				if err != nil {
+					logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
+					continue
+				}
+
+				logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
+			}
+
 			if traceCall {
 				parsedResult, _ := json.Marshal(e)
 				span := &pb.SpanRequest{

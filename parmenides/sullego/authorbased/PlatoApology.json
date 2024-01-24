@@ -1,0 +1,5326 @@
+[
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 1,
+    "content": [
+      {
+        "translation": "earth",
+        "greek": "γῆ"
+      },
+      {
+        "translation": "[interactional particle: S\u0026H on same page]",
+        "greek": "δή"
+      },
+      {
+        "translation": "(no,) by ..",
+        "greek": "μά"
+      },
+      {
+        "translation": "not",
+        "greek": "μή"
+      },
+      {
+        "translation": "(yes) by..",
+        "greek": "νή"
+      },
+      {
+        "translation": "who, that, which: relative pronoun",
+        "greek": "ὅς"
+      },
+      {
+        "translation": "here, there",
+        "greek": "τῇ"
+      },
+      {
+        "translation": "as, how",
+        "greek": "ὡς"
+      },
+      {
+        "translation": "at once, at the same time",
+        "greek": "ἅμα"
+      },
+      {
+        "translation": "particle: 'so'",
+        "greek": "ἄρα"
+      },
+      {
+        "translation": "particle introducing a question",
+        "greek": "ἆρα"
+      },
+      {
+        "translation": "through c. gen.; because of c. acc.",
+        "greek": "διά"
+      },
+      {
+        "translation": "into, to c. acc.",
+        "greek": "εἰς"
+      },
+      {
+        "translation": "one",
+        "greek": "εἷς"
+      },
+      {
+        "translation": "(w. aor or as prep.) until; (w. pres) as long as",
+        "greek": "ἕως"
+      },
+      {
+        "translation": "already",
+        "greek": "ἤδη"
+      },
+      {
+        "translation": "provisions for a journey",
+        "greek": "ἤια"
+      },
+      {
+        "translation": "provisions for a journey",
+        "greek": "ἤϊα"
+      },
+      {
+        "translation": "the morning red, daybreak, dawn",
+        "greek": "ἠώς"
+      },
+      {
+        "translation": "sheep",
+        "greek": "ὄϊς"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 2,
+    "content": [
+      {
+        "translation": "by which way",
+        "greek": "ὅπη"
+      },
+      {
+        "translation": "where",
+        "greek": "ὅπῃ"
+      },
+      {
+        "translation": "auris, the ear",
+        "greek": "οὖς"
+      },
+      {
+        "translation": "somehow, in some way",
+        "greek": "πως"
+      },
+      {
+        "translation": "how? in what way",
+        "greek": "πῶς"
+      },
+      {
+        "translation": "your",
+        "greek": "σός"
+      },
+      {
+        "translation": "why? wherefore?",
+        "greek": "τίη"
+      },
+      {
+        "translation": "any one, any thing, some one, some thing;",
+        "greek": "τις"
+      },
+      {
+        "translation": "who? which?",
+        "greek": "τίς"
+      },
+      {
+        "translation": "a web",
+        "greek": "ὑφή"
+      },
+      {
+        "translation": "it is fated, necessary",
+        "greek": "χρή"
+      },
+      {
+        "translation": "[sacrificial victim]",
+        "greek": "ὥρα"
+      },
+      {
+        "translation": "a gathering; a contest, a struggle, a trial",
+        "greek": "ἀγών"
+      },
+      {
+        "translation": "a javelin, dart",
+        "greek": "ἄκων"
+      },
+      {
+        "translation": "in another place, elsewhere",
+        "greek": "ἄλλῃ"
+      },
+      {
+        "translation": "a man",
+        "greek": "ἀνήρ"
+      },
+      {
+        "translation": "the worth",
+        "greek": "ἀξία"
+      },
+      {
+        "translation": "a beginning, rule, office, empire",
+        "greek": "ἀρχή"
+      },
+      {
+        "translation": "a bow",
+        "greek": "βιός"
+      },
+      {
+        "translation": "life",
+        "greek": "βίος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 3,
+    "content": [
+      {
+        "translation": "a woman",
+        "greek": "γυνή"
+      },
+      {
+        "translation": "(custom, usage) justice, lawsuit, penalty",
+        "greek": "δίκη"
+      },
+      {
+        "translation": "without plan",
+        "greek": "εἰκῇ"
+      },
+      {
+        "translation": "willing, of free will, readily",
+        "greek": "ἑκών"
+      },
+      {
+        "translation": "mine",
+        "greek": "ἐμός"
+      },
+      {
+        "translation": "belonging to the former of two periods, last year's",
+        "greek": "ἕνος"
+      },
+      {
+        "translation": "a word",
+        "greek": "ἔπος"
+      },
+      {
+        "translation": "a year",
+        "greek": "ἔτος"
+      },
+      {
+        "translation": "a living being, animal",
+        "greek": "ζῷον"
+      },
+      {
+        "translation": "sweet",
+        "greek": "ἡδύς"
+      },
+      {
+        "translation": "hero",
+        "greek": "ἥρως"
+      },
+      {
+        "translation": "god",
+        "greek": "θεός"
+      },
+      {
+        "translation": "equal to, the same as; adv. perhaps",
+        "greek": "ἴσος"
+      },
+      {
+        "translation": "equally, in like manner",
+        "greek": "ἴσως"
+      },
+      {
+        "translation": "a dog",
+        "greek": "κύων"
+      },
+      {
+        "translation": "battle, fight, combat",
+        "greek": "μάχη"
+      },
+      {
+        "translation": "young, youthful",
+        "greek": "νέος"
+      },
+      {
+        "translation": "mind, perception",
+        "greek": "νόος"
+      },
+      {
+        "translation": "(such a kind) as; for οἷός τε see οἷος III.",
+        "greek": "οἷος"
+      },
+      {
+        "translation": "whole, entire, complete in all its parts",
+        "greek": "ὅλος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 4,
+    "content": [
+      {
+        "translation": "equally, likewise, alike",
+        "greek": "ὁμῶς"
+      },
+      {
+        "translation": "all the same, nevertheless",
+        "greek": "ὅμως"
+      },
+      {
+        "translation": "an ass",
+        "greek": "ὄνος"
+      },
+      {
+        "translation": "wood sorrel, Oxalis Acetosella",
+        "greek": "ὀξύς"
+      },
+      {
+        "translation": "how, that, in order that, as",
+        "greek": "ὅπως"
+      },
+      {
+        "translation": "natural impulse",
+        "greek": "ὀργή"
+      },
+      {
+        "translation": "as much/many as",
+        "greek": "ὅσος"
+      },
+      {
+        "translation": "a child",
+        "greek": "παῖς"
+      },
+      {
+        "translation": "from the side of, c. gen., beside, alongside of, c. dat., to the side of, motion alongside of, c. acc.",
+        "greek": "παρά"
+      },
+      {
+        "translation": "(w. gen.) from; (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "greek": "πρός"
+      },
+      {
+        "translation": "(spoken) word, line, verb",
+        "greek": "ῥῆμα"
+      },
+      {
+        "translation": "the body",
+        "greek": "σῶμα"
+      },
+      {
+        "translation": "that which is paid in token of worth",
+        "greek": "τιμή"
+      },
+      {
+        "translation": "a son",
+        "greek": "υἱός"
+      },
+      {
+        "translation": "your",
+        "greek": "ὑμός"
+      },
+      {
+        "translation": "a voice from heaven, a prophetic voice",
+        "greek": "φήμη"
+      },
+      {
+        "translation": "flight",
+        "greek": "φυγή"
+      },
+      {
+        "translation": "a race, a tribe",
+        "greek": "φυλή"
+      },
+      {
+        "translation": "a sound, tone",
+        "greek": "φωνή"
+      },
+      {
+        "translation": "breath, soul",
+        "greek": "ψυχή"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 5,
+    "content": [
+      {
+        "translation": "an assembly of the people",
+        "greek": "ἀγορά"
+      },
+      {
+        "translation": "against one's will, unwilling",
+        "greek": "ἀέκων"
+      },
+      {
+        "translation": "unpleasant to the taste, distasteful",
+        "greek": "ἀηδής"
+      },
+      {
+        "translation": "without god, denying the gods",
+        "greek": "ἄθεος"
+      },
+      {
+        "translation": "a charge, accusation",
+        "greek": "αἰτία"
+      },
+      {
+        "translation": "other, another",
+        "greek": "ἄλλος"
+      },
+      {
+        "translation": "in another way",
+        "greek": "ἄλλως"
+      },
+      {
+        "translation": "worthy",
+        "greek": "ἄξιος"
+      },
+      {
+        "translation": "goodness, excellence",
+        "greek": "ἀρετή"
+      },
+      {
+        "translation": "a ruler, commander, chief, captain",
+        "greek": "ἄρχων"
+      },
+      {
+        "translation": "a townsman, citizen",
+        "greek": "ἀστός"
+      },
+      {
+        "translation": "back, back again",
+        "greek": "αὖθις"
+      },
+      {
+        "translation": "unemph.",
+        "greek": "αὐτός"
+      },
+      {
+        "translation": "heavy",
+        "greek": "βαρύς"
+      },
+      {
+        "translation": "race, stock, family",
+        "greek": "γένος"
+      },
+      {
+        "translation": "drawing, writing; indictment",
+        "greek": "γραφή"
+      },
+      {
+        "translation": "visible, conspicuous",
+        "greek": "δῆλος"
+      },
+      {
+        "translation": "a giving",
+        "greek": "δόσις"
+      },
+      {
+        "translation": "a deed, act",
+        "greek": "δρᾶμα"
+      },
+      {
+        "translation": "near, nigh, at hand",
+        "greek": "ἐγγύς"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 6,
+    "content": [
+      {
+        "translation": "to see",
+        "greek": "εἶδον"
+      },
+      {
+        "translation": "to speak, say",
+        "greek": "εἶπον"
+      },
+      {
+        "translation": "hope, expectation",
+        "greek": "ἐλπίς"
+      },
+      {
+        "translation": "work",
+        "greek": "ἔργον"
+      },
+      {
+        "translation": "straight, direct",
+        "greek": "εὐθύς"
+      },
+      {
+        "translation": "the sun",
+        "greek": "ἥλιος"
+      },
+      {
+        "translation": "day",
+        "greek": "ἡμέρα"
+      },
+      {
+        "translation": "less, weaker",
+        "greek": "ἥσσων"
+      },
+      {
+        "translation": "of/from the gods, divine",
+        "greek": "θεῖος"
+      },
+      {
+        "translation": "that which is laid down",
+        "greek": "θέμις"
+      },
+      {
+        "translation": "mud, dirt",
+        "greek": "θολός"
+      },
+      {
+        "translation": "a round building with a conical roof, a vaulted chamber",
+        "greek": "θόλος"
+      },
+      {
+        "translation": "one's own, pertaining to oneself",
+        "greek": "ἴδιος"
+      },
+      {
+        "translation": "a horse, mare",
+        "greek": "ἵππος"
+      },
+      {
+        "translation": "badness",
+        "greek": "κακία"
+      },
+      {
+        "translation": "bad",
+        "greek": "κακός"
+      },
+      {
+        "translation": "beautiful",
+        "greek": "καλός"
+      },
+      {
+        "translation": "a speaking, saying, speech",
+        "greek": "λέξις"
+      },
+      {
+        "translation": "a stone",
+        "greek": "λίθος"
+      },
+      {
+        "translation": "the word",
+        "greek": "λόγος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 7,
+    "content": [
+      {
+        "translation": "a part, share",
+        "greek": "μέρος"
+      },
+      {
+        "translation": "a mother",
+        "greek": "μήτηρ"
+      },
+      {
+        "translation": "(with toil and pain); barely, scarcely",
+        "greek": "μόγις"
+      },
+      {
+        "translation": "a part, portion; fate",
+        "greek": "μοῖρα"
+      },
+      {
+        "translation": "alone, left alone, forsaken solitary",
+        "greek": "μόνος"
+      },
+      {
+        "translation": "a bastard; in Athens, also child of citizen father and alien mother",
+        "greek": "νόθος"
+      },
+      {
+        "translation": "place of pasture; district (nome), esp. in Egypt",
+        "greek": "νομός"
+      },
+      {
+        "translation": "usage, custom, law, ordinance",
+        "greek": "νόμος"
+      },
+      {
+        "translation": "a young wife, bride",
+        "greek": "νύμφη"
+      },
+      {
+        "translation": "sluggish, slothful, torpid",
+        "greek": "νωθής"
+      },
+      {
+        "translation": "a guest, guest-friend, stranger; foreign",
+        "greek": "ξένος"
+      },
+      {
+        "translation": "a house, abode, dwelling",
+        "greek": "οἶκος"
+      },
+      {
+        "translation": "name",
+        "greek": "ὄνομα"
+      },
+      {
+        "translation": "a tool, implement, (pl.) arms, weapons",
+        "greek": "ὅπλον"
+      },
+      {
+        "translation": "straight",
+        "greek": "ὀρθός"
+      },
+      {
+        "translation": "hallowed, sanctioned by the law of God",
+        "greek": "ὅσιος"
+      },
+      {
+        "translation": "indef. relative or indirect interrogative",
+        "greek": "ὅστις"
+      },
+      {
+        "translation": "this; that",
+        "greek": "οὗτος"
+      },
+      {
+        "translation": "so, in this manner",
+        "greek": "οὕτως"
+      },
+      {
+        "translation": "anything that befalls one, an incident, accident",
+        "greek": "πάθος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 8,
+    "content": [
+      {
+        "translation": "a father",
+        "greek": "πατήρ"
+      },
+      {
+        "translation": "one who works for his daily bread, a day-labourer, a poor man",
+        "greek": "πένης"
+      },
+      {
+        "translation": "poverty, need",
+        "greek": "πενία"
+      },
+      {
+        "translation": "a wandering, roaming",
+        "greek": "πλάνη"
+      },
+      {
+        "translation": "of a certain nature, kind",
+        "greek": "ποιός"
+      },
+      {
+        "translation": "of what nature? of what sort?",
+        "greek": "ποῖος"
+      },
+      {
+        "translation": "a city",
+        "greek": "πόλις"
+      },
+      {
+        "translation": "much, many",
+        "greek": "πολύς"
+      },
+      {
+        "translation": "work",
+        "greek": "πόνος"
+      },
+      {
+        "translation": "of a certain quantity",
+        "greek": "ποσός"
+      },
+      {
+        "translation": "how much? how many?",
+        "greek": "πόσος"
+      },
+      {
+        "translation": "a public speaker, pleader",
+        "greek": "ῥήτωρ"
+      },
+      {
+        "translation": "clear, plain, distinct, manifest",
+        "greek": "σαφής"
+      },
+      {
+        "translation": "skill",
+        "greek": "σοφία"
+      },
+      {
+        "translation": "wise, skilled, clever",
+        "greek": "σοφός"
+      },
+      {
+        "translation": "personal and (ind.) reflexive pronoun",
+        "greek": "σφεῖς"
+      },
+      {
+        "translation": "spare time, leisure, rest, ease; σχολῇ scarcely",
+        "greek": "σχολή"
+      },
+      {
+        "translation": "an arranging",
+        "greek": "τάξις"
+      },
+      {
+        "translation": "in this way.",
+        "greek": "ταύτῃ"
+      },
+      {
+        "translation": "quick, swift, fleet",
+        "greek": "ταχύς"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 9,
+    "content": [
+      {
+        "translation": "art, skill, craft in work, cunning of hand",
+        "greek": "τέχνη"
+      },
+      {
+        "translation": "courage, to undertake",
+        "greek": "τόλμα"
+      },
+      {
+        "translation": "a place",
+        "greek": "τόπος"
+      },
+      {
+        "translation": "nourishment, food, victuals",
+        "greek": "τροφή"
+      },
+      {
+        "translation": "wantonness, wanton violence",
+        "greek": "ὕβρις"
+      },
+      {
+        "translation": "sleep, slumber",
+        "greek": "ὕπνος"
+      },
+      {
+        "translation": "friend; loved, beloved, dear",
+        "greek": "φίλος"
+      },
+      {
+        "translation": "the nature, natural qualities, powers, constitution, condition",
+        "greek": "φύσις"
+      },
+      {
+        "translation": "gratitude, favor, grace, charm",
+        "greek": "χάρις"
+      },
+      {
+        "translation": "thing, (pl.) goods, property, money",
+        "greek": "χρῆμα"
+      },
+      {
+        "translation": "separately, asunder, apart, by oneself",
+        "greek": "χωρίς"
+      },
+      {
+        "translation": "a small stone, a pebble; vote",
+        "greek": "ψῆφος"
+      },
+      {
+        "translation": "ready reckoner",
+        "greek": "ψήφων"
+      },
+      {
+        "translation": "good",
+        "greek": "ἀγαθός"
+      },
+      {
+        "translation": "not seen",
+        "greek": "ἄδηλος"
+      },
+      {
+        "translation": "injustice",
+        "greek": "ἀδικία"
+      },
+      {
+        "translation": "wrong-doing, unrighteous, unjust",
+        "greek": "ἄδικος"
+      },
+      {
+        "translation": "in crowds",
+        "greek": "ἀθρόος"
+      },
+      {
+        "translation": "to blame, blameworthy, culpable",
+        "greek": "αἴτιος"
+      },
+      {
+        "translation": "unconcealed, true",
+        "greek": "ἀληθής"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 10,
+    "content": [
+      {
+        "translation": "without",
+        "greek": "ἄλογος"
+      },
+      {
+        "translation": "unlearned, ignorant, stupid, boorish",
+        "greek": "ἀμαθής"
+      },
+      {
+        "translation": "ignorance",
+        "greek": "ἀμαθία"
+      },
+      {
+        "translation": "force, constraint, necessity",
+        "greek": "ἀνάγκη"
+      },
+      {
+        "translation": "difficulty of passing",
+        "greek": "ἀπορία"
+      },
+      {
+        "translation": "without passage",
+        "greek": "ἄπορος"
+      },
+      {
+        "translation": "out of place",
+        "greek": "ἄτοπος"
+      },
+      {
+        "translation": "to be lived, worth living",
+        "greek": "βιωτός"
+      },
+      {
+        "translation": "slow",
+        "greek": "βραδύς"
+      },
+      {
+        "translation": "(drawing, scratch) letter, character, writing, document",
+        "greek": "γράμμα"
+      },
+      {
+        "translation": "god; divine power",
+        "greek": "δαίμων"
+      },
+      {
+        "translation": "fearful, terrible, dread, dire",
+        "greek": "δεινός"
+      },
+      {
+        "translation": "anything for binding, a band, bond",
+        "greek": "δεσμός"
+      },
+      {
+        "translation": "two-fold, double",
+        "greek": "δισσός"
+      },
+      {
+        "translation": "a handful; a drachma",
+        "greek": "δραχμή"
+      },
+      {
+        "translation": "in need of; deficient",
+        "greek": "ἐνδεής"
+      },
+      {
+        "translation": "desolate, lone, lonely, lonesome, solitary",
+        "greek": "ἐρῆμος"
+      },
+      {
+        "translation": "the one; the other (of two)",
+        "greek": "ἕτερος"
+      },
+      {
+        "translation": "in order, in a row, one after another",
+        "greek": "ἐφεξῆς"
+      },
+      {
+        "translation": "a yoke of beasts, a pair of mules, oxen",
+        "greek": "ζεῦγος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 11,
+    "content": [
+      {
+        "translation": "time of life, age",
+        "greek": "ἡλικία"
+      },
+      {
+        "translation": "stillness, rest, quiet",
+        "greek": "ἡσυχία"
+      },
+      {
+        "translation": "quicker, swifter",
+        "greek": "θάσσων"
+      },
+      {
+        "translation": "becoming, befitting, sufficing",
+        "greek": "ἱκανός"
+      },
+      {
+        "translation": "new, fresh",
+        "greek": "καινός"
+      },
+      {
+        "translation": "gain, profit, advantage",
+        "greek": "κέρδος"
+      },
+      {
+        "translation": "a separating, power of distinguishing",
+        "greek": "κρίσις"
+      },
+      {
+        "translation": "acquisition",
+        "greek": "κτῆσις"
+      },
+      {
+        "translation": "remaining, the rest",
+        "greek": "λοιπός"
+      },
+      {
+        "translation": "that which is learnt, a lesson",
+        "greek": "μάθημα"
+      },
+      {
+        "translation": "more, rather",
+        "greek": "μᾶλλον"
+      },
+      {
+        "translation": "a witness",
+        "greek": "μάρτυς"
+      },
+      {
+        "translation": "(and not one); not one, no-one",
+        "greek": "μηδείς"
+      },
+      {
+        "translation": "an instrument, machine",
+        "greek": "μηχανή"
+      },
+      {
+        "translation": "stained",
+        "greek": "μιαρός"
+      },
+      {
+        "translation": "small, little",
+        "greek": "μικρός"
+      },
+      {
+        "translation": "wages, pay, hire",
+        "greek": "μισθός"
+      },
+      {
+        "translation": "numberless, countless, infinite",
+        "greek": "μυρίος"
+      },
+      {
+        "translation": "youth",
+        "greek": "νεότης"
+      },
+      {
+        "translation": "just now",
+        "greek": "νῦν δή"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 12,
+    "content": [
+      {
+        "translation": "pity, compassion",
+        "greek": "οἶκτος"
+      },
+      {
+        "translation": "few, little, scanty, small",
+        "greek": "ὀλίγος"
+      },
+      {
+        "translation": "like, resembling",
+        "greek": "ὅμοιος"
+      },
+      {
+        "translation": "not one, nobody",
+        "greek": "οὐδείς"
+      },
+      {
+        "translation": "furtherance, advantage, help",
+        "greek": "ὄφελος"
+      },
+      {
+        "translation": "altogether;",
+        "greek": "πάντως"
+      },
+      {
+        "translation": "more, larger",
+        "greek": "πλείων"
+      },
+      {
+        "translation": "a great number, a throng, crowd, multitude",
+        "greek": "πλῆθος"
+      },
+      {
+        "translation": "anything made",
+        "greek": "ποίημα"
+      },
+      {
+        "translation": "that which has been done, a deed, act",
+        "greek": "πρᾶγμα"
+      },
+      {
+        "translation": "a doing, transaction, business",
+        "greek": "πρᾶξις"
+      },
+      {
+        "translation": "first",
+        "greek": "πρῶτος"
+      },
+      {
+        "translation": "close, compact",
+        "greek": "πυκνός"
+      },
+      {
+        "translation": "easy, ready, easy to make",
+        "greek": "ῥᾴδιος"
+      },
+      {
+        "translation": "one must mention",
+        "greek": "ῥητέος"
+      },
+      {
+        "translation": "the moon",
+        "greek": "σελήνη"
+      },
+      {
+        "translation": "haste, speed",
+        "greek": "σπουδή"
+      },
+      {
+        "translation": "a standing, the posture of standing",
+        "greek": "στάσις"
+      },
+      {
+        "translation": "very, very much, exceedingly, violently",
+        "greek": "σφόδρα"
+      },
+      {
+        "translation": "close, near, hard by, nigh",
+        "greek": "σχεδόν"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 13,
+    "content": [
+      {
+        "translation": "an estimate, valuation",
+        "greek": "τίμημα"
+      },
+      {
+        "translation": "a twisted leathern thong",
+        "greek": "τροπός"
+      },
+      {
+        "translation": "a turn, direction, course, way; character",
+        "greek": "τρόπος"
+      },
+      {
+        "translation": "slight, indifferent, trivial, common, simple",
+        "greek": "φαῦλος"
+      },
+      {
+        "translation": "ill-will, envy, jealousy",
+        "greek": "φθόνος"
+      },
+      {
+        "translation": "worse, meaner, inferior",
+        "greek": "χείρων"
+      },
+      {
+        "translation": "time",
+        "greek": "χρόνος"
+      },
+      {
+        "translation": "lying, false",
+        "greek": "ψευδής"
+      },
+      {
+        "translation": "a falsehood, untruth, lie",
+        "greek": "ψεῦδος"
+      },
+      {
+        "translation": "sons of the same mother",
+        "greek": "ἀδελφός"
+      },
+      {
+        "translation": "a wrong done, a wrong",
+        "greek": "ἀδίκημα"
+      },
+      {
+        "translation": "a dark saying, riddle",
+        "greek": "αἴνιγμα"
+      },
+      {
+        "translation": "causing shame, abusive",
+        "greek": "αἰσχρός"
+      },
+      {
+        "translation": "shame done one, disgrace, dishonour",
+        "greek": "αἰσχύνη"
+      },
+      {
+        "translation": "truth",
+        "greek": "ἀλήθεια"
+      },
+      {
+        "translation": "of one another, to one another, one another",
+        "greek": "ἀλλήλων"
+      },
+      {
+        "translation": "of another sort",
+        "greek": "ἀλλοῖος"
+      },
+      {
+        "translation": "better, abler, stronger, braver",
+        "greek": "ἀμείνων"
+      },
+      {
+        "translation": "indifference, negligence",
+        "greek": "ἀμέλεια"
+      },
+      {
+        "translation": "unworthy, not deemed",
+        "greek": "ἀνάξιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 14,
+    "content": [
+      {
+        "translation": "manliness, manhood, manly spirit",
+        "greek": "ἀνδρεία"
+      },
+      {
+        "translation": "unholy, profane",
+        "greek": "ἀνόσιος"
+      },
+      {
+        "translation": "disobedient",
+        "greek": "ἀπειθής"
+      },
+      {
+        "translation": "without trial, inexperienced",
+        "greek": "ἄπειρος"
+      },
+      {
+        "translation": "not to be trusted",
+        "greek": "ἄπιστος"
+      },
+      {
+        "translation": "number",
+        "greek": "ἀριθμός"
+      },
+      {
+        "translation": "best",
+        "greek": "ἄριστος"
+      },
+      {
+        "translation": "ungodliness, impiety, profaneness",
+        "greek": "ἀσέβεια"
+      },
+      {
+        "translation": "an occupation, business, want of leisure",
+        "greek": "ἀσχολία"
+      },
+      {
+        "translation": "unskilled, adv. ἀτεχνῶς simply",
+        "greek": "ἀτεχνής"
+      },
+      {
+        "translation": "without art, ignorant of the rules of art, unskilled, empirical",
+        "greek": "ἄτεχνος"
+      },
+      {
+        "translation": "simply",
+        "greek": "ἀτεχνῶς"
+      },
+      {
+        "translation": "without rules of art, empirically",
+        "greek": "ἀτέχνως"
+      },
+      {
+        "translation": "self-willed, wilful, dogged, stubborn, contumacious, presumptuous",
+        "greek": "αὐθάδης"
+      },
+      {
+        "translation": "a flute-player",
+        "greek": "αὐλητής"
+      },
+      {
+        "translation": "freedom from envy",
+        "greek": "ἀφθονία"
+      },
+      {
+        "translation": "better",
+        "greek": "βελτίων"
+      },
+      {
+        "translation": "a paper, scroll, letter",
+        "greek": "βιβλίον"
+      },
+      {
+        "translation": "causing laughter, laughable",
+        "greek": "γέλοιος"
+      },
+      {
+        "translation": "(born in wedlock); genuine, legitimate",
+        "greek": "γνήσιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 15,
+    "content": [
+      {
+        "translation": "a tear",
+        "greek": "δάκρυον"
+      },
+      {
+        "translation": "one of the people, a commoner, plebeian",
+        "greek": "δημότης"
+      },
+      {
+        "translation": "false accusation, slander, calumny",
+        "greek": "διαβολή"
+      },
+      {
+        "translation": "a thought, intention, purpose",
+        "greek": "διάνοια"
+      },
+      {
+        "translation": "just, observant of custom, correct, balanced",
+        "greek": "δίκαιος"
+      },
+      {
+        "translation": "strong, mighty, able",
+        "greek": "δυνατός"
+      },
+      {
+        "translation": "an accusation, charge, complaint",
+        "greek": "ἔγκλημα"
+      },
+      {
+        "translation": "every, every one, each, each one",
+        "greek": "ἕκαστος"
+      },
+      {
+        "translation": "that over there, that",
+        "greek": "ἐκεῖνος"
+      },
+      {
+        "translation": "smaller, less",
+        "greek": "ἐλάσσων"
+      },
+      {
+        "translation": "a reproach, disgrace, dishonour",
+        "greek": "ἔλεγχος"
+      },
+      {
+        "translation": "outermost",
+        "greek": "ἔσχατος"
+      },
+      {
+        "translation": "a comrade, companion, mate",
+        "greek": "ἑταῖρος"
+      },
+      {
+        "translation": "at hand, ready, prepared",
+        "greek": "ἑτοῖμος"
+      },
+      {
+        "translation": "of good hope, hopeful, cheerful, sanguine",
+        "greek": "εὔελπις"
+      },
+      {
+        "translation": "a seeking, seeking for, search for",
+        "greek": "ζήτησις"
+      },
+      {
+        "translation": "a half-god, demigod",
+        "greek": "ἡμίθεος"
+      },
+      {
+        "translation": "a half-ass",
+        "greek": "ἡμίονος"
+      },
+      {
+        "translation": "death",
+        "greek": "θάνατος"
+      },
+      {
+        "translation": "allowed by the laws of God and men, righteous",
+        "greek": "θεμιτός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 16,
+    "content": [
+      {
+        "translation": "a private person, an individual",
+        "greek": "ἰδιώτης"
+      },
+      {
+        "translation": "supplication",
+        "greek": "ἱκετεία"
+      },
+      {
+        "translation": "of a horse",
+        "greek": "ἱππικός"
+      },
+      {
+        "translation": "strong, mighty",
+        "greek": "ἰσχυρός"
+      },
+      {
+        "translation": "chastisement, correction, punishment",
+        "greek": "κόλασις"
+      },
+      {
+        "translation": "a comedy",
+        "greek": "κωμῳδία"
+      },
+      {
+        "translation": "the state of a hired workman, service, servitude",
+        "greek": "λατρεία"
+      },
+      {
+        "translation": "learning, the getting of knowledge",
+        "greek": "μάθησις"
+      },
+      {
+        "translation": "a learner, pupil",
+        "greek": "μαθητής"
+      },
+      {
+        "translation": "prophesying, prophetic power",
+        "greek": "μαντεία"
+      },
+      {
+        "translation": "greatness, magnitude, size, height, stature",
+        "greek": "μέγεθος"
+      },
+      {
+        "translation": "within measure",
+        "greek": "μέτριος"
+      },
+      {
+        "translation": "none",
+        "greek": "μηδαμός"
+      },
+      {
+        "translation": "not at all",
+        "greek": "μηδαμῶς"
+      },
+      {
+        "translation": "in or of the house",
+        "greek": "οἰκεῖος"
+      },
+      {
+        "translation": "a child",
+        "greek": "παιδίον"
+      },
+      {
+        "translation": "old in years",
+        "greek": "παλαιός"
+      },
+      {
+        "translation": "sent",
+        "greek": "πεμπτός"
+      },
+      {
+        "translation": "the fifth, oneself with four others",
+        "greek": "πέμπτος"
+      },
+      {
+        "translation": "calculated to persuade;",
+        "greek": "πιθανός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 17,
+    "content": [
+      {
+        "translation": "near, close to",
+        "greek": "πλησίος"
+      },
+      {
+        "translation": "a making, fabrication, creation, production",
+        "greek": "ποίησις"
+      },
+      {
+        "translation": "one who makes, a maker",
+        "greek": "ποιητής"
+      },
+      {
+        "translation": "made",
+        "greek": "ποιητός"
+      },
+      {
+        "translation": "battle, fight, war",
+        "greek": "πόλεμος"
+      },
+      {
+        "translation": "(fellow) citizen",
+        "greek": "πολίτης"
+      },
+      {
+        "translation": "a bad state",
+        "greek": "πονηρία"
+      },
+      {
+        "translation": "toilsome, painful, grievous",
+        "greek": "πονηρός"
+      },
+      {
+        "translation": "whether",
+        "greek": "πότερον"
+      },
+      {
+        "translation": "which of the two?",
+        "greek": "πότερος"
+      },
+      {
+        "translation": "an old man; pl. ambassadors",
+        "greek": "πρέσβυς"
+      },
+      {
+        "translation": "a sign, a mark, token",
+        "greek": "σημεῖον"
+      },
+      {
+        "translation": "an eating, feeding",
+        "greek": "σίτησις"
+      },
+      {
+        "translation": "army",
+        "greek": "στρατιά"
+      },
+      {
+        "translation": "a pair of horses",
+        "greek": "συνωρίς"
+      },
+      {
+        "translation": "vehement, violent, excessive",
+        "greek": "σφοδρός"
+      },
+      {
+        "translation": "help, aid, assistance, succour",
+        "greek": "τιμωρία"
+      },
+      {
+        "translation": "the afterbirth",
+        "greek": "ὕστερον"
+      },
+      {
+        "translation": "latter, last",
+        "greek": "ὕστερος"
+      },
+      {
+        "translation": "silly talk, nonsense, foolery",
+        "greek": "φλυαρία"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 18,
+    "content": [
+      {
+        "translation": "hard to bear, painful; difficult",
+        "greek": "χαλεπός"
+      },
+      {
+        "translation": "the answer of an oracle, oracular response, oracle",
+        "greek": "χρησμός"
+      },
+      {
+        "translation": "useful, good of its kind, serviceable",
+        "greek": "χρηστός"
+      },
+      {
+        "translation": "of or in the country, rustic; boorish, rude",
+        "greek": "ἄγροικος"
+      },
+      {
+        "translation": "unable, impossible",
+        "greek": "ἀδύνατος"
+      },
+      {
+        "translation": "undying, immortal",
+        "greek": "ἀθάνατος"
+      },
+      {
+        "translation": "perception by the senses",
+        "greek": "αἴσθησις"
+      },
+      {
+        "translation": "licentiousness, intemperance",
+        "greek": "ἀκολασία"
+      },
+      {
+        "translation": "a hearer",
+        "greek": "ἀκροατής"
+      },
+      {
+        "translation": "a failure, fault, sin",
+        "greek": "ἁμάρτημα"
+      },
+      {
+        "translation": "without means",
+        "greek": "ἀμήχανος"
+      },
+      {
+        "translation": "man, person, human",
+        "greek": "ἄνθρωπος"
+      },
+      {
+        "translation": "deliverance, release, relief from",
+        "greek": "ἀπαλλαγή"
+      },
+      {
+        "translation": "hatred",
+        "greek": "ἀπέχθεια"
+      },
+      {
+        "translation": "a being from home, a going",
+        "greek": "ἀποδημία"
+      },
+      {
+        "translation": "a speech in defence, defence",
+        "greek": "ἀπολογία"
+      },
+      {
+        "translation": "a piece of silver, a silver coin",
+        "greek": "ἀργύριον"
+      },
+      {
+        "translation": "a king, chief",
+        "greek": "βασιλεύς"
+      },
+      {
+        "translation": "noble, excellent",
+        "greek": "γενναῖος"
+      },
+      {
+        "translation": "belonging to the people",
+        "greek": "δημόσιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 19,
+    "content": [
+      {
+        "translation": "a way of spending time",
+        "greek": "διατριβή"
+      },
+      {
+        "translation": "a judge",
+        "greek": "δικαστής"
+      },
+      {
+        "translation": "ill luck, ill fortune",
+        "greek": "δυστυχία"
+      },
+      {
+        "translation": "one who gives security, a surety",
+        "greek": "ἐγγυητής"
+      },
+      {
+        "translation": "each of two, either, each singly",
+        "greek": "ἑκάτερος"
+      },
+      {
+        "translation": "an assembly of the citizens regularly summoned, the legislative assembly",
+        "greek": "ἐκκλησία"
+      },
+      {
+        "translation": "finding pity, pitied",
+        "greek": "ἐλεεινός"
+      },
+      {
+        "translation": "opposite",
+        "greek": "ἐναντίος"
+      },
+      {
+        "translation": "a thing seen in sleep",
+        "greek": "ἐνύπνιον"
+      },
+      {
+        "translation": "a close examination, scrutiny, review",
+        "greek": "ἐξέτασις"
+      },
+      {
+        "translation": "fitting, meet, suitable",
+        "greek": "ἐπιεικής"
+      },
+      {
+        "translation": "knowledge, skill",
+        "greek": "ἐπιστήμη"
+      },
+      {
+        "translation": "fortunate, wealthy, happy",
+        "greek": "εὐδαίμων"
+      },
+      {
+        "translation": "a danger, risk, hazard, venture, enterprise",
+        "greek": "κίνδυνος"
+      },
+      {
+        "translation": "stronger, mightier, more powerful",
+        "greek": "κρείσσων"
+      },
+      {
+        "translation": "an oracle",
+        "greek": "μαντεῖον"
+      },
+      {
+        "translation": "prophetic, oracular",
+        "greek": "μαντικός"
+      },
+      {
+        "translation": "a change, changing",
+        "greek": "μεταβολή"
+      },
+      {
+        "translation": "raised from the ground, hanging",
+        "greek": "μετέωρος"
+      },
+      {
+        "translation": "change of abode, removal, migration",
+        "greek": "μετοικία"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 20,
+    "content": [
+      {
+        "translation": "bad condition, badness",
+        "greek": "μοχθηρία"
+      },
+      {
+        "translation": "suffering hardship, in sore distress, miserable, wretched",
+        "greek": "μοχθηρός"
+      },
+      {
+        "translation": "a sea-fight",
+        "greek": "ναυμαχία"
+      },
+      {
+        "translation": "younger",
+        "greek": "νεώτερος"
+      },
+      {
+        "translation": "which of two, whether of the twain",
+        "greek": "ὁπότερος"
+      },
+      {
+        "translation": "the orchestra",
+        "greek": "ὀρχήστρα"
+      },
+      {
+        "translation": "all beautiful, good",
+        "greek": "πάγκαλος"
+      },
+      {
+        "translation": "one must persuade",
+        "greek": "πειστέος"
+      },
+      {
+        "translation": "beyond the regular number",
+        "greek": "περισσός"
+      },
+      {
+        "translation": "most, largest",
+        "greek": "πλεῖστος"
+      },
+      {
+        "translation": "rich, wealthy, opulent",
+        "greek": "πλούσιος"
+      },
+      {
+        "translation": "many times, often, oft",
+        "greek": "πολλάκις"
+      },
+      {
+        "translation": "before, earlier",
+        "greek": "πρότερος"
+      },
+      {
+        "translation": "a prince, ruler, lord, chief",
+        "greek": "πρύτανις"
+      },
+      {
+        "translation": "a master of one's craft",
+        "greek": "σοφιστής"
+      },
+      {
+        "translation": "a being with, social intercourse, society, conversation, communion",
+        "greek": "συνουσία"
+      },
+      {
+        "translation": "such as this",
+        "greek": "τοιοῦτος"
+      },
+      {
+        "translation": "so large, so tall",
+        "greek": "τοσοῦτος"
+      },
+      {
+        "translation": "a tragedy",
+        "greek": "τραγῳδία"
+      },
+      {
+        "translation": "a violent, overbearing person, a wanton, insolent man",
+        "greek": "ὑβριστής"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 21,
+    "content": [
+      {
+        "translation": "your, yours",
+        "greek": "ὑμέτερος"
+      },
+      {
+        "translation": "the body of rowers and sailors, the ship's crew",
+        "greek": "ὑπηρεσία"
+      },
+      {
+        "translation": "of the nature of a burden",
+        "greek": "φορτικός"
+      },
+      {
+        "translation": "in one's right mind, in one's senses",
+        "greek": "φρόνιμος"
+      },
+      {
+        "translation": "against one's will, involuntary",
+        "greek": "ἀεκούσιος"
+      },
+      {
+        "translation": "licentious, intemperate",
+        "greek": "ἀκόλαστος"
+      },
+      {
+        "translation": "unreasoning, inconsiderate, thoughtless, heedless",
+        "greek": "ἀλόγιστος"
+      },
+      {
+        "translation": "each of two, both",
+        "greek": "ἀμφότερος"
+      },
+      {
+        "translation": "a place of constraint, a prison",
+        "greek": "ἀναγκαῖον"
+      },
+      {
+        "translation": "necessary, forcible (subst. kin, necessities for life)",
+        "greek": "ἀναγκαῖος"
+      },
+      {
+        "translation": "entreaty, prayer",
+        "greek": "ἀντιβολία"
+      },
+      {
+        "translation": "a reply in writing",
+        "greek": "ἀντιγραφή"
+      },
+      {
+        "translation": "an oath",
+        "greek": "ἀντωμοσία"
+      },
+      {
+        "translation": "worthy of a thing",
+        "greek": "ἀξιόχρεως"
+      },
+      {
+        "translation": "of or for the flute, suitable for flute playing",
+        "greek": "αὐλητικός"
+      },
+      {
+        "translation": "acting of one's own will, of oneself",
+        "greek": "αὐτόματος"
+      },
+      {
+        "translation": "self-detected, caught in the act of theft",
+        "greek": "αὐτόφωρος"
+      },
+      {
+        "translation": "best",
+        "greek": "βέλτιστος"
+      },
+      {
+        "translation": "a councillor, senator",
+        "greek": "βουλευτής"
+      },
+      {
+        "translation": "divine being, spirit",
+        "greek": "δαιμόνιον"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 22,
+    "content": [
+      {
+        "translation": "of or belonging to a δαίμων; miraculous, marvellous",
+        "greek": "δαιμόνιος"
+      },
+      {
+        "translation": "a speech in the public assembly",
+        "greek": "δημηγορία"
+      },
+      {
+        "translation": "skilled in law, versed in pleading, lawyer-like",
+        "greek": "δικανικός"
+      },
+      {
+        "translation": "one who stands near",
+        "greek": "ἐπιστάτης"
+      },
+      {
+        "translation": "knowing, wise, prudent",
+        "greek": "ἐπιστήμων"
+      },
+      {
+        "translation": "liable to envy",
+        "greek": "ἐπίφθονος"
+      },
+      {
+        "translation": "well-doing",
+        "greek": "εὐεργεσία"
+      },
+      {
+        "translation": "a well-doer, benefactor",
+        "greek": "εὐεργέτης"
+      },
+      {
+        "translation": "an equal in age, fellow, comrade",
+        "greek": "ἡλικιώτης"
+      },
+      {
+        "translation": "bold, of good courage, ready, daring, undaunted",
+        "greek": "θαρσαλέος"
+      },
+      {
+        "translation": "wondrous, wonderful, marvellous",
+        "greek": "θαυμάσιος"
+      },
+      {
+        "translation": "wondrous, wonderful, marvellous",
+        "greek": "θαυμαστός"
+      },
+      {
+        "translation": "one who has a spirit of prophecy, an inspired person",
+        "greek": "θεόμαντις"
+      },
+      {
+        "translation": "an accusation, charge",
+        "greek": "κατηγορία"
+      },
+      {
+        "translation": "an accuser",
+        "greek": "κατήγορος"
+      },
+      {
+        "translation": "a boy, lad, stripling",
+        "greek": "μειράκιον"
+      },
+      {
+        "translation": "the management of a household",
+        "greek": "οἰκονομία"
+      },
+      {
+        "translation": "an oligarchy, government in the hands of a few families",
+        "greek": "ὀλιγαρχία"
+      },
+      {
+        "translation": "not either, neither of the two",
+        "greek": "οὐδέτερος"
+      },
+      {
+        "translation": "acting contrary to law, lawless",
+        "greek": "παράνομος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 23,
+    "content": [
+      {
+        "translation": "of, for, related to citizen or statesman; civil, constitutional",
+        "greek": "πολιτικός"
+      },
+      {
+        "translation": "age",
+        "greek": "πρεσβύτης"
+      },
+      {
+        "translation": "at hand, ready",
+        "greek": "πρόχειρος"
+      },
+      {
+        "translation": "the office, dignity",
+        "greek": "στρατηγία"
+      },
+      {
+        "translation": "the leader",
+        "greek": "στρατηγός"
+      },
+      {
+        "translation": "a being leagued by oath, conspiracy",
+        "greek": "συνωμοσία"
+      },
+      {
+        "translation": "a sure signs.",
+        "greek": "τεκμήριον"
+      },
+      {
+        "translation": "loving the city",
+        "greek": "φιλόπολις"
+      },
+      {
+        "translation": "loving honour, covetous of honour, ambitious, emulous",
+        "greek": "φιλότιμος"
+      },
+      {
+        "translation": "love of life",
+        "greek": "φιλοψυχία"
+      },
+      {
+        "translation": "soothsayer, oracle-monger; (adj.) chanting oracles",
+        "greek": "χρησμῳδός"
+      },
+      {
+        "translation": "not cross-questioned, safe from being questioned",
+        "greek": "ἀνέλεγκτος"
+      },
+      {
+        "translation": "unhoped for, unlooked for",
+        "greek": "ἀνέλπιστος"
+      },
+      {
+        "translation": "of man, of mankind",
+        "greek": "ἀνθρώπειος"
+      },
+      {
+        "translation": "belonging to mankind; human",
+        "greek": "ἀνθρώπινος"
+      },
+      {
+        "translation": "one who works for the people, a skilled workman, handicraftsman",
+        "greek": "δημιουργός"
+      },
+      {
+        "translation": "a teacher, master",
+        "greek": "διδάσκαλος"
+      },
+      {
+        "translation": "the dithyramb;",
+        "greek": "διθύραμβος"
+      },
+      {
+        "translation": "prosperity, good fortune, wealth, weal, happiness",
+        "greek": "εὐδαιμονία"
+      },
+      {
+        "translation": "easy to refute: easy to test",
+        "greek": "εὐέλεγκτος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 24,
+    "content": [
+      {
+        "translation": "change of abode, move",
+        "greek": "μετοίκησις"
+      },
+      {
+        "translation": "a pattern",
+        "greek": "παράδειγμα"
+      },
+      {
+        "translation": "a mistake in music, false note",
+        "greek": "πλημμέλεια"
+      },
+      {
+        "translation": "the presidents' hall, town-hall",
+        "greek": "πρυτανεῖον"
+      },
+      {
+        "translation": "of such an age, of such a magnitude",
+        "greek": "τηλικοῦτος"
+      },
+      {
+        "translation": "a deep, hard thinker",
+        "greek": "φροντιστής"
+      },
+      {
+        "translation": "not affected by decay",
+        "greek": "ἀδιάφθαρτος"
+      },
+      {
+        "translation": "shamelessness",
+        "greek": "ἀναισχυντία"
+      },
+      {
+        "translation": "shameless, impudent",
+        "greek": "ἀναίσχυντος"
+      },
+      {
+        "translation": "not fit for a free man",
+        "greek": "ἀνελεύθερος"
+      },
+      {
+        "translation": "not inquired into",
+        "greek": "ἀνεξέταστος"
+      },
+      {
+        "translation": "entreaty, prayer",
+        "greek": "ἀντιβόλησις"
+      },
+      {
+        "translation": "one must defend",
+        "greek": "ἀπολογητέος"
+      },
+      {
+        "translation": "a prison",
+        "greek": "δεσμωτήριον"
+      },
+      {
+        "translation": "a court of justice",
+        "greek": "δικαστήριον"
+      },
+      {
+        "translation": "easy to count",
+        "greek": "εὐαρίθμητος"
+      },
+      {
+        "translation": "a maker of comedies, comic poet",
+        "greek": "κωμῳδοποιός"
+      },
+      {
+        "translation": "coming near, nearly resembling, such-like",
+        "greek": "παραπλήσιος"
+      },
+      {
+        "translation": "a handicraftsman, artisan",
+        "greek": "χειροτέχνης"
+      },
+      {
+        "translation": "an oracular response, divine warning",
+        "greek": "χρηματισμός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 25,
+    "content": [
+      {
+        "translation": "a member of the ἐκκλησία",
+        "greek": "ἐκκλησιαστής"
+      },
+      {
+        "translation": "to be reproached, shameful, ignominious",
+        "greek": "ἐπονείδιστος"
+      },
+      {
+        "translation": "ridiculous, absurd",
+        "greek": "καταγέλαστος"
+      },
+      {
+        "translation": "a calling out to, cheering on, exhorting, addressing",
+        "greek": "παρακέλευσις"
+      },
+      {
+        "translation": "earnestly, eagerly, vigorously",
+        "greek": "συντεταμένως"
+      },
+      {
+        "translation": "up to this time, yet",
+        "greek": "πω"
+      },
+      {
+        "translation": "therefore, in this wise, thereupon",
+        "greek": "τῷ"
+      },
+      {
+        "translation": "to send rain, to rain",
+        "greek": "ὕω"
+      },
+      {
+        "translation": "to lead",
+        "greek": "ἄγω"
+      },
+      {
+        "translation": "to bind, tie, fetter",
+        "greek": "δέω"
+      },
+      {
+        "translation": "to let, suffer, allow, permit",
+        "greek": "ἐάω"
+      },
+      {
+        "translation": "I (first person pronoun)",
+        "greek": "ἐγώ"
+      },
+      {
+        "translation": "[I will say]",
+        "greek": "ἐρῶ"
+      },
+      {
+        "translation": "to have",
+        "greek": "ἔχω"
+      },
+      {
+        "translation": "to live",
+        "greek": "ζάω"
+      },
+      {
+        "translation": "to boil, seethe",
+        "greek": "ζέω"
+      },
+      {
+        "translation": "to live (LSJ ζῶ)",
+        "greek": "ζήω"
+      },
+      {
+        "translation": "to have come, be present, be here",
+        "greek": "ἥκω"
+      },
+      {
+        "translation": "to run",
+        "greek": "θέω"
+      },
+      {
+        "translation": "to take up, raise, lift up",
+        "greek": "αἴρω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 26,
+    "content": [
+      {
+        "translation": "(to be first) to rule, to begin",
+        "greek": "ἄρχω"
+      },
+      {
+        "translation": "to live, pass one's life",
+        "greek": "βιόω"
+      },
+      {
+        "translation": "to cry aloud, to shout",
+        "greek": "βοάω"
+      },
+      {
+        "translation": "to be full",
+        "greek": "γέμω"
+      },
+      {
+        "translation": "to be",
+        "greek": "εἰμί"
+      },
+      {
+        "translation": "come, go",
+        "greek": "εἶμι"
+      },
+      {
+        "translation": "to vomit, throw up",
+        "greek": "ἐμέω"
+      },
+      {
+        "translation": "to do",
+        "greek": "ἔρδω"
+      },
+      {
+        "translation": "to be at man's estate, to be in the prime of youth",
+        "greek": "ἡβάω"
+      },
+      {
+        "translation": "to set a going, put in motion",
+        "greek": "ἵημι"
+      },
+      {
+        "translation": "to trouble, distress, vex; mid. care for",
+        "greek": "κήδω"
+      },
+      {
+        "translation": "to pick; to say",
+        "greek": "λέγω"
+      },
+      {
+        "translation": "to be an object of care",
+        "greek": "μέλω"
+      },
+      {
+        "translation": "to stay at home, stay where one is, not stir",
+        "greek": "μένω"
+      },
+      {
+        "translation": "to renovate, renew",
+        "greek": "νεόω"
+      },
+      {
+        "translation": "to perceive by the eyes, observe, notice",
+        "greek": "νοέω"
+      },
+      {
+        "translation": "to see",
+        "greek": "ὁράω"
+      },
+      {
+        "translation": "not yet",
+        "greek": "οὔπω"
+      },
+      {
+        "translation": "to make to cease",
+        "greek": "παύω"
+      },
+      {
+        "translation": "to save, keep",
+        "greek": "σῴζω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 27,
+    "content": [
+      {
+        "translation": "to bear",
+        "greek": "φέρω"
+      },
+      {
+        "translation": "to say, to claim",
+        "greek": "φημί"
+      },
+      {
+        "translation": "to fall upon, attack, assail",
+        "greek": "χράω"
+      },
+      {
+        "translation": "to lift, heave, raise up",
+        "greek": "ἀείρω"
+      },
+      {
+        "translation": "to take, (mid.) to choose",
+        "greek": "αἱρέω"
+      },
+      {
+        "translation": "to ask, beg; postulate",
+        "greek": "αἰτέω"
+      },
+      {
+        "translation": "to hear",
+        "greek": "ἀκούω"
+      },
+      {
+        "translation": "to hold up; (mid.) endure, put up with",
+        "greek": "ἀνέχω"
+      },
+      {
+        "translation": "to think worthy of; to expect",
+        "greek": "ἀξιόω"
+      },
+      {
+        "translation": "to lead away, carry off",
+        "greek": "ἀπάγω"
+      },
+      {
+        "translation": "to constrain",
+        "greek": "βιάζω"
+      },
+      {
+        "translation": "to scratch, draw, write",
+        "greek": "γράφω"
+      },
+      {
+        "translation": "to fear",
+        "greek": "δείδω"
+      },
+      {
+        "translation": "to carry over",
+        "greek": "διάγω"
+      },
+      {
+        "translation": "to pursue",
+        "greek": "διώκω"
+      },
+      {
+        "translation": "seem, impers. it seems best..",
+        "greek": "δοκέω"
+      },
+      {
+        "translation": "to will, wish, purpose",
+        "greek": "ἐθέλω"
+      },
+      {
+        "translation": "to accustom, use",
+        "greek": "ἐθίζω"
+      },
+      {
+        "translation": "to have pity on, shew mercy upon",
+        "greek": "ἐλεέω"
+      },
+      {
+        "translation": "to give ear to, perceive, understand",
+        "greek": "ἐπαΐω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 28,
+    "content": [
+      {
+        "translation": "to hold on; hold out; hold back; adjourn; occupy",
+        "greek": "ἐπέχω"
+      },
+      {
+        "translation": "to eat",
+        "greek": "ἐσθίω"
+      },
+      {
+        "translation": "to set upon",
+        "greek": "ἐφίζω"
+      },
+      {
+        "translation": "to seek, seek for",
+        "greek": "ζητέω"
+      },
+      {
+        "translation": "to call, summon",
+        "greek": "καλέω"
+      },
+      {
+        "translation": "to pick out, choose, judge, determine",
+        "greek": "κρίνω"
+      },
+      {
+        "translation": "to strike, smite: to strike",
+        "greek": "κρούω"
+      },
+      {
+        "translation": "to let, hinder, check, prevent",
+        "greek": "κωλύω"
+      },
+      {
+        "translation": "to leave, quit",
+        "greek": "λείπω"
+      },
+      {
+        "translation": "to give pain to, to pain, distress, grieve, vex, annoy",
+        "greek": "λυπέω"
+      },
+      {
+        "translation": "to think of doing, intend to do, to be about to do",
+        "greek": "μέλλω"
+      },
+      {
+        "translation": "to disclose what is secret, reveal, betray",
+        "greek": "μηνύω"
+      },
+      {
+        "translation": "to conquer, prevail, vanquish",
+        "greek": "νικάω"
+      },
+      {
+        "translation": "to inhabit, occupy",
+        "greek": "οἰκέω"
+      },
+      {
+        "translation": "to set in motion, urge",
+        "greek": "ὁρμάω"
+      },
+      {
+        "translation": "to be moored, lie at anchor",
+        "greek": "ὁρμέω"
+      },
+      {
+        "translation": "to play like a child, to sport, play",
+        "greek": "παίζω"
+      },
+      {
+        "translation": "to experience, to suffer",
+        "greek": "πάσχω"
+      },
+      {
+        "translation": "to prevail upon, win over, persuade",
+        "greek": "πείθω"
+      },
+      {
+        "translation": "to be or become full",
+        "greek": "πλήθω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 29,
+    "content": [
+      {
+        "translation": "to make, to do",
+        "greek": "ποιέω"
+      },
+      {
+        "translation": "to work hard, do work, suffer toil",
+        "greek": "πονέω"
+      },
+      {
+        "translation": "to be clearly seen, to resemble, to seem (πρέπει it is fitting)",
+        "greek": "πρέπω"
+      },
+      {
+        "translation": "forwards, onwards, further",
+        "greek": "πρόσω"
+      },
+      {
+        "translation": "to be silent",
+        "greek": "σιγάω"
+      },
+      {
+        "translation": "take food, eat",
+        "greek": "σιτέω"
+      },
+      {
+        "translation": "to arrange, put in order",
+        "greek": "τάσσω"
+      },
+      {
+        "translation": "to complete, fulfil, accomplish",
+        "greek": "τελέω"
+      },
+      {
+        "translation": "to honor; to value something at a price (gen.)",
+        "greek": "τιμάω"
+      },
+      {
+        "translation": "to turn",
+        "greek": "τρέπω"
+      },
+      {
+        "translation": "to nourish, rear, maintain",
+        "greek": "τρέφω"
+      },
+      {
+        "translation": "to hold under, uphold; undergo, suffer, be accountable",
+        "greek": "ὑπέχω"
+      },
+      {
+        "translation": "to bring to light, make to appear",
+        "greek": "φαίνω"
+      },
+      {
+        "translation": "to say, affirm, assert",
+        "greek": "φάσκω"
+      },
+      {
+        "translation": "to flee, take flight, run away",
+        "greek": "φεύγω"
+      },
+      {
+        "translation": "to cry φεῦ",
+        "greek": "φεύζω"
+      },
+      {
+        "translation": "to put to flight, to terrify; mid. to fear",
+        "greek": "φοβέω"
+      },
+      {
+        "translation": "to point out, shew, indicate",
+        "greek": "φράζω"
+      },
+      {
+        "translation": "to rejoice, be glad, be delighted",
+        "greek": "χαίρω"
+      },
+      {
+        "translation": "to scrape, graze, wound slightly",
+        "greek": "χραύω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 30,
+    "content": [
+      {
+        "translation": "to cheat by lies, beguile",
+        "greek": "ψεύδω"
+      },
+      {
+        "translation": "to make delicate, treat delicately",
+        "greek": "ἁβρύνω"
+      },
+      {
+        "translation": "not to perceive, be ignorant of",
+        "greek": "ἀγνοέω"
+      },
+      {
+        "translation": "to do wrong",
+        "greek": "ἀδικέω"
+      },
+      {
+        "translation": "change, alternate, respond",
+        "greek": "ἀμείβω"
+      },
+      {
+        "translation": "to have no care for, be neglectful of",
+        "greek": "ἀμελέω"
+      },
+      {
+        "translation": "to lift up",
+        "greek": "ἀναίρω"
+      },
+      {
+        "translation": "be absent",
+        "greek": "ἄπειμι"
+      },
+      {
+        "translation": "to loose from",
+        "greek": "ἀπολύω"
+      },
+      {
+        "translation": "to dishonour",
+        "greek": "ἀτιμόω"
+      },
+      {
+        "translation": "to send forth, discharge",
+        "greek": "ἀφίημι"
+      },
+      {
+        "translation": "to look away from",
+        "greek": "ἀφοράω"
+      },
+      {
+        "translation": "to disable, hinder (Hom.); to harm, damage",
+        "greek": "βλάπτω"
+      },
+      {
+        "translation": "to come to aid, to succour, assist, aid",
+        "greek": "βοηθέω"
+      },
+      {
+        "translation": "to give",
+        "greek": "δίδωμι"
+      },
+      {
+        "translation": "to judge, to give judgment on",
+        "greek": "δικάζω"
+      },
+      {
+        "translation": "to think, imagine, suppose, fancy, conjecture",
+        "greek": "δοξάζω"
+      },
+      {
+        "translation": "to give or hand over as a pledge, security",
+        "greek": "ἐγγυάω"
+      },
+      {
+        "translation": "to awaken, wake up, rouse",
+        "greek": "ἐγείρω"
+      },
+      {
+        "translation": "to lead in",
+        "greek": "εἰσάγω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 31,
+    "content": [
+      {
+        "translation": "to pick out; single out",
+        "greek": "ἐκλέγω"
+      },
+      {
+        "translation": "to pay off, pay in full",
+        "greek": "ἐκτίνω"
+      },
+      {
+        "translation": "cross-examine; put to the test; prove; refute",
+        "greek": "ἐλέγχω"
+      },
+      {
+        "translation": "to abide in",
+        "greek": "ἐμμένω"
+      },
+      {
+        "translation": "to have in one's thoughts, to think, consider, reflect",
+        "greek": "ἐννοέω"
+      },
+      {
+        "translation": "go out",
+        "greek": "ἔξειμι"
+      },
+      {
+        "translation": "to ask, enquire",
+        "greek": "ἔρομαι"
+      },
+      {
+        "translation": "to ask",
+        "greek": "ἐρωτάω"
+      },
+      {
+        "translation": "to die; see also ἀποθνῄσκω",
+        "greek": "θνῄσκω"
+      },
+      {
+        "translation": "to sing a dirge, to wail",
+        "greek": "θρηνέω"
+      },
+      {
+        "translation": "to make to stand",
+        "greek": "ἵστημι"
+      },
+      {
+        "translation": "to hold fast",
+        "greek": "κατέχω"
+      },
+      {
+        "translation": "to urge",
+        "greek": "κελεύω"
+      },
+      {
+        "translation": "to cut short, dock, curtail",
+        "greek": "κολούω"
+      },
+      {
+        "translation": "to order, arrange",
+        "greek": "κοσμέω"
+      },
+      {
+        "translation": "to have as a custom; to believe",
+        "greek": "νομίζω"
+      },
+      {
+        "translation": "to suppose, think, deem, imagine",
+        "greek": "οἴομαι"
+      },
+      {
+        "translation": "to swear",
+        "greek": "ὄμνυμι"
+      },
+      {
+        "translation": "to make angry, provoke to anger, irritate",
+        "greek": "ὀργίζω"
+      },
+      {
+        "translation": "to furnish, provide, supply",
+        "greek": "παρέχω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 32,
+    "content": [
+      {
+        "translation": "to attempt, endeavour, try",
+        "greek": "πειράω"
+      },
+      {
+        "translation": "to form, mould, shape",
+        "greek": "πλάσσω"
+      },
+      {
+        "translation": "to strike, smite",
+        "greek": "πλήσσω"
+      },
+      {
+        "translation": "do, (w. adv) fare, (mid.) charge payment",
+        "greek": "πράσσω"
+      },
+      {
+        "translation": "to look at",
+        "greek": "σκοπέω"
+      },
+      {
+        "translation": "to set, put, place",
+        "greek": "τίθημι"
+      },
+      {
+        "translation": "to undertake, take heart",
+        "greek": "τολμάω"
+      },
+      {
+        "translation": "to retire, withdraw, depart",
+        "greek": "ὑπείκω"
+      },
+      {
+        "translation": "to bear ill-will",
+        "greek": "φθονέω"
+      },
+      {
+        "translation": "to do a favor, to oblige, to please",
+        "greek": "χαρίζω"
+      },
+      {
+        "translation": "(mid.) to vote; (act.) to count with pebbles",
+        "greek": "ψηφίζω"
+      },
+      {
+        "translation": "to help, aid, assist, to be of use",
+        "greek": "ὠφελέω"
+      },
+      {
+        "translation": "to make ugly, disfigure, mar",
+        "greek": "αἰσχύνω"
+      },
+      {
+        "translation": "to speak truth",
+        "greek": "ἀληθεύω"
+      },
+      {
+        "translation": "to take up; to destroy",
+        "greek": "ἀναιρέω"
+      },
+      {
+        "translation": "to sail up, to go up stream",
+        "greek": "ἀναπλέω"
+      },
+      {
+        "translation": "to bring up, bring back",
+        "greek": "ἀναφέρω"
+      },
+      {
+        "translation": "to roll up together",
+        "greek": "ἀνειλέω"
+      },
+      {
+        "translation": "to be disobedient, refuse compliance",
+        "greek": "ἀπειθέω"
+      },
+      {
+        "translation": "to disbelieve, distrust; to disobey",
+        "greek": "ἀπιστέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 33,
+    "content": [
+      {
+        "translation": "to have enjoyment of",
+        "greek": "ἀπολαύω"
+      },
+      {
+        "translation": "to flow",
+        "greek": "ἀπορρέω"
+      },
+      {
+        "translation": "to pay back, repay, return",
+        "greek": "ἀποτίνω"
+      },
+      {
+        "translation": "to hold in no honour, to esteem lightly, dishonour, slight",
+        "greek": "ἀτιμάζω"
+      },
+      {
+        "translation": "to be loaded; to be annoyed",
+        "greek": "ἄχθομαι"
+      },
+      {
+        "translation": "to take counsel, deliberate, concert measures",
+        "greek": "βουλεύω"
+      },
+      {
+        "translation": "to take, accept, receive",
+        "greek": "δέχομαι"
+      },
+      {
+        "translation": "to pick out one from another, to pick out",
+        "greek": "διαλέγω"
+      },
+      {
+        "translation": "to carry through; be different from, excel",
+        "greek": "διαφέρω"
+      },
+      {
+        "translation": "to teach",
+        "greek": "διδάσκω"
+      },
+      {
+        "translation": "to be a slave",
+        "greek": "δουλεύω"
+      },
+      {
+        "translation": "to be able, capable, strong enough",
+        "greek": "δύναμαι"
+      },
+      {
+        "translation": "to call in; bring a charge or accusation",
+        "greek": "ἐγκαλέω"
+      },
+      {
+        "translation": "to go into",
+        "greek": "εἴσειμι"
+      },
+      {
+        "translation": "to send into",
+        "greek": "εἰσίημι"
+      },
+      {
+        "translation": "to flee out",
+        "greek": "ἐκφεύγω"
+      },
+      {
+        "translation": "to take out of",
+        "greek": "ἐξαιρέω"
+      },
+      {
+        "translation": "to examine well",
+        "greek": "ἐξετάζω"
+      },
+      {
+        "translation": "to cause to forget",
+        "greek": "ἐπιλήθω"
+      },
+      {
+        "translation": "to seek",
+        "greek": "ἐρευνάω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 34,
+    "content": [
+      {
+        "translation": "to come",
+        "greek": "ἔρχομαι"
+      },
+      {
+        "translation": "to find",
+        "greek": "εὑρίσκω"
+      },
+      {
+        "translation": "to live or act piously, religiously",
+        "greek": "εὐσεβέω"
+      },
+      {
+        "translation": "to lead; to consider, believe",
+        "greek": "ἡγέομαι"
+      },
+      {
+        "translation": "to wonder, marvel, be astonished",
+        "greek": "θαυμάζω"
+      },
+      {
+        "translation": "to make a noise",
+        "greek": "θορυβέω"
+      },
+      {
+        "translation": "to approach as a suppliant",
+        "greek": "ἱκετεύω"
+      },
+      {
+        "translation": "to lie down to sleep, sleep",
+        "greek": "καθεύδω"
+      },
+      {
+        "translation": "to send down, let fall",
+        "greek": "καθίημι"
+      },
+      {
+        "translation": "to beautify",
+        "greek": "καλλύνω"
+      },
+      {
+        "translation": "to bind, take prisoner, convict, cast a spell on",
+        "greek": "καταδέω"
+      },
+      {
+        "translation": "to put down, destroy; settle (disputes); lodge, rest",
+        "greek": "καταλύω"
+      },
+      {
+        "translation": "to take, seize, receive",
+        "greek": "λαμβάνω"
+      },
+      {
+        "translation": "to escape notice, to be unknown, unseen, unnoticed",
+        "greek": "λανθάνω"
+      },
+      {
+        "translation": "to learn",
+        "greek": "μανθάνω"
+      },
+      {
+        "translation": "to fight",
+        "greek": "μάχομαι"
+      },
+      {
+        "translation": "be among; (+dat and gen) have a share in",
+        "greek": "μέτειμι"
+      },
+      {
+        "translation": "to nod in sleep, to nap, slumber",
+        "greek": "νυστάζω"
+      },
+      {
+        "translation": "to be left alone, abandoned, forsaken.",
+        "greek": "οἰόομαι"
+      },
+      {
+        "translation": "to be gone, to have gone",
+        "greek": "οἴχομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 35,
+    "content": [
+      {
+        "translation": "to profit, benefit, help, assist",
+        "greek": "ὀνίνημι"
+      },
+      {
+        "translation": "to bring up",
+        "greek": "παιδεύω"
+      },
+      {
+        "translation": "be present",
+        "greek": "πάρειμι"
+      },
+      {
+        "translation": "to pass over, let go, relax, yield, allow",
+        "greek": "παρίημι"
+      },
+      {
+        "translation": "to make proof",
+        "greek": "πειράζω"
+      },
+      {
+        "translation": "to trust, trust to",
+        "greek": "πιστεύω"
+      },
+      {
+        "translation": "to hold to, offer",
+        "greek": "προσέχω"
+      },
+      {
+        "translation": "to have come; to belong to, to fit",
+        "greek": "προσήκω"
+      },
+      {
+        "translation": "be with (incl. be wife of, study with)",
+        "greek": "σύνειμι"
+      },
+      {
+        "translation": "to bring together; understand",
+        "greek": "συνίημι"
+      },
+      {
+        "translation": "to help, aid, succour",
+        "greek": "τιμωρέω"
+      },
+      {
+        "translation": "(with gen.) to hit the mark, to get; (with pple) to happen to, to actually",
+        "greek": "τυγχάνω"
+      },
+      {
+        "translation": "to stay behind, survive",
+        "greek": "ὑπομένω"
+      },
+      {
+        "translation": "to talk nonsense, play the fool",
+        "greek": "φλυαρέω"
+      },
+      {
+        "translation": "use, experience",
+        "greek": "χράομαι"
+      },
+      {
+        "translation": "to go up, mount, to go up to",
+        "greek": "ἀναβαίνω"
+      },
+      {
+        "translation": "to force, compel",
+        "greek": "ἀναγκάζω"
+      },
+      {
+        "translation": "to examine into, investigate",
+        "greek": "ἀναζητέω"
+      },
+      {
+        "translation": "to bring over, convince",
+        "greek": "ἀναπείθω"
+      },
+      {
+        "translation": "to ask",
+        "greek": "ἀνερωτάω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 36,
+    "content": [
+      {
+        "translation": "to drive away, expel from",
+        "greek": "ἀπελαύνω"
+      },
+      {
+        "translation": "to step off from",
+        "greek": "ἀποβαίνω"
+      },
+      {
+        "translation": "to be away from home, be abroad",
+        "greek": "ἀποδημέω"
+      },
+      {
+        "translation": "to separate, set apart; mid. answer",
+        "greek": "ἀποκρίνω"
+      },
+      {
+        "translation": "to leave over",
+        "greek": "ἀπολείπω"
+      },
+      {
+        "translation": "to destroy, kill; to lose",
+        "greek": "ἀπόλλυμι"
+      },
+      {
+        "translation": "to turn away from, dissuade",
+        "greek": "ἀποτρέπω"
+      },
+      {
+        "translation": "to shew fort, display, produce",
+        "greek": "ἀποφαίνω"
+      },
+      {
+        "translation": "to flee from, escape",
+        "greek": "ἀποφεύγω"
+      },
+      {
+        "translation": "to will, wish, be willing",
+        "greek": "βούλομαι"
+      },
+      {
+        "translation": "become, be born",
+        "greek": "γίγνομαι"
+      },
+      {
+        "translation": "to learn to know, to perceive, mark, learn",
+        "greek": "γιγνώσκω"
+      },
+      {
+        "translation": "to show",
+        "greek": "δείκνυμι"
+      },
+      {
+        "translation": "to throw over",
+        "greek": "διαβάλλω"
+      },
+      {
+        "translation": "to hinder, prevent",
+        "greek": "διακωλύω"
+      },
+      {
+        "translation": "to bring quite to an end, accomplish",
+        "greek": "διατελέω"
+      },
+      {
+        "translation": "to rub between, rub hard, rub away, consume, waste",
+        "greek": "διατρίβω"
+      },
+      {
+        "translation": "to flee through, get away from, escape",
+        "greek": "διαφεύγω"
+      },
+      {
+        "translation": "to cross-question",
+        "greek": "διερωτάω"
+      },
+      {
+        "translation": "to swear solemnly, to declare on oath that . .",
+        "greek": "διόμνυμι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 37,
+    "content": [
+      {
+        "translation": "(to knock out); to astound, shock, amaze",
+        "greek": "ἐκπλήσσω"
+      },
+      {
+        "translation": "to deceive",
+        "greek": "ἐξαπατάω"
+      },
+      {
+        "translation": "to drive out from",
+        "greek": "ἐξελαύνω"
+      },
+      {
+        "translation": "to convict, confute, refute",
+        "greek": "ἐξελέγχω"
+      },
+      {
+        "translation": "to be at home, live at home",
+        "greek": "ἐπιδημέω"
+      },
+      {
+        "translation": "to set one's heart upon",
+        "greek": "ἐπιθυμέω"
+      },
+      {
+        "translation": "to swear falsely, forswear oneself",
+        "greek": "ἐπιορκέω"
+      },
+      {
+        "translation": "to send besides",
+        "greek": "ἐπιπέμπω"
+      },
+      {
+        "translation": "to turn over to, entrust, command",
+        "greek": "ἐπιτρέπω"
+      },
+      {
+        "translation": "to sit upon",
+        "greek": "ἐφέζομαι"
+      },
+      {
+        "translation": "to set on, over; set in charge of",
+        "greek": "ἐφίστημι"
+      },
+      {
+        "translation": "to be a private person",
+        "greek": "ἰδιωτεύω"
+      },
+      {
+        "translation": "to observe well, to understand",
+        "greek": "κατανοέω"
+      },
+      {
+        "translation": "to abuse, revile",
+        "greek": "λοιδορέω"
+      },
+      {
+        "translation": "to be a witness, to bear witness, give evidence, bear testimony",
+        "greek": "μαρτυρέω"
+      },
+      {
+        "translation": "to blame, censure, find fault with",
+        "greek": "μέμφομαι"
+      },
+      {
+        "translation": "to mimic, imitate, represent, portray",
+        "greek": "μιμέομαι"
+      },
+      {
+        "translation": "to remind",
+        "greek": "μιμνήσκω"
+      },
+      {
+        "translation": "to put in mind, to admonish, warn, advise",
+        "greek": "νουθετέω"
+      },
+      {
+        "translation": "to lament, bewail, mourn for",
+        "greek": "ὀδύρομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 38,
+    "content": [
+      {
+        "translation": "agree, say the same thing as",
+        "greek": "ὁμολογέω"
+      },
+      {
+        "translation": "to throw a reproach upon",
+        "greek": "ὀνειδίζω"
+      },
+      {
+        "translation": "to stay beside",
+        "greek": "παραμένω"
+      },
+      {
+        "translation": "to tie, fasten, hang about",
+        "greek": "περιάπτω"
+      },
+      {
+        "translation": "to wait for, await",
+        "greek": "περιμένω"
+      },
+      {
+        "translation": "to carry round",
+        "greek": "περιφέρω"
+      },
+      {
+        "translation": "to choose before others, choose by preference, prefer, select",
+        "greek": "προκρίνω"
+      },
+      {
+        "translation": "to urge forwards",
+        "greek": "προτρέπω"
+      },
+      {
+        "translation": "to take food, eat",
+        "greek": "σιτέομαι"
+      },
+      {
+        "translation": "to make haste",
+        "greek": "σπουδάζω"
+      },
+      {
+        "translation": "to come together, meet",
+        "greek": "συγχωρέω"
+      },
+      {
+        "translation": "meet, agree, happen",
+        "greek": "συμβαίνω"
+      },
+      {
+        "translation": "to throw together, dash together",
+        "greek": "συμβάλλω"
+      },
+      {
+        "translation": "to flee along with",
+        "greek": "συμφεύγω"
+      },
+      {
+        "translation": "to stretch together, strain, draw tight, brace up",
+        "greek": "συντείνω"
+      },
+      {
+        "translation": "to complete, finish, accomplish; pple. finally, in the end",
+        "greek": "τελευτάω"
+      },
+      {
+        "translation": "offer",
+        "greek": "τραπεζόω"
+      },
+      {
+        "translation": "to spare",
+        "greek": "φείδομαι"
+      },
+      {
+        "translation": "to think, consider, reflect, take thought, have a care, give heed",
+        "greek": "φροντίζω"
+      },
+      {
+        "translation": "to feel irritation",
+        "greek": "ἀγανακτέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 39,
+    "content": [
+      {
+        "translation": "to walk the air",
+        "greek": "ἀεροβατέω"
+      },
+      {
+        "translation": "to hearken to, listen to",
+        "greek": "ἀκροάομαι"
+      },
+      {
+        "translation": "to be caught, conquered, caught in the act",
+        "greek": "ἁλίσκομαι"
+      },
+      {
+        "translation": "to make go up, cause to mount",
+        "greek": "ἀναβιβάζω"
+      },
+      {
+        "translation": "inquire of, question",
+        "greek": "ἀνείρομαι"
+      },
+      {
+        "translation": "to honour in return",
+        "greek": "ἀντιτιμάω"
+      },
+      {
+        "translation": "to set free, release, deliver",
+        "greek": "ἀπαλλάσσω"
+      },
+      {
+        "translation": "to die, be killed",
+        "greek": "ἀποθνῄσκω"
+      },
+      {
+        "translation": "to hide from, keep hidden from",
+        "greek": "ἀποκρύπτω"
+      },
+      {
+        "translation": "to kill, slay",
+        "greek": "ἀποκτείνω"
+      },
+      {
+        "translation": "to confiscate",
+        "greek": "δημοσιεύω"
+      },
+      {
+        "translation": "to destroy, ruin; to corrupt",
+        "greek": "διαφθείρω"
+      },
+      {
+        "translation": "to light upon, fall in with, meet with",
+        "greek": "ἐντυγχάνω"
+      },
+      {
+        "translation": "to go out, come out",
+        "greek": "ἐξέρχομαι"
+      },
+      {
+        "translation": "to find out, discover",
+        "greek": "ἐξευρίσκω"
+      },
+      {
+        "translation": "to know",
+        "greek": "ἐπίσταμαι"
+      },
+      {
+        "translation": "to pursue",
+        "greek": "ἐπιτηδεύω"
+      },
+      {
+        "translation": "to lay, put on; (mid.) to attack",
+        "greek": "ἐπιτίθημι"
+      },
+      {
+        "translation": "to attempt, attack, put one’s hand to",
+        "greek": "ἐπιχειρέω"
+      },
+      {
+        "translation": "to work, labour",
+        "greek": "ἐργάζομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 40,
+    "content": [
+      {
+        "translation": "to be of good repute, to be held in esteem, honoured, famous, popular",
+        "greek": "εὐδοκιμέω"
+      },
+      {
+        "translation": "to do well, do good",
+        "greek": "εὐεργετέω"
+      },
+      {
+        "translation": "to set down, place",
+        "greek": "καθίστημι"
+      },
+      {
+        "translation": "to laugh at, jeer",
+        "greek": "καταγελάω"
+      },
+      {
+        "translation": "to speak against, to accuse",
+        "greek": "κατηγορέω"
+      },
+      {
+        "translation": "to be daring, to make a venture, take the risk, do a daring thing",
+        "greek": "κινδυνεύω"
+      },
+      {
+        "translation": "to count, reckon, calculate, compute",
+        "greek": "λογίζομαι"
+      },
+      {
+        "translation": "to bring profit, gain",
+        "greek": "λυσιτελέω"
+      },
+      {
+        "translation": "to send after",
+        "greek": "μεταπέμπω"
+      },
+      {
+        "translation": "to fall differently, undergo a change",
+        "greek": "μεταπίπτω"
+      },
+      {
+        "translation": "to owe, to be liable to pay",
+        "greek": "ὀφλισκάνω"
+      },
+      {
+        "translation": "to go aside, make room, give place, retire",
+        "greek": "παραχωρέω"
+      },
+      {
+        "translation": "to wound all round",
+        "greek": "περιιάπτω"
+      },
+      {
+        "translation": "to expect",
+        "greek": "προσδοκάω"
+      },
+      {
+        "translation": "to be thought besides",
+        "greek": "προσδοκέω"
+      },
+      {
+        "translation": "to make over to; mid. procure, pretend",
+        "greek": "προσποιέω"
+      },
+      {
+        "translation": "to order",
+        "greek": "προστάσσω"
+      },
+      {
+        "translation": "to hold the presidency",
+        "greek": "πρυτανεύω"
+      },
+      {
+        "translation": "to look about, look carefully",
+        "greek": "σκέπτομαι"
+      },
+      {
+        "translation": "to fight in the shade",
+        "greek": "σκιαμαχέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 41,
+    "content": [
+      {
+        "translation": "to put together",
+        "greek": "συντίθημι"
+      },
+      {
+        "translation": "to draw in",
+        "greek": "ὑποστέλλω"
+      },
+      {
+        "translation": "to love knowledge, pursue it, philosophise",
+        "greek": "φιλοσοφέω"
+      },
+      {
+        "translation": "to be severe, sore, grievous",
+        "greek": "χαλεπαίνω"
+      },
+      {
+        "translation": "to chant oracles",
+        "greek": "χρησμῳδέω"
+      },
+      {
+        "translation": "to contend for a prize",
+        "greek": "ἀγωνίζομαι"
+      },
+      {
+        "translation": "to speak in riddles",
+        "greek": "αἰνίσσομαι"
+      },
+      {
+        "translation": "to perceive, apprehend by the senses, to see, hear, feel",
+        "greek": "αἰσθάνομαι"
+      },
+      {
+        "translation": "to take up, take into one's hands",
+        "greek": "ἀναλαμβάνω"
+      },
+      {
+        "translation": "to wish to be delivered from",
+        "greek": "ἀπαλλαξείω"
+      },
+      {
+        "translation": "to come to",
+        "greek": "ἀφικνέομαι"
+      },
+      {
+        "translation": "talk",
+        "greek": "διαλέγομαι"
+      },
+      {
+        "translation": "to be minded, intend, purpose",
+        "greek": "διανοέομαι"
+      },
+      {
+        "translation": "to go in",
+        "greek": "εἰσέρχομαι"
+      },
+      {
+        "translation": "fill quite full",
+        "greek": "ἐμπίμπλημι"
+      },
+      {
+        "translation": "to mark, point out",
+        "greek": "ἐνδείκνυμι"
+      },
+      {
+        "translation": "to be inspired",
+        "greek": "ἐνθουσιάζω"
+      },
+      {
+        "translation": "to lay to heart, consider well, reflect on, ponder",
+        "greek": "ἐνθυμέομαι"
+      },
+      {
+        "translation": "to err from the mark, fail",
+        "greek": "ἐξαμαρτάνω"
+      },
+      {
+        "translation": "to satirize in comedy",
+        "greek": "ἐπικωμῳδέω"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 42,
+    "content": [
+      {
+        "translation": "to hit the mark",
+        "greek": "ἐπιτυγχάνω"
+      },
+      {
+        "translation": "to reproach",
+        "greek": "ἐπονειδίζω"
+      },
+      {
+        "translation": "to be discreet, cautious, beware",
+        "greek": "εὐλαβέομαι"
+      },
+      {
+        "translation": "to think down upon",
+        "greek": "καταφρονέω"
+      },
+      {
+        "translation": "to go down from; return from exile",
+        "greek": "κατέρχομαι"
+      },
+      {
+        "translation": "to divine, prophesy, presage",
+        "greek": "μαντεύομαι"
+      },
+      {
+        "translation": "to prepare, make ready",
+        "greek": "μηχανάομαι"
+      },
+      {
+        "translation": "to sit down by",
+        "greek": "προσκαθίζω"
+      },
+      {
+        "translation": "to be placed at, by; to be attached to, devoted to",
+        "greek": "πρόσκειμαι"
+      },
+      {
+        "translation": "to add, to apply, to close (a door); mid. to join (a group), take as an ally",
+        "greek": "προστίθημι"
+      },
+      {
+        "translation": "to advise, counsel",
+        "greek": "συμβουλεύω"
+      },
+      {
+        "translation": "take up; understand, interpret; assume; reply, rejoin",
+        "greek": "ὑπολαμβάνω"
+      },
+      {
+        "translation": "to know well, know certainly; to read",
+        "greek": "ἀναγιγνώσκω"
+      },
+      {
+        "translation": "to remind",
+        "greek": "ἀναμιμνήσκω"
+      },
+      {
+        "translation": "to fill up; to contaminate, infect",
+        "greek": "ἀναπίμπλημι"
+      },
+      {
+        "translation": "to be hated, incur hatred, be roused to hatred",
+        "greek": "ἀπεχθάνομαι"
+      },
+      {
+        "translation": "to speak in defence, defend oneself",
+        "greek": "ἀπολογέομαι"
+      },
+      {
+        "translation": "to be self-willed",
+        "greek": "αὐθαδίζομαι"
+      },
+      {
+        "translation": "to go through, pass",
+        "greek": "διαγίγνομαι"
+      },
+      {
+        "translation": "to dissemble",
+        "greek": "εἰρωνεύομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 43,
+    "content": [
+      {
+        "translation": "to set oneself against, oppose, withstand",
+        "greek": "ἐναντιόομαι"
+      },
+      {
+        "translation": "to work out, make completely, finish off, bring to perfection",
+        "greek": "ἐξεργάζομαι"
+      },
+      {
+        "translation": "to follow close upon, follow after",
+        "greek": "ἐπακολουθέω"
+      },
+      {
+        "translation": "to exhibit as a specimen",
+        "greek": "ἐπιδείκνυμι"
+      },
+      {
+        "translation": "to take care of, have charge of, have the management of",
+        "greek": "ἐπιμελέομαι"
+      },
+      {
+        "translation": "to fall asleep",
+        "greek": "καταδαρθάνω"
+      },
+      {
+        "translation": "to seize upon, lay hold of",
+        "greek": "καταλαμβάνω"
+      },
+      {
+        "translation": "to have or get a share of",
+        "greek": "μεταλαμβάνω"
+      },
+      {
+        "translation": "feel repentance, regret",
+        "greek": "μεταμέλομαι"
+      },
+      {
+        "translation": "to beg from",
+        "greek": "παραιτέομαι"
+      },
+      {
+        "translation": "to receive from",
+        "greek": "παραλαμβάνω"
+      },
+      {
+        "translation": "to get ready, prepare",
+        "greek": "παρασκευάζω"
+      },
+      {
+        "translation": "to go round, go about",
+        "greek": "περιέρχομαι"
+      },
+      {
+        "translation": "to be ready, willing, eager, zealous to do",
+        "greek": "προθυμέομαι"
+      },
+      {
+        "translation": "to come",
+        "greek": "προσέρχομαι"
+      },
+      {
+        "translation": "use besides; use",
+        "greek": "προσχράομαι"
+      },
+      {
+        "translation": "to be with",
+        "greek": "συγγίγνομαι"
+      },
+      {
+        "translation": "to think with, agree with",
+        "greek": "συγγιγνώσκω"
+      },
+      {
+        "translation": "to promise",
+        "greek": "ὑπισχνέομαι"
+      },
+      {
+        "translation": "to make trial, essay",
+        "greek": "ἀποπειράομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 44,
+    "content": [
+      {
+        "translation": "to vote away from",
+        "greek": "ἀποψηφίζομαι"
+      },
+      {
+        "translation": "to improvise",
+        "greek": "αὐτοσχεδιάζω"
+      },
+      {
+        "translation": "to run all risks, make a desperate attempt, hazard all",
+        "greek": "διακινδυνεύω"
+      },
+      {
+        "translation": "to communicate by word, to express in speech",
+        "greek": "διαμυθολογέω"
+      },
+      {
+        "translation": "to make trial",
+        "greek": "διαπειράομαι"
+      },
+      {
+        "translation": "to say in fine phrases",
+        "greek": "καλλιεπέομαι"
+      },
+      {
+        "translation": "to remark, discover",
+        "greek": "καταγιγνώσκω"
+      },
+      {
+        "translation": "to be superior to; to survive",
+        "greek": "περιγίγνομαι"
+      },
+      {
+        "translation": "to examine together with",
+        "greek": "συνεπισκοπέω"
+      },
+      {
+        "translation": "to take into account, take account of",
+        "greek": "ὑπολογίζομαι"
+      },
+      {
+        "translation": "to hold side by side, to compare",
+        "greek": "ἀντιπαραβάλλω"
+      },
+      {
+        "translation": "to have the effrontery to do",
+        "greek": "ἀπαναισχυντέω"
+      },
+      {
+        "translation": "to speak",
+        "greek": "ἀπαυθαδίζομαι"
+      },
+      {
+        "translation": "to have a democratical constitution, live in a democracy",
+        "greek": "δημοκρατέομαι"
+      },
+      {
+        "translation": "to forget",
+        "greek": "ἐπιλανθάνομαι"
+      },
+      {
+        "translation": "to show favoritism",
+        "greek": "καταχαρίζομαι"
+      },
+      {
+        "translation": "to vote against",
+        "greek": "καταψηφίζομαι"
+      },
+      {
+        "translation": "to order",
+        "greek": "παρακελεύομαι"
+      },
+      {
+        "translation": "to be busy with many things, meddlesome",
+        "greek": "πολυπραγμονέω"
+      },
+      {
+        "translation": "to busy oneself, take trouble",
+        "greek": "πραγματεύομαι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 45,
+    "content": [
+      {
+        "translation": "to be witty, to jest",
+        "greek": "χαριεντίζομαι"
+      },
+      {
+        "translation": "to contrast and compare",
+        "greek": "ἀντιπαρατίθημι"
+      },
+      {
+        "translation": "to scatter",
+        "greek": "κατασκεδάννυμι"
+      },
+      {
+        "translation": "either..or; than",
+        "greek": "ἤ"
+      },
+      {
+        "translation": "in truth, truly, verily, of a surety",
+        "greek": "ἦ"
+      },
+      {
+        "translation": "which way, where, whither, in",
+        "greek": "ᾗ"
+      },
+      {
+        "translation": "the",
+        "greek": "ὁ"
+      },
+      {
+        "translation": "O! oh!",
+        "greek": "ὦ"
+      },
+      {
+        "translation": "modal particle",
+        "greek": "ἄν"
+      },
+      {
+        "translation": "again, anew, afresh, once more",
+        "greek": "αὖ"
+      },
+      {
+        "translation": "at least, at any rate",
+        "greek": "γε"
+      },
+      {
+        "translation": "but",
+        "greek": "δέ"
+      },
+      {
+        "translation": "conj. if, whether; part. w/wishes, adv. w/imperatives",
+        "greek": "εἰ"
+      },
+      {
+        "translation": "from out of",
+        "greek": "ἐκ"
+      },
+      {
+        "translation": "in, among. c. dat.",
+        "greek": "ἐν"
+      },
+      {
+        "translation": "well",
+        "greek": "εὖ"
+      },
+      {
+        "translation": "not",
+        "greek": "οὐ"
+      },
+      {
+        "translation": "where",
+        "greek": "οὗ"
+      },
+      {
+        "translation": "you (personal pronoun)",
+        "greek": "σύ"
+      },
+      {
+        "translation": "and",
+        "greek": "τε"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 46,
+    "content": [
+      {
+        "translation": "always, for ever",
+        "greek": "ἀεί"
+      },
+      {
+        "translation": "up, upon",
+        "greek": "ἀνά"
+      },
+      {
+        "translation": "from, away from. c. gen.",
+        "greek": "ἀπό"
+      },
+      {
+        "translation": "just as (both pre-and postposed); w. part.: because",
+        "greek": "ἅτε"
+      },
+      {
+        "translation": "for",
+        "greek": "γάρ"
+      },
+      {
+        "translation": "it is necessary",
+        "greek": "δεῖ"
+      },
+      {
+        "translation": "wherefore, on which account",
+        "greek": "διό"
+      },
+      {
+        "translation": "two",
+        "greek": "δύο"
+      },
+      {
+        "translation": "if",
+        "greek": "ἐάν"
+      },
+      {
+        "translation": "on, upon with gen., dat., and acc.",
+        "greek": "ἐπί"
+      },
+      {
+        "translation": "yet, as yet, still, besides",
+        "greek": "ἔτι"
+      },
+      {
+        "translation": "in order that (conj.); where (rel. adv.)",
+        "greek": "ἵνα"
+      },
+      {
+        "translation": "and, also",
+        "greek": "καί"
+      },
+      {
+        "translation": "and if, even if, although",
+        "greek": "κἄν"
+      },
+      {
+        "translation": "on the one hand, on the other hand",
+        "greek": "μέν"
+      },
+      {
+        "translation": "now verily, full surely",
+        "greek": "μήν"
+      },
+      {
+        "translation": "a weight,",
+        "greek": "μνᾶ"
+      },
+      {
+        "translation": "now at this very time",
+        "greek": "νῦν"
+      },
+      {
+        "translation": "the night",
+        "greek": "νύξ"
+      },
+      {
+        "translation": "this",
+        "greek": "ὅδε"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 47,
+    "content": [
+      {
+        "translation": "when",
+        "greek": "ὅτε"
+      },
+      {
+        "translation": "adv. + superl., as...as possible; ὅτι μή except",
+        "greek": "ὅτι"
+      },
+      {
+        "translation": "so, then, therefore",
+        "greek": "οὖν"
+      },
+      {
+        "translation": "all, the whole",
+        "greek": "πᾶς"
+      },
+      {
+        "translation": "anywhere, somewhere",
+        "greek": "που"
+      },
+      {
+        "translation": "before",
+        "greek": "πρό"
+      },
+      {
+        "translation": "sir, my good friend",
+        "greek": "τᾶν"
+      },
+      {
+        "translation": "let me tell you, surely, verily",
+        "greek": "τοι"
+      },
+      {
+        "translation": "from under, by, c. gen. under, c. dat., towards c. acc.",
+        "greek": "ὑπό"
+      },
+      {
+        "translation": "in this wise, so, thus",
+        "greek": "ὧδε"
+      },
+      {
+        "translation": "otherwise, but",
+        "greek": "ἀλλά"
+      },
+      {
+        "translation": "on both sides",
+        "greek": "ἀμφί"
+      },
+      {
+        "translation": "over against, opposite. c. gen.",
+        "greek": "ἀντί"
+      },
+      {
+        "translation": "quite all, the whole",
+        "greek": "ἅπας"
+      },
+      {
+        "translation": "just now, recently",
+        "greek": "ἄρτι"
+      },
+      {
+        "translation": "something, some",
+        "greek": "ἄσσα"
+      },
+      {
+        "translation": "form of address: \"father\"",
+        "greek": "ἄττα"
+      },
+      {
+        "translation": "at least then, at any rate, any way",
+        "greek": "γοῦν"
+      },
+      {
+        "translation": "ten",
+        "greek": "δέκα"
+      },
+      {
+        "translation": "certainly, to be sure, of course",
+        "greek": "δῆτα"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 48,
+    "content": [
+      {
+        "translation": "a notion",
+        "greek": "δόξα"
+      },
+      {
+        "translation": "well, quite so, very good",
+        "greek": "εἶἑν"
+      },
+      {
+        "translation": "then, next",
+        "greek": "εἶτα"
+      },
+      {
+        "translation": "whether..or (regardless of whether A or B)",
+        "greek": "εἴτε"
+      },
+      {
+        "translation": "there, in that place",
+        "greek": "ἐκεῖ"
+      },
+      {
+        "translation": "after, since, when",
+        "greek": "ἐπεί"
+      },
+      {
+        "translation": "up to the time that, until",
+        "greek": "ἔστε"
+      },
+      {
+        "translation": "now surely, truly, verily",
+        "greek": "ἤτοι"
+      },
+      {
+        "translation": "down, against with gen.; according to, throughout with acc.",
+        "greek": "κατά"
+      },
+      {
+        "translation": "very, very much, exceedingly",
+        "greek": "μάλα"
+      },
+      {
+        "translation": "(w gen) with, among; (w acc) after",
+        "greek": "μετά"
+      },
+      {
+        "translation": "but not",
+        "greek": "μηδέ"
+      },
+      {
+        "translation": "neither / nor",
+        "greek": "μήτε"
+      },
+      {
+        "translation": "contracting the eyes, near sighted; (subst) gadfly",
+        "greek": "μύωψ"
+      },
+      {
+        "translation": "now, at this moment",
+        "greek": "νυνί"
+      },
+      {
+        "translation": "from where, whence",
+        "greek": "ὅθεν"
+      },
+      {
+        "translation": "to know",
+        "greek": "οἶδα"
+      },
+      {
+        "translation": "a dream, vision in sleep",
+        "greek": "ὄναρ"
+      },
+      {
+        "translation": "to which place, whither",
+        "greek": "ὅποι"
+      },
+      {
+        "translation": "when, whenever",
+        "greek": "ὅταν"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 49,
+    "content": [
+      {
+        "translation": "and/but not; not even",
+        "greek": "οὐδέ"
+      },
+      {
+        "translation": "neither / nor",
+        "greek": "οὔτε"
+      },
+      {
+        "translation": "altogether, entirely",
+        "greek": "πάνυ"
+      },
+      {
+        "translation": "around, round about with gen., dat., and acc.",
+        "greek": "περί"
+      },
+      {
+        "translation": "except",
+        "greek": "πλήν"
+      },
+      {
+        "translation": "ever, sometime",
+        "greek": "ποτε"
+      },
+      {
+        "translation": "before; (after negated main clause) until",
+        "greek": "πρίν"
+      },
+      {
+        "translation": "(Homer, later rare) quickly, presently; (post-Homer) perhaps",
+        "greek": "τάχα"
+      },
+      {
+        "translation": "here, thus",
+        "greek": "τῇδε"
+      },
+      {
+        "translation": "at times, now and then",
+        "greek": "τοτέ"
+      },
+      {
+        "translation": "at that time, then",
+        "greek": "τότε"
+      },
+      {
+        "translation": "over, above, w. gen, over, beyond, w. acc.",
+        "greek": "ὑπέρ"
+      },
+      {
+        "translation": "so that",
+        "greek": "ὥστε"
+      },
+      {
+        "translation": "at the very place, just here, just there",
+        "greek": "αὐτοῦ"
+      },
+      {
+        "translation": "hither",
+        "greek": "δεῦρο"
+      },
+      {
+        "translation": "perhaps, it may be",
+        "greek": "δήπου"
+      },
+      {
+        "translation": "strengthd. for εἰ, if indeed",
+        "greek": "εἴπερ"
+      },
+      {
+        "translation": "to be accustomed",
+        "greek": "εἴωθα"
+      },
+      {
+        "translation": "on account of, for the sake of, because of, for",
+        "greek": "ἕνεκα"
+      },
+      {
+        "translation": "some",
+        "greek": "ἔνιοι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 50,
+    "content": [
+      {
+        "translation": "to be like; to look like",
+        "greek": "ἔοικα"
+      },
+      {
+        "translation": "from morn",
+        "greek": "ἕωθεν"
+      },
+      {
+        "translation": "at which time, when",
+        "greek": "ἡνίκα"
+      },
+      {
+        "translation": "big, great",
+        "greek": "μέγας"
+      },
+      {
+        "translation": "when",
+        "greek": "ὁπότε"
+      },
+      {
+        "translation": "the very man who, the very thing which",
+        "greek": "ὅσπερ"
+      },
+      {
+        "translation": "long ago, in olden time, in days of yore, in time gone by",
+        "greek": "πάλαι"
+      },
+      {
+        "translation": "back, backwards",
+        "greek": "πάλιν"
+      },
+      {
+        "translation": "from some place",
+        "greek": "ποθεν"
+      },
+      {
+        "translation": "whence? (i.e., from where?)",
+        "greek": "πόθεν"
+      },
+      {
+        "translation": "dowry, gift; adv. freely, unbribed",
+        "greek": "προίξ"
+      },
+      {
+        "translation": "just as if, even as",
+        "greek": "ὥσπερ"
+      },
+      {
+        "translation": "elsewhere, in another place, in a strange",
+        "greek": "ἄλλοθι"
+      },
+      {
+        "translation": "forthwith, straightway, at once",
+        "greek": "αὐτίκα"
+      },
+      {
+        "translation": "on the spot",
+        "greek": "αὐτόθι"
+      },
+      {
+        "translation": "himself, herself, themselves",
+        "greek": "ἑαυτοῦ"
+      },
+      {
+        "translation": "eleven; the Eleven, police commissioners at Athens",
+        "greek": "ἕνδεκα"
+      },
+      {
+        "translation": "here, in this place, at this point",
+        "greek": "ἐνθάδε"
+      },
+      {
+        "translation": "sometimes",
+        "greek": "ἐνίοτε"
+      },
+      {
+        "translation": "it is allowed, it is in one's power, is possible",
+        "greek": "ἔξεστι"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 51,
+    "content": [
+      {
+        "translation": "then, next",
+        "greek": "ἔπειτα"
+      },
+      {
+        "translation": "although, albeit",
+        "greek": "καίπερ"
+      },
+      {
+        "translation": "and indeed, and further; and yet",
+        "greek": "καίτοι"
+      },
+      {
+        "translation": "however, nevertheless; of course (answers)",
+        "greek": "μέντοι"
+      },
+      {
+        "translation": "betwixt, between",
+        "greek": "μεταξύ"
+      },
+      {
+        "translation": "to one's home, home, homewards",
+        "greek": "οἴκαδε"
+      },
+      {
+        "translation": "in any way whatever",
+        "greek": "ὁπῃοῦν"
+      },
+      {
+        "translation": "whence, from what place",
+        "greek": "ὁπόθεν"
+      },
+      {
+        "translation": "whatsoever",
+        "greek": "ὁτιοῦν"
+      },
+      {
+        "translation": "therefore, then, accordingly",
+        "greek": "οὐκοῦν"
+      },
+      {
+        "translation": "not therefore, so not",
+        "greek": "οὔκουν"
+      },
+      {
+        "translation": "never",
+        "greek": "οὔποτε"
+      },
+      {
+        "translation": "ever yet",
+        "greek": "πώποτε"
+      },
+      {
+        "translation": "all together, all at once, all in a body",
+        "greek": "σύμπας"
+      },
+      {
+        "translation": "therefore, accordingly",
+        "greek": "τοίνυν"
+      },
+      {
+        "translation": "a thousand",
+        "greek": "χίλιοι"
+      },
+      {
+        "translation": "of me, of myself",
+        "greek": "ἐμαυτοῦ"
+      },
+      {
+        "translation": "hence, from this quarter",
+        "greek": "ἐνθένδε"
+      },
+      {
+        "translation": "here, there; at that juncture",
+        "greek": "ἐνταῦθα"
+      },
+      {
+        "translation": "whenever.",
+        "greek": "ἐπειδάν"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 52,
+    "content": [
+      {
+        "translation": "were kept shut",
+        "greek": "ἐπώχατο"
+      },
+      {
+        "translation": "most",
+        "greek": "μάλιστα"
+      },
+      {
+        "translation": "from one's house, from home",
+        "greek": "οἴκοθεν"
+      },
+      {
+        "translation": "in any way whatever, in some way or other",
+        "greek": "ὁπωσοῦν"
+      },
+      {
+        "translation": "nowhere",
+        "greek": "οὐδαμοῦ"
+      },
+      {
+        "translation": "altogether, absolutely",
+        "greek": "παράπαν"
+      },
+      {
+        "translation": "before",
+        "greek": "πρόσθεν"
+      },
+      {
+        "translation": "of thyself",
+        "greek": "σεαυτοῦ"
+      },
+      {
+        "translation": "to share in knowledge, be cognisant of",
+        "greek": "σύνοιδα"
+      },
+      {
+        "translation": "such a",
+        "greek": "τοιόσδε"
+      },
+      {
+        "translation": "so strong, so able",
+        "greek": "τοσόσδε"
+      },
+      {
+        "translation": "four-legged a table",
+        "greek": "τράπεζα"
+      },
+      {
+        "translation": "(Ion.) \u003e ἀφοράω]",
+        "greek": "ἀπορέω ["
+      },
+      {
+        "translation": "each time, on each occasion",
+        "greek": "ἑκάστοτε"
+      },
+      {
+        "translation": "hither, here",
+        "greek": "ἐνταυθοῖ"
+      },
+      {
+        "translation": "hence",
+        "greek": "ἐντεῦθεν"
+      },
+      {
+        "translation": "anybody (anything) whatsoever",
+        "greek": "ὁστισοῦν"
+      },
+      {
+        "translation": "never",
+        "greek": "οὐδέποτε"
+      },
+      {
+        "translation": "everywhere",
+        "greek": "πανταχοῦ"
+      },
+      {
+        "translation": "in many places",
+        "greek": "πολλαχοῦ"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 53,
+    "content": [
+      {
+        "translation": "to buy",
+        "greek": "πρίασθαι"
+      },
+      {
+        "translation": "to know besides;",
+        "greek": "πρόσοιδα"
+      },
+      {
+        "translation": "four",
+        "greek": "τέσσαρες"
+      },
+      {
+        "translation": "before, in front",
+        "greek": "ἔμπροσθεν"
+      },
+      {
+        "translation": "all in all, altogether, wholly, absolutely",
+        "greek": "παντάπασι"
+      },
+      {
+        "translation": "of such an age",
+        "greek": "τηλικόσδε"
+      },
+      {
+        "translation": "thirty",
+        "greek": "τριάκοντα"
+      },
+      {
+        "translation": "nor yet at any time, never yet at any time",
+        "greek": "οὐδεπώποτε"
+      },
+      {
+        "translation": "seventy",
+        "greek": "ἑβδομήκοντα"
+      },
+      {
+        "translation": "consider worthy",
+        "greek": "ἀξιάω ( = ἀξιόω)"
+      },
+      {
+        "translation": "ABC and any other geometric figure",
+        "greek": "ΑΒΓ"
+      },
+      {
+        "translation": "Dia",
+        "greek": "Δίη"
+      },
+      {
+        "translation": "Hera",
+        "greek": "Ἥρα"
+      },
+      {
+        "translation": "Hades",
+        "greek": "ᾍδης"
+      },
+      {
+        "translation": "Ajax",
+        "greek": "Αἴας"
+      },
+      {
+        "translation": "Dion",
+        "greek": "Δίον"
+      },
+      {
+        "translation": "Zeus",
+        "greek": "Ζεύς"
+      },
+      {
+        "translation": "Leon",
+        "greek": "Λέων"
+      },
+      {
+        "translation": "Hector",
+        "greek": "Ἕκτωρ"
+      },
+      {
+        "translation": "Thetis",
+        "greek": "Θέτις"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 54,
+    "content": [
+      {
+        "translation": "from the island of Ceos",
+        "greek": "Κεῖος"
+      },
+      {
+        "translation": "Lycon",
+        "greek": "Λύκων"
+      },
+      {
+        "translation": "Minos",
+        "greek": "Μίνως"
+      },
+      {
+        "translation": "Paris son of Priam",
+        "greek": "Πάρις"
+      },
+      {
+        "translation": "the Pythia, priestess of Pythian Apollo",
+        "greek": "Πυθία"
+      },
+      {
+        "translation": "Troy",
+        "greek": "Τροία"
+      },
+      {
+        "translation": "son of Zeus and Aegina, grandfather of Achilles",
+        "greek": "Αἰακός"
+      },
+      {
+        "translation": "Anytus",
+        "greek": "Ἄνυτος"
+      },
+      {
+        "translation": "Delphi; Delphians",
+        "greek": "Δελφοί"
+      },
+      {
+        "translation": "Delium",
+        "greek": "Δήλιον"
+      },
+      {
+        "translation": "from Elis",
+        "greek": "Ἠλεῖος"
+      },
+      {
+        "translation": "Theages",
+        "greek": "Θεάγης"
+      },
+      {
+        "translation": "Hippias",
+        "greek": "Ἱππίας"
+      },
+      {
+        "translation": "Crito",
+        "greek": "Κρίτων"
+      },
+      {
+        "translation": "Homer",
+        "greek": "Ὅμηρος"
+      },
+      {
+        "translation": "Orpheus",
+        "greek": "Ὀρφεύς"
+      },
+      {
+        "translation": "Plato",
+        "greek": "Πλάτων"
+      },
+      {
+        "translation": "Antiphon",
+        "greek": "Ἀντιφῶν"
+      },
+      {
+        "translation": "Ariston",
+        "greek": "Ἀρίστων"
+      },
+      {
+        "translation": "Gorgias",
+        "greek": "Γοργίας"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 55,
+    "content": [
+      {
+        "translation": "Hesiod",
+        "greek": "Ἡσίοδος"
+      },
+      {
+        "translation": "Callias",
+        "greek": "Καλλίας"
+      },
+      {
+        "translation": "Meletus",
+        "greek": "Μέλητος"
+      },
+      {
+        "translation": "Olympia",
+        "greek": "Ὀλυμπία"
+      },
+      {
+        "translation": "Salamis",
+        "greek": "Σαλαμίς"
+      },
+      {
+        "translation": "the crafty.)",
+        "greek": "Σίσυφος"
+      },
+      {
+        "translation": "Sphettos, Attic deme",
+        "greek": "Σφηττός"
+      },
+      {
+        "translation": "Telamon",
+        "greek": "Τελαμών"
+      },
+      {
+        "translation": "Athenian, of Athens",
+        "greek": "Ἀθηναῖος"
+      },
+      {
+        "translation": "Athenaeus",
+        "greek": "Ἀθήναιος"
+      },
+      {
+        "translation": "Aeschines",
+        "greek": "Αἰσχίνης"
+      },
+      {
+        "translation": "Epigenes",
+        "greek": "Ἐπιγένης"
+      },
+      {
+        "translation": "Theodotes",
+        "greek": "Θεοδότης"
+      },
+      {
+        "translation": "Theodotus",
+        "greek": "Θεόδοτος"
+      },
+      {
+        "translation": "Lysanias",
+        "greek": "Λυσανίας"
+      },
+      {
+        "translation": "Musaeus",
+        "greek": "Μουσαῖος"
+      },
+      {
+        "translation": "Odysseus",
+        "greek": "Ὀδυσσεύς"
+      },
+      {
+        "translation": "(pr.n.) Paralius, (adj.) of Paralos",
+        "greek": "Παράλιος"
+      },
+      {
+        "translation": "Prodicus",
+        "greek": "Πρόδικος"
+      },
+      {
+        "translation": "a Sphettian",
+        "greek": "Σφήττιος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Plato - Apology",
+    "set": 56,
+    "content": [
+      {
+        "translation": "Socrates",
+        "greek": "Σωκράτης"
+      },
+      {
+        "translation": "Chaerephon",
+        "greek": "Χαιρεφῶν"
+      },
+      {
+        "translation": "Amphipolis",
+        "greek": "Ἀμφίπολις"
+      },
+      {
+        "translation": "Demodocus",
+        "greek": "Δημόδοκος"
+      },
+      {
+        "translation": "Hipponicus",
+        "greek": "Ἱππόνικος"
+      },
+      {
+        "translation": "(inhabitant) of the town of Leontini",
+        "greek": "Λεοντῖνος"
+      },
+      {
+        "translation": "at Olympia",
+        "greek": "Ὀλυμπίασι"
+      },
+      {
+        "translation": "the Inventor",
+        "greek": "Παλαμήδης"
+      },
+      {
+        "translation": "Potidea",
+        "greek": "Ποτείδαια"
+      },
+      {
+        "translation": "Adimantus",
+        "greek": "Ἀδείμαντος"
+      },
+      {
+        "translation": "Anaxagoras",
+        "greek": "Ἀναξαγόρας"
+      },
+      {
+        "translation": "Theozotides",
+        "greek": "Θεοζοτίδης"
+      },
+      {
+        "translation": "pr.n. Rhadamanthys",
+        "greek": "Ῥαδάμανθυς"
+      },
+      {
+        "translation": "Salaminian, of or from Salamis",
+        "greek": "Σαλαμίνιος"
+      },
+      {
+        "translation": "Aeantodorus",
+        "greek": "Αἰαντόδωρος"
+      },
+      {
+        "translation": "Apollodorus",
+        "greek": "Ἀπολλόδωρος"
+      },
+      {
+        "translation": "Aristophanes",
+        "greek": "Ἀριστοφάνης"
+      },
+      {
+        "translation": "of Clazomenae",
+        "greek": "Κλαζομένιος"
+      },
+      {
+        "translation": "Critobulus",
+        "greek": "Κριτόβουλος"
+      },
+      {
+        "translation": "Nicostratus",
+        "greek": "Νικόστρατος"
+      },
+      {
+        "translation": "Triptolemus",
+        "greek": "Τριπτόλεμος"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  }
+]

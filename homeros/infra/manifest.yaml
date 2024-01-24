@@ -1,0 +1,176 @@
+---
+# Source: homeros/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homeros
+  namespace: odysseia
+data:
+  ELASTIC_SEARCH_SERVICE: "https://aristoteles-es-http:9200"
+  ENV: "localdev"
+  TLS_ENABLED: "true"
+  CERT_ROOT: "/etc/certs"
+  SOLON_SERVICE: "https://solon:5443"
+  ALEXANDROS_SERVICE: "http://alexandros:5000"
+  DIONYSIOS_SERVICE: "http://dionysios:5000"
+  HERODOTOS_SERVICE: "http://herodotos:5000"
+  SOKRATES_SERVICE: "http://sokrates:5000"
+---
+# Source: homeros/templates/trace-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homeros-trace-config
+  namespace: odysseia
+data:
+  trace-config.json: |
+    {
+      "operationScores": [
+        {
+          "operation": "dictionary",
+          "score": 100
+        },
+        {
+          "operation": "grammar",
+          "score": 100
+        },
+        {
+          "operation": "authors",
+          "score": 100
+        },
+        {
+          "operation": "sentence",
+          "score": 100
+        },
+        {
+          "operation": "text",
+          "score": 100
+        },
+        {
+          "operation": "options",
+          "score": 100
+        },
+        {
+          "operation": "answer",
+          "score": 100
+        },
+        {
+          "operation": "quiz",
+          "score": 100
+        },
+        {
+          "operation": "status",
+          "score": 1
+        }
+      ]
+    }
+---
+# Source: homeros/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: homeros
+  namespace: odysseia
+spec:
+  selector:
+    app: homeros
+  ports:
+    - name: "gateway"
+      port: 8080
+      targetPort: 8080
+    - name: "delve"
+      port: 2345
+      targetPort: 2345
+---
+# Source: homeros/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeros
+  namespace: odysseia
+  labels:
+    heritage: "Helm"
+    release: "homeros"
+    chart: "homeros"
+    env: localdev
+    variant: k3d
+    app: homeros
+    domain: "backend"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeros
+  template:
+    metadata:
+      labels:
+        app: homeros
+        release: homeros
+        version: v0.0.11
+    spec:
+      containers:
+        - name: "aristophanes"
+          image: ghcr.io/odysseia-greek/aristophanes:v0.0.11
+
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: ELASTIC_SEARCH_USER
+              valueFrom:
+                secretKeyRef:
+                  name: agreus-elastic
+                  key: user
+            - name: ELASTIC_SEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: agreus-elastic
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: homeros
+          ports:
+            - containerPort: 50052
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 50m
+            limits:
+              memory: 64Mi
+              cpu: 200m
+          volumeMounts:
+            - name: elastic-internal-tls
+              mountPath: /app/config/elastic
+              readOnly: true
+        - name: homeros
+          image: ghcr.io/odysseia-greek/homeros:v0.0.11
+
+          imagePullPolicy: Never
+          env:
+            - name: TRACE_CONFIG_PATH
+              value: /etc/config/trace-config.json
+          envFrom:
+            - configMapRef:
+                name: homeros
+          ports:
+            - name: graphql
+              containerPort: 8080
+              protocol: TCP
+            - containerPort: 2345
+              name: delve
+          volumeMounts:
+            - name: trace-config-volume
+              mountPath: /etc/config
+      volumes:
+        - name: trace-config-volume
+          configMap:
+            name: homeros-trace-config
+        - name: elastic-internal-tls
+          secret:
+            secretName: aristoteles-es-http-certs-public

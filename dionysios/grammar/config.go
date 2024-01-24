@@ -24,9 +24,7 @@ import (
 )
 
 const (
-	defaultIndex             string = "grammar"
-	EnvAggregatorAddress            = "ARISTARCHOS_ADDRESS"
-	DEFAULTAGGREGATORADDRESS        = "aristarchos:50053"
+	defaultIndex string = "grammar"
 )
 
 func CreateNewConfig(env string) (*DionysosHandler, error) {
@@ -139,7 +137,7 @@ func CreateNewConfig(env string) (*DionysosHandler, error) {
 		return nil, err
 	}
 
-	aggregatorAddress := config.StringFromEnv(EnvAggregatorAddress, DEFAULTAGGREGATORADDRESS)
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
 	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
 	if healthCheck {
 		healthy := aggregator.WaitForHealthyState()

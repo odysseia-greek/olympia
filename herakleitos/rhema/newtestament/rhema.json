@@ -1,0 +1,26 @@
+{
+  "rhemai": [
+    {
+      "author": "John New Testament",
+      "greek": "ΕΝ ΑΡΧΗ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.",
+      "translations": [
+        "In the beginning was the Word, and the Word was with God, and the Word was God."
+      ],
+      "book": 1,
+      "chapter": 1,
+      "section": 1,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg004.perseus-grc2:1.1/"
+    },
+    {
+      "author": "Matthew New Testament",
+      "greek": "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ, καὶ ἐκ τῶν λόγων σου καταδικασθήσῃ.",
+      "translations": [
+        "For by your words you will be justified, and by your words you will be condemned."
+      ],
+      "book": 2,
+      "chapter": 12,
+      "section": 37,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg001.perseus-grc2:12.37/"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import (
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
+	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
@@ -131,11 +132,24 @@ func CreateNewConfig(env string) (*SokratesHandler, error) {
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 	searchWord := config.StringFromEnv(config.EnvSearchWord, config.DefaultSearchWord)
 
+	client, err := config.CreateOdysseiaClient()
+	if err != nil {
+		return nil, err
+	}
+
+	ticker := time.NewTicker(30 * time.Second)
+	quizAttempts := make(chan plato.QuizAttempt)
+	aggregatedResult := make(map[string]plato.QuizAttempt)
+
 	return &SokratesHandler{
-		Elastic:    elastic,
-		Randomizer: randomizer,
-		SearchWord: searchWord,
-		Index:      index,
-		Tracer:     tracer,
+		Tracer:             tracer,
+		Elastic:            elastic,
+		Randomizer:         randomizer,
+		Client:             client,
+		SearchWord:         searchWord,
+		Index:              index,
+		QuizAttempts:       quizAttempts,
+		AggregatedAttempts: aggregatedResult,
+		Ticker:             ticker,
 	}, nil
 }

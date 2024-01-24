@@ -8,11 +8,16 @@ import (
 	"github.com/odysseia-greek/agora/aristoteles"
 	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/helpers"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/service"
 	plato "github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	pab "github.com/odysseia-greek/olympia/aristarchos/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
+	"google.golang.org/grpc/metadata"
 	"log"
 	"net/http"
 	"strings"
@@ -20,17 +25,19 @@ import (
 )
 
 type HerodotosHandler struct {
-	Tracer  *aristophanes.ClientTracer
-	Elastic aristoteles.Client
-	Index   string
+	Tracer     *aristophanes.ClientTracer
+	Aggregator *aristarchos.ClientAggregator
+	Elastic    aristoteles.Client
+	Index      string
 }
 
 const (
-	Author  string = "author"
-	Authors string = "authors"
-	Book    string = "book"
-	Books   string = "books"
-	Id      string = "_id"
+	Author   string = "author"
+	Authors  string = "authors"
+	Book     string = "book"
+	Books    string = "books"
+	RootWord string = "rootword"
+	Id       string = "_id"
 )
 
 // PingPong pongs the ping
@@ -347,7 +354,7 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 
 	w.Header().Set(plato.HeaderKey, requestId)
 
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
+	logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
 
 	var checkSentenceRequest models.CheckSentenceRequest
 	decoder := json.NewDecoder(req.Body)
@@ -646,6 +653,182 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 	}
 
 	middleware.ResponseWithJson(w, books)
+}
+
+// analyseText fetches words and queries them in all the texts
+func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request) {
+	// swagger:route GET /texts sentence createSentence
+	//
+	// Creates a new sentence for translation
+	//
+	//	Consumes:
+	//	- application/json
+	//
+	//	Produces:
+	//	- application/json
+	//
+	//   Parameters:
+	//     + name: rootword
+	//       in: rootword
+	//       description: rootword to be searched in text
+	//		 example: herodotos
+	//       required: true
+	//       type: string
+	//       format: rootword
+	//		 title: rootword
+	//
+	//	Schemes: http, https
+	//
+	//	Responses:
+	//	  200: Rhema
+	//    400: ValidationError
+	//	  404: NotFoundError
+	//	  405: MethodError
+	//    502: ElasticSearchError
+	rootWord := req.URL.Query().Get(RootWord)
+
+	requestId := req.Header.Get(plato.HeaderKey)
+	splitID := strings.Split(requestId, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	if traceCall {
+		traceReceived := &pb.TraceRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			Method:       req.Method,
+			Url:          req.URL.RequestURI(),
+			Host:         req.Host,
+		}
+
+		go h.Tracer.Trace(context.Background(), traceReceived)
+	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
+
+	if rootWord == "" {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "rootWord",
+					Message: "cannot be empty",
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
+	md := metadata.New(map[string]string{service.HeaderKey: requestId})
+	ctx = metadata.NewOutgoingContext(context.Background(), md)
+
+	aggregatorRequest := pab.AggregatorRequest{RootWord: rootWord}
+	words, err := h.Aggregator.RetrieveSearchWords(ctx, &aggregatorRequest)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "querying aggregator failed",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	boolQuery := map[string]interface{}{
+		"bool": map[string]interface{}{
+			"should": make([]map[string]interface{}, len(words.Word)),
+		},
+	}
+
+	for i, word := range words.Word {
+		boolQuery["bool"].(map[string]interface{})["should"].([]map[string]interface{})[i] = map[string]interface{}{
+			"match": map[string]interface{}{
+				"greek": word,
+			},
+		}
+	}
+
+	var query = map[string]interface{}{
+		"query": boolQuery,
+	}
+
+	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
+
+	if err != nil {
+		e := models.ElasticSearchError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Message: models.ElasticErrorMessage{
+				ElasticError: err.Error(),
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	if traceCall {
+		go h.databaseSpan(response, query, traceID, spanID)
+	}
+
+	if len(response.Hits.Hits) == 0 {
+		e := models.NotFoundError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Message: models.NotFoundMessage{
+				Type:   fmt.Sprintf("words: %v", words),
+				Reason: "no hits",
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	var rhemas models.Rhema
+
+	for _, hit := range response.Hits.Hits {
+		elasticJson, _ := json.Marshal(hit.Source)
+		rhemaSource, err := models.UnmarshalRhema(elasticJson)
+		errorMessage := fmt.Errorf("an error occurred while parsing %s", elasticJson)
+		if err != nil {
+			logging.Error(errorMessage.Error())
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "analyzeText",
+						Message: errorMessage.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		for _, word := range words.Word {
+			highlight := fmt.Sprintf("&&&%s&&&", word)
+			rhemaSource.Greek = strings.ReplaceAll(rhemaSource.Greek, word, highlight)
+			rhemas.Rhemai = append(rhemas.Rhemai, rhemaSource)
+		}
+	}
+
+	middleware.ResponseWithCustomCode(w, 200, rhemas)
 }
 
 func (h *HerodotosHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {

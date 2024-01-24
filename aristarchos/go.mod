@@ -3,13 +3,13 @@ module github.com/odysseia-greek/olympia/aristarchos
 go 1.21.4
 
 require (
-	github.com/odysseia-greek/agora/aristoteles v0.1.2
-	github.com/odysseia-greek/agora/plato v0.1.4
-	github.com/odysseia-greek/attike/aristophanes v0.4.0
+	github.com/odysseia-greek/agora/aristoteles v0.1.4
+	github.com/odysseia-greek/agora/plato v0.1.12
+	github.com/odysseia-greek/attike/aristophanes v0.4.1
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.8.4
-	google.golang.org/grpc v1.60.0
-	google.golang.org/protobuf v1.31.0
+	google.golang.org/grpc v1.60.1
+	google.golang.org/protobuf v1.32.0
 )
 
 require (
@@ -34,8 +34,6 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/odysseia-greek/agora/diogenes v0.1.4 // indirect
-	github.com/odysseia-greek/aristoteles v0.6.0 // indirect
-	github.com/odysseia-greek/plato v0.7.6 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect

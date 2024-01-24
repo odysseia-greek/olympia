@@ -13,7 +13,6 @@ import (
 
 const (
 	cacheNameHerodotosTree string = "herodotosTree"
-	cacheNameSokratesTree  string = "sokratesTree"
 )
 
 func (h *HomerosHandler) Books(requestID string) ([]models.AuthorTree, error) {

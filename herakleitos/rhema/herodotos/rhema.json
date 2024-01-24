@@ -15,7 +15,7 @@
       "author": "Herodotos",
       "greek": "Περσέων μέν νυν οἱ λόγιοι Φοίνικας αἰτίους φασὶ γενέσθαι τῆς διαφορῆς. τούτους γὰρ ἀπὸ τῆς Ἐρυθρῆς καλεομένης θαλάσσης ἀπικομένους ἐπὶ τήνδε τὴν θάλασσαν, καὶ οἰκήσαντας τοῦτον τὸν χῶρον τὸν καὶ νῦν οἰκέουσι, αὐτίκα ναυτιλίῃσι μακρῇσι ἐπιθέσθαι, ἀπαγινέοντας δὲ φορτία Αἰγύπτιά τε καὶ Ἀσσύρια τῇ τε ἄλλῃ ἐσαπικνέεσθαι καὶ δὴ καὶ ἐς Ἄργος.",
       "translations": [
-        "The Persian learned men say that the Phoenicians were the cause of the dispute. These (they say) came to our seas from the sea which is called Red,[*] and having settled in the country which they still occupy, at once began to make long voyages. Among other places to which they carried Egyptian and Assyrian merchandise, they came to Argos,"
+        "The Persian learned men say that the Phoenicians were the cause of the dispute. These (they say) came to our seas from the sea which is called Red, and having settled in the country which they still occupy, at once began to make long voyages. Among other places to which they carried Egyptian and Assyrian merchandise, they came to Argos,"
       ],
       "book": 1,
       "chapter":  1,
@@ -70,12 +70,34 @@
       "author": "Herodotos",
       "greek" : "ἐπὶ τοῦτον δὴ τὸν Ἄμασιν Καμβύσης ὁ Κύρου ἐστρατεύετο, ἄγων καί ἄλλους τῶν ἦρχε καὶ Ἑλλήνων Ἴωνάς τε καὶ Αἰολέας, διʼ αἰτίην τοιήνδε. πέμψας Καμβύσης ἐς Αἴγυπτον κήρυκα αἴτεε Ἄμασιν θυγατέρα, αἴτεε δὲ ἐκ βουλῆς ἀνδρὸς Αἰγυπτίου, ὃς μεμφόμενος Ἄμασιν ἔπρηξε ταῦτα ὅτι μιν ἐξ ἁπάντων τῶν ἐν Αἰγύπτῳ ἰητρῶν ἀποσπάσας ἀπὸ γυναικός τε καὶ τέκνων ἔκδοτον ἐποίησε ἐς Πέρσας, ὅτε Κῦρος πέμψας παρὰ Ἄμασιν αἴτεε ἰητρὸν ὀφθαλμῶν ὃς εἴη ἄριστος τῶν ἐν Αἰγύπτῳ.",
       "translations" : [
-        "Cyrus' son Cambyses was leading an army of his subjects, Ionian and Aeolian Greeks among them,[*] against this Amasis for the following reason. Cambyses had sent a herald to Egypt asking Amasis for his daughter; he asked on the advice of an Egyptian, who advised it out of resentment against Amasis, that out of all the Egyptian physicians Amasis had dragged him away from his wife and children and sent him up to Persia when Cyrus sent to Amasis asking for the best eye-doctor in Egypt.\n"
+        "Cyrus' son Cambyses was leading an army of his subjects, Ionian and Aeolian Greeks among them, against this Amasis for the following reason. Cambyses had sent a herald to Egypt asking Amasis for his daughter; he asked on the advice of an Egyptian, who advised it out of resentment against Amasis, that out of all the Egyptian physicians Amasis had dragged him away from his wife and children and sent him up to Persia when Cyrus sent to Amasis asking for the best eye-doctor in Egypt.\n"
       ],
       "book": 3,
       "chapter":  1,
       "section": 1,
       "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.1.1?right=perseus-eng2"
+    },
+    {
+      "author": "Herodotos",
+      "greek" : "καὶ ἢν μέν γε κατασκήψῃ ἐς τὴν Πελοπόννησον, κίνδυνος αὐτῷ τε βασιλέι καὶ τῇ στρατιῇ τῇ ἐν τῇ ἠπείρῳ ἔσται, ἢν δὲ ἐπὶ τὰς νέας τράπηται τὰς ἐν Σαλαμῖνι, τὸν ναυτικὸν στρατὸν κινδυνεύσει βασιλεὺς ἀποβαλεῖν.",
+      "translations" : [
+        "If it descends upon the Peloponnese, the king himself and his army on the mainland will be endangered. If, however, it turns towards the ships at Salamis, the king will be in danger of losing his fleet."
+      ],
+      "book": 8,
+      "chapter":  65,
+      "section": 3,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:8.65.3"
+    },
+    {
+      "author": "Herodotos",
+      "greek": "περὶ δὲ τῆς βασιληίης ἐβούλευσαν τοιόνδε· ὅτευ ἂν ὁ ἵππος ἡλίου ἐπανατέλλοντος πρῶτος φθέγξηται, ἐν τῷ προαστείῳ αὐτῶν ἐπιβεβηκότων, τοῦτον ἔχειν τὴν βασιληίην.",
+      "translations" : [
+        "As for the making of a king, they decided that he should be elected whose horse, after they were all in their saddles in the suburb of the city, should first be heard to neigh at sunrise."
+      ],
+      "book": 3,
+      "chapter":  84,
+      "section": 3,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.84.3?right=perseus-eng2"
     }
   ]
 }
