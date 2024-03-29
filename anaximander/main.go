@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -23,6 +24,9 @@ var documents int
 
 //go:embed arkho
 var arkho embed.FS
+
+//go:embed logoi
+var logoi embed.FS
 
 func main() {
 	//https://patorjk.com/software/taag/#p=display&f=Crawford2&t=ANAXIMANDER
@@ -102,6 +106,29 @@ func main() {
 
 	go handler.PrintProgress(documents)
 	wg.Wait()
+
+	type seedingWords struct {
+		Words []string `json:"words"`
+	}
+
+	logoiName := "logoi"
+
+	logoiDir, err := logoi.ReadDir(logoiName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	grammarWords, err := logoi.ReadFile(filepath.Join(logoiName, logoiDir[0].Name()))
+	if err != nil {
+		log.Fatal(err)
+	}
+	var words seedingWords
+	err = json.Unmarshal(grammarWords, &words)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	handler.SeedListOfGrammarWords(words.Words)
 
 	// Create a ticker that ticks every second
 	ticker := time.NewTicker(1 * time.Second)

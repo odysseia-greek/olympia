@@ -23,7 +23,16 @@ var sullego embed.FS
 
 func main() {
 	//https://patorjk.com/software/taag/#p=display&f=Crawford2&t=PARMENIDES
-	logging.System("\n ____   ____  ____   ___ ___    ___  ____   ____  ___      ___  _____\n|    \\ /    ||    \\ |   |   |  /  _]|    \\ |    ||   \\    /  _]/ ___/\n|  o  )  o  ||  D  )| _   _ | /  [_ |  _  | |  | |    \\  /  [_(   \\_ \n|   _/|     ||    / |  \\_/  ||    _]|  |  | |  | |  D  ||    _]\\__  |\n|  |  |  _  ||    \\ |   |   ||   [_ |  |  | |  | |     ||   [_ /  \\ |\n|  |  |  |  ||  .  \\|   |   ||     ||  |  | |  | |     ||     |\\    |\n|__|  |__|__||__|\\_||___|___||_____||__|__||____||_____||_____| \\___|\n                                                                     \n")
+	logging.System(`
+ ____   ____  ____   ___ ___    ___  ____   ____  ___      ___  _____
+|    \ /    ||    \ |   |   |  /  _]|    \ |    ||   \    /  _]/ ___/
+|  o  )  o  ||  D  )| _   _ | /  [_ |  _  | |  | |    \  /  [_(   \_ 
+|   _/|     ||    / |  \_/  ||    _]|  |  | |  | |  D  ||    _]\__  |
+|  |  |  _  ||    \ |   |   ||   [_ |  |  | |  | |     ||   [_ /  \ |
+|  |  |  |  ||  .  \|   |   ||     ||  |  | |  | |     ||     |\    |
+|__|  |__|__||__|\_||___|___||_____||__|__||____||_____||_____| \___|
+                                                                     
+`)
 	logging.System(strings.Repeat("~", 37))
 	logging.System("\"τό γάρ αυτο νοειν έστιν τε καί ειναι\"")
 	logging.System("\"for it is the same thinking and being\"")
@@ -60,47 +69,85 @@ func main() {
 	documents := 0
 
 	for _, dir := range rootDir {
-		logging.Debug("working on the following directory: " + dir.Name())
 		if dir.IsDir() {
-			method := dir.Name()
-			logging.Info(fmt.Sprintf("working on %s", method))
-			methodPath := path.Join(root, dir.Name())
-			methodDir, err := sullego.ReadDir(methodPath)
+			typePath := path.Join(root, dir.Name())
+			typeDir, err := sullego.ReadDir(typePath)
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			for _, innerDir := range methodDir {
-				category := innerDir.Name()
-				filePath := path.Join(root, dir.Name(), innerDir.Name())
-				files, err := sullego.ReadDir(filePath)
+			for _, quizType := range typeDir {
+				quizPath := path.Join(typePath, quizType.Name())
+				content, err := sullego.ReadFile(quizPath)
 				if err != nil {
-					log.Fatal(err)
+					logging.Error(err.Error())
+					continue
 				}
-				for _, f := range files {
-					logging.Debug(fmt.Sprintf("found %s in %s", f.Name(), filePath))
-					plan, _ := sullego.ReadFile(path.Join(filePath, f.Name()))
-					var logoi models.Logos
-					err := json.Unmarshal(plan, &logoi)
-					if err != nil {
-						log.Fatal(err)
-					}
 
-					logging.Info(fmt.Sprintf("method: %s | category: %s | documents: %d", method, category, len(logoi.Logos)))
+				logging.Debug(fmt.Sprintf("working on file: %s in quiz: %s", quizPath, dir.Name()))
 
-					documents += len(logoi.Logos)
-
+				switch dir.Name() {
+				case "media":
 					wg.Add(1)
-					go func() {
-						err := handler.Add(logoi, &wg, method, category)
-						if err != nil {
-							log.Fatal(err)
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.MediaQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
 						}
-					}()
+
+						for _, q := range quiz {
+							asJson, err := json.Marshal(q)
+							if err != nil {
+								logging.Error(err.Error())
+								continue
+							}
+
+							if err := handler.AddWithoutQueue(asJson); err != nil {
+								logging.Error(err.Error())
+							}
+						}
+					}(content)
+				case "dialogue":
+					wg.Add(1)
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.DialogueQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
+						}
+
+						for _, q := range quiz {
+							asJson, err := json.Marshal(q)
+							if err != nil {
+								logging.Error(err.Error())
+								continue
+							}
+
+							if err := handler.AddWithoutQueue(asJson); err != nil {
+								logging.Error(err.Error())
+							}
+						}
+					}(content)
+				case "authorbased":
+					wg.Add(1)
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.AuthorBasedQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
+						}
+
+						if err := handler.AddWithQueue(quiz); err != nil {
+							logging.Error(err.Error())
+						}
+					}(content)
 				}
 			}
 		}
-
 	}
 
 	wg.Wait()

@@ -1,50 +1,27 @@
 Feature: Sokrates
-  In order to work with multiple choice quizes
+  In order to work with different quiz modes
   As a greek enthusiast
   We need to be able to validate the functioning of the Sokrates api
 
   @sokrates
-  Scenario Outline: Querying methods should return a list of methods
+  Scenario Outline: Querying for options should return options
     Given the "<service>" is running
-    When a query is made for all methods
-    Then the method "<method>" should be included
-    And the number of methods should exceed "<results>"
+    When a query is made for the options for the quizType "<quizType>"
+    Then a list of themes with the highest set should be returned
     Examples:
-      | service  | method       | results |
-      | sokrates | herodotos    | 4       |
-      | sokrates | aristophanes | 4       |
-      | sokrates | plato        | 4       |
-      | sokrates | mouseion     | 4       |
-      | sokrates | logos        | 4       |
+      | service  | quizType |
+      | sokrates | media    |
+      | sokrates | authorbased |
+      | sokrates | dialogue    |
 
   @sokrates
-  Scenario Outline: Querying categories within a method should return categories
+  Scenario Outline: The simple flow to create and answer a quiz should be functional
     Given the "<service>" is running
-    When a query is made for all methods
-    And a random method is queried for categories
-    Then a category should be returned
+    When a query is made for the options for the quizType "<quizType>"
+    And a new quiz question is made with the quizType "<quizType>"
+    Then the question can be answered from the response
     Examples:
-      | service  |
-      | sokrates |
-
-  @sokrates
-  Scenario Outline: Querying for a last chapter should return a last chapter
-    Given the "<service>" is running
-    When a query is made for all methods
-    And a random method is queried for categories
-    And a random category is queried for the last chapter
-    Then that chapter should be a number above 0
-    Examples:
-      | service  |
-      | sokrates |
-
-  @sokrates
-  Scenario Outline: The flow to create and answer a question should return a right or wrong answer
-    Given the "<service>" is running
-    When a new quiz question is requested
-    And that question is answered with a "<answer>" answer
-    Then the result should be "<answer>"
-    Examples:
-      | service  | answer |
-      | sokrates | true   |
-      | sokrates | false  |
+      | service  | quizType |
+      | sokrates | media    |
+      | sokrates | authorbased |
+      | sokrates | dialogue    |

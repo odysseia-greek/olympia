@@ -1,0 +1,307 @@
+[
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Euterpe",
+    "set": 1,
+    "content": [
+      {
+        "translation": "[interactional particle: S\u0026H on same page]",
+        "greek": "δή"
+      },
+      {
+        "translation": "who, that, which: relative pronoun",
+        "greek": "ὅς"
+      },
+      {
+        "translation": "into, to c. acc.",
+        "greek": "εἰς"
+      },
+      {
+        "translation": "a man",
+        "greek": "ἀνήρ"
+      },
+      {
+        "translation": "a woman",
+        "greek": "γυνή"
+      },
+      {
+        "translation": "a child",
+        "greek": "παῖς"
+      },
+      {
+        "translation": "from the side of, c. gen., beside, alongside of, c. dat., to the side of, motion alongside of, c. acc.",
+        "greek": "παρά"
+      },
+      {
+        "translation": "a charge, accusation",
+        "greek": "αἰτία"
+      },
+      {
+        "translation": "other, another",
+        "greek": "ἄλλος"
+      },
+      {
+        "translation": "unemph. 3rd pers.pronoun; -self; [the] same",
+        "greek": "αὐτός"
+      },
+      {
+        "translation": "will, determination; council, senate",
+        "greek": "βουλή"
+      },
+      {
+        "translation": "this; that",
+        "greek": "οὗτος"
+      },
+      {
+        "translation": "one who heals, a mediciner, physician",
+        "greek": "ἰατρός"
+      },
+      {
+        "translation": "grief, sadness, sorrow",
+        "greek": "πένθος"
+      },
+      {
+        "translation": "a child",
+        "greek": "τέκνον"
+      },
+      {
+        "translation": "best",
+        "greek": "ἄριστος"
+      },
+      {
+        "translation": "given up, delivered over, surrendered",
+        "greek": "ἔκδοτος"
+      },
+      {
+        "translation": "a daughter",
+        "greek": "θυγάτηρ"
+      },
+      {
+        "translation": "a kingdom, dominion",
+        "greek": "βασιλεία"
+      },
+      {
+        "translation": "the eye",
+        "greek": "ὀφθαλμός"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Euterpe",
+    "set": 2,
+    "content": [
+      {
+        "translation": "to tell",
+        "greek": "προεῖπον"
+      },
+      {
+        "translation": "to lead",
+        "greek": "ἄγω"
+      },
+      {
+        "translation": "(to be first) to rule, to begin",
+        "greek": "ἄρχω"
+      },
+      {
+        "translation": "to be",
+        "greek": "εἰμί"
+      },
+      {
+        "translation": "to ask, beg; postulate",
+        "greek": "αἰτέω"
+      },
+      {
+        "translation": "to send, despatch",
+        "greek": "πέμπω"
+      },
+      {
+        "translation": "to make, to do",
+        "greek": "ποιέω"
+      },
+      {
+        "translation": "do,",
+        "greek": "πράσσω"
+      },
+      {
+        "translation": "to tear",
+        "greek": "ἀποσπάω"
+      },
+      {
+        "translation": "to blame, censure, find fault with",
+        "greek": "μέμφομαι"
+      },
+      {
+        "translation": "to serve in war, serve as a soldier, do military service, take the field, march",
+        "greek": "στρατεύω"
+      },
+      {
+        "translation": "to complete, finish, accomplish; pple. finally, in the end",
+        "greek": "τελευτάω"
+      },
+      {
+        "translation": "to tell beforehand",
+        "greek": "προαγορεύω"
+      },
+      {
+        "translation": "to receive from",
+        "greek": "παραλαμβάνω"
+      },
+      {
+        "translation": "to die before",
+        "greek": "προαποθνῄσκω"
+      },
+      {
+        "translation": "the",
+        "greek": "ὁ"
+      },
+      {
+        "translation": "but",
+        "greek": "δέ"
+      },
+      {
+        "translation": "from out of",
+        "greek": "ἐκ"
+      },
+      {
+        "translation": "in, among. c. dat.",
+        "greek": "ἐν"
+      },
+      {
+        "translation": "and",
+        "greek": "τε"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "authorbased",
+    "theme": "Herodotos - Euterpe",
+    "set": 3,
+    "content": [
+      {
+        "translation": "from, away from. c. gen.",
+        "greek": "ἀπό"
+      },
+      {
+        "translation": "wherefore, on which account",
+        "greek": "διό"
+      },
+      {
+        "translation": "on, upon with gen., dat., and acc.",
+        "greek": "ἐπί"
+      },
+      {
+        "translation": "and, also",
+        "greek": "καί"
+      },
+      {
+        "translation": "him, her, it",
+        "greek": "μιν"
+      },
+      {
+        "translation": "when",
+        "greek": "ὅτε"
+      },
+      {
+        "translation": "adv. + superl., as...as possible; ὅτι μή except",
+        "greek": "ὅτι"
+      },
+      {
+        "translation": "all, the whole",
+        "greek": "πᾶς"
+      },
+      {
+        "translation": "quite all, the whole",
+        "greek": "ἅπας"
+      },
+      {
+        "translation": "conj.: that, because",
+        "greek": "ὅτι2"
+      },
+      {
+        "translation": "a herald, pursuivant, marshal, public messenger",
+        "greek": "κῆρυξ"
+      },
+      {
+        "translation": "big, great",
+        "greek": "μέγας"
+      },
+      {
+        "translation": "such a",
+        "greek": "τοιόσδε"
+      },
+      {
+        "translation": "Hellen; Greek",
+        "greek": "Ἕλλην"
+      },
+      {
+        "translation": "Ionians",
+        "greek": "Ἴωνες"
+      },
+      {
+        "translation": "Cyrus",
+        "greek": "Κῦρος"
+      },
+      {
+        "translation": "Amasis",
+        "greek": "Ἄμασις"
+      },
+      {
+        "translation": "a Persian; Perses",
+        "greek": "Πέρσης"
+      },
+      {
+        "translation": "Aeolian",
+        "greek": "Αἰολεύς"
+      },
+      {
+        "translation": "Egypt",
+        "greek": "Αἴγυπτος"
+      },
+      {
+        "translation": "Cambyses",
+        "greek": "Καμβύσης"
+      },
+      {
+        "translation": "Egyptian",
+        "greek": "Αἰγύπτιος"
+      },
+      {
+        "translation": "to make like an Egyptian",
+        "greek": "Αἰγυπτιόω"
+      },
+      {
+        "translation": "Pharnaspes",
+        "greek": "Φαρνάσπης"
+      },
+      {
+        "translation": "Cassandane",
+        "greek": "Κασσανδάνη"
+      }
+    ],
+    "progress": {
+      "timesCorrect": 0,
+      "timesIncorrect": 0,
+      "averageAccuracy": 0
+    }
+  }
+]

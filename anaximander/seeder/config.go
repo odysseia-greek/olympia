@@ -22,21 +22,17 @@ const (
 
 func CreateNewConfig(env string) (*AnaximanderHandler, error) {
 	healthCheck := true
-	if env == "DEVELOPMENT" {
-		healthCheck = false
-	}
+
 	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
 	ambassador := diplomat.NewClientAmbassador()
 	if healthCheck {
-		if healthCheck {
-			healthy := ambassador.WaitForHealthyState()
-			if !healthy {
-				logging.Info("tracing service not ready - restarting seems the only option")
-				os.Exit(1)
-			}
+		healthy := ambassador.WaitForHealthyState()
+		if !healthy {
+			logging.Info("tracing service not ready - restarting seems the only option")
+			os.Exit(1)
 		}
 
 		traceId := uuid.New().String()
@@ -78,11 +74,17 @@ func CreateNewConfig(env string) (*AnaximanderHandler, error) {
 
 	policyName := fmt.Sprintf("%s_policy", index)
 
+	client, err := config.CreateOdysseiaClient()
+	if err != nil {
+		return nil, err
+	}
+
 	return &AnaximanderHandler{
 		Index:      index,
 		Created:    0,
 		Elastic:    elastic,
 		Ambassador: ambassador,
 		PolicyName: policyName,
+		Client:     client,
 	}, nil
 }

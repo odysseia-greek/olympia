@@ -3,107 +3,45 @@ package quiz
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/gorilla/mux"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
-	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
+	plato "github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/randomizer"
-	plato "github.com/odysseia-greek/agora/plato/service"
+	"github.com/odysseia-greek/agora/plato/service"
+	"github.com/odysseia-greek/agora/plato/transform"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
-	"log"
+	"math"
 	"math/rand"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
 
 type SokratesHandler struct {
-	Tracer     *aristophanes.ClientTracer
-	Elastic    elastic.Client
-	Randomizer randomizer.Random
-	SearchWord string
-	Index      string
+	Tracer             *aristophanes.ClientTracer
+	Elastic            elastic.Client
+	Randomizer         randomizer.Random
+	Client             service.OdysseiaClient
+	SearchWord         string
+	Index              string
+	QuizAttempts       chan models.QuizAttempt
+	AggregatedAttempts map[string]models.QuizAttempt
+	Ticker             *time.Ticker
 }
 
 const (
-	Method     string = "method"
-	Authors    string = "authors"
-	Category   string = "category"
-	Categories string = "categories"
-	Chapter    string = "chapter"
+	THEME    string = "theme"
+	SET      string = "set"
+	QUIZTYPE string = "quizType"
 )
 
-// PingPong pongs the ping
-func (s *SokratesHandler) pingPong(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /ping status ping
-	//
-	// Checks if api is reachable
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: ResultModel
-	pingPong := models.ResultModel{Result: "pong"}
-	middleware.ResponseWithJson(w, pingPong)
-}
-
-// returns the health of the api
-func (s *SokratesHandler) health(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /health status health
-	//
-	// Checks if api is healthy
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Health
-	//	  502: Health
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
+func (s *SokratesHandler) Health(w http.ResponseWriter, req *http.Request) {
 	elasticHealth := s.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,
@@ -124,42 +62,7 @@ func (s *SokratesHandler) health(w http.ResponseWriter, req *http.Request) {
 	middleware.ResponseWithJson(w, healthy)
 }
 
-func (s *SokratesHandler) findHighestChapter(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /methods/{method}/categories/{category}/chapters methods highestChapter
-	//
-	// Finds the highest chapter for a combination of method and categories
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: method
-	//       in: query
-	//       description: method to be used
-	//		 example: aristophanes
-	//       required: true
-	//       type: string
-	//       format: method
-	//		 title: method
-	//     + name: category
-	//       in: query
-	//       description: category to be used
-	//		 example: frogs
-	//       required: true
-	//       type: string
-	//       format: category
-	//		 title: category
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: LastChapterResponse
-	//    400: ValidationError
-	//	  405: MethodError
-	//	  502: ElasticSearchError
+func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 	requestId := req.Header.Get(plato.HeaderKey)
 	splitID := strings.Split(requestId, "+")
 
@@ -187,22 +90,21 @@ func (s *SokratesHandler) findHighestChapter(w http.ResponseWriter, req *http.Re
 		}
 
 		go s.Tracer.Trace(context.Background(), traceReceived)
+		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
 	}
 
 	w.Header().Set(plato.HeaderKey, requestId)
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
 
-	pathParams := mux.Vars(req)
-	category := pathParams[Category]
-	method := pathParams[Method]
-
-	if len(category) < 2 {
+	var createQuizRequest models.CreationRequest
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&createQuizRequest)
+	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   Category,
-					Message: "must be longer than 1",
+					Field:   "decoding",
+					Message: err.Error(),
 				},
 			},
 		}
@@ -210,514 +112,743 @@ func (s *SokratesHandler) findHighestChapter(w http.ResponseWriter, req *http.Re
 		return
 	}
 
+	switch createQuizRequest.QuizType {
+	case models.MEDIA:
+		quiz, err := s.mediaQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	case models.AUTHORBASED:
+		quiz, err := s.authorBasedQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	case models.DIALOGUE:
+		quiz, err := s.dialogueQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	}
+}
+
+func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
+	requestId := req.Header.Get(plato.HeaderKey)
+	splitID := strings.Split(requestId, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	if traceCall {
+		traceReceived := &pb.TraceRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			Method:       req.Method,
+			Url:          req.URL.RequestURI(),
+			Host:         req.Host,
+		}
+
+		go s.Tracer.Trace(context.Background(), traceReceived)
+		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
+	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
+
+	var answerRequest models.AnswerRequest
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&answerRequest)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "decoding",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithCustomCode(w, 400, e)
+		return
+	}
+
+	switch answerRequest.QuizType {
+	case models.MEDIA:
+		quiz, err := s.mediaQuizAnswer(answerRequest, requestId)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithCustomCode(w, 400, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	case models.AUTHORBASED:
+		quiz, err := s.authorBasedQuizAnswer(answerRequest, requestId)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithCustomCode(w, 400, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	case models.DIALOGUE:
+		quiz, err := s.dialogueAnswer(answerRequest)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithCustomCode(w, 400, e)
+			return
+		}
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
+	}
+}
+
+func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
+	requestId := req.Header.Get(plato.HeaderKey)
+	splitID := strings.Split(requestId, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	if traceCall {
+		traceReceived := &pb.TraceRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			Method:       req.Method,
+			Url:          req.URL.RequestURI(),
+			Host:         req.Host,
+		}
+
+		go s.Tracer.Trace(context.Background(), traceReceived)
+		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
+	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
+	quizType := req.URL.Query().Get("quizType")
+
+	options, err := s.options(quizType)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "creating quiz error",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+	middleware.ResponseWithCustomCode(w, 200, options)
+	return
+
+}
+
+func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
 	mustQuery := []map[string]string{
 		{
-			Method: method,
+			QUIZTYPE: models.MEDIA,
 		},
 		{
-			Category: category,
+			THEME: req.Theme,
+		},
+		{
+			SET: req.Set,
 		},
 	}
 
 	query := s.Elastic.Builder().MultipleMatch(mustQuery)
-	mode := "desc"
-
-	elasticResult, err := s.Elastic.Query().MatchWithSort(s.Index, mode, Chapter, 1, query)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
+		return nil, err
+	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
 	}
 
-	if len(elasticResult.Hits.Hits) == 0 {
-		e := models.NotFoundError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.NotFoundMessage{
-				Type:   "",
-				Reason: fmt.Sprintf("no chapters found for category: %s and method: %s", category, method),
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
-	}
-
-	elasticJson, _ := json.Marshal(elasticResult.Hits.Hits[0].Source)
-	chapter, _ := models.UnmarshalWord(elasticJson)
-	response := models.LastChapterResponse{LastChapter: chapter.Chapter}
-
-	middleware.ResponseWithCustomCode(w, 200, response)
-}
-
-// swagger:parameters checkQuestion
-type checkQuestionParameters struct {
-	// in:body
-	Application models.CheckAnswerRequest
-}
-
-func (s *SokratesHandler) checkAnswer(w http.ResponseWriter, req *http.Request) {
-	// swagger:route POST /answer questions checkQuestion
-	//
-	// Checks whether the provided answer is right or wrong
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: CheckSentenceResponse
-	//    400: ValidationError
-	//	  404: NotFoundError
-	//	  405: MethodError
-	//	  502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
-
-	var checkAnswerRequest models.CheckAnswerRequest
-	decoder := json.NewDecoder(req.Body)
-	err := decoder.Decode(&checkAnswerRequest)
-	if err != nil || checkAnswerRequest.AnswerProvided == "" {
-		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Messages: []models.ValidationMessages{
-				{
-					Field:   "body",
-					Message: "error parsing",
-				},
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
-	}
-
-	if traceCall {
-		jsonCheckSentence, _ := checkAnswerRequest.Marshal()
-		span := &pb.SpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Action:       "RequestBodyFromPost",
-			RequestBody:  string(jsonCheckSentence),
-		}
-
-		go s.Tracer.Span(context.Background(), span)
-	}
-
-	query := s.Elastic.Builder().MatchQuery(s.SearchWord, checkAnswerRequest.QuizWord)
-	elasticResult, err := s.Elastic.Query().Match(s.Index, query)
+	var option models.MediaQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
-			},
+		return nil, err
+	}
+
+	answer := models.ComprehensiveResponse{Correct: false, QuizWord: req.QuizWord}
+
+	if req.Comprehensive {
+		s.gatherComprehensiveData(&answer, requestID)
+	}
+
+	for _, content := range option.Content {
+		if content.Greek == req.QuizWord {
+			if content.Translation == req.Answer {
+				answer.Correct = true
+			}
 		}
-		middleware.ResponseWithJson(w, e)
-		return
 	}
 
-	if traceCall {
-		go s.databaseSpan(elasticResult, query, traceID, spanID)
-	}
-
-	var logoi models.Logos
-	answer := models.CheckAnswerResponse{Correct: false, QuizWord: checkAnswerRequest.QuizWord}
-	for _, hit := range elasticResult.Hits.Hits {
-		elasticJson, _ := json.Marshal(hit.Source)
-		logos, _ := models.UnmarshalWord(elasticJson)
-		logoi.Logos = append(logoi.Logos, logos)
-	}
-
-	for _, logos := range logoi.Logos {
-		if logos.Translation == checkAnswerRequest.AnswerProvided {
-			answer.Correct = true
-		}
-
-		answer.Possibilities = append(answer.Possibilities, logos)
-	}
-
-	middleware.ResponseWithCustomCode(w, 200, answer)
+	return &answer, nil
 }
 
-func (s *SokratesHandler) createQuestion(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /createQuestion questions create
-	//
-	// Creates a new question from a method - category - chapter combination
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: method
-	//       in: query
-	//       description: method to be used
-	//		 example: aristophanes
-	//       required: true
-	//       type: string
-	//       format: method
-	//		 title: method
-	//     + name: category
-	//       in: query
-	//       description: category to be used
-	//		 example: frogs
-	//       required: true
-	//       type: string
-	//       format: category
-	//		 title: category
-	//     + name: chapter
-	//       in: query
-	//       description: chapter to be used
-	//		 example: 2
-	//       required: true
-	//       type: string
-	//       format: chapter
-	//		 title: chapter
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: QuizResponse
-	//    400: ValidationError
-	//	  405: MethodError
-	//	  502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
+func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
+	mustQuery := []map[string]string{
+		{
+			QUIZTYPE: models.AUTHORBASED,
+		},
+		{
+			THEME: req.Theme,
+		},
+		{
+			SET: req.Set,
+		},
 	}
 
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return nil, err
 	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
 	}
 
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
+	var option models.AuthorBasedQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
+	}
+
+	answer := models.ComprehensiveResponse{Correct: false, QuizWord: req.QuizWord}
+
+	if req.Comprehensive {
+		s.gatherComprehensiveData(&answer, requestID)
+	}
+
+	for _, content := range option.Content {
+		if content.Greek == req.QuizWord {
+			if content.Translation == req.Answer {
+				answer.Correct = true
+			}
+		}
+	}
+
+	s.QuizAttempts <- models.QuizAttempt{Correct: answer.Correct, Set: req.Set, Theme: req.Theme}
+	answer.Progress.AverageAccuracy = option.Progress.AverageAccuracy
+	answer.Progress.TimesCorrect = option.Progress.TimesCorrect
+	answer.Progress.TimesIncorrect = option.Progress.TimesIncorrect
+
+	return &answer, nil
+}
+
+func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.DialogueAnswer, error) {
+	mustQuery := []map[string]string{
+		{
+			QUIZTYPE: models.DIALOGUE,
+		},
+		{
+			THEME: req.Theme,
+		},
+		{
+			SET: req.Set,
+		},
+	}
+
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return nil, err
+	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+	var option models.DialogueQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
+	}
+
+	answer := models.DialogueAnswer{
+		Percentage:   0,
+		Input:        req.Dialogue,
+		Answer:       option.Content,
+		InWrongPlace: []models.DialogueCorrection{},
+	}
+	var correctPlace int
+	var wrongPlace int
+
+	for _, dialogue := range req.Dialogue {
+		verifiedContent := option.Content[dialogue.Place-1]
+		if verifiedContent.Greek == dialogue.Greek && verifiedContent.Place == dialogue.Place {
+			correctPlace++
+		} else {
+			correctedPlacing := models.DialogueCorrection{
+				Translation:  dialogue.Translation,
+				Greek:        dialogue.Greek,
+				Place:        dialogue.Place,
+				Speaker:      dialogue.Speaker,
+				CorrectPlace: 0,
+			}
+
+			for _, corrected := range option.Content {
+				if corrected.Greek == dialogue.Greek && corrected.Speaker == dialogue.Speaker {
+					correctedPlacing.CorrectPlace = corrected.Place
+				}
+			}
+
+			answer.InWrongPlace = append(answer.InWrongPlace, correctedPlacing)
+			wrongPlace++
+		}
+	}
+
+	total := correctPlace + wrongPlace
+	totalProgress := 0.0
+	if total > 0 {
+		totalProgress = float64(correctPlace) / float64(total) * 100
+	}
+
+	answer.Percentage = totalProgress
+
+	return &answer, nil
+}
+
+func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveResponse, requestID string) {
+	wordToBeSend := extractBaseWord(answer.QuizWord)
+	foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
+	if err != nil {
+		logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
+	} else {
+		defer foundInText.Body.Close()
+		err = json.NewDecoder(foundInText.Body).Decode(&answer.FoundInText)
+		if err != nil {
+			logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
+		}
+	}
+
+	similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", "false", requestID)
+	if err != nil {
+		logging.Error(fmt.Sprintf("could not query any similar words for word: %s error: %s", answer.QuizWord, err.Error()))
+	} else {
+		defer similarWords.Body.Close()
+		var extended models.ExtendedResponse
+		err = json.NewDecoder(similarWords.Body).Decode(&extended)
+		if err != nil {
+			logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
 		}
 
-		go s.Tracer.Trace(context.Background(), traceReceived)
+		for _, meros := range extended.Hits {
+			answer.SimilarWords = append(answer.SimilarWords, meros.Hit)
+		}
+	}
+}
+
+func (s *SokratesHandler) mediaQuiz(theme, set string) (*models.QuizResponse, error) {
+	mustQuery := []map[string]string{
+		{
+			THEME: theme,
+		},
+		{
+			SET: set,
+		},
+		{
+			QUIZTYPE: models.MEDIA,
+		},
 	}
 
-	w.Header().Set(plato.HeaderKey, requestId)
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return nil, err
+	}
 
-	chapter := req.URL.Query().Get("chapter")
-	category := req.URL.Query().Get("category")
-	method := req.URL.Query().Get("method")
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
+	}
 
-	if category == "" || chapter == "" || method == "" {
-		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Messages: []models.ValidationMessages{
-				{
-					Field:   "category, chapter, method",
-					Message: "cannot be empty",
-				},
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
+	var option models.MediaQuiz
+
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
 	}
 
 	var quiz models.QuizResponse
+	randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
 
+	question := option.Content[randNumber]
+	quiz.QuizItem = question.Greek
+	quiz.Options = append(quiz.Options, models.Options{
+		Option:   question.Translation,
+		ImageUrl: question.ImageURL,
+	})
+
+	numberOfNeededAnswers := 4
+
+	if len(option.Content) < numberOfNeededAnswers {
+		numberOfNeededAnswers = len(option.Content)
+	}
+
+	for len(quiz.Options) != numberOfNeededAnswers {
+		randNumber = s.Randomizer.RandomNumberBaseZero(len(option.Content))
+		randEntry := option.Content[randNumber]
+
+		exists := findQuizWord(quiz.Options, randEntry.Translation)
+		if !exists {
+			option := models.Options{
+				Option:   randEntry.Translation,
+				ImageUrl: randEntry.ImageURL,
+			}
+			quiz.Options = append(quiz.Options, option)
+		}
+	}
+
+	rand.Shuffle(len(quiz.Options), func(i, j int) {
+		quiz.Options[i], quiz.Options[j] = quiz.Options[j], quiz.Options[i]
+	})
+
+	return &quiz, nil
+}
+
+func (s *SokratesHandler) authorBasedQuiz(theme, set string) (*models.QuizResponse, error) {
 	mustQuery := []map[string]string{
 		{
-			Method: method,
+			THEME: theme,
 		},
 		{
-			Category: category,
+			SET: set,
 		},
 		{
-			Chapter: chapter,
+			QUIZTYPE: models.AUTHORBASED,
 		},
 	}
 
 	query := s.Elastic.Builder().MultipleMatch(mustQuery)
-
-	elasticResponse, err := s.Elastic.Query().MatchWithScroll(s.Index, query)
-
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
+		return nil, err
 	}
 
-	var logoi models.Logos
-	for _, hit := range elasticResponse.Hits.Hits {
-		source, _ := json.Marshal(hit.Source)
-		logos, _ := models.UnmarshalWord(source)
-		logoi.Logos = append(logoi.Logos, logos)
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
 	}
 
-	if traceCall {
-		go s.databaseSpan(elasticResponse, query, traceID, spanID)
+	var option models.AuthorBasedQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
 	}
 
-	randNumber := s.Randomizer.RandomNumberBaseZero(len(logoi.Logos))
+	var quiz models.QuizResponse
+	randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
 
-	question := logoi.Logos[randNumber]
-	quiz.Question = question.Greek
-	quiz.Answer = question.Translation
-	quiz.QuizQuestions = append(quiz.QuizQuestions, question.Translation)
+	question := option.Content[randNumber]
+	quiz.QuizItem = question.Greek
+	quiz.Options = append(quiz.Options, models.Options{
+		Option: question.Translation,
+	})
 
 	numberOfNeededAnswers := 4
 
-	if len(logoi.Logos) < numberOfNeededAnswers {
-		numberOfNeededAnswers = len(logoi.Logos)
+	if len(option.Content) < numberOfNeededAnswers {
+		numberOfNeededAnswers = len(option.Content)
 	}
 
-	for len(quiz.QuizQuestions) != numberOfNeededAnswers {
-		randNumber = s.Randomizer.RandomNumberBaseZero(len(logoi.Logos))
-		randEntry := logoi.Logos[randNumber]
+	for len(quiz.Options) != numberOfNeededAnswers {
+		randNumber = s.Randomizer.RandomNumberBaseZero(len(option.Content))
+		randEntry := option.Content[randNumber]
 
-		exists := findQuizWord(quiz.QuizQuestions, randEntry.Translation)
+		exists := findQuizWord(quiz.Options, randEntry.Translation)
 		if !exists {
-			quiz.QuizQuestions = append(quiz.QuizQuestions, randEntry.Translation)
+			option := models.Options{
+				Option: randEntry.Translation,
+			}
+			quiz.Options = append(quiz.Options, option)
 		}
 	}
 
-	rand.Seed(time.Now().UnixNano())
-	rand.Shuffle(len(quiz.QuizQuestions), func(i, j int) {
-		quiz.QuizQuestions[i], quiz.QuizQuestions[j] = quiz.QuizQuestions[j], quiz.QuizQuestions[i]
+	rand.Shuffle(len(quiz.Options), func(i, j int) {
+		quiz.Options[i], quiz.Options[j] = quiz.Options[j], quiz.Options[i]
 	})
 
-	middleware.ResponseWithCustomCode(w, 200, quiz)
+	return &quiz, nil
 }
 
-func (s *SokratesHandler) queryMethods(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /methods methods methods
-	//
-	// Finds all methods available
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Methods
-	//	  405: MethodError
-	//	  502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
+func (s *SokratesHandler) dialogueQuiz(theme, set string) (*models.DialogueQuiz, error) {
+	mustQuery := []map[string]string{
+		{
+			THEME: theme,
+		},
+		{
+			SET: set,
+		},
+		{
+			QUIZTYPE: models.DIALOGUE,
+		},
 	}
 
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
-
-	query := s.Elastic.Builder().Aggregate(Authors, Method)
-	elasticResult, err := s.Elastic.Query().MatchAggregate(s.Index, query)
-
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
+		return nil, err
 	}
 
-	var methods models.Methods
-	for _, bucket := range elasticResult.Aggregations.AuthorAggregation.Buckets {
-		author := models.Method{Method: strings.ToLower(fmt.Sprintf("%v", bucket.Key))}
-		methods.Method = append(methods.Method, author)
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
 	}
 
-	middleware.ResponseWithCustomCode(w, http.StatusOK, methods)
+	var quiz models.DialogueQuiz
+
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &quiz)
+	if err != nil {
+		return nil, err
+	}
+
+	return &quiz, nil
 }
 
-func (s *SokratesHandler) queryCategories(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /methods/{method}/categories methods categories
-	//
-	// Finds all categories for a method
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: method
-	//       in: query
-	//       description: method to be used
-	//		 example: aristophanes
-	//       required: true
-	//       type: string
-	//       format: method
-	//		 title: method
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Categories
-	//    400: ValidationError
-	//	  405: MethodError
-	//	  502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
+func (s *SokratesHandler) options(quizType string) (*models.AggregateResult, error) {
+	query := s.Elastic.Builder().FilteredAggregate(QUIZTYPE, quizType, THEME, THEME)
+	//if quizType == models.MEDIA {
+	//	query = map[string]interface{}{
+	//		"query": map[string]interface{}{
+	//			"match_phrase": map[string]interface{}{
+	//				QUIZTYPE: quizType,
+	//			},
+	//		},
+	//		"size": 0,
+	//		"aggs": map[string]interface{}{
+	//			SET: map[string]interface{}{
+	//				"max": map[string]interface{}{
+	//					"field": SET,
+	//				},
+	//			},
+	//		},
+	//	}
+	//}
 
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-	log.Printf("received %s code with value: %s", plato.HeaderKey, traceID)
-
-	pathParams := mux.Vars(req)
-	method := pathParams[Method]
-
-	query := s.Elastic.Builder().FilteredAggregate(Method, method, Categories, Category)
 	elasticResult, err := s.Elastic.Query().MatchAggregate(s.Index, query)
-
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
-			},
+		return nil, err
+	}
+
+	var result models.AggregateResult
+
+	for _, bucket := range elasticResult.Aggregations.ThemeAggregation.Buckets {
+		aggregate := models.Aggregate{
+			HighestSet: strconv.Itoa(int(bucket.DocCount)),
+			Name:       bucket.Key.(string),
 		}
-		middleware.ResponseWithJson(w, e)
-		return
+
+		result.Aggregates = append(result.Aggregates, aggregate)
 	}
 
-	var categories models.Categories
-	for _, bucket := range elasticResult.Aggregations.CategoryAggregation.Buckets {
-		category := models.Category{Category: fmt.Sprintf("%s", bucket.Key)}
-		categories.Category = append(categories.Category, category)
+	if len(elasticResult.Aggregations.ThemeAggregation.Buckets) == 0 {
+		aggregate := models.Aggregate{
+			HighestSet: fmt.Sprintf("%v", elasticResult.Aggregations.SetAggregation.Value),
+		}
 
+		result.Aggregates = append(result.Aggregates, aggregate)
 	}
 
-	middleware.ResponseWithJson(w, categories)
+	return &result, nil
+}
+
+func (s *SokratesHandler) updateElasticsearch() {
+	for {
+		select {
+		case <-s.Ticker.C:
+			for key, attempt := range s.AggregatedAttempts {
+				err := s.performUpdate(attempt.Set, attempt.Theme, attempt.Correct)
+				if err != nil {
+					logging.Error(err.Error())
+				}
+				delete(s.AggregatedAttempts, key)
+			}
+		case attempt := <-s.QuizAttempts:
+			key := fmt.Sprintf("%s-%s", attempt.Set, attempt.Theme)
+			s.AggregatedAttempts[key] = attempt
+		}
+	}
+}
+
+func (s *SokratesHandler) performUpdate(set, theme string, correct bool) error {
+	mustQuery := []map[string]string{
+		{
+			THEME: theme,
+		},
+		{
+			SET: set,
+		},
+		{
+			QUIZTYPE: models.AUTHORBASED,
+		},
+	}
+
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return err
+	}
+
+	var option models.AuthorBasedQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return err
+	}
+
+	if correct {
+		option.Progress.TimesCorrect += 1
+	} else {
+		option.Progress.TimesIncorrect += 1
+	}
+
+	total := option.Progress.TimesCorrect + option.Progress.TimesIncorrect
+	totalProgress := 0.0
+	if total > 0 {
+		totalProgress = float64(option.Progress.TimesCorrect) / float64(total) * 100
+	}
+
+	option.Progress.AverageAccuracy = roundToTwoDecimals(totalProgress)
+
+	entryAsJson, err := json.Marshal(option)
+	if err != nil {
+		return err
+	}
+	_, err = s.Elastic.Document().Update(s.Index, elasticResponse.Hits.Hits[0].ID, entryAsJson)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func roundToTwoDecimals(f float64) float64 {
+	return math.Round(f*100) / 100
 }
 
 // findQuizWord takes a slice and looks for an element in it
-func findQuizWord(slice []string, val string) bool {
+func findQuizWord(slice []models.Options, val string) bool {
 	for _, item := range slice {
-		if item == val {
+		if item.Option == val {
 			return true
 		}
 	}
 	return false
 }
 
-func (s *SokratesHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
-	parsedResult, _ := json.Marshal(response)
-	parsedQuery, _ := json.Marshal(query)
-	dataBaseSpan := &pb.DatabaseSpanRequest{
-		TraceId:      traceID,
-		ParentSpanId: spanID,
-		Action:       "search",
-		Query:        string(parsedQuery),
-		ResultJson:   string(parsedResult),
+func extractBaseWord(queryWord string) string {
+	// Normalize and split the input
+	strippedWord := transform.RemoveAccents(strings.ToLower(queryWord))
+	splitWord := strings.Split(strippedWord, " ")
+
+	greekPronouns := map[string]bool{"η": true, "ο": true, "το": true}
+	cleanWord := func(word string) string {
+		return strings.Trim(word, ",.!?-") // Add any other punctuation as needed
 	}
 
-	s.Tracer.DatabaseSpan(context.Background(), dataBaseSpan)
+	for _, word := range splitWord {
+		cleanedWord := cleanWord(word)
+
+		if strings.HasPrefix(cleanedWord, "-") {
+			continue
+		}
+
+		if _, isPronoun := greekPronouns[cleanedWord]; !isPronoun {
+			// If the word is not a pronoun, it's likely the correct word
+			return cleanedWord
+		}
+	}
+
+	return queryWord
 }

@@ -1,21 +1,37 @@
 ---
+# Source: alexandros/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alexandros
+  namespace: odysseia
+data:
+  ELASTIC_SEARCH_SERVICE: "https://aristoteles-es-http:9200"
+  ENV: "localdev"
+  TLS_ENABLED: "true"
+  CERT_ROOT: "/etc/certs"
+  SOLON_SERVICE: "https://solon:5443"
+  HERODOTOS_SERVICE: "http://herodotos:5000"
+  MAX_NGRAM: "6"
+  MIN_NGRAM: "2"
+---
  # Source: alexandros/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: alexandros-dev
+ name: alexandros
  namespace: odysseia
  labels:
-   app: alexandros-dev
+   app: alexandros
 spec:
  replicas: 1
  selector:
    matchLabels:
-     app: alexandros-dev
+     app: alexandros
  template:
    metadata:
      labels:
-       app: alexandros-dev
+       app: alexandros
      annotations:
        odysseia-greek/role: api
        odysseia-greek/access: dictionary
@@ -147,7 +163,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: alexandros-dev
+  name: alexandros
 spec:
   ports:
     - port: 5000
@@ -157,4 +173,4 @@ spec:
       name: delve
       targetPort: delve
   selector:
-    app: alexandros-dev
+    app: alexandros

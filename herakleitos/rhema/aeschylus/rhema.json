@@ -10,6 +10,17 @@
       "chapter": 1,
       "section": 24,
       "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0085.tlg005.perseus-grc2:0-24?right=perseus-eng3"
+    },
+    {
+      "author": "Aeschylus",
+      "greek": "Κῆρυξ\nοὐκ οἶδεν οὐδεὶς ὥστ ἀπαγγεῖλαι τορῶς,\nπλὴν τοῦ τρέφοντος Ἡλίου χθονὸς φύσιν.\nΧορός\nπῶς γὰρ λέγεις χειμῶνα ναυτικῷ στρατῷ\nἐλθεῖν τελευτῆσαί τε δαιμόνων κότῳ;",
+      "translations": [
+        "Herald\nNone knows to give clear report of this—except only the Sun that fosters life upon the earth.\nChorus\nHow then do you say\nrose the storm by the wrath of the gods upon the naval host and passed away?"
+      ],
+      "book": 1,
+      "chapter": 1,
+      "section": 631,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0085.tlg005.perseus-grc2:631-635?right=perseus-eng3"
     }
   ]
 }

@@ -5,16 +5,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/transform"
 	"strings"
 )
 
 func (l *OdysseiaFixture) theWordIsQueried(word string) error {
-	response, err := l.client.Alexandros().Search(word, "", "", TraceId)
+	response, err := l.client.Alexandros().Search(word, "", "", "", TraceId)
 	if err != nil {
 		return err
 	}
 
-	var meroi []models.Meros
+	var meroi models.ExtendedResponse
 	err = json.NewDecoder(response.Body).Decode(&meroi)
 
 	l.ctx = context.WithValue(l.ctx, ResponseBody, meroi)
@@ -23,7 +24,7 @@ func (l *OdysseiaFixture) theWordIsQueried(word string) error {
 }
 
 func (l *OdysseiaFixture) theWordIsQueriedWithAndNotFound(word string) error {
-	_, err := l.client.Alexandros().Search(word, "", "exact", TraceId)
+	_, err := l.client.Alexandros().Search(word, "", "exact", "", TraceId)
 	if err != nil {
 		l.ctx = context.WithValue(l.ctx, ErrorBody, err.Error())
 	}
@@ -31,13 +32,13 @@ func (l *OdysseiaFixture) theWordIsQueriedWithAndNotFound(word string) error {
 	return nil
 }
 
-func (l *OdysseiaFixture) theWordIsQueriedUsingAnd(word, mode, language string) error {
-	response, err := l.client.Alexandros().Search(word, language, mode, TraceId)
+func (l *OdysseiaFixture) theWordIsQueriedUsingAndAnd(word, mode, language, expand string) error {
+	response, err := l.client.Alexandros().Search(word, language, mode, expand, TraceId)
 	if err != nil {
 		return err
 	}
 
-	var meroi []models.Meros
+	var meroi models.ExtendedResponse
 	err = json.NewDecoder(response.Body).Decode(&meroi)
 
 	l.ctx = context.WithValue(l.ctx, ResponseBody, meroi)
@@ -46,12 +47,12 @@ func (l *OdysseiaFixture) theWordIsQueriedUsingAnd(word, mode, language string) 
 }
 
 func (l *OdysseiaFixture) thePartialIsQueried(partial string) error {
-	response, err := l.client.Alexandros().Search(partial, "", "", TraceId)
+	response, err := l.client.Alexandros().Search(partial, "", "partial", "", TraceId)
 	if err != nil {
 		return err
 	}
 
-	var meroi []models.Meros
+	var meroi models.ExtendedResponse
 	err = json.NewDecoder(response.Body).Decode(&meroi)
 
 	l.ctx = context.WithValue(l.ctx, ResponseBody, meroi)
@@ -60,14 +61,14 @@ func (l *OdysseiaFixture) thePartialIsQueried(partial string) error {
 }
 
 func (l *OdysseiaFixture) theWordIsStrippedOfAccents(word string) error {
-	strippedWord := RemoveAccents(word)
+	strippedWord := transform.RemoveAccents(word)
 
-	response, err := l.client.Alexandros().Search(strippedWord, "", "", TraceId)
+	response, err := l.client.Alexandros().Search(strippedWord, "", "", "", TraceId)
 	if err != nil {
 		return err
 	}
 
-	var meroi []models.Meros
+	var meroi models.ExtendedResponse
 	err = json.NewDecoder(response.Body).Decode(&meroi)
 
 	l.ctx = context.WithValue(l.ctx, ResponseBody, meroi)
@@ -76,12 +77,12 @@ func (l *OdysseiaFixture) theWordIsStrippedOfAccents(word string) error {
 }
 
 func (l *OdysseiaFixture) theWordShouldBeIncludedInTheResponse(searchTerm string) error {
-	words := l.ctx.Value(ResponseBody).([]models.Meros)
+	words := l.ctx.Value(ResponseBody).(models.ExtendedResponse)
 
 	found := false
 
-	for _, word := range words {
-		if strings.Contains(word.Greek, searchTerm) {
+	for _, hit := range words.Hits {
+		if strings.Contains(hit.Hit.Greek, searchTerm) {
 			found = true
 		}
 	}
@@ -93,12 +94,12 @@ func (l *OdysseiaFixture) theWordShouldBeIncludedInTheResponse(searchTerm string
 }
 
 func (l *OdysseiaFixture) aGreekTranslationShouldBeIncludedInTheResponse() error {
-	words := l.ctx.Value(ResponseBody).([]models.Meros)
+	words := l.ctx.Value(ResponseBody).(models.ExtendedResponse)
 
 	included := true
 
-	for _, word := range words {
-		if word.Greek == "" {
+	for _, hit := range words.Hits {
+		if hit.Hit.Greek == "" {
 			included = false
 		}
 	}

@@ -151,21 +151,27 @@
         "declension": "-ον",
         "ruleName": "noun - sing - neut - nom",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-ου",
         "ruleName": "noun - sing - neut - gen",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-ῳ",
         "ruleName": "noun - sing - neut - dat",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
@@ -179,42 +185,54 @@
         "declension": "-α",
         "ruleName": "noun - plural - neut - nom",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-ᾰ",
         "ruleName": "noun - plural - neut - nom",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-ων",
         "ruleName": "noun - plural - neut - gen",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-οις",
         "ruleName": "noun - plural - neut - dat",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-ᾰ",
         "ruleName": "noun - plural - neut - acc",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       },
       {
         "declension": "-α",
         "ruleName": "noun - plural - neut - acc",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος",
+          "ός"
         ]
       }
     ]

@@ -5,218 +5,226 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/stretchr/testify/assert"
+	"net/http"
 	"strconv"
+	"strings"
 )
 
 const (
-	ContextCategories string = "contextCategories"
-	ContextChapter    string = "contextChapter"
-	ContextMethod     string = "contextMethod"
-	ContextAnswer     string = "contextAnswer"
-	TraceId           string = "hippokrates-traceid"
+	AnswerContext    string = "answerContext"
+	QuizContext      string = "quizContext"
+	BodyContext      string = "bodyContext"
+	AggregateContext string = "aggregateContext"
+	TraceId          string = "hippokrates-traceid"
 )
 
-func (l *OdysseiaFixture) aQueryIsMadeForAllMethods() error {
-	response, err := l.client.Sokrates().GetMethods(TraceId)
+func (l *OdysseiaFixture) aListOfThemesWithTheHighestSetShouldBeReturned() error {
+	aggregates := l.ctx.Value(AggregateContext).(models.AggregateResult)
+	err := assertTrue(
+		assert.True, len(aggregates.Aggregates) >= 1,
+		"aggregates %v when more than 1 expected", len(aggregates.Aggregates),
+	)
 	if err != nil {
 		return err
 	}
 
-	var methods models.Methods
-	err = json.NewDecoder(response.Body).Decode(&methods)
+	for _, aggregate := range aggregates.Aggregates {
+		highestSet, err := strconv.Atoi(aggregate.HighestSet)
+		if err != nil {
+			return err
+		}
 
-	l.ctx = context.WithValue(l.ctx, ResponseBody, methods)
+		if highestSet < 1 {
+			return fmt.Errorf("number of sets lower than 1")
+		}
+	}
 
 	return nil
 }
 
-func (l *OdysseiaFixture) aRandomMethodIsQueriedForCategories() error {
-	methods := l.ctx.Value(ResponseBody).(models.Methods)
-
-	randNumber := GenerateRandomNumber(len(methods.Method))
-	method := methods.Method[randNumber].Method
-
-	categoriesResponse, err := l.client.Sokrates().GetCategories(method, TraceId)
+func (l *OdysseiaFixture) aQueryIsMadeForTheOptionsForTheQuizType(quizType string) error {
+	response, err := l.client.Sokrates().Options(quizType, TraceId)
 	if err != nil {
 		return err
 	}
 
-	var categories models.Categories
-	err = json.NewDecoder(categoriesResponse.Body).Decode(&categories)
+	var aggregates models.AggregateResult
+	err = json.NewDecoder(response.Body).Decode(&aggregates)
 
-	l.ctx = context.WithValue(l.ctx, ContextCategories, categories)
-	l.ctx = context.WithValue(l.ctx, ContextMethod, method)
+	l.ctx = context.WithValue(l.ctx, AggregateContext, aggregates)
 
+	return err
+}
+
+func (l *OdysseiaFixture) aNewQuizQuestionIsMadeWithTheQuizType(quizType string) error {
+	aggregates := l.ctx.Value(AggregateContext).(models.AggregateResult)
+	randomAggregate := aggregates.Aggregates[l.randomizer.RandomNumberBaseZero(len(aggregates.Aggregates))]
+
+	bodyModel := models.CreationRequest{
+		Theme:    randomAggregate.Name,
+		Set:      randomAggregate.HighestSet,
+		QuizType: quizType,
+	}
+
+	body, err := json.Marshal(bodyModel)
+	if err != nil {
+		return err
+	}
+
+	quiz, err := l.client.Sokrates().Create(body, TraceId)
+	if err != nil {
+		return err
+	}
+
+	if quiz.StatusCode != http.StatusOK {
+		return fmt.Errorf("expected 200 but got %v", quiz.StatusCode)
+	}
+
+	var quizResponse interface{}
+	err = json.NewDecoder(quiz.Body).Decode(&quizResponse)
+
+	l.ctx = context.WithValue(l.ctx, QuizContext, quizResponse)
+	l.ctx = context.WithValue(l.ctx, BodyContext, bodyModel)
 	return nil
 }
 
-func (l *OdysseiaFixture) aRandomCategoryIsQueriedForTheLastChapter() error {
-	categories := l.ctx.Value(ContextCategories).(models.Categories)
-	method := l.ctx.Value(ContextMethod).(string)
-
-	randNumber := GenerateRandomNumber(len(categories.Category))
-	category := categories.Category[randNumber].Category
-
-	lastChapterResponse, err := l.client.Sokrates().GetChapters(method, category, TraceId)
-	if err != nil {
-		return err
+func (l *OdysseiaFixture) theQuestionCanBeAnsweredFromTheResponse() error {
+	quizResponse, ok := l.ctx.Value(QuizContext).(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert quizResponse type")
 	}
 
-	var lastChapter models.LastChapterResponse
-	err = json.NewDecoder(lastChapterResponse.Body).Decode(&lastChapter)
-
-	l.ctx = context.WithValue(l.ctx, ContextChapter, lastChapter)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) aNewQuizQuestionIsRequested() error {
-	resp, err := l.client.Sokrates().GetMethods(TraceId)
-	if err != nil {
-		return err
+	bodyMeta, ok := l.ctx.Value(BodyContext).(models.CreationRequest)
+	if !ok {
+		return fmt.Errorf("failed to assert bodyMeta type")
 	}
 
-	var methods models.Methods
-	err = json.NewDecoder(resp.Body).Decode(&methods)
-
-	randomMethod := GenerateRandomNumber(len(methods.Method))
-	method := methods.Method[randomMethod].Method
-
-	categoryResponse, err := l.client.Sokrates().GetCategories(method, TraceId)
-	if err != nil {
-		return err
+	answerRequest := models.AnswerRequest{
+		Theme:         bodyMeta.Theme,
+		Set:           bodyMeta.Set,
+		QuizType:      bodyMeta.QuizType,
+		Comprehensive: false,
+		Answer:        "",
+		Dialogue:      nil,
+		QuizWord:      "",
 	}
 
-	var categories models.Categories
-	err = json.NewDecoder(categoryResponse.Body).Decode(&categories)
+	switch bodyMeta.QuizType {
+	case models.MEDIA:
+		var quiz models.QuizResponse
+		quizBytes, err := json.Marshal(quizResponse)
+		if err != nil {
+			return fmt.Errorf("failed to marshal quizResponse: %v", err)
+		}
+		if err := json.Unmarshal(quizBytes, &quiz); err != nil {
+			return fmt.Errorf("failed to unmarshal quizResponse into QuizResponse: %v", err)
+		}
 
-	randomCategory := GenerateRandomNumber(len(categories.Category))
-	category := categories.Category[randomCategory].Category
-
-	lastChapterResponse, err := l.client.Sokrates().GetChapters(method, category, TraceId)
-	if err != nil {
-		return err
-	}
-
-	var lastChapter models.LastChapterResponse
-	err = json.NewDecoder(lastChapterResponse.Body).Decode(&lastChapter)
-
-	randomChapter := GenerateRandomNumber(int(lastChapter.LastChapter)) + 1
-
-	chapter := strconv.Itoa(randomChapter)
-	quizResponse, err := l.client.Sokrates().CreateQuestion(method, category, chapter, TraceId)
-	if err != nil {
-		return err
-	}
-
-	var quizQuestion models.QuizResponse
-	err = json.NewDecoder(quizResponse.Body).Decode(&quizQuestion)
-
-	l.ctx = context.WithValue(l.ctx, ContextCategories, category)
-	l.ctx = context.WithValue(l.ctx, ResponseBody, quizQuestion)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) thatQuestionIsAnsweredWithAAnswer(correctAnswer string) error {
-	quiz := l.ctx.Value(ResponseBody).(models.QuizResponse)
-
-	checkAnswerRequest := models.CheckAnswerRequest{
-		QuizWord:       quiz.Question,
-		AnswerProvided: "",
-	}
-
-	parsedAnswer, err := strconv.ParseBool(correctAnswer)
-	if err != nil {
-		return err
-	}
-
-	if parsedAnswer {
-		checkAnswerRequest.AnswerProvided = quiz.Answer
-	} else {
-		for _, answer := range quiz.QuizQuestions {
-			if answer != quiz.Answer {
-				checkAnswerRequest.AnswerProvided = answer
-				break
+		for _, item := range quiz.Options {
+			err := assertTrue(
+				assert.True, strings.Contains(item.ImageUrl, "webp"),
+				"expected webp to be included in: %s", item.ImageUrl,
+			)
+			if err != nil {
+				return err
 			}
 		}
-	}
 
-	request, err := checkAnswerRequest.Marshal()
-	if err != nil {
-		return err
-	}
+		randomQuizItem := quiz.Options[l.randomizer.RandomNumberBaseZero(len(quiz.Options))]
+		answerRequest.Answer = randomQuizItem.Option
+		answerRequest.QuizWord = quiz.QuizItem
 
-	answerResponse, err := l.client.Sokrates().CheckAnswer(request, TraceId)
-	if err != nil {
-		return err
-	}
+		body, err := json.Marshal(answerRequest)
+		if err != nil {
+			return err
+		}
+		answer, err := l.client.Sokrates().Check(body, TraceId)
+		if err != nil {
+			return err
+		}
 
-	var answer models.CheckAnswerResponse
-	err = json.NewDecoder(answerResponse.Body).Decode(&answer)
+		if answer.StatusCode != http.StatusOK {
+			return fmt.Errorf("expected 200 but got %v", answer.StatusCode)
+		}
 
-	l.ctx = context.WithValue(l.ctx, ContextAnswer, answer.Correct)
+		var answerResponse models.ComprehensiveResponse
+		err = json.NewDecoder(answer.Body).Decode(&answerResponse)
+		if err != nil {
+			return err
+		}
 
-	return nil
-}
+	case models.AUTHORBASED:
+		var quiz models.QuizResponse
+		quizBytes, err := json.Marshal(quizResponse)
+		if err != nil {
+			return fmt.Errorf("failed to marshal quizResponse: %v", err)
+		}
+		if err := json.Unmarshal(quizBytes, &quiz); err != nil {
+			return fmt.Errorf("failed to unmarshal quizResponse into QuizResponse: %v", err)
+		}
 
-func (l *OdysseiaFixture) theMethodShouldBeIncluded(method string) error {
-	methods := l.ctx.Value(ResponseBody).(models.Methods)
+		randomQuizItem := quiz.Options[l.randomizer.RandomNumberBaseZero(len(quiz.Options))]
+		answerRequest.Answer = randomQuizItem.Option
+		answerRequest.QuizWord = quiz.QuizItem
 
-	found := false
+		body, err := json.Marshal(answerRequest)
+		if err != nil {
+			return err
+		}
+		answer, err := l.client.Sokrates().Check(body, TraceId)
+		if err != nil {
+			return err
+		}
 
-	for _, result := range methods.Method {
-		if result.Method == method {
-			found = true
+		if answer.StatusCode != http.StatusOK {
+			return fmt.Errorf("expected 200 but got %v", answer.StatusCode)
+		}
+
+		var answerResponse models.ComprehensiveResponse
+		err = json.NewDecoder(answer.Body).Decode(&answerResponse)
+		if err != nil {
+			return err
+		}
+
+	case models.DIALOGUE:
+		var quiz models.DialogueQuiz
+		quizBytes, err := json.Marshal(quizResponse)
+		if err != nil {
+			return fmt.Errorf("failed to marshal quizResponse: %v", err)
+		}
+		if err := json.Unmarshal(quizBytes, &quiz); err != nil {
+			return fmt.Errorf("failed to unmarshal quizResponse into QuizResponse: %v", err)
+		}
+
+		answerRequest.Dialogue = quiz.Content
+
+		body, err := json.Marshal(answerRequest)
+		if err != nil {
+			return err
+		}
+		answer, err := l.client.Sokrates().Check(body, TraceId)
+		if err != nil {
+			return err
+		}
+
+		if answer.StatusCode != http.StatusOK {
+			return fmt.Errorf("expected 200 but got %v", answer.StatusCode)
+		}
+
+		var answerResponse models.DialogueAnswer
+		err = json.NewDecoder(answer.Body).Decode(&answerResponse)
+		if err != nil {
+			return err
+		}
+		err = assertTrue(
+			assert.True, answerResponse.Percentage == 100.00,
+			"expected correctness to be 100% but was: %v", answerResponse.Percentage,
+		)
+		if err != nil {
+			return err
 		}
 	}
 
-	if !found {
-		return fmt.Errorf("could not find book %v in slice", method)
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) theNumberOfMethodsShouldExceed(results int) error {
-	methods := l.ctx.Value(ResponseBody).(models.Methods)
-	numberOfMethods := len(methods.Method)
-	if numberOfMethods <= results {
-		return fmt.Errorf("expected results to be equal to or more than %v but was %v", results, numberOfMethods)
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) aCategoryShouldBeReturned() error {
-	categories := l.ctx.Value(ContextCategories).(models.Categories)
-
-	if len(categories.Category) == 0 {
-		return fmt.Errorf("expected categories to be returned but non were found")
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) thatChapterShouldBeANumberAbove(number int) error {
-	lastChapter := l.ctx.Value(ContextChapter).(models.LastChapterResponse)
-	if lastChapter.LastChapter < int64(number) {
-		return fmt.Errorf("expected lastchapter to be higher than %v but was %v", number, lastChapter.LastChapter)
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) theResultShouldBe(correct string) error {
-	answer := l.ctx.Value(ContextAnswer).(bool)
-
-	parsedCorrectness, err := strconv.ParseBool(correct)
-	if err != nil {
-		return err
-	}
-
-	if answer != parsedCorrectness {
-		return fmt.Errorf("expected answer %v to be equal to correctness %v", answer, correct)
-	}
 	return nil
 }

@@ -1,0 +1,4 @@
+###
+GRPC http://localhost:50053/olympia_aristarchos.Aristarchos/Health
+
+GRPC http://localhost:50053/olympia_aristarchos.Aristarchos/CreateNewEntry

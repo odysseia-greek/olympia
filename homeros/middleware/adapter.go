@@ -12,7 +12,6 @@ import (
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
@@ -73,7 +72,7 @@ func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.T
 				http.Error(w, "Failed to read request body", http.StatusInternalServerError)
 				return
 			}
-			r.Body = ioutil.NopCloser(bytes.NewReader(bodyBytes)) // Set the original request body
+			r.Body = io.NopCloser(bytes.NewReader(bodyBytes)) // Set the original request body
 
 			var bodyClone map[string]interface{}
 			decoder := json.NewDecoder(bytes.NewReader(bodyBytes))
@@ -128,8 +127,6 @@ func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.T
 		})
 	}
 }
-
-// ... (shouldTrace and Log functions remain the same)
 
 func Log(combinedId string) {
 	splitID := strings.Split(combinedId, "+")

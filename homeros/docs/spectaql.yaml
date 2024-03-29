@@ -4,7 +4,7 @@ spectaql:
 
 introspection:
   removeTrailingPeriodFromDescriptions: false
-  url: http://k3s-odysseia.greek/graphql
+  url: http://k3s-odysseia.greek:8080/graphql
   queryNameStrategy: capitalizeFirst
   fieldExpansionDepth: 3
 
