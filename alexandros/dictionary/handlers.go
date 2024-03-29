@@ -7,12 +7,15 @@ import (
 	"github.com/odysseia-greek/agora/aristoteles"
 	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
 	plato "github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/service"
 	"github.com/odysseia-greek/agora/plato/transform"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -20,6 +23,7 @@ import (
 type AlexandrosHandler struct {
 	Elastic aristoteles.Client
 	Index   string
+	Client  service.OdysseiaClient
 	Tracer  *aristophanes.ClientTracer
 }
 
@@ -135,59 +139,7 @@ func (a *AlexandrosHandler) health(w http.ResponseWriter, req *http.Request) {
 //  3. Executes the Elasticsearch query and handles any errors.
 //  4. Processes the query results and prepares the response.
 //  5. Sends the response back to the client.
-//
-// Responses:
-//   - 200: Returns an array of models.Meros representing the search results.
-//   - 400: Returns a models.ValidationError if there are validation errors in the query parameters.
-//   - 404: Returns a models.NotFoundError if no results are found for the given query.
-//   - 405: Returns a models.MethodError if the HTTP method is not allowed for the endpoint.
-//   - 502: Returns a models.ElasticSearchError if there is an error in the Elasticsearch query.
 func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /search search search
-	//
-	// Searches the dictionary for a word in Greek (English wip)
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: word
-	//       in: query
-	//       description: word or part of word being queried
-	//		 example: test
-	//       required: true
-	//       type: string
-	//       format: word
-	//		 title: word
-	//     + name: mode
-	//       in: query
-	//       description: Determines a number of query modes; fuzzy, exact, extended or partial
-	//		 example: false
-	//       required: false
-	//       type: string
-	//       format: mode
-	//		 title: mode
-	//     + name: lang
-	//       in: query
-	//       description: language to use (greek, english, dutch)
-	//		 example: greek
-	//       required: false
-	//       type: string
-	//       format: lang
-	//		 title: lang
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: []Meros
-	//    400: ValidationError
-	//	  404: NotFoundError
-	//	  405: MethodError
-	//    502: ElasticSearchError
-
 	requestId := req.Header.Get(plato.HeaderKey)
 	splitID := strings.Split(requestId, "+")
 
@@ -222,6 +174,8 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 	queryWord := req.URL.Query().Get("word")
 	mode := req.URL.Query().Get("mode")
 	language := req.URL.Query().Get("lang")
+	text := req.URL.Query().Get("searchInText")
+	searchInText, _ := strconv.ParseBool(text)
 
 	if a.validateAndRespondError(w, "word", queryWord, nil, traceID, spanID, traceCall) {
 		return
@@ -278,14 +232,52 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 
 	var meroi []models.Meros
 
-	for _, hit := range response.Hits.Hits {
-		jsonHit, _ := json.Marshal(hit.Source)
-		meros, _ := models.UnmarshalMeros(jsonHit)
-		if meros.Original != "" {
-			meros.Greek = meros.Original
-			meros.Original = ""
+	if len(response.Hits.Hits) == 0 {
+		noResponseQuery := a.processQuery(mode, language, queryWord)
+
+		noResponseResponse, err := a.Elastic.Query().Match(a.Index, noResponseQuery)
+		if err != nil {
+			e := models.ElasticSearchError{
+				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				Message: models.ElasticErrorMessage{
+					ElasticError: err.Error(),
+				},
+			}
+			if traceCall {
+				parsedError, _ := json.Marshal(e)
+				span := &pb.SpanRequest{
+					TraceId:      traceID,
+					ParentSpanId: spanID,
+					Action:       "MatchElasticQuery",
+					ResponseBody: string(parsedError),
+				}
+				go a.Tracer.Span(context.Background(), span)
+			}
+
+			middleware.ResponseWithJson(w, e)
+			return
 		}
-		meroi = append(meroi, meros)
+
+		for _, hit := range noResponseResponse.Hits.Hits {
+			jsonHit, _ := json.Marshal(hit.Source)
+			meros, _ := models.UnmarshalMeros(jsonHit)
+			if meros.Original != "" {
+				meros.Greek = meros.Original
+				meros.Original = ""
+			}
+			meroi = append(meroi, meros)
+		}
+
+	} else {
+		for _, hit := range response.Hits.Hits {
+			jsonHit, _ := json.Marshal(hit.Source)
+			meros, _ := models.UnmarshalMeros(jsonHit)
+			if meros.Original != "" {
+				meros.Greek = meros.Original
+				meros.Original = ""
+			}
+			meroi = append(meroi, meros)
+		}
 	}
 
 	if traceCall {
@@ -293,7 +285,26 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 	}
 
 	results := a.cleanSearchResult(meroi)
-	middleware.ResponseWithJson(w, results)
+
+	if searchInText {
+		for i, hit := range results.Hits {
+			baseWord := a.extractBaseWord(hit.Hit.Greek)
+			foundInText, err := a.Client.Herodotos().AnalyseText(baseWord, traceID)
+			if err != nil {
+				logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", hit.Hit.Greek, err.Error()))
+			} else {
+				var source models.Rhema
+				defer foundInText.Body.Close()
+				err = json.NewDecoder(foundInText.Body).Decode(&source)
+				if err != nil {
+					logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
+				}
+
+				results.Hits[i].FoundInText = &source
+			}
+		}
+	}
+	middleware.ResponseWithCustomCode(w, http.StatusOK, results)
 }
 
 func (a *AlexandrosHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
@@ -310,8 +321,34 @@ func (a *AlexandrosHandler) databaseSpan(response *elasticmodels.Response, query
 	a.Tracer.DatabaseSpan(context.Background(), dataBaseSpan)
 }
 
+func (a *AlexandrosHandler) extractBaseWord(queryWord string) string {
+	// Normalize and split the input
+	strippedWord := transform.RemoveAccents(strings.ToLower(queryWord))
+	splitWord := strings.Split(strippedWord, " ")
+
+	greekPronouns := map[string]bool{"η": true, "ο": true, "το": true}
+	cleanWord := func(word string) string {
+		return strings.Trim(word, ",.!?-") // Add any other punctuation as needed
+	}
+
+	for _, word := range splitWord {
+		cleanedWord := cleanWord(word)
+
+		if strings.HasPrefix(cleanedWord, "-") {
+			continue
+		}
+
+		if _, isPronoun := greekPronouns[cleanedWord]; !isPronoun {
+			// If the word is not a pronoun, it's likely the correct word
+			return cleanedWord
+		}
+	}
+
+	return queryWord
+}
+
 // CleanSearchResult removes duplicate entries and cleans up the search results.
-func (a *AlexandrosHandler) cleanSearchResult(results []models.Meros) []models.Meros {
+func (a *AlexandrosHandler) cleanSearchResult(results []models.Meros) *models.ExtendedResponse {
 	filteredSlice := make([]models.Meros, 0)
 
 	// Create a map to track entries by Greek and English
@@ -334,7 +371,17 @@ func (a *AlexandrosHandler) cleanSearchResult(results []models.Meros) []models.M
 		filteredSlice = append(filteredSlice, entry)
 	}
 
-	return filteredSlice
+	var extendedResponse models.ExtendedResponse
+
+	for _, filtered := range filteredSlice {
+		hit := models.Hit{
+			Hit:         filtered,
+			FoundInText: nil,
+		}
+
+		extendedResponse.Hits = append(extendedResponse.Hits, hit)
+	}
+	return &extendedResponse
 }
 
 // ProcessQuery constructs the appropriate Elasticsearch query based on the provided mode and language.

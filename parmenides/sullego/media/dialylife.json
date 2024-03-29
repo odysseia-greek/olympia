@@ -1,0 +1,262 @@
+[
+  {
+    "quizMetadata":{
+      "language":"English"
+    },
+    "quizType":"media",
+    "theme":"Daily Life",
+    "set":1,
+    "content":[
+      {
+        "greek":"ἡ ἀγορά",
+        "translation":"market place",
+        "imageURL":"agora.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ οἶκος",
+        "translation":"house",
+        "imageURL":"house.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἡ ὁδός",
+        "translation":"road",
+        "imageURL":"road.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἡ πύλη",
+        "translation":"gate",
+        "imageURL":"gate.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ δικαστής",
+        "translation":"judge",
+        "imageURL":"judge.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ νόμος",
+        "translation":"law",
+        "imageURL":"law.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἡ δημοκρατία",
+        "translation":"democracy",
+        "imageURL":"democracy.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή πόλις",
+        "translation":"city",
+        "imageURL":"city.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἄριστος",
+        "translation":"best",
+        "imageURL":"best.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πολύς",
+        "translation":"many",
+        "imageURL":"many.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"φιλόσοφος",
+        "translation":"philosopher",
+        "imageURL":"philosopher.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ποιητής",
+        "translation":"poet",
+        "imageURL":"poet.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ βασιλεύς",
+        "translation":"king",
+        "imageURL":"king.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή βασιλεία",
+        "translation":"queen",
+        "imageURL":"queen.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό τεῖχος",
+        "translation":"wall",
+        "imageURL":"wall.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό ἱερόν",
+        "translation":"temple",
+        "imageURL":"temple.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ῥήτωρ",
+        "translation":"orator",
+        "imageURL":"orator.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ τύραννος",
+        "translation":"tyrant",
+        "imageURL":"tyrant.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό θέατρον",
+        "translation":"theatre",
+        "imageURL":"theatre.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό στάδιον",
+        "translation":"stadium",
+        "imageURL":"stadium.webp",
+        "audioFile":""
+      }
+    ]
+  },
+  {
+    "quizMetadata":{
+      "language":"English"
+    },
+    "quizType":"media",
+    "set":2,
+    "theme":"Daily Life",
+    "content":[
+      {
+        "greek":"ή ἀγορά",
+        "translation":"agora",
+        "imageURL":"agora.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"Ἀθῆναι",
+        "translation":"athens",
+        "imageURL":"athens.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἄρτος",
+        "translation":"bread",
+        "imageURL":"bread.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ χαλκός",
+        "translation":"bronze",
+        "imageURL":"bronze.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ τυρός",
+        "translation":"cheese",
+        "imageURL":"cheese.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τὸ ἀργύριον",
+        "translation":"coin",
+        "imageURL":"coin.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἰχθύς",
+        "translation":"fish",
+        "imageURL":"fish.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ χρυσός",
+        "translation":"gold",
+        "imageURL":"gold.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ λιμήν",
+        "translation":"harbor",
+        "imageURL":"harbor.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό κρέας",
+        "translation":"meat",
+        "imageURL":"meat.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἔμπορος",
+        "translation":"merchant",
+        "imageURL":"merchant.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ἐλαία",
+        "translation":"olive",
+        "imageURL":"olive.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ῥόα",
+        "translation":"pomegranate",
+        "imageURL":"pomegranate.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ κέραμος",
+        "translation":"pottery",
+        "imageURL":"pottery.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό πλοῖον",
+        "translation":"ship",
+        "imageURL":"ship.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἄργυρος",
+        "translation":"silver",
+        "imageURL":"silver.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ δοῦλος",
+        "translation":"slave",
+        "imageURL":"slave.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό ἐμπόριον",
+        "translation":"tradingstation",
+        "imageURL":"tradingstation.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ πλοῦτος",
+        "translation":"wealth",
+        "imageURL":"wealth.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ οἶνος",
+        "translation":"wine",
+        "imageURL":"wine.webp",
+        "audioFile":""
+      }
+    ]
+  }
+]

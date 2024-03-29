@@ -43,6 +43,10 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 		return nil, err
 	}
 
+	if entry.Categories == nil {
+		return &pb.AggregatorCreationResponse{Created: false, Updated: false}, fmt.Errorf("could not map the word %s to a workable form", parsedWord)
+	}
+
 	if createNewWord {
 		entryAsJson, _ := json.Marshal(entry)
 		createDocument, err := a.Elastic.Index().CreateDocument(a.Index, entryAsJson)
@@ -195,6 +199,7 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 	// example: 1st plur - aor - ind - act
 	// example: noun - plural - masc - nom
 	// example: pres act part - sing - masc - nom
+	// example: inf - pres - act
 	var entry RootWordEntry
 	ruleSet := strings.Split(request.Rule, "-")
 
@@ -219,6 +224,19 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 				Tense:  strings.TrimSpace(ruleSet[3]),
 				Mood:   strings.TrimSpace(ruleSet[2]),
 				Aspect: strings.TrimSpace(ruleSet[1]),
+				Forms:  []GrammaticalForm{conjForm},
+			}
+		}
+
+		if len(ruleSet) == 3 {
+			conjForm = GrammaticalForm{
+				Word: request.Word,
+				Rule: request.Rule,
+			}
+			conj = GrammaticalCategory{
+				Tense:  strings.TrimSpace(ruleSet[2]),
+				Mood:   strings.TrimSpace(ruleSet[1]),
+				Aspect: strings.TrimSpace(ruleSet[0]),
 				Forms:  []GrammaticalForm{conjForm},
 			}
 		}

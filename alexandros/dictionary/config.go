@@ -145,10 +145,16 @@ func CreateNewConfig(env string) (*AlexandrosHandler, error) {
 		}
 	}
 
+	client, err := config.CreateOdysseiaClient()
+	if err != nil {
+		return nil, err
+	}
+
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 	return &AlexandrosHandler{
 		Index:   index,
 		Elastic: elastic,
 		Tracer:  tracer,
+		Client:  client,
 	}, nil
 }

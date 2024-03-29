@@ -8,18 +8,79 @@ deploy:
 build:
   local:
     push: false
-  artifacts:
-    - image: ghcr.io/odysseia-greek/anaximander
-      context: anaximander
-      docker:
-        target: debug
-      sync:
-        manual:
-          - src: '**/*.go'
-            dest: '/app'
 
-manifests:
-  rawYaml:
-    - anaximander/infra/manifest.yaml
 profiles:
-  - name: dev
+  - name: dionysios
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/dionysios
+          context: dionysios
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - dionysios/infra/manifest.yaml
+
+  - name: alexandros
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/alexandros
+          context: alexandros
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - alexandros/infra/manifest.yaml
+
+  - name: herodotos
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/herodotos
+          context: herodotos
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - herodotos/infra/manifest.yaml
+
+  - name: homeros
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/homeros
+          context: homeros
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - homeros/infra/manifest.yaml
+
+  - name: melissos
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/melissos
+          context: melissos
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - melissos/infra/manifest.yaml

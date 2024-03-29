@@ -78,7 +78,6 @@ func TestHealth(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        nil,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -120,7 +119,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -147,7 +145,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -172,7 +169,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -197,7 +193,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -216,7 +211,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -236,7 +230,6 @@ func TestCreateEntry(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -260,7 +253,6 @@ func TestRetrieveEntries(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -277,7 +269,6 @@ func TestRetrieveEntries(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -300,7 +291,6 @@ func TestRetrieveEntries(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        mockElasticClient,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -326,7 +316,6 @@ func TestMapping(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        nil,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -351,7 +340,6 @@ func TestMapping(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        nil,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -374,7 +362,6 @@ func TestMapping(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        nil,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 
@@ -398,7 +385,6 @@ func TestMapping(t *testing.T) {
 		handler := &AggregatorServiceImpl{
 			Elastic:                        nil,
 			Index:                          "test",
-			Tracer:                         nil,
 			UnimplementedAristarchosServer: pb.UnimplementedAristarchosServer{},
 		}
 

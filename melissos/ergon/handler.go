@@ -1,4 +1,4 @@
-package seeder
+package ergon
 
 import (
 	"context"
@@ -66,6 +66,7 @@ func (m *MelissosHandler) HandleParmenides() bool {
 		if err != nil {
 			logging.Error(err.Error())
 		}
+
 		if !found {
 			m.addWord(word)
 		}
@@ -150,8 +151,9 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 	for _, hit := range response.Hits.Hits {
 		jsonHit, _ := json.Marshal(hit.Source)
 		meros, _ := models.UnmarshalMeros(jsonHit)
+		baseWord := m.extractBaseWord(meros.Greek)
 		if len(response.Hits.Hits) > 1 {
-			if meros.Greek != strippedWord && meros.Greek != s {
+			if baseWord != strippedWord && baseWord != s {
 				continue
 			}
 		}
@@ -328,4 +330,35 @@ func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
 			c <- true
 		}
 	}
+}
+
+func (m *MelissosHandler) extractBaseWord(queryWord string) string {
+	// Normalize and split the input
+	strippedWord := transform.RemoveAccents(strings.ToLower(queryWord))
+	splitWord := strings.Split(strippedWord, " ")
+
+	// Known Greek pronouns
+	greekPronouns := map[string]bool{"η": true, "ο": true, "το": true}
+
+	// Function to clean punctuation from a word
+	cleanWord := func(word string) string {
+		return strings.Trim(word, ",.!?-") // Add any other punctuation as needed
+	}
+
+	// Iterate through the words
+	for _, word := range splitWord {
+		cleanedWord := cleanWord(word)
+
+		if strings.HasPrefix(cleanedWord, "-") {
+			// Skip words starting with "-"
+			continue
+		}
+
+		if _, isPronoun := greekPronouns[cleanedWord]; !isPronoun {
+			// If the word is not a pronoun, it's likely the correct word
+			return cleanedWord
+		}
+	}
+
+	return queryWord
 }

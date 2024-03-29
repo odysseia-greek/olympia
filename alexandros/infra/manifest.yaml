@@ -11,6 +11,7 @@ data:
   TLS_ENABLED: "true"
   CERT_ROOT: "/etc/certs"
   SOLON_SERVICE: "https://solon:5443"
+  HERODOTOS_SERVICE: "http://herodotos:5000"
   MAX_NGRAM: "6"
   MIN_NGRAM: "2"
 ---

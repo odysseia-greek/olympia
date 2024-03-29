@@ -35,26 +35,18 @@ Feature: Validate Homeros GraphQL Gateway Functionality
       | author       |
       | thucydides   |
       | ploutarchos  |
-      | plato        |
-
-  @homeros
-  Scenario: Sokrates aggregate
-    Given the gateway is up
-    When I query for a tree of Sokrates methods
-    Then methods and categories should be returned in a single response
 
   @homeros
   Scenario Outline: Using the gateway it should be possible to create and answer a quiz
     Given the gateway is up
-    When I query for a tree of Sokrates methods
-    And I create a new quiz from those methods
-    And I answer the quiz with a "<answer>" answer through the gateway
-    Then the gateway should respond with a correct "<answer>"
+    When I create a new quiz with quizType "<quizType>"
+    And I answer the quiz through the gateway
+    Then the gateway should respond with a correctness
     And other possibilities should be included in the response
     Examples:
-      | answer |
-      | true   |
-      | false  |
+      | quizType |
+      | media    |
+      | authorbased |
 
   @homeros
   Scenario Outline: Alexandros search word
@@ -62,13 +54,14 @@ Feature: Validate Homeros GraphQL Gateway Functionality
     When the word "<word>" is queried using "<mode>" and "<language>" through the gateway
     Then a Greek translation should be included in the response
     Examples:
-      | word     | mode   | language |
-      | ἰδιώτης  | exact  | Greek    |
-      | ἄλλος    | phrase | Greek    |
-      | ομαι     | fuzzy  | Greek    |
-      | house    | exact  | English  |
-      | round    | phrase | English  |
-      | so       | fuzzy  | English  |
+      | word     | mode     | language |
+      | ἰδιώτης  | exact    | Greek    |
+      | ἄλλος    | extended | Greek    |
+      | ομαι     | partial  | Greek    |
+      | αλλας    | fuzzy    | Greek    |
+      | house    | exact    | English  |
+      | round    | extended | English  |
+      | so       | partial  | English  |
 
   @homeros
   Scenario Outline: Dionysios search grammar results
@@ -79,3 +72,4 @@ Feature: Validate Homeros GraphQL Gateway Functionality
       | declension                     | word    |
       | 2nd plural - pres - mid - ind  | μάχεσθε |
       | 2nd sing - pres - mid - ind    | μάχει   |
+      | inf - aorist - pas             | ἀγορευθῆναι  |

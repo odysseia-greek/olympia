@@ -101,6 +101,18 @@ Feature: Dionysios
       | dionysios | 2nd sing - futurum - ind - act | λῡ́σεις |
 
   @dionysios
+  Scenario Outline: Different forms of infintive can be identified
+    Given the "<service>" is running
+    When the grammar is checked for word "<word>"
+    Then the declension "<declension>" should be included in the response
+    Examples:
+      | service   | declension          | word         |
+      | dionysios | inf - pres - mid    | ἀγορεύεσθαι  |
+      | dionysios | inf - futurum - act | ἀγορεύσειν   |
+      | dionysios | inf - aorist - mid  | ἀγορεύσᾰσθαι |
+      | dionysios | inf - aorist - pas  | ἀγορευθῆναι  |
+
+  @dionysios
   Scenario Outline: Different forms of participia can be identified
     Given the "<service>" is running
     When the grammar is checked for word "<word>"
@@ -140,6 +152,6 @@ Feature: Dionysios
     And the number of translations should be equal to er exceed "<translations>"
     And the number of declensions should be equal to or exceed "<declensions>"
     Examples:
-      | service   | results | translations | declensions | word |
-      | dionysios | 2       | 1            | 2           | δῶρα |
+      | service   | results | translations | declensions | word  |
+      | dionysios | 2       | 1            | 2           | δῶρα  |
       | dionysios | 2       | 2            | 1           | μάχων |

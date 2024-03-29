@@ -156,7 +156,7 @@ func TestProcessQuery(t *testing.T) {
 			},
 		},
 		{
-			option:    phrase,
+			option:    extended,
 			language:  "greek",
 			queryWord: "test",
 			expectedQuery: map[string]interface{}{

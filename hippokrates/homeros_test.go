@@ -104,35 +104,6 @@ func (l *OdysseiaFixture) iQueryForATreeOfHerodotosAuthors() error {
 	return nil
 }
 
-func (l *OdysseiaFixture) iQueryForATreeOfSokratesMethods() error {
-	// Define your GraphQL query
-	query := `query methods {
-	methods {
-		name
-		categories {
-			name
-			highestChapter
-		}
-	}
-}
-`
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var sokratesResponse struct {
-		Data struct {
-			Methods graphql.MethodGraph `json:"methods"`
-		} `json:"data"`
-	}
-	err = json.NewDecoder(response.Body).Decode(&sokratesResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, sokratesResponse.Data.Methods)
-
-	return nil
-}
-
 func (l *OdysseiaFixture) theGrammarIsCheckedForWordThroughTheGateway(word string) error {
 	// Define your GraphQL query
 	query := fmt.Sprintf(`query grammar {
@@ -180,7 +151,7 @@ func (l *OdysseiaFixture) theWordIsQueriedUsingAndThroughTheGateway(word, mode, 
 
 	var alexandrosResponse struct {
 		Data struct {
-			Response []models.Meros `json:"dictionary"`
+			Response models.ExtendedResponse `json:"dictionary"`
 		} `json:"data"`
 	}
 
@@ -208,20 +179,6 @@ func (l *OdysseiaFixture) authorsAndBooksShouldBeReturnedInASingleResponse() err
 	return nil
 }
 
-func (l *OdysseiaFixture) methodsAndCategoriesShouldBeReturnedInASingleResponse() error {
-	methods := l.ctx.Value(ResponseBody).(graphql.MethodGraph)
-
-	for _, method := range methods.MethodTree {
-		if method.Name == "" {
-			return errors.New("empty name for a method")
-		}
-		if len(method.Categories) == 0 {
-			return errors.New("no categories for method " + method.Name)
-		}
-	}
-	return nil
-}
-
 func (l *OdysseiaFixture) theDeclensionShouldBeIncludedInTheResponseAsAGatewayStruct(declension string) error {
 	declensions := l.ctx.Value(ResponseBody).([]models.Result)
 
@@ -239,99 +196,172 @@ func (l *OdysseiaFixture) theDeclensionShouldBeIncludedInTheResponseAsAGatewaySt
 	return nil
 }
 
-func (l *OdysseiaFixture) iAnswerTheQuizWithAAnswerThroughTheGateway(answer string) error {
-	quiz := l.ctx.Value(ResponseBody).(models.QuizResponse)
-	correct, _ := strconv.ParseBool(answer)
-	provided := quiz.Answer
+func (l *OdysseiaFixture) iAnswerTheQuizThroughTheGateway() error {
+	quizResponse, ok := l.ctx.Value(QuizContext).(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert quizResponse type")
+	}
 
-	if !correct {
-		for _, quizQuestion := range quiz.QuizQuestions {
-			if quizQuestion != quiz.Answer {
-				provided = quizQuestion
-				break
+	bodyMeta, ok := l.ctx.Value(BodyContext).(models.CreationRequest)
+	if !ok {
+		return fmt.Errorf("failed to assert bodyMeta type")
+	}
+
+	data, ok := quizResponse["data"].(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert data type")
+	}
+
+	quiz, ok := data["quiz"].(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert quiz type")
+	}
+
+	quizWord, ok := quiz["quizItem"]
+	if !ok {
+		return fmt.Errorf("failed to assert quizWord type")
+	}
+
+	options, ok := quiz["options"].([]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert options type")
+	}
+
+	if len(options) == 0 {
+		return fmt.Errorf("options slice is empty")
+	}
+
+	randomIndex := l.randomizer.RandomNumberBaseZero(len(options))
+
+	selectedOption, ok := options[randomIndex].(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("failed to assert selected option type")
+	}
+
+	answer, ok := selectedOption["option"].(string)
+	if !ok {
+		return fmt.Errorf("failed to assert answer type")
+	}
+
+	query := fmt.Sprintf(`query answer{
+	answer(
+		theme: "%s"
+		set: "%s"
+		quizType: "%s"
+		quizWord: "%s"
+		answer: "%s"
+		comprehensive: true
+	) {
+				... on ComprehensiveResponse {
+		correct
+		quizWord
+		similarWords{
+			greek
+	english
+		}
+		foundInText{
+			rhemai{
+				author
+				greek
+				translations
 			}
 		}
 	}
-
-	query := fmt.Sprintf(`query answer {
-	answer(quizWord: "%s", answerProvided: "%s") {
-		correct
-		quizWord
-		possibilities{
-			greek
-			category
-			translation
-		}
 	}
 }
-`, quiz.Question, provided)
+`, bodyMeta.Theme, bodyMeta.Set, bodyMeta.QuizType, quizWord, answer)
 
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
 	}
 
-	var sokratesResponse struct {
+	var answerResponse struct {
 		Data struct {
-			Response models.CheckAnswerResponse `json:"answer"`
+			Response models.ComprehensiveResponse `json:"answer"`
 		} `json:"data"`
 	}
+	err = json.NewDecoder(response.Body).Decode(&answerResponse)
 
-	err = json.NewDecoder(response.Body).Decode(&sokratesResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, sokratesResponse.Data.Response)
+	l.ctx = context.WithValue(l.ctx, QuizContext, answerResponse.Data.Response)
 
 	return nil
 }
 
-func (l *OdysseiaFixture) iCreateANewQuizFromThoseMethods() error {
-	// Define your GraphQL query
-	query := `query quiz {
-	quiz(category: "nomina", chapter: "1", method: "mouseion") {
-		question
-		answer
-		quiz
+func (l *OdysseiaFixture) iCreateANewQuizWithQuizType(quizType string) error {
+	optionsQuery := fmt.Sprintf(`query options{
+	options(quizType: "%s") {
+		aggregates{
+			name
+			highestSet
+		}
 	}
 }
-`
+`, quizType)
+
+	optionsResponse, err := l.graphqlHelper(optionsQuery)
+	if err != nil {
+		return err
+	}
+
+	var aggregates struct {
+		Data struct {
+			Options models.AggregateResult `json:"options"`
+		} `json:"data"`
+	}
+
+	err = json.NewDecoder(optionsResponse.Body).Decode(&aggregates)
+	randomAggregate := aggregates.Data.Options.Aggregates[l.randomizer.RandomNumberBaseZero(len(aggregates.Data.Options.Aggregates))]
+
+	bodyModel := models.CreationRequest{
+		Theme:    randomAggregate.Name,
+		Set:      randomAggregate.HighestSet,
+		QuizType: quizType,
+	}
+
+	l.ctx = context.WithValue(l.ctx, BodyContext, bodyModel)
+
+	query := fmt.Sprintf(`query quiz {
+	quiz(set: "%s", theme: "%s", quizType: "%s",) {
+	... on QuizResponse {
+		quizItem
+		options{
+			option
+			imageUrl
+			}
+		}
+	}
+}
+`, randomAggregate.HighestSet, randomAggregate.Name, quizType)
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
 	}
 
-	var sokratesResponse struct {
-		Data struct {
-			Response models.QuizResponse `json:"quiz"`
-		} `json:"data"`
-	}
+	var quizResponse interface{}
+	err = json.NewDecoder(response.Body).Decode(&quizResponse)
 
-	err = json.NewDecoder(response.Body).Decode(&sokratesResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, sokratesResponse.Data.Response)
+	l.ctx = context.WithValue(l.ctx, QuizContext, quizResponse)
 
 	return nil
 }
 
 func (l *OdysseiaFixture) otherPossibilitiesShouldBeIncludedInTheResponse() error {
-	response := l.ctx.Value(ResponseBody).(models.CheckAnswerResponse)
+	response := l.ctx.Value(QuizContext).(models.ComprehensiveResponse)
 
-	if len(response.Possibilities) == 0 {
-		return fmt.Errorf("expected possibilties to be greater than zero: %v", response.Possibilities)
+	if response.SimilarWords == nil {
+		return fmt.Errorf("expected possibilties to be greater than zero: %v", response.SimilarWords)
 	}
 
 	return nil
 }
 
-func (l *OdysseiaFixture) theGatewayShouldRespondWithACorrect(answer string) error {
-	parsedAnswer, err := strconv.ParseBool(answer)
-	if err != nil {
-		return err
+func (l *OdysseiaFixture) theGatewayShouldRespondWithACorrectness() error {
+	_, ok := l.ctx.Value(QuizContext).(models.ComprehensiveResponse)
+	if !ok {
+		return fmt.Errorf("the answer was not a correct format")
 	}
-	response := l.ctx.Value(ResponseBody).(models.CheckAnswerResponse)
 
-	if parsedAnswer != response.Correct {
-		return fmt.Errorf("expected answer %v to be equal to correctness %v", parsedAnswer, response.Correct)
-	}
 	return nil
 }
 

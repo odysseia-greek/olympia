@@ -1,129 +1,262 @@
-{
-  "quizMetadata": {
-    "language": "English"
+[
+  {
+    "quizMetadata":{
+      "language":"English"
+    },
+    "quizType":"media",
+    "theme":"Basic",
+    "set":1,
+    "content":[
+      {
+        "greek":"ὁ λόγος",
+        "translation":"word",
+        "imageURL":"logos.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ χρόνος",
+        "translation":"time",
+        "imageURL":"time.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ποταμός",
+        "translation":"river",
+        "imageURL":"river.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ πόλεμος",
+        "translation":"war",
+        "imageURL":"war.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ναυτικός",
+        "translation":"seafaring, naval",
+        "imageURL":"naval.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή στρατιά",
+        "translation":"army",
+        "imageURL":"army.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό δένδρον",
+        "translation":"tree",
+        "imageURL":"tree.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ἀγαθός",
+        "translation":"good",
+        "imageURL":"good.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή κακός",
+        "translation":"bad",
+        "imageURL":"bad.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἵππος",
+        "translation":"horse",
+        "imageURL":"horse.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ θεός",
+        "translation":"god",
+        "imageURL":"god.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή θεά",
+        "translation":"goddess",
+        "imageURL":"goddess.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ οἶνος",
+        "translation":"wine",
+        "imageURL":"wine.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή θάλασσα",
+        "translation":"sea",
+        "imageURL":"sea.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή γέφυρα",
+        "translation":"bridge",
+        "imageURL":"bridge.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή σελήνη",
+        "translation":"moon",
+        "imageURL":"moon.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἥλιος",
+        "translation":"sun",
+        "imageURL":"sun.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ἀσπίς",
+        "translation":"shield",
+        "imageURL":"shield.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή γυνή, γυναικός",
+        "translation":"woman",
+        "imageURL":"woman.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἀνήρ, ἀνδρός",
+        "translation":"man",
+        "imageURL":"man.webp",
+        "audioFile":""
+      }
+    ]
   },
-  "quizType": "media",
-  "set": 1,
-  "content": [
-    {
-      "greek": "ὁ λόγος",
-      "translation": "word",
-      "imageURL": "logos.webp",
-      "audioFile": ""
+  {
+    "quizMetadata":{
+      "language":"English"
     },
-    {
-      "greek": "ὁ χρόνος",
-      "translation": "time",
-      "imageURL": "time.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ ποταμός",
-      "translation": "river",
-      "imageURL": "river.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ πόλεμος",
-      "translation": "war",
-      "imageURL": "war.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή ναυτικός",
-      "translation": "seafaring, naval",
-      "imageURL": "naval.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή στρατιά",
-      "translation": "army",
-      "imageURL": "army.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "τό δένδρον",
-      "translation": "tree",
-      "imageURL": "tree.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή ἀγαθός",
-      "translation": "good",
-      "imageURL": "good.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή κακός",
-      "translation": "bad",
-      "imageURL": "bad.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ ἵππος",
-      "translation": "horse",
-      "imageURL": "horse.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ θεός",
-      "translation": "god",
-      "imageURL": "god.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή θεά",
-      "translation": "goddess",
-      "imageURL": "goddess.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ οἶνος",
-      "translation": "wine",
-      "imageURL": "wine.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή θάλασσα",
-      "translation": "sea",
-      "imageURL": "sea.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή γέφυρα",
-      "translation": "bridge",
-      "imageURL": "bridge.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή σελήνη",
-      "translation": "moon",
-      "imageURL": "moon.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ ἥλιος",
-      "translation": "sun",
-      "imageURL": "sun.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή ἀσπίς",
-      "translation": "shield",
-      "imageURL": "shield.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ή γυνή, γυναικός",
-      "translation": "woman",
-      "imageURL": "woman.webp",
-      "audioFile": ""
-    },
-    {
-      "greek": "ὁ ἀνήρ, ἀνδρός",
-      "translation": "man",
-      "imageURL": "man.webp",
-      "audioFile": ""
-    }
-  ]
-}
+    "quizType":"media",
+    "theme":"Basic",
+    "set":2,
+    "content":[
+      {
+        "greek":"φέρω",
+        "translation":"carry",
+        "imageURL":"carry.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πίνω",
+        "translation":"to drink",
+        "imageURL":"drink.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"θηράω",
+        "translation":"to hunt",
+        "imageURL":"hunt.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἄγω",
+        "translation":"to lead",
+        "imageURL":"lead.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"λύω",
+        "translation":"loose",
+        "imageURL":"loose.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"φιλέω",
+        "translation":"love",
+        "imageURL":"love.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀγγέλλω",
+        "translation":"message",
+        "imageURL":"message.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὠνέομαι",
+        "translation":"to purchase",
+        "imageURL":"purchase.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τρέχω",
+        "translation":"to run",
+        "imageURL":"run.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"θύω",
+        "translation":"sacrifice",
+        "imageURL":"sacrifice.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πλέω",
+        "translation":"sail",
+        "imageURL":"sail.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πλάσσω",
+        "translation":"shape",
+        "imageURL":"shape.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀείδω",
+        "translation":"sing",
+        "imageURL":"sing.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀείδω",
+        "translation":"speak",
+        "imageURL":"speak.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"παύω",
+        "translation":"stop",
+        "imageURL":"stop.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"διδάσκω",
+        "translation":"teach",
+        "imageURL":"teach.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"φρονέω",
+        "translation":"to think",
+        "imageURL":"think.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"εἰμί",
+        "translation":"to be",
+        "imageURL":"tobe.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"παλαίω",
+        "translation":"to wrestle",
+        "imageURL":"wrestle.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"γράφω",
+        "translation":"to write",
+        "imageURL":"write.webp",
+        "audioFile":""
+      }
+    ]
+  }
+]

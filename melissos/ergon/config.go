@@ -1,4 +1,4 @@
-package seeder
+package ergon
 
 import (
 	"context"
@@ -103,7 +103,7 @@ func CreateNewConfig(env string, duration time.Duration, finished int64) (*Melis
 	if wait == "" {
 		waitDuration, _ = time.ParseDuration(DefaultWaitTime + "s")
 	} else {
-		waitDuration, _ = time.ParseDuration(wait + "ms")
+		waitDuration, _ = time.ParseDuration(wait + "s")
 	}
 
 	return &MelissosHandler{

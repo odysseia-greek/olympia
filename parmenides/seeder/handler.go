@@ -13,7 +13,6 @@ import (
 	"github.com/odysseia-greek/agora/plato/service"
 	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	"strings"
-	"sync"
 )
 
 type ParmenidesHandler struct {
@@ -75,8 +74,7 @@ func (p *ParmenidesHandler) CreateIndexAtStartup() error {
 	return nil
 }
 
-func (p *ParmenidesHandler) AddWithQueue(quizzes []models.AuthorBasedQuiz, wg *sync.WaitGroup) error {
-	defer wg.Done()
+func (p *ParmenidesHandler) AddWithQueue(quizzes []models.AuthorBasedQuiz) error {
 	var buf bytes.Buffer
 
 	var currBatch int
@@ -133,9 +131,7 @@ func (p *ParmenidesHandler) AddWithQueue(quizzes []models.AuthorBasedQuiz, wg *s
 	return nil
 }
 
-func (p *ParmenidesHandler) AddWithoutQueue(content []byte, wg *sync.WaitGroup) error {
-	defer wg.Done()
-
+func (p *ParmenidesHandler) AddWithoutQueue(content []byte) error {
 	_, err := p.Elastic.Index().CreateDocument(p.Index, content)
 	if err != nil {
 		return err

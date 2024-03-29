@@ -89,19 +89,12 @@ func main() {
 				switch dir.Name() {
 				case "media":
 					wg.Add(1)
-					go func() {
-						err := handler.AddWithoutQueue(content, &wg)
-						if err != nil {
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.MediaQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
 							logging.Error(err.Error())
-						}
-					}()
-				case "dialogue":
-					wg.Add(1)
-					go func() {
-						var quiz []models.DialogueQuiz
-						err = json.Unmarshal(content, &quiz)
-						if err != nil {
-							logging.Error(err.Error())
+							return
 						}
 
 						for _, q := range quiz {
@@ -111,28 +104,49 @@ func main() {
 								continue
 							}
 
-							err = handler.AddWithoutQueue(asJson, &wg)
-							if err != nil {
+							if err := handler.AddWithoutQueue(asJson); err != nil {
 								logging.Error(err.Error())
 							}
 						}
-					}()
+					}(content)
+				case "dialogue":
+					wg.Add(1)
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.DialogueQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
+						}
+
+						for _, q := range quiz {
+							asJson, err := json.Marshal(q)
+							if err != nil {
+								logging.Error(err.Error())
+								continue
+							}
+
+							if err := handler.AddWithoutQueue(asJson); err != nil {
+								logging.Error(err.Error())
+							}
+						}
+					}(content)
 				case "authorbased":
 					wg.Add(1)
-					var quiz []models.AuthorBasedQuiz
-					err := json.Unmarshal(content, &quiz)
-					if err != nil {
-						logging.Error(err.Error())
-						return
-					}
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.AuthorBasedQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
+						}
 
-					err = handler.AddWithQueue(quiz, &wg)
-					if err != nil {
-						logging.Error(err.Error())
-					}
+						if err := handler.AddWithQueue(quiz); err != nil {
+							logging.Error(err.Error())
+						}
+					}(content)
 				}
 			}
-
 		}
 	}
 

@@ -323,13 +323,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			PartOfSpeech: speech,
 		}
 
-		test, _ := d.Aggregator.RetrieveEntry(ctx, &pba.AggregatorRequest{
-			RootWord: declension.RootWord,
-		})
-
-		l, _ := json.Marshal(test)
-		logging.Debug(string(l))
-
 		entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
 		if err != nil {
 			logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))

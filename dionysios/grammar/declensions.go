@@ -19,7 +19,7 @@ import (
 
 // queryWordInAlexandros tries to find results for given words in the dictionary.
 // It queries the Alexandros dictionary for the stripped word and returns the search results.
-func (d *DionysosHandler) queryWordInAlexandros(word, traceID string) ([]models.Meros, error) {
+func (d *DionysosHandler) queryWordInAlexandros(word, traceID string) ([]models.Hit, error) {
 	// Remove accents from the word
 	strippedWord := d.removeAccents(word)
 
@@ -28,7 +28,7 @@ func (d *DionysosHandler) queryWordInAlexandros(word, traceID string) ([]models.
 	mode := "exact"
 
 	// Send a search request to the Alexandros dictionary
-	response, err := d.Client.Alexandros().Search(strippedWord, "greek", mode, traceID)
+	response, err := d.Client.Alexandros().Search(strippedWord, "greek", mode, "false", traceID)
 	if err != nil {
 		return nil, err
 	}
@@ -48,14 +48,14 @@ func (d *DionysosHandler) queryWordInAlexandros(word, traceID string) ([]models.
 	}
 
 	// Decode the response body into search results
-	var searchResults []models.Meros
-	err = json.NewDecoder(response.Body).Decode(&searchResults)
+	var extendedResponse models.ExtendedResponse
+	err = json.NewDecoder(response.Body).Decode(&extendedResponse)
 	if err != nil {
 		return nil, err
 	}
 
 	// Return the search results
-	return searchResults, nil
+	return extendedResponse.Hits, nil
 }
 
 // removeAccents removes accents from a given string and returns the transformed string.
@@ -153,7 +153,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 					// Parse the dictionary results and create result objects
 					for _, hit := range dictionaryHits {
-						translation, article := d.parseDictResults(hit)
+						translation, article := d.parseDictResults(hit.Hit)
 
 						result := models.Result{
 							Word:        word,
@@ -184,8 +184,6 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 								if !strings.Contains(declension.Rule, "neut") {
 									continue
 								}
-							default:
-								continue
 							}
 						}
 
@@ -205,7 +203,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		if len(singleSearchResult) > 0 {
 			// Parse the dictionary results and create result objects
 			for _, searchResult := range singleSearchResult {
-				translation, _ := d.parseDictResults(searchResult)
+				translation, _ := d.parseDictResults(searchResult.Hit)
 
 				// Skip adding the result if it already exists with the same translation
 				doNotAdd := false
@@ -223,7 +221,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 				result := models.Result{
 					Word:        word,
 					Rule:        "preposition",
-					RootWord:    searchResult.Greek,
+					RootWord:    searchResult.Hit.Greek,
 					Translation: translation,
 				}
 				results.Results = append(results.Results, result)
@@ -241,7 +239,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		if len(singleSearchResult) > 0 {
 			// Parse the dictionary results and create result objects
 			for _, searchResult := range singleSearchResult {
-				translation, _ := d.parseDictResults(searchResult)
+				translation, _ := d.parseDictResults(searchResult.Hit)
 
 				// Skip adding the result if it already exists with the same translation
 				doNotAdd := false
@@ -259,7 +257,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 				result := models.Result{
 					Word:        word,
 					Rule:        "preposition",
-					RootWord:    searchResult.Greek,
+					RootWord:    searchResult.Hit.Greek,
 					Translation: translation,
 				}
 				results.Results = append(results.Results, result)
@@ -277,25 +275,36 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		}
 		go d.Tracer.Span(context.Background(), span)
 	}
+
 	// Perform additional filtering and removal of redundant results
 	if len(results.Results) > 1 {
-		lastResult := models.Result{
-			Word:        "",
-			Rule:        "",
-			RootWord:    "",
-			Translation: "",
-		}
-		for i, result := range results.Results {
-			if result.Rule != "preposition" {
-				if lastResult.Rule == result.Rule && result.Translation == lastResult.Translation && d.removeAccents(result.RootWord) == d.removeAccents(lastResult.RootWord) {
-					results.RemoveIndex(i)
+		filteredResults := make([]models.Result, 0)
+		seen := make(map[string]int) // Map to track unique combinations and their indices in filteredResults
+
+		for _, result := range results.Results {
+			// Create a key that represents the unique combination of Rule, Translation, and RootWord (with accents removed)
+			key := result.Rule + "|" + result.Translation + "|" + d.removeAccents(result.RootWord)
+
+			if result.Rule == "preposition" || result.Translation == "" ||
+				(result.RootWord == "η" || result.RootWord == "ο" || result.RootWord == "το") && result.Word != result.RootWord {
+				continue // Skip adding this result
+			}
+
+			if index, found := seen[key]; found {
+				// Check if the current result has accents but the one in filteredResults does not
+				if result.RootWord != d.removeAccents(result.RootWord) && filteredResults[index].RootWord == d.removeAccents(filteredResults[index].RootWord) {
+					// Replace the no-accent version with the current result (which has accents)
+					filteredResults[index] = result
 				}
+			} else {
+				// Add the current result to filteredResults and record its index in seen
+				filteredResults = append(filteredResults, result)
+				seen[key] = len(filteredResults) - 1 // Store the index of this result in filteredResults
 			}
-			if result.Translation == "" {
-				results.RemoveIndex(i)
-			}
-			lastResult = result
 		}
+
+		// Replace the original results with the filtered results
+		results.Results = filteredResults
 	}
 
 	// Return the declension translation results

@@ -821,11 +821,22 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 			return
 		}
 
+		var processedWords []string
 		for _, word := range words.Word {
-			highlight := fmt.Sprintf("&&&%s&&&", word)
-			rhemaSource.Greek = strings.ReplaceAll(rhemaSource.Greek, word, highlight)
-			rhemas.Rhemai = append(rhemas.Rhemai, rhemaSource)
+			processedInLoop := false
+			for _, processed := range processedWords {
+				if processed == word {
+					processedInLoop = true
+				}
+			}
+			if !processedInLoop {
+				highlight := fmt.Sprintf("&&&%s&&&", word)
+				rhemaSource.Greek = strings.ReplaceAll(rhemaSource.Greek, word, highlight)
+				processedWords = append(processedWords, word)
+			}
+
 		}
+		rhemas.Rhemai = append(rhemas.Rhemai, rhemaSource)
 	}
 
 	middleware.ResponseWithCustomCode(w, 200, rhemas)

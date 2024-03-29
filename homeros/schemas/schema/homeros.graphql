@@ -1,0 +1,222 @@
+schema {
+  query: RootQuery
+}
+
+type Aggregate {
+  highestSet: String
+  name: String
+}
+
+type AggregateResult {
+  aggregates: [Aggregate]
+}
+
+union AnswerUnion = ComprehensiveResponse | DialogueAnswer
+
+type Authors {
+  books: [Book]
+  name: String
+}
+
+type Book {
+  book: Int
+}
+
+type ComprehensiveResponse {
+  correct: Boolean
+  foundInText: FoundInText
+  progress: Progress
+  quizWord: String
+  similarWords: [Hit]
+}
+
+type Database {
+  clusterName: String
+  healthy: Boolean
+  serverName: String
+  serverVersion: String
+}
+
+type Dialogue {
+  introduction: String
+  linkToPerseus: String
+  section: String
+  speakers: [Speaker]
+}
+
+type DialogueAnswer {
+  answer: [DialogueContent]
+  input: [DialogueContent]
+  percentage: Float
+  wronglyPlaced: [DialogueCorrection]
+}
+
+type DialogueContent {
+  greek: String
+  place: Int
+  speaker: String
+  translation: String
+}
+
+type DialogueCorrection {
+  correctPlace: Int
+  greek: String
+  place: Int
+  speaker: String
+  translation: String
+}
+
+input DialogueInput {
+  speaker: String
+  translation: String
+  greek: String
+  place: Int
+}
+
+type DialogueQuiz {
+  content: [DialogueContent]
+  dialogue: Dialogue
+  quizMetadata: QuizMetadata
+  quizType: String
+  set: Int
+  theme: String
+}
+
+type FoundInText {
+  rhemai: [Rhema]
+}
+
+type Health {
+  database: Database
+  healthy: Boolean
+  time: String
+}
+
+type Hit {
+  dutch: String
+  english: String
+  greek: String
+  linkedWord: String
+  original: String
+}
+
+type matches {
+  index: Int
+  word: String
+}
+
+type mistakes {
+  index: Int
+  nonMatches: [nonMatches]
+  word: String
+}
+
+type nonMatches {
+  index: Int
+  levenshtein: Int
+  match: String
+  percentage: String
+}
+
+type Options {
+  audioUrl: String
+  imageUrl: String
+  option: String
+}
+
+type Progress {
+  averageAccuracy: Float
+  timesCorrect: Int
+  timesIncorrect: Int
+}
+
+type QuizMetadata {
+  language: String
+}
+
+type QuizResponse {
+  options: [Options]
+  quizItem: String
+}
+
+union QuizResponseUnion = QuizResponse | DialogueQuiz
+
+type Result {
+  rootWord: String
+  rule: String
+  translation: String
+  word: String
+}
+
+type Rhema {
+  author: String
+  book: Int
+  chapter: Int
+  greek: String
+  perseusTextLink: String
+  section: Int
+  translations: [String]
+}
+
+type RootQuery {
+  answer(answer: String, comprehensive: Boolean, dialogue: [DialogueInput], theme: String, set: String, quizType: String, quizWord: String): AnswerUnion
+
+  """Get the author and books tree from Herodotos"""
+  authors: [Authors]
+
+  """Search Alexandros dictionary for a word"""
+  dictionary(word: String, language: String = "", mode: String = ""): [Hit]
+
+  """Search Dionysios for grammar results"""
+  grammar(word: String): [Result]
+
+  """returns the options for a specific quiztype"""
+  options(quizType: String): AggregateResult
+  quiz(quizType: String, theme: String, set: String): QuizResponseUnion
+
+  """Create a new Question in Herodotos"""
+  sentence(book: String, author: String): Sentence
+
+  """See if the backendApis are healthy"""
+  status: Status
+
+  """Check the text given"""
+  text(sentenceId: String, author: String, answer: String): Text
+}
+
+type Sentence {
+  author: String
+  book: String
+  greek: String
+  id: String
+}
+
+type Speaker {
+  name: String
+  shorthand: String
+  translation: String
+}
+
+"""The way to check whether backend apis are available"""
+type Status {
+  alexandros: Health
+  dionysios: Health
+  herodotos: Health
+  overallHealth: Boolean
+  sokrates: Health
+}
+
+type Text {
+  input: String
+  levenshtein: String
+  matches: [matches]
+  mistakes: [mistakes]
+  quiz: String
+  splitAnswer: [word]
+  splitQuiz: [word]
+}
+
+type word {
+  word: String
+}
+

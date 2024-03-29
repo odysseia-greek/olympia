@@ -1,5 +1,5 @@
 # Base build
-FROM golang:1.21-alpine as base
+FROM golang:1.22-alpine as base
 
 ARG project_name
 ARG TARGETOS
@@ -40,5 +40,6 @@ ARG project_name
 ENV project_name=${project_name}
 
 COPY --from=builder /app/${project_name} .
+COPY docs /app/docs
 ENV TMPDIR=/tmp
 ENTRYPOINT [ "sh", "-c", "/app/${project_name}" ]

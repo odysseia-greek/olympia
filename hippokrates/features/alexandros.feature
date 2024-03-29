@@ -36,13 +36,17 @@ Feature: Alexandros
   @alexandros
   Scenario Outline: Different modes and languages are supported
     Given the "<service>" is running
-    When the word "<word>" is queried using "<mode>" and "<language>"
+    When the word "<word>" is queried using "<mode>" and "<language>" and "<extend>"
     Then a Greek translation should be included in the response
     Examples:
-      | service    | word     | mode   | language |
-      | alexandros | ἰδιώτης  | exact  | greek    |
-      | alexandros | ἄλλος    | phrase | greek    |
-      | alexandros | ομαι     | fuzzy  | greek    |
-      | alexandros | house    | exact  | english  |
-      | alexandros | round    | phrase | english  |
-      | alexandros | so       | fuzzy  | english  |
+      | service    | word     | mode   | language | extend |
+      | alexandros | ἰδιώτης  | exact  | greek    | false  |
+      | alexandros | λόγος  | exact  | greek    | true  |
+      | alexandros | Ἀθηναῖος  | exact  | greek    | true  |
+      | alexandros | ἄλλος    | extended | greek    |  false  |
+      | alexandros | ομαι     | partial  | greek    | false  |
+      | alexandros | αγαθ     | fuzzy  | greek    | false  |
+      | alexandros | house    | exact  | english  | false  |
+      | alexandros | round    | extended | english  | false  |
+      | alexandros | so       | partial  | english  | false  |
+

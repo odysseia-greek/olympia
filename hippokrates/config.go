@@ -3,13 +3,15 @@ package hippokrates
 import (
 	"context"
 	"github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/randomizer"
 	"github.com/odysseia-greek/agora/plato/service"
 )
 
 type OdysseiaFixture struct {
-	ctx     context.Context
-	client  service.OdysseiaClient
-	homeros Homeros
+	ctx        context.Context
+	client     service.OdysseiaClient
+	homeros    Homeros
+	randomizer randomizer.Random
 }
 
 type Homeros struct {
@@ -29,11 +31,16 @@ func New() (*OdysseiaFixture, error) {
 	homerosBaseUrl := config.StringFromEnv("HOMEROS_SERVICE", "")
 
 	if homerosBaseUrl == "" {
-		gqlEndpoint = "http://k3s-odysseia.greek/graphql"
-		healthEndpoint = "http://k3s-odysseia.api.greek/homeros/v1/health"
+		gqlEndpoint = "http://k3d-odysseia.greek:8080/graphql"
+		healthEndpoint = "http://k3d-odysseia.api.greek:8080/homeros/v1/health"
 	} else {
 		gqlEndpoint = homerosBaseUrl + "/graphql"
 		healthEndpoint = homerosBaseUrl + "/homeros/v1/health"
+	}
+
+	randomizerClient, err := randomizer.NewRandomizerClient()
+	if err != nil {
+		return nil, err
 	}
 
 	return &OdysseiaFixture{
@@ -42,6 +49,7 @@ func New() (*OdysseiaFixture, error) {
 			graphql: gqlEndpoint,
 			health:  healthEndpoint,
 		},
-		ctx: context.Background(),
+		ctx:        context.Background(),
+		randomizer: randomizerClient,
 	}, nil
 }

@@ -3,6 +3,7 @@ package quiz
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	plato "github.com/odysseia-greek/agora/plato/config"
@@ -113,7 +114,7 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 
 	switch createQuizRequest.QuizType {
 	case models.MEDIA:
-		quiz, err := s.mediaQuiz(createQuizRequest.Set)
+		quiz, err := s.mediaQuiz(createQuizRequest.Theme, createQuizRequest.Set)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -215,7 +216,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 				},
 			},
 		}
-		middleware.ResponseWithJson(w, e)
+		middleware.ResponseWithCustomCode(w, 400, e)
 		return
 	}
 
@@ -232,7 +233,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 					},
 				},
 			}
-			middleware.ResponseWithJson(w, e)
+			middleware.ResponseWithCustomCode(w, 400, e)
 			return
 		}
 
@@ -250,7 +251,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 					},
 				},
 			}
-			middleware.ResponseWithJson(w, e)
+			middleware.ResponseWithCustomCode(w, 400, e)
 			return
 		}
 
@@ -268,7 +269,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 					},
 				},
 			}
-			middleware.ResponseWithJson(w, e)
+			middleware.ResponseWithCustomCode(w, 400, e)
 			return
 		}
 		middleware.ResponseWithCustomCode(w, 200, quiz)
@@ -335,6 +336,9 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 			QUIZTYPE: models.MEDIA,
 		},
 		{
+			THEME: req.Theme,
+		},
+		{
 			SET: req.Set,
 		},
 	}
@@ -344,6 +348,10 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 	if err != nil {
 		return nil, err
 	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+
 	var option models.MediaQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
@@ -386,6 +394,10 @@ func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, reques
 	if err != nil {
 		return nil, err
 	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+
 	var option models.AuthorBasedQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
@@ -432,6 +444,9 @@ func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.Dial
 	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
 	if err != nil {
 		return nil, err
+	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
 	}
 	var option models.DialogueQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
@@ -486,7 +501,6 @@ func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.Dial
 
 func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveResponse, requestID string) {
 	wordToBeSend := extractBaseWord(answer.QuizWord)
-	logging.System(wordToBeSend)
 	foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
 	if err != nil {
 		logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
@@ -498,20 +512,28 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 		}
 	}
 
-	similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", requestID)
+	similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", "false", requestID)
 	if err != nil {
 		logging.Error(fmt.Sprintf("could not query any similar words for word: %s error: %s", answer.QuizWord, err.Error()))
 	} else {
 		defer similarWords.Body.Close()
-		err = json.NewDecoder(similarWords.Body).Decode(&answer.SimilarWords)
+		var extended models.ExtendedResponse
+		err = json.NewDecoder(similarWords.Body).Decode(&extended)
 		if err != nil {
 			logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
+		}
+
+		for _, meros := range extended.Hits {
+			answer.SimilarWords = append(answer.SimilarWords, meros.Hit)
 		}
 	}
 }
 
-func (s *SokratesHandler) mediaQuiz(set string) (*models.QuizResponse, error) {
+func (s *SokratesHandler) mediaQuiz(theme, set string) (*models.QuizResponse, error) {
 	mustQuery := []map[string]string{
+		{
+			THEME: theme,
+		},
 		{
 			SET: set,
 		},
@@ -524,6 +546,10 @@ func (s *SokratesHandler) mediaQuiz(set string) (*models.QuizResponse, error) {
 	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
 	if err != nil {
 		return nil, err
+	}
+
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
 	}
 
 	var option models.MediaQuiz
@@ -590,6 +616,10 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set string) (*models.QuizRespon
 		return nil, err
 	}
 
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
+	}
+
 	var option models.AuthorBasedQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
@@ -651,6 +681,10 @@ func (s *SokratesHandler) dialogueQuiz(theme, set string) (*models.DialogueQuiz,
 		return nil, err
 	}
 
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
+	}
+
 	var quiz models.DialogueQuiz
 
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
@@ -664,23 +698,23 @@ func (s *SokratesHandler) dialogueQuiz(theme, set string) (*models.DialogueQuiz,
 
 func (s *SokratesHandler) options(quizType string) (*models.AggregateResult, error) {
 	query := s.Elastic.Builder().FilteredAggregate(QUIZTYPE, quizType, THEME, THEME)
-	if quizType == models.MEDIA {
-		query = map[string]interface{}{
-			"query": map[string]interface{}{
-				"match_phrase": map[string]interface{}{
-					QUIZTYPE: quizType,
-				},
-			},
-			"size": 0,
-			"aggs": map[string]interface{}{
-				SET: map[string]interface{}{
-					"max": map[string]interface{}{
-						"field": SET,
-					},
-				},
-			},
-		}
-	}
+	//if quizType == models.MEDIA {
+	//	query = map[string]interface{}{
+	//		"query": map[string]interface{}{
+	//			"match_phrase": map[string]interface{}{
+	//				QUIZTYPE: quizType,
+	//			},
+	//		},
+	//		"size": 0,
+	//		"aggs": map[string]interface{}{
+	//			SET: map[string]interface{}{
+	//				"max": map[string]interface{}{
+	//					"field": SET,
+	//				},
+	//			},
+	//		},
+	//	}
+	//}
 
 	elasticResult, err := s.Elastic.Query().MatchAggregate(s.Index, query)
 	if err != nil {

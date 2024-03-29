@@ -322,7 +322,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 
 		// Alexandros
 		"dictionary": &graphql.Field{
-			Type:        graphql.NewList(dictionary),
+			Type:        extendedDictionary,
 			Description: "Search Alexandros dictionary for a word",
 			Args: graphql.FieldConfigArgument{
 				"word": &graphql.ArgumentConfig{
@@ -335,6 +335,10 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				"mode": &graphql.ArgumentConfig{
 					Type:         graphql.String,
 					DefaultValue: "",
+				},
+				"searchInText": &graphql.ArgumentConfig{
+					Type:         graphql.Boolean,
+					DefaultValue: false,
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
@@ -358,7 +362,11 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				if !isOK {
 					return nil, fmt.Errorf("expected argument word")
 				}
-				return handler.Dictionary(word, language, mode, traceID)
+				searchInText, isOK := p.Args["searchInText"].(bool)
+				if !isOK {
+					return nil, fmt.Errorf("expected argument searchInText")
+				}
+				return handler.Dictionary(word, language, mode, traceID, searchInText)
 			},
 		},
 
