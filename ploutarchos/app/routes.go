@@ -32,10 +32,13 @@ func InitRoutes() *mux.Router {
 		absolutePath = filepath.Join("/app", name)
 	}
 
-	public := filepath.Join(absolutePath, "public")
+	homeros := filepath.Join(absolutePath, "graphql", "homeros")
+	euripides := filepath.Join(absolutePath, "graphql", "euripides")
 
-	fs := http.FileServer(http.Dir(public))
-	serveMux.PathPrefix("/ploutarchos/homeros/").Handler(http.StripPrefix("/ploutarchos/homeros/", fs))
+	fsHomeros := http.FileServer(http.Dir(homeros))
+	fsEuripides := http.FileServer(http.Dir(euripides))
+	serveMux.PathPrefix("/ploutarchos/homeros/").Handler(http.StripPrefix("/ploutarchos/homeros/", fsHomeros))
+	serveMux.PathPrefix("/ploutarchos/euripides/").Handler(http.StripPrefix("/ploutarchos/euripides/", fsEuripides))
 
 	return serveMux
 }

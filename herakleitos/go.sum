@@ -114,6 +114,7 @@ github.com/odysseia-greek/agora/plato v0.1.4 h1:TUkckJ83URgUV4uXg1WcpiW658WU1xEV
 github.com/odysseia-greek/agora/plato v0.1.4/go.mod h1:8HAbEc1qo3ixs4KlbwRmgzsXyPbkX7RAwTxdUFZpiCU=
 github.com/odysseia-greek/agora/plato v0.1.14 h1:Dr9iijoDsG5aUIR5YTsbR6tJKnvbg12xY0wr12Q8kfo=
 github.com/odysseia-greek/agora/plato v0.1.14/go.mod h1:8HAbEc1qo3ixs4KlbwRmgzsXyPbkX7RAwTxdUFZpiCU=
+github.com/odysseia-greek/agora/plato v0.1.17/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4/go.mod h1:vfNlFMTer0uYUbUFFRQhc0uY/tLSYnsbveRBYm/vUdM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

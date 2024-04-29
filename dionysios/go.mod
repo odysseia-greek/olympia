@@ -6,11 +6,11 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/odysseia-greek/agora/archytas v0.1.1
 	github.com/odysseia-greek/agora/aristoteles v0.1.6
-	github.com/odysseia-greek/agora/plato v0.1.13
-	github.com/odysseia-greek/attike/aristophanes v0.4.1
+	github.com/odysseia-greek/agora/plato v0.1.17
+	github.com/odysseia-greek/attike/aristophanes v0.4.9
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/odysseia-greek/olympia/aristarchos v0.0.4
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	golang.org/x/text v0.14.0
 	google.golang.org/grpc v1.61.0
 )
@@ -51,7 +51,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	go.opencensus.io v0.22.5 // indirect
 	golang.org/x/crypto v0.15.0 // indirect
 	golang.org/x/net v0.18.0 // indirect

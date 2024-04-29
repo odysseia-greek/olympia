@@ -67,10 +67,10 @@ type DialogueCorrection {
 }
 
 input DialogueInput {
+  place: Int
   speaker: String
   translation: String
   greek: String
-  place: Int
 }
 
 type DialogueQuiz {
@@ -80,6 +80,15 @@ type DialogueQuiz {
   quizType: String
   set: Int
   theme: String
+}
+
+type ExtendedDictionary {
+  hits: [ExtendedDictionaryEntry]
+}
+
+type ExtendedDictionaryEntry {
+  foundInText: FoundInText
+  hit: Hit
 }
 
 type FoundInText {
@@ -159,20 +168,20 @@ type Rhema {
 }
 
 type RootQuery {
-  answer(answer: String, comprehensive: Boolean, dialogue: [DialogueInput], theme: String, set: String, quizType: String, quizWord: String): AnswerUnion
+  answer(dialogue: [DialogueInput], theme: String, set: String, quizType: String, quizWord: String, answer: String, comprehensive: Boolean): AnswerUnion
 
   """Get the author and books tree from Herodotos"""
   authors: [Authors]
 
   """Search Alexandros dictionary for a word"""
-  dictionary(word: String, language: String = "", mode: String = ""): [Hit]
+  dictionary(word: String, language: String = "", mode: String = "", searchInText: Boolean = false): ExtendedDictionary
 
   """Search Dionysios for grammar results"""
   grammar(word: String): [Result]
 
   """returns the options for a specific quiztype"""
   options(quizType: String): AggregateResult
-  quiz(quizType: String, theme: String, set: String): QuizResponseUnion
+  quiz(set: String, quizType: String, theme: String): QuizResponseUnion
 
   """Create a new Question in Herodotos"""
   sentence(book: String, author: String): Sentence
@@ -181,7 +190,7 @@ type RootQuery {
   status: Status
 
   """Check the text given"""
-  text(sentenceId: String, author: String, answer: String): Text
+  text(author: String, answer: String, sentenceId: String): Text
 }
 
 type Sentence {

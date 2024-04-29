@@ -192,12 +192,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			},
 		}
 		if traceCall {
-			parsedResult, _ := json.Marshal(e)
 			span := &pb.SpanRequest{
 				TraceId:      traceID,
 				ParentSpanId: spanID,
 				Action:       "Validating",
-				ResponseBody: string(parsedResult),
 			}
 			go d.Tracer.Span(context.Background(), span)
 		}
@@ -260,12 +258,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			}
 
 			if traceCall {
-				parsedResult, _ := json.Marshal(e)
 				span := &pb.SpanRequest{
 					TraceId:      traceID,
 					ParentSpanId: spanID,
 					Action:       "Cache",
-					ResponseBody: string(parsedResult),
 				}
 				go d.Tracer.Span(context.Background(), span)
 			}
@@ -286,12 +282,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			},
 		}
 		if traceCall {
-			parsedResult, _ := json.Marshal(e)
 			span := &pb.SpanRequest{
 				TraceId:      traceID,
 				ParentSpanId: spanID,
 				Action:       "Rules Found",
-				ResponseBody: string(parsedResult),
 			}
 			go d.Tracer.Span(context.Background(), span)
 		}
@@ -346,12 +340,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			},
 		}
 		if traceCall {
-			parsedResult, _ := json.Marshal(e)
 			span := &pb.SpanRequest{
 				TraceId:      traceID,
 				ParentSpanId: spanID,
 				Action:       "Cache",
-				ResponseBody: string(parsedResult),
 			}
 			go d.Tracer.Span(context.Background(), span)
 		}

@@ -13,6 +13,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 	"unicode"
 	"unicode/utf8"
 )
@@ -113,10 +114,19 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		msg := &pb.StartSpanRequest{
 			TraceId: traceID,
 		}
-		combinedID, _ := d.Tracer.StartNewSpan(context.Background(), msg)
-		split := strings.Split(combinedID.CombinedId, "+")
-		if len(split) > 1 {
-			spanID = split[1]
+
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
+
+		combinedID, err := d.Tracer.StartSpan(ctx, msg)
+		if err != nil {
+			logging.Error(err.Error())
+			spanID = splitID[1]
+		} else {
+			split := strings.Split(combinedID.CombinedId, "+")
+			if len(split) > 1 {
+				spanID = split[1]
+			}
 		}
 	}
 
@@ -129,12 +139,10 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 	}
 
 	if traceCall {
-		parsedResult, _ := json.Marshal(declensions)
 		span := &pb.SpanRequest{
 			TraceId:      traceID,
 			ParentSpanId: spanID,
 			Action:       "searchForDeclensions",
-			ResponseBody: string(parsedResult),
 		}
 		go d.Tracer.Span(context.Background(), span)
 	}
@@ -266,12 +274,10 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 	}
 
 	if traceCall {
-		parsedResult, _ := json.Marshal(results)
 		span := &pb.SpanRequest{
 			TraceId:      traceID,
 			ParentSpanId: spanID,
 			Action:       "unfilteredRules",
-			ResponseBody: string(parsedResult),
 		}
 		go d.Tracer.Span(context.Background(), span)
 	}

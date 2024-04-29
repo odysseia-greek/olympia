@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/cucumber/godog v0.14.0
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/plato v0.1.14
+	github.com/odysseia-greek/agora/plato v0.1.17
 	github.com/odysseia-greek/olympia/homeros v0.0.1
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8

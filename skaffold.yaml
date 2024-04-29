@@ -84,3 +84,18 @@ profiles:
     manifests:
       rawYaml:
         - melissos/infra/manifest.yaml
+
+  - name: anaximenes
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/anaximenes
+          context: anaximenes
+          docker:
+            target: debug
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    manifests:
+      rawYaml:
+        - anaximenes/infra/manifest.yaml

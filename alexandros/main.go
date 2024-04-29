@@ -43,7 +43,7 @@ func main() {
 
 	srv := dictionary.InitRoutes(alexandrosConfig)
 
-	logging.System(fmt.Sprint("%s : %s", "running on port", port))
+	logging.System(fmt.Sprintf("%s : %s", "running on port", port))
 	err = http.ListenAndServe(port, srv)
 	if err != nil {
 		panic(err)
