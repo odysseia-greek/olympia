@@ -4,5 +4,5 @@ go 1.22
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/odysseia-greek/agora/plato v0.1.14
+	github.com/odysseia-greek/agora/plato v0.1.17
 )

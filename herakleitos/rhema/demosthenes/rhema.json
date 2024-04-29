@@ -1,0 +1,26 @@
+{
+  "rhemai": [
+    {
+      "author": "Demosthenes",
+      "greek": "καὶ τούτων πάντων οὐδὲν ἔσθʼ ἡμέτερον οὐδὲ καινὸν εὕρημα, ἀλλʼ ὁ παλαιός, ὃν οὗτος παρέβη, νόμος οὕτω κελεύει νομοθετεῖν, γράφεσθαι μέν, ἄν τίς τινα τῶν ὑπαρχόντων νόμων μὴ καλῶς ἔχειν ἡγῆται, παρεισφέρειν δʼ αὐτὸν ἄλλον, ὃν ἂν τιθῇ λύων ἐκεῖνον, ὑμᾶς δʼ ἀκούσαντες ἑλέσθαι τὸν κρείττω.",
+      "translations": [
+        "And in all this there is nothing new, no innovation of our own; but the old law, transgressed by Leptines, lays down this procedure in legislation, that if a man disapproves of an existing law, he shall bring an indictment against it, but shall himself introduce an alternative, such as he proposes to enact after repeal of the other, and that you, after hearing arguments, shall choose the better law."
+      ],
+      "book": 1,
+      "chapter": 1,
+      "section": 89,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0014.tlg020.perseus-grc2:89?right=perseus-eng2"
+    },
+    {
+      "author": "Demosthenes",
+      "greek": "τοῦτο μὲν οὖν παράνομον ἦν τὸ ψήφισμα, τὸ τοῦ Φιλοκράτους, καὶ οὐχ οἷόν τʼ ἦν τὸν τὰ ἔννομα γράφοντα ταὐτὰ τῷ παρανόμῳ ψηφίσματι γράφειν. ἐκείνοις δὲ τοῖς προτέροις ψηφίσμασι, τοῖς οὖσιν ἐννόμοις καὶ σῴζουσι τὴν ὑμετέραν χώραν, ταὐτὰ γράφων ἔννομά τʼ ἔγραψα καὶ ἐξήλεγχον τὸν Φίλιππον, ὅτι ἐξηπάτα ὑμᾶς καὶ οὐκ ἐπανορθώσασθαι ἐβούλετο τὴν εἰρήνην, ἀλλὰ τοὺς ὑπὲρ ὑμῶν λέγοντας ἀπίστους καταστῆσαι.",
+      "translations": [
+        "So it was this decree of Philocrates that was unconstitutional, nor would it have been possible to draft a constitutional proposal in conformity with his unconstitutional decree. By drafting mine to agree with the earlier decrees, which were constitutional and which also kept your territory intact, I both kept within the constitution and was able to convict Philip of trying to deceive you and of wishing, not to amend the peace, but to bring discredit on those who were pleading your cause.\n\n"
+      ],
+      "book": 1,
+      "chapter": 2,
+      "section": 25,
+      "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0014.tlg007.perseus-grc2:25?right=perseus-eng2"
+    }
+  ]
+}

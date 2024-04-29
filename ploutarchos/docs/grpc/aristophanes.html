@@ -179,62 +179,86 @@
             <ul>
               
                 <li>
-                  <a href="#proto.CloseTraceRequest"><span class="badge">M</span>CloseTraceRequest</a>
+                  <a href="#aristophanes.CloseSpanRequest"><span class="badge">M</span>CloseSpanRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.DatabaseSpan"><span class="badge">M</span>DatabaseSpan</a>
+                  <a href="#aristophanes.CloseTraceRequest"><span class="badge">M</span>CloseTraceRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.DatabaseSpanRequest"><span class="badge">M</span>DatabaseSpanRequest</a>
+                  <a href="#aristophanes.DatabaseSpan"><span class="badge">M</span>DatabaseSpan</a>
                 </li>
               
                 <li>
-                  <a href="#proto.Span"><span class="badge">M</span>Span</a>
+                  <a href="#aristophanes.DatabaseSpanRequest"><span class="badge">M</span>DatabaseSpanRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.SpanRequest"><span class="badge">M</span>SpanRequest</a>
+                  <a href="#aristophanes.Empty"><span class="badge">M</span>Empty</a>
                 </li>
               
                 <li>
-                  <a href="#proto.StartSpanRequest"><span class="badge">M</span>StartSpanRequest</a>
+                  <a href="#aristophanes.HealthCheckResponse"><span class="badge">M</span>HealthCheckResponse</a>
                 </li>
               
                 <li>
-                  <a href="#proto.StartTraceRequest"><span class="badge">M</span>StartTraceRequest</a>
+                  <a href="#aristophanes.Span"><span class="badge">M</span>Span</a>
                 </li>
               
                 <li>
-                  <a href="#proto.Trace"><span class="badge">M</span>Trace</a>
+                  <a href="#aristophanes.SpanRequest"><span class="badge">M</span>SpanRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.TraceCommon"><span class="badge">M</span>TraceCommon</a>
+                  <a href="#aristophanes.SpanStart"><span class="badge">M</span>SpanStart</a>
                 </li>
               
                 <li>
-                  <a href="#proto.TraceRequest"><span class="badge">M</span>TraceRequest</a>
+                  <a href="#aristophanes.SpanStop"><span class="badge">M</span>SpanStop</a>
                 </li>
               
                 <li>
-                  <a href="#proto.TraceResponse"><span class="badge">M</span>TraceResponse</a>
+                  <a href="#aristophanes.StartSpanRequest"><span class="badge">M</span>StartSpanRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.TraceStart"><span class="badge">M</span>TraceStart</a>
+                  <a href="#aristophanes.StartTraceRequest"><span class="badge">M</span>StartTraceRequest</a>
                 </li>
               
                 <li>
-                  <a href="#proto.TraceStop"><span class="badge">M</span>TraceStop</a>
+                  <a href="#aristophanes.Trace"><span class="badge">M</span>Trace</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TraceCommon"><span class="badge">M</span>TraceCommon</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TraceRequest"><span class="badge">M</span>TraceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TraceResponse"><span class="badge">M</span>TraceResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TraceStart"><span class="badge">M</span>TraceStart</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TraceStop"><span class="badge">M</span>TraceStop</a>
+                </li>
+              
+                <li>
+                  <a href="#aristophanes.TracingMetrics"><span class="badge">M</span>TracingMetrics</a>
                 </li>
               
               
               
               
                 <li>
-                  <a href="#proto.TraceService"><span class="badge">S</span>TraceService</a>
+                  <a href="#aristophanes.TraceService"><span class="badge">S</span>TraceService</a>
                 </li>
               
             </ul>
@@ -252,7 +276,52 @@
       <p></p>
 
       
-        <h3 id="proto.CloseTraceRequest">CloseTraceRequest</h3>
+        <h3 id="aristophanes.CloseSpanRequest">CloseSpanRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>trace_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Root trace_id which where item will be added </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parent_span_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The root parent_span_id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>span_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>response_code</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.CloseTraceRequest">CloseTraceRequest</h3>
         <p></p>
 
         
@@ -297,7 +366,7 @@
 
         
       
-        <h3 id="proto.DatabaseSpan">DatabaseSpan</h3>
+        <h3 id="aristophanes.DatabaseSpan">DatabaseSpan</h3>
         <p></p>
 
         
@@ -315,17 +384,38 @@
                 </tr>
               
                 <tr>
-                  <td>result_json</td>
+                  <td>time_started</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Query result data as JSON string </p></td>
+                  <td><p>Reuse TraceCommon for common fields </p></td>
+                </tr>
+              
+                <tr>
+                  <td>time_finished</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hits</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>took</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>common</td>
-                  <td><a href="#proto.TraceCommon">TraceCommon</a></td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
                   <td></td>
-                  <td><p>Reuse TraceCommon for common fields </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -335,7 +425,7 @@
 
         
       
-        <h3 id="proto.DatabaseSpanRequest">DatabaseSpanRequest</h3>
+        <h3 id="aristophanes.DatabaseSpanRequest">DatabaseSpanRequest</h3>
         <p></p>
 
         
@@ -374,10 +464,17 @@
                 </tr>
               
                 <tr>
-                  <td>result_json</td>
-                  <td><a href="#string">string</a></td>
+                  <td>hits</td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p>Query result data as JSON string </p></td>
+                </tr>
+              
+                <tr>
+                  <td>time_took</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -387,7 +484,114 @@
 
         
       
-        <h3 id="proto.Span">Span</h3>
+        <h3 id="aristophanes.Empty">Empty</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="aristophanes.HealthCheckResponse">HealthCheckResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.Span">Span</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>action</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Action performed in the span </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_body</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>common</td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.SpanRequest">SpanRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>trace_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Root trace_id which where item will be added </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parent_span_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The root parent_span_id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>action</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Action performed in the span </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.SpanStart">SpanStart</h3>
         <p></p>
 
         
@@ -412,15 +616,15 @@
                 </tr>
               
                 <tr>
-                  <td>response_body</td>
+                  <td>time_started</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional: Response body data </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>common</td>
-                  <td><a href="#proto.TraceCommon">TraceCommon</a></td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
                   <td></td>
                   <td><p>Reuse TraceCommon for common fields </p></td>
                 </tr>
@@ -432,7 +636,45 @@
 
         
       
-        <h3 id="proto.SpanRequest">SpanRequest</h3>
+        <h3 id="aristophanes.SpanStop">SpanStop</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response_code</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>time_finished</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>common</td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.StartSpanRequest">StartSpanRequest</h3>
         <p></p>
 
         
@@ -470,13 +712,6 @@
                   <td><p>Optional: Request body data </p></td>
                 </tr>
               
-                <tr>
-                  <td>response_body</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional: Response body data </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -484,31 +719,7 @@
 
         
       
-        <h3 id="proto.StartSpanRequest">StartSpanRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>trace_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Root trace_id which where item will be added </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="proto.StartTraceRequest">StartTraceRequest</h3>
+        <h3 id="aristophanes.StartTraceRequest">StartTraceRequest</h3>
         <p></p>
 
         
@@ -567,7 +778,7 @@
 
         
       
-        <h3 id="proto.Trace">Trace</h3>
+        <h3 id="aristophanes.Trace">Trace</h3>
         <p></p>
 
         
@@ -600,9 +811,16 @@
               
                 <tr>
                   <td>common</td>
-                  <td><a href="#proto.TraceCommon">TraceCommon</a></td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
                   <td></td>
                   <td><p>Reuse TraceCommon for common fields </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metrics</td>
+                  <td><a href="#aristophanes.TracingMetrics">TracingMetrics</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -612,7 +830,7 @@
 
         
       
-        <h3 id="proto.TraceCommon">TraceCommon</h3>
+        <h3 id="aristophanes.TraceCommon">TraceCommon</h3>
         <p>Common message used in various trace-related messages</p>
 
         
@@ -671,7 +889,7 @@
 
         
       
-        <h3 id="proto.TraceRequest">TraceRequest</h3>
+        <h3 id="aristophanes.TraceRequest">TraceRequest</h3>
         <p></p>
 
         
@@ -723,7 +941,7 @@
 
         
       
-        <h3 id="proto.TraceResponse">TraceResponse</h3>
+        <h3 id="aristophanes.TraceResponse">TraceResponse</h3>
         <p></p>
 
         
@@ -747,7 +965,7 @@
 
         
       
-        <h3 id="proto.TraceStart">TraceStart</h3>
+        <h3 id="aristophanes.TraceStart">TraceStart</h3>
         <p></p>
 
         
@@ -801,7 +1019,7 @@
               
                 <tr>
                   <td>common</td>
-                  <td><a href="#proto.TraceCommon">TraceCommon</a></td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
                   <td></td>
                   <td><p>Reuse TraceCommon for common fields </p></td>
                 </tr>
@@ -813,7 +1031,7 @@
 
         
       
-        <h3 id="proto.TraceStop">TraceStop</h3>
+        <h3 id="aristophanes.TraceStop">TraceStop</h3>
         <p></p>
 
         
@@ -832,9 +1050,75 @@
               
                 <tr>
                   <td>common</td>
-                  <td><a href="#proto.TraceCommon">TraceCommon</a></td>
+                  <td><a href="#aristophanes.TraceCommon">TraceCommon</a></td>
                   <td></td>
                   <td><p>Reuse TraceCommon for common fields </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="aristophanes.TracingMetrics">TracingMetrics</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cpu_units</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memory_units</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cpu_raw</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memory_raw</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cpu_human_readable</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memory_human_readable</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -850,7 +1134,7 @@
       
 
       
-        <h3 id="proto.TraceService">TraceService</h3>
+        <h3 id="aristophanes.TraceService">TraceService</h3>
         <p>The TraceService service provides operations for managing and tracking traces and spans.</p>
         <table class="enum-table">
           <thead>
@@ -860,44 +1144,58 @@
             
               <tr>
                 <td>StartTrace</td>
-                <td><a href="#proto.StartTraceRequest">StartTraceRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td><a href="#aristophanes.StartTraceRequest">StartTraceRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Start a new trace.</p></td>
               </tr>
             
               <tr>
                 <td>Trace</td>
-                <td><a href="#proto.TraceRequest">TraceRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td><a href="#aristophanes.TraceRequest">TraceRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Record a new trace within an existing trace.</p></td>
               </tr>
             
               <tr>
-                <td>StartNewSpan</td>
-                <td><a href="#proto.StartSpanRequest">StartSpanRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td>StartSpan</td>
+                <td><a href="#aristophanes.StartSpanRequest">StartSpanRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Start a new span within an existing trace.</p></td>
               </tr>
             
               <tr>
                 <td>Span</td>
-                <td><a href="#proto.SpanRequest">SpanRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td><a href="#aristophanes.SpanRequest">SpanRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Record a span with details of an action performed.</p></td>
               </tr>
             
               <tr>
+                <td>CloseSpan</td>
+                <td><a href="#aristophanes.CloseSpanRequest">CloseSpanRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
+                <td><p>Close an existing Span</p></td>
+              </tr>
+            
+              <tr>
                 <td>DatabaseSpan</td>
-                <td><a href="#proto.DatabaseSpanRequest">DatabaseSpanRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td><a href="#aristophanes.DatabaseSpanRequest">DatabaseSpanRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Record a span related to a database query.</p></td>
               </tr>
             
               <tr>
                 <td>CloseTrace</td>
-                <td><a href="#proto.CloseTraceRequest">CloseTraceRequest</a></td>
-                <td><a href="#proto.TraceResponse">TraceResponse</a></td>
+                <td><a href="#aristophanes.CloseTraceRequest">CloseTraceRequest</a></td>
+                <td><a href="#aristophanes.TraceResponse">TraceResponse</a></td>
                 <td><p>Close an existing trace.</p></td>
+              </tr>
+            
+              <tr>
+                <td>HealthCheck</td>
+                <td><a href="#aristophanes.Empty">Empty</a></td>
+                <td><a href="#aristophanes.HealthCheckResponse">HealthCheckResponse</a></td>
+                <td><p></p></td>
               </tr>
             
           </tbody>

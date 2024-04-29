@@ -2,7 +2,6 @@ package seeder
 
 import (
 	"context"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
@@ -17,8 +16,6 @@ import (
 )
 
 const (
-	defaultIndex  string = "tracing"
-	MAXAGE        string = "MAX_AGE"
 	defaultMaxAge string = "30"
 )
 
@@ -76,19 +73,17 @@ func CreateNewConfig(env string) (*AnaximenesHandler, error) {
 		}
 	}
 
-	maxAge := os.Getenv(MAXAGE)
+	maxAge := os.Getenv(config.EnvMaxAge)
 	if maxAge == "" {
 		maxAge = defaultMaxAge
 	}
-	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
-	policyName := fmt.Sprintf("%s_policy", index)
+	indices := []string{config.TracingElasticIndex, config.MetricsElasticIndex}
 
 	return &AnaximenesHandler{
-		Index:      index,
+		Indices:    indices,
 		Elastic:    elastic,
 		Ambassador: ambassador,
-		PolicyName: policyName,
 		MaxAge:     maxAge,
 	}, nil
 }

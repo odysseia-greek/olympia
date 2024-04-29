@@ -38,17 +38,7 @@ func main() {
 		log.Fatal("death has found me")
 	}
 
-	err = handler.DeleteIndexAtStartUp()
-	if err != nil {
-		logging.Debug("cannot delete index which means an aliased version exist and should not be deleted")
-		logging.Error(err.Error())
-		os.Exit(0)
-	}
-
-	err = handler.CreateIndexAtStartup()
-	if err != nil {
-		log.Fatal(err)
-	}
+	handler.CreateAttikeIndices()
 
 	logging.Debug("closing ptolemaios because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service

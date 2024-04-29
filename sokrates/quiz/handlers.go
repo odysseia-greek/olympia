@@ -20,6 +20,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -67,7 +68,7 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, spanID string
+	var traceID, parentSpanID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -77,23 +78,36 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		spanID = splitID[1]
+		parentSpanID = splitID[1]
 	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
 
 	if traceCall {
 		traceReceived := &pb.TraceRequest{
 			TraceId:      traceID,
-			ParentSpanId: spanID,
+			ParentSpanId: parentSpanID,
 			Method:       req.Method,
 			Url:          req.URL.RequestURI(),
 			Host:         req.Host,
 		}
 
 		go s.Tracer.Trace(context.Background(), traceReceived)
-		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
-	}
 
-	w.Header().Set(plato.HeaderKey, requestId)
+		spanStart := &pb.StartSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			Action:       "createQuiz",
+			RequestBody:  req.URL.RequestURI(),
+		}
+
+		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
+		requestId = resp.CombinedId
+		split := strings.Split(resp.CombinedId, "+")
+		if len(split) >= 2 {
+			spanID = split[1]
+		}
+	}
 
 	var createQuizRequest models.CreationRequest
 	decoder := json.NewDecoder(req.Body)
@@ -129,7 +143,18 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		middleware.ResponseWithCustomCode(w, 200, quiz)
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.AUTHORBASED:
 		quiz, err := s.authorBasedQuiz(createQuizRequest.Theme, createQuizRequest.Set)
@@ -147,7 +172,18 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		middleware.ResponseWithCustomCode(w, 200, quiz)
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.DIALOGUE:
 		quiz, err := s.dialogueQuiz(createQuizRequest.Theme, createQuizRequest.Set)
@@ -165,7 +201,18 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		middleware.ResponseWithCustomCode(w, 200, quiz)
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	}
 }
@@ -175,7 +222,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, spanID string
+	var traceID, parentSpanID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -185,23 +232,36 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		spanID = splitID[1]
+		parentSpanID = splitID[1]
 	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
 
 	if traceCall {
 		traceReceived := &pb.TraceRequest{
 			TraceId:      traceID,
-			ParentSpanId: spanID,
+			ParentSpanId: parentSpanID,
 			Method:       req.Method,
 			Url:          req.URL.RequestURI(),
 			Host:         req.Host,
 		}
 
 		go s.Tracer.Trace(context.Background(), traceReceived)
-		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
-	}
 
-	w.Header().Set(plato.HeaderKey, requestId)
+		spanStart := &pb.StartSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			Action:       "checkAnswer",
+			RequestBody:  req.URL.RequestURI(),
+		}
+
+		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
+		requestId = resp.CombinedId
+		split := strings.Split(resp.CombinedId, "+")
+		if len(split) >= 2 {
+			spanID = split[1]
+		}
+	}
 
 	var answerRequest models.AnswerRequest
 	decoder := json.NewDecoder(req.Body)
@@ -237,6 +297,17 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
 		middleware.ResponseWithCustomCode(w, 200, quiz)
 		return
 	case models.AUTHORBASED:
@@ -255,7 +326,18 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		middleware.ResponseWithCustomCode(w, 200, quiz)
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.DIALOGUE:
 		quiz, err := s.dialogueAnswer(answerRequest)
@@ -272,7 +354,19 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			middleware.ResponseWithCustomCode(w, 400, e)
 			return
 		}
-		middleware.ResponseWithCustomCode(w, 200, quiz)
+
+		if traceCall {
+			span := &pb.CloseSpanRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       spanID,
+				ResponseCode: http.StatusOK,
+			}
+
+			go s.Tracer.CloseSpan(context.Background(), span)
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	}
 }
@@ -282,7 +376,7 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, spanID string
+	var traceID, parentSpanID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -292,23 +386,37 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		spanID = splitID[1]
+		parentSpanID = splitID[1]
 	}
+
+	w.Header().Set(plato.HeaderKey, requestId)
 
 	if traceCall {
 		traceReceived := &pb.TraceRequest{
 			TraceId:      traceID,
-			ParentSpanId: spanID,
+			ParentSpanId: parentSpanID,
 			Method:       req.Method,
 			Url:          req.URL.RequestURI(),
 			Host:         req.Host,
 		}
 
 		go s.Tracer.Trace(context.Background(), traceReceived)
-		logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
+
+		spanStart := &pb.StartSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			Action:       "getOptions",
+			RequestBody:  req.URL.RequestURI(),
+		}
+
+		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
+		requestId = resp.CombinedId
+		split := strings.Split(resp.CombinedId, "+")
+		if len(split) >= 2 {
+			spanID = split[1]
+		}
 	}
 
-	w.Header().Set(plato.HeaderKey, requestId)
 	quizType := req.URL.Query().Get("quizType")
 
 	options, err := s.options(quizType)
@@ -325,7 +433,19 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 		middleware.ResponseWithJson(w, e)
 		return
 	}
-	middleware.ResponseWithCustomCode(w, 200, options)
+
+	if traceCall {
+		span := &pb.CloseSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			SpanId:       spanID,
+			ResponseCode: http.StatusOK,
+		}
+
+		go s.Tracer.CloseSpan(context.Background(), span)
+	}
+
+	middleware.ResponseWithCustomCode(w, http.StatusOK, options)
 	return
 
 }
@@ -500,25 +620,95 @@ func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.Dial
 }
 
 func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveResponse, requestID string) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, parentSpanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		parentSpanID = splitID[1]
+	}
+
+	var comprehensiveSpanID string
+	if traceCall {
+		comprehensiveSpan := &pb.StartSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			Action:       "gatherComprehensiveData",
+		}
+
+		resp, _ := s.Tracer.StartSpan(context.Background(), comprehensiveSpan)
+		requestID = resp.CombinedId
+		split := strings.Split(resp.CombinedId, "+")
+		if len(split) >= 2 {
+			comprehensiveSpanID = split[1]
+		}
+	}
+
 	wordToBeSend := extractBaseWord(answer.QuizWord)
-	foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
-	if err != nil {
-		logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
-	} else {
+
+	// Use a WaitGroup to wait for both goroutines to finish
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	// Buffered channels to capture 1 response
+	foundInTextChan := make(chan *http.Response, 1)
+	similarWordsChan := make(chan *http.Response, 1)
+	errChan := make(chan error, 2) // Buffered to hold potential errors from both calls
+
+	go func() {
+		defer wg.Done()
+		foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
+		if err != nil {
+			logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
+			errChan <- err
+			return
+		}
+		foundInTextChan <- foundInText
+	}()
+
+	go func() {
+		defer wg.Done()
+		similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", "false", requestID)
+		if err != nil {
+			logging.Error(fmt.Sprintf("could not query any similar words for word: %s error: %s", answer.QuizWord, err.Error()))
+			errChan <- err
+			return
+		}
+		similarWordsChan <- similarWords
+	}()
+
+	// Wait for both goroutines to complete
+	wg.Wait()
+
+	// Process responses
+	close(errChan)
+	close(foundInTextChan)
+	close(similarWordsChan)
+
+	for err := range errChan {
+		logging.Error(err.Error())
+	}
+
+	for foundInText := range foundInTextChan {
 		defer foundInText.Body.Close()
-		err = json.NewDecoder(foundInText.Body).Decode(&answer.FoundInText)
+		err := json.NewDecoder(foundInText.Body).Decode(&answer.FoundInText)
 		if err != nil {
 			logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
 		}
 	}
 
-	similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", "false", requestID)
-	if err != nil {
-		logging.Error(fmt.Sprintf("could not query any similar words for word: %s error: %s", answer.QuizWord, err.Error()))
-	} else {
+	for similarWords := range similarWordsChan {
 		defer similarWords.Body.Close()
 		var extended models.ExtendedResponse
-		err = json.NewDecoder(similarWords.Body).Decode(&extended)
+		err := json.NewDecoder(similarWords.Body).Decode(&extended)
 		if err != nil {
 			logging.Error(fmt.Sprintf("error while decoding: %s", err.Error()))
 		}
@@ -526,6 +716,17 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 		for _, meros := range extended.Hits {
 			answer.SimilarWords = append(answer.SimilarWords, meros.Hit)
 		}
+	}
+
+	if traceCall {
+
+		span := &pb.CloseSpanRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			SpanId:       comprehensiveSpanID,
+			ResponseCode: int32(http.StatusOK),
+		}
+		go s.Tracer.CloseSpan(context.Background(), span)
 	}
 }
 

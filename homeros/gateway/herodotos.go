@@ -25,16 +25,10 @@ func (h *HomerosHandler) Books(requestID string) ([]models.AuthorTree, error) {
 
 		traceId, parentspanId, traceCall := ParseHeaderID(requestID)
 		if traceCall {
-			traceResponse, err := json.Marshal(cachedGraph)
-			if err != nil {
-				return nil, err
-			}
-
 			span := &aristophanes.SpanRequest{
 				TraceId:      traceId,
 				ParentSpanId: parentspanId,
 				Action:       "Cached",
-				ResponseBody: string(traceResponse),
 			}
 
 			h.Tracer.Span(context.Background(), span)

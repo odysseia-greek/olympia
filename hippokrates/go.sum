@@ -41,6 +41,7 @@ github.com/odysseia-greek/agora/plato v0.1.12 h1:Ki6R/HTLNYozaZ3OOLibrzwBk1BPdEu
 github.com/odysseia-greek/agora/plato v0.1.12/go.mod h1:8HAbEc1qo3ixs4KlbwRmgzsXyPbkX7RAwTxdUFZpiCU=
 github.com/odysseia-greek/agora/plato v0.1.14 h1:Dr9iijoDsG5aUIR5YTsbR6tJKnvbg12xY0wr12Q8kfo=
 github.com/odysseia-greek/agora/plato v0.1.14/go.mod h1:8HAbEc1qo3ixs4KlbwRmgzsXyPbkX7RAwTxdUFZpiCU=
+github.com/odysseia-greek/agora/plato v0.1.17/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
 github.com/odysseia-greek/olympia/homeros v0.0.1 h1:8THKgNhMTWVOFnQ1hWVBHqin/8JjRIGunvAGCEozNjo=
 github.com/odysseia-greek/olympia/homeros v0.0.1/go.mod h1:ET02fnecg59Wc86OnxrcNCvXqjzbj8nq0mDKyFkKDdk=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
