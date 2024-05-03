@@ -267,9 +267,9 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 						ParentSpanId: spanID,
 						SpanId:       spanID,
 						RequestType: &pb.ParabasisRequest_Span{Span: &pb.SpanRequest{
-							Action:       "analyseText",
-							TimeFinished: fmt.Sprintf("%v", endTime),
-							Status:       fmt.Sprintf("querying Herodotos returned: %d", foundInText.StatusCode),
+							Action: "analyseText",
+							Took:   fmt.Sprintf("%v", endTime),
+							Status: fmt.Sprintf("querying Herodotos returned: %d", foundInText.StatusCode),
 						}},
 					}
 

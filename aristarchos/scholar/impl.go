@@ -166,9 +166,9 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 					SpanId:       comedy.GenerateSpanID(),
 					RequestType: &pbar.ParabasisRequest_Span{
 						Span: &pbar.SpanRequest{
-							Action:       "CloseSpan",
-							TimeFinished: fmt.Sprintf("%v", time.Since(startTime)),
-							Status:       "updated document",
+							Action: "CloseSpan",
+							Took:   fmt.Sprintf("%v", time.Since(startTime)),
+							Status: "updated document",
 						},
 					},
 				}
@@ -193,9 +193,9 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 				SpanId:       comedy.GenerateSpanID(),
 				RequestType: &pbar.ParabasisRequest_Span{
 					Span: &pbar.SpanRequest{
-						Action:       "CloseSpan",
-						TimeFinished: fmt.Sprintf("%v", time.Since(startTime)),
-						Status:       "no update done",
+						Action: "CloseSpan",
+						Took:   fmt.Sprintf("%v", time.Since(startTime)),
+						Status: "no update done",
 					},
 				},
 			}
@@ -308,8 +308,8 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 				SpanId:       comedy.GenerateSpanID(),
 				RequestType: &pbar.ParabasisRequest_Span{
 					Span: &pbar.SpanRequest{
-						Action:       "CloseSpan",
-						TimeFinished: fmt.Sprintf("%v", time.Since(startTime)),
+						Action: "CloseSpan",
+						Took:   fmt.Sprintf("%v", time.Since(startTime)),
 					},
 				},
 			}
@@ -398,8 +398,8 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 				SpanId:       comedy.GenerateSpanID(),
 				RequestType: &pbar.ParabasisRequest_Span{
 					Span: &pbar.SpanRequest{
-						Action:       "CloseSpan",
-						TimeFinished: fmt.Sprintf("%v", time.Since(startTime)),
+						Action: "CloseSpan",
+						Took:   fmt.Sprintf("%v", time.Since(startTime)),
 					},
 				},
 			}

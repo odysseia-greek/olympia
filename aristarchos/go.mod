@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/odysseia-greek/agora/aristoteles v0.1.6
 	github.com/odysseia-greek/agora/plato v0.1.17
-	github.com/odysseia-greek/attike/aristophanes v0.5.7
+	github.com/odysseia-greek/attike/aristophanes v0.5.8
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.63.2

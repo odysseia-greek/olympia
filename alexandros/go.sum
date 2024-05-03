@@ -185,8 +185,8 @@ github.com/odysseia-greek/agora/plato v0.1.17 h1:ZY+W5dNNx+5twI+EdoKXTsjsHf6sci5
 github.com/odysseia-greek/agora/plato v0.1.17/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
 github.com/odysseia-greek/agora/thales v0.1.9 h1:bDLNiqkMgcuUFUnfnC2yf5vXKurs/CxKBLllu65q2qQ=
 github.com/odysseia-greek/agora/thales v0.1.9/go.mod h1:/Pk3exLO78YdFvJ9XkbhOCfRZeWZTIbcxfOGSDzUwdM=
-github.com/odysseia-greek/attike/aristophanes v0.5.7 h1:z6qerUfayOQ2yG+jxnXooXZOvjO8HTV52fnQ0isFvUk=
-github.com/odysseia-greek/attike/aristophanes v0.5.7/go.mod h1:M10aHpesfD2H3f5Bblq0kiV+G+JB4eqdyyUB2XDVfYI=
+github.com/odysseia-greek/attike/aristophanes v0.5.8 h1:vurUnBFXBtPdtcP2kCTqVRO+QFxZtdG8H83I/MbRZqY=
+github.com/odysseia-greek/attike/aristophanes v0.5.8/go.mod h1:M10aHpesfD2H3f5Bblq0kiV+G+JB4eqdyyUB2XDVfYI=
 github.com/odysseia-greek/attike/sophokles v0.0.5 h1:rVE3POKGLftx4FsAv5PdWYqMZmxE4ISwI12VozMeZ5g=
 github.com/odysseia-greek/attike/sophokles v0.0.5/go.mod h1:o5jkqkymZ5Qh2VqjAsHn554KTNuipHYHqeAmN2UTd4Q=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=
