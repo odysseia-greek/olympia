@@ -6,13 +6,12 @@ import (
 	"fmt"
 	"github.com/odysseia-greek/agora/aristoteles"
 	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
-	plato "github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
 	"github.com/odysseia-greek/agora/plato/transform"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"net/http"
 	"strconv"
@@ -21,10 +20,11 @@ import (
 )
 
 type AlexandrosHandler struct {
-	Elastic aristoteles.Client
-	Index   string
-	Client  service.OdysseiaClient
-	Tracer  *aristophanes.ClientTracer
+	Elastic  aristoteles.Client
+	Index    string
+	Client   service.OdysseiaClient
+	Streamer pb.TraceService_ChorusClient
+	Cancel   context.CancelFunc
 }
 
 const (
@@ -79,37 +79,6 @@ func (a *AlexandrosHandler) health(w http.ResponseWriter, req *http.Request) {
 	//	Responses:
 	//	  200: Health
 	//	  502: Health
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go a.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
 	elasticHealth := a.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,
@@ -140,11 +109,18 @@ func (a *AlexandrosHandler) health(w http.ResponseWriter, req *http.Request) {
 //  4. Processes the query results and prepares the response.
 //  5. Sends the response back to the client.
 func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request) {
-	requestId := req.Header.Get(plato.HeaderKey)
+	//requestId := req.Context().Value(plato.HeaderKey).(string)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -154,35 +130,7 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go a.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "searchWord",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := a.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+		spanID = splitID[1]
 	}
 
 	queryWord := req.URL.Query().Get("word")
@@ -191,7 +139,7 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 	text := req.URL.Query().Get("searchInText")
 	searchInText, _ := strconv.ParseBool(text)
 
-	if a.validateAndRespondError(w, "word", queryWord, nil, traceID, parentSpanID, spanID, traceCall) {
+	if a.validateAndRespondError(w, "word", queryWord, nil, traceID) {
 		return
 	}
 
@@ -199,7 +147,7 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 		language = defaultLang
 	}
 
-	if a.validateAndRespondError(w, "lang", language, allowedLanguages, traceID, parentSpanID, spanID, traceCall) {
+	if a.validateAndRespondError(w, "lang", language, allowedLanguages, traceID) {
 		return
 	}
 
@@ -207,7 +155,7 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 		mode = fuzzy
 	}
 
-	if a.validateAndRespondError(w, "mode", mode, allowedMatchModes, traceID, parentSpanID, spanID, traceCall) {
+	if a.validateAndRespondError(w, "mode", mode, allowedMatchModes, traceID) {
 		return
 	}
 
@@ -228,15 +176,6 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 				ElasticError: err.Error(),
 			},
 		}
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-			go a.Tracer.CloseSpan(context.Background(), span)
-		}
 
 		middleware.ResponseWithJson(w, e)
 		return
@@ -254,15 +193,6 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 				Message: models.ElasticErrorMessage{
 					ElasticError: err.Error(),
 				},
-			}
-			if traceCall {
-				span := &pb.CloseSpanRequest{
-					TraceId:      traceID,
-					ParentSpanId: parentSpanID,
-					SpanId:       spanID,
-					ResponseCode: http.StatusOK,
-				}
-				go a.Tracer.CloseSpan(context.Background(), span)
 			}
 
 			middleware.ResponseWithJson(w, e)
@@ -300,24 +230,26 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 	if searchInText {
 		for i, hit := range results.Hits {
 			baseWord := a.extractBaseWord(hit.Hit.Greek)
-			herodotosRequestId := requestId
-			var herodotosSpanID string
 			if traceCall {
-				herodotosSpan := &pb.StartSpanRequest{
+				herodotosSpan := &pb.ParabasisRequest{
 					TraceId:      traceID,
 					ParentSpanId: spanID,
-					Action:       "analyseText",
+					SpanId:       spanID,
+					RequestType: &pb.ParabasisRequest_Span{Span: &pb.SpanRequest{
+						Action: "analyseText",
+						Status: fmt.Sprintf("querying Herodotos for word: %s", baseWord),
+					}},
 				}
 
-				resp, _ := a.Tracer.StartSpan(context.Background(), herodotosSpan)
-				herodotosRequestId = resp.CombinedId
-				split := strings.Split(resp.CombinedId, "+")
-				if len(split) >= 2 {
-					herodotosSpanID = split[1]
+				err := a.Streamer.Send(herodotosSpan)
+				if err != nil {
+					logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
 				}
 			}
 
-			foundInText, err := a.Client.Herodotos().AnalyseText(baseWord, herodotosRequestId)
+			startTime := time.Now()
+			foundInText, err := a.Client.Herodotos().AnalyseText(baseWord, requestId)
+			endTime := time.Since(startTime)
 
 			if err != nil {
 				logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", hit.Hit.Greek, err.Error()))
@@ -330,13 +262,21 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 				}
 
 				if traceCall {
-					span := &pb.CloseSpanRequest{
+					herodotosSpan := &pb.ParabasisRequest{
 						TraceId:      traceID,
-						ParentSpanId: parentSpanID,
-						SpanId:       herodotosSpanID,
-						ResponseCode: int32(foundInText.StatusCode),
+						ParentSpanId: spanID,
+						SpanId:       spanID,
+						RequestType: &pb.ParabasisRequest_Span{Span: &pb.SpanRequest{
+							Action:       "analyseText",
+							TimeFinished: fmt.Sprintf("%v", endTime),
+							Status:       fmt.Sprintf("querying Herodotos returned: %d", foundInText.StatusCode),
+						}},
 					}
-					go a.Tracer.CloseSpan(context.Background(), span)
+
+					err := a.Streamer.Send(herodotosSpan)
+					if err != nil {
+						logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+					}
 				}
 
 				results.Hits[i].FoundInText = &source
@@ -345,32 +285,27 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 		}
 	}
 
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go a.Tracer.CloseSpan(context.Background(), span)
-	}
-
 	middleware.ResponseWithCustomCode(w, http.StatusOK, results)
 }
 
 func (a *AlexandrosHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
 	parsedQuery, _ := json.Marshal(query)
-	dataBaseSpan := &pb.DatabaseSpanRequest{
+	dataBaseSpan := &pb.ParabasisRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,
-		Action:       "search",
-		Query:        string(parsedQuery),
-		Hits:         response.Hits.Total.Value,
-		TimeTook:     response.Took,
+		SpanId:       spanID,
+		RequestType: &pb.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pb.DatabaseSpanRequest{
+			Action:   "search",
+			Query:    string(parsedQuery),
+			Hits:     response.Hits.Total.Value,
+			TimeTook: response.Took,
+		}},
 	}
 
-	a.Tracer.DatabaseSpan(context.Background(), dataBaseSpan)
+	err := a.Streamer.Send(dataBaseSpan)
+	if err != nil {
+		logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+	}
 }
 
 func (a *AlexandrosHandler) extractBaseWord(queryWord string) string {
@@ -518,7 +453,7 @@ func (a *AlexandrosHandler) processQuery(option string, language string, queryWo
 	}
 }
 
-func (a *AlexandrosHandler) validateAndRespondError(w http.ResponseWriter, field, value string, allowedValues []string, traceID, parentSpanID, spanID string, traceCall bool) bool {
+func (a *AlexandrosHandler) validateAndRespondError(w http.ResponseWriter, field, value string, allowedValues []string, traceID string) bool {
 	if err := a.validateQueryParam(value, field, allowedValues); err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -528,15 +463,6 @@ func (a *AlexandrosHandler) validateAndRespondError(w http.ResponseWriter, field
 					Message: err.Error(),
 				},
 			},
-		}
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-			go a.Tracer.CloseSpan(context.Background(), span)
 		}
 		middleware.ResponseWithJson(w, e)
 		return true
@@ -561,6 +487,10 @@ func (a *AlexandrosHandler) validateQueryParam(queryParam, field string, allowed
 	}
 
 	return fmt.Errorf("invalid %s value. Please choose one of the following: %s", field, strings.Join(allowedValues, ", "))
+}
+
+func (a *AlexandrosHandler) Close() {
+	a.Cancel()
 }
 
 func extractBaseWord(queryWord string) string {

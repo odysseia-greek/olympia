@@ -3,6 +3,7 @@ package dictionary
 import (
 	"github.com/gorilla/mux"
 	"github.com/odysseia-greek/agora/plato/middleware"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 )
 
 // InitRoutes to start up a mux router and return the routes
@@ -11,7 +12,7 @@ func InitRoutes(alexandrosHandler *AlexandrosHandler) *mux.Router {
 
 	serveMux.HandleFunc("/alexandros/v1/ping", middleware.Adapt(alexandrosHandler.pingPong, middleware.ValidateRestMethod("GET")))
 	serveMux.HandleFunc("/alexandros/v1/health", middleware.Adapt(alexandrosHandler.health, middleware.ValidateRestMethod("GET")))
-	serveMux.HandleFunc("/alexandros/v1/search", middleware.Adapt(alexandrosHandler.searchWord, middleware.ValidateRestMethod("GET"), middleware.LogRequestDetails()))
+	serveMux.HandleFunc("/alexandros/v1/search", middleware.Adapt(alexandrosHandler.searchWord, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(alexandrosHandler.Streamer))))
 
 	return serveMux
 }

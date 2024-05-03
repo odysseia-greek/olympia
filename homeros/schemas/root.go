@@ -1,6 +1,7 @@
 package schemas
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/graphql-go/graphql"
@@ -8,7 +9,6 @@ import (
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"log"
-	"os"
 	"sync"
 )
 
@@ -19,8 +19,8 @@ var (
 
 func HomerosHandler() *gateway.HomerosHandler {
 	homerosHandlerOnce.Do(func() {
-		env := os.Getenv("ENV")
-		homerosHandler, err := gateway.CreateNewConfig(env)
+		ctx := context.Background()
+		homerosHandler, err := gateway.CreateNewConfig(ctx)
 		if err != nil {
 			log.Print(err)
 		}

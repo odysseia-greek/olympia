@@ -1,14 +1,14 @@
 package gateway
 
 import (
-	"context"
 	"encoding/json"
+	"fmt"
+	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/proto"
+	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/olympia/homeros/models"
-	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -52,7 +52,7 @@ func (h *HomerosHandler) Health(requestId string) (*models.Health, error) {
 			return
 		}
 		id := response.Header.Get(service.HeaderKey)
-		log.Printf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id)
+		logging.Info(fmt.Sprintf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id))
 		defer response.Body.Close()
 
 		var health plato.Health
@@ -82,7 +82,7 @@ func (h *HomerosHandler) Health(requestId string) (*models.Health, error) {
 			return
 		}
 		id := response.Header.Get(service.HeaderKey)
-		log.Printf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id)
+		logging.Info(fmt.Sprintf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id))
 		defer response.Body.Close()
 
 		var health plato.Health
@@ -111,7 +111,7 @@ func (h *HomerosHandler) Health(requestId string) (*models.Health, error) {
 			return
 		}
 		id := response.Header.Get(service.HeaderKey)
-		log.Printf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id)
+		logging.Info(fmt.Sprintf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id))
 		defer response.Body.Close()
 
 		var health plato.Health
@@ -141,7 +141,7 @@ func (h *HomerosHandler) Health(requestId string) (*models.Health, error) {
 			return
 		}
 		id := response.Header.Get(service.HeaderKey)
-		log.Printf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id)
+		logging.Info(fmt.Sprintf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id))
 		defer response.Body.Close()
 
 		var health plato.Health
@@ -177,15 +177,25 @@ func (h *HomerosHandler) Health(requestId string) (*models.Health, error) {
 		}
 	}
 
-	traceId, _, traceCall := ParseHeaderID(requestId)
+	traceID, parentSpanID, traceCall := ParseHeaderID(requestId)
 	if traceCall {
-
-		traceCloser := &aristophanes.CloseTraceRequest{
-			TraceId:      traceId,
-			ResponseCode: 200,
+		health, err := json.Marshal(healthy)
+		parabasis := &pb.ParabasisRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentSpanID,
+			SpanId:       parentSpanID,
+			RequestType: &pb.ParabasisRequest_CloseTrace{
+				CloseTrace: &pb.CloseTraceRequest{
+					ResponseCode: 200,
+					ResponseBody: string(health),
+				},
+			},
 		}
 
-		go h.Tracer.CloseTrace(context.Background(), traceCloser)
+		err = h.Streamer.Send(parabasis)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+		}
 	}
 
 	return &healthy, nil

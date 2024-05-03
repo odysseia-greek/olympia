@@ -40,7 +40,7 @@ func main() {
 	tracingConfig := gateway.InitTracingConfig()
 
 	logging.Debug(fmt.Sprintf("%v", handler))
-	srv := routing.InitRoutes(handler.Tracer, tracingConfig, handler.Randomizer)
+	srv := routing.InitRoutes(handler.Streamer, tracingConfig, handler.Randomizer)
 
 	logging.System(fmt.Sprintf("running on port %s", port))
 	err := http.ListenAndServe(port, srv)

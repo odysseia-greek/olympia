@@ -6,14 +6,12 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/odysseia-greek/agora/aristoteles"
-	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
+	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/helpers"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
-	plato "github.com/odysseia-greek/agora/plato/service"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pab "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
@@ -24,10 +22,11 @@ import (
 )
 
 type HerodotosHandler struct {
-	Tracer     *aristophanes.ClientTracer
 	Aggregator *aristarchos.ClientAggregator
 	Elastic    aristoteles.Client
 	Index      string
+	Streamer   pb.TraceService_ChorusClient
+	Cancel     context.CancelFunc
 }
 
 const (
@@ -76,37 +75,6 @@ func (h *HerodotosHandler) health(w http.ResponseWriter, req *http.Request) {
 	//	Responses:
 	//	  200: Health
 	//	  502: Health
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
 	elasticHealth := h.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,
@@ -169,11 +137,17 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 	author := req.URL.Query().Get(Author)
 	book := req.URL.Query().Get(Book)
 
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -183,35 +157,7 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "createQuestion",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := h.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+		spanID = splitID[1]
 	}
 
 	if author == "" || book == "" {
@@ -266,7 +212,7 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 	}
 
 	if traceCall {
-		go h.databaseSpan(response, query, traceID, spanID)
+		go h.databaseSpan(response.Hits.Total.Value, response.Took, query, traceID, spanID)
 	}
 
 	if len(response.Hits.Hits) == 0 {
@@ -310,17 +256,6 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 	question := models.CreateSentenceResponse{Sentence: rhemaSource.Greek,
 		SentenceId: id}
 
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go h.Tracer.CloseSpan(context.Background(), span)
-	}
-
 	middleware.ResponseWithJson(w, question)
 }
 
@@ -349,11 +284,17 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 	//	  404: NotFoundError
 	//	  405: MethodError
 	//    502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -363,38 +304,8 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
+		spanID = splitID[1]
 	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "checkSentence",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := h.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
-	}
-
-	logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
 
 	var checkSentenceRequest models.CheckSentenceRequest
 	decoder := json.NewDecoder(req.Body)
@@ -439,7 +350,7 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 	}
 
 	if traceCall {
-		go h.databaseSpan(elasticResult, query, traceID, spanID)
+		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
 	}
 
 	elasticJson, _ := json.Marshal(elasticResult.Hits.Hits[0].Source)
@@ -489,17 +400,6 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		SplitAnswerSentence:   model.SplitAnswerSentence,
 	}
 
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go h.Tracer.CloseSpan(context.Background(), span)
-	}
-
 	middleware.ResponseWithJson(w, response)
 }
 
@@ -530,11 +430,17 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 	//	  200: Authors
 	//	  405: MethodError
 	//    502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -544,42 +450,15 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
+		spanID = splitID[1]
 	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "queryAuthors",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := h.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
-	}
-
-	logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
 
 	query := h.Elastic.Builder().Aggregate(Authors, Author)
 
 	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
+	if traceCall {
+		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
+	}
 
 	if err != nil {
 		e := models.ElasticSearchError{
@@ -596,17 +475,6 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 	for _, bucket := range elasticResult.Aggregations.AuthorAggregation.Buckets {
 		author := models.Author{Author: strings.ToLower(fmt.Sprintf("%v", bucket.Key))}
 		authors.Authors = append(authors.Authors, author)
-	}
-
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go h.Tracer.CloseSpan(context.Background(), span)
 	}
 
 	middleware.ResponseWithJson(w, authors)
@@ -639,11 +507,17 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 	//	  200: Books
 	//	  405: MethodError
 	//    502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -653,38 +527,8 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
+		spanID = splitID[1]
 	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "queryBooks",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := h.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
-	}
-
-	logging.Trace(fmt.Sprintf("received %s code with value: %s", plato.HeaderKey, traceID))
 
 	pathParams := mux.Vars(req)
 	author := pathParams[Author]
@@ -710,6 +554,9 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 	}
 
 	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
+	if traceCall {
+		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
+	}
 
 	if err != nil {
 		e := models.ElasticSearchError{
@@ -728,17 +575,6 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 		book := models.Book{Book: int64(bucket.Key.(float64))}
 		books.Books = append(books.Books, book)
 
-	}
-
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go h.Tracer.CloseSpan(context.Background(), span)
 	}
 
 	middleware.ResponseWithJson(w, books)
@@ -776,11 +612,17 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 	//    502: ElasticSearchError
 	rootWord := req.URL.Query().Get(RootWord)
 
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
-	var traceID, parentSpanID, spanID string
+	var traceID, spanID string
 
 	if len(splitID) >= 3 {
 		traceCall = splitID[2] == "1"
@@ -790,35 +632,7 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		traceID = splitID[0]
 	}
 	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go h.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "analyseText",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := h.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+		spanID = splitID[1]
 	}
 
 	if rootWord == "" {
@@ -888,7 +702,7 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 	}
 
 	if traceCall {
-		go h.databaseSpan(response, query, traceID, spanID)
+		go h.databaseSpan(response.Hits.Total.Value, response.Took, query, traceID, spanID)
 	}
 
 	if len(response.Hits.Hits) == 0 {
@@ -942,32 +756,27 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		rhemas.Rhemai = append(rhemas.Rhemai, rhemaSource)
 	}
 
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go h.Tracer.CloseSpan(context.Background(), span)
-	}
-
 	middleware.ResponseWithCustomCode(w, 200, rhemas)
 }
 
-func (h *HerodotosHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
+func (h *HerodotosHandler) databaseSpan(hits, took int64, query map[string]interface{}, traceID, spanID string) {
 	parsedQuery, _ := json.Marshal(query)
-	dataBaseSpan := &pb.DatabaseSpanRequest{
+	dataBaseSpan := &pb.ParabasisRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,
-		Action:       "search",
-		Query:        string(parsedQuery),
-		TimeTook:     response.Took,
-		Hits:         response.Hits.Total.Value,
+		SpanId:       spanID,
+		RequestType: &pb.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pb.DatabaseSpanRequest{
+			Action:   "search",
+			Query:    string(parsedQuery),
+			Hits:     hits,
+			TimeTook: took,
+		}},
 	}
 
-	h.Tracer.DatabaseSpan(context.Background(), dataBaseSpan)
+	err := h.Streamer.Send(dataBaseSpan)
+	if err != nil {
+		logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+	}
 }
 
 // calculates the amount of changes needed to have two sentences match
