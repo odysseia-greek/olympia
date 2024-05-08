@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/olympia/sokrates/quiz"
+	"golang.org/x/net/context"
 	"log"
 	"net/http"
 	"os"
@@ -33,9 +34,9 @@ func main() {
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
 
-	env := os.Getenv("ENV")
+	ctx := context.Background()
 
-	sokratesConfig, err := quiz.CreateNewConfig(env)
+	sokratesConfig, err := quiz.CreateNewConfig(ctx)
 	if err != nil {
 		log.Print(err)
 		log.Fatal("death has found me")

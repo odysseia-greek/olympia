@@ -212,7 +212,13 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 	}
 
 	if traceCall {
-		go h.databaseSpan(response.Hits.Total.Value, response.Took, query, traceID, spanID)
+		hits := int64(0)
+		took := int64(0)
+		if response != nil {
+			hits = response.Hits.Total.Value
+			took = response.Took
+		}
+		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
 	if len(response.Hits.Hits) == 0 {
@@ -337,6 +343,16 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		return
 	}
 
+	if traceCall {
+		hits := int64(0)
+		took := int64(0)
+		if elasticResult != nil {
+			hits = elasticResult.Hits.Total.Value
+			took = elasticResult.Took
+		}
+		go h.databaseSpan(hits, took, query, traceID, spanID)
+	}
+
 	if len(elasticResult.Hits.Hits) == 0 {
 		e := models.NotFoundError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -347,10 +363,6 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		}
 		middleware.ResponseWithJson(w, e)
 		return
-	}
-
-	if traceCall {
-		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
 	}
 
 	elasticJson, _ := json.Marshal(elasticResult.Hits.Hits[0].Source)
@@ -457,7 +469,13 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 
 	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
 	if traceCall {
-		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
+		hits := int64(0)
+		took := int64(0)
+		if elasticResult != nil {
+			hits = elasticResult.Hits.Total.Value
+			took = elasticResult.Took
+		}
+		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
 	if err != nil {
@@ -555,7 +573,13 @@ func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) 
 
 	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
 	if traceCall {
-		go h.databaseSpan(elasticResult.Hits.Total.Value, elasticResult.Took, query, traceID, spanID)
+		hits := int64(0)
+		took := int64(0)
+		if elasticResult != nil {
+			hits = elasticResult.Hits.Total.Value
+			took = elasticResult.Took
+		}
+		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
 	if err != nil {
@@ -689,7 +713,6 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 	}
 
 	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
-
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -699,10 +722,6 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		}
 		middleware.ResponseWithJson(w, e)
 		return
-	}
-
-	if traceCall {
-		go h.databaseSpan(response.Hits.Total.Value, response.Took, query, traceID, spanID)
 	}
 
 	if len(response.Hits.Hits) == 0 {
@@ -715,6 +734,16 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		}
 		middleware.ResponseWithJson(w, e)
 		return
+	}
+
+	if traceCall {
+		hits := int64(0)
+		took := int64(0)
+		if response != nil {
+			hits = response.Hits.Total.Value
+			took = response.Took
+		}
+		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
 	var rhemas models.Rhema
@@ -761,6 +790,7 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 
 func (h *HerodotosHandler) databaseSpan(hits, took int64, query map[string]interface{}, traceID, spanID string) {
 	parsedQuery, _ := json.Marshal(query)
+
 	dataBaseSpan := &pb.ParabasisRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,

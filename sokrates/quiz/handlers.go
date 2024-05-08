@@ -6,14 +6,15 @@ import (
 	"errors"
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
-	plato "github.com/odysseia-greek/agora/plato/config"
+	elasticmodels "github.com/odysseia-greek/agora/aristoteles/models"
+	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/randomizer"
 	"github.com/odysseia-greek/agora/plato/service"
 	"github.com/odysseia-greek/agora/plato/transform"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"math"
 	"math/rand"
@@ -25,7 +26,6 @@ import (
 )
 
 type SokratesHandler struct {
-	Tracer             *aristophanes.ClientTracer
 	Elastic            elastic.Client
 	Randomizer         randomizer.Random
 	Client             service.OdysseiaClient
@@ -34,6 +34,8 @@ type SokratesHandler struct {
 	QuizAttempts       chan models.QuizAttempt
 	AggregatedAttempts map[string]models.QuizAttempt
 	Ticker             *time.Ticker
+	Streamer           pb.TraceService_ChorusClient
+	Cancel             context.CancelFunc
 }
 
 const (
@@ -64,49 +66,12 @@ func (s *SokratesHandler) Health(w http.ResponseWriter, req *http.Request) {
 }
 
 func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, parentSpanID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "createQuiz",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
 	}
 
 	var createQuizRequest models.CreationRequest
@@ -114,7 +79,7 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 	err := decoder.Decode(&createQuizRequest)
 	if err != nil {
 		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
 			Messages: []models.ValidationMessages{
 				{
 					Field:   "decoding",
@@ -128,10 +93,10 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 
 	switch createQuizRequest.QuizType {
 	case models.MEDIA:
-		quiz, err := s.mediaQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		quiz, err := s.mediaQuiz(createQuizRequest.Theme, createQuizRequest.Set, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -141,26 +106,15 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithJson(w, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.AUTHORBASED:
-		quiz, err := s.authorBasedQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		quiz, err := s.authorBasedQuiz(createQuizRequest.Theme, createQuizRequest.Set, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -170,26 +124,15 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithJson(w, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.DIALOGUE:
-		quiz, err := s.dialogueQuiz(createQuizRequest.Theme, createQuizRequest.Set)
+		quiz, err := s.dialogueQuiz(createQuizRequest.Theme, createQuizRequest.Set, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -199,17 +142,6 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithJson(w, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
@@ -218,49 +150,12 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 }
 
 func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, parentSpanID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "checkAnswer",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
 	}
 
 	var answerRequest models.AnswerRequest
@@ -268,7 +163,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 	err := decoder.Decode(&answerRequest)
 	if err != nil {
 		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
 			Messages: []models.ValidationMessages{
 				{
 					Field:   "decoding",
@@ -285,7 +180,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 		quiz, err := s.mediaQuizAnswer(answerRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -295,17 +190,6 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithCustomCode(w, 400, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, 200, quiz)
@@ -314,7 +198,7 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 		quiz, err := s.authorBasedQuizAnswer(answerRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -324,26 +208,15 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithCustomCode(w, 400, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
 	case models.DIALOGUE:
-		quiz, err := s.dialogueAnswer(answerRequest)
+		quiz, err := s.dialogueAnswer(answerRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
-				ErrorModel: models.ErrorModel{UniqueCode: traceID},
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
 				Messages: []models.ValidationMessages{
 					{
 						Field:   "creating quiz error",
@@ -353,17 +226,6 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 			}
 			middleware.ResponseWithCustomCode(w, 400, e)
 			return
-		}
-
-		if traceCall {
-			span := &pb.CloseSpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentSpanID,
-				SpanId:       spanID,
-				ResponseCode: http.StatusOK,
-			}
-
-			go s.Tracer.CloseSpan(context.Background(), span)
 		}
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
@@ -372,49 +234,12 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 }
 
 func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, parentSpanID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		parentSpanID = splitID[1]
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go s.Tracer.Trace(context.Background(), traceReceived)
-
-		spanStart := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "getOptions",
-			RequestBody:  req.URL.RequestURI(),
-		}
-
-		resp, _ := s.Tracer.StartSpan(context.Background(), spanStart)
-		requestId = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			spanID = split[1]
-		}
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
 	}
 
 	quizType := req.URL.Query().Get("quizType")
@@ -422,7 +247,7 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 	options, err := s.options(quizType)
 	if err != nil {
 		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
 			Messages: []models.ValidationMessages{
 				{
 					Field:   "creating quiz error",
@@ -434,23 +259,28 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	if traceCall {
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       spanID,
-			ResponseCode: http.StatusOK,
-		}
-
-		go s.Tracer.CloseSpan(context.Background(), span)
-	}
-
 	middleware.ResponseWithCustomCode(w, http.StatusOK, options)
 	return
 
 }
 
 func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			QUIZTYPE: models.MEDIA,
@@ -470,6 +300,10 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 	}
 	if len(elasticResponse.Hits.Hits) == 0 {
 		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
 	var option models.MediaQuiz
@@ -497,6 +331,22 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 }
 
 func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			QUIZTYPE: models.AUTHORBASED,
@@ -516,6 +366,10 @@ func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, reques
 	}
 	if len(elasticResponse.Hits.Hits) == 0 {
 		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
 	var option models.AuthorBasedQuiz
@@ -547,7 +401,23 @@ func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, reques
 	return &answer, nil
 }
 
-func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.DialogueAnswer, error) {
+func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest, requestID string) (*models.DialogueAnswer, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			QUIZTYPE: models.DIALOGUE,
@@ -565,9 +435,15 @@ func (s *SokratesHandler) dialogueAnswer(req models.AnswerRequest) (*models.Dial
 	if err != nil {
 		return nil, err
 	}
+
 	if len(elasticResponse.Hits.Hits) == 0 {
 		return nil, fmt.Errorf("no hits found in Elastic")
 	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
+	}
+
 	var option models.DialogueQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
@@ -636,22 +512,6 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 		parentSpanID = splitID[1]
 	}
 
-	var comprehensiveSpanID string
-	if traceCall {
-		comprehensiveSpan := &pb.StartSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			Action:       "gatherComprehensiveData",
-		}
-
-		resp, _ := s.Tracer.StartSpan(context.Background(), comprehensiveSpan)
-		requestID = resp.CombinedId
-		split := strings.Split(resp.CombinedId, "+")
-		if len(split) >= 2 {
-			comprehensiveSpanID = split[1]
-		}
-	}
-
 	wordToBeSend := extractBaseWord(answer.QuizWord)
 
 	// Use a WaitGroup to wait for both goroutines to finish
@@ -665,6 +525,22 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 
 	go func() {
 		defer wg.Done()
+		if traceCall {
+			herodotosSpan := &pb.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       comedy.GenerateSpanID(),
+				RequestType: &pb.ParabasisRequest_Span{Span: &pb.SpanRequest{
+					Action: "analyseText",
+					Status: fmt.Sprintf("querying Herodotos for word: %s", wordToBeSend),
+				}},
+			}
+
+			err := s.Streamer.Send(herodotosSpan)
+			if err != nil {
+				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+			}
+		}
 		foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
 		if err != nil {
 			logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
@@ -676,6 +552,22 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 
 	go func() {
 		defer wg.Done()
+		if traceCall {
+			alexandrosSpan := &pb.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentSpanID,
+				SpanId:       comedy.GenerateSpanID(),
+				RequestType: &pb.ParabasisRequest_Span{Span: &pb.SpanRequest{
+					Action: "analyseText",
+					Status: fmt.Sprintf("querying Alexandros for word: %s", wordToBeSend),
+				}},
+			}
+
+			err := s.Streamer.Send(alexandrosSpan)
+			if err != nil {
+				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+			}
+		}
 		similarWords, err := s.Client.Alexandros().Search(wordToBeSend, "greek", "fuzzy", "false", requestID)
 		if err != nil {
 			logging.Error(fmt.Sprintf("could not query any similar words for word: %s error: %s", answer.QuizWord, err.Error()))
@@ -717,20 +609,25 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 			answer.SimilarWords = append(answer.SimilarWords, meros.Hit)
 		}
 	}
-
-	if traceCall {
-
-		span := &pb.CloseSpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       comprehensiveSpanID,
-			ResponseCode: int32(http.StatusOK),
-		}
-		go s.Tracer.CloseSpan(context.Background(), span)
-	}
 }
 
-func (s *SokratesHandler) mediaQuiz(theme, set string) (*models.QuizResponse, error) {
+func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			THEME: theme,
@@ -759,6 +656,10 @@ func (s *SokratesHandler) mediaQuiz(theme, set string) (*models.QuizResponse, er
 	err = json.Unmarshal(source, &option)
 	if err != nil {
 		return nil, err
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
 	var quiz models.QuizResponse
@@ -798,7 +699,23 @@ func (s *SokratesHandler) mediaQuiz(theme, set string) (*models.QuizResponse, er
 	return &quiz, nil
 }
 
-func (s *SokratesHandler) authorBasedQuiz(theme, set string) (*models.QuizResponse, error) {
+func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models.QuizResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			THEME: theme,
@@ -826,6 +743,10 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set string) (*models.QuizRespon
 	err = json.Unmarshal(source, &option)
 	if err != nil {
 		return nil, err
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
 	var quiz models.QuizResponse
@@ -863,7 +784,23 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set string) (*models.QuizRespon
 	return &quiz, nil
 }
 
-func (s *SokratesHandler) dialogueQuiz(theme, set string) (*models.DialogueQuiz, error) {
+func (s *SokratesHandler) dialogueQuiz(theme, set, requestID string) (*models.DialogueQuiz, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
 	mustQuery := []map[string]string{
 		{
 			THEME: theme,
@@ -884,6 +821,10 @@ func (s *SokratesHandler) dialogueQuiz(theme, set string) (*models.DialogueQuiz,
 
 	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
 		return nil, errors.New("no hits found in query")
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
 	var quiz models.DialogueQuiz
@@ -1052,4 +993,28 @@ func extractBaseWord(queryWord string) string {
 	}
 
 	return queryWord
+}
+
+func (s *SokratesHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
+	parsedQuery, _ := json.Marshal(query)
+	hits := int64(0)
+	if response != nil {
+		hits = response.Hits.Total.Value
+	}
+	dataBaseSpan := &pb.ParabasisRequest{
+		TraceId:      traceID,
+		ParentSpanId: spanID,
+		SpanId:       spanID,
+		RequestType: &pb.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pb.DatabaseSpanRequest{
+			Action:   "search",
+			Query:    string(parsedQuery),
+			Hits:     hits,
+			TimeTook: response.Took,
+		}},
+	}
+
+	err := s.Streamer.Send(dataBaseSpan)
+	if err != nil {
+		logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+	}
 }

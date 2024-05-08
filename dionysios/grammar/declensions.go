@@ -1,11 +1,11 @@
 package grammar
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
@@ -98,6 +98,7 @@ func (d *DionysosHandler) parseDictResults(dictionaryHits models.Meros) (transla
 // It returns the declension translation results.
 func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.DeclensionTranslationResults, error) {
 	// Initialize the results variable
+	startTime := time.Now()
 	splitID := strings.Split(requestID, "+")
 
 	traceCall := false
@@ -110,25 +111,6 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 	if len(splitID) >= 1 {
 		traceID = splitID[0]
 	}
-	if len(splitID) >= 2 {
-		msg := &pb.StartSpanRequest{
-			TraceId: traceID,
-		}
-
-		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-		defer cancel()
-
-		combinedID, err := d.Tracer.StartSpan(ctx, msg)
-		if err != nil {
-			logging.Error(err.Error())
-			spanID = splitID[1]
-		} else {
-			split := strings.Split(combinedID.CombinedId, "+")
-			if len(split) > 1 {
-				spanID = split[1]
-			}
-		}
-	}
 
 	var results models.DeclensionTranslationResults
 
@@ -136,15 +118,6 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 	declensions, err := d.searchForDeclensions(word)
 	if err != nil {
 		return nil, err
-	}
-
-	if traceCall {
-		span := &pb.SpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Action:       "searchForDeclensions",
-		}
-		go d.Tracer.Span(context.Background(), span)
 	}
 
 	// If declensions are found, process each declension
@@ -273,15 +246,6 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		}
 	}
 
-	if traceCall {
-		span := &pb.SpanRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Action:       "unfilteredRules",
-		}
-		go d.Tracer.Span(context.Background(), span)
-	}
-
 	// Perform additional filtering and removal of redundant results
 	if len(results.Results) > 1 {
 		filteredResults := make([]models.Result, 0)
@@ -313,7 +277,30 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		results.Results = filteredResults
 	}
 
-	// Return the declension translation results
+	if traceCall {
+		// this span is meant to give insight into the working of StartFindingRules and should be expanded
+		duration := time.Since(startTime)
+		status, err := json.Marshal(results)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to marshal body: %v", err))
+		}
+		parabasis := &pb.ParabasisRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			SpanId:       comedy.GenerateSpanID(),
+			RequestType: &pb.ParabasisRequest_Span{
+				Span: &pb.SpanRequest{
+					Action: "StartFindingRules",
+					Took:   fmt.Sprintf("%v", duration),
+					Status: fmt.Sprintf("%s", string(status)),
+				},
+			},
+		}
+		if err := d.Streamer.Send(parabasis); err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+		}
+	}
+
 	return &results, nil
 }
 

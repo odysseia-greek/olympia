@@ -5,9 +5,8 @@ go 1.22.0
 require (
 	github.com/google/uuid v1.6.0
 	github.com/odysseia-greek/agora/aristoteles v0.1.6
-	github.com/odysseia-greek/agora/plato v0.1.17
+	github.com/odysseia-greek/agora/plato v0.1.19
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
-	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.62.1
 )
 
@@ -40,6 +39,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect

@@ -290,6 +290,12 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 
 func (a *AlexandrosHandler) databaseSpan(response *elasticmodels.Response, query map[string]interface{}, traceID, spanID string) {
 	parsedQuery, _ := json.Marshal(query)
+	hits := int64(0)
+	took := int64(0)
+	if response != nil {
+		hits = response.Hits.Total.Value
+		took = response.Took
+	}
 	dataBaseSpan := &pb.ParabasisRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,
@@ -297,8 +303,8 @@ func (a *AlexandrosHandler) databaseSpan(response *elasticmodels.Response, query
 		RequestType: &pb.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pb.DatabaseSpanRequest{
 			Action:   "search",
 			Query:    string(parsedQuery),
-			Hits:     response.Hits.Total.Value,
-			TimeTook: response.Took,
+			Hits:     hits,
+			TimeTook: took,
 		}},
 	}
 

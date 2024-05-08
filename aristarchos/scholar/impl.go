@@ -55,27 +55,7 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 	createNewWord := false
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
-	if traceCall {
-		go func() {
-			parsedQuery, _ := json.Marshal(query)
-			dataBaseSpan := &pbar.ParabasisRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				SpanId:       spanID,
-				RequestType: &pbar.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pbar.DatabaseSpanRequest{
-					Action:   "search",
-					Query:    string(parsedQuery),
-					Hits:     response.Hits.Total.Value,
-					TimeTook: response.Took,
-				}},
-			}
 
-			err := streamer.Send(dataBaseSpan)
-			if err != nil {
-				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
-			}
-		}()
-	}
 	if err != nil {
 		if strings.Contains(err.Error(), "404") {
 			createNewWord = true
@@ -84,6 +64,34 @@ func (a *AggregatorServiceImpl) CreateNewEntry(ctx context.Context, request *pb.
 		}
 	} else if len(response.Hits.Hits) == 0 {
 		createNewWord = true
+	}
+
+	if traceCall {
+		go func() {
+			parsedQuery, _ := json.Marshal(query)
+			hits := int64(0)
+			took := int64(0)
+			if response != nil {
+				hits = response.Hits.Total.Value
+				took = response.Took
+			}
+			dataBaseSpan := &pbar.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: spanID,
+				SpanId:       spanID,
+				RequestType: &pbar.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pbar.DatabaseSpanRequest{
+					Action:   "search",
+					Query:    string(parsedQuery),
+					Hits:     hits,
+					TimeTook: took,
+				}},
+			}
+
+			err := streamer.Send(dataBaseSpan)
+			if err != nil {
+				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+			}
+		}()
 	}
 
 	entry, err := a.mapAndHandleGrammaticalCategories(request)
@@ -245,6 +253,12 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 
 	if traceCall {
 		go func() {
+			hits := int64(0)
+			took := int64(0)
+			if response != nil {
+				hits = response.Hits.Total.Value
+				took = response.Took
+			}
 			parsedQuery, _ := json.Marshal(query)
 			dataBaseSpan := &pbar.ParabasisRequest{
 				TraceId:      traceID,
@@ -253,8 +267,8 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 				RequestType: &pbar.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pbar.DatabaseSpanRequest{
 					Action:   "search",
 					Query:    string(parsedQuery),
-					Hits:     response.Hits.Total.Value,
-					TimeTook: response.Took,
+					Hits:     hits,
+					TimeTook: took,
 				}},
 			}
 
@@ -352,9 +366,22 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
 	response, err := a.Elastic.Query().Match(a.Index, query)
 
+	if err != nil {
+		return nil, err
+	} else if len(response.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no entry can be found")
+	}
+
 	if traceCall {
 		go func() {
 			parsedQuery, _ := json.Marshal(query)
+			hits := int64(0)
+			took := int64(0)
+			if response != nil {
+				hits = response.Hits.Total.Value
+				took = response.Took
+			}
+
 			dataBaseSpan := &pbar.ParabasisRequest{
 				TraceId:      traceID,
 				ParentSpanId: spanID,
@@ -362,8 +389,8 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 				RequestType: &pbar.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pbar.DatabaseSpanRequest{
 					Action:   "search",
 					Query:    string(parsedQuery),
-					Hits:     response.Hits.Total.Value,
-					TimeTook: response.Took,
+					Hits:     hits,
+					TimeTook: took,
 				}},
 			}
 
@@ -372,12 +399,6 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
 			}
 		}()
-	}
-
-	if err != nil {
-		return nil, err
-	} else if len(response.Hits.Hits) == 0 {
-		return nil, fmt.Errorf("no entry can be found")
 	}
 
 	var responsePB pb.SearchWordResponse

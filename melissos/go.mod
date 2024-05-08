@@ -6,7 +6,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/odysseia-greek/agora/aristoteles v0.1.6
 	github.com/odysseia-greek/agora/eupalinos v0.1.0
-	github.com/odysseia-greek/agora/plato v0.1.17
+	github.com/odysseia-greek/agora/plato v0.1.19
 	github.com/odysseia-greek/agora/thales v0.1.7
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.9.0
@@ -34,7 +34,6 @@ require (
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
@@ -57,8 +56,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/moby/spdystream v0.2.0 // indirect

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
@@ -36,9 +37,8 @@ func main() {
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
 
-	env := os.Getenv("ENV")
-
-	dionysiosConfig, err := grammar.CreateNewConfig(env)
+	ctx := context.Background()
+	dionysiosConfig, err := grammar.CreateNewConfig(ctx)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

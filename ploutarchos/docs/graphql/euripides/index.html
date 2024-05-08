@@ -48,17 +48,18 @@
             <h4 class="nav-group-title">Types</h4>
             <ul class="nav-group-items">
               <li><a href="#definition-Boolean">Boolean</a></li>
+              <li><a href="#definition-CloseTrace">CloseTrace</a></li>
               <li><a href="#definition-DatabaseSpan">DatabaseSpan</a></li>
               <li><a href="#definition-Float">Float</a></li>
               <li><a href="#definition-Grouped">Grouped</a></li>
               <li><a href="#definition-Int">Int</a></li>
               <li><a href="#definition-Item">Item</a></li>
               <li><a href="#definition-Metrics">Metrics</a></li>
-              <li><a href="#definition-MetricsQueryInput">MetricsQueryInput</a></li>
               <li><a href="#definition-Node">Node</a></li>
               <li><a href="#definition-ParentTrace">ParentTrace</a></li>
               <li><a href="#definition-Pod">Pod</a></li>
               <li><a href="#definition-Span">Span</a></li>
+              <li><a href="#definition-StartTrace">StartTrace</a></li>
               <li><a href="#definition-String">String</a></li>
               <li><a href="#definition-Trace">Trace</a></li>
               <li><a href="#definition-TraceQueryInput">TraceQueryInput</a></li>
@@ -152,7 +153,14 @@ https://attike.odysseia-greek.com/graphql
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>input</code></span> - <span class="property-type"><a href="#definition-MetricsQueryInput"><code>MetricsQueryInput</code></a></span>
+                          <span class="property-name"><code>timeSpan</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>order</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -167,8 +175,14 @@ https://attike.odysseia-greek.com/graphql
                   <h5>Query</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Metrics<span class="hljs-tag">(<span class="hljs-code">$input</span>:<span class="hljs-type"> MetricsQueryInput)</span> {
-  metrics(input: <span class="hljs-code">$input</span>)</span> <span class="hljs-tag">{
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> Metrics<span class="hljs-tag">(
+  <span class="hljs-code">$timeSpan</span>:<span class="hljs-type"> String,</span>
+  <span class="hljs-code">$order</span>:<span class="hljs-type"> String
+</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">metrics<span class="hljs-tag">(
+    timeSpan: <span class="hljs-code">$timeSpan</span>,
+    order: <span class="hljs-code">$order</span>
+  )</span> <span class="hljs-tag">{
     <span class="hljs-symbol">cpuUnits</span>
     <span class="hljs-symbol">grouped <span class="hljs-tag">{
       <span class="hljs-symbol">cpuHumanReadable</span>
@@ -200,7 +214,7 @@ https://attike.odysseia-greek.com/graphql
     <span class="hljs-symbol">timeStamps</span>
     <span class="hljs-symbol">timeStarted</span>
   }</span></span>
-}
+}</span></span>
 </code></pre>
                     </body>
                   </html>
@@ -209,7 +223,10 @@ https://attike.odysseia-greek.com/graphql
                   <h5>Variables</h5>
                   <html>
                     <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"input"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">MetricsQueryInput</span><span class="hljs-punctuation">}</span>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"timeSpan"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"order"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
                   </html>
@@ -221,14 +238,14 @@ https://attike.odysseia-greek.com/graphql
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"metrics"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"cpuUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"cpuUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"grouped"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Grouped</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"memoryUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Node</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"pods"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Pod</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"timeEnded"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"timeStamps"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+      <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -300,8 +317,6 @@ https://attike.odysseia-greek.com/graphql
         <span class="hljs-symbol">podName</span>
         <span class="hljs-symbol"><span class="hljs-keyword">query</span></span>
         <span class="hljs-symbol">spanID</span>
-        <span class="hljs-symbol">timeFinished</span>
-        <span class="hljs-symbol">timeStarted</span>
         <span class="hljs-symbol">timestamp</span>
         <span class="hljs-symbol">took</span>
       }</span>
@@ -312,13 +327,26 @@ https://attike.odysseia-greek.com/graphql
         <span class="hljs-symbol">parentSpanID</span>
         <span class="hljs-symbol">podName</span>
         <span class="hljs-symbol">requestBody</span>
-        <span class="hljs-symbol">responseCode</span>
         <span class="hljs-symbol">spanID</span>
-        <span class="hljs-symbol">timeFinished</span>
-        <span class="hljs-symbol">timeStarted</span>
+        <span class="hljs-symbol">status</span>
         <span class="hljs-symbol">timestamp</span>
+        <span class="hljs-symbol">took</span>
       }</span>
       ... on Trace <span class="hljs-tag">{
+        <span class="hljs-symbol">host</span>
+        <span class="hljs-symbol">itemType</span>
+        <span class="hljs-symbol">method</span>
+        <span class="hljs-symbol">metrics <span class="hljs-tag">{
+          <span class="hljs-type">...tracingMetricsFragment</span>
+        }</span></span>
+        <span class="hljs-symbol">namespace</span>
+        <span class="hljs-symbol">parentSpanID</span>
+        <span class="hljs-symbol">podName</span>
+        <span class="hljs-symbol">spanID</span>
+        <span class="hljs-symbol">timestamp</span>
+        <span class="hljs-symbol">url</span>
+      }</span>
+      ... on StartTrace <span class="hljs-tag">{
         <span class="hljs-symbol">host</span>
         <span class="hljs-symbol">itemType</span>
         <span class="hljs-symbol">method</span>
@@ -331,8 +359,20 @@ https://attike.odysseia-greek.com/graphql
         <span class="hljs-symbol">podName</span>
         <span class="hljs-symbol">remoteAddress</span>
         <span class="hljs-symbol">rootQuery</span>
+        <span class="hljs-symbol">spanID</span>
         <span class="hljs-symbol">timestamp</span>
         <span class="hljs-symbol">url</span>
+      }</span>
+      ... on CloseTrace <span class="hljs-tag">{
+        <span class="hljs-symbol">itemType</span>
+        <span class="hljs-symbol">metrics <span class="hljs-tag">{
+          <span class="hljs-type">...tracingMetricsFragment</span>
+        }</span></span>
+        <span class="hljs-symbol">namespace</span>
+        <span class="hljs-symbol">parentSpanID</span>
+        <span class="hljs-symbol">podName</span>
+        <span class="hljs-symbol">responseBody</span>
+        <span class="hljs-symbol">timestamp</span>
       }</span>
     }</span>
     <span class="hljs-symbol">responseCode</span>
@@ -365,10 +405,10 @@ https://attike.odysseia-greek.com/graphql
       <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">"isActive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DatabaseSpan</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"responseCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"responseCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"timeEnded"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">"totalTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"totalTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">"traceID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
       <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
@@ -392,6 +432,99 @@ https://attike.odysseia-greek.com/graphql
                 </div>
               </div>
               <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CloseTrace" class="definition definition-object" data-traverse-target="definition-CloseTrace">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CloseTrace</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>itemType</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>metrics</code></span> - <span class="property-type"><a href="#definition-tracingMetrics"><code>tracingMetrics</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>namespace</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>parentSpanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>podName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>responseBody</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>timestamp</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"metrics"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tracingMetrics</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"responseBody"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
               </div>
             </div>
           </section>
@@ -455,18 +588,6 @@ https://attike.odysseia-greek.com/graphql
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>timeFinished</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>timeStarted</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
                         <td data-property-name=""><span class="property-name"><code>timestamp</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -492,11 +613,9 @@ https://attike.odysseia-greek.com/graphql
   <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"query"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"spanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeFinished"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"spanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"took"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
@@ -589,10 +708,10 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -656,6 +775,16 @@ https://attike.odysseia-greek.com/graphql
                       <tr>
                         <td>
                           <p><a href="#definition-Trace"><code>Trace</code></a></p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><a href="#definition-StartTrace"><code>StartTrace</code></a></p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><a href="#definition-CloseTrace"><code>CloseTrace</code></a></p>
                         </td>
                       </tr>
                     </tbody>
@@ -750,73 +879,14 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"cpuUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"grouped"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Grouped</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Node</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"pods"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">Pod</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeEnded"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timeEnded"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"timeStamps"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
-                    </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-MetricsQueryInput" class="definition definition-input-object" data-traverse-target="definition-MetricsQueryInput">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">MetricsQueryInput</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Input Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>beginTime</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>endTime</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>order</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                    <head></head>
-                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"beginTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"endTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"order"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -906,17 +976,17 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cpuPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987.65</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cpuPercentageHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123.45</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuPercentageHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryPercentage"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987.65</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryPercentageHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-    <span class="hljs-string">"abc123"</span>
+    <span class="hljs-string">"xyz789"</span>
   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"nodeName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"nodeName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -994,12 +1064,12 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"isActive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"isActive"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">DatabaseSpan</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"responseCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"timeEnded"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"totalTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"totalTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"traceID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -1067,9 +1137,9 @@ https://attike.odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"memoryHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"memoryHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">123</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
@@ -1133,31 +1203,25 @@ https://attike.odysseia-greek.com/graphql
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>responseCode</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
                         <td data-property-name=""><span class="property-name"><code>spanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>timeFinished</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>timeStarted</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>status</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
                       </tr>
                       <tr>
                         <td data-property-name=""><span class="property-name"><code>timestamp</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>took</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1173,16 +1237,141 @@ https://attike.odysseia-greek.com/graphql
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"action"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"requestBody"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"responseCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"requestBody"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"spanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeFinished"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timeStarted"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"took"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-StartTrace" class="definition definition-object" data-traverse-target="definition-StartTrace">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">StartTrace</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>host</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>itemType</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>method</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>metrics</code></span> - <span class="property-type"><a href="#definition-tracingMetrics"><code>tracingMetrics</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>namespace</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>operation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>parentSpanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>podName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>remoteAddress</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>rootQuery</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>spanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>timestamp</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>url</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"host"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"method"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"metrics"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tracingMetrics</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"remoteAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"rootQuery"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"spanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1264,12 +1453,6 @@ https://attike.odysseia-greek.com/graphql
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>operation</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
                         <td data-property-name=""><span class="property-name"><code>parentSpanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
@@ -1282,13 +1465,7 @@ https://attike.odysseia-greek.com/graphql
                         </td>
                       </tr>
                       <tr>
-                        <td data-property-name=""><span class="property-name"><code>remoteAddress</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name=""><span class="property-name"><code>rootQuery</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        <td data-property-name=""><span class="property-name"><code>spanID</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
                         </td>
                         <td>
                         </td>
@@ -1319,14 +1496,12 @@ https://attike.odysseia-greek.com/graphql
   <span class="hljs-attr">"itemType"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"method"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"metrics"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tracingMetrics</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"namespace"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"parentSpanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"remoteAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"rootQuery"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"spanID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1352,6 +1527,20 @@ https://attike.odysseia-greek.com/graphql
                       </tr>
                     </thead>
                     <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>ids</code></span> - <span class="property-type"><a href="#definition-String"><code>[String]</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>statusCode</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
                       <tr>
                         <td>
                           <span class="property-name"><code>beginTime</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
@@ -1387,20 +1576,6 @@ https://attike.odysseia-greek.com/graphql
                         <td>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>ids</code></span> - <span class="property-type"><a href="#definition-String"><code>[String]</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>statusCode</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -1411,13 +1586,13 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"ids"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"statusCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"beginTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"endTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"totalTimeHigherThan"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"ids"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"statusCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span>
+  <span class="hljs-attr">"podName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"operation"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
@@ -1489,12 +1664,12 @@ https://attike.odysseia-greek.com/graphql
                   <html>
                     <head></head>
                     <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cpuHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"cpuRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"cpuUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"memoryHumanReadable"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"memoryUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+  <span class="hljs-attr">"memoryRaw"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"memoryUnits"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                     </body>
