@@ -1,12 +1,11 @@
 package gateway
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/proto"
+	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -35,42 +34,60 @@ func ParseHeaderID(requestId string) (string, string, bool) {
 
 func (h *HomerosHandler) CloseTrace(response *http.Response, body interface{}) {
 	requestId := response.Header.Get(config.HeaderKey)
-
-	traceId, parentspanId, traceCall := ParseHeaderID(requestId)
+	traceID, parentspanID, traceCall := ParseHeaderID(requestId)
 
 	jsonBody, _ := json.Marshal(body)
 
-	logging.Info(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d", traceId, response.StatusCode))
+	logging.Info(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d", traceID, response.StatusCode))
 
 	if traceCall {
-		traceCloser := &aristophanes.CloseTraceRequest{
-			TraceId:      traceId,
-			ParentSpanId: parentspanId,
-			ResponseCode: int32(response.StatusCode),
-			ResponseBody: string(jsonBody),
+		parabasis := &pb.ParabasisRequest{
+			TraceId:      traceID,
+			ParentSpanId: parentspanID,
+			SpanId:       parentspanID,
+			RequestType: &pb.ParabasisRequest_CloseTrace{
+				CloseTrace: &pb.CloseTraceRequest{
+					ResponseCode: int32(response.StatusCode),
+					ResponseBody: string(jsonBody),
+				},
+			},
 		}
 
-		h.Tracer.CloseTrace(context.Background(), traceCloser)
-		logging.Trace(fmt.Sprintf("trace closed with id: %s", traceId))
+		err := h.Streamer.Send(parabasis)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+			return
+		}
+
+		logging.Trace(fmt.Sprintf("trace closed with id: %s", traceID))
 	}
 }
 
-// todo refactor to actual have a meaningful code this has to be changed in the plato client
 func (h *HomerosHandler) CloseTraceWithError(err error, requestId string) {
-	traceID, parentspanId, traceCall := ParseHeaderID(requestId)
+	traceID, parentspanID, traceCall := ParseHeaderID(requestId)
 	statusCode := parseActualStatusCodeFromErrorMessage(err)
 
 	logging.Error(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d | error: %s", traceID, statusCode, err.Error()))
 
 	if traceCall {
-		traceCloser := &aristophanes.CloseTraceRequest{
+		parabasis := &pb.ParabasisRequest{
 			TraceId:      traceID,
-			ParentSpanId: parentspanId,
-			ResponseCode: int32(statusCode),
-			ResponseBody: err.Error(),
+			ParentSpanId: parentspanID,
+			SpanId:       parentspanID,
+			RequestType: &pb.ParabasisRequest_CloseTrace{
+				CloseTrace: &pb.CloseTraceRequest{
+					ResponseCode: int32(statusCode),
+					ResponseBody: err.Error(),
+				},
+			},
 		}
 
-		h.Tracer.CloseTrace(context.Background(), traceCloser)
+		err := h.Streamer.Send(parabasis)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+			return
+		}
+
 		logging.Trace(fmt.Sprintf("trace closed with id: %s", traceID))
 	}
 }

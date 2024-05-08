@@ -3,6 +3,7 @@ package scholar
 import (
 	"context"
 	"fmt"
+	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/config"
@@ -14,7 +15,6 @@ import (
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
 	"google.golang.org/grpc/metadata"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -22,16 +22,21 @@ const (
 	defaultIndex string = "aggregator"
 )
 
-var Tracer *aristophanes.ClientTracer
+var streamer pbar.TraceService_ChorusClient
 
-func CreateNewConfig() (*AggregatorServiceImpl, error) {
+func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	Tracer = aristophanes.NewClientTracer()
-	healthy := Tracer.WaitForHealthyState()
+	tracer, err := aristophanes.NewClientTracer()
+	healthy := tracer.WaitForHealthyState()
 	if !healthy {
 		logging.Error("tracing service not ready - restarting seems the only option")
 		os.Exit(1)
+	}
+
+	streamer, err = tracer.Chorus(ctx)
+	if err != nil {
+		logging.Error(err.Error())
 	}
 
 	var cfg models.Config
@@ -43,8 +48,13 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 		os.Exit(1)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
+	traceID := uuid.New().String()
+	spanID := aristophanes.GenerateSpanID()
+	combinedID := fmt.Sprintf("%s+%s+%d", traceID, spanID, 1)
+
+	ambassadorCtx, ctxCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer ctxCancel()
+
 	payload := &pbar.StartTraceRequest{
 		Method:        "GetSecret",
 		Url:           diplomat.DEFAULTADDRESS,
@@ -53,21 +63,49 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 		Operation:     "/delphi_ptolemaios.Ptolemaios/GetSecret",
 	}
 
-	trace, err := Tracer.StartTrace(ctx, payload)
+	go func() {
+		parabasis := &pbar.ParabasisRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			SpanId:       spanID,
+			RequestType: &pbar.ParabasisRequest_StartTrace{
+				StartTrace: payload,
+			},
+		}
+		if err := streamer.Send(parabasis); err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+		}
+
+		logging.Trace(fmt.Sprintf("trace with requestID: %s and span: %s", traceID, spanID))
+	}()
+
+	md := metadata.New(map[string]string{service.HeaderKey: combinedID})
+	ambassadorCtx = metadata.NewOutgoingContext(context.Background(), md)
+	vaultConfig, err := ambassador.GetSecret(ambassadorCtx, &pb.VaultRequest{})
 	if err != nil {
 		logging.Error(err.Error())
 		return nil, err
 	}
 
-	logging.Trace(fmt.Sprintf("traceID: %s |", trace.CombinedId))
+	go func() {
+		parabasis := &pbar.ParabasisRequest{
+			TraceId:      traceID,
+			ParentSpanId: spanID,
+			SpanId:       spanID,
+			RequestType: &pbar.ParabasisRequest_CloseTrace{
+				CloseTrace: &pbar.CloseTraceRequest{
+					ResponseBody: fmt.Sprintf("user retrieved from vault: %s", vaultConfig.ElasticUsername),
+				},
+			},
+		}
 
-	md := metadata.New(map[string]string{service.HeaderKey: trace.CombinedId})
-	ctx = metadata.NewOutgoingContext(context.Background(), md)
-	vaultConfig, err := ambassador.GetSecret(ctx, &pb.VaultRequest{})
-	if err != nil {
-		logging.Error(err.Error())
-		return nil, err
-	}
+		err := streamer.Send(parabasis)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+		}
+
+		logging.Trace(fmt.Sprintf("trace closed with id: %s", traceID))
+	}()
 
 	elasticService := aristoteles.ElasticService(tls)
 
@@ -76,29 +114,6 @@ func CreateNewConfig() (*AggregatorServiceImpl, error) {
 		Username:    vaultConfig.ElasticUsername,
 		Password:    vaultConfig.ElasticPassword,
 		ElasticCERT: vaultConfig.ElasticCERT,
-	}
-
-	splitID := strings.Split(trace.CombinedId, "+")
-
-	var traceID, spanID string
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-	traceCloser := &pbar.CloseTraceRequest{
-		TraceId:      traceID,
-		ParentSpanId: spanID,
-		ResponseCode: 200,
-		ResponseBody: "redacted",
-	}
-
-	_, err = Tracer.CloseTrace(context.Background(), traceCloser)
-	logging.Trace(fmt.Sprintf("trace closed with id: %s", traceID))
-	if err != nil {
-		return nil, err
 	}
 
 	elastic, err := aristoteles.NewClient(cfg)

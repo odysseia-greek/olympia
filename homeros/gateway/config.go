@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/archytas"
@@ -11,12 +12,7 @@ import (
 	"os"
 )
 
-func CreateNewConfig(env string) (*HomerosHandler, error) {
-	healthCheck := true
-	if env == "DEVELOPMENT" {
-		healthCheck = false
-	}
-
+func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 	cache, err := archytas.CreateBadgerClient()
 	if err != nil {
 		return nil, err
@@ -32,21 +28,30 @@ func CreateNewConfig(env string) (*HomerosHandler, error) {
 		return nil, err
 	}
 
-	tracer := aristophanes.NewClientTracer()
-
-	if healthCheck {
-		healthy := tracer.WaitForHealthyState()
-		if !healthy {
-			logging.Error("tracing service not ready - restarting seems the only option")
-			os.Exit(1)
-		}
+	tracer, err := aristophanes.NewClientTracer()
+	if err != nil {
+		logging.Error(err.Error())
 	}
+
+	streamer, err := tracer.Chorus(ctx)
+	if err != nil {
+		logging.Error(err.Error())
+	}
+
+	healthy := tracer.WaitForHealthyState()
+	if !healthy {
+		logging.Error("tracing service not ready - restarting seems the only option")
+		os.Exit(1)
+	}
+
+	ctx, cancel := context.WithCancel(ctx)
 
 	return &HomerosHandler{
 		Cache:       cache,
 		HttpClients: service,
-		Tracer:      tracer,
+		Streamer:    streamer,
 		Randomizer:  randomizer,
+		Cancel:      cancel,
 	}, nil
 }
 
@@ -69,43 +74,43 @@ func InitTracingConfig() *TraceConfig {
 				// alexandros
 				{
 					Operation: "dictionary",
-					Score:     20, // 20% chance of tracing
+					Score:     100,
 				},
 				// dionysios
 				{
 					Operation: "grammar",
-					Score:     50, // 50% chance of tracing
+					Score:     100,
 				},
 				//herodotos
 				{
 					Operation: "authors",
-					Score:     100, // 100% chance of tracing
+					Score:     100,
 				},
 				{
 					Operation: "sentence",
-					Score:     100, // 50% chance of tracing
+					Score:     100,
 				},
 				{
 					Operation: "text",
-					Score:     100, // 50% chance of tracing
+					Score:     100,
 				},
 				//sokrates
 				{
 					Operation: "methods",
-					Score:     100, // 100% chance of tracing
+					Score:     100,
 				},
 				{
 					Operation: "answer",
-					Score:     100, // 50% chance of tracing
+					Score:     100,
 				},
 				{
 					Operation: "quiz",
-					Score:     100, // 50% chance of tracing
+					Score:     100,
 				},
 				//shared
 				{
 					Operation: "status",
-					Score:     50, // 50% chance of tracing
+					Score:     50,
 				},
 			},
 		}

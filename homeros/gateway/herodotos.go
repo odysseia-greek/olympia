@@ -1,12 +1,11 @@
 package gateway
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	plato "github.com/odysseia-greek/agora/plato/models"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/proto"
+	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/olympia/homeros/models"
 	"time"
 )
@@ -23,24 +22,26 @@ func (h *HomerosHandler) Books(requestID string) ([]models.AuthorTree, error) {
 			return nil, err
 		}
 
-		traceId, parentspanId, traceCall := ParseHeaderID(requestID)
+		traceID, parentspanID, traceCall := ParseHeaderID(requestID)
 		if traceCall {
-			span := &aristophanes.SpanRequest{
-				TraceId:      traceId,
-				ParentSpanId: parentspanId,
-				Action:       "Cached",
+			parabasis := &pb.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: parentspanID,
+				SpanId:       parentspanID,
+				RequestType: &pb.ParabasisRequest_CloseTrace{
+					CloseTrace: &pb.CloseTraceRequest{
+						ResponseCode: 200,
+						ResponseBody: "taken from cache",
+					},
+				},
 			}
 
-			h.Tracer.Span(context.Background(), span)
-
-			traceCloser := &aristophanes.CloseTraceRequest{
-				TraceId:      traceId,
-				ParentSpanId: parentspanId,
-				ResponseCode: 200,
+			err := h.Streamer.Send(parabasis)
+			if err != nil {
+				logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
 			}
 
-			h.Tracer.CloseTrace(context.Background(), traceCloser)
-			logging.Info(fmt.Sprintf("taking from cache | traceID: %s | responseCode: %d", traceId, 200))
+			logging.Info(fmt.Sprintf("taking from cache | traceID: %s | responseCode: %d", traceID, 200))
 		}
 
 		return cachedGraph.AuthorTree, nil

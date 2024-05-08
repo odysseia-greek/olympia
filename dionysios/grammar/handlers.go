@@ -2,16 +2,15 @@ package grammar
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
+	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
-	plato "github.com/odysseia-greek/agora/plato/service"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
@@ -27,8 +26,9 @@ type DionysosHandler struct {
 	Index            string
 	Client           service.OdysseiaClient
 	DeclensionConfig models.DeclensionConfig
-	Tracer           *aristophanes.ClientTracer
+	Streamer         pb.TraceService_ChorusClient
 	Aggregator       *aristarchos.ClientAggregator
+	Cancel           context.CancelFunc
 }
 
 // PingPong pongs the ping
@@ -68,37 +68,6 @@ func (d *DionysosHandler) health(w http.ResponseWriter, req *http.Request) {
 	//	Responses:
 	//	  200: Health
 	//	  502: Health
-	requestId := req.Header.Get(plato.HeaderKey)
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go d.Tracer.Trace(context.Background(), traceReceived)
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
 	elasticHealth := d.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,
@@ -147,7 +116,13 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 	//	  404: NotFoundError
 	//	  405: MethodError
 	//    502: ElasticSearchError
-	requestId := req.Header.Get(plato.HeaderKey)
+	var requestId string
+	fromContext := req.Context().Value(config.DefaultTracingName)
+	if fromContext == nil {
+		requestId = req.Header.Get(config.HeaderKey)
+	} else {
+		requestId = fromContext.(string)
+	}
 	splitID := strings.Split(requestId, "+")
 
 	traceCall := false
@@ -164,21 +139,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		spanID = splitID[1]
 	}
 
-	if traceCall {
-		traceReceived := &pb.TraceRequest{
-			TraceId:      traceID,
-			ParentSpanId: spanID,
-			Method:       req.Method,
-			Url:          req.URL.RequestURI(),
-			Host:         req.Host,
-		}
-
-		go d.Tracer.Trace(context.Background(), traceReceived)
-		logging.Trace(fmt.Sprintf("found traceId: %s", traceID))
-	}
-
-	w.Header().Set(plato.HeaderKey, requestId)
-
 	queryWord := req.URL.Query().Get("word")
 
 	if queryWord == "" {
@@ -190,14 +150,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 					Message: "cannot be empty",
 				},
 			},
-		}
-		if traceCall {
-			span := &pb.SpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Action:       "Validating",
-			}
-			go d.Tracer.Span(context.Background(), span)
 		}
 		middleware.ResponseWithJson(w, e)
 		return
@@ -241,29 +193,32 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 					PartOfSpeech: speech,
 				}
 
-				test, _ := d.Aggregator.RetrieveEntry(ctx, &pba.AggregatorRequest{
-					RootWord: declension.RootWord,
-				})
-
-				l, _ := json.Marshal(test)
-				logging.Debug(string(l))
-
 				entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
 				if err != nil {
 					logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
 					continue
 				}
 
-				logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
+				if entry.Created || entry.Updated {
+					logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v for word: %s and root: %s", entry.Created, entry.Created, request.Word, request.RootWord))
+				}
 			}
 
 			if traceCall {
-				span := &pb.SpanRequest{
+				parabasis := &pb.ParabasisRequest{
 					TraceId:      traceID,
 					ParentSpanId: spanID,
-					Action:       "Cache",
+					SpanId:       comedy.GenerateSpanID(),
+					RequestType: &pb.ParabasisRequest_Span{
+						Span: &pb.SpanRequest{
+							Action: "TakenFromCache",
+							Status: fmt.Sprintf("status code: %d", http.StatusOK),
+						},
+					},
 				}
-				go d.Tracer.Span(context.Background(), span)
+				if err := d.Streamer.Send(parabasis); err != nil {
+					logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+				}
 			}
 			middleware.ResponseWithJson(w, e)
 			return
@@ -280,14 +235,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 				Type:   queryWord,
 				Reason: "no options found",
 			},
-		}
-		if traceCall {
-			span := &pb.SpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Action:       "Rules Found",
-			}
-			go d.Tracer.Span(context.Background(), span)
 		}
 		middleware.ResponseWithJson(w, e)
 		return
@@ -338,14 +285,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 					Message: err.Error(),
 				},
 			},
-		}
-		if traceCall {
-			span := &pb.SpanRequest{
-				TraceId:      traceID,
-				ParentSpanId: spanID,
-				Action:       "Cache",
-			}
-			go d.Tracer.Span(context.Background(), span)
 		}
 		middleware.ResponseWithJson(w, e)
 		return

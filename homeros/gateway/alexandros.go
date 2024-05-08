@@ -5,7 +5,6 @@ import (
 	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
 	"strconv"
-	"sync"
 )
 
 func (h *HomerosHandler) Dictionary(word, language, mode, traceID string, searchInText bool) (*plato.ExtendedResponse, error) {
@@ -23,16 +22,7 @@ func (h *HomerosHandler) Dictionary(word, language, mode, traceID string, search
 		return nil, err
 	}
 
-	var wg sync.WaitGroup
-
-	wg.Add(1)
-
-	go func() {
-		defer wg.Done()
-		h.CloseTrace(response, extendedResponse)
-	}()
-
-	wg.Wait()
+	h.CloseTrace(response, extendedResponse)
 
 	return &extendedResponse, nil
 }

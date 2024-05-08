@@ -8,11 +8,10 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/randomizer"
-	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"io"
-	"log"
 	"net/http"
 	"strings"
 
@@ -64,7 +63,7 @@ func SetCorsHeaders() Adapter {
 //
 // Returns:
 // An Adapter that wraps an http.Handler and performs the described middleware actions.
-func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
+func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			bodyBytes, err := io.ReadAll(r.Body)
@@ -84,7 +83,20 @@ func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.T
 			operationName, _ := bodyClone["operationName"].(string)
 			query, _ := bodyClone["query"].(string)
 
-			var traceID string
+			if operationName == "" {
+				splitQuery := strings.Split(query, "{")
+				if len(splitQuery) != 0 {
+					if strings.Contains(splitQuery[0], " ") {
+						operationName = strings.Split(splitQuery[0], " ")[1]
+						logging.Debug(fmt.Sprintf("extracted operationName from query: %s", operationName))
+					}
+				}
+			}
+
+			traceID := uuid.New().String()
+			spanID := comedy.GenerateSpanID()
+			traceRequest := 0
+
 			payload := &pb.StartTraceRequest{
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
@@ -96,21 +108,28 @@ func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.T
 
 			for _, service := range traceConfig.OperationScores {
 				if service.Operation == operationName && shouldTrace(service.Score, randomizer) {
-					trace, err := tracer.StartTrace(context.Background(), payload)
-					if err != nil {
-						log.Print(err)
-						break
-					}
+					traceRequest = 1
 
-					traceID = trace.CombinedId
-					go Log(trace.CombinedId) // Integrated log here
+					go func() {
+						parabasis := &pb.ParabasisRequest{
+							TraceId:      traceID,
+							ParentSpanId: spanID,
+							SpanId:       spanID,
+							RequestType: &pb.ParabasisRequest_StartTrace{
+								StartTrace: payload,
+							},
+						}
+						if err := tracer.Send(parabasis); err != nil {
+							logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+						}
+
+						logging.Trace(fmt.Sprintf("trace with requestID: %s and span: %s", traceID, spanID))
+					}()
 					break
 				}
 			}
 
-			if traceID == "" {
-				traceID = uuid.New().String()
-			}
+			requestID := fmt.Sprintf("%s+%s+%d", traceID, spanID, traceRequest)
 
 			if operationName != "IntrospectionQuery" {
 				jsonPayload, err := json.MarshalIndent(payload, "", "  ")
@@ -122,30 +141,10 @@ func LogRequestDetails(tracer *aristophanes.ClientTracer, traceConfig *gateway.T
 				logging.Info(logLine)
 			}
 
-			ctx := context.WithValue(r.Context(), config.HeaderKey, traceID)
+			ctx := context.WithValue(r.Context(), config.HeaderKey, requestID)
 			f.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
-}
-
-func Log(combinedId string) {
-	splitID := strings.Split(combinedId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	logging.Trace(fmt.Sprintf("traceID: %s | parentSpanID: %s | callTraced: %v", traceID, spanID, traceCall))
 }
 
 func shouldTrace(score int, random randomizer.Random) bool {
