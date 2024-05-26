@@ -1,0 +1,39 @@
+[
+  {
+    "author":"Matthew",
+    "book":"New Testament, Gospel of Matthew",
+    "type":"work",
+    "reference":"12",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg001.perseus-grc2:12?right=perseus-eng2/",
+    "rhemai":[
+      {
+        "greek":"γεννήματα ἐχιδνῶν, ῶς δύνασθε ἀγαθὰ λαλεῖν πονηροὶ ὄντες; ἐκ γὰρ τοῦ περισσεύματος τῆς καρδίας τὸ στόμα λαλεῖ.",
+        "translations":[
+          "You offspring of vipers, how can you, being evil, speak good things? For out of the abundance of the heart, the mouth speaks."
+        ],
+        "section":"34"
+      },
+      {
+        "greek":"ὁ ἀγαθὸς ἄνθρωπος ἐκ τοῦ ἀγαθοῦ θησαυροῦ ἐκβάλλει ἀγαθά, καὶ ὁ πονηρὸς ἄνθρωπος ἐκ τοῦ πονηροῦ θησαυροῦ ἐκβάλλει πονηρά.",
+        "translations":[
+          "The good man out of his good treasure brings out good things, and the evil man out of his evil treasure brings out evil things."
+        ],
+        "section":"35"
+      },
+      {
+        "greek":"Λέγω δὲ ὑμῖν ὅτι πᾶν ῥῆμα ἀργὸν ὃ λαλήσουσιν οἱ ἄνθρωποι, ἀποδώσουσιν περὶ αὐτοῦ λόγον ἐν ἡμέρᾳ κρίσεως·",
+        "translations":[
+          "I tell you that every idle word that men speak, they will give account of it in the day of judgment."
+        ],
+        "section":"36"
+      },
+      {
+        "greek":"ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ, καὶ ἐκ τῶν λόγων σου καταδικασθήσῃ.",
+        "translations":[
+          "For by your words you will be justified, and by your words you will be condemned."
+        ],
+        "section":"37"
+      }
+    ]
+  }
+]

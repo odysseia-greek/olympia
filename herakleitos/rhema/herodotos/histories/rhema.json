@@ -1,0 +1,224 @@
+[
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"1.1",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek":"Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε, ὡς μήτε τὰ γενόμενα ἐξ ἀνθρώπων τῷ χρόνῳ ἐξίτηλα γένηται, μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται, τά τε ἄλλα καὶ διʼ ἣν αἰτίην ἐπολέμησαν ἀλλήλοισι.ε",
+        "translations":[
+          "This is the display of the inquiry of Herodotus of Halicarnassus, so that things done by man not be forgotten in time, and that great and marvelous deeds, some displayed by the Hellenes, some by the barbarians, not lose their glory, including among others what was the cause of their waging war on each other."
+        ],
+        "section":"0"
+      },
+      {
+        "greek":"Περσέων μέν νυν οἱ λόγιοι Φοίνικας αἰτίους φασὶ γενέσθαι τῆς διαφορῆς. τούτους γὰρ ἀπὸ τῆς Ἐρυθρῆς καλεομένης θαλάσσης ἀπικομένους ἐπὶ τήνδε τὴν θάλασσαν, καὶ οἰκήσαντας τοῦτον τὸν χῶρον τὸν καὶ νῦν οἰκέουσι, αὐτίκα ναυτιλίῃσι μακρῇσι ἐπιθέσθαι, ἀπαγινέοντας δὲ φορτία Αἰγύπτιά τε καὶ Ἀσσύρια τῇ τε ἄλλῃ ἐσαπικνέεσθαι καὶ δὴ καὶ ἐς Ἄργος.",
+        "translations":[
+          "The Persian learned men say that the Phoenicians were the cause of the dispute. These (they say) came to our seas from the sea which is called Red, and having settled in the country which they still occupy, at once began to make long voyages. Among other places to which they carried Egyptian and Assyrian merchandise, they came to Argos,"
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"τὸ δὲ Ἄργος τοῦτον τὸν χρόνον προεῖχε ἅπασι τῶν ἐν τῇ νῦν Ἑλλάδι καλεομένῃ χωρῇ. ἀπικομένους δὲ τούς Φοίνικας ἐς δὴ τὸ Ἄργος τοῦτο διατίθεσθαι τὸν φόρτον.",
+        "translations":[
+          "which was at that time preeminent in every way among the people of what is now called Hellas. The Phoenicians came to Argos, and set out their cargo."
+        ],
+        "section":"2"
+      },
+      {
+        "greek":"πέμπτῃ δὲ ἢ ἕκτῃ ἡμέρῃ ἀπʼ ἧς ἀπίκοντο, ἐξεμπολημένων σφι σχεδόν πάντων, ἐλθεῖν ἐπὶ τὴν θάλασσαν γυναῖκας ἄλλας τε πολλάς καὶ δὴ καὶ τοῦ βασιλέος θυγατέρα· τὸ δέ οἱ οὔνομα εἶναι, κατὰ τὠυτὸ τὸ καὶ Ἕλληνές λέγουσι, Ἰοῦν τὴν Ἰνάχου·",
+        "translations":[
+          "On the fifth or sixth day after their arrival, when their wares were almost all sold, many women came to the shore and among them especially the daughter of the king, whose name was Io (according to Persians and Greeks alike), the daughter of Inachus."
+        ],
+        "section":"3"
+      },
+      {
+        "greek":"ταύτας στάσας κατά πρύμνην τῆς νεὸς ὠνέεσθαι τῶν φορτίων τῶν σφι ἦν θυμός μάλιστα· καὶ τοὺς Φοίνικας διακελευσαμένους ὁρμῆσαι ἐπʼ αὐτάς. τὰς μὲν δὴ πλεῦνας τῶν γυναικῶν ἀποφυγεῖν, τὴν δὲ Ἰοῦν σὺν ἄλλῃσι ἁρπασθῆναι. ἐσβαλομένους δὲ ἐς τὴν νέα οἴχεσθαι ἀποπλέοντας ἐπʼ Αἰγύπτου.",
+        "translations":[
+          "As these stood about the stern of the ship bargaining for the wares they liked, the Phoenicians incited one another to set upon them. Most of the women escaped: Io and others were seized and thrown into the ship, which then sailed away for Egypt."
+        ],
+        "section":"4"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"1.79",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.79?right=perseus-eng2&q=&qk=form",
+    "rhemai":[
+      {
+        "greek":"Κῦρος δὲ αὐτίκα ἀπελαύνοντος Κροίσου μετὰ τὴν μάχην τὴν γενομένην ἐν τῇ Πτερίῃ, μαθὼν ὡς ἀπελάσας μέλλοι Κροῖσος διασκεδᾶν τὸν στρατόν, βουλευόμενος εὕρισκε πρῆγμά οἷ εἶναι ἐλαύνειν ὡς δύναιτο τάχιστα ἐπὶ τὰς Σάρδις, πρὶν ἢ τὸ δεύτερον ἁλισθῆναι τῶν Λυδῶν τὴν δύναμιν.",
+        "translations":[
+          "When Croesus marched away after the battle in the Pterian country, Cyrus, learning that Croesus had gone intending to disband his army, deliberated and perceived that it would be opportune for him to march quickly against Sardis, before the power of the Lydians could be assembled again."
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"ὡς δέ οἱ ταῦτα ἔδοξε, καὶ ἐποίεε κατὰ τάχος· ἐλάσας γὰρ τὸν στρατὸν ἐς τὴν Λυδίην αὐτὸς ἄγγελος Κροίσῳ ἐληλύθεε. ἐνθαῦτα Κροῖσος ἐς ἀπορίην πολλὴν ἀπιγμένος, ὥς οἱ παρὰ δόξαν ἔσχε τὰ πρήγματα ἢ ὡς αὐτὸς κατεδόκεε, ὅμως τοὺς Λυδοὺς ἐξῆγε ἐς μάχην.",
+        "translations":[
+          "This he decided, and this he did immediately; he marched his army into Lydia and so came himself to bring the news of it to Croesus. All had turned out contrary to Croesus' expectation, and he was in a great quandary; nevertheless, he led out the Lydians to battle."
+        ],
+        "section":"2"
+      },
+      {
+        "greek":"ἦν δὲ τοῦτον τὸν χρόνον ἔθνος οὐδὲν ἐν τῇ Ἀσίῃ οὔτε ἀνδρηιότερον οὔτε ἀλκιμώτερον τοῦ Λυδίου. ἡ δὲ μάχη σφέων ἦν ἀπʼ ἵππων, δόρατά τε ἐφόρεον μεγάλα, καὶ αὐτοὶ ἦσαν ἱππεύεσθαι ἀγαθοί.",
+        "translations":[
+          "Now at this time there was no nation in Asia more valiant or warlike than the Lydian. It was their custom to fight on horseback, carrying long spears, and they were skillful at managing horses."
+        ],
+        "section":"3"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"2.1",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:2.1/?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek":"τελευτήσαντος δὲ Κύρου παρέλαβε τὴν βασιληίην Καμβύσης, Κύρου ἐὼν παῖς καὶ Κασσανδάνης τῆς Φαρνάσπεω θυγατρός, τῆς προαποθανούσης Κῦρος αὐτός τε μέγα πένθος ἐποιήσατο καὶ τοῖσι ἄλλοισι προεῖπε πᾶσι τῶν ἦρχε πένθος ποιέεσθαι.",
+        "translations":[
+          "After the death of Cyrus, Cambyses inherited his throne. He was the son of Cyrus and of Cassandane, the daughter of Pharnaspes, for whom Cyrus mourned deeply when she died before him, and had all his subjects mourn also."
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"ταύτης δὴ τῆς γυναικὸς ἐὼν παῖς καὶ Κύρου Καμβύσης Ἴωνας μὲν καὶ Αἰολέας ὡς δούλους πατρωίους ἐόντας ἐνόμιζε, ἐπὶ δὲ Αἴγυπτον ἐποιέετο στρατηλασίην ἄλλους τε παραλαβὼν τῶν ἦρχε καὶ δὴ καὶ Ἑλλήνων τῶν ἐπεκράτεε.",
+        "translations":[
+          "Cambyses was the son of this woman and of Cyrus. He considered the Ionians and Aeolians slaves inherited from his father, and prepared an expedition against Egypt, taking with him some of these Greek subjects besides others whom he ruled."
+        ],
+        "section":"2"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"3.1",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.1?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek":"ἐπὶ τοῦτον δὴ τὸν Ἄμασιν Καμβύσης ὁ Κύρου ἐστρατεύετο, ἄγων καί ἄλλους τῶν ἦρχε καὶ Ἑλλήνων Ἴωνάς τε καὶ Αἰολέας, διʼ αἰτίην τοιήνδε. πέμψας Καμβύσης ἐς Αἴγυπτον κήρυκα αἴτεε Ἄμασιν θυγατέρα, αἴτεε δὲ ἐκ βουλῆς ἀνδρὸς Αἰγυπτίου, ὃς μεμφόμενος Ἄμασιν ἔπρηξε ταῦτα ὅτι μιν ἐξ ἁπάντων τῶν ἐν Αἰγύπτῳ ἰητρῶν ἀποσπάσας ἀπὸ γυναικός τε καὶ τέκνων ἔκδοτον ἐποίησε ἐς Πέρσας, ὅτε Κῦρος πέμψας παρὰ Ἄμασιν αἴτεε ἰητρὸν ὀφθαλμῶν ὃς εἴη ἄριστος τῶν ἐν Αἰγύπτῳ.",
+        "translations":[
+          "Cyrus' son Cambyses was leading an army of his subjects, Ionian and Aeolian Greeks among them, against this Amasis for the following reason. Cambyses had sent a herald to Egypt asking Amasis for his daughter; he asked on the advice of an Egyptian, who advised it out of resentment against Amasis, that out of all the Egyptian physicians Amasis had dragged him away from his wife and children and sent him up to Persia when Cyrus sent to Amasis asking for the best eye-doctor in Egypt.\n"
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"ταῦτα δὴ ἐπιμεμφόμενος ὁ Αἰγύπτιος ἐνῆγε τῇ συμβουλῇ κελεύων αἰτέειν τὸν Καμβύσεα Ἄμασιν θυγατέρα, ἵνα ἢ δοὺς ἀνιῷτο ἢ μὴ δοὺς Καμβύσῃ ἀπέχθοιτο. ὁ δὲ Ἄμασις τῇ δυνάμι τῶν Περσέων ἀχθόμενος καὶ ἀρρωδέων οὐκ εἶχε οὔτε δοῦναι οὔτε ἀρνήσασθαι· εὖ γὰρ ἠπίστατο ὅτι οὐκ ὡς γυναῖκά μιν ἔμελλε Καμβύσης ἕξειν ἀλλʼ ὡς παλλακήν.",
+        "translations":[
+          "Out of resentment, the Egyptian by his advice induced Cambyses to ask Amasis for his daughter, so that Amasis would either be wretched if he gave her, or hated by Cambyses if he did not. Amasis, intimidated by the power of Persia and frightened, could neither give his daughter nor refuse her; for he knew well that Cambyses was not going to take her as his wife but as his concubine."
+        ],
+        "section":"2"
+      },
+      {
+        "greek":"ταῦτα δὴ ἐκλογιζόμενος ἐποίησε τάδε. ἦν Ἀπρίεω τοῦ προτέρου βασιλέος θυγάτηρ κάρτα μεγάλη τε καὶ εὐειδὴς μούνη τοῦ οἴκου λελειμμένη, οὔνομα δέ οἱ ἦν Νίτητις· ταύτην δὴ τὴν παῖδα ὁ Ἄμασις κοσμήσας ἐσθῆτί τε καὶ χρυσῷ ἀποπέμπει ἐς Πέρσας ὡς ἑωυτοῦ θυγατέρα.",
+        "translations":[
+          "After considering the matter, he did as follows. There was a daughter of the former king Apries, all that was left of that family, quite tall and pretty, and her name was Nitetis; this girl Amasis adorned with clothes and gold and sent to Cambyses as his own daughter."
+        ],
+        "section":"3"
+      },
+      {
+        "greek":"μετὰ δὲ χρόνον ὥς μιν ἠσπάζετο πατρόθεν ὀνομάζων, λέγει πρὸς αὐτὸν ἡ παῖς ὦ βασιλεῦ, διαβεβλημένος ὑπὸ Ἀμάσιος οὐ μανθάνεις. ὃς ἐμὲ σοὶ κόσμῳ ἀσκήσας ἀπέπεμψε ὡς ἑωυτοῦ θυγατέρα διδούς, ἐοῦσαν τῇ ἀληθείῃ Ἀπρίεω, τὸν ἐκεῖνος ἐόντα ἑωυτοῦ δεσπότεα μετʼ Αἰγυπτίων ἐπαναστὰς ἐφόνευσε.",
+        "translations":[
+          "But after a time, as he embraced her addressing her as the daughter of Amasis, the girl said to him, “O King, you do not understand how you have been made a fool of by Amasis, who dressed me in finery and sent me to you as his own daughter, when I am in fact the daughter of Apries, the ruler Amasis revolted from with the Egyptians and killed.”"
+        ],
+        "section":"4"
+      },
+      {
+        "greek":"τοῦτο δὴ τὸ ἔπος καὶ αὕτη ἡ αἰτίη ἐγγενομένη ἤγαγε Καμβύσεα τὸν Κύρου μεγάλως θυμωθέντα ἐπʼ Αἴγυπτον.",
+        "translations":[
+          "This speech and this crime that occurred turned Cyrus' son Cambyses, furiously angry, against Egypt. So the Persians say."
+        ],
+        "section":"5"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"3.84",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.84?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek":"οἱ δὲ λοιποὶ τῶν ἑπτὰ ἐβουλεύοντο ὡς βασιλέα δικαιότατα στήσονται· καί σφι ἔδοξε Ὀτάνῃ μὲν καὶ τοῖσι ἀπὸ Ὀτάνεω αἰεὶ γινομένοισι, ἢν ἐς ἄλλον τινὰ τῶν ἑπτὰ ἔλθῃ ἡ βασιληίη, ἐξαίρετα δίδοσθαι ἐσθῆτά τε Μηδικὴν ἔτεος ἑκάστου καὶ τὴν πᾶσαν δωρεὴν ἣ γίνεται ἐν Πέρσῃσι τιμιωτάτη. τοῦδε δὲ εἵνεκεν ἐβούλευσάν οἱ δίδοσθαι ταῦτα, ὅτι ἐβούλευσέ τε πρῶτος τὸ πρῆγμα καὶ συνέστησε αὐτούς.",
+        "translations":[
+          "The rest of the seven then considered what was the fairest way of making a king; and they decided that if another of the seven than Otanes should gain the royal power, that Otanes and his descendants should receive a yearly gift of Median clothing and everything else that the Persians hold most valuable. The reason for this decision was that it was he who had first planned the matter and assembled the conspirators."
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"ταῦτα μὲν δὴ Ὀτάνῃ ἐξαίρετα, τάδε δὲ ἐς τὸ κοινὸν ἐβούλευσαν, παριέναι ἐς τὰ βασιλήια πάντα τὸν βουλόμενον τῶν ἑπτὰ ἄνευ ἐσαγγελέος, ἢν μὴ τυγχάνῃ εὕδων μετὰ γυναικὸς βασιλεύς, γαμέειν δὲ μὴ ἐξεῖναι ἄλλοθεν τῷ βασιλέι ἢ ἐκ τῶν συνεπαναστάντων.",
+        "translations":[
+          "For Otanes, then, they choose this particular honor; but with regard to all of them they decreed that any one of the seven should, if he wished, enter the king's palace unannounced, except when the king was sleeping with a woman; and that the king should be forbidden to take a wife except from the households of the conspirators."
+        ],
+        "section":"2"
+      },
+      {
+        "greek":"περὶ δὲ τῆς βασιληίης ἐβούλευσαν τοιόνδε· ὅτευ ἂν ὁ ἵππος ἡλίου ἐπανατέλλοντος πρῶτος φθέγξηται, ἐν τῷ προαστείῳ αὐτῶν ἐπιβεβηκότων, τοῦτον ἔχειν τὴν βασιληίην.",
+        "translations":[
+          "As for the making of a king, they decided that he should be elected whose horse, after they were all in their saddles in the suburb of the city, should first be heard to neigh at sunrise."
+        ],
+        "section":"3"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"8.65",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:8.65?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek":"ἔφη δὲ Δίκαιος ὁ Θεοκύδεος, ἀνὴρ Ἀθηναῖος φυγάς τε καὶ παρὰ Μήδοισι λόγιμος γενόμενος τοῦτον τὸν χρόνον, ἐπείτε ἐκείρετο ἡ Ἀττικὴ χώρη ὑπὸ τοῦ πεζοῦ στρατοῦ τοῦ Ξέρξεω ἐοῦσα ἔρημος Ἀθηναίων, τυχεῖν τότε ἐὼν ἅμα Δημαρήτῳ τῷ Λακεδαιμονίῳ ἐν τῷ Θριασίῳ πεδίῳ, ἰδεῖν δὲ κονιορτὸν χωρέοντα ἀπʼ Ἐλευσῖνος ὡς ἀνδρῶν μάλιστά κῃ τρισμυρίων, ἀποθωμάζειν τε σφέας τὸν κονιορτὸν ὅτεων κοτὲ εἴη ἀνθρώπων, καὶ πρόκατε φωνῆς ἀκούειν, καί οἱ φαίνεσθαι τὴν φωνὴν εἶναι τὸν μυστικὸν ἴακχον.",
+        "translations":[
+          "Dicaeus son of Theocydes, an Athenian exile who had become important among the Medes, said that at the time when the land of Attica, Central Greece and Euboea, Greece, Europe Attica was being laid waste by Xerxes' army and there were no Athenians in the country, he was with Demaratus the Lacedaemonian on the Thriasian plain and saw advancing from Eleusis a cloud of dust as if raised by the feet of about thirty thousand men. They marvelled at what men might be raising such a cloud of dust and immediately heard a cry. The cry seemed to be the \"Iacchus\" of the mysteries,"
+        ],
+        "section":"1"
+      },
+      {
+        "greek":"καὶ ἢν μέν γε κατασκήψῃ ἐς τὴν Πελοπόννησον, κίνδυνος αὐτῷ τε βασιλέι καὶ τῇ στρατιῇ τῇ ἐν τῇ ἠπείρῳ ἔσται, ἢν δὲ ἐπὶ τὰς νέας τράπηται τὰς ἐν Σαλαμῖνι, τὸν ναυτικὸν στρατὸν κινδυνεύσει βασιλεὺς ἀποβαλεῖν.",
+        "translations":[
+          "and when Demaratus, ignorant of the rites of Eleusis, asked him what was making this sound, Dicaeus said, \"Demaratus, there is no way that some great disaster will not befall the king's army. Since Attica, Central Greece and Euboea, Greece, Europe Attica is deserted, it is obvious that this voice is divine and comes from Eleusis to help the Athenians and their allies."
+        ],
+        "section":"2"
+      },
+      {
+        "greek":"καὶ ἢν μέν γε κατασκήψῃ ἐς τὴν Πελοπόννησον, κίνδυνος αὐτῷ τε βασιλέι καὶ τῇ στρατιῇ τῇ ἐν τῇ ἠπείρῳ ἔσται, ἢν δὲ ἐπὶ τὰς νέας τράπηται τὰς ἐν Σαλαμῖνι, τὸν ναυτικὸν στρατὸν κινδυνεύσει βασιλεὺς ἀποβαλεῖν.",
+        "translations":[
+          "If it descends upon the Peloponnese, the king himself and his army on the mainland will be endangered. If, however, it turns towards the ships at Salamis, the king will be in danger of losing his fleet."
+        ],
+        "section":"3"
+      },
+      {
+        "greek":"τὴν δὲ ὁρτὴν ταύτην ἄγουσι Ἀθηναῖοι ἀνὰ πάντα ἔτεα τῇ Μητρὶ καὶ τῇ Κούρῃ, καὶ αὐτῶν τε ὁ βουλόμενος καὶ τῶν ἄλλων Ἑλλήνων μυεῖται· καὶ τὴν φωνὴν τῆς ἀκούεις ἐν ταύτῃ τῇ ὁρτῇ ἰακχάζουσι. πρὸς ταῦτα εἰπεῖν Δημάρητον σίγα τε καὶ μηδενὶ ἄλλῳ τὸν λόγον τοῦτον εἴπῃς·",
+        "translations":[
+          "Every year the Athenians observe this festival for the Mother and the Maiden, and any Athenian or other Hellene who wishes is initiated. The voice which you hear is the ‘Iacchus’ they cry at this festival.\" To this Demaratus replied, “Keep silent and tell this to no one else."
+        ],
+        "section":"4"
+      },
+      {
+        "greek":"ἢν γάρ τοι ἐς βασιλέα ἀνενειχθῇ τὰ ἔπεα ταῦτα, ἀποβαλέεις τὴν κεφαλήν, καὶ σε οὔτε ἐγὼ δυνήσομαι ῥύσασθαι οὔτʼ ἄλλος ἀνθρώπων οὐδὲ εἶς. ἀλλʼ ἔχʼ ἥσυχος, περὶ δὲ στρατιῆς τῆσδε θεοῖσι μελήσει.",
+        "translations":[
+          "If these words of yours are reported to the king, you will lose your head, and neither I nor any other man will be able to save you, so be silent. The gods will see to the army.\""
+        ],
+        "section":"5"
+      },
+      {
+        "greek":"τὸν μὲν δὴ ταῦτα παραινέειν, ἐκ δὲ τοῦ κονιορτοῦ καὶ τῆς φωνῆς γενέσθαι νέφος καὶ μεταρσιωθὲν φέρεσθαι ἐπὶ Σαλαμῖνος ἐπὶ τὸ στρατόπεδον τὸ τῶν Ἑλλήνων. οὕτω δὴ αὐτοὺς μαθεῖν ὅτι τὸ ναυτικὸν τὸ Ξέρξεω ἀπολέεσθαι μέλλοι. ταῦτα μὲν Δίκαιος ὁ Θεοκύδεος ἔλεγε, Δημαρήτου τε καὶ ἄλλων μαρτύρων καταπτόμενος.",
+        "translations":[
+          "Thus he advised, and after the dust and the cry came a cloud, which rose aloft and floated away towards Salamis (island), Attica, Central Greece and Euboea, Greece, EuropeSalamis to the camp of the Hellenes. In this way they understood that Xerxes' fleet was going to be destroyed. Dicaeus son of Theocydes used to say this, appealing to Demaratus and others as witnesses."
+        ],
+        "section":"6"
+      }
+    ]
+  }
+]

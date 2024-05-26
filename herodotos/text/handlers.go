@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/helpers"
@@ -30,51 +29,22 @@ type HerodotosHandler struct {
 }
 
 const (
-	Author   string = "author"
-	Authors  string = "authors"
-	Book     string = "book"
-	Books    string = "books"
-	RootWord string = "rootword"
-	Id       string = "_id"
+	AuthorReq    string = "author"
+	BookReq      string = "book"
+	ReferenceReq string = "reference"
+	SectionReq   string = "section"
+	RootWord     string = "rootword"
+	Id           string = "_id"
 )
 
 // PingPong pongs the ping
 func (h *HerodotosHandler) pingPong(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /ping status ping
-	//
-	// Checks if api is reachable
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: ResultModel
 	pingPong := models.ResultModel{Result: "pong"}
 	middleware.ResponseWithJson(w, pingPong)
 }
 
 // returns the health of the api
 func (h *HerodotosHandler) health(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /health status health
-	//
-	// Checks if api is healthy
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Health
-	//	  502: Health
 	elasticHealth := h.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,
@@ -134,8 +104,10 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 	//	  404: NotFoundError
 	//	  405: MethodError
 	//    502: ElasticSearchError
-	author := req.URL.Query().Get(Author)
-	book := req.URL.Query().Get(Book)
+	author := req.URL.Query().Get(AuthorReq)
+	book := req.URL.Query().Get(BookReq)
+	reference := req.URL.Query().Get(ReferenceReq)
+	section := req.URL.Query().Get(SectionReq)
 
 	var requestId string
 	fromContext := req.Context().Value(config.DefaultTracingName)
@@ -160,12 +132,12 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		spanID = splitID[1]
 	}
 
-	if author == "" || book == "" {
+	if author == "" || book == "" || reference == "" {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "author and book",
+					Field:   "author&book&reference",
 					Message: "cannot be empty",
 				},
 			},
@@ -180,7 +152,7 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 				"must": []map[string]interface{}{
 					{
 						"match": map[string]interface{}{
-							Author: map[string]interface{}{
+							AuthorReq: map[string]interface{}{
 								"query":         author,
 								"operator":      "and",
 								"fuzziness":     "AUTO",
@@ -190,7 +162,7 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 					},
 					{
 						"match": map[string]interface{}{
-							Book: book,
+							BookReq: book,
 						},
 					},
 				},
@@ -263,12 +235,6 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		SentenceId: id}
 
 	middleware.ResponseWithJson(w, question)
-}
-
-// swagger:parameters checkSentence
-type checkSentenceParameters struct {
-	// in:body
-	Application models.CheckSentenceRequest
 }
 
 // checks the validity of an answer
@@ -415,33 +381,7 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 	middleware.ResponseWithJson(w, response)
 }
 
-func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /authors authors authors
-	//
-	// Finds all authors
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: author
-	//       in: path
-	//       description: author to be used for creating a sentence
-	//		 example: herodotos
-	//       required: true
-	//       type: string
-	//       format: author
-	//		 title: author
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Authors
-	//	  405: MethodError
-	//    502: ElasticSearchError
+func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
 	var requestId string
 	fromContext := req.Context().Value(config.DefaultTracingName)
 	if fromContext == nil {
@@ -449,38 +389,12 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 	} else {
 		requestId = fromContext.(string)
 	}
-	splitID := strings.Split(requestId, "+")
+	query := textAggregationQuery()
 
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	query := h.Elastic.Builder().Aggregate(Authors, Author)
-
-	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
-	if traceCall {
-		hits := int64(0)
-		took := int64(0)
-		if elasticResult != nil {
-			hits = elasticResult.Hits.Total.Value
-			took = elasticResult.Took
-		}
-		go h.databaseSpan(hits, took, query, traceID, spanID)
-	}
-
+	elasticResult, err := h.Elastic.Query().MatchRaw(h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
 			Message: models.ElasticErrorMessage{
 				ElasticError: err.Error(),
 			},
@@ -489,119 +403,38 @@ func (h *HerodotosHandler) queryAuthors(w http.ResponseWriter, req *http.Request
 		return
 	}
 
-	var authors models.Authors
-	for _, bucket := range elasticResult.Aggregations.AuthorAggregation.Buckets {
-		author := models.Author{Author: strings.ToLower(fmt.Sprintf("%v", bucket.Key))}
-		authors.Authors = append(authors.Authors, author)
-	}
-
-	middleware.ResponseWithJson(w, authors)
-}
-
-func (h *HerodotosHandler) queryBooks(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /authors/{author}/books authors books
-	//
-	// Finds all books
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: author
-	//       in: path
-	//       description: author to be used for creating a sentence
-	//		 example: herodotos
-	//       required: true
-	//       type: string
-	//       format: author
-	//		 title: author
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Books
-	//	  405: MethodError
-	//    502: ElasticSearchError
-	var requestId string
-	fromContext := req.Context().Value(config.DefaultTracingName)
-	if fromContext == nil {
-		requestId = req.Header.Get(config.HeaderKey)
-	} else {
-		requestId = fromContext.(string)
-	}
-	splitID := strings.Split(requestId, "+")
-
-	traceCall := false
-	var traceID, spanID string
-
-	if len(splitID) >= 3 {
-		traceCall = splitID[2] == "1"
-	}
-
-	if len(splitID) >= 1 {
-		traceID = splitID[0]
-	}
-	if len(splitID) >= 2 {
-		spanID = splitID[1]
-	}
-
-	pathParams := mux.Vars(req)
-	author := pathParams[Author]
-
-	query := map[string]interface{}{
-		"size": 0,
-		"aggs": map[string]interface{}{
-			Books: map[string]interface{}{
-				"terms": map[string]interface{}{
-					"field": Book,
-					"size":  500,
-				},
-			},
-		},
-		"query": map[string]interface{}{
-			"wildcard": map[string]interface{}{
-				Author: map[string]interface{}{
-					"value":            fmt.Sprintf("*%s*", author),
-					"case_insensitive": true,
-				},
-			},
-		},
-	}
-
-	elasticResult, err := h.Elastic.Query().MatchAggregate(h.Index, query)
-	if traceCall {
-		hits := int64(0)
-		took := int64(0)
-		if elasticResult != nil {
-			hits = elasticResult.Hits.Total.Value
-			took = elasticResult.Took
-		}
-		go h.databaseSpan(hits, took, query, traceID, spanID)
-	}
-
+	var agg map[string]interface{}
+	err = json.Unmarshal(elasticResult, &agg)
 	if err != nil {
-		e := models.ElasticSearchError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Message: models.ElasticErrorMessage{
-				ElasticError: err.Error(),
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "unmarshall action failed internally",
+					Message: err.Error(),
+				},
 			},
 		}
 		middleware.ResponseWithJson(w, e)
 		return
 	}
 
-	var books models.Books
-	for _, bucket := range elasticResult.Aggregations.BookAggregation.Buckets {
-
-		book := models.Book{Book: int64(bucket.Key.(float64))}
-		books.Books = append(books.Books, book)
-
+	result, err := parseAggregationResults(agg)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "querying aggregator failed",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
 	}
 
-	middleware.ResponseWithJson(w, books)
+	middleware.ResponseWithCustomCode(w, http.StatusOK, result)
 }
 
 // analyseText fetches words and queries them in all the texts
