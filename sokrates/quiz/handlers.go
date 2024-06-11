@@ -541,7 +541,9 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
 			}
 		}
-		foundInText, err := s.Client.Herodotos().AnalyseText(wordToBeSend, requestID)
+		r := models.AnalyzeTextRequest{Rootword: wordToBeSend}
+		jsonBody, err := json.Marshal(r)
+		foundInText, err := s.Client.Herodotos().Analyze(jsonBody, requestID)
 		if err != nil {
 			logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", answer.QuizWord, err.Error()))
 			errChan <- err

@@ -7,7 +7,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/odysseia-greek/agora/archytas v0.1.1
 	github.com/odysseia-greek/agora/aristoteles v0.1.6
-	github.com/odysseia-greek/agora/plato v0.1.19
+	github.com/odysseia-greek/agora/plato v0.1.26
 	github.com/odysseia-greek/attike/aristophanes v0.5.9
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/odysseia-greek/olympia/aristarchos v0.0.7

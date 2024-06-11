@@ -6,9 +6,9 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
 	github.com/graphql-go/graphql v0.8.1
-	github.com/graphql-go/handler v0.2.3
+	github.com/graphql-go/handler v0.2.4
 	github.com/odysseia-greek/agora/archytas v0.1.1
-	github.com/odysseia-greek/agora/plato v0.1.19
+	github.com/odysseia-greek/agora/plato v0.1.26
 	github.com/odysseia-greek/attike/aristophanes v0.5.9
 )
 

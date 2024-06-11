@@ -49,7 +49,7 @@ func (d *DemokritosHandler) CreateIndexAtStartup() error {
 		return err
 	}
 	logging.Info(fmt.Sprintf("creating index: %s with min: %v and max: %v ngram", d.Index, d.MinNGram, d.MaxNGram))
-	query := d.Elastic.Builder().DictionaryIndex(d.MinNGram, d.MaxNGram, d.PolicyName)
+	query := dictionaryIndex(d.MinNGram, d.MaxNGram, d.PolicyName)
 	res, err := d.Elastic.Index().Create(d.Index, query)
 	if err != nil {
 		return err

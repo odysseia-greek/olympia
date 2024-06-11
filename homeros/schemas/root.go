@@ -2,6 +2,7 @@ package schemas
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/graphql-go/graphql"
@@ -54,9 +55,9 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		},
 
 		// Herodotos
-		"authors": &graphql.Field{
-			Type:        graphql.NewList(authors),
-			Description: "Get the author and books tree from Herodotos",
+		"textOptions": &graphql.Field{
+			Type:        aggregationResultType,
+			Description: "Fetch options from Herodotos",
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				ctx := p.Context
 
@@ -66,18 +67,15 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					return nil, errors.New("failed to get request from context")
 				}
 
-				return handler.Books(traceID)
+				return handler.HerodotosOptions(traceID)
 			},
 		},
 
-		"sentence": &graphql.Field{
-			Type:        sentence,
-			Description: "Create a new Question in Herodotos",
+		"analyze": &graphql.Field{
+			Type:        analyzeTextResponseType,
+			Description: "analyze text based on a rootword",
 			Args: graphql.FieldConfigArgument{
-				"book": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-				"author": &graphql.ArgumentConfig{
+				"rootword": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
@@ -90,30 +88,58 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					return nil, errors.New("failed to get request from context")
 				}
 
-				book, isOK := p.Args["book"].(string)
+				rootword, isOK := p.Args["rootword"].(string)
 				if !isOK {
-					return nil, fmt.Errorf("expected argument book")
+					return nil, fmt.Errorf("expected argument rootword")
 				}
-				author, isOK := p.Args["author"].(string)
-				if !isOK {
-					return nil, fmt.Errorf("expected argument book")
+
+				r := models.AnalyzeTextRequest{Rootword: rootword}
+				jsonBody, err := json.Marshal(r)
+				if err != nil {
+					return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
 				}
-				return handler.Sentence(author, book, traceID)
+
+				return handler.Analyze(jsonBody, traceID)
 			},
 		},
 
-		"text": &graphql.Field{
-			Type:        text,
+		"create": &graphql.Field{
+			Type:        textType,
+			Description: "Create a new Text in Herodotos",
+			Args: graphql.FieldConfigArgument{
+				"input": &graphql.ArgumentConfig{
+					Type: createTextInputType,
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				ctx := p.Context
+
+				// Get the traceID
+				traceID, ok := ctx.Value(plato.HeaderKey).(string)
+				if !ok {
+					return nil, errors.New("failed to get request from context")
+				}
+
+				input, isOK := p.Args["input"].(map[string]interface{})
+				if !isOK {
+					return nil, fmt.Errorf("expected argument input")
+				}
+
+				jsonBody, err := json.Marshal(input)
+				if err != nil {
+					return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
+				}
+
+				return handler.CreateText(jsonBody, traceID)
+			},
+		},
+
+		"check": &graphql.Field{
+			Type:        checkTextResponseType,
 			Description: "Check the text given",
 			Args: graphql.FieldConfigArgument{
-				"sentenceId": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-				"author": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-				"answer": &graphql.ArgumentConfig{
-					Type: graphql.String,
+				"input": &graphql.ArgumentConfig{
+					Type: checkTextRequestInputType,
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
@@ -125,19 +151,17 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					return nil, errors.New("failed to get request from context")
 				}
 
-				sentenceId, isOK := p.Args["sentenceId"].(string)
+				input, isOK := p.Args["input"].(map[string]interface{})
 				if !isOK {
-					return nil, fmt.Errorf("expected argument id")
+					return nil, fmt.Errorf("expected argument input")
 				}
-				author, isOK := p.Args["author"].(string)
-				if !isOK {
-					return nil, fmt.Errorf("expected argument book")
+
+				jsonBody, err := json.Marshal(input)
+				if err != nil {
+					return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
 				}
-				answer, isOK := p.Args["answer"].(string)
-				if !isOK {
-					return nil, fmt.Errorf("expected argument answer")
-				}
-				return handler.Answer(sentenceId, author, answer, traceID)
+
+				return handler.CheckText(jsonBody, traceID)
 			},
 		},
 

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
 	"github.com/odysseia-greek/olympia/herakleitos/seeder"
 	"log"
@@ -70,29 +69,41 @@ func main() {
 		logging.Debug("working on the following directory: " + dir.Name())
 		if dir.IsDir() {
 			filePath := path.Join(root, dir.Name())
-			files, err := rhema.ReadDir(filePath)
+			authorDir, err := rhema.ReadDir(filePath)
 			if err != nil {
-				log.Fatal(err)
+				logging.Error(err.Error())
+				continue
 			}
-			for _, f := range files {
-				logging.Debug(fmt.Sprintf("found %s in %s", f.Name(), filePath))
-				plan, _ := rhema.ReadFile(path.Join(filePath, f.Name()))
-				var rhemai models.Rhema
-				err := json.Unmarshal(plan, &rhemai)
-				if err != nil {
-					log.Fatal(err)
-				}
-
-				documents += len(rhemai.Rhemai)
-
-				wg.Add(1)
-				go func() {
-					err := handler.Add(rhemai, &wg)
+			for _, innerDir := range authorDir {
+				if innerDir.IsDir() {
+					innerFilePath := path.Join(filePath, innerDir.Name())
+					files, err := rhema.ReadDir(innerFilePath)
 					if err != nil {
 						logging.Error(err.Error())
+						continue
 					}
-				}()
+					for _, f := range files {
+						logging.Debug(fmt.Sprintf("found %s in %s", f.Name(), innerFilePath))
+						plan, _ := rhema.ReadFile(path.Join(innerFilePath, f.Name()))
+						var rhemai []seeder.Text
+						err := json.Unmarshal(plan, &rhemai)
+						if err != nil {
+							log.Fatal(err)
+						}
+
+						documents += 1
+
+						wg.Add(1)
+						go func() {
+							err := handler.Add(rhemai, &wg)
+							if err != nil {
+								logging.Error(err.Error())
+							}
+						}()
+					}
+				}
 			}
+
 		}
 	}
 

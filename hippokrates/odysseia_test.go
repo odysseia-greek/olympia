@@ -77,8 +77,8 @@ func (l *OdysseiaFixture) theQuizresponseIsExpandedWithTextAndSimilarWords() err
 	}
 
 	err = assertTrue(
-		assert.True, len(answer.FoundInText.Rhemai) >= 1,
-		"expected length of rhemai to be one or greater but was: %v", len(answer.FoundInText.Rhemai),
+		assert.True, len(answer.FoundInText.Results) >= 1,
+		"expected length of rhemai to be one or greater but was: %v", len(answer.FoundInText.Results),
 	)
 
 	return err

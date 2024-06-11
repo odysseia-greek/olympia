@@ -129,48 +129,12 @@ var comprehensiveAnswer = graphql.NewObject(graphql.ObjectConfig{
 		"correct":  &graphql.Field{Type: graphql.Boolean},
 		"quizWord": &graphql.Field{Type: graphql.String},
 		"foundInText": &graphql.Field{
-			Type: foundInTextType,
+			Type: analyzeTextResponseType,
 		},
 		"similarWords": &graphql.Field{
 			Type: graphql.NewList(dictionary),
 		},
 		"progress": &graphql.Field{Type: progressType},
-	},
-})
-
-var foundInTextType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "FoundInText",
-	Fields: graphql.Fields{
-		"rhemai": &graphql.Field{
-			Type: graphql.NewList(rhemaType),
-		},
-	},
-})
-
-var rhemaType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Rhema",
-	Fields: graphql.Fields{
-		"author": &graphql.Field{
-			Type: graphql.String,
-		},
-		"greek": &graphql.Field{
-			Type: graphql.String,
-		},
-		"translations": &graphql.Field{
-			Type: graphql.NewList(graphql.String),
-		},
-		"book": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"chapter": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"section": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"perseusTextLink": &graphql.Field{
-			Type: graphql.String,
-		},
 	},
 })
 

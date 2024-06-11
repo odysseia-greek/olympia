@@ -12,11 +12,11 @@ func InitRoutes(herodotosHandler *HerodotosHandler) *mux.Router {
 
 	serveMux.HandleFunc("/herodotos/v1/ping", middleware.Adapt(herodotosHandler.pingPong, middleware.ValidateRestMethod("GET")))
 	serveMux.HandleFunc("/herodotos/v1/health", middleware.Adapt(herodotosHandler.health, middleware.ValidateRestMethod("GET")))
-	serveMux.HandleFunc("/herodotos/v1/createQuestion", middleware.Adapt(herodotosHandler.createQuestion, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/authors", middleware.Adapt(herodotosHandler.queryAuthors, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/authors/{author}/books", middleware.Adapt(herodotosHandler.queryBooks, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/checkSentence", middleware.Adapt(herodotosHandler.checkSentence, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/texts", middleware.Adapt(herodotosHandler.analyseText, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
+
+	serveMux.HandleFunc("/herodotos/v1/texts/_create", middleware.Adapt(herodotosHandler.create, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/_analyze", middleware.Adapt(herodotosHandler.analyze, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/_check", middleware.Adapt(herodotosHandler.check, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/options", middleware.Adapt(herodotosHandler.options, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
 
 	return serveMux
 }

@@ -96,6 +96,9 @@ func (l *OdysseiaFixture) theWordShouldBeIncludedInTheResponse(searchTerm string
 func (l *OdysseiaFixture) aGreekTranslationShouldBeIncludedInTheResponse() error {
 	words := l.ctx.Value(ResponseBody).(models.ExtendedResponse)
 
+	if len(words.Hits) == 0 {
+		return fmt.Errorf("hits is empty where a response was expected")
+	}
 	included := true
 
 	for _, hit := range words.Hits {

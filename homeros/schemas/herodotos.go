@@ -1,123 +1,184 @@
 package schemas
 
-import "github.com/graphql-go/graphql"
+import (
+	"github.com/graphql-go/graphql"
+)
 
-var authors = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Authors",
+// Define Section Type
+var sectionType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Section",
 	Fields: graphql.Fields{
-		"name": &graphql.Field{
-			Type: graphql.String,
+		"key": &graphql.Field{Type: graphql.String},
+	},
+})
+
+// Define Reference Type
+var referenceType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Reference",
+	Fields: graphql.Fields{
+		"key": &graphql.Field{Type: graphql.String},
+		"sections": &graphql.Field{
+			Type: graphql.NewList(sectionType),
 		},
+	},
+})
+
+// Define ESBook Type
+var esBookType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "ESBook",
+	Fields: graphql.Fields{
+		"key": &graphql.Field{Type: graphql.String},
+		"references": &graphql.Field{
+			Type: graphql.NewList(referenceType),
+		},
+	},
+})
+
+// Define ESAuthor Type
+var esAuthorType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "ESAuthor",
+	Fields: graphql.Fields{
+		"key": &graphql.Field{Type: graphql.String},
 		"books": &graphql.Field{
-			Type: graphql.NewList(book),
+			Type: graphql.NewList(esBookType),
 		},
 	},
 })
 
-var book = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Book",
+// Define AggregationResult Type
+var aggregationResultType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AggregationResult",
 	Fields: graphql.Fields{
-		"book": &graphql.Field{
-			Type: graphql.Int,
+		"authors": &graphql.Field{
+			Type: graphql.NewList(esAuthorType),
 		},
 	},
 })
 
-var sentence = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Sentence",
+// Define Rhema Type
+var rhemaType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Rhema",
 	Fields: graphql.Fields{
-		"author": &graphql.Field{
-			Type: graphql.String,
+		"greek": &graphql.Field{Type: graphql.String},
+		"translations": &graphql.Field{
+			Type: graphql.NewList(graphql.String),
 		},
-		"book": &graphql.Field{
-			Type: graphql.String,
-		},
-		"greek": &graphql.Field{
-			Type: graphql.String,
-		},
-		"id": &graphql.Field{
-			Type: graphql.String,
-		},
+		"section": &graphql.Field{Type: graphql.String},
 	},
 })
 
-var text = graphql.NewObject(graphql.ObjectConfig{
+// Define Text Type
+var textType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Text",
 	Fields: graphql.Fields{
-		"levenshtein": &graphql.Field{
-			Type: graphql.String,
-		},
-		"quiz": &graphql.Field{
-			Type: graphql.String,
-		},
-		"input": &graphql.Field{
-			Type: graphql.String,
-		},
-		"splitQuiz": &graphql.Field{
-			Type: graphql.NewList(split),
-		},
-		"splitAnswer": &graphql.Field{
-			Type: graphql.NewList(split),
-		},
-		"matches": &graphql.Field{
-			Type: graphql.NewList(matchingWords),
-		},
-		"mistakes": &graphql.Field{
-			Type: graphql.NewList(nonMatchingWords),
+		"author":          &graphql.Field{Type: graphql.String},
+		"book":            &graphql.Field{Type: graphql.String},
+		"type":            &graphql.Field{Type: graphql.String},
+		"reference":       &graphql.Field{Type: graphql.String},
+		"perseusTextLink": &graphql.Field{Type: graphql.String},
+		"rhemai": &graphql.Field{
+			Type: graphql.NewList(rhemaType),
 		},
 	},
 })
 
-var split = graphql.NewObject(graphql.ObjectConfig{
-	Name: "word",
+// Define AnalyzeResult Type
+var analyzeResultType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AnalyzeResult",
 	Fields: graphql.Fields{
-		"word": &graphql.Field{
-			Type: graphql.String,
+		"referenceLink": &graphql.Field{Type: graphql.String},
+		"text":          &graphql.Field{Type: rhemaType},
+		"author":        &graphql.Field{Type: graphql.String},
+		"book":          &graphql.Field{Type: graphql.String},
+		"reference":     &graphql.Field{Type: graphql.String},
+	},
+})
+
+// Define AnalyzeTextResponse Type
+var analyzeTextResponseType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AnalyzeTextResponse",
+	Fields: graphql.Fields{
+		"rootword": &graphql.Field{Type: graphql.String},
+		"conjugations": &graphql.Field{
+			Type: graphql.NewList(conjugationResponseType),
+		},
+		"results": &graphql.Field{
+			Type: graphql.NewList(analyzeResultType),
 		},
 	},
 })
 
-var matchingWords = graphql.NewObject(graphql.ObjectConfig{
-	Name: "matches",
+var conjugationResponseType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "ConjugationResponse",
 	Fields: graphql.Fields{
-		"word": &graphql.Field{
-			Type: graphql.String,
-		},
-		"index": &graphql.Field{
-			Type: graphql.Int,
-		},
+		"word": &graphql.Field{Type: graphql.String},
+		"rule": &graphql.Field{Type: graphql.String},
 	},
 })
 
-var nonMatchingWords = graphql.NewObject(graphql.ObjectConfig{
-	Name: "mistakes",
-	Fields: graphql.Fields{
-		"word": &graphql.Field{
-			Type: graphql.String,
-		},
-		"index": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"nonMatches": &graphql.Field{
-			Type: graphql.NewList(nonMatch),
-		},
+// Define CreateTextRequest Type
+var createTextInputType = graphql.NewInputObject(graphql.InputObjectConfig{
+	Name: "CreateTextInput",
+	Fields: graphql.InputObjectConfigFieldMap{
+		"author":    &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"book":      &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"reference": &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"section":   &graphql.InputObjectFieldConfig{Type: graphql.String}, // Optional field
 	},
 })
 
-var nonMatch = graphql.NewObject(graphql.ObjectConfig{
-	Name: "nonMatches",
+// Define Translations Type
+var translationsInputType = graphql.NewInputObject(graphql.InputObjectConfig{
+	Name: "TranslationsInput",
+	Fields: graphql.InputObjectConfigFieldMap{
+		"section":     &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"translation": &graphql.InputObjectFieldConfig{Type: graphql.String},
+	},
+})
+
+// Define CheckTextRequest Type
+var checkTextRequestInputType = graphql.NewInputObject(graphql.InputObjectConfig{
+	Name: "CheckTextRequestInput",
+	Fields: graphql.InputObjectConfigFieldMap{
+		"translations": &graphql.InputObjectFieldConfig{
+			Type: graphql.NewList(translationsInputType),
+		},
+		"author":    &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"book":      &graphql.InputObjectFieldConfig{Type: graphql.String},
+		"reference": &graphql.InputObjectFieldConfig{Type: graphql.String},
+	},
+})
+
+// Define Typo Type
+var typoType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Typo",
 	Fields: graphql.Fields{
-		"match": &graphql.Field{
-			Type: graphql.String,
+		"source":   &graphql.Field{Type: graphql.String},
+		"provided": &graphql.Field{Type: graphql.String},
+	},
+})
+
+// Define AnswerSection Type
+var answerSectionType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AnswerSection",
+	Fields: graphql.Fields{
+		"section":               &graphql.Field{Type: graphql.String},
+		"levenshteinPercentage": &graphql.Field{Type: graphql.String},
+		"quizSentence":          &graphql.Field{Type: graphql.String},
+		"answerSentence":        &graphql.Field{Type: graphql.String},
+	},
+})
+
+// Define CheckTextResponse Type
+var checkTextResponseType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "CheckTextResponse",
+	Fields: graphql.Fields{
+		"averageLevenshteinPercentage": &graphql.Field{Type: graphql.String},
+		"sections": &graphql.Field{
+			Type: graphql.NewList(answerSectionType),
 		},
-		"levenshtein": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"index": &graphql.Field{
-			Type: graphql.Int,
-		},
-		"percentage": &graphql.Field{
-			Type: graphql.String,
+		"possibleTypos": &graphql.Field{
+			Type: graphql.NewList(typoType),
 		},
 	},
 })

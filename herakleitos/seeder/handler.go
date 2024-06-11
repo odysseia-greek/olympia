@@ -2,10 +2,10 @@ package seeder
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/models"
 	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	"strings"
 	"sync"
@@ -55,7 +55,7 @@ func (h *HerakleitosHandler) CreateIndexAtStartup() error {
 		return err
 	}
 
-	indexMapping := h.Elastic.Builder().TextIndex(h.PolicyName)
+	indexMapping := textIndex(h.PolicyName)
 	created, err := h.Elastic.Index().Create(h.Index, indexMapping)
 	if err != nil {
 		return err
@@ -66,32 +66,30 @@ func (h *HerakleitosHandler) CreateIndexAtStartup() error {
 	return nil
 }
 
-func (h *HerakleitosHandler) Add(rhema models.Rhema, wg *sync.WaitGroup) error {
+func (h *HerakleitosHandler) Add(rhemai []Text, wg *sync.WaitGroup) error {
 	defer wg.Done()
 	var buf bytes.Buffer
 
 	var currBatch int
 
-	for _, text := range rhema.Rhemai {
+	for _, rhema := range rhemai {
 		currBatch++
 
 		meta := []byte(fmt.Sprintf(`{ "index": {} }%s`, "\n"))
-		jsonifiedText, _ := text.Marshal()
+		jsonifiedText, _ := json.Marshal(rhema)
 		jsonifiedText = append(jsonifiedText, "\n"...)
 		buf.Grow(len(meta) + len(jsonifiedText))
 		buf.Write(meta)
 		buf.Write(jsonifiedText)
 
-		if currBatch == len(rhema.Rhemai) {
+		if currBatch == len(rhemai) {
 			res, err := h.Elastic.Document().Bulk(buf, h.Index)
 			if err != nil {
-				logging.Error(err.Error())
 				return err
 			}
 
 			h.Created = h.Created + len(res.Items)
 		}
 	}
-
 	return nil
 }

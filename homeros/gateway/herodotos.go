@@ -2,102 +2,11 @@ package gateway
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/odysseia-greek/agora/plato/logging"
 	plato "github.com/odysseia-greek/agora/plato/models"
-	pb "github.com/odysseia-greek/attike/aristophanes/proto"
-	"github.com/odysseia-greek/olympia/homeros/models"
-	"time"
 )
 
-const (
-	cacheNameHerodotosTree string = "herodotosTree"
-)
-
-func (h *HomerosHandler) Books(requestID string) ([]models.AuthorTree, error) {
-	cacheItem, _ := h.Cache.Read(cacheNameHerodotosTree)
-	if cacheItem != nil {
-		cachedGraph, err := models.UnmarshalAuthorGraph(cacheItem)
-		if err != nil {
-			return nil, err
-		}
-
-		traceID, parentspanID, traceCall := ParseHeaderID(requestID)
-		if traceCall {
-			parabasis := &pb.ParabasisRequest{
-				TraceId:      traceID,
-				ParentSpanId: parentspanID,
-				SpanId:       parentspanID,
-				RequestType: &pb.ParabasisRequest_CloseTrace{
-					CloseTrace: &pb.CloseTraceRequest{
-						ResponseCode: 200,
-						ResponseBody: "taken from cache",
-					},
-				},
-			}
-
-			err := h.Streamer.Send(parabasis)
-			if err != nil {
-				logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
-			}
-
-			logging.Info(fmt.Sprintf("taking from cache | traceID: %s | responseCode: %d", traceID, 200))
-		}
-
-		return cachedGraph.AuthorTree, nil
-	}
-
-	var graph models.AuthorGraph
-
-	response, err := h.HttpClients.Herodotos().GetAuthors(requestID)
-	if err != nil {
-		h.CloseTraceWithError(err, requestID)
-		return nil, err
-	}
-	defer response.Body.Close()
-
-	var authors plato.Authors
-	err = json.NewDecoder(response.Body).Decode(&authors)
-	if err != nil {
-		return nil, err
-	}
-
-	for _, author := range authors.Authors {
-
-		resp, err := h.HttpClients.Herodotos().GetBooks(author.Author, requestID)
-		if err != nil {
-			h.CloseTrace(resp, nil)
-			return nil, err
-		}
-
-		var books plato.Books
-		err = json.NewDecoder(resp.Body).Decode(&books)
-		if err != nil {
-			return nil, err
-		}
-
-		authorTree := models.AuthorTree{
-			Name:  author.Author,
-			Books: books.Books,
-		}
-
-		graph.AuthorTree = append(graph.AuthorTree, authorTree)
-	}
-
-	h.CloseTrace(response, graph)
-
-	stringifiedAuthorTree, _ := graph.Marshal()
-	ttl := time.Hour
-	err = h.Cache.SetWithTTL(cacheNameHerodotosTree, string(stringifiedAuthorTree), ttl)
-	if err != nil {
-		return nil, err
-	}
-
-	return graph.AuthorTree, nil
-}
-
-func (h *HomerosHandler) Sentence(author, book, requestID string) (*models.SentenceGraph, error) {
-	response, err := h.HttpClients.Herodotos().CreateQuestion(author, book, requestID)
+func (h *HomerosHandler) CreateText(body []byte, requestID string) (*plato.Text, error) {
+	response, err := h.HttpClients.Herodotos().Create(body, requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
 		return nil, err
@@ -105,46 +14,70 @@ func (h *HomerosHandler) Sentence(author, book, requestID string) (*models.Sente
 
 	defer response.Body.Close()
 
-	var sentence plato.CreateSentenceResponse
+	var sentence plato.Text
 	err = json.NewDecoder(response.Body).Decode(&sentence)
 	if err != nil {
 		return nil, err
 	}
-
-	graph := models.SentenceGraph{
-		Author: author,
-		Book:   book,
-		Greek:  sentence.Sentence,
-		Id:     sentence.SentenceId,
-	}
-
-	h.CloseTrace(response, graph)
-
-	return &graph, nil
-}
-
-func (h *HomerosHandler) Answer(id, author, answer, requestID string) (*models.Answer, error) {
-	answerModel := plato.CheckSentenceRequest{
-		SentenceId:       id,
-		ProvidedSentence: answer,
-		Author:           author,
-	}
-	response, err := h.HttpClients.Herodotos().CheckSentence(answerModel, requestID)
-	if err != nil {
-		h.CloseTraceWithError(err, requestID)
-		return nil, err
-	}
-	defer response.Body.Close()
-
-	var sentence plato.CheckSentenceResponse
-	err = json.NewDecoder(response.Body).Decode(&sentence)
-	if err != nil {
-		return nil, err
-	}
-
-	a := models.ParseSentenceResponseToAnswer(sentence)
 
 	h.CloseTrace(response, sentence)
 
-	return &a, nil
+	return &sentence, nil
+}
+
+func (h *HomerosHandler) CheckText(body []byte, requestID string) (*plato.CheckTextResponse, error) {
+	response, err := h.HttpClients.Herodotos().Check(body, requestID)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	var sentence plato.CheckTextResponse
+	err = json.NewDecoder(response.Body).Decode(&sentence)
+	if err != nil {
+		return nil, err
+	}
+
+	h.CloseTrace(response, sentence)
+
+	return &sentence, nil
+}
+
+func (h *HomerosHandler) HerodotosOptions(requestID string) (*plato.AggregationResult, error) {
+	response, err := h.HttpClients.Herodotos().Options(requestID)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	var aggregate plato.AggregationResult
+	err = json.NewDecoder(response.Body).Decode(&aggregate)
+	if err != nil {
+		return nil, err
+	}
+
+	h.CloseTrace(response, aggregate)
+
+	return &aggregate, nil
+}
+
+func (h *HomerosHandler) Analyze(body []byte, requestID string) (*plato.AnalyzeTextResponse, error) {
+	response, err := h.HttpClients.Herodotos().Analyze(body, requestID)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	var analyzeResult plato.AnalyzeTextResponse
+	err = json.NewDecoder(response.Body).Decode(&analyzeResult)
+	if err != nil {
+		return nil, err
+	}
+
+	h.CloseTrace(response, analyzeResult)
+
+	return &analyzeResult, nil
 }

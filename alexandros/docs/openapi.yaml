@@ -245,15 +245,17 @@ components:
               greek: "λόγος –ου, ὁ"
               english: "word"
             foundInText:
-              rhemai:
-                - author: "Matthew New Testament"
-                  greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ, καὶ ἐκ τῶν λόγων σου καταδικασθήσῃ."
-                  translations:
-                    - "For by your words you will be justified, and by your words you will be condemned."
-                  book: 2
-                  chapter: 12
-                  section: 37
-                  perseusTextLink: "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg001.perseus-grc2:12.37/"
+              - conjugations: [ "λόγος", "λόγων", "λόγοι" ]
+                rootword: "λογος"
+                texts:
+                  author: "Matthew"
+                  book: "New Testament, Gospel of Matthew"
+                  reference: "12"
+                  referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+                  text:
+                    greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
+                    translations:
+                      - "For by your words you will be justified, and by your words you will be condemned."
 
     Hit:
       type: object
@@ -280,41 +282,54 @@ components:
     FoundInText:
       type: object
       properties:
-        rhemai:
+        rootword:
+          type: string
+        conjugations:
           type: array
           items:
-            $ref: '#/components/schemas/TextInstance'
+            type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Texts'
       example:
-        rhemai: []
+        conjugations: ["λόγος", "λόγων", "λόγοι"]
+        rootword: "λογος"
+        texts: {}
 
-    TextInstance:
+    Texts:
       type: object
       properties:
         author:
           type: string
+        book:
+          type: string
+        reference:
+          type: string
+        referenceLink:
+          type: string
+        text:
+          $ref: '#/components/schemas/TextInstance'
+      example:
+        author: "Matthew"
+        book: "New Testament, Gospel of Matthew"
+        reference: "12"
+        referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+        text: {}
+
+    TextInstance:
+      type: object
+      properties:
         greek:
           type: string
         translations:
           type: array
           items:
             type: string
-        book:
-          type: integer
-        chapter:
-          type: integer
-        section:
-          type: integer
-        perseusTextLink:
-          type: string
       example:
-        author: "Plato"
         greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
         translations:
-          - "For by your words you will be justified"
-        book: 1
-        chapter: 1
-        section: 1
-        perseusTextLink: "https://example.com"
+          - "For by your words you will be justified, and by your words you will be condemned."
 
     MethodMessages:
       type: object
