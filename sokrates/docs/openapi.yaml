@@ -372,43 +372,62 @@ components:
     FoundInText:
       type: object
       properties:
-        rhemai:
+        rootword:
+          type: string
+        conjugations:
           type: array
           items:
-            $ref: '#/components/schemas/Rhema'
-      required:
-        - rhemai
+            type: string
+        texts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Texts'
+      example:
+        conjugations: ["λόγος", "λόγων", "λόγοι"]
+        rootword: "λογος"
+        texts:
+          - author: "Matthew"
+            book: "New Testament, Gospel of Matthew"
+            reference: "12"
+            referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+            text:
+              greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
+              translations:
+                - "For by your words you will be justified, and by your words you will be condemned."
 
-    Rhema:
+    Texts:
       type: object
       properties:
         author:
           type: string
-          example: Matthew New Testament
+        book:
+          type: string
+        reference:
+          type: string
+        referenceLink:
+          type: string
+        text:
+          $ref: '#/components/schemas/TextInstance'
+      example:
+        author: "Matthew"
+        book: "New Testament, Gospel of Matthew"
+        reference: "12"
+        referenceLink: "/texts?author=Matthew&book=New Testament, Gospel of Matthew&reference=12"
+        text: { TextInstance }
+
+    TextInstance:
+      type: object
+      properties:
         greek:
           type: string
-          example: ἐκ γὰρ τῶν &&&λόγων&&& σου δικαιωθήσῃ, καὶ ἐκ τῶν &&&λόγων&&& σου καταδικασθήσῃ.
         translations:
           type: array
           items:
             type: string
-            example: For by your words you will be justified, and by your words you will be condemned.
-        book:
-          type: integer
-          example: 2
-        chapter:
-          type: integer
-          example: 12
-        section:
-          type: integer
-          example: 32
-        perseusTextLink:
-          type: string
-          example: https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0031.tlg001.perseus-grc2:12.37/
-      required:
-        - author
-        - greek
-        - translations
+      example:
+        greek: "ἐκ γὰρ τῶν λόγων σου δικαιωθήσῃ"
+        translations:
+          - "For by your words you will be justified, and by your words you will be condemned."
 
     SimilarWord:
       type: object

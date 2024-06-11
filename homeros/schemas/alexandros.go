@@ -15,7 +15,7 @@ var extendedDictionaryHit = graphql.NewObject(graphql.ObjectConfig{
 	Name: "ExtendedDictionaryEntry",
 	Fields: graphql.Fields{
 		"foundInText": &graphql.Field{
-			Type: foundInTextType,
+			Type: analyzeTextResponseType,
 		},
 		"hit": &graphql.Field{
 			Type: dictionary,

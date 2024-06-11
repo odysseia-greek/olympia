@@ -3,12 +3,10 @@ module github.com/odysseia-greek/olympia/hippokrates
 go 1.22.0
 
 require (
-	github.com/cucumber/godog v0.14.0
+	github.com/cucumber/godog v0.14.1
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/plato v0.1.19
-	github.com/odysseia-greek/olympia/homeros v0.0.1
+	github.com/odysseia-greek/agora/plato v0.1.26
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8
 )
 
 require (

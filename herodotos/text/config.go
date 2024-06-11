@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
+	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
 	"github.com/odysseia-greek/agora/plato/config"
@@ -127,6 +128,10 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 		return nil, err
 	}
 
+	cache, err := archytas.CreateBadgerClient()
+	if err != nil {
+		return nil, err
+	}
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
@@ -142,6 +147,7 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	return &HerodotosHandler{
 		Index:      index,
 		Elastic:    elastic,
+		Cache:      cache,
 		Aggregator: aggregator,
 		Streamer:   streamer,
 		Cancel:     cancel,

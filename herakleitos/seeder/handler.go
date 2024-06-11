@@ -82,13 +82,14 @@ func (h *HerakleitosHandler) Add(rhemai []Text, wg *sync.WaitGroup) error {
 		buf.Write(meta)
 		buf.Write(jsonifiedText)
 
-		res, err := h.Elastic.Document().Bulk(buf, h.Index)
-		if err != nil {
-			logging.Error(err.Error())
-			return err
-		}
+		if currBatch == len(rhemai) {
+			res, err := h.Elastic.Document().Bulk(buf, h.Index)
+			if err != nil {
+				return err
+			}
 
-		h.Created = h.Created + len(res.Items)
+			h.Created = h.Created + len(res.Items)
+		}
 	}
 	return nil
 }

@@ -138,123 +138,123 @@
     "set":2,
     "content":[
       {
-        "greek":"φέρω",
-        "translation":"carry",
-        "imageURL":"carry.webp",
+        "greek":"ή καλός",
+        "translation":"beautiful",
+        "imageURL":"beautiful.webp",
         "audioFile":""
       },
       {
-        "greek":"πίνω",
-        "translation":"to drink",
-        "imageURL":"drink.webp",
+        "greek":"ἡ καρδία",
+        "translation":"heart",
+        "imageURL":"heart.webp",
         "audioFile":""
       },
       {
-        "greek":"θηράω",
-        "translation":"to hunt",
-        "imageURL":"hunt.webp",
+        "greek":"ἡ κώμη",
+        "translation":"village",
+        "imageURL":"village.webp",
         "audioFile":""
       },
       {
-        "greek":"ἄγω",
-        "translation":"to lead",
-        "imageURL":"lead.webp",
+        "greek":"ὁ κυβερνήτης",
+        "translation":"a steersman, helmsman, pilot",
+        "imageURL":"helmsman.webp",
         "audioFile":""
       },
       {
-        "greek":"λύω",
-        "translation":"loose",
-        "imageURL":"loose.webp",
+        "greek":"ή ἀδελφή",
+        "translation":"sister",
+        "imageURL":"sister.webp",
         "audioFile":""
       },
       {
-        "greek":"φιλέω",
-        "translation":"love",
-        "imageURL":"love.webp",
+        "greek":"ὁ ἀδελφός",
+        "translation":"brother",
+        "imageURL":"brother.webp",
         "audioFile":""
       },
       {
-        "greek":"ἀγγέλλω",
-        "translation":"message",
-        "imageURL":"message.webp",
+        "greek":"τό ἔργον",
+        "translation":"work",
+        "imageURL":"work.webp",
         "audioFile":""
       },
       {
-        "greek":"ὠνέομαι",
-        "translation":"to purchase",
-        "imageURL":"purchase.webp",
+        "greek":"ή κεφαλή",
+        "translation":"head",
+        "imageURL":"head.webp",
         "audioFile":""
       },
       {
-        "greek":"τρέχω",
-        "translation":"to run",
-        "imageURL":"run.webp",
+        "greek":"ὁ βίος",
+        "translation":"life",
+        "imageURL":"life.webp",
         "audioFile":""
       },
       {
-        "greek":"θύω",
-        "translation":"sacrifice",
-        "imageURL":"sacrifice.webp",
+        "greek":"ή ψυχή",
+        "translation":"breath, soul",
+        "imageURL":"soul.webp",
         "audioFile":""
       },
       {
-        "greek":"πλέω",
-        "translation":"sail",
-        "imageURL":"sail.webp",
+        "greek":"ἡ σκήνη",
+        "translation":"tent",
+        "imageURL":"tent.webp",
         "audioFile":""
       },
       {
-        "greek":"πλάσσω",
-        "translation":"shape",
-        "imageURL":"shape.webp",
+        "greek":"ή σοφία",
+        "translation":"wisdom",
+        "imageURL":"wisdom.webp",
         "audioFile":""
       },
       {
-        "greek":"ἀείδω",
-        "translation":"sing",
-        "imageURL":"sing.webp",
+        "greek":"τό τέκνον",
+        "translation":"child",
+        "imageURL":"child.webp",
         "audioFile":""
       },
       {
-        "greek":"ἀείδω",
-        "translation":"speak",
-        "imageURL":"speak.webp",
+        "greek":"ὁ ξένος",
+        "translation":"foreigner, stranger",
+        "imageURL":"foreigner.webp",
         "audioFile":""
       },
       {
-        "greek":"παύω",
-        "translation":"stop",
-        "imageURL":"stop.webp",
+        "greek":"τό ξύλον",
+        "translation":"wood",
+        "imageURL":"wood.webp",
         "audioFile":""
       },
       {
-        "greek":"διδάσκω",
-        "translation":"teach",
-        "imageURL":"teach.webp",
+        "greek":"ὁ μάντις",
+        "translation":"prophet",
+        "imageURL":"prophet.webp",
         "audioFile":""
       },
       {
-        "greek":"φρονέω",
-        "translation":"to think",
-        "imageURL":"think.webp",
+        "greek":"ὁ γέρων",
+        "translation":"old man",
+        "imageURL":"oldman.webp",
         "audioFile":""
       },
       {
-        "greek":"εἰμί",
-        "translation":"to be",
-        "imageURL":"tobe.webp",
+        "greek":"ή γεωργία",
+        "translation":"tillage, agriculture, farming",
+        "imageURL":"agriculture.webp",
         "audioFile":""
       },
       {
-        "greek":"παλαίω",
-        "translation":"to wrestle",
-        "imageURL":"wrestle.webp",
+        "greek":"ὁ νεκρός",
+        "translation":"corpse",
+        "imageURL":"corpse.webp",
         "audioFile":""
       },
       {
-        "greek":"γράφω",
-        "translation":"to write",
-        "imageURL":"write.webp",
+        "greek":"ὁ βίβλος",
+        "translation":"book",
+        "imageURL":"book.webp",
         "audioFile":""
       }
     ]

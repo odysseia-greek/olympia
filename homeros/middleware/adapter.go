@@ -31,17 +31,22 @@ func Adapt(h http.Handler, adapters ...Adapter) http.Handler {
 func SetCorsHeaders() Adapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			//allow all CORS w.Header().Set("Access-Control-Allow-Origin", "*")
-			allowedOrigin := "localhost"
-
 			origin := r.Header.Get("Origin")
-			if strings.Contains(origin, allowedOrigin) {
-				logging.Debug(fmt.Sprintf("setting CORS header for origin: %s", origin))
-				w.Header().Set("Access-Control-Allow-Origin", origin)
-				w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-				w.Header().Set("Access-Control-Allow-Methods", "GET, POST,OPTIONS")
-				if r.Method == "OPTIONS" {
-					return
+			// Allow any origin in the allowedOrigins slice
+			allowedOrigins := []string{"localhost"}
+
+			for _, o := range allowedOrigins {
+				if strings.Contains(origin, o) {
+					logging.Debug(fmt.Sprintf("setting CORS header for origin: %s", origin))
+					w.Header().Set("Access-Control-Allow-Origin", origin)
+					w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+					w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+					w.Header().Set("Access-Control-Allow-Credentials", "true")
+					if r.Method == "OPTIONS" {
+						w.WriteHeader(http.StatusOK)
+						return
+					}
+					break
 				}
 			}
 			f.ServeHTTP(w, r)

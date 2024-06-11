@@ -2,6 +2,7 @@ package text
 
 import (
 	"fmt"
+	"github.com/odysseia-greek/agora/plato/models"
 )
 
 func textAggregationQuery() map[string]interface{} {
@@ -10,38 +11,31 @@ func textAggregationQuery() map[string]interface{} {
 		"aggs": map[string]interface{}{
 			"authors": map[string]interface{}{
 				"terms": map[string]interface{}{
-					"field": "author",
+					"field": "author.keyword",
 					"size":  100,
 				},
 				"aggs": map[string]interface{}{
 					"books": map[string]interface{}{
 						"terms": map[string]interface{}{
-							"field": "book",
+							"field": "book.keyword",
 							"size":  100,
 						},
 						"aggs": map[string]interface{}{
 							"references": map[string]interface{}{
-								"nested": map[string]interface{}{
-									"path": "biblos",
+								"terms": map[string]interface{}{
+									"field": "reference",
+									"size":  100,
 								},
 								"aggs": map[string]interface{}{
-									"reference_ids": map[string]interface{}{
-										"terms": map[string]interface{}{
-											"field": "biblos.reference",
-											"size":  100,
+									"sections": map[string]interface{}{
+										"nested": map[string]interface{}{
+											"path": "rhemai",
 										},
 										"aggs": map[string]interface{}{
-											"sections": map[string]interface{}{
-												"nested": map[string]interface{}{
-													"path": "biblos.rhemai",
-												},
-												"aggs": map[string]interface{}{
-													"section_ids": map[string]interface{}{
-														"terms": map[string]interface{}{
-															"field": "biblos.rhemai.section",
-															"size":  100,
-														},
-													},
+											"section_ids": map[string]interface{}{
+												"terms": map[string]interface{}{
+													"field": "rhemai.section",
+													"size":  100,
 												},
 											},
 										},
@@ -56,8 +50,8 @@ func textAggregationQuery() map[string]interface{} {
 	}
 }
 
-func parseAggregationResults(agg map[string]interface{}) (AggregationResult, error) {
-	var result AggregationResult
+func parseAggregationResults(agg map[string]interface{}) (models.AggregationResult, error) {
+	var result models.AggregationResult
 
 	authorsAgg, ok := agg["aggregations"].(map[string]interface{})["authors"].(map[string]interface{})["buckets"].([]interface{})
 	if !ok {
@@ -66,7 +60,7 @@ func parseAggregationResults(agg map[string]interface{}) (AggregationResult, err
 
 	for _, authorBucket := range authorsAgg {
 		authorMap := authorBucket.(map[string]interface{})
-		author := ESAuthor{
+		author := models.ESAuthor{
 			Key: authorMap["key"].(string),
 		}
 
@@ -77,18 +71,18 @@ func parseAggregationResults(agg map[string]interface{}) (AggregationResult, err
 
 		for _, bookBucket := range booksAgg {
 			bookMap := bookBucket.(map[string]interface{})
-			book := ESBook{
+			book := models.ESBook{
 				Key: bookMap["key"].(string),
 			}
 
-			referencesAgg, ok := bookMap["references"].(map[string]interface{})["reference_ids"].(map[string]interface{})["buckets"].([]interface{})
+			referencesAgg, ok := bookMap["references"].(map[string]interface{})["buckets"].([]interface{})
 			if !ok {
 				return result, fmt.Errorf("error parsing references aggregation")
 			}
 
 			for _, referenceBucket := range referencesAgg {
 				referenceMap := referenceBucket.(map[string]interface{})
-				reference := Reference{
+				reference := models.Reference{
 					Key: referenceMap["key"].(string),
 				}
 
@@ -99,7 +93,7 @@ func parseAggregationResults(agg map[string]interface{}) (AggregationResult, err
 
 				for _, sectionBucket := range sectionsAgg {
 					sectionMap := sectionBucket.(map[string]interface{})
-					section := Section{
+					section := models.Section{
 						Key: sectionMap["key"].(string),
 					}
 					reference.Sections = append(reference.Sections, section)
@@ -117,25 +111,35 @@ func parseAggregationResults(agg map[string]interface{}) (AggregationResult, err
 	return result, nil
 }
 
-type Section struct {
-	Key string `json:"key"`
-}
+func createGreekTextQuery(words []string) map[string]interface{} {
+	shouldClauses := make([]map[string]interface{}, len(words))
 
-type Reference struct {
-	Key      string    `json:"key"`
-	Sections []Section `json:"sections"`
-}
+	for i, word := range words {
+		shouldClauses[i] = map[string]interface{}{
+			"nested": map[string]interface{}{
+				"path": "rhemai",
+				"query": map[string]interface{}{
+					"bool": map[string]interface{}{
+						"should": []map[string]interface{}{
+							{
+								"match": map[string]interface{}{
+									"rhemai.greek": word,
+								},
+							},
+						},
+					},
+				},
+			},
+		}
+	}
 
-type ESBook struct {
-	Key        string      `json:"key"`
-	References []Reference `json:"references"`
-}
+	boolQuery := map[string]interface{}{
+		"bool": map[string]interface{}{
+			"should": shouldClauses,
+		},
+	}
 
-type ESAuthor struct {
-	Key   string   `json:"key"`
-	Books []ESBook `json:"books"`
-}
-
-type AggregationResult struct {
-	Authors []ESAuthor `json:"authors"`
+	return map[string]interface{}{
+		"query": boolQuery,
+	}
 }

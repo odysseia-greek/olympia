@@ -4,7 +4,7 @@ spectaql:
 
 introspection:
   removeTrailingPeriodFromDescriptions: false
-  url: http://k3s-odysseia.greek:8080/graphql
+  url: http://k3d-odysseia.greek:8080/graphql
   queryNameStrategy: capitalizeFirst
   fieldExpansionDepth: 3
 
@@ -29,8 +29,8 @@ info:
 
 
 servers:
-  - url: http://k3s-odysseia.greek/graphql
-    description: k3s
+  - url: http://k3d-odysseia.greek/graphql
+    description: k3d
     production: false
   - url: https://odysseia-greek.com/graphql
     description: Production

@@ -3,44 +3,35 @@ Feature: Herodotos
   As a greek enthusiast
   We need to be able to validate the functioning of the Herodotos api
 
-  @herodotos
-  Scenario Outline: Querying authors should return a list of authors
-    Given the "<service>" is running
-    When a query is made for all authors
-    Then the author "<author>" should be included
-    And the number of authors should exceed "<results>"
-    Examples:
-      | service    | author     | results |
-      | herodotos | herodotos   |   4      |
-      | herodotos | plato   |   4      |
 
   @herodotos
-  Scenario Outline: Querying books should return a list of books
-    Given the "<service>" is running
-    When a query is made for all books by author "<author>"
-    Then the book "<book>" should be included
+  Scenario: Querying options should return all options
+    Given the "herodotos" is running
+    When a query is made for options
+    Then a list of books, authors and references should be returned
+
+  # this test assumes a certain amount of words can always be found in the texts
+  @herodotos
+  Scenario Outline: A word can be analysed for more detailed information about that word
+    Given the "herodotos" is running
+    When a the word "<word>" is analyzed
+    Then the response has a complete analyzes included
     Examples:
-      | service    | author     | book |
-      | herodotos | thucydides   | 1    |
-      | herodotos | ploutarchos   | 1        |
+      | word  |
+      | λόγος    |
+      | Ἀθηναῖος |
 
   @herodotos
-  Scenario Outline: A client can create a question with a new sentence
-    Given the "<service>" is running
-    When an author and book combination is queried
-    Then the sentenceId should be longer than "<length>"
-    And the sentence should include non-ASCII (Greek) characters
-    Examples:
-      | service    | length |
-      | herodotos | 12 |
+  Scenario: A word can be analysed and from the result a text can be created which can then be used to send in a check
+    Given the "herodotos" is running
+    When a the word "λόγος" is analyzed
+    And the response is used to create a new text
+    And the sentence is checked against the official translation
+    Then the average levenshtein should be perfect
 
   @herodotos
-  Scenario Outline: A client can return a question with an answer
-    Given the "<service>" is running
-    When an author and book combination is queried
-    Then a translation is returned
-    And a correctness percentage
-    And a sentence with a translation
-    Examples:
-      | service    |
-      | herodotos |
+  Scenario: A translation with an obvious typo should return that typo and the levhenstein should be affected
+    Given the "herodotos" is running
+    When the text with author "herodotos" and book "histories" and reference "1.1" and section "0" is checked with typos
+    Then the response should include possibleTypos
+    And the average levenshtein should be less than perfect

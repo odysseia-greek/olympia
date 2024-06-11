@@ -19,6 +19,13 @@ func textIndex(policyName string) map[string]interface{} {
 							"greek_stemmer",
 						},
 					},
+					"case_insensitive_analyzer": map[string]interface{}{
+						"type":      "custom",
+						"tokenizer": "standard",
+						"filter": []string{
+							"lowercase",
+						},
+					},
 				},
 				"filter": map[string]interface{}{
 					"greek_stop": map[string]interface{}{
@@ -35,10 +42,24 @@ func textIndex(policyName string) map[string]interface{} {
 		"mappings": map[string]interface{}{
 			"properties": map[string]interface{}{
 				"author": map[string]interface{}{
-					"type": "keyword",
+					"type":     "text",
+					"analyzer": "case_insensitive_analyzer",
+					"fields": map[string]interface{}{
+						"keyword": map[string]interface{}{
+							"type":         "keyword",
+							"ignore_above": 256,
+						},
+					},
 				},
 				"book": map[string]interface{}{
-					"type": "keyword", // Assuming book is a string now
+					"type":     "text",
+					"analyzer": "case_insensitive_analyzer",
+					"fields": map[string]interface{}{
+						"keyword": map[string]interface{}{
+							"type":         "keyword",
+							"ignore_above": 256,
+						},
+					},
 				},
 				"type": map[string]interface{}{
 					"type": "keyword",
@@ -49,7 +70,6 @@ func textIndex(policyName string) map[string]interface{} {
 				"perseusTextLink": map[string]interface{}{
 					"type": "keyword",
 				},
-
 				"rhemai": map[string]interface{}{
 					"type": "nested",
 					"properties": map[string]interface{}{

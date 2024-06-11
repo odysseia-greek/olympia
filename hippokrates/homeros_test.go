@@ -4,12 +4,10 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/models"
-	graphql "github.com/odysseia-greek/olympia/homeros/models"
+	"github.com/stretchr/testify/assert"
 	"net/http"
-	"strconv"
 )
 
 func (l *OdysseiaFixture) theGatewayIsUp() error {
@@ -25,81 +23,6 @@ func (l *OdysseiaFixture) theGatewayIsUp() error {
 	if !health.Healthy {
 		return fmt.Errorf("service was %v were a healthy status was expected", health.Healthy)
 	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) allAPIsShouldBeHealthy() error {
-	resp := l.ctx.Value(ResponseBody).(graphql.Health)
-	if !resp.Overall {
-		return fmt.Errorf("service was %v were a healthy status was expected", resp.Overall)
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) iSendAStatusGraphQLQuery() error {
-	// Define your GraphQL query
-	query := `query healthQuery {
-	status {
-		overallHealth
-		herodotos {
-			healthy
-		}
-		sokrates {
-			healthy
-		}
-		alexandros {
-			healthy
-		}
-		dionysios {
-			healthy
-		}
-	}
-}
-`
-
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var healthResponse struct {
-		Data struct {
-			Status graphql.Health `json:"status"`
-		} `json:"data"`
-	}
-	err = json.NewDecoder(response.Body).Decode(&healthResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, healthResponse.Data.Status)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) iQueryForATreeOfHerodotosAuthors() error {
-	// Define your GraphQL query
-	query := `query authors {
-	authors {
-		name
-		books {
-			book
-		}
-	}
-}
-`
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var herodotosResponse struct {
-		Data struct {
-			Authors []graphql.AuthorTree `json:"authors"`
-		} `json:"data"`
-	}
-	err = json.NewDecoder(response.Body).Decode(&herodotosResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, herodotosResponse.Data.Authors)
 
 	return nil
 }
@@ -135,12 +58,16 @@ func (l *OdysseiaFixture) theGrammarIsCheckedForWordThroughTheGateway(word strin
 func (l *OdysseiaFixture) theWordIsQueriedUsingAndThroughTheGateway(word, mode, language string) error {
 	// Define your GraphQL query
 	query := fmt.Sprintf(`query dictionary {
-	dictionary(word: "%s", language: "%s", mode: "%s") {
-		greek
-		english
-		original
-		dutch
-		linkedWord
+	dictionary(word: "%s", language: "%s", mode: "%s", searchInText: false) {
+			hits{
+				hit{
+					english
+					greek
+					dutch
+					linkedWord
+					original
+				}
+		}
 	}
 }
 `, word, language, mode)
@@ -162,21 +89,78 @@ func (l *OdysseiaFixture) theWordIsQueriedUsingAndThroughTheGateway(word, mode, 
 	return nil
 }
 
-func (l *OdysseiaFixture) authorsAndBooksShouldBeReturnedInASingleResponse() error {
-	authors := l.ctx.Value(ResponseBody).([]graphql.AuthorTree)
+func (l *OdysseiaFixture) theWordIsQueriedUsingAndAndSearchInTextThroughTheGateway(word, mode, language string) error {
+	// Define your GraphQL query
+	query := fmt.Sprintf(`query dictionary {
+	dictionary(word: "%s", language: "%s", mode: "%s", searchInText: true) {
+			hits{
+				hit{
+					english
+					greek
+					dutch
+					linkedWord
+					original
+				}
+		foundInText{
+					rootword
+					conjugations {
+						word
+						rule
+					}
+					results{
+						author
+						book
+						reference
+						referenceLink
+						text{
+							translations
+							greek
+						}
+					}
+		}
+		}
+	}
+}
+`, word, language, mode)
+	response, err := l.graphqlHelper(query)
+	if err != nil {
+		return err
+	}
 
-	if authors == nil {
-		return errors.New("empty tree returned")
+	var alexandrosResponse struct {
+		Data struct {
+			Response struct {
+				Hits []struct {
+					FoundInText struct {
+						Conjugations []models.Conjugations  `json:"conjugations"`
+						Results      []models.AnalyzeResult `json:"results"`
+						Rootword     string                 `json:"rootword"`
+					}
+					Hit models.Meros `json:"hit"`
+				} `json:"hits"`
+			} `json:"dictionary"`
+		} `json:"data"`
 	}
-	for _, author := range authors {
-		if author.Name == "" {
-			return errors.New("empty name for an author")
-		}
-		if len(author.Books) == 0 {
-			return errors.New("no books for author " + author.Name)
-		}
-	}
+
+	err = json.NewDecoder(response.Body).Decode(&alexandrosResponse)
+
+	l.ctx = context.WithValue(l.ctx, ResponseBody, alexandrosResponse.Data.Response.Hits[0].FoundInText.Results)
+
 	return nil
+}
+
+func (l *OdysseiaFixture) aFoundInTextResponseShouldIncludeResults() error {
+	results := l.ctx.Value(ResponseBody).([]models.AnalyzeResult)
+	err := assertTrue(
+		assert.True, len(results) >= 1,
+		"results %v when more than 1 expected", len(results),
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+
 }
 
 func (l *OdysseiaFixture) theDeclensionShouldBeIncludedInTheResponseAsAGatewayStruct(declension string) error {
@@ -260,11 +244,19 @@ func (l *OdysseiaFixture) iAnswerTheQuizThroughTheGateway() error {
 	english
 		}
 		foundInText{
-			rhemai{
-				author
-				greek
-				translations
-			}
+					rootword
+					conjugations {
+						word
+						rule
+					}
+					results{
+						author
+						book
+						text{
+							translations
+							greek
+						}
+					}
 		}
 	}
 	}
@@ -365,234 +357,179 @@ func (l *OdysseiaFixture) theGatewayShouldRespondWithACorrectness() error {
 	return nil
 }
 
-func (l *OdysseiaFixture) iAnswerTheSentenceThroughTheGateway() error {
-	sentence := l.ctx.Value(ResponseBody).(graphql.SentenceGraph)
-
-	query := fmt.Sprintf(`query text {
-	text(
-		author: "%s"
-		sentenceId: "%s"
-		answer: "a het the many yasm was is si aws e ui opp ti up pu small lsa er tha thet no ona oe"
-	) {
-		levenshtein
-		input
-		quiz
-		splitQuiz {
-			word
-		}
-		splitAnswer {
-			word
-		}
-		matches {
-			word
-			index
-		}
-		mistakes {
-			word
-			index
-			nonMatches {
-				match
-				levenshtein
-				index
-				percentage
+func (l *OdysseiaFixture) aQueryIsMadeForAllTextOptions() error {
+	query := `query textOptions {
+	textOptions {
+		authors {
+			key
+			books {
+				key
+				references{
+					key
+					sections{
+						key
+					}
+				}
 			}
 		}
-	}
 }
-
-`, sentence.Author, sentence.Id)
-
-	l.ctx = context.WithValue(l.ctx, ContextAuthor, sentence.Author)
-	l.ctx = context.WithValue(l.ctx, ContextId, sentence.Id)
+}`
 
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
 	}
 
-	var herodotosResponse struct {
+	var optionsResponse struct {
 		Data struct {
-			Text graphql.Answer `json:"text"`
+			Response models.AggregationResult `json:"textOptions"`
 		} `json:"data"`
 	}
-	err = json.NewDecoder(response.Body).Decode(&herodotosResponse)
+	err = json.NewDecoder(response.Body).Decode(&optionsResponse)
 
-	l.ctx = context.WithValue(l.ctx, ResponseBody, herodotosResponse.Data.Text)
+	l.ctx = context.WithValue(l.ctx, AggregateContext, optionsResponse.Data.Response)
 
 	return nil
 }
 
-func (l *OdysseiaFixture) iCreateANewSentenceResponseFromThoseMethodsWithAuthor(author string) error {
-	authorTree := l.ctx.Value(ResponseBody).([]graphql.AuthorTree)
-	var book models.Book
-	for _, auth := range authorTree {
-		if auth.Name == author {
-			book = auth.Books[GenerateRandomNumber(len(auth.Books))]
-		}
+func (l *OdysseiaFixture) thatResponseIsUsedToCreateANewText() error {
+	aggregation, ok := l.ctx.Value(AggregateContext).(models.AggregationResult)
+	if !ok {
+		return fmt.Errorf("failed to assert AggregationResult type")
 	}
 
-	query := fmt.Sprintf(`query sentence {
-	sentence(author: "%s", book: "%v") {
-		id
-		greek
-		author
-		book
-	}
+	randomAuthor := aggregation.Authors[l.randomizer.RandomNumberBaseZero(len(aggregation.Authors))]
+	randomBook := randomAuthor.Books[l.randomizer.RandomNumberBaseZero(len(randomAuthor.Books))]
+	randomRef := randomBook.References[l.randomizer.RandomNumberBaseZero(len(randomBook.References))]
+	randomSection := randomRef.Sections[l.randomizer.RandomNumberBaseZero(len(randomRef.Sections))]
+
+	query := fmt.Sprintf(`query create {
+  create(input: {author: "%s", book: "%s", reference: "%s", section: "%s"}) {
+    author
+    book
+    reference
+    rhemai {
+      greek
+      section
+      translations
+    }
+  }
 }
-`, author, book.Book)
+`, randomAuthor.Key, randomBook.Key, randomRef.Key, randomSection.Key)
 
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
 	}
 
-	var herodotosResponse struct {
+	var textResponse struct {
 		Data struct {
-			Sentence graphql.SentenceGraph `json:"sentence"`
+			Response models.Text `json:"create"`
 		} `json:"data"`
 	}
-	err = json.NewDecoder(response.Body).Decode(&herodotosResponse)
+	err = json.NewDecoder(response.Body).Decode(&textResponse)
 
-	l.ctx = context.WithValue(l.ctx, ResponseBody, herodotosResponse.Data.Sentence)
+	l.ctx = context.WithValue(l.ctx, TextContext, textResponse.Data.Response)
 
 	return nil
 }
 
-func (l *OdysseiaFixture) iCreateANewSentenceResponseFromThoseMethods() error {
-	authorTree := l.ctx.Value(ResponseBody).([]graphql.AuthorTree)
-	author := authorTree[GenerateRandomNumber(len(authorTree))]
-	book := author.Books[GenerateRandomNumber(len(author.Books))]
-
-	query := fmt.Sprintf(`query sentence {
-	sentence(author: "%s", book: "%v") {
-		id
-		greek
-		author
-		book
+func (l *OdysseiaFixture) theTextIsCheckedAgainstTheOfficialTranslation() error {
+	text, ok := l.ctx.Value(TextContext).(models.Text)
+	if !ok {
+		return fmt.Errorf("failed to assert Text type")
 	}
+
+	query := fmt.Sprintf(`query check {
+  check(input: {author: "%s", 
+		book: "%s",
+		reference: "%s",
+	translations: 
+	[
+		{
+	section: "%s",
+	translation: "%s"
+		}
+	]
+}) {
+    averageLevenshteinPercentage
+	sections{
+		section
+		answerSentence
+		levenshteinPercentage
+	}
+	possibleTypos{
+		source
+		provided
+		
+	}
+  }
 }
-`, author.Name, book.Book)
+`, text.Author, text.Book, text.Reference, text.Rhemai[0].Section, text.Rhemai[0].Translations[0])
+	response, err := l.graphqlHelper(query)
+	if err != nil {
+		return err
+	}
+
+	var checkResponse struct {
+		Data struct {
+			Response models.CheckTextResponse `json:"check"`
+		} `json:"data"`
+	}
+	err = json.NewDecoder(response.Body).Decode(&checkResponse)
+
+	l.ctx = context.WithValue(l.ctx, CheckedContext, checkResponse.Data.Response)
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theWordIsAnalyzedThroughTheGateway(word string) error {
+	query := fmt.Sprintf(`query analyze {
+	analyze(rootword: "%s") {
+		rootword
+		conjugations{
+			word
+			rule
+		}
+		results{
+			text{
+				greek
+				section
+			}
+			referenceLink
+			author
+			book
+			reference
+		}
+}
+}
+`, word)
 
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
 	}
 
-	var herodotosResponse struct {
+	var analyzeResponse struct {
 		Data struct {
-			Sentence graphql.SentenceGraph `json:"sentence"`
+			Response struct {
+				Conjugations []models.Conjugations  `json:"conjugations"`
+				Results      []models.AnalyzeResult `json:"results"`
+				Rootword     string                 `json:"rootword"`
+			} `json:"analyze"`
 		} `json:"data"`
 	}
-	err = json.NewDecoder(response.Body).Decode(&herodotosResponse)
 
-	l.ctx = context.WithValue(l.ctx, ResponseBody, herodotosResponse.Data.Sentence)
+	err = json.NewDecoder(response.Body).Decode(&analyzeResponse)
 
-	return nil
-}
-
-func (l *OdysseiaFixture) thatResponseShouldIncludeALevenshteinDistance() error {
-	answer := l.ctx.Value(ResponseBody).(graphql.Answer)
-	levenshtein, err := strconv.ParseFloat(answer.LevenshteinPercentage, 64)
-	if err != nil {
-		return err
+	analyzeContextResponse := models.AnalyzeTextResponse{
+		Rootword:     analyzeResponse.Data.Response.Rootword,
+		PartOfSpeech: "",
+		Conjugations: analyzeResponse.Data.Response.Conjugations,
+		Results:      analyzeResponse.Data.Response.Results,
 	}
 
-	if levenshtein < 1 {
-		return fmt.Errorf("expected a levenshtein higher than 1 but was: %v", levenshtein)
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) thatResponseShouldIncludeTheNumberOfMistakesWithAPercentage() error {
-	answer := l.ctx.Value(ResponseBody).(graphql.Answer)
-	misMatches := answer.NonMatchingWords
-	var typos []string
-	for _, misMatch := range misMatches {
-		for _, mistake := range misMatch.Matches {
-			percentage, err := strconv.ParseFloat(mistake.Percentage, 32)
-			if err != nil {
-				return err
-			}
-
-			if percentage > 50 {
-				typos = append(typos, mistake.Percentage)
-			}
-		}
-	}
-
-	if len(typos) == 0 {
-		return fmt.Errorf("expected mismatches to be found but found: %v", len(typos))
-	}
-
-	return nil
-}
-
-func (l *OdysseiaFixture) iUpdateMyAnswerUsingTheVerifiedTranslation() error {
-	answer := l.ctx.Value(ResponseBody).(graphql.Answer)
-	author := l.ctx.Value(ContextAuthor).(string)
-	id := l.ctx.Value(ContextId).(string)
-
-	query := fmt.Sprintf(`query text {
-	text(
-		author: "%s"
-		sentenceId: "%s"
-		answer: "%s"
-	) {
-		levenshtein
-		input
-		quiz
-		splitQuiz {
-			word
-		}
-		splitAnswer {
-			word
-		}
-		matches {
-			word
-			index
-		}
-		mistakes {
-			word
-			index
-			nonMatches {
-				match
-				levenshtein
-				index
-				percentage
-			}
-		}
-	}
-}
-
-`, author, id, answer.Quiz)
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var herodotosResponse struct {
-		Data struct {
-			Text graphql.Answer `json:"text"`
-		} `json:"data"`
-	}
-	err = json.NewDecoder(response.Body).Decode(&herodotosResponse)
-
-	l.ctx = context.WithValue(l.ctx, UpdatedAnswer, herodotosResponse.Data.Text)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) theLevenshteinScoreShouldBe(expected int) error {
-	answer := l.ctx.Value(UpdatedAnswer).(graphql.Answer)
-	levenshtein, err := strconv.ParseFloat(answer.LevenshteinPercentage, 32)
-	if err != nil {
-		return err
-	}
-
-	if expected != int(levenshtein) {
-		return fmt.Errorf("expected levenshtein to be 100 but was %v", levenshtein)
-	}
+	l.ctx = context.WithValue(l.ctx, AnalyzeContext, analyzeContextResponse)
 
 	return nil
 }

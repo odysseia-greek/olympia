@@ -4,13 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/config"
-	"github.com/odysseia-greek/agora/plato/helpers"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pab "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
@@ -26,6 +27,7 @@ type HerodotosHandler struct {
 	Index      string
 	Streamer   pb.TraceService_ChorusClient
 	Cancel     context.CancelFunc
+	Cache      archytas.Client
 }
 
 const (
@@ -34,6 +36,7 @@ const (
 	ReferenceReq string = "reference"
 	SectionReq   string = "section"
 	RootWord     string = "rootword"
+	Options      string = "texts/options"
 	Id           string = "_id"
 )
 
@@ -67,48 +70,7 @@ func (h *HerodotosHandler) health(w http.ResponseWriter, req *http.Request) {
 }
 
 // creates a new sentence for translation
-func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /createQuestion sentence createSentence
-	//
-	// Creates a new sentence for translation
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: author
-	//       in: query
-	//       description: author to be used for creating a sentence
-	//		 example: herodotos
-	//       required: true
-	//       type: string
-	//       format: author
-	//		 title: author
-	//     + name: book
-	//       in: query
-	//       description: book to be used for creating a sentence
-	//		 example: 2
-	//       required: true
-	//       type: string
-	//       format: book
-	//		 title: book
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: CreateSentenceResponse
-	//    400: ValidationError
-	//	  404: NotFoundError
-	//	  405: MethodError
-	//    502: ElasticSearchError
-	author := req.URL.Query().Get(AuthorReq)
-	book := req.URL.Query().Get(BookReq)
-	reference := req.URL.Query().Get(ReferenceReq)
-	section := req.URL.Query().Get(SectionReq)
-
+func (h *HerodotosHandler) create(w http.ResponseWriter, req *http.Request) {
 	var requestId string
 	fromContext := req.Context().Value(config.DefaultTracingName)
 	if fromContext == nil {
@@ -132,13 +94,16 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		spanID = splitID[1]
 	}
 
-	if author == "" || book == "" || reference == "" {
+	var createTextRequest models.CreateTextRequest
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&createTextRequest)
+	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "author&book&reference",
-					Message: "cannot be empty",
+					Field:   "decoding",
+					Message: err.Error(),
 				},
 			},
 		}
@@ -153,7 +118,7 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 					{
 						"match": map[string]interface{}{
 							AuthorReq: map[string]interface{}{
-								"query":         author,
+								"query":         createTextRequest.Author,
 								"operator":      "and",
 								"fuzziness":     "AUTO",
 								"prefix_length": 0,
@@ -162,7 +127,12 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 					},
 					{
 						"match": map[string]interface{}{
-							BookReq: book,
+							BookReq: createTextRequest.Book,
+						},
+					},
+					{
+						"match": map[string]interface{}{
+							ReferenceReq: createTextRequest.Reference,
 						},
 					},
 				},
@@ -197,33 +167,19 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		e := models.NotFoundError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Message: models.NotFoundMessage{
-				Type:   fmt.Sprintf("author: %s and book: %s", author, book),
+				Type:   fmt.Sprintf("author: %s and book: %s", createTextRequest.Author, createTextRequest.Book),
 				Reason: "no hits for combination",
 			},
 		}
 		middleware.ResponseWithJson(w, e)
 		return
-	}
-
-	randNumber := helpers.GenerateRandomNumber(len(response.Hits.Hits))
-	questionItem := response.Hits.Hits[randNumber]
-	id := questionItem.ID
-
-	elasticJson, _ := json.Marshal(questionItem.Source)
-	rhemaSource, err := models.UnmarshalRhema(elasticJson)
-	if err != nil || rhemaSource.Translations == nil {
-		errorMessage := fmt.Errorf("an error occurred while parsing %s", elasticJson)
-		logging.Error(errorMessage.Error())
+	} else if len(response.Hits.Hits) > 1 {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "createQuestion",
-					Message: errorMessage.Error(),
-				},
-				{
-					Field:   "translation",
-					Message: "cannot be nil",
+					Field:   "response.Hits.Hits",
+					Message: fmt.Sprintf("more than one entry found for author: %s book: %s and reference: %s", createTextRequest.Author, createTextRequest.Book, createTextRequest.Reference),
 				},
 			},
 		}
@@ -231,31 +187,48 @@ func (h *HerodotosHandler) createQuestion(w http.ResponseWriter, req *http.Reque
 		return
 	}
 
-	question := models.CreateSentenceResponse{Sentence: rhemaSource.Greek,
-		SentenceId: id}
+	elasticJson, _ := json.Marshal(response.Hits.Hits[0].Source)
+	var text models.Text
+	err = json.Unmarshal(elasticJson, &text)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "unmarshal json",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
 
-	middleware.ResponseWithJson(w, question)
+	if createTextRequest.Section != "" {
+		for _, rhema := range text.Rhemai {
+			if rhema.Section == createTextRequest.Section {
+				var sectionedText = models.Text{
+					Author:          text.Author,
+					Book:            text.Book,
+					Type:            text.Type,
+					Reference:       text.Reference,
+					PerseusTextLink: text.PerseusTextLink,
+					Rhemai: []models.Rhema{
+						rhema,
+					},
+				}
+
+				middleware.ResponseWithCustomCode(w, http.StatusOK, sectionedText)
+				return
+			}
+		}
+	}
+
+	middleware.ResponseWithCustomCode(w, http.StatusOK, text)
 }
 
 // checks the validity of an answer
-func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Request) {
-	// swagger:route POST /checkSentence sentence checkSentence
-	//
-	// Checks the sentence against a set of provided accepted answers
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: CheckSentenceResponse
-	//    400: ValidationError
-	//	  404: NotFoundError
-	//	  405: MethodError
-	//    502: ElasticSearchError
+func (h *HerodotosHandler) check(w http.ResponseWriter, req *http.Request) {
 	var requestId string
 	fromContext := req.Context().Value(config.DefaultTracingName)
 	if fromContext == nil {
@@ -279,9 +252,9 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		spanID = splitID[1]
 	}
 
-	var checkSentenceRequest models.CheckSentenceRequest
+	var checkTextRequest models.CheckTextRequest
 	decoder := json.NewDecoder(req.Body)
-	err := decoder.Decode(&checkSentenceRequest)
+	err := decoder.Decode(&checkTextRequest)
 	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -296,8 +269,36 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		return
 	}
 
-	query := h.Elastic.Builder().MatchQuery(Id, checkSentenceRequest.SentenceId)
-	elasticResult, err := h.Elastic.Query().Match(h.Index, query)
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"bool": map[string]interface{}{
+				"must": []map[string]interface{}{
+					{
+						"match": map[string]interface{}{
+							AuthorReq: map[string]interface{}{
+								"query":         checkTextRequest.Author,
+								"operator":      "and",
+								"fuzziness":     "AUTO",
+								"prefix_length": 0,
+							},
+						},
+					},
+					{
+						"match": map[string]interface{}{
+							BookReq: checkTextRequest.Book,
+						},
+					},
+					{
+						"match": map[string]interface{}{
+							ReferenceReq: checkTextRequest.Reference,
+						},
+					},
+				},
+			},
+		},
+	}
+
+	response, err := h.Elastic.Query().Match(h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -312,39 +313,30 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 	if traceCall {
 		hits := int64(0)
 		took := int64(0)
-		if elasticResult != nil {
-			hits = elasticResult.Hits.Total.Value
-			took = elasticResult.Took
+		if response != nil {
+			hits = response.Hits.Total.Value
+			took = response.Took
 		}
 		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
-	if len(elasticResult.Hits.Hits) == 0 {
+	if len(response.Hits.Hits) == 0 {
 		e := models.NotFoundError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Message: models.NotFoundMessage{
-				Type:   "no reults",
-				Reason: "elastic results 0 results",
+				Type:   fmt.Sprintf("author: %s and book: %s", checkTextRequest.Author, checkTextRequest.Book),
+				Reason: "no hits for combination",
 			},
 		}
 		middleware.ResponseWithJson(w, e)
 		return
-	}
-
-	elasticJson, _ := json.Marshal(elasticResult.Hits.Hits[0].Source)
-	original, err := models.UnmarshalRhema(elasticJson)
-	if err != nil || original.Translations == nil {
-		errorMessage := fmt.Errorf("an error occurred while parsing %s", elasticJson)
+	} else if len(response.Hits.Hits) > 1 {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "createQuestion",
-					Message: errorMessage.Error(),
-				},
-				{
-					Field:   "translation",
-					Message: "cannot be nil",
+					Field:   "response.Hits.Hits",
+					Message: fmt.Sprintf("more than one entry found for author: %s book: %s and reference: %s", checkTextRequest.Author, checkTextRequest.Book, checkTextRequest.Reference),
 				},
 			},
 		}
@@ -352,33 +344,64 @@ func (h *HerodotosHandler) checkSentence(w http.ResponseWriter, req *http.Reques
 		return
 	}
 
-	var sentence string
-	var percentage float64
-	for _, solution := range original.Translations {
-		levenshteinDist := levenshteinDistance(solution, checkSentenceRequest.ProvidedSentence)
-		lenOfLongestSentence := longestStringOfTwo(solution, checkSentenceRequest.ProvidedSentence)
-		levenshteinPerc := levenshteinDistanceInPercentage(levenshteinDist, lenOfLongestSentence)
-		if levenshteinPerc > percentage {
-			sentence = solution
-			percentage = levenshteinPerc
+	elasticJson, _ := json.Marshal(response.Hits.Hits[0].Source)
+	var text models.Text
+	err = json.Unmarshal(elasticJson, &text)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: traceID},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "unmarshal json",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	var answers []models.AnswerSection
+	var possibleTypos []models.Typo
+	var totalLevenshtein float64
+
+	for _, section := range checkTextRequest.Translations {
+		for _, sect := range text.Rhemai {
+			if section.Section == sect.Section {
+				for _, translation := range sect.Translations {
+					levenshteinDist := levenshteinDistance(translation, section.Translation)
+					lenOfLongestSentence := longestStringOfTwo(translation, section.Translation)
+					levenshteinPerc := levenshteinDistanceInPercentage(levenshteinDist, lenOfLongestSentence)
+					roundedPercentage := fmt.Sprintf("%.2f", levenshteinPerc)
+					answerSection := models.AnswerSection{
+						Section:               sect.Section,
+						LevenshteinPercentage: roundedPercentage,
+						QuizSentence:          translation,
+						AnswerSentence:        section.Translation,
+					}
+
+					if levenshteinPerc < 100.0 {
+						typos := findTypos(section.Translation, translation)
+						possibleTypos = append(possibleTypos, typos...)
+					}
+
+					totalLevenshtein += levenshteinPerc
+
+					answers = append(answers, answerSection)
+				}
+			}
 		}
 	}
 
-	roundedPercentage := fmt.Sprintf("%.2f", percentage)
+	averageLevenshtein := fmt.Sprintf("%.2f", totalLevenshtein/float64(len(answers)))
 
-	model := findMatchingWordsWithSpellingAllowance(sentence, checkSentenceRequest.ProvidedSentence)
-
-	response := models.CheckSentenceResponse{
-		LevenshteinPercentage: roundedPercentage,
-		QuizSentence:          sentence,
-		AnswerSentence:        checkSentenceRequest.ProvidedSentence,
-		MatchingWords:         model.MatchingWords,
-		NonMatchingWords:      model.NonMatchingWords,
-		SplitQuizSentence:     model.SplitQuizSentence,
-		SplitAnswerSentence:   model.SplitAnswerSentence,
+	result := models.CheckTextResponse{
+		AverageLevenshteinPercentage: averageLevenshtein,
+		Sections:                     answers,
+		PossibleTypos:                possibleTypos,
 	}
 
-	middleware.ResponseWithJson(w, response)
+	middleware.ResponseWithCustomCode(w, http.StatusOK, result)
 }
 
 func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
@@ -389,6 +412,62 @@ func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
 	} else {
 		requestId = fromContext.(string)
 	}
+	splitID := strings.Split(requestId, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	cacheItem, _ := h.Cache.Read(Options)
+	if cacheItem != nil {
+		var agg models.AggregationResult
+		err := json.Unmarshal(cacheItem, &agg)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "unmarshal json cache",
+						Message: err.Error(),
+					},
+				},
+			}
+
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		if traceCall {
+			parabasis := &pb.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: spanID,
+				SpanId:       comedy.GenerateSpanID(),
+				RequestType: &pb.ParabasisRequest_Span{
+					Span: &pb.SpanRequest{
+						Action: "TakenFromCache",
+						Status: fmt.Sprintf("status code: %d", http.StatusOK),
+					},
+				},
+			}
+			if err := h.Streamer.Send(parabasis); err != nil {
+				logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+			}
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, agg)
+		return
+	}
+
 	query := textAggregationQuery()
 
 	elasticResult, err := h.Elastic.Query().MatchRaw(h.Index, query)
@@ -434,41 +513,42 @@ func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	ttl := time.Hour
+	setCache, err := json.Marshal(result)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "unmarshall action failed internally",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	err = h.Cache.SetWithTTL(Options, string(setCache), ttl)
+	if err != nil {
+		e := models.ValidationError{
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
+			Messages: []models.ValidationMessages{
+				{
+					Field:   "cache",
+					Message: err.Error(),
+				},
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
 	middleware.ResponseWithCustomCode(w, http.StatusOK, result)
 }
 
 // analyseText fetches words and queries them in all the texts
-func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request) {
-	// swagger:route GET /texts sentence createSentence
-	//
-	// Creates a new sentence for translation
-	//
-	//	Consumes:
-	//	- application/json
-	//
-	//	Produces:
-	//	- application/json
-	//
-	//   Parameters:
-	//     + name: rootword
-	//       in: rootword
-	//       description: rootword to be searched in text
-	//		 example: herodotos
-	//       required: true
-	//       type: string
-	//       format: rootword
-	//		 title: rootword
-	//
-	//	Schemes: http, https
-	//
-	//	Responses:
-	//	  200: Rhema
-	//    400: ValidationError
-	//	  404: NotFoundError
-	//	  405: MethodError
-	//    502: ElasticSearchError
-	rootWord := req.URL.Query().Get(RootWord)
-
+func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 	var requestId string
 	fromContext := req.Context().Value(config.DefaultTracingName)
 	if fromContext == nil {
@@ -492,13 +572,16 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		spanID = splitID[1]
 	}
 
-	if rootWord == "" {
+	var analyzeTextRequest models.AnalyzeTextRequest
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&analyzeTextRequest)
+	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "rootWord",
-					Message: "cannot be empty",
+					Field:   "decoding",
+					Message: err.Error(),
 				},
 			},
 		}
@@ -511,8 +594,8 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 	md := metadata.New(map[string]string{service.HeaderKey: requestId})
 	ctx = metadata.NewOutgoingContext(context.Background(), md)
 
-	aggregatorRequest := pab.AggregatorRequest{RootWord: rootWord}
-	words, err := h.Aggregator.RetrieveSearchWords(ctx, &aggregatorRequest)
+	aggregatorRequest := pab.AggregatorRequest{RootWord: analyzeTextRequest.Rootword}
+	entry, err := h.Aggregator.RetrieveEntry(ctx, &aggregatorRequest)
 	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -527,23 +610,29 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	boolQuery := map[string]interface{}{
-		"bool": map[string]interface{}{
-			"should": make([]map[string]interface{}, len(words.Word)),
-		},
-	}
+	var conjugations []models.Conjugations
+	var words []string
+	var rootWordfound bool
 
-	for i, word := range words.Word {
-		boolQuery["bool"].(map[string]interface{})["should"].([]map[string]interface{})[i] = map[string]interface{}{
-			"match": map[string]interface{}{
-				"greek": word,
-			},
+	for _, category := range entry.Categories {
+		for _, form := range category.Forms {
+			if form.Word == entry.RootWord {
+				rootWordfound = true
+			}
+			words = append(words, form.Word)
+			conjugation := models.Conjugations{
+				Word: form.Word,
+				Rule: form.Rule,
+			}
+			conjugations = append(conjugations, conjugation)
 		}
 	}
 
-	var query = map[string]interface{}{
-		"query": boolQuery,
+	if !rootWordfound {
+		words = append(words, entry.RootWord)
 	}
+
+	query := createGreekTextQuery(words)
 
 	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
 	if err != nil {
@@ -579,20 +668,22 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 		go h.databaseSpan(hits, took, query, traceID, spanID)
 	}
 
-	var rhemas models.Rhema
+	result := models.AnalyzeTextResponse{
+		Rootword:     analyzeTextRequest.Rootword,
+		Conjugations: conjugations,
+	}
 
 	for _, hit := range response.Hits.Hits {
 		elasticJson, _ := json.Marshal(hit.Source)
-		rhemaSource, err := models.UnmarshalRhema(elasticJson)
-		errorMessage := fmt.Errorf("an error occurred while parsing %s", elasticJson)
+		var text models.Text
+		err = json.Unmarshal(elasticJson, &text)
 		if err != nil {
-			logging.Error(errorMessage.Error())
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: traceID},
 				Messages: []models.ValidationMessages{
 					{
-						Field:   "analyzeText",
-						Message: errorMessage.Error(),
+						Field:   "unmarshal json",
+						Message: err.Error(),
 					},
 				},
 			}
@@ -600,25 +691,41 @@ func (h *HerodotosHandler) analyseText(w http.ResponseWriter, req *http.Request)
 			return
 		}
 
-		var processedWords []string
-		for _, word := range words.Word {
-			processedInLoop := false
-			for _, processed := range processedWords {
-				if processed == word {
-					processedInLoop = true
+		for _, section := range text.Rhemai {
+			var processedWords []string
+			wordFound := false // Variable to track if the word is found
+			for _, word := range words {
+				processedInLoop := false
+				for _, processed := range processedWords {
+					if processed == word {
+						processedInLoop = true
+					}
+				}
+				if !processedInLoop {
+					if strings.Contains(section.Greek, word) {
+						wordFound = true // Mark that the word is found in the section
+						highlight := fmt.Sprintf("&&&%s&&&", word)
+						section.Greek = strings.ReplaceAll(section.Greek, word, highlight)
+					}
+					processedWords = append(processedWords, word)
 				}
 			}
-			if !processedInLoop {
-				highlight := fmt.Sprintf("&&&%s&&&", word)
-				rhemaSource.Greek = strings.ReplaceAll(rhemaSource.Greek, word, highlight)
-				processedWords = append(processedWords, word)
-			}
 
+			// Only add the result if the word was found
+			if wordFound {
+				res := models.AnalyzeResult{
+					ReferenceLink: fmt.Sprintf("/texts?author=%s&book=%s&reference=%s", text.Author, text.Book, text.Reference),
+					Author:        text.Author,
+					Book:          text.Book,
+					Reference:     text.Reference,
+					Text:          section,
+				}
+				result.Results = append(result.Results, res)
+			}
 		}
-		rhemas.Rhemai = append(rhemas.Rhemai, rhemaSource)
 	}
 
-	middleware.ResponseWithCustomCode(w, 200, rhemas)
+	middleware.ResponseWithCustomCode(w, 200, result)
 }
 
 func (h *HerodotosHandler) databaseSpan(hits, took int64, query map[string]interface{}, traceID, spanID string) {
@@ -694,71 +801,61 @@ func longestStringOfTwo(a, b string) int {
 	return len(b)
 }
 
-// take two sentences and creates a list of matching words and words with a typo (1 levenshtein)
-func findMatchingWordsWithSpellingAllowance(source, target string) (response models.CheckSentenceResponse) {
+// Function to find typos between two sentences
+func findTypos(provided, source string) []models.Typo {
 	s := removeCharacters(source, ",`~<>/?!.;:'\"")
-	t := removeCharacters(target, ",`~<>/?!.;:'\"")
+	p := removeCharacters(provided, ",`~<>/?!.;:'\"")
 
 	sourceSentence := strings.Split(s, " ")
-	targetSentence := strings.Split(t, " ")
+	providedSentence := strings.Split(p, " ")
 
-	response.SplitQuizSentence = sourceSentence
-	response.SplitAnswerSentence = targetSentence
+	var possibleTypos []models.Typo
 
-	//todo probably we want to check the len of the word and determine what levenshtein distance is allowed
-	//for example: the vs | tha | then | thee | dhe which one is misspelled and which should we ignore?
-	for i, wordInSource := range sourceSentence {
-		for _, wordInTarget := range targetSentence {
+	for _, wordProvided := range providedSentence {
+		wordMatched := false
+
+		for _, wordInSource := range sourceSentence {
 			sourceWord := strings.ToLower(wordInSource)
-			targetWord := strings.ToLower(wordInTarget)
+			providedWord := strings.ToLower(wordProvided)
 
-			levenshtein := levenshteinDistance(sourceWord, targetWord)
+			levenshtein := levenshteinDistance(providedWord, sourceWord)
 
-			// might be changed to one levenshtein as being typo's
+			// If an exact match is found, break out of the loop
 			if levenshtein == 0 {
-				response.MatchingWords = append(response.MatchingWords, models.MatchingWord{
-					Word:        wordInSource,
-					SourceIndex: i,
-				})
+				wordMatched = true
 				break
 			}
-		}
-	}
 
-	var slice []string
-	for _, word := range response.MatchingWords {
-		slice = append(slice, word.Word)
-	}
-
-	for i, wordInSource := range sourceSentence {
-		wordInSlice := checkSliceForItem(slice, wordInSource)
-		if !wordInSlice {
-			levenshteinModel := models.NonMatchingWord{
-				Word:        wordInSource,
-				SourceIndex: i,
-				Matches:     nil,
-			}
-			for j, wordInTarget := range targetSentence {
-				sourceWord := strings.ToLower(wordInSource)
-				targetWord := strings.ToLower(wordInTarget)
-
-				levenshtein := levenshteinDistance(sourceWord, targetWord)
-				percentage := levenshteinDistanceInPercentage(levenshtein, longestStringOfTwo(sourceWord, targetWord))
-				roundedPercentage := fmt.Sprintf("%.2f", percentage)
-
-				matchModel := models.Match{
-					Match:       wordInTarget,
-					Levenshtein: levenshtein,
-					AnswerIndex: j,
-					Percentage:  roundedPercentage,
+			// Check for a typo with a Levenshtein distance of 1
+			if levenshtein == 1 {
+				possibleTypo := models.Typo{
+					Source:   wordInSource,
+					Provided: wordProvided,
 				}
-				levenshteinModel.Matches = append(levenshteinModel.Matches, matchModel)
+				possibleTypos = append(possibleTypos, possibleTypo)
 			}
-			response.NonMatchingWords = append(response.NonMatchingWords, levenshteinModel)
+
+			// Check for a possible typo with longer words and a small Levenshtein distance
+			if levenshtein > 1 && len(sourceWord) > 10 && levenshtein <= 3 {
+				possibleTypo := models.Typo{
+					Source:   wordInSource,
+					Provided: wordProvided,
+				}
+				possibleTypos = append(possibleTypos, possibleTypo)
+			}
+		}
+
+		// If an exact match was found for the word, remove any typos added for this word
+		if wordMatched {
+			for i := len(possibleTypos) - 1; i >= 0; i-- {
+				if strings.ToLower(possibleTypos[i].Provided) == strings.ToLower(wordProvided) {
+					possibleTypos = append(possibleTypos[:i], possibleTypos[i+1:]...)
+				}
+			}
 		}
 	}
 
-	return
+	return possibleTypos
 }
 
 // takes a slice and returns a bool if value is part of the slice

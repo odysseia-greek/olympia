@@ -71,12 +71,10 @@ func TestFindMatchingWords(t *testing.T) {
 	sourceString := "This inquiry the Herodotos of Halikarnassos"
 	targetString := "This inquiry tHe Herodotus of Halikarnassus"
 
-	response := findMatchingWordsWithSpellingAllowance(sourceString, targetString)
+	response := findTypos(sourceString, targetString)
 
-	expectedSame := 4
-	expectedSameWithSpelling := 2
-	assert.Equal(t, expectedSame, len(response.MatchingWords))
-	assert.Equal(t, expectedSameWithSpelling, len(response.NonMatchingWords))
+	expectedTypos := 2
+	assert.Equal(t, expectedTypos, len(response))
 }
 
 func TestStreamlineString(t *testing.T) {
