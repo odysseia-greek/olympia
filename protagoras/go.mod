@@ -1,19 +1,16 @@
-module github.com/odysseia-greek/olympia/dionysios
+module github.com/odysseia-greek/olympia/protagoras
 
 go 1.22.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/gorilla/mux v1.8.1
 	github.com/odysseia-greek/agora/archytas v0.1.1
-	github.com/odysseia-greek/agora/aristoteles v0.1.6
-	github.com/odysseia-greek/agora/plato v0.1.28
+	github.com/odysseia-greek/agora/aristoteles v0.1.7
+	github.com/odysseia-greek/agora/plato v0.1.26
 	github.com/odysseia-greek/attike/aristophanes v0.5.9
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/odysseia-greek/olympia/aristarchos v0.0.7
-	github.com/stretchr/testify v1.9.0
-	golang.org/x/text v0.14.0
-	google.golang.org/grpc v1.63.2
+	google.golang.org/grpc v1.64.0
 )
 
 require (
@@ -85,6 +82,7 @@ require (
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/xlab/treeprint v1.2.0 // indirect
 	go.opencensus.io v0.22.5 // indirect
 	go.opentelemetry.io/otel v1.24.0 // indirect
@@ -93,10 +91,11 @@ require (
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
-	golang.org/x/oauth2 v0.17.0 // indirect
+	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/term v0.18.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240325203815-454cdb8f5daa // indirect

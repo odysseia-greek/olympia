@@ -1,12 +1,10 @@
 package seeder
 
 import (
-	"encoding/json"
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/agora/plato/service"
 	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	"strings"
 	"time"
@@ -18,7 +16,6 @@ type AnaximanderHandler struct {
 	PolicyName string
 	Elastic    elastic.Client
 	Ambassador *ptolemaios.ClientAmbassador
-	Client     service.OdysseiaClient
 }
 
 func (a *AnaximanderHandler) DeleteIndexAtStartUp() error {
@@ -75,69 +72,6 @@ func (a *AnaximanderHandler) AddToElastic(declension models.Declension) error {
 	a.Created++
 	if err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (a *AnaximanderHandler) SeedListOfGrammarWords(words []string) error {
-	healthy := false
-	standardTicks := 120 * time.Second
-	tick := 1 * time.Second
-
-	ticker := time.NewTicker(tick)
-	timeout := time.After(standardTicks)
-
-	for {
-		select {
-		case t := <-ticker.C:
-			logging.Debug(fmt.Sprintf("tick: %s", t))
-			res, _ := a.Client.Dionysios().Health("")
-			if res == nil {
-				continue
-			}
-			defer res.Body.Close()
-			var health models.Health
-			err := json.NewDecoder(res.Body).Decode(&health)
-			if err != nil {
-				continue
-			}
-
-			healthy = health.Healthy
-			if !healthy {
-				continue
-			}
-
-			ticker.Stop()
-
-		case <-timeout:
-			ticker.Stop()
-		}
-		break
-	}
-
-	var retries []string
-	for _, word := range words {
-		time.Sleep(200 * time.Millisecond)
-		response, err := a.Client.Dionysios().Grammar(word, "")
-		if err != nil {
-			logging.Error(err.Error())
-			retries = append(retries, word)
-			continue
-		}
-		logging.Debug(fmt.Sprintf("seeding word: %s - code: %v", word, response.StatusCode))
-	}
-
-	for _, word := range retries {
-		logging.Debug(fmt.Sprintf("retrying the following word: %s", word))
-		time.Sleep(200 * time.Millisecond)
-		retryResponse, err := a.Client.Dionysios().Grammar(word, "")
-		if err != nil {
-			logging.Error(err.Error())
-			continue
-		}
-
-		logging.Debug(fmt.Sprintf("seeding word: %s - code: %v", word, retryResponse.StatusCode))
 	}
 
 	return nil

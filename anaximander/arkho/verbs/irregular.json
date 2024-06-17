@@ -4,7 +4,7 @@
   "dialect": "attic",
   "declensions": [
     {
-      "declension": "εἰμῐ́",
+      "declension": "εἰμί",
       "ruleName": "1st sing - pres - ind - act",
       "searchTerm": [
         "εἰμί"
@@ -19,14 +19,14 @@
     },
     {
       "declension": "ἐστί",
-      "ruleName": "3th sing - pres - ind - act",
+      "ruleName": "3rd sing - pres - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
     },
     {
       "declension": "ἐστίν",
-      "ruleName": "3th sing - pres - ind - act",
+      "ruleName": "3rd sing - pres - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
@@ -47,14 +47,14 @@
     },
     {
       "declension": "εἰσί",
-      "ruleName": "3th plural - pres - ind - act",
+      "ruleName": "3rd plural - pres - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
     },
     {
       "declension": "εἰσίν",
-      "ruleName": "3th plural - pres - ind - act",
+      "ruleName": "3rd plural - pres - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
@@ -82,7 +82,7 @@
     },
     {
       "declension": "ἦν",
-      "ruleName": "3th sing - impf - ind - act",
+      "ruleName": "3rd sing - impf - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
@@ -103,10 +103,265 @@
     },
     {
       "declension": "ἦσαν",
-      "ruleName": "3th plural - impf - ind - act",
+      "ruleName": "3rd plural - impf - ind - act",
       "searchTerm": [
         "εἰμί"
       ]
+    },
+    {
+      "declension": "ἔσομαι",
+      "ruleName": "1st sing - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἔσῃ",
+      "ruleName": "2nd sing - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἔσεται",
+      "ruleName": "3rd sing - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἔσται",
+      "ruleName": "3rd sing - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἐσόμεθα",
+      "ruleName": "1st plural - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἔσεσθε",
+      "ruleName": "2nd plural - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "ἔσονται",
+      "ruleName": "3rd plural - fut - ind - mid",
+      "searchTerm": [
+        "εἰμί"
+      ]
+    },
+    {
+      "declension": "φημί",
+      "ruleName": "1st sing - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φής",
+      "ruleName": "2nd sing - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φησί",
+      "ruleName": "3rd sing - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φησίν",
+      "ruleName": "3rd sing - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φαμέν",
+      "ruleName": "1st plural - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φατέ",
+      "ruleName": "2nd plural - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φασί",
+      "ruleName": "3rd plural - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φασίν",
+      "ruleName": "3rd plural - pres - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+
+
+    {
+      "declension": "ἔφην",
+      "ruleName": "1st sing - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφης",
+      "ruleName": "2nd sing - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφη",
+      "ruleName": "3rd sing - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφην",
+      "ruleName": "3rd sing - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφαμεν",
+      "ruleName": "1st plural - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφατε",
+      "ruleName": "2nd plural - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφασαν",
+      "ruleName": "3rd plural - impf - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφησᾰ",
+      "ruleName": "1st sing - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφησᾰς",
+      "ruleName": "2nd sing - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφησε",
+      "ruleName": "3rd sing - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφησεν",
+      "ruleName": "3rd sing - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἐφήσᾰμεν",
+      "ruleName": "1st plural - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἐφήσᾰτε",
+      "ruleName": "2nd plural - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "ἔφησᾰν",
+      "ruleName": "3rd plural - aor - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσω",
+      "ruleName": "1st sing - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσεις",
+      "ruleName": "2nd sing - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσει",
+      "ruleName": "3rd sing - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσομεν",
+      "ruleName": "1st plural - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσετε",
+      "ruleName": "2nd plural - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσουσι",
+      "ruleName": "3rd plural - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
+    },
+    {
+      "declension": "φήσουσιν",
+      "ruleName": "3rd plural - fut - ind - act",
+      "searchTerm": [
+        "φημί"
+      ]
     }
+
   ]
 }

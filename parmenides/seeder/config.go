@@ -26,48 +26,36 @@ type EupalinosClient interface {
 	EnqueueMessage(ctx context.Context, in *pb.Epistello, opts ...grpc.CallOption) (*pb.EnqueueResponse, error)
 }
 
-func CreateNewConfig(env string) (*ParmenidesHandler, *grpc.ClientConn, error) {
-	healthCheck := true
-	if env == "DEVELOPMENT" {
-		healthCheck = false
-	}
-
-	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
+func CreateNewConfig() (*ParmenidesHandler, *grpc.ClientConn, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
 	ambassador := diplomat.NewClientAmbassador()
 
-	if healthCheck {
-		if healthCheck {
-			healthy := ambassador.WaitForHealthyState()
-			if !healthy {
-				logging.Info("tracing service not ready - restarting seems the only option")
-				os.Exit(1)
-			}
-		}
+	healthy := ambassador.WaitForHealthyState()
+	if !healthy {
+		logging.Info("tracing service not ready - restarting seems the only option")
+		os.Exit(1)
+	}
 
-		traceId := uuid.New().String()
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		defer cancel()
-		md := metadata.New(map[string]string{service.HeaderKey: traceId})
-		ctx = metadata.NewOutgoingContext(context.Background(), md)
-		vaultConfig, err := ambassador.GetSecret(ctx, &pbp.VaultRequest{})
-		if err != nil {
-			logging.Error(err.Error())
-			return nil, nil, err
-		}
+	traceId := uuid.New().String()
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+	defer cancel()
+	md := metadata.New(map[string]string{service.HeaderKey: traceId})
+	ctx = metadata.NewOutgoingContext(context.Background(), md)
+	vaultConfig, err := ambassador.GetSecret(ctx, &pbp.VaultRequest{})
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, nil, err
+	}
 
-		elasticService := aristoteles.ElasticService(tls)
+	elasticService := aristoteles.ElasticService(tls)
 
-		cfg = models.Config{
-			Service:     elasticService,
-			Username:    vaultConfig.ElasticUsername,
-			Password:    vaultConfig.ElasticPassword,
-			ElasticCERT: vaultConfig.ElasticCERT,
-		}
-	} else {
-		cfg = aristoteles.ElasticConfig(env, testOverWrite, tls)
+	cfg = models.Config{
+		Service:     elasticService,
+		Username:    vaultConfig.ElasticUsername,
+		Password:    vaultConfig.ElasticPassword,
+		ElasticCERT: vaultConfig.ElasticCERT,
 	}
 
 	elastic, err := aristoteles.NewClient(cfg)
@@ -77,13 +65,6 @@ func CreateNewConfig(env string) (*ParmenidesHandler, *grpc.ClientConn, error) {
 
 	channel := config.StringFromEnv(config.EnvChannel, config.DefaultParmenidesChannel)
 	eupalinosAddress := config.StringFromEnv(config.EnvEupalinosService, config.DefaultEupalinosService)
-
-	if healthCheck {
-		err := aristoteles.HealthCheck(elastic)
-		if err != nil {
-			return nil, nil, err
-		}
-	}
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 

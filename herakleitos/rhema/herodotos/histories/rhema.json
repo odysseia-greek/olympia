@@ -174,6 +174,29 @@
     "author":"Herodotos",
     "book":"Histories",
     "type":"work",
+    "reference":"5.6",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:5.6",
+    "rhemai":[
+      {
+        "greek": "τῶν δὲ δὴ ἄλλων Θρηίκων ἐστὶ ὅδε νόμος· πωλεῦσι τὰ τέκνα ἐπʼ ἐξαγωγῇ, τὰς δὲ παρθένους οὐ φυλάσσουσι, ἀλλʼ ἐῶσι τοῖσι αὐταὶ βούλονται ἀνδράσι μίσγεσθαι· τὰς δὲ γυναῖκας ἰσχυρῶς φυλάσσουσι καὶ ὠνέονται τὰς γυναῖκας παρὰ τῶν γονέων χρημάτων μεγάλων.",
+        "translations":[
+          "Among the rest of the Thracians, it is the custom to sell their children for export and to take no care of their maidens, allowing them to have intercourse with any man they wish. Their wives, however, they strictly guard, and buy them for a price from the parents."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "καὶ τὸ μὲν ἐστίχθαι εὐγενὲς κέκριται, τὸ δὲ ἄστικτον ἀγεννές. ἀργὸν εἶναι κάλλιστον, γῆς δὲ ἐργάτην ἀτιμότατον· τὸ ζῆν ἀπὸ πολέμου καὶ ληιστύος κάλλιστον.",
+        "translations":[
+          "To be tattooed is a sign of noble birth, while to bear no such marks is for the baser sort. The idler is most honored, the tiller of the soil most scorned; he is held in highest honor who lives by war and robbery."
+        ],
+        "section":"2"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
     "reference":"8.65",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:8.65?right=perseus-eng2",
     "rhemai":[

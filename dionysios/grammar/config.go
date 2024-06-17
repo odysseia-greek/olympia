@@ -177,7 +177,8 @@ func QueryRuleSet(es elastic.Client, index string) (*plato.DeclensionConfig, err
 		if err != nil {
 			return nil, err
 		}
-		declension, err := plato.UnmarshalDeclension(byteJson)
+		var declension plato.Declension
+		err = json.Unmarshal(byteJson, &declension)
 		if err != nil {
 			return nil, err
 		}

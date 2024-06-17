@@ -2,6 +2,7 @@ package grammar
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
@@ -156,8 +157,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 	}
 
 	cacheItem, _ := d.Cache.Read(queryWord)
+	//cacheItem, _ := d.Cache.Read("kjsndfiusdhf89s7dyf9s88duyf9sudhfiusdhf")
 	if cacheItem != nil {
-		cache, err := models.UnmarshalDeclensionTranslationResults(cacheItem)
+		var cache models.DeclensionTranslationResults
+		err := json.Unmarshal(cacheItem, &cache)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -167,41 +170,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 						Message: err.Error(),
 					},
 				},
-			}
-
-			for _, declension := range cache.Results {
-				ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-				defer cancel()
-				md := metadata.New(map[string]string{service.HeaderKey: requestId})
-				ctx = metadata.NewOutgoingContext(context.Background(), md)
-
-				speech := pba.PartOfSpeech_VERB
-
-				if strings.Contains(declension.Rule, "noun") {
-					speech = pba.PartOfSpeech_NOUN
-				}
-
-				if strings.Contains(declension.Rule, "part") {
-					speech = pba.PartOfSpeech_PARTICIPLE
-				}
-
-				request := pba.AggregatorCreationRequest{
-					Word:         declension.Word,
-					Rule:         declension.Rule,
-					RootWord:     declension.RootWord,
-					Translation:  declension.Translation,
-					PartOfSpeech: speech,
-				}
-
-				entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
-				if err != nil {
-					logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
-					continue
-				}
-
-				if entry.Created || entry.Updated {
-					logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v for word: %s and root: %s", entry.Created, entry.Created, request.Word, request.RootWord))
-				}
 			}
 
 			if traceCall {
@@ -256,11 +224,31 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			speech = pba.PartOfSpeech_PARTICIPLE
 		}
 
+		if strings.Contains(declension.Rule, "adverb") {
+			// todo change to particle at update
+			speech = pba.PartOfSpeech_PREPOSITION
+		}
+
+		if strings.Contains(declension.Rule, "conjunction") {
+			// todo change to particle at update
+			speech = pba.PartOfSpeech_PREPOSITION
+		}
+
+		if strings.Contains(declension.Rule, "preposition") {
+			// todo change to particle at update
+			speech = pba.PartOfSpeech_PREPOSITION
+		}
+
+		if strings.Contains(declension.Rule, "particle") {
+			// todo change to particle at update
+			speech = pba.PartOfSpeech_PREPOSITION
+		}
+
 		request := pba.AggregatorCreationRequest{
 			Word:         declension.Word,
 			Rule:         declension.Rule,
 			RootWord:     declension.RootWord,
-			Translation:  declension.Translation,
+			Translation:  declension.Translation[0],
 			PartOfSpeech: speech,
 		}
 
@@ -273,7 +261,7 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
 	}
 
-	stringifiedDeclension, _ := declensions.Marshal()
+	stringifiedDeclension, _ := json.Marshal(declensions)
 	ttl := time.Hour
 	err := d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
 	if err != nil {

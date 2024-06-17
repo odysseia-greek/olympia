@@ -10,13 +10,17 @@ import (
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
-	"log"
 	"net/http"
 	"strings"
 	"time"
 	"unicode"
 	"unicode/utf8"
 )
+
+var miscNames = []string{"adverb", "conjunction", "particle", "preposition"}
+var exceptionList = map[string]bool{
+	"λογάς": true,
+}
 
 // queryWordInAlexandros tries to find results for given words in the dictionary.
 // It queries the Alexandros dictionary for the stripped word and returns the search results.
@@ -68,7 +72,7 @@ func (d *DionysosHandler) removeAccents(s string) string {
 	// Apply the transformation to the input string
 	output, _, e := transform.String(t, s)
 	if e != nil {
-		log.Print(e.Error())
+		logging.Error(e.Error())
 	}
 
 	// Return the transformed string
@@ -94,6 +98,22 @@ func (d *DionysosHandler) parseDictResults(dictionaryHits models.Meros) (transla
 	return
 }
 
+func (d *DionysosHandler) isAWordWithoutDeclensions(word string) (bool, string) {
+	for _, rules := range d.DeclensionConfig.Declensions {
+		for _, m := range miscNames {
+			if rules.Type == m {
+				for _, declensionWord := range rules.Declensions {
+					if word == d.removeAccents(declensionWord.Declension) {
+						return true, rules.Type
+					}
+				}
+			}
+		}
+	}
+
+	return false, ""
+}
+
 // StartFindingRules initiates the process of finding declension rules and translations for a given word.
 // It returns the declension translation results.
 func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.DeclensionTranslationResults, error) {
@@ -114,134 +134,156 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 	var results models.DeclensionTranslationResults
 
-	// Search for declensions for the given word
-	declensions, err := d.searchForDeclensions(word)
-	if err != nil {
-		return nil, err
-	}
+	noDeclensionWord, particleForm := d.isAWordWithoutDeclensions(d.removeAccents(word))
 
-	// If declensions are found, process each declension
-	if len(declensions.Rules) > 0 {
+	if noDeclensionWord {
+		// if there are searchTerms (for example articles and pronouns) use those else just use the word
+		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
+		if err != nil {
+			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
+		}
+
+		if len(singleSearchResult) > 0 {
+			// Parse the dictionary results and create result objects
+
+			result := models.Result{
+				Word:        word,
+				Rule:        particleForm,
+				RootWord:    word,
+				Translation: []string{},
+			}
+			for _, searchResult := range singleSearchResult {
+				translation, _ := d.parseDictResults(searchResult.Hit)
+				result.Translation = append(result.Translation, translation)
+			}
+			results.Results = append(results.Results, result)
+		}
+	} else {
+		// even if the word is found as being in the misc group it might still be both
+		declensions, err := d.searchForDeclensions(word)
+		if err != nil {
+			return nil, err
+		}
+
+		// Separate first/second declensions from third declensions
+		firstSecondDeclensions := []models.Rule{}
+		thirdDeclensions := []models.Rule{}
+		remainingDeclensions := []models.Rule{}
+
 		for _, declension := range declensions.Rules {
-			// Process each search term in the declension
-			if len(declension.SearchTerms) > 0 {
-				for _, term := range declension.SearchTerms {
-					// Query the word in the Alexandros dictionary
+			if declension.Type == "firstDeclension" || declension.Type == "secondDeclension" {
+				firstSecondDeclensions = append(firstSecondDeclensions, declension)
+			} else if declension.Type == "thirdDeclension" {
+				thirdDeclensions = append(thirdDeclensions, declension)
+			} else {
+				remainingDeclensions = append(remainingDeclensions, declension)
+			}
+		}
 
-					dictionaryHits, err := d.queryWordInAlexandros(term, requestID)
-					if err != nil {
-					}
+		// Function to process declensions and query dictionary
+		processDeclensions := func(declensions []models.Rule) []models.Result {
+			processedResults := []models.Result{}
 
-					// Parse the dictionary results and create result objects
-					for _, hit := range dictionaryHits {
-						translation, article := d.parseDictResults(hit.Hit)
+			for _, declension := range declensions {
+				if len(declension.SearchTerms) > 0 {
+					for _, term := range declension.SearchTerms {
+						// Filter out potential words that have been found and are either α or ω which are exclamations
+						if utf8.RuneCountInString(term) == 1 && term != "ὁ" {
+							continue
+						}
+
+						// Query the word in the Alexandros dictionary
+						dictionaryHits, err := d.queryWordInAlexandros(term, requestID)
+						if err != nil {
+							// Handle the error
+							continue
+						}
 
 						result := models.Result{
 							Word:        word,
 							Rule:        declension.Rule,
 							RootWord:    term,
-							Translation: translation,
+							Translation: []string{},
 						}
 
-						// Skip adding the result if it already exists with the same translation
-						if len(results.Results) > 0 {
-							if translation == "" {
-								continue
+						// Parse the dictionary results and create result objects
+						for _, hit := range dictionaryHits {
+							if hit.Hit.Original != "" && hit.Hit.Original != result.RootWord {
+								result.RootWord = hit.Hit.Original
 							}
-						}
 
-						// Handle articles and filter the results accordingly
-						if article != "" {
-							switch article {
-							case "ὁ":
-								if !strings.Contains(declension.Rule, "masc") {
+							if hit.Hit.Greek != "" && hit.Hit.Greek != result.RootWord {
+								result.RootWord = hit.Hit.Greek
+							}
+
+							translation, article := d.parseDictResults(hit.Hit)
+
+							result.Translation = append(result.Translation, translation)
+
+							// Skip adding the result if it already exists with the same translation
+							if len(processedResults) > 0 {
+								if translation == "" {
 									continue
 								}
-							case "ἡ":
-								if !strings.Contains(declension.Rule, "fem") {
-									continue
-								}
-							case "τό":
-								if !strings.Contains(declension.Rule, "neut") {
-									continue
+							}
+
+							// Handle articles and filter the results accordingly
+							if article != "" {
+								switch article {
+								case "ὁ":
+									if !strings.Contains(declension.Rule, "masc") {
+										continue
+									}
+								case "ἡ":
+									if !strings.Contains(declension.Rule, "fem") {
+										continue
+									}
+								case "τό":
+									if !strings.Contains(declension.Rule, "neut") {
+										continue
+									}
 								}
 							}
 						}
 
 						// Append the result to the results slice
-						results.Results = append(results.Results, result)
+						if len(result.Translation) > 0 {
+							processedResults = append(processedResults, result)
+						}
 					}
 				}
 			}
-		}
-	} else {
-		// If no declensions are found, query the word in the Alexandros dictionary directly
-		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
-		if err != nil {
-			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
+
+			return processedResults
 		}
 
-		if len(singleSearchResult) > 0 {
-			// Parse the dictionary results and create result objects
-			for _, searchResult := range singleSearchResult {
-				translation, _ := d.parseDictResults(searchResult.Hit)
+		// Function to check if a word is in the exception list
+		isException := func(word string) bool {
+			_, found := exceptionList[word]
+			return found
+		}
 
-				// Skip adding the result if it already exists with the same translation
-				doNotAdd := false
-				for _, res := range results.Results {
-					if res.Translation == translation {
-						doNotAdd = true
-						break
-					}
-				}
-
-				if doNotAdd {
-					continue
-				}
-
-				result := models.Result{
-					Word:        word,
-					Rule:        "preposition",
-					RootWord:    searchResult.Hit.Greek,
-					Translation: translation,
-				}
-				results.Results = append(results.Results, result)
+		// Process first/second declensions
+		r := processDeclensions(firstSecondDeclensions)
+		for _, res := range r {
+			if !isException(res.RootWord) {
+				results.Results = append(results.Results, res)
 			}
 		}
-	}
 
-	// Handle additional filtering and removal of redundant results
-	if results.Results == nil {
-		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
-		if err != nil {
-			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
+		// If no results found from first/second declensions, process third declensions
+		if len(r) == 0 {
+			r = processDeclensions(thirdDeclensions)
+			for _, res := range r {
+				results.Results = append(results.Results, res)
+			}
 		}
 
-		if len(singleSearchResult) > 0 {
-			// Parse the dictionary results and create result objects
-			for _, searchResult := range singleSearchResult {
-				translation, _ := d.parseDictResults(searchResult.Hit)
-
-				// Skip adding the result if it already exists with the same translation
-				doNotAdd := false
-				for _, res := range results.Results {
-					if res.Translation == translation {
-						doNotAdd = true
-						break
-					}
-				}
-
-				if doNotAdd {
-					continue
-				}
-
-				result := models.Result{
-					Word:        word,
-					Rule:        "preposition",
-					RootWord:    searchResult.Hit.Greek,
-					Translation: translation,
-				}
-				results.Results = append(results.Results, result)
+		// If no results found from third declensions, process remaining possibilities
+		if len(remainingDeclensions) > 0 {
+			others := processDeclensions(remainingDeclensions)
+			for _, res := range others {
+				results.Results = append(results.Results, res)
 			}
 		}
 	}
@@ -253,9 +295,9 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 		for _, result := range results.Results {
 			// Create a key that represents the unique combination of Rule, Translation, and RootWord (with accents removed)
-			key := result.Rule + "|" + result.Translation + "|" + d.removeAccents(result.RootWord)
+			key := result.Rule + "|" + result.Translation[0] + "|" + d.removeAccents(result.RootWord)
 
-			if result.Rule == "preposition" || result.Translation == "" ||
+			if result.Translation[0] == "" ||
 				(result.RootWord == "η" || result.RootWord == "ο" || result.RootWord == "το") && result.Word != result.RootWord {
 				continue // Skip adding this result
 			}
@@ -275,6 +317,25 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 		// Replace the original results with the filtered results
 		results.Results = filteredResults
+	} else if len(results.Results) == 0 {
+		// a final attempt is made if the rules are empty to just find the word in the dictonary
+		dictionaryHits, err := d.queryWordInAlexandros(d.removeAccents(word), requestID)
+		if err != nil {
+			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
+		}
+
+		result := models.Result{
+			Word:        word,
+			Rule:        "no rule found",
+			RootWord:    word,
+			Translation: []string{},
+		}
+
+		for _, hit := range dictionaryHits {
+			translation, _ := d.parseDictResults(hit.Hit)
+			result.Translation = append(result.Translation, translation)
+		}
+		results.Results = append(results.Results, result)
 	}
 
 	if traceCall {
@@ -318,12 +379,54 @@ func (d *DionysosHandler) searchForDeclensions(word string) (*models.FoundRules,
 		switch declension.Type {
 		case "past":
 			contract = true
-		case "irregular":
-			// Process irregular verbs separately
-			rules := d.loopOverIrregularVerbs(word, declension.Declensions)
+		case "article":
+			var directRules models.FoundRules
+			rules, directHit := d.loopOverIrregularVerbs(word, declension.Declensions)
 			for _, rule := range rules.Rules {
-				foundRules.Rules = append(foundRules.Rules, rule)
+				if directHit {
+					directRules.Rules = append(directRules.Rules, rule)
+				} else {
+					foundRules.Rules = append(foundRules.Rules, rule)
+				}
 			}
+
+			if directHit {
+				return &directRules, nil
+			}
+
+			continue
+		case "pronoun":
+			var directRules models.FoundRules
+			rules, directHit := d.loopOverIrregularVerbs(word, declension.Declensions)
+			for _, rule := range rules.Rules {
+				if directHit {
+					directRules.Rules = append(directRules.Rules, rule)
+				} else {
+					foundRules.Rules = append(foundRules.Rules, rule)
+				}
+			}
+
+			if directHit {
+				return &directRules, nil
+			}
+
+			continue
+		case "irregular":
+			// Process irregular verbs separately and if the exact match is found we return here
+			var directRules models.FoundRules
+			rules, directHit := d.loopOverIrregularVerbs(word, declension.Declensions)
+			for _, rule := range rules.Rules {
+				if directHit {
+					directRules.Rules = append(directRules.Rules, rule)
+				} else {
+					foundRules.Rules = append(foundRules.Rules, rule)
+				}
+			}
+
+			if directHit {
+				return &directRules, nil
+			}
+
 			continue
 		default:
 			contract = false
@@ -332,8 +435,7 @@ func (d *DionysosHandler) searchForDeclensions(word string) (*models.FoundRules,
 		// Iterate over each declension form
 		for _, declensionForm := range declension.Declensions {
 			// Process the declension form and get the result
-			result := d.loopOverDeclensions(word, declensionForm, contract)
-
+			result := d.loopOverDeclensions(word, declensionForm, contract, declension.Name)
 			// Check if any rules were found
 			if len(result.Rules) >= 1 {
 				for _, rule := range result.Rules {
@@ -349,7 +451,7 @@ func (d *DionysosHandler) searchForDeclensions(word string) (*models.FoundRules,
 
 // loopOverDeclensions processes declensions for a given word and declension form.
 // It checks if the declension form matches the word and returns the found declension rules.
-func (d *DionysosHandler) loopOverDeclensions(word string, form models.DeclensionElement, prefix bool) models.FoundRules {
+func (d *DionysosHandler) loopOverDeclensions(word string, form models.DeclensionElement, prefix bool, declensionType string) models.FoundRules {
 	// Initialize the declensions variable
 	var declensions models.FoundRules
 
@@ -370,7 +472,7 @@ func (d *DionysosHandler) loopOverDeclensions(word string, form models.Declensio
 	wordInRune := []rune(d.removeAccents(word))
 
 	// If the length of the declension is greater than the word length, return empty declensions
-	if lengthOfDeclension > len(wordInRune) {
+	if lengthOfDeclension > len(wordInRune) || rootCutOff > len(wordInRune)-lengthOfDeclension {
 		return declensions
 	}
 
@@ -431,6 +533,7 @@ func (d *DionysosHandler) loopOverDeclensions(word string, form models.Declensio
 			declension := models.Rule{
 				Rule:        form.RuleName,
 				SearchTerms: words,
+				Type:        declensionType,
 			}
 			declensions.Rules = append(declensions.Rules, declension)
 		}
@@ -442,7 +545,7 @@ func (d *DionysosHandler) loopOverDeclensions(word string, form models.Declensio
 
 // loopOverIrregularVerbs processes irregular verbs for a given word.
 // It checks if the stripped word matches the stripped outcome word and returns the found declension rules.
-func (d *DionysosHandler) loopOverIrregularVerbs(word string, declensions []models.DeclensionElement) models.FoundRules {
+func (d *DionysosHandler) loopOverIrregularVerbs(word string, declensions []models.DeclensionElement) (models.FoundRules, bool) {
 	// Initialize the rules variable
 	var rules models.FoundRules
 
@@ -451,6 +554,14 @@ func (d *DionysosHandler) loopOverIrregularVerbs(word string, declensions []mode
 
 	// Iterate over each declension outcome
 	for _, outcome := range declensions {
+		if word == outcome.Declension {
+			rules.Rules = append(rules.Rules, models.Rule{
+				Rule:        outcome.RuleName,
+				SearchTerms: outcome.SearchTerm,
+			})
+
+			return rules, true
+		}
 		// Remove accents from the outcome word
 		strippedOutcomeWord := d.removeAccents(outcome.Declension)
 
@@ -468,15 +579,26 @@ func (d *DionysosHandler) loopOverIrregularVerbs(word string, declensions []mode
 	}
 
 	// Return the found declension rules
-	return rules
+	return rules, false
 }
 
 // containsRule checks if a given rule is already present in the rules slice.
 // It compares both the rule string and the search terms to determine if they are the same.
 func (d *DionysosHandler) containsRule(rules []models.Rule, rule models.Rule) bool {
 	for _, r := range rules {
-		if d.slicesEqual(r.SearchTerms, rule.SearchTerms) && r.Rule == rule.Rule {
-			return true
+		if r.Rule == rule.Rule {
+			if d.slicesEqual(r.SearchTerms, rule.SearchTerms) {
+				return true
+			}
+
+			for _, term := range r.SearchTerms {
+				for _, innerSearchTerm := range rule.SearchTerms {
+					if term == innerSearchTerm {
+						return true
+					}
+				}
+			}
+
 		}
 	}
 	return false

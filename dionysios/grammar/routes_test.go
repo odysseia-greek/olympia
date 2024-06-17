@@ -137,7 +137,7 @@ func TestCheckGrammarEndPointNouns(t *testing.T) {
 	t.Run("HappyPathPreposition", func(t *testing.T) {
 		fixtureFile := "dionysosPreposition"
 		mockCode := 200
-		expected := "preposition"
+		expected := "particle"
 		mockElasticClient, err := elastic.NewMockClient(fixtureFile, mockCode)
 		assert.Nil(t, err)
 		inMemoryCache, err := archytas.NewInMemoryBadgerClient()

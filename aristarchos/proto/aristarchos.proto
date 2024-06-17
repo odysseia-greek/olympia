@@ -5,7 +5,7 @@ package olympia_aristarchos;
 
 
 service Aristarchos {
-  rpc CreateNewEntry (AggregatorCreationRequest) returns (AggregatorCreationResponse) {}
+  rpc CreateNewEntry(stream AggregatorCreationRequest) returns (AggregatorStreamResponse);
   rpc RetrieveEntry (AggregatorRequest) returns (RootWordResponse) {}
   rpc RetrieveSearchWords (AggregatorRequest) returns (SearchWordResponse) {}
   rpc Health (HealthRequest) returns (HealthResponse) {}
@@ -21,6 +21,11 @@ enum PartOfSpeech {
   NOUN = 2;
   PARTICIPLE = 3;
   PREPOSITION = 4;
+  PARTICLE = 5;
+  ADVERB = 6;
+  CONJUNCTION = 7;
+  ARTICLE = 8;
+  PRONOUN = 9;
 }
 
 message AggregatorCreationRequest {
@@ -34,6 +39,10 @@ message AggregatorCreationRequest {
 message AggregatorCreationResponse {
   bool created = 1;
   bool updated = 2;
+}
+
+message AggregatorStreamResponse {
+  string ack = 1;
 }
 
 message SearchWordResponse {
