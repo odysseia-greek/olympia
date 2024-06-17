@@ -34,6 +34,7 @@ message AggregatorCreationRequest {
   string root_word = 3;
   string translation = 4;
   PartOfSpeech part_of_speech = 5;
+  string trace_id = 6;
 }
 
 message AggregatorCreationResponse {

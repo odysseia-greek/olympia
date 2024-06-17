@@ -14,7 +14,6 @@ import (
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
-	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
 	"net/http"
 	"strings"
@@ -28,7 +27,7 @@ type DionysosHandler struct {
 	Client           service.OdysseiaClient
 	DeclensionConfig models.DeclensionConfig
 	Streamer         pb.TraceService_ChorusClient
-	Aggregator       *aristarchos.ClientAggregator
+	Aggregator       pba.Aristarchos_CreateNewEntryClient
 	Cancel           context.CancelFunc
 }
 
@@ -156,8 +155,8 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	cacheItem, _ := d.Cache.Read(queryWord)
-	//cacheItem, _ := d.Cache.Read("kjsndfiusdhf89s7dyf9s88duyf9sudhfiusdhf")
+	//cacheItem, _ := d.Cache.Read(queryWord)
+	cacheItem, _ := d.Cache.Read("kjsndfiusdhf89s7dyf9s88duyf9sudhfiusdhf")
 	if cacheItem != nil {
 		var cache models.DeclensionTranslationResults
 		err := json.Unmarshal(cacheItem, &cache)
@@ -220,31 +219,35 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			speech = pba.PartOfSpeech_NOUN
 		}
 
-		if strings.Contains(declension.Rule, "part") {
+		if declension.Rule == "participle" {
 			speech = pba.PartOfSpeech_PARTICIPLE
 		}
 
 		if strings.Contains(declension.Rule, "adverb") {
-			// todo change to particle at update
-			speech = pba.PartOfSpeech_PREPOSITION
+			speech = pba.PartOfSpeech_ADVERB
 		}
 
 		if strings.Contains(declension.Rule, "conjunction") {
-			// todo change to particle at update
-			speech = pba.PartOfSpeech_PREPOSITION
+			speech = pba.PartOfSpeech_CONJUNCTION
 		}
 
 		if strings.Contains(declension.Rule, "preposition") {
-			// todo change to particle at update
 			speech = pba.PartOfSpeech_PREPOSITION
 		}
 
-		if strings.Contains(declension.Rule, "particle") {
-			// todo change to particle at update
-			speech = pba.PartOfSpeech_PREPOSITION
+		if declension.Rule == "particle" {
+			speech = pba.PartOfSpeech_PARTICLE
 		}
 
-		request := pba.AggregatorCreationRequest{
+		if strings.Contains(declension.Rule, "pronoun") {
+			speech = pba.PartOfSpeech_PRONOUN
+		}
+
+		if strings.Contains(declension.Rule, "article") {
+			speech = pba.PartOfSpeech_ARTICLE
+		}
+
+		request := &pba.AggregatorCreationRequest{
 			Word:         declension.Word,
 			Rule:         declension.Rule,
 			RootWord:     declension.RootWord,
@@ -252,13 +255,9 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			PartOfSpeech: speech,
 		}
 
-		entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
-		if err != nil {
-			logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
-			continue
+		if err := d.Aggregator.Send(request); err != nil {
+			logging.Error(fmt.Sprintf("failed to send aggregator data: %v", err))
 		}
-
-		logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
 	}
 
 	stringifiedDeclension, _ := json.Marshal(declensions)

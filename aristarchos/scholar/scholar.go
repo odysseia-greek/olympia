@@ -27,8 +27,6 @@ func (a *AggregatorServiceImpl) Health(context.Context, *pb.HealthRequest) (*pb.
 }
 
 func (a *AggregatorServiceImpl) CreateNewEntry(stream pb.Aristarchos_CreateNewEntryServer) error {
-	ctx := stream.Context()
-
 	for {
 		in, err := stream.Recv()
 		if err == io.EOF {
@@ -40,7 +38,7 @@ func (a *AggregatorServiceImpl) CreateNewEntry(stream pb.Aristarchos_CreateNewEn
 			return err
 		}
 
-		resp, err := a.createOrUpdate(ctx, in)
+		resp, err := a.createOrUpdate(in)
 		if err != nil {
 			return err
 		} else {
@@ -50,15 +48,9 @@ func (a *AggregatorServiceImpl) CreateNewEntry(stream pb.Aristarchos_CreateNewEn
 	}
 }
 
-func (a *AggregatorServiceImpl) createOrUpdate(ctx context.Context, request *pb.AggregatorCreationRequest) (*pb.AggregatorCreationResponse, error) {
+func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationRequest) (*pb.AggregatorCreationResponse, error) {
 	startTime := time.Now()
-	requestID, ok := ctx.Value(config.DefaultTracingName).(string)
-	if !ok {
-		logging.Error("could not extract combinedId")
-		requestID = "donot+trace+0"
-	}
-
-	splitID := strings.Split(requestID, "+")
+	splitID := strings.Split(request.TraceId, "+")
 
 	traceCall := false
 	var traceID, spanID string
