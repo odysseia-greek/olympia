@@ -40,9 +40,7 @@ func main() {
 
 	logging.Debug("creating config")
 
-	env := os.Getenv("ENV")
-
-	handler, conn, err := seeder.CreateNewConfig(env)
+	handler, conn, err := seeder.CreateNewConfig()
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

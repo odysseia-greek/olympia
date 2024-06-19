@@ -24,7 +24,7 @@ func TestCheckGrammarEndPointIrregularVerb(t *testing.T) {
 		for _, declension := range declensionConfig.Declensions {
 			switch declension.Name {
 			case "irregular":
-				rules := handler.loopOverIrregularVerbs(searchWord, declension.Declensions)
+				rules, _ := handler.loopOverIrregularVerbs(searchWord, declension.Declensions)
 				for _, rule := range rules.Rules {
 					foundRules.Rules = append(foundRules.Rules, rule)
 				}
@@ -94,7 +94,7 @@ func TestDeclensionImperfectumResult(t *testing.T) {
 			switch declension.Name {
 			case "imperfect":
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -139,7 +139,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -170,7 +170,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -201,7 +201,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -240,7 +240,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -278,7 +278,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -317,7 +317,7 @@ func TestDeclensionAoristResult(t *testing.T) {
 			switch declension.Name {
 			case name:
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -362,7 +362,7 @@ func TestDeclensionParticiplesResult(t *testing.T) {
 			switch declension.Type {
 			case "participia":
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -400,7 +400,7 @@ func TestDeclensionParticiplesResult(t *testing.T) {
 			switch declension.Type {
 			case "participia":
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}
@@ -438,7 +438,7 @@ func TestDeclensionParticiplesResult(t *testing.T) {
 			switch declension.Type {
 			case "participia":
 				for _, element := range declension.Declensions {
-					rules := handler.loopOverDeclensions(searchWord, element, contraction)
+					rules := handler.loopOverDeclensions(searchWord, element, contraction, "")
 					for _, rule := range rules.Rules {
 						foundRules.Rules = append(foundRules.Rules, rule)
 					}

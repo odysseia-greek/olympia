@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AristarchosClient interface {
-	CreateNewEntry(ctx context.Context, in *AggregatorCreationRequest, opts ...grpc.CallOption) (*AggregatorCreationResponse, error)
+	CreateNewEntry(ctx context.Context, opts ...grpc.CallOption) (Aristarchos_CreateNewEntryClient, error)
 	RetrieveEntry(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*RootWordResponse, error)
 	RetrieveSearchWords(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*SearchWordResponse, error)
 	Health(ctx context.Context, in *HealthRequest, opts ...grpc.CallOption) (*HealthResponse, error)
@@ -36,13 +36,38 @@ func NewAristarchosClient(cc grpc.ClientConnInterface) AristarchosClient {
 	return &aristarchosClient{cc}
 }
 
-func (c *aristarchosClient) CreateNewEntry(ctx context.Context, in *AggregatorCreationRequest, opts ...grpc.CallOption) (*AggregatorCreationResponse, error) {
-	out := new(AggregatorCreationResponse)
-	err := c.cc.Invoke(ctx, "/olympia_aristarchos.Aristarchos/CreateNewEntry", in, out, opts...)
+func (c *aristarchosClient) CreateNewEntry(ctx context.Context, opts ...grpc.CallOption) (Aristarchos_CreateNewEntryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Aristarchos_ServiceDesc.Streams[0], "/olympia_aristarchos.Aristarchos/CreateNewEntry", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &aristarchosCreateNewEntryClient{stream}
+	return x, nil
+}
+
+type Aristarchos_CreateNewEntryClient interface {
+	Send(*AggregatorCreationRequest) error
+	CloseAndRecv() (*AggregatorStreamResponse, error)
+	grpc.ClientStream
+}
+
+type aristarchosCreateNewEntryClient struct {
+	grpc.ClientStream
+}
+
+func (x *aristarchosCreateNewEntryClient) Send(m *AggregatorCreationRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *aristarchosCreateNewEntryClient) CloseAndRecv() (*AggregatorStreamResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(AggregatorStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *aristarchosClient) RetrieveEntry(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*RootWordResponse, error) {
@@ -76,7 +101,7 @@ func (c *aristarchosClient) Health(ctx context.Context, in *HealthRequest, opts 
 // All implementations must embed UnimplementedAristarchosServer
 // for forward compatibility
 type AristarchosServer interface {
-	CreateNewEntry(context.Context, *AggregatorCreationRequest) (*AggregatorCreationResponse, error)
+	CreateNewEntry(Aristarchos_CreateNewEntryServer) error
 	RetrieveEntry(context.Context, *AggregatorRequest) (*RootWordResponse, error)
 	RetrieveSearchWords(context.Context, *AggregatorRequest) (*SearchWordResponse, error)
 	Health(context.Context, *HealthRequest) (*HealthResponse, error)
@@ -87,8 +112,8 @@ type AristarchosServer interface {
 type UnimplementedAristarchosServer struct {
 }
 
-func (UnimplementedAristarchosServer) CreateNewEntry(context.Context, *AggregatorCreationRequest) (*AggregatorCreationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateNewEntry not implemented")
+func (UnimplementedAristarchosServer) CreateNewEntry(Aristarchos_CreateNewEntryServer) error {
+	return status.Errorf(codes.Unimplemented, "method CreateNewEntry not implemented")
 }
 func (UnimplementedAristarchosServer) RetrieveEntry(context.Context, *AggregatorRequest) (*RootWordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RetrieveEntry not implemented")
@@ -112,22 +137,30 @@ func RegisterAristarchosServer(s grpc.ServiceRegistrar, srv AristarchosServer) {
 	s.RegisterService(&Aristarchos_ServiceDesc, srv)
 }
 
-func _Aristarchos_CreateNewEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AggregatorCreationRequest)
-	if err := dec(in); err != nil {
+func _Aristarchos_CreateNewEntry_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(AristarchosServer).CreateNewEntry(&aristarchosCreateNewEntryServer{stream})
+}
+
+type Aristarchos_CreateNewEntryServer interface {
+	SendAndClose(*AggregatorStreamResponse) error
+	Recv() (*AggregatorCreationRequest, error)
+	grpc.ServerStream
+}
+
+type aristarchosCreateNewEntryServer struct {
+	grpc.ServerStream
+}
+
+func (x *aristarchosCreateNewEntryServer) SendAndClose(m *AggregatorStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *aristarchosCreateNewEntryServer) Recv() (*AggregatorCreationRequest, error) {
+	m := new(AggregatorCreationRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
-	if interceptor == nil {
-		return srv.(AristarchosServer).CreateNewEntry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/olympia_aristarchos.Aristarchos/CreateNewEntry",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AristarchosServer).CreateNewEntry(ctx, req.(*AggregatorCreationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return m, nil
 }
 
 func _Aristarchos_RetrieveEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -192,10 +225,6 @@ var Aristarchos_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AristarchosServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateNewEntry",
-			Handler:    _Aristarchos_CreateNewEntry_Handler,
-		},
-		{
 			MethodName: "RetrieveEntry",
 			Handler:    _Aristarchos_RetrieveEntry_Handler,
 		},
@@ -208,6 +237,12 @@ var Aristarchos_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Aristarchos_Health_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "CreateNewEntry",
+			Handler:       _Aristarchos_CreateNewEntry_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "proto/aristarchos.proto",
 }

@@ -2,6 +2,7 @@ package grammar
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
@@ -14,7 +15,6 @@ import (
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
-	"google.golang.org/grpc/metadata"
 	"net/http"
 	"strings"
 	"time"
@@ -27,8 +27,10 @@ type DionysosHandler struct {
 	Client           service.OdysseiaClient
 	DeclensionConfig models.DeclensionConfig
 	Streamer         pb.TraceService_ChorusClient
-	Aggregator       *aristarchos.ClientAggregator
-	Cancel           context.CancelFunc
+	Aggregator       pba.Aristarchos_CreateNewEntryClient
+	StreamerCancel   context.CancelFunc
+	AggregatorCancel context.CancelFunc
+	AggregatorClient *aristarchos.ClientAggregator
 }
 
 // PingPong pongs the ping
@@ -157,7 +159,8 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 
 	cacheItem, _ := d.Cache.Read(queryWord)
 	if cacheItem != nil {
-		cache, err := models.UnmarshalDeclensionTranslationResults(cacheItem)
+		var cache models.DeclensionTranslationResults
+		err := json.Unmarshal(cacheItem, &cache)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -167,41 +170,6 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 						Message: err.Error(),
 					},
 				},
-			}
-
-			for _, declension := range cache.Results {
-				ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-				defer cancel()
-				md := metadata.New(map[string]string{service.HeaderKey: requestId})
-				ctx = metadata.NewOutgoingContext(context.Background(), md)
-
-				speech := pba.PartOfSpeech_VERB
-
-				if strings.Contains(declension.Rule, "noun") {
-					speech = pba.PartOfSpeech_NOUN
-				}
-
-				if strings.Contains(declension.Rule, "part") {
-					speech = pba.PartOfSpeech_PARTICIPLE
-				}
-
-				request := pba.AggregatorCreationRequest{
-					Word:         declension.Word,
-					Rule:         declension.Rule,
-					RootWord:     declension.RootWord,
-					Translation:  declension.Translation,
-					PartOfSpeech: speech,
-				}
-
-				entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
-				if err != nil {
-					logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
-					continue
-				}
-
-				if entry.Created || entry.Updated {
-					logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v for word: %s and root: %s", entry.Created, entry.Created, request.Word, request.RootWord))
-				}
 			}
 
 			if traceCall {
@@ -223,6 +191,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			middleware.ResponseWithJson(w, e)
 			return
 		}
+		err = d.sendWordsToAggregator(&cache, requestId)
+		if err != nil {
+			logging.Error(err.Error())
+		}
 		middleware.ResponseWithJson(w, cache)
 		return
 	}
@@ -240,11 +212,24 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
+	err := d.sendWordsToAggregator(declensions, requestId)
+
+	stringifiedDeclension, _ := json.Marshal(declensions)
+	ttl := time.Hour
+	err = d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
+
+	if err != nil {
+		logging.Error(fmt.Sprintf("error setting cache: %s", err.Error()))
+	}
+
+	middleware.ResponseWithJson(w, *declensions)
+}
+
+func (d *DionysosHandler) sendWordsToAggregator(declensions *models.DeclensionTranslationResults, requestID string) error {
 	for _, declension := range declensions.Results {
-		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-		defer cancel()
-		md := metadata.New(map[string]string{service.HeaderKey: requestId})
-		ctx = metadata.NewOutgoingContext(context.Background(), md)
+		if len(declension.Translation) == 0 {
+			continue
+		}
 
 		speech := pba.PartOfSpeech_VERB
 
@@ -252,43 +237,95 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			speech = pba.PartOfSpeech_NOUN
 		}
 
-		if strings.Contains(declension.Rule, "part") {
+		if declension.Rule == "participle" {
 			speech = pba.PartOfSpeech_PARTICIPLE
 		}
 
-		request := pba.AggregatorCreationRequest{
+		if strings.Contains(declension.Rule, "adverb") {
+			speech = pba.PartOfSpeech_ADVERB
+		}
+
+		if strings.Contains(declension.Rule, "conjunction") {
+			speech = pba.PartOfSpeech_CONJUNCTION
+		}
+
+		if strings.Contains(declension.Rule, "preposition") {
+			speech = pba.PartOfSpeech_PREPOSITION
+		}
+
+		if declension.Rule == "particle" {
+			speech = pba.PartOfSpeech_PARTICLE
+		}
+
+		if strings.Contains(declension.Rule, "pronoun") {
+			speech = pba.PartOfSpeech_PRONOUN
+		}
+
+		if strings.Contains(declension.Rule, "article") {
+			speech = pba.PartOfSpeech_ARTICLE
+			if strings.Contains(declension.RootWord, " ") {
+				continue
+			}
+		}
+
+		processedRootWord := d.processRootWord(declension.RootWord)
+
+		request := &pba.AggregatorCreationRequest{
 			Word:         declension.Word,
 			Rule:         declension.Rule,
-			RootWord:     declension.RootWord,
-			Translation:  declension.Translation,
+			RootWord:     processedRootWord,
+			Translation:  declension.Translation[0],
 			PartOfSpeech: speech,
+			TraceId:      requestID,
 		}
 
-		entry, err := d.Aggregator.CreateNewEntry(ctx, &request)
-		if err != nil {
-			logging.Error(fmt.Sprintf("failed to created entry in aggregator: %s", err.Error()))
-			continue
+		if err := d.Aggregator.Send(request); err != nil {
+			d.reestablishStream()
+			if err = d.Aggregator.Send(request); err != nil {
+				return err
+			}
 		}
+	}
+	return nil
+}
 
-		logging.Debug(fmt.Sprintf("new entry in aggregator created: %v updated: %v", entry.Created, entry.Created))
+func (d *DionysosHandler) processRootWord(rootWord string) string {
+	if strings.Contains(rootWord, "–") {
+		parts := strings.Split(rootWord, "–")
+		if strings.Contains(parts[0], ",") {
+			innerParts := strings.Split(parts[0], ",")
+			return strings.TrimSpace(innerParts[0])
+		}
+		return strings.TrimSpace(parts[0])
+	}
+	return strings.TrimSpace(rootWord)
+}
+
+func (d *DionysosHandler) reestablishStream() {
+	logging.Debug("stream is invalid so resetting stream")
+	if d.AggregatorCancel != nil {
+		d.AggregatorCancel()
 	}
 
-	stringifiedDeclension, _ := declensions.Marshal()
-	ttl := time.Hour
-	err := d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
 	if err != nil {
-		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Messages: []models.ValidationMessages{
-				{
-					Field:   "cache",
-					Message: err.Error(),
-				},
-			},
-		}
-		middleware.ResponseWithJson(w, e)
+		logging.Error(err.Error())
+		return
+	}
+	aggregatorHealthy := aggregator.WaitForHealthyState()
+	if !aggregatorHealthy {
+		logging.Error("aggregator service not ready")
 		return
 	}
 
-	middleware.ResponseWithJson(w, *declensions)
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := d.AggregatorClient.CreateNewEntry(aggrContext)
+	if err != nil {
+		logging.Error(err.Error())
+		return
+	}
+
+	d.Aggregator = aristarchosStreamer
+	d.AggregatorCancel = aggregatorCancel
 }

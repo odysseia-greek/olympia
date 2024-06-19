@@ -149,9 +149,29 @@ Feature: Dionysios
     Given the "<service>" is running
     When the grammar is checked for word "<word>"
     Then the number of results should be equal to or exceed "<results>"
-    And the number of translations should be equal to er exceed "<translations>"
     And the number of declensions should be equal to or exceed "<declensions>"
     Examples:
-      | service   | results | translations | declensions | word  |
-      | dionysios | 2       | 1            | 2           | δῶρα  |
-      | dionysios | 2       | 2            | 1           | μάχων |
+      | service   | results | declensions | word  |
+      | dionysios | 2       | 2           | δῶρα  |
+
+
+  @dionysios
+  Scenario Outline: The word λόγῶν does not decline to λογάς since there is an exception for that word
+    Given the "<service>" is running
+    When the grammar is checked for word "<word>"
+    Then the result should just be "<validRule>" as a rule
+    And the rootWord should not include "<invalidRootWord>"
+    And the rootWord should include "<validRootWord>"
+    Examples:
+      | service   | validRule                  | invalidRootWord | validRootWord | word  |
+      | dionysios | noun - plural - masc - gen | λογάς           | λόγος         | λόγῶν |
+
+    @dionysios
+    Scenario Outline: A word that can be found as a first or second declension and a third gets returned as a first or second declension and not a third
+      Given the "<service>" is running
+      When the grammar is checked for word "<word>"
+      Then the result should just be "<validRule>" as a rule
+      And not "<invalidRule>" as a rule
+      Examples:
+        | service   | validRule                | invalidRule              | word     |
+        | dionysios | noun - sing - masc - nom | noun - sing - fem - nom  | νεανίας  |

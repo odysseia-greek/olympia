@@ -143,11 +143,23 @@ func CreateNewConfig(ctx context.Context) (*DionysosHandler, error) {
 	}
 
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
-	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
 	aggregatorHealthy := aggregator.WaitForHealthyState()
 	if !aggregatorHealthy {
 		logging.Debug("aggregator service not ready - restarting seems the only option")
 		os.Exit(1)
+	}
+
+	// New context for aggregator streamer
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := aggregator.CreateNewEntry(aggrContext)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
@@ -159,8 +171,10 @@ func CreateNewConfig(ctx context.Context) (*DionysosHandler, error) {
 		Client:           client,
 		DeclensionConfig: plato.DeclensionConfig{},
 		Streamer:         streamer,
-		Aggregator:       aggregator,
-		Cancel:           cancel,
+		Aggregator:       aristarchosStreamer,
+		AggregatorClient: aggregator,
+		AggregatorCancel: aggregatorCancel,
+		StreamerCancel:   cancel,
 	}, nil
 }
 
@@ -177,7 +191,8 @@ func QueryRuleSet(es elastic.Client, index string) (*plato.DeclensionConfig, err
 		if err != nil {
 			return nil, err
 		}
-		declension, err := plato.UnmarshalDeclension(byteJson)
+		var declension plato.Declension
+		err = json.Unmarshal(byteJson, &declension)
 		if err != nil {
 			return nil, err
 		}

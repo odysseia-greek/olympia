@@ -7,12 +7,12 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/odysseia-greek/agora/archytas v0.1.1
 	github.com/odysseia-greek/agora/aristoteles v0.1.7
-	github.com/odysseia-greek/agora/plato v0.1.26
+	github.com/odysseia-greek/agora/plato v0.1.28
 	github.com/odysseia-greek/attike/aristophanes v0.5.9
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
-	github.com/odysseia-greek/olympia/aristarchos v0.0.7
+	github.com/odysseia-greek/olympia/aristarchos v0.0.10
 	github.com/stretchr/testify v1.9.0
-	google.golang.org/grpc v1.63.2
+	google.golang.org/grpc v1.64.0
 )
 
 require (
@@ -92,7 +92,7 @@ require (
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
-	golang.org/x/oauth2 v0.17.0 // indirect
+	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/term v0.18.0 // indirect

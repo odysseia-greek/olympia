@@ -21,41 +21,34 @@ const (
 )
 
 func CreateNewConfig(env string) (*AnaximanderHandler, error) {
-	healthCheck := true
-
-	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
 	ambassador := diplomat.NewClientAmbassador()
-	if healthCheck {
-		healthy := ambassador.WaitForHealthyState()
-		if !healthy {
-			logging.Info("tracing service not ready - restarting seems the only option")
-			os.Exit(1)
-		}
+	healthy := ambassador.WaitForHealthyState()
+	if !healthy {
+		logging.Info("tracing service not ready - restarting seems the only option")
+		os.Exit(1)
+	}
 
-		traceId := uuid.New().String()
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		defer cancel()
-		md := metadata.New(map[string]string{service.HeaderKey: traceId})
-		ctx = metadata.NewOutgoingContext(context.Background(), md)
-		vaultConfig, err := ambassador.GetSecret(ctx, &pb.VaultRequest{})
-		if err != nil {
-			logging.Error(err.Error())
-			return nil, err
-		}
+	traceId := uuid.New().String()
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+	defer cancel()
+	md := metadata.New(map[string]string{service.HeaderKey: traceId})
+	ctx = metadata.NewOutgoingContext(context.Background(), md)
+	vaultConfig, err := ambassador.GetSecret(ctx, &pb.VaultRequest{})
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
 
-		elasticService := aristoteles.ElasticService(tls)
+	elasticService := aristoteles.ElasticService(tls)
 
-		cfg = models.Config{
-			Service:     elasticService,
-			Username:    vaultConfig.ElasticUsername,
-			Password:    vaultConfig.ElasticPassword,
-			ElasticCERT: vaultConfig.ElasticCERT,
-		}
-	} else {
-		cfg = aristoteles.ElasticConfig(env, testOverWrite, tls)
+	cfg = models.Config{
+		Service:     elasticService,
+		Username:    vaultConfig.ElasticUsername,
+		Password:    vaultConfig.ElasticPassword,
+		ElasticCERT: vaultConfig.ElasticCERT,
 	}
 
 	elastic, err := aristoteles.NewClient(cfg)
@@ -63,21 +56,14 @@ func CreateNewConfig(env string) (*AnaximanderHandler, error) {
 		return nil, err
 	}
 
-	if healthCheck {
-		err := aristoteles.HealthCheck(elastic)
-		if err != nil {
-			return nil, err
-		}
+	err = aristoteles.HealthCheck(elastic)
+	if err != nil {
+		return nil, err
 	}
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
 	policyName := fmt.Sprintf("%s_policy", index)
-
-	client, err := config.CreateOdysseiaClient()
-	if err != nil {
-		return nil, err
-	}
 
 	return &AnaximanderHandler{
 		Index:      index,
@@ -85,6 +71,5 @@ func CreateNewConfig(env string) (*AnaximanderHandler, error) {
 		Elastic:    elastic,
 		Ambassador: ambassador,
 		PolicyName: policyName,
-		Client:     client,
 	}, nil
 }

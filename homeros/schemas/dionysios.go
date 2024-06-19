@@ -15,7 +15,7 @@ var grammar = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.String,
 		},
 		"translation": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewList(graphql.String),
 		},
 	},
 })

@@ -47,6 +47,57 @@
     "author":"Herodotos",
     "book":"Histories",
     "type":"work",
+    "reference":"1.75",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.75?right=perseus-eng2&q=&qk=form",
+    "rhemai":[
+      {
+        "greek": "τοῦτον δὴ ὦν τὸν Ἀστυάγεα Κῦρος ἐόντα ἑωυτοῦ μητροπάτορα καταστρεψάμενος ἔσχε διʼ αἰτίην τὴν ἐγὼ ἐν τοῖσι ὀπίσω λόγοισι σημανέω·",
+        "translations":[
+          "Cyrus had subjugated this Astyages, then, Cyrus' own mother's father, for the reason which I shall presently disclose."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "τὰ Κροῖσος ἐπιμεμφόμενος τῷ Κύρῳ ἔς τε τὰ χρηστήρια ἔπεμπε εἰ στρατεύηται ἐπὶ Πέρσας, καὶ δὴ καὶ ἀπικομένου χρησμοῦ κιβδήλου, ἐλπίσας πρὸς ἑωυτοῦ τὸν χρησμὸν εἶναι, ἐστρατεύετο ἐς τὴν Περσέων μοῖραν.",
+        "translations":[
+          "Having this reason to quarrel with Cyrus, Croesus sent to ask the oracles if he should march against the Persians; and when a deceptive answer came he thought it to be favorable to him, and so led his army into the Persian territory."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ὡς δὲ ἀπίκετο ἐπὶ τὸν Ἅλυν ποταμὸν ὁ Κροῖσος, τὸ ἐνθεῦτεν, ὡς μὲν ἐγὼ λέγω, κατὰ τὰς ἐούσας γεφύρας διεβίβασε τὸν στρατόν, ὡς δὲ ὁ πολλὸς λόγος Ἑλλήνων, Θαλῆς οἱ ὁ Μιλήσιος διεβίβασε.",
+        "translations":[
+          "When he came to the river Halys, he transported his army across it—by the bridges which were there then, as I maintain; but the general belief of the Greeks is that Thales of Miletus got the army across."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "ἀπορέοντος γὰρ Κροίσου ὅκως οἱ διαβήσεται τὸν ποταμὸν ὁ στρατός (οὐ γὰρ δὴ εἶναι κω τοῦτον τὸν χρόνον τὰς γεφύρας ταύτας) λέγεται παρεόντα τὸν Θαλῆν ἐν τῷ στρατοπέδῳ ποιῆσαι αὐτῷ τὸν ποταμὸν ἐξ ἀριστερῆς χειρὸς ῥέοντα τοῦ στρατοῦ καὶ ἐκ δεξιῆς ῥέειν, ποιῆσαι δὲ ὧδε·",
+        "translations":[
+          "The story is that, as Croesus did not know how his army could pass the river (as the aforesaid bridges did not yet exist then), Thales, who was in the encampment, made the river, which flowed on the left of the army, also flow on the right, in the following way."
+        ],
+        "section":"4"
+      },
+      {
+        "greek": "ἄνωθεν τοῦ στρατοπέδου ἀρξάμενον διώρυχα βαθέαν ὀρύσσειν, ἄγοντα μηνοειδέα, ὅκως ἂν τὸ στρατόπεδον ἱδρυμένον κατὰ νώτου λάβοι, ταύτῃ κατὰ τὴν διώρυχα ἐκτραπόμενος ἐκ τῶν ἀρχαίων ῥεέθρων, καὶ αὖτις παραμειβόμενος τὸ στρατόπεδον ἐς τὰ ἀρχαῖα ἐσβάλλοι· ὥστε ἐπείτε καὶ ἐσχίσθη τάχιστα ὁ ποταμός, ἀμφοτέρῃ διαβατὸς ἐγένετο,",
+        "translations":[
+          "Starting from a point on the river upstream from the camp, he dug a deep semi-circular trench, so that the stream, turned from its ancient course, would flow in the trench to the rear of the camp and, passing it, would issue into its former bed, with the result that as soon as the river was thus divided into two, both channels could be forded."
+        ],
+        "section":"5"
+      },
+      {
+        "greek": "οἳ δὲ καὶ τὸ παράπαν λέγουσι καὶ τὸ ἀρχαῖον ῥέεθρον ἀποξηρανθῆναι. ἀλλὰ τοῦτο μὲν οὐ προσίεμαι· κῶς γὰρ ὀπίσω πορευόμενοι διέβησαν αὐτόν;",
+        "translations":[
+          "Some even say that the ancient channel dried up altogether. But I do not believe this; for in that case, how did they pass the river when they were returning?"
+        ],
+        "section":"6"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
     "reference":"1.79",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.79?right=perseus-eng2&q=&qk=form",
     "rhemai":[
@@ -144,6 +195,43 @@
     "author":"Herodotos",
     "book":"Histories",
     "type":"work",
+    "reference":"3.9",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.9?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "ἐπεὶ ὦν τὴν πίστιν τοῖσι ἀγγέλοισι τοῖσι παρὰ Καμβύσεω ἀπιγμένοισι ἐποιήσατο ὁ Ἀράβιος, ἐμηχανᾶτο τοιάδε· ἀσκοὺς καμήλων πλήσας, ὕδατος ἐπέσαξε ἐπὶ τὰς ζωὰς τῶν καμήλων πάσας, τοῦτο δὲ ποιήσας ἤλασε ἐς τὴν ἄνυδρον καὶ ὑπέμενε ἐνθαῦτα τὸν Καμβύσεω στρατόν.",
+        "translations":[
+          "When, then, the Arabian had made the pledge to the messengers who had come from Cambyses, he devised the following expedient: he filled camel-skins with water and loaded all his camels with these; then he drove them into the waterless land and there awaited Cambyses' army."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "οὗτος μὲν ὁ πιθανώτερος τῶν λόγων εἴρηται, δεῖ δὲ καὶ τὸν ἧσσον πιθανόν, ἐπεί γε δὴ λέγεται, ῥηθῆναι. ποταμός ἐστι μέγας ἐν τῇ Ἀραβίῃ τῷ οὔνομα Κόρυς, ἐκδιδοῖ δὲ οὗτος ἐς τὴν Ἐρυθρὴν καλεομένην θάλασσαν·",
+        "translations":[
+          "This is the most credible of the stories told; but I must relate the less credible tale also, since they tell it. There is a great river in Arabia called Corys, emptying into the sea called Red."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ἀπὸ τούτου δὴ ὦν τοῦ ποταμοῦ λέγεται τὸν βασιλέα τῶν Ἀραβίων, ῥαψάμενον τῶν ὠμοβοέων καὶ τῶν ἄλλων δερμάτων ὀχετὸν μήκεϊ ἐξικνεύμενον ἐς τὴν ἄνυδρον, ἀγαγεῖν διὰ δὴ τούτων τὸ ὕδωρ, ἐν δὲ τῇ ἀνύδρῳ μεγάλας δεξαμενὰς ὀρύξασθαι, ἵνα δεκόμεναι τὸ ὕδωρ σώζωσι.",
+        "translations":[
+          "From this river (it is said) the king of the Arabians brought water by an aqueduct made of sewn oxhides and other hides and extensive enough to reach to the dry country; and he had great tanks dug in that country to try to receive and keep the water."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "ὁδὸς δʼ ἐστὶ δυώδεκα ἡμερέων ἀπὸ τοῦ ποταμοῦ ἐς ταύτην τὴν ἄνυδρον. ἄγειν δέ μιν διʼ ὀχετῶν τριῶν ἐς τριξὰ χωρία.",
+        "translations":[
+          "It is a twelve days' journey from the river to that desert. By three aqueducts (they say) he brought the water to three different places."
+        ],
+        "section":"4"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
     "reference":"3.84",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:3.84?right=perseus-eng2",
     "rhemai":[
@@ -167,6 +255,29 @@
           "As for the making of a king, they decided that he should be elected whose horse, after they were all in their saddles in the suburb of the city, should first be heard to neigh at sunrise."
         ],
         "section":"3"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"5.6",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:5.6",
+    "rhemai":[
+      {
+        "greek": "τῶν δὲ δὴ ἄλλων Θρηίκων ἐστὶ ὅδε νόμος· πωλεῦσι τὰ τέκνα ἐπʼ ἐξαγωγῇ, τὰς δὲ παρθένους οὐ φυλάσσουσι, ἀλλʼ ἐῶσι τοῖσι αὐταὶ βούλονται ἀνδράσι μίσγεσθαι· τὰς δὲ γυναῖκας ἰσχυρῶς φυλάσσουσι καὶ ὠνέονται τὰς γυναῖκας παρὰ τῶν γονέων χρημάτων μεγάλων.",
+        "translations":[
+          "Among the rest of the Thracians, it is the custom to sell their children for export and to take no care of their maidens, allowing them to have intercourse with any man they wish. Their wives, however, they strictly guard, and buy them for a price from the parents."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "καὶ τὸ μὲν ἐστίχθαι εὐγενὲς κέκριται, τὸ δὲ ἄστικτον ἀγεννές. ἀργὸν εἶναι κάλλιστον, γῆς δὲ ἐργάτην ἀτιμότατον· τὸ ζῆν ἀπὸ πολέμου καὶ ληιστύος κάλλιστον.",
+        "translations":[
+          "To be tattooed is a sign of noble birth, while to bear no such marks is for the baser sort. The idler is most honored, the tiller of the soil most scorned; he is held in highest honor who lives by war and robbery."
+        ],
+        "section":"2"
       }
     ]
   },

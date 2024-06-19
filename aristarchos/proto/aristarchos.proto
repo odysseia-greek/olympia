@@ -5,7 +5,7 @@ package olympia_aristarchos;
 
 
 service Aristarchos {
-  rpc CreateNewEntry (AggregatorCreationRequest) returns (AggregatorCreationResponse) {}
+  rpc CreateNewEntry(stream AggregatorCreationRequest) returns (AggregatorStreamResponse);
   rpc RetrieveEntry (AggregatorRequest) returns (RootWordResponse) {}
   rpc RetrieveSearchWords (AggregatorRequest) returns (SearchWordResponse) {}
   rpc Health (HealthRequest) returns (HealthResponse) {}
@@ -21,6 +21,11 @@ enum PartOfSpeech {
   NOUN = 2;
   PARTICIPLE = 3;
   PREPOSITION = 4;
+  PARTICLE = 5;
+  ADVERB = 6;
+  CONJUNCTION = 7;
+  ARTICLE = 8;
+  PRONOUN = 9;
 }
 
 message AggregatorCreationRequest {
@@ -29,6 +34,7 @@ message AggregatorCreationRequest {
   string root_word = 3;
   string translation = 4;
   PartOfSpeech part_of_speech = 5;
+  string trace_id = 6;
 }
 
 message AggregatorCreationResponse {
@@ -36,23 +42,20 @@ message AggregatorCreationResponse {
   bool updated = 2;
 }
 
+message AggregatorStreamResponse {
+  string ack = 1;
+}
+
 message SearchWordResponse {
   repeated string word = 1;
 }
 
 message GrammaticalForm {
-  string person = 1;
-  string number = 2;
-  string gender = 3;
-  string case = 4;
-  string word = 5;
-  string rule = 6;
+  string word = 1;
+  string rule = 2;
 }
 
 message GrammaticalCategory {
-  string tense = 1;
-  string mood = 2;
-  string aspect = 3;
   repeated GrammaticalForm forms = 4;
 }
 

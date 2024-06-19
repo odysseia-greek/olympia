@@ -1,0 +1,126 @@
+{
+  "name": "misc",
+  "type": "pronoun",
+  "dialect": "attic",
+  "declensions": [
+    {
+      "declension": "τις",
+      "ruleName": "pronoun - sing - masc/fem - nom",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινός",
+      "ruleName": "pronoun - sing - masc/fem - gen",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινί",
+      "ruleName": "pronoun - sing - masc/fem - dat",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινά",
+      "ruleName": "pronoun - sing - masc/fem - acc",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινές",
+      "ruleName": "pronoun - plural - masc/fem - nom",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινῶν",
+      "ruleName": "pronoun - plural - masc/fem - gen",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τισί(ν)",
+      "ruleName": "pronoun - plural - masc/fem - dat",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τινάς",
+      "ruleName": "pronoun - plural - masc/fem - acc",
+      "searchTerm": [
+        "τις"
+      ]
+    },
+    {
+      "declension": "τι",
+      "ruleName": "pronoun - sing - neut - nom",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τινός",
+      "ruleName": "pronoun - sing - neut - gen",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τινί",
+      "ruleName": "pronoun - sing - neut - dat",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τι",
+      "ruleName": "pronoun - sing - neut - acc",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τινά",
+      "ruleName": "pronoun - plural - neut - nom",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τινῶν",
+      "ruleName": "pronoun - plural - neut - gen",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τισί",
+      "ruleName": "pronoun - plural - neut - dat",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τισίν",
+      "ruleName": "pronoun - plural - neut - dat",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τινά",
+      "ruleName": "pronoun - plural - neut - acc",
+      "searchTerm": [
+        "τι"
+      ]
+    }
+  ]
+}

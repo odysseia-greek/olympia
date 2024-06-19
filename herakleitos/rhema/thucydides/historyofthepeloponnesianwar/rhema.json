@@ -497,5 +497,35 @@
         "section":"13"
       }
     ]
+  },
+  {
+    "book":"History of the Peloponnesian War",
+    "author":"Thucydides",
+    "type":"work",
+    "reference":"4.12",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0003.tlg001.perseus-grc2:4.12?q=&qk=form&right=perseus-eng6",
+    "rhemai":[
+      {
+        "greek": "καὶ ὁ μὲν τούς τε ἄλλους τοιαῦτα ἐπέσπερχε καὶ τὸν ἑαυτοῦ κυβερνήτην ἀναγκάσας ὀκεῖλαι τὴν ναῦν ἐχώρει ἐπὶ τὴν ἀποβάθραν· καὶ πειρώμενος ἀποβαίνειν ἀνεκόπη ὑπὸ τῶν Ἀθηναίων, καὶ τραυματισθεὶς πολλὰ ἐλιποψύχησέ τε καὶ πεσόντος αὐτοῦ ἐς τὴν παρεξειρεσίαν ἡ ἀσπὶς περιερρύη ἐς τὴν θάλασσαν, καὶ ἐξενεχθείσης αὐτῆς ἐς τὴν γῆν οἱ Ἀθηναῖοι ἀνελόμενοι ὕστερον πρὸς τὸ τροπαῖον ἐχρήσαντο ὃ ἔστησαν τῆς προσβολῆς ταύτης.",
+        "translations":[
+          "Not content with this exhortation, he forced his own steersman to run his ship ashore, and stepping on to the gangway, was endeavoring to land, when he was cut down by the Athenians, and after receiving many wounds fainted away. Falling into the bows, his shield slipped off his arm into the sea, and being thrown ashore was picked up by the Athenians, and afterwards used for the trophy which they set up for this attack."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "οἱ δ’ ἄλλοι προυθυμοῦντο μέν, ἀδύνατοι δ’ ἦσαν ἀποβῆναι τῶν τε χωρίων χαλεπότητι καὶ τῶν Ἀθηναίων μενόντων καὶ οὐδὲν ὑποχωρούντων.",
+        "translations":[
+          "The rest also did their best, but were not able to land, owing to the difficulty of the ground and the unflinching tenacity of the Athenians."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ἐς τοῦτό τε περιέστη ἡ τύχη ὥστε Ἀθηναίους μὲν ἐκ γῆς τε καὶ ταύτης Λακωνικῆς ἀμύνεσθαι ἐκείνους ἐπιπλέοντας, Λακεδαιμονίους δὲ ἐκ νεῶν τε καὶ ἐς τὴν ἑαυτῶν πολεμίαν οὖσαν ἐπ’ Ἀθηναίους ἀποβαίνειν· ἐπὶ πολὺ γὰρ ἐποίει τῆς δόξης ἐν τῷ τότε τοῖς μὲν ἠπειρώταις μάλιστα εἶναι καὶ τὰ πεζὰ κρατίστοις, τοῖς δὲ θαλασσίοις τε καὶ ταῖς ναυσὶ πλεῖστον προύχειν.",
+        "translations":[
+          "It was a strange reversal of the order of things for Athenians to be fighting from the lands and from Laconian land too, against Lacedaemonians coming from the sea; while Lacedaemonians were trying to land from shipboard in their own country, now become hostile, to attack Athenians, although the former were chiefly famous at the time as an inland people and superior by land, the latter as a maritime people with a navy that had no equal."
+        ],
+        "section":"3"
+      }
+    ]
   }
 ]
