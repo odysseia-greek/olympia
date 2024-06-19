@@ -24,7 +24,7 @@ func TestCheckGrammarEndPointIrregularVerb(t *testing.T) {
 		for _, declension := range declensionConfig.Declensions {
 			switch declension.Name {
 			case "irregular":
-				rules := handler.loopOverIrregularVerbs(searchWord, declension.Declensions)
+				rules, _ := handler.loopOverIrregularVerbs(searchWord, declension.Declensions)
 				for _, rule := range rules.Rules {
 					foundRules.Rules = append(foundRules.Rules, rule)
 				}

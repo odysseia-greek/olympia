@@ -245,8 +245,8 @@ github.com/odysseia-greek/attike/sophokles v0.0.5 h1:rVE3POKGLftx4FsAv5PdWYqMZmx
 github.com/odysseia-greek/attike/sophokles v0.0.5/go.mod h1:o5jkqkymZ5Qh2VqjAsHn554KTNuipHYHqeAmN2UTd4Q=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4/go.mod h1:vfNlFMTer0uYUbUFFRQhc0uY/tLSYnsbveRBYm/vUdM=
-github.com/odysseia-greek/olympia/aristarchos v0.0.8 h1:zXUFrrmWoAapTXgC8eIOlLo2svxFYhjLTGNlj4/sa2s=
-github.com/odysseia-greek/olympia/aristarchos v0.0.8/go.mod h1:9Uz9aixxia/jy6Fldoua3zxVzKroH9vH19CZa0KQ9aQ=
+github.com/odysseia-greek/olympia/aristarchos v0.0.9 h1:e/iP9sozYLMQFGg1L4iVJGa0DJUDa8vc95s3ZHP1pjE=
+github.com/odysseia-greek/olympia/aristarchos v0.0.9/go.mod h1:9Uz9aixxia/jy6Fldoua3zxVzKroH9vH19CZa0KQ9aQ=
 github.com/onsi/ginkgo/v2 v2.13.0 h1:0jY9lJquiL8fcf3M4LAXN5aMlS/b2BV86HFFPCPMgE4=
 github.com/onsi/ginkgo/v2 v2.13.0/go.mod h1:TE309ZR8s5FsKKpuB1YAQYBzCaAfUgatB/xlT/ETL/o=
 github.com/onsi/gomega v1.29.0 h1:KIA/t2t5UBzoirT4H9tsML45GEbo3ouUnBHsCfD2tVg=

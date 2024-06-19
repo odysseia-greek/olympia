@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/models"
+	"strings"
 )
 
 func (l *OdysseiaFixture) theGrammarForWordIsQueriedWithAnError(word string) error {
@@ -59,21 +60,7 @@ func (l *OdysseiaFixture) theNumberOfResultsShouldBeEqualToOrExceed(numberOfResu
 
 func (l *OdysseiaFixture) theNumberOfTranslationsShouldBeEqualToErExceed(numberOfTranslations int) error {
 	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
-	var translations []string
-	for _, result := range declensions.Results {
-		inTranslation := false
-		for _, translation := range translations {
-			if translation == result.Translation {
-				inTranslation = true
-			}
-		}
-
-		if !inTranslation {
-			translations = append(translations, result.Translation)
-		}
-	}
-
-	lengthOTranslations := len(translations)
+	lengthOTranslations := len(declensions.Results[0].Translation)
 	if lengthOTranslations < numberOfTranslations {
 		return fmt.Errorf("expected translation results to be equal to or more than %v but was %v", numberOfTranslations, lengthOTranslations)
 	}
@@ -101,6 +88,70 @@ func (l *OdysseiaFixture) theNumberOfDeclensionsShouldBeEqualToOrExceed(numberOf
 	lengthOfDeclensions := len(declensionRules)
 	if lengthOfDeclensions < numberOfDeclensions {
 		return fmt.Errorf("expected declension results to be equal to or more than %v but was %v", numberOfDeclensions, lengthOfDeclensions)
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theResultShouldJustBeAsARule(rule string) error {
+	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
+	declensionFound := false
+	for _, result := range declensions.Results {
+		if result.Rule == rule {
+			declensionFound = true
+		}
+	}
+
+	if !declensionFound {
+		return fmt.Errorf("could not find declension %v in slice", rule)
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) notAsARule(rule string) error {
+	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
+	declensionFound := false
+	for _, result := range declensions.Results {
+		if result.Rule == rule {
+			declensionFound = true
+		}
+	}
+
+	if declensionFound {
+		return fmt.Errorf("could find declension %v in slice where that was not expected", rule)
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theRootWordShouldInclude(word string) error {
+	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
+	rootWordFound := false
+	for _, result := range declensions.Results {
+		if strings.Contains(result.RootWord, word) {
+			rootWordFound = true
+		}
+	}
+
+	if !rootWordFound {
+		return fmt.Errorf("could not find word %v in slice where that was expected", word)
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theRootWordShouldNotInclude(word string) error {
+	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
+	rootWordFound := false
+	for _, result := range declensions.Results {
+		if strings.Contains(result.RootWord, word) {
+			rootWordFound = true
+		}
+	}
+
+	if rootWordFound {
+		return fmt.Errorf("could find word %v in slice where that was unexpected", word)
 	}
 
 	return nil

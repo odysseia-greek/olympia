@@ -14,7 +14,7 @@ import (
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
-	"google.golang.org/grpc/metadata"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"net/http"
 	"strings"
 	"time"
@@ -28,7 +28,9 @@ type DionysosHandler struct {
 	DeclensionConfig models.DeclensionConfig
 	Streamer         pb.TraceService_ChorusClient
 	Aggregator       pba.Aristarchos_CreateNewEntryClient
-	Cancel           context.CancelFunc
+	StreamerCancel   context.CancelFunc
+	AggregatorCancel context.CancelFunc
+	AggregatorClient *aristarchos.ClientAggregator
 }
 
 // PingPong pongs the ping
@@ -155,8 +157,7 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	//cacheItem, _ := d.Cache.Read(queryWord)
-	cacheItem, _ := d.Cache.Read("kjsndfiusdhf89s7dyf9s88duyf9sudhfiusdhf")
+	cacheItem, _ := d.Cache.Read(queryWord)
 	if cacheItem != nil {
 		var cache models.DeclensionTranslationResults
 		err := json.Unmarshal(cacheItem, &cache)
@@ -190,6 +191,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 			middleware.ResponseWithJson(w, e)
 			return
 		}
+		err = d.sendWordsToAggregator(&cache, requestId)
+		if err != nil {
+			logging.Error(err.Error())
+		}
 		middleware.ResponseWithJson(w, cache)
 		return
 	}
@@ -207,11 +212,24 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
+	err := d.sendWordsToAggregator(declensions, requestId)
+
+	stringifiedDeclension, _ := json.Marshal(declensions)
+	ttl := time.Hour
+	err = d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
+
+	if err != nil {
+		logging.Error(fmt.Sprintf("error setting cache: %s", err.Error()))
+	}
+
+	middleware.ResponseWithJson(w, *declensions)
+}
+
+func (d *DionysosHandler) sendWordsToAggregator(declensions *models.DeclensionTranslationResults, requestID string) error {
 	for _, declension := range declensions.Results {
-		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-		defer cancel()
-		md := metadata.New(map[string]string{service.HeaderKey: requestId})
-		ctx = metadata.NewOutgoingContext(context.Background(), md)
+		if len(declension.Translation) == 0 {
+			continue
+		}
 
 		speech := pba.PartOfSpeech_VERB
 
@@ -245,37 +263,61 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 
 		if strings.Contains(declension.Rule, "article") {
 			speech = pba.PartOfSpeech_ARTICLE
+			if strings.Contains(declension.RootWord, " ") {
+				continue
+			}
 		}
+
+		processedRootWord := d.processRootWord(declension.RootWord)
 
 		request := &pba.AggregatorCreationRequest{
 			Word:         declension.Word,
 			Rule:         declension.Rule,
-			RootWord:     declension.RootWord,
+			RootWord:     processedRootWord,
 			Translation:  declension.Translation[0],
 			PartOfSpeech: speech,
+			TraceId:      requestID,
 		}
 
 		if err := d.Aggregator.Send(request); err != nil {
-			logging.Error(fmt.Sprintf("failed to send aggregator data: %v", err))
+			d.reestablishStream()
+			if err = d.Aggregator.Send(request); err != nil {
+				return err
+			}
 		}
 	}
+	return nil
+}
 
-	stringifiedDeclension, _ := json.Marshal(declensions)
-	ttl := time.Hour
-	err := d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
-	if err != nil {
-		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Messages: []models.ValidationMessages{
-				{
-					Field:   "cache",
-					Message: err.Error(),
-				},
-			},
-		}
-		middleware.ResponseWithJson(w, e)
+func (d *DionysosHandler) processRootWord(rootWord string) string {
+	if strings.Contains(rootWord, "–") {
+		parts := strings.Split(rootWord, "–")
+		return strings.TrimSpace(parts[0])
+	}
+	return strings.TrimSpace(rootWord)
+}
+
+func (d *DionysosHandler) reestablishStream() {
+	logging.Debug("stream is invalid so resetting stream")
+	if d.AggregatorCancel != nil {
+		d.AggregatorCancel()
+	}
+
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
+	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	aggregatorHealthy := aggregator.WaitForHealthyState()
+	if !aggregatorHealthy {
+		logging.Error("aggregator service not ready")
 		return
 	}
 
-	middleware.ResponseWithJson(w, *declensions)
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := d.AggregatorClient.CreateNewEntry(aggrContext)
+	if err != nil {
+		logging.Error(err.Error())
+		return
+	}
+
+	d.Aggregator = aristarchosStreamer
+	d.AggregatorCancel = aggregatorCancel
 }

@@ -89,9 +89,11 @@ func (l *OdysseiaFixture) theOptionsReturnedFromTheGrammarApiShouldInclude(gramm
 
 	found := false
 	for _, decResult := range declensions.Results {
-		if strings.Contains(decResult.Translation, grammarResponse) || decResult.Translation == grammarResponse {
-			found = true
-			break
+		for _, translation := range decResult.Translation {
+			if strings.Contains(translation, grammarResponse) || translation == grammarResponse {
+				found = true
+				break
+			}
 		}
 	}
 

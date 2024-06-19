@@ -634,6 +634,7 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 
 	query := createGreekTextQuery(words)
 
+	logging.Debug(fmt.Sprintf("%v", query))
 	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{

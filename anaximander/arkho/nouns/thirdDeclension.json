@@ -6,70 +6,70 @@
   "declensions": [
     {
       "declension": "-ς",
-      "ruleName": "noun - sing - masc - nom",
+      "ruleName": "noun - sing - masc/fem - nom",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ς",
-      "ruleName": "noun - sing - masc - voc",
+      "ruleName": "noun - sing - masc/fem - voc",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ος",
-      "ruleName": "noun - sing - masc - gen",
+      "ruleName": "noun - sing - masc/fem - gen",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ι",
-      "ruleName": "noun - sing - masc - dat",
+      "ruleName": "noun - sing - masc/fem - dat",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-α",
-      "ruleName": "noun - sing - masc - acc",
+      "ruleName": "noun - sing - masc/fem - acc",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ες",
-      "ruleName": "noun - sing - masc - acc",
+      "ruleName": "noun - sing - masc/fem - acc",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ες",
-      "ruleName": "noun - sing - masc - nom",
+      "ruleName": "noun - sing - masc/fem - nom",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ων",
-      "ruleName": "noun - plural - masc - gen",
+      "ruleName": "noun - plural - masc/fem - gen",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-ασιν",
-      "ruleName": "noun - plural - masc - dat",
+      "ruleName": "noun - plural - masc/fem - dat",
       "searchTerm": [
         "ς"
       ]
     },
     {
       "declension": "-σι",
-      "ruleName": "noun - plural - masc - dat",
+      "ruleName": "noun - plural - masc/fem - dat",
       "searchTerm": [
         "ς"
       ]
@@ -530,6 +530,112 @@
       "searchTerm": [
         "ήρ"
       ]
+    },
+      {
+        "declension": "-ρος",
+        "ruleName": "noun - sing - gen - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-ρι",
+        "ruleName": "noun - sing - dat - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-ρα",
+        "ruleName": "noun - sing - acc - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-ρες",
+        "ruleName": "noun - sing - nom - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-ρων",
+        "ruleName": "noun - plural - gen - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-σιν",
+        "ruleName": "noun - plural - dat - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+      {
+        "declension": "-ρας",
+        "ruleName": "noun - plural - acc - masc/fem",
+        "searchTerm": [
+          "ς"
+        ]
+      },
+    {
+      "declension": "-τος",
+      "ruleName": "noun - singular - gen - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-τι",
+      "ruleName": "noun - singular - dat - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-ν",
+      "ruleName": "noun - singular - acc - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-τες",
+      "ruleName": "noun - plural - nom - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-των",
+      "ruleName": "noun - plural - gen - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-σι",
+      "ruleName": "noun - plural - dat - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-σιν",
+      "ruleName": "noun - plural - dat - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
+    },
+    {
+      "declension": "-τας",
+      "ruleName": "noun - plural - acc - masc/fem",
+      "searchTerm": [
+        "ς"
+      ]
     }
+
   ]
 }

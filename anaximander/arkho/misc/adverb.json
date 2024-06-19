@@ -138,6 +138,10 @@
     {
       "declension": "ὥσπερ",
       "ruleName": "adverb"
+    },
+    {
+      "declension": "πάντα",
+      "ruleName": "adverb"
     }
   ]
 }

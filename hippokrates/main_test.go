@@ -158,6 +158,10 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the number of results should be equal to or exceed "([^"]*)"$`, odysseia.theNumberOfResultsShouldBeEqualToOrExceed)
 	ctx.Step(`^the number of translations should be equal to er exceed "([^"]*)"$`, odysseia.theNumberOfTranslationsShouldBeEqualToErExceed)
 	ctx.Step(`^the number of declensions should be equal to or exceed "([^"]*)"$`, odysseia.theNumberOfDeclensionsShouldBeEqualToOrExceed)
+	ctx.Step(`^the result should just be "([^"]*)" as a rule$`, odysseia.theResultShouldJustBeAsARule)
+	ctx.Step(`^the rootWord should include "([^"]*)"$`, odysseia.theRootWordShouldInclude)
+	ctx.Step(`^the rootWord should not include "([^"]*)"$`, odysseia.theRootWordShouldNotInclude)
+	ctx.Step(`^not "([^"]*)" as a rule$`, odysseia.notAsARule)
 
 	//homeros
 	ctx.Step(`^the gateway is up$`, odysseia.theGatewayIsUp)

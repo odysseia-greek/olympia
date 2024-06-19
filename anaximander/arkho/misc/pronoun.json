@@ -102,7 +102,14 @@
       ]
     },
     {
-      "declension": "τισί(ν)",
+      "declension": "τισί",
+      "ruleName": "pronoun - plural - neut - dat",
+      "searchTerm": [
+        "τι"
+      ]
+    },
+    {
+      "declension": "τισίν",
       "ruleName": "pronoun - plural - neut - dat",
       "searchTerm": [
         "τι"

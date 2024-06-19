@@ -2,9 +2,11 @@ package scholar
 
 import (
 	"context"
+	"fmt"
 	"github.com/odysseia-greek/agora/aristoteles"
 	pb "github.com/odysseia-greek/olympia/aristarchos/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"time"
 )
 
@@ -16,7 +18,7 @@ type AggregatorService interface {
 }
 
 const (
-	DEFAULTADDRESS string = "localhost:50053"
+	DEFAULTADDRESS string = "localhost:50060"
 )
 
 type AggregatorServiceImpl struct {
@@ -33,13 +35,16 @@ type ClientAggregator struct {
 	scholar pb.AristarchosClient
 }
 
-func NewClientAggregator(address string) *ClientAggregator {
+func NewClientAggregator(address string) (*ClientAggregator, error) {
 	if address == "" {
 		address = DEFAULTADDRESS
 	}
-	conn, _ := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to tracing service: %w", err)
+	}
 	client := pb.NewAristarchosClient(conn)
-	return &ClientAggregator{scholar: client}
+	return &ClientAggregator{scholar: client}, nil
 }
 
 func (c *ClientAggregator) WaitForHealthyState() bool {

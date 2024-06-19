@@ -48,10 +48,13 @@ func (p *ProtagorasHandler) gatherOptions() error {
 		}
 	}
 
+	percentageDone := float64(len(p.wordsDone)) / float64(len(p.wordsDone)+len(p.wordsNotFound)) * 100
+
 	logging.Info(fmt.Sprintf("Total Number of sections done: %d", sectionsDone))
 	logging.Info(fmt.Sprintf("Done a total of: %d words", len(p.wordsDone)+len(p.wordsNotFound)))
 	logging.Info(fmt.Sprintf("Declinded a total of: %d words", len(p.wordsDone)))
 	logging.Info(fmt.Sprintf("Could not decline a total of: %d words", len(p.wordsNotFound)))
+	logging.Info(fmt.Sprintf("Percentage done: %v%s", percentageDone, "%"))
 
 	if p.Save {
 		err = p.saveWords("/tmp/done.json", p.wordsDone)
@@ -103,6 +106,7 @@ func (p *ProtagorasHandler) loopOverAndDeclineWords(text models.Text) error {
 	greekText := text.Rhemai[0].Greek
 
 	greekWords := p.splitAndCleanGreekWords(greekText)
+	doneInText := 0
 
 	for _, word := range greekWords {
 		response, err := p.Client.Dionysios().Grammar(word, "")
@@ -120,13 +124,16 @@ func (p *ProtagorasHandler) loopOverAndDeclineWords(text models.Text) error {
 
 		if len(declensions.Results) > 0 {
 			p.wordsDone = append(p.wordsDone, word)
-			logging.Info(fmt.Sprintf("found declension result | word: %s | rootword: %s | translation: %s | rule: %s |", declensions.Results[0].Word, declensions.Results[0].RootWord, declensions.Results[0].Translation, declensions.Results[0].Rule))
+			doneInText++
 		} else {
 			p.wordsNotFound = append(p.wordsNotFound, word)
 			logging.Error(fmt.Sprintf("no result found for word: %s", word))
 		}
 	}
 
+	percentageDone := float64(doneInText) / float64(len(greekWords)) * 100
+
+	logging.Debug(fmt.Sprintf("in text: %s %s ref:%s total number of words: %d of which: %v could be done", text.Author, text.Book, text.Reference, len(greekWords), percentageDone))
 	return nil
 }
 

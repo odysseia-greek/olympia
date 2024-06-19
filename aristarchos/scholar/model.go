@@ -3,19 +3,12 @@ package scholar
 import "encoding/json"
 
 type GrammaticalForm struct {
-	Person string `json:"person,omitempty"`
-	Number string `json:"number,omitempty"`
-	Gender string `json:"gender,omitempty"`
-	Case   string `json:"case,omitempty"`
-	Word   string `json:"word"`
-	Rule   string `json:"rule"`
+	Word string `json:"word"`
+	Rule string `json:"rule"`
 }
 
 type GrammaticalCategory struct {
-	Tense  string            `json:"tense,omitempty"`
-	Mood   string            `json:"mood,omitempty"`
-	Aspect string            `json:"aspect,omitempty"`
-	Forms  []GrammaticalForm `json:"forms"`
+	Forms []GrammaticalForm `json:"forms"`
 }
 
 type RootWordEntry struct {

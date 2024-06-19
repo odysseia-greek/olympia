@@ -3,7 +3,6 @@ package scholar
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
@@ -38,17 +37,11 @@ func (a *AggregatorServiceImpl) CreateNewEntry(stream pb.Aristarchos_CreateNewEn
 			return err
 		}
 
-		resp, err := a.createOrUpdate(in)
-		if err != nil {
-			return err
-		} else {
-			logging.Debug(fmt.Sprintf("word: %s was updated: %v|| created: %v", in.Word, resp.Updated, resp.Created))
-			return nil
-		}
+		go a.createOrUpdate(in)
 	}
 }
 
-func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationRequest) (*pb.AggregatorCreationResponse, error) {
+func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationRequest) {
 	startTime := time.Now()
 	splitID := strings.Split(request.TraceId, "+")
 
@@ -77,7 +70,8 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 		if strings.Contains(err.Error(), "404") {
 			createNewWord = true
 		} else {
-			return &pb.AggregatorCreationResponse{Created: false, Updated: false}, err
+			logging.Error(err.Error())
+			return
 		}
 	} else if len(response.Hits.Hits) == 0 {
 		createNewWord = true
@@ -113,53 +107,44 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 
 	entry, err := a.mapAndHandleGrammaticalCategories(request)
 	if err != nil {
-		return nil, err
+		logging.Error(err.Error())
+		return
 	}
 
 	if entry.Categories == nil {
-		return &pb.AggregatorCreationResponse{Created: false, Updated: false}, fmt.Errorf("could not map the word %s to a workable form", parsedWord)
+		logging.Error(fmt.Sprintf("could not map the word %s to a workable form", parsedWord))
+		return
 	}
 
 	if createNewWord {
 		entryAsJson, _ := json.Marshal(entry)
 		createDocument, err := a.Elastic.Index().CreateDocument(a.Index, entryAsJson)
 		if err != nil {
-			return nil, err
+			logging.Error(err.Error())
+			return
 		}
 
 		logging.Debug(fmt.Sprintf("created document with id: %s and rootWord: %s", createDocument.ID, request.RootWord))
-		return &pb.AggregatorCreationResponse{
-			Created: true,
-			Updated: false,
-		}, nil
+		return
 	}
 
 	jsonHit, _ := json.Marshal(response.Hits.Hits[0].Source)
 	rootWord, _ := UnmarshalRootWordEntry(jsonHit)
 
 	updateNeeded := false
-	conjucationFound := false
 	for i, conjugation := range rootWord.Categories {
-		if conjugation.Mood == entry.Categories[0].Mood && conjugation.Tense == entry.Categories[0].Tense && conjugation.Aspect == entry.Categories[0].Aspect {
-			conjucationFound = true
-			formFound := false
-			for _, cform := range conjugation.Forms {
-				if cform.Person == entry.Categories[0].Forms[0].Person && cform.Number == entry.Categories[0].Forms[0].Number && cform.Word == entry.Categories[0].Forms[0].Word {
-					formFound = true
-					break
-				}
+		formFound := false
+		for _, cform := range conjugation.Forms {
+			if cform.Word == entry.Categories[0].Forms[0].Word {
+				formFound = true
+				break
 			}
-			if !formFound {
-				rootWord.Categories[i].Forms = append(rootWord.Categories[i].Forms, entry.Categories[0].Forms[0])
-				updateNeeded = true
-			}
-			break
 		}
-	}
-
-	if !conjucationFound {
-		rootWord.Categories = append(rootWord.Categories, entry.Categories[0])
-		updateNeeded = true
+		if !formFound {
+			rootWord.Categories[i].Forms = append(rootWord.Categories[i].Forms, entry.Categories[0].Forms[0])
+			updateNeeded = true
+		}
+		break
 	}
 
 	translationFound := false
@@ -180,7 +165,8 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 		entryAsJson, _ := json.Marshal(rootWord)
 		createDocument, err := a.Elastic.Document().Update(a.Index, response.Hits.Hits[0].ID, entryAsJson)
 		if err != nil {
-			return nil, err
+			logging.Error(err.Error())
+			return
 		}
 
 		if traceCall {
@@ -204,10 +190,7 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 		}
 
 		logging.Debug(fmt.Sprintf("updated document with id: %s and rootWord: %s", createDocument.ID, request.RootWord))
-		return &pb.AggregatorCreationResponse{
-			Created: false,
-			Updated: true,
-		}, nil
+		return
 	}
 
 	if traceCall {
@@ -230,12 +213,9 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 		}()
 	}
 
-	logging.Debug("no action needed since document and grammar exists")
+	logging.Debug(fmt.Sprintf("no action needed since document and grammar exists: %s", rootWord))
 
-	return &pb.AggregatorCreationResponse{
-		Created: false,
-		Updated: false,
-	}, nil
+	return
 }
 
 func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.AggregatorRequest) (*pb.RootWordResponse, error) {
@@ -310,20 +290,12 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 	responsePB.Translations = rootWord.Translations
 	responsePB.PartOfSpeech = mapCategoryToEnum(rootWord.PartOfSpeech)
 	for _, conj := range rootWord.Categories {
-		conjPB := &pb.GrammaticalCategory{
-			Tense:  conj.Tense,
-			Mood:   conj.Mood,
-			Aspect: conj.Aspect,
-		}
+		conjPB := &pb.GrammaticalCategory{}
 
 		for _, form := range conj.Forms {
 			formPB := &pb.GrammaticalForm{
-				Person: form.Person,
-				Number: form.Number,
-				Gender: form.Gender,
-				Case:   form.Case,
-				Word:   form.Word,
-				Rule:   form.Rule,
+				Word: form.Word,
+				Rule: form.Rule,
 			}
 			conjPB.Forms = append(conjPB.Forms, formPB)
 		}
@@ -457,130 +429,17 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 	// example: pres act part - sing - masc - nom
 	// example: inf - pres - act
 	var entry RootWordEntry
-	ruleSet := strings.Split(request.Rule, "-")
 
 	entry.RootWord = request.RootWord
 	entry.PartOfSpeech = mapEnumToCategory(request.PartOfSpeech)
 	entry.Translations = []string{request.Translation}
 
-	var conjForm GrammaticalForm
-	var conj GrammaticalCategory
-
-	switch request.PartOfSpeech {
-	case pb.PartOfSpeech_VERB:
-		if len(ruleSet) >= 4 {
-			form := strings.Split(strings.TrimSpace(ruleSet[0]), " ")
-			conjForm = GrammaticalForm{
-				Person: strings.TrimSpace(form[0]),
-				Number: strings.TrimSpace(form[1]),
-				Word:   request.Word,
-				Rule:   request.Rule,
-			}
-			conj = GrammaticalCategory{
-				Tense:  strings.TrimSpace(ruleSet[3]),
-				Mood:   strings.TrimSpace(ruleSet[2]),
-				Aspect: strings.TrimSpace(ruleSet[1]),
-				Forms:  []GrammaticalForm{conjForm},
-			}
-		}
-
-		if len(ruleSet) == 3 {
-			conjForm = GrammaticalForm{
-				Word: request.Word,
-				Rule: request.Rule,
-			}
-			conj = GrammaticalCategory{
-				Tense:  strings.TrimSpace(ruleSet[2]),
-				Mood:   strings.TrimSpace(ruleSet[1]),
-				Aspect: strings.TrimSpace(ruleSet[0]),
-				Forms:  []GrammaticalForm{conjForm},
-			}
-		}
-	case pb.PartOfSpeech_NOUN:
-		if len(ruleSet) >= 4 {
-			conjForm = GrammaticalForm{
-				Number: strings.TrimSpace(ruleSet[1]),
-				Gender: strings.TrimSpace(ruleSet[2]),
-				Case:   strings.TrimSpace(ruleSet[3]),
-				Word:   request.Word,
-				Rule:   request.Rule,
-			}
-			conj = GrammaticalCategory{
-				Forms: []GrammaticalForm{conjForm},
-			}
-		}
-	case pb.PartOfSpeech_PARTICIPLE:
-		if len(ruleSet) >= 4 {
-			form := strings.Split(strings.TrimSpace(ruleSet[0]), " ")
-			conjForm = GrammaticalForm{
-				Number: strings.TrimSpace(ruleSet[1]),
-				Gender: strings.TrimSpace(ruleSet[2]),
-				Case:   strings.TrimSpace(ruleSet[3]),
-				Word:   request.Word,
-				Rule:   request.Rule,
-			}
-			conj = GrammaticalCategory{
-				Tense:  strings.TrimSpace(form[1]),
-				Aspect: strings.TrimSpace(form[0]),
-				Forms:  []GrammaticalForm{conjForm},
-			}
-		}
-	case pb.PartOfSpeech_PREPOSITION:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	case pb.PartOfSpeech_ADVERB:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	case pb.PartOfSpeech_ARTICLE:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	case pb.PartOfSpeech_CONJUNCTION:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	case pb.PartOfSpeech_PARTICLE:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	case pb.PartOfSpeech_PRONOUN:
-		conjForm = GrammaticalForm{
-			Word: request.Word,
-			Rule: request.Rule,
-		}
-
-		conj = GrammaticalCategory{
-			Forms: []GrammaticalForm{conjForm},
-		}
-	default:
-		return nil, errors.New("unsupported grammatical category")
+	conjForm := GrammaticalForm{
+		Word: request.Word,
+		Rule: request.Rule,
+	}
+	conj := GrammaticalCategory{
+		Forms: []GrammaticalForm{conjForm},
 	}
 
 	entry.Categories = append(entry.Categories, conj)

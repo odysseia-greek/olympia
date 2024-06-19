@@ -182,7 +182,7 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 		// Function to process declensions and query dictionary
 		processDeclensions := func(declensions []models.Rule) []models.Result {
-			processedResults := []models.Result{}
+			var processedResults []models.Result
 
 			for _, declension := range declensions {
 				if len(declension.SearchTerms) > 0 {
@@ -318,24 +318,26 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 		// Replace the original results with the filtered results
 		results.Results = filteredResults
 	} else if len(results.Results) == 0 {
-		// a final attempt is made if the rules are empty to just find the word in the dictonary
+		// a final attempt is made if the rules are empty to just find the word in the dictionary
 		dictionaryHits, err := d.queryWordInAlexandros(d.removeAccents(word), requestID)
 		if err != nil {
 			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
 		}
 
-		result := models.Result{
-			Word:        word,
-			Rule:        "no rule found",
-			RootWord:    word,
-			Translation: []string{},
-		}
+		if len(dictionaryHits) > 0 {
+			result := models.Result{
+				Word:        word,
+				Rule:        "no rule found",
+				RootWord:    word,
+				Translation: []string{},
+			}
 
-		for _, hit := range dictionaryHits {
-			translation, _ := d.parseDictResults(hit.Hit)
-			result.Translation = append(result.Translation, translation)
+			for _, hit := range dictionaryHits {
+				translation, _ := d.parseDictResults(hit.Hit)
+				result.Translation = append(result.Translation, translation)
+			}
+			results.Results = append(results.Results, result)
 		}
-		results.Results = append(results.Results, result)
 	}
 
 	if traceCall {

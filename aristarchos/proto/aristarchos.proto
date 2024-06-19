@@ -51,18 +51,11 @@ message SearchWordResponse {
 }
 
 message GrammaticalForm {
-  string person = 1;
-  string number = 2;
-  string gender = 3;
-  string case = 4;
-  string word = 5;
-  string rule = 6;
+  string word = 1;
+  string rule = 2;
 }
 
 message GrammaticalCategory {
-  string tense = 1;
-  string mood = 2;
-  string aspect = 3;
   repeated GrammaticalForm forms = 4;
 }
 

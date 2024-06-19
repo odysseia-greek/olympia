@@ -150,9 +150,12 @@ func CreateNewConfig(ctx context.Context) (*DionysosHandler, error) {
 		os.Exit(1)
 	}
 
-	aristarchosStreamer, err := aggregator.CreateNewEntry(ctx)
+	// New context for aggregator streamer
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := aggregator.CreateNewEntry(aggrContext)
 	if err != nil {
 		logging.Error(err.Error())
+		return nil, err
 	}
 
 	ctx, cancel := context.WithCancel(ctx)
@@ -165,7 +168,9 @@ func CreateNewConfig(ctx context.Context) (*DionysosHandler, error) {
 		DeclensionConfig: plato.DeclensionConfig{},
 		Streamer:         streamer,
 		Aggregator:       aristarchosStreamer,
-		Cancel:           cancel,
+		AggregatorClient: aggregator,
+		AggregatorCancel: aggregatorCancel,
+		StreamerCancel:   cancel,
 	}, nil
 }
 
