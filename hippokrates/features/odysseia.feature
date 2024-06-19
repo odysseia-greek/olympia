@@ -11,7 +11,7 @@ Feature: Odysseia
     And the quizresponse is expanded with text and similar words
     Examples:
       | word  | fullWord | grammarResponse | set | theme            | quizType    |
-      | ἦν    | εἰμί     | to be           | 20  | Plato - Republic | authorbased |
+      | ἦν    | εἰμί     | be              | 20  | Plato - Republic | authorbased |
       | ἱερόν | τό ἱερόν | temple          | 1   | Daily Life       | media       |
 
   @odysseia

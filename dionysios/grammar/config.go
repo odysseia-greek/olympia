@@ -143,7 +143,11 @@ func CreateNewConfig(ctx context.Context) (*DionysosHandler, error) {
 	}
 
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
-	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
 	aggregatorHealthy := aggregator.WaitForHealthyState()
 	if !aggregatorHealthy {
 		logging.Debug("aggregator service not ready - restarting seems the only option")

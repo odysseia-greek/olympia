@@ -27,8 +27,6 @@ github.com/go-logr/stdr v1.2.2/go.mod h1:mMo/vtBO5dYbehREoey6XUKy/eSumjCCveDpRre
 github.com/go-test/deep v1.0.2/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
 github.com/go-test/deep v1.1.0 h1:WOcxcdHcvdgThNXjw0t76K42FXTU7HpNQWHpA2HHNlg=
 github.com/go-test/deep v1.1.0/go.mod h1:5C2ZWiW0ErCdrYzpqxLbTX7MG14M9iiw8DgHncVwcsE=
-github.com/golang/protobuf v1.5.4 h1:i7eJL8qZTpSEXOPTxNKhASYpMn+8e5Q6AdndVa1dWek=
-github.com/golang/protobuf v1.5.4/go.mod h1:lnTiLA8Wa4RWRcIUkrtSVa5nRhsEGBg48fD6rSs7xps=
 github.com/google/go-cmp v0.5.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.7/go.mod h1:n+brtR0CgQNWTVd5ZUFpTBC8YFBDLK/h/bpaJ8/DtOE=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
@@ -96,12 +94,12 @@ github.com/mitchellh/go-wordwrap v1.0.0/go.mod h1:ZXFpozHsX6DPmq2I0TCekCxypsnAUb
 github.com/mitchellh/mapstructure v1.4.1/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
-github.com/odysseia-greek/agora/aristoteles v0.1.6 h1:J3Og0pb7KeNRRJ1PMvZZuZMgvS+ZrGpiqijFPl1G6kg=
-github.com/odysseia-greek/agora/aristoteles v0.1.6/go.mod h1:vZaZDhBf6Y4vvAPlo1zAES0TGGqcYykC6AwABpgU3Zw=
+github.com/odysseia-greek/agora/aristoteles v0.1.7 h1:PzrXMY7BQ0IIRRuRx8hlWLd9yjLGzuzA9CXGg+AqMr8=
+github.com/odysseia-greek/agora/aristoteles v0.1.7/go.mod h1:vZaZDhBf6Y4vvAPlo1zAES0TGGqcYykC6AwABpgU3Zw=
 github.com/odysseia-greek/agora/diogenes v0.1.4 h1:zaii31bCdRSuraRJyi1bHOAkX64anMlPa9kJzpuItLE=
 github.com/odysseia-greek/agora/diogenes v0.1.4/go.mod h1:nd8HWflnhxPqX/nfxbP3oZUt9bZvcIp27m5w4+jO3Yw=
-github.com/odysseia-greek/agora/plato v0.1.19 h1:P8mngpc7JFTbzwYNVLKx5k89xpfoe3iks6llO88vg9o=
-github.com/odysseia-greek/agora/plato v0.1.19/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
+github.com/odysseia-greek/agora/plato v0.1.28 h1:W0mRn3BAQxMAT04MqgorN4uBCcjWSOqKKRB6w9p3Dgw=
+github.com/odysseia-greek/agora/plato v0.1.28/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4/go.mod h1:vfNlFMTer0uYUbUFFRQhc0uY/tLSYnsbveRBYm/vUdM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
@@ -205,8 +203,8 @@ golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8T
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20240325203815-454cdb8f5daa h1:RBgMaUMP+6soRkik4VoN8ojR2nex2TqZwjSSogic+eo=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20240325203815-454cdb8f5daa/go.mod h1:WtryC6hu0hhx87FDGxWCDptyssuo68sk10vYjF+T9fY=
-google.golang.org/grpc v1.62.1 h1:B4n+nfKzOICUXMgyrNd19h/I9oH0L1pizfk1d4zSgTk=
-google.golang.org/grpc v1.62.1/go.mod h1:IWTG0VlJLCh1SkC58F7np9ka9mx/WNkjl4PGJaiq+QE=
+google.golang.org/grpc v1.64.0 h1:KH3VH9y/MgNQg1dE7b3XfVK0GsPSIzJwdF617gUSbvY=
+google.golang.org/grpc v1.64.0/go.mod h1:oxjF8E3FBnjp+/gVFYdWacaLDx9na1aqy9oovLpxQYg=
 google.golang.org/protobuf v1.33.0 h1:uNO2rsAINq/JlFpSdYEKIZ0uKD/R9cpdv0T+yoGwGmI=
 google.golang.org/protobuf v1.33.0/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=

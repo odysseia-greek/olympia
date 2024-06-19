@@ -292,6 +292,10 @@ func (d *DionysosHandler) sendWordsToAggregator(declensions *models.DeclensionTr
 func (d *DionysosHandler) processRootWord(rootWord string) string {
 	if strings.Contains(rootWord, "–") {
 		parts := strings.Split(rootWord, "–")
+		if strings.Contains(parts[0], ",") {
+			innerParts := strings.Split(parts[0], ",")
+			return strings.TrimSpace(innerParts[0])
+		}
 		return strings.TrimSpace(parts[0])
 	}
 	return strings.TrimSpace(rootWord)
@@ -304,7 +308,11 @@ func (d *DionysosHandler) reestablishStream() {
 	}
 
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
-	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return
+	}
 	aggregatorHealthy := aggregator.WaitForHealthyState()
 	if !aggregatorHealthy {
 		logging.Error("aggregator service not ready")

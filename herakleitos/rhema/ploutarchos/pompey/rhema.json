@@ -35,5 +35,40 @@
         "section":"4"
       }
     ]
+  },
+  {
+    "author":"Ploutarchos",
+    "book":"Pompey",
+    "type":"work",
+    "reference":"75",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0007.tlg045.perseus-grc2:75?q=&qk=form&right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "ταῦτα εἰπεῖν τὴν Κορνηλίαν λέγουσι, τὸν δὲ Πομπήϊον ἀποκρίνασθαι μίαν ἄρα, Κορνηλία, τύχην ᾔδεις τὴν ἀμείνονα, ἣ καὶ σὲ ἴσως ἐξηπάτησεν, ὅτι μοι χρόνον πλείονα τοῦ συνήθους παρέμεινεν. ἀλλὰ καὶ ταῦτα δεῖ φέρειν γενομένους ἀνθρώπους, καὶ τῆς τύχης ἔτι πειρατέον. οὐ γὰρ ἀνέλπιστον ἐκ τούτων ἀναλαβεῖν ἐκεῖνα τὸν ἐξ ἐκείνων ἐν τούτοις γενόμενον.",
+        "translations":[
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "ἡ μὲν οὖν γυνὴ μετεπέμπετο χρήματα καὶ θεράποντας ἐκ πόλεως· τῶν δὲ Μιτυληναίων τὸν Πομπήϊον ἀσπασαμένων καὶ παρακαλούντων εἰσελθεῖν εἰς τὴν πόλιν, οὐκ ἠθέλησεν, ἀλλὰ κἀκείνους ἐκέλευσε τῷ κρατοῦντι πείθεσθαι καὶ θαρρεῖν εὐγνώμονα γὰρ εἶναι Καίσαρα καὶ χρηστόν.",
+        "translations":[
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "αὐτὸς δὲ πρὸς Κράτιππον τραπόμενος τὸν φιλόσοφον κατέβη γὰρ ἐκ τῆς πόλεως ὀψόμενος αὐτόν, ἐμέμψατο καὶ συνδιηπόρησε βραχέα περὶ τῆς προνοίας, ὑποκατακλινομένου τοῦ Κρατίππου καὶ παράγοντος αὐτὸν ἐπὶ τὰς ἀμείνονας ἐλπίδας, ὅπως μὴ λυπηρὸς μηδὲ ἄκαιρος ἀντιλέγων εἴη.",
+        "translations":[
+          "He himself, however, turning to Cratippus the philosopher, who had come down from the city to see him, complained and argued briefly with him about Providence, Cratippus yielding somewhat to his reasoning and trying to lead him on to better hopes, that he might not give him pain by arguing against him at such a time."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "ἐπεὶ τὸ μὲν ἐρέσθαι τὸν Πομπήϊον ἦν ὑπὲρ τῆς προνοίας, τὸν δʼ ἀποφαίνεσθαι ὅτι τοῖς πράγμασιν ἤδη μοναρχίας ἔδει διὰ τὴν κακοπολιτείαν ἐρέσθαι δέ· πῶς, ὦ Πομπήϊε, καὶ τίνι τεκμηρίῳ πεισθῶμεν ὅτι βέλτιον ἂν σὺ τῇ τύχῃ Καίσαρος ἐχρήσω κρατήσας ; ἀλλὰ ταῦτα μὲν ἐατέον ὥσπερ ἔχει, τὰ τῶν θεῶν.",
+        "translations":[
+          "For when Pompey raised questions about Providence, Cratippus might have answered that the state now required a monarchy because it was so badly administered; and he might have asked Pompey: How, O Pompey, and by what evidence, can we be persuaded that thou wouldst have made a better use of fortune than Caesar, hadst thou got the mastery? But this matter of the divine ordering of events must be left without further discussion."
+        ],
+        "section":"4"
+      }
+    ]
   }
 ]

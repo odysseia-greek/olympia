@@ -135,7 +135,11 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
-	aggregator := aristarchos.NewClientAggregator(aggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
 	aggregatorHealthy := aggregator.WaitForHealthyState()
 	if !aggregatorHealthy {
 		logging.Debug("aggregator service not ready - restarting seems the only option")
