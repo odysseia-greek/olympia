@@ -3,6 +3,50 @@
     "author":"Plato",
     "book":"Republic",
     "type":"work",
+    "reference":"1.348",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0059.tlg030.perseus-grc2:1.348?q=&qk=form&right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "ἤκουσας, ἦν δʼ ἐγώ, ὅσα ἄρτι Θρασύμαχος ἀγαθὰ διῆλθεν τῷ τοῦ ἀδίκου; ἤκουσα, ἔφη, ἀλλʼ οὐ πείθομαι. βούλει οὖν αὐτὸν πείθωμεν, ἂν δυνώμεθά πῃ ἐξευρεῖν, ὡς οὐκ ἀληθῆ λέγει; πῶς γὰρ οὐ βούλομαι; ἦ δʼ ὅς. ἂν μὲν τοίνυν, ἦν δʼ ἐγώ, ἀντικατατείναντες λέγωμεν αὐτῷ λόγον παρὰ λόγον, ὅσα αὖ ἀγαθὰ ἔχει τὸ δίκαιον εἶναι, καὶ αὖθις οὗτος, καὶ ἄλλον ἡμεῖς, ἀριθμεῖν δεήσει",
+        "translations":[
+          "Did you hear, said I, all the goods that Thrasymachus just now enumerated for the life of the unjust man? I heard, he said, but I am not convinced. Do you wish us then to try to persuade him, supposing we can find a way, that what he says is not true? Of course I wish it, he said. If then we oppose[*] him in a set speech enumerating in turn the advantages of being just and he replies and we rejoin, we shall have to count up and measure the goods listed in the respective speeches"
+        ],
+        "section":"a"
+      },
+      {
+        "greek": "τἀγαθὰ καὶ μετρεῖν ὅσα ἑκάτεροι ἐν ἑκατέρῳ λέγομεν, καὶ ἤδη δικαστῶν τινων τῶν διακρινούντων δεησόμεθα· ἂν δὲ ὥσπερ ἄρτι ἀνομολογούμενοι πρὸς ἀλλήλους σκοπῶμεν, ἅμα αὐτοί τε δικασταὶ καὶ ῥήτορες ἐσόμεθα. πάνυ μὲν οὖν, ἔφη. ὁποτέρως οὖν σοι, ἦν δʼ ἐγώ, ἀρέσκει. οὕτως, ἔφη. ἴθι δή, ἦν δʼ ἐγώ, ὦ Θρασύμαχε, ἀπόκριναι ἡμῖν ἐξ ἀρχῆς. τὴν τελέαν ἀδικίαν τελέας οὔσης δικαιοσύνης λυσιτελεστέραν φῂς εἶναι;",
+        "translations":[
+          "and we shall forthwith be in need of judges to decide between us. But if, as in the preceding discussion, we come to terms with one another as to what we admit in the inquiry, we shall be ourselves both judges and pleaders. Quite so, he said. Which method do you like best? said I. This one, he said. Come then, Thrasymachus, I said, go back to the beginning and answer us. You affirm that perfect and complete injustice is more profitable than justice that is complete."
+        ],
+        "section":"b"
+      },
+      {
+        "greek": "πάνυ μὲν οὖν καὶ φημί, ἔφη, καὶ διʼ ἅ, εἴρηκα. φέρε δή, τὸ τοιόνδε περὶ αὐτῶν πῶς λέγεις; τὸ μέν που ἀρετὴν αὐτοῖν καλεῖς, τὸ δὲ κακίαν; πῶς γὰρ οὔ; οὐκοῦν τὴν μὲν δικαιοσύνην ἀρετήν, τὴν δὲ ἀδικίαν κακίαν; εἰκός γʼ, ἔφη, ὦ ἥδιστε, ἐπειδή γε καὶ λέγω ἀδικίαν μὲν λυσιτελεῖν, δικαιοσύνην δʼ οὔ. ἀλλὰ τί μήν; τοὐναντίον, ἦ δʼ ὅς. ἦ τὴν δικαιοσύνην κακίαν; οὔκ, ἀλλὰ πάνυ γενναίαν εὐήθειαν.",
+        "translations":[
+          "I affirm it, he said, and have told you my reasons. Tell me then how you would express yourself on this point about them. You call one of them, I presume, a virtue and the other a vice? Of course. Justice the virtue and injustice the vice? It is likely, you innocent, when I say that injustice pays and justice doesn’t pay. But what then, pray? The opposite, he replied. What! justice vice? No, but a most noble simplicity[*] or goodness of heart. Then do you call injustice badness of heart?"
+        ],
+        "section":"c"
+      },
+      {
+        "greek": "τὴν ἀδικίαν ἄρα κακοήθειαν καλεῖς; οὔκ, ἀλλʼ εὐβουλίαν, ἔφη. ἦ καὶ φρόνιμοί σοι, ὦ Θρασύμαχε, δοκοῦσιν εἶναι καὶ ἀγαθοὶ οἱ ἄδικοι; οἵ γε τελέως, ἔφη, οἷοί τε ἀδικεῖν, πόλεις τε καὶ ἔθνη δυνάμενοι ἀνθρώπων ὑφʼ ἑαυτοὺς ποιεῖσθαι· σὺ δὲ οἴει με ἴσως τοὺς τὰ βαλλάντια ἀποτέμνοντας λέγειν. λυσιτελεῖ μὲν οὖν, ἦ δʼ ὅς, καὶ τὰ τοιαῦτα, ἐάνπερ λανθάνῃ· ἔστι δὲ οὐκ ἄξια λόγου, ἀλλʼ ἃ νυνδὴ ἔλεγον.",
+        "translations":[
+          "No, but goodness of judgement. Do you also, Thrasymachus, regard the unjust as intelligent and good? Yes, if they are capable of complete injustice, he said, and are able to subject to themselves cities and tribes of men. But you probably suppose that I mean those who take purses. There is profit to be sure even in that sort of thing, he said, if it goes undetected. But such things are not worth taking into the account,"
+        ],
+        "section":"d"
+      },
+      {
+        "greek": "τοῦτο μέν, ἔφην, οὐκ ἀγνοῶ ὃ βούλει λέγειν, ἀλλὰ τόδε ἐθαύμασα, εἰ ἐν ἀρετῆς καὶ σοφίας τιθεῖς μέρει τὴν ἀδικίαν, τὴν δὲ δικαιοσύνην ἐν τοῖς ἐναντίοις. ἀλλὰ πάνυ οὕτω τίθημι. τοῦτο, ἦν δʼ ἐγώ, ἤδη στερεώτερον, ὦ ἑταῖρε, καὶ οὐκέτι ῥᾴδιον ἔχειν ὅτι τις εἴπῃ.",
+        "translations":[
+          "but only what I just described. I am not unaware of your meaning in that, I said; but this is what surprised me, that you should range injustice under the head of virtue and wisdom, and justice in the opposite class. Well, I do so class them, he said. That, said I, is a stiffer proposition,[*] my friend, and if you are going as far as that it is hard to know what to answer."
+        ],
+        "section":"e"
+      }
+    ]
+  },
+  {
+    "author":"Plato",
+    "book":"Republic",
+    "type":"work",
     "reference":"2.378",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0059.tlg030.perseus-grc2:2.378?right=perseus-eng2&q=&qk=form",
     "rhemai":[

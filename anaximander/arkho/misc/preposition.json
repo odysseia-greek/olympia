@@ -12,7 +12,11 @@
       "ruleName": "preposition +gen."
     },
     {
-      "declension": "ἄχρι(ς)",
+      "declension": "ἄχρι",
+      "ruleName": "preposition +gen."
+    },
+    {
+      "declension": "ἄχρις",
       "ruleName": "preposition +gen."
     },
     {

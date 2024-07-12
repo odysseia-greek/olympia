@@ -2,14 +2,21 @@
     "target": "{{ get_env(name="TARGET", default="deploy/alexandros") }}",
     "feature": {
         "network": {
-            "incoming": "mirror",
+            "incoming": {
+                "mode": "mirror",
+                "ignore_localhost": false
+            },
             "outgoing": {
                 "tcp": true,
                 "udp": true,
-                "ignore_localhost": true
-            }
+                "ignore_localhost": false
+            },
+            "dns": true
         },
         "fs": "read",
         "env": true
     }
 }
+
+
+

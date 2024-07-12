@@ -142,6 +142,27 @@
     {
       "declension": "πάντα",
       "ruleName": "adverb"
+    },
+    {
+      "declension": "τί",
+      "ruleName": "adverb (adverbial accusative)",
+      "searchTerm": [
+        "τί"
+      ]
+    },
+    {
+      "declension": "τʼ",
+      "ruleName": "adverb (adverbial accusative)",
+      "searchTerm": [
+        "τί"
+      ]
+    },
+    {
+      "declension": "τ’",
+      "ruleName": "adverb (adverbial accusative)",
+      "searchTerm": [
+        "τί"
+      ]
     }
   ]
 }
