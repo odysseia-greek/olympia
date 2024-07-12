@@ -54,6 +54,24 @@
     {
       "declension": "ὅταν",
       "ruleName": "conjunction"
+    },
+    {
+      "declension": "ἀλλά",
+      "ruleName": "conjunction"
+    },
+    {
+      "declension": "ἀλλʼ",
+      "ruleName": "conjunction",
+      "searchTerm": [
+        "ἀλλά"
+      ]
+    },
+    {
+      "declension": "ἀλλ’",
+      "ruleName": "conjunction",
+      "searchTerm": [
+        "ἀλλά"
+      ]
     }
   ]
 }

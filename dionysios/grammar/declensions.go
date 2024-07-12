@@ -98,20 +98,20 @@ func (d *DionysosHandler) parseDictResults(dictionaryHits models.Meros) (transla
 	return
 }
 
-func (d *DionysosHandler) isAWordWithoutDeclensions(word string) (bool, string) {
+func (d *DionysosHandler) isAWordWithoutDeclensions(word string) (bool, *models.DeclensionElement) {
 	for _, rules := range d.DeclensionConfig.Declensions {
 		for _, m := range miscNames {
 			if rules.Type == m {
 				for _, declensionWord := range rules.Declensions {
 					if word == d.removeAccents(declensionWord.Declension) {
-						return true, rules.Type
+						return true, &declensionWord
 					}
 				}
 			}
 		}
 	}
 
-	return false, ""
+	return false, nil
 }
 
 // StartFindingRules initiates the process of finding declension rules and translations for a given word.
@@ -134,11 +134,15 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 	var results models.DeclensionTranslationResults
 
-	noDeclensionWord, particleForm := d.isAWordWithoutDeclensions(d.removeAccents(word))
+	noDeclensionWord, form := d.isAWordWithoutDeclensions(d.removeAccents(word))
 
 	if noDeclensionWord {
 		// if there are searchTerms (for example articles and pronouns) use those else just use the word
-		singleSearchResult, err := d.queryWordInAlexandros(word, requestID)
+		rootWord := word
+		if len(form.SearchTerm) > 0 {
+			rootWord = form.SearchTerm[0]
+		}
+		singleSearchResult, err := d.queryWordInAlexandros(rootWord, requestID)
 		if err != nil {
 			logging.Debug(fmt.Sprintf("single search result gave an error: %s", err.Error()))
 		}
@@ -148,8 +152,8 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 
 			result := models.Result{
 				Word:        word,
-				Rule:        particleForm,
-				RootWord:    word,
+				Rule:        form.RuleName,
+				RootWord:    rootWord,
 				Translation: []string{},
 			}
 			for _, searchResult := range singleSearchResult {
@@ -191,6 +195,8 @@ func (d *DionysosHandler) StartFindingRules(word, requestID string) (*models.Dec
 						if utf8.RuneCountInString(term) == 1 && term != "ὁ" {
 							continue
 						}
+
+						//replace παρε with παρα for imperfect verbs
 
 						// Query the word in the Alexandros dictionary
 						dictionaryHits, err := d.queryWordInAlexandros(term, requestID)
@@ -436,11 +442,23 @@ func (d *DionysosHandler) searchForDeclensions(word string) (*models.FoundRules,
 
 		// Iterate over each declension form
 		for _, declensionForm := range declension.Declensions {
-			// Process the declension form and get the result
+			wordIsOfTypePare := false
+			if len(word) >= 4 && strings.HasPrefix(d.removeAccents(word), "παρε") {
+				contract = false
+				wordIsOfTypePare = true
+			}
+
 			result := d.loopOverDeclensions(word, declensionForm, contract, declension.Name)
 			// Check if any rules were found
 			if len(result.Rules) >= 1 {
 				for _, rule := range result.Rules {
+					if wordIsOfTypePare {
+						for index, searchTerm := range rule.SearchTerms {
+							// Replace "παρε" with "παρα"
+							parsedTerm := "παρα" + string([]rune(d.removeAccents(searchTerm))[4:])
+							rule.SearchTerms[index] = parsedTerm
+						}
+					}
 					d.addRuleIfDifferent(&foundRules, rule)
 				}
 			}
