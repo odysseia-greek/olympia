@@ -85,7 +85,7 @@ func main() {
 				logging.Debug(fmt.Sprintf("working on file: %s in quiz: %s", quizPath, dir.Name()))
 
 				switch dir.Name() {
-				case "media":
+				case models.MEDIA:
 					wg.Add(1)
 					go func(content []byte) {
 						defer wg.Done()
@@ -107,7 +107,7 @@ func main() {
 							}
 						}
 					}(content)
-				case "dialogue":
+				case models.DIALOGUE:
 					wg.Add(1)
 					go func(content []byte) {
 						defer wg.Done()
@@ -129,11 +129,32 @@ func main() {
 							}
 						}
 					}(content)
-				case "authorbased":
+				case models.AUTHORBASED:
 					wg.Add(1)
 					go func(content []byte) {
 						defer wg.Done()
-						var quiz []models.AuthorBasedQuiz
+						var quiz []models.AuthorbasedQuiz
+						if err := json.Unmarshal(content, &quiz); err != nil {
+							logging.Error(err.Error())
+							return
+						}
+						for _, q := range quiz {
+							asJson, err := json.Marshal(q)
+							if err != nil {
+								logging.Error(err.Error())
+								continue
+							}
+
+							if err := handler.AddWithoutQueue(asJson); err != nil {
+								logging.Error(err.Error())
+							}
+						}
+					}(content)
+				case models.MULTICHOICE:
+					wg.Add(1)
+					go func(content []byte) {
+						defer wg.Done()
+						var quiz []models.MultipleChoiceQuiz
 						if err := json.Unmarshal(content, &quiz); err != nil {
 							logging.Error(err.Error())
 							return

@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/cucumber/godog v0.14.1
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/plato v0.1.28
+	github.com/odysseia-greek/agora/plato v0.1.37
 	github.com/stretchr/testify v1.9.0
 )
 

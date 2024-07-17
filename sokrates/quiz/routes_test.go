@@ -3,6 +3,7 @@ package quiz
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/models"
@@ -509,6 +510,15 @@ func TestHealthEndPoint(t *testing.T) {
 		assert.Equal(t, http.StatusBadGateway, response.Code)
 		assert.False(t, healthModel.Healthy)
 	})
+}
+
+func TestRandomizerOutput(t *testing.T) {
+	randomizer, err := config.CreateNewRandomizer()
+	assert.Nil(t, err)
+	for i := range 100 {
+		randomNumber := randomizer.RandomNumberBaseZero(20)
+		fmt.Println(fmt.Sprintf("Random Number %d: %d", i, randomNumber))
+	}
 }
 
 func TestCreateQuizEndpoint(t *testing.T) {

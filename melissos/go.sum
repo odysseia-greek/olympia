@@ -174,6 +174,8 @@ github.com/odysseia-greek/agora/eupalinos v0.1.0 h1:0WprASVnBaKi8hQdJDBmCeQbzeSJ
 github.com/odysseia-greek/agora/eupalinos v0.1.0/go.mod h1:1QsIeyWfs0UQ2uJCuXUorv9G1zLNcQvx4zha0OewZ+E=
 github.com/odysseia-greek/agora/plato v0.1.28 h1:W0mRn3BAQxMAT04MqgorN4uBCcjWSOqKKRB6w9p3Dgw=
 github.com/odysseia-greek/agora/plato v0.1.28/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
+github.com/odysseia-greek/agora/plato v0.1.37 h1:ELQtZ31I3iA2GKnof/Bd58zwejTY7H3E8XwOQpCil5E=
+github.com/odysseia-greek/agora/plato v0.1.37/go.mod h1:P+HXT0Jy1tggm/6SD2f58AEVT+lEvrpxlbKtqTZZrB8=
 github.com/odysseia-greek/agora/thales v0.1.9 h1:bDLNiqkMgcuUFUnfnC2yf5vXKurs/CxKBLllu65q2qQ=
 github.com/odysseia-greek/agora/thales v0.1.9/go.mod h1:/Pk3exLO78YdFvJ9XkbhOCfRZeWZTIbcxfOGSDzUwdM=
 github.com/odysseia-greek/delphi/ptolemaios v0.0.4 h1:Yoq58w6Z7gwse3pZBSO6Gj3Q03JKLyQBXUVuRzLI/mc=

@@ -9,10 +9,11 @@ Feature: Sokrates
     When a query is made for the options for the quizType "<quizType>"
     Then a list of themes with the highest set should be returned
     Examples:
-      | service  | quizType |
-      | sokrates | media    |
-      | sokrates | authorbased |
-      | sokrates | dialogue    |
+      | service  | quizType       |
+      | sokrates | media          |
+      | sokrates | multiplechoice |
+      | sokrates | dialogue       |
+      | sokrates | authorbased    |
 
   @sokrates
   Scenario Outline: The simple flow to create and answer a quiz should be functional
@@ -21,7 +22,7 @@ Feature: Sokrates
     And a new quiz question is made with the quizType "<quizType>"
     Then the question can be answered from the response
     Examples:
-      | service  | quizType |
-      | sokrates | media    |
-      | sokrates | authorbased |
-      | sokrates | dialogue    |
+      | service  | quizType       |
+      | sokrates | media          |
+      | sokrates | multiplechoice |
+      | sokrates | dialogue       |

@@ -1,0 +1,225 @@
+[
+  {
+    "quizType": "authorbased",
+    "theme": "Herodotos - Histories",
+    "reference": "/texts?author=Herodotos&book=Histories&reference=1.1",
+    "set": 1,
+    "fullSentence": "Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε, ὡς μήτε τὰ γενόμενα ἐξ ἀνθρώπων τῷ χρόνῳ ἐξίτηλα γένηται, μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται, τά τε ἄλλα καὶ διʼ ἣν αἰτίην ἐπολέμησαν ἀλλήλοισι.",
+    "translation": "This is the display of the inquiry of Herodotus of Halicarnassus, so that things done by man not be forgotten in time, and that great and marvelous deeds, some displayed by the Hellenes, some by the barbarians, not lose their glory, including among others what was the cause of their waging war on each other.",
+    "content": [
+      {
+        "greek": "αἰτία",
+        "translation": "a charge, accusation",
+        "wordsInText": [
+          "αἰτίην"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "ἣν"
+        ]
+      },
+      {
+        "greek": "ἀκλεής",
+        "translation": "without fame, inglorious, unsung",
+        "wordsInText": [
+          "ἀκλεᾶ"
+        ]
+      },
+      {
+        "greek": "Ἁλικαρνασσεύς",
+        "translation": "a Halicarnassian",
+        "wordsInText": [
+          "Ἁλικαρνησσέος"
+        ]
+      },
+      {
+        "greek": "ἀλλήλων",
+        "translation": "of one another, to one another, one another",
+        "wordsInText": [
+          "ἀλλήλοισι"
+        ]
+      },
+      {
+        "greek": "ἄλλος",
+        "translation": "other, another",
+        "wordsInText": [
+          "ἄλλα"
+        ]
+      },
+      {
+        "greek": "ἄνθρωπος",
+        "translation": "man, person, human",
+        "wordsInText": [
+          "ἀνθρώπων"
+        ]
+      },
+      {
+        "greek": "ἀποδείκνυμι",
+        "translation": "display, appoint, demonstrate",
+        "wordsInText": [
+          "ἀποδεχθέντα"
+        ]
+      },
+      {
+        "greek": "ἀπόδεξις",
+        "translation": "setting, showing forth, publication (Ionic form of ἀπόδειξις)",
+        "wordsInText": [
+          "ἀπόδεξις"
+        ]
+      },
+      {
+        "greek": "βάρβαρος",
+        "translation": "barbarous",
+        "wordsInText": [
+          "βαρβάροισι"
+        ]
+      },
+      {
+        "greek": "γίγνομαι",
+        "translation": "become, be born",
+        "wordsInText": [
+          "γενόμενα",
+          "γένηται"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "διά",
+        "translation": "through c. gen.; because of c. acc",
+        "wordsInText": [
+          "διʼ"
+        ]
+      },
+      {
+        "greek": "ἐκ",
+        "translation": "from out of",
+        "wordsInText": [
+          "ἐξ"
+        ]
+      },
+      {
+        "greek": "Ἕλλην",
+        "translation": "Hellen; Greek",
+        "wordsInText": [
+          "Ἕλλησι"
+        ]
+      },
+      {
+        "greek": "ἐξίτηλος",
+        "translation": "going out, losing colour, fading, evanescent",
+        "wordsInText": [
+          "ἐξίτηλα"
+        ]
+      },
+      {
+        "greek": "ἔργον",
+        "translation": "work, deed",
+        "wordsInText": [
+          "ἔργα"
+        ]
+      },
+      {
+        "greek": "Ἡρόδοτος",
+        "translation": "Herodotus",
+        "wordsInText": [
+          "Ἡροδότου"
+        ]
+      },
+      {
+        "greek": "θαυμαστός",
+        "translation": "wondrous, wonderful, marvellous",
+        "wordsInText": [
+          "θωμαστά"
+        ]
+      },
+      {
+        "greek": "ἱστορία",
+        "translation": "a learning by inquiry, inquiry",
+        "wordsInText": [
+          "ἱστορίης"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "μέγας",
+        "translation": "big, great",
+        "wordsInText": [
+          "μεγάλα"
+        ]
+      },
+      {
+        "greek": "μέν",
+        "translation": "on the one hand, on the other hand",
+        "wordsInText": [
+          "μὲν"
+        ]
+      },
+      {
+        "greek": "μήτε",
+        "translation": "neither / nor",
+        "wordsInText": [
+          "μήτε"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὰ",
+          "τῷ",
+          "τά"
+        ]
+      },
+      {
+        "greek": "τε",
+        "translation": "and",
+        "wordsInText": [
+          "τε"
+        ]
+      },
+      {
+        "greek": "ὡς",
+        "translation": "as, how",
+        "wordsInText": [
+          "ὡς"
+        ]
+      },
+      {
+        "greek": "χρόνος",
+        "translation": "time",
+        "wordsInText": [
+          "χρόνῳ"
+        ]
+      },
+      {
+        "greek": "ὅδε",
+        "translation": "this",
+        "wordsInText": [
+          "ἥδε"
+        ]
+      },
+      {
+        "greek": "πολεμέω",
+        "translation": "to make war, to be at war",
+        "wordsInText": [
+          "ἐπολέμησαν"
+        ]
+      }
+    ]
+  }
+]

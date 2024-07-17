@@ -74,7 +74,7 @@ func (p *ParmenidesHandler) CreateIndexAtStartup() error {
 	return nil
 }
 
-func (p *ParmenidesHandler) AddWithQueue(quizzes []models.AuthorBasedQuiz) error {
+func (p *ParmenidesHandler) AddWithQueue(quizzes []models.MultipleChoiceQuiz) error {
 	var buf bytes.Buffer
 
 	var currBatch int
