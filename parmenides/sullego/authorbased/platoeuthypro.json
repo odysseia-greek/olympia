@@ -1,0 +1,96 @@
+[
+  {
+    "quizType": "authorbased",
+    "theme": "Plato - Euthypro",
+    "reference": "/texts?author=Plato&book=Euthyphro&reference=2",
+    "set": 1,
+    "fullSentence": "ΣΩ. οὔτοι δὴ Ἀθηναῖοί γε, ὦ Εὐθύφρων, δίκην αὐτὴν καλοῦσιν ἀλλὰ γραφήν.",
+    "translation": "Socrates. Our Athenians, Euthyphro, do not call it an action, but an indictment.",
+    "content": [
+      {
+        "greek": "ΣΩ",
+        "translation": "Socrates (short hand)",
+        "wordsInText": [
+          "ΣΩ"
+        ]
+      },
+      {
+        "greek": "Ἀθηναῖος",
+        "translation": "Athenian, of Athens",
+        "wordsInText": [
+          "Ἀθηναῖοί"
+        ]
+      },
+      {
+        "greek": "Εὐθύφρων",
+        "translation": "Euthyphro",
+        "wordsInText": [
+          "Εὐθύφρων"
+        ]
+      },
+      {
+        "greek": "οὔτοι",
+        "translation": "indeed not",
+        "wordsInText": [
+          "οὔτοι"
+        ]
+      },
+      {
+        "greek": "δὴ",
+        "translation": "(discourse particle)",
+        "wordsInText": [
+          "δὴ"
+        ]
+      },
+      {
+        "greek": "ὦ",
+        "translation": "O! oh!",
+        "wordsInText": [
+          "ὦ"
+        ]
+      },
+      {
+        "greek": "ἀλλά",
+        "translation": "otherwise, but",
+        "wordsInText": [
+          "ἀλλὰ"
+        ]
+      },
+      {
+        "greek": "δίκη",
+        "translation": "justice, lawsuit, penalty",
+        "wordsInText": [
+          "δίκην"
+        ]
+      },
+      {
+        "greek": "καλέω",
+        "translation": "to call, summon",
+        "wordsInText": [
+          "καλοῦσιν"
+        ]
+      },
+      {
+        "greek": "γραφή",
+        "translation": "drawing, writing; indictment",
+        "wordsInText": [
+          "γραφήν"
+        ]
+      },
+      {
+        "greek": "γε",
+        "translation": "at least, at any rate",
+        "wordsInText": [
+          "γε"
+        ]
+      },
+      {
+        "greek": "αὐτός",
+        "translation": "the same; unemph. 3rd pers.pronoun; -self",
+        "wordsInText": [
+          "αὐτὴν"
+        ]
+      }
+    ]
+  }
+]

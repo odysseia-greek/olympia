@@ -36,11 +36,46 @@ func (h *HomerosHandler) CreateDialogueQuiz(theme, set, quizType, requestID stri
 	return &quiz, nil
 }
 
-func (h *HomerosHandler) CreateQuiz(theme, set, quizType, requestID string) (*plato.QuizResponse, error) {
+func (h *HomerosHandler) CreateAuthorBasedQuiz(theme, set, quizType, requestID string, excludeWords []string) (*plato.AuthorbasedQuizResponse, error) {
 	request := plato.CreationRequest{
-		Theme:    theme,
-		Set:      set,
-		QuizType: quizType,
+		Theme:        theme,
+		Set:          set,
+		QuizType:     quizType,
+		ExcludeWords: excludeWords,
+		Order:        "",
+	}
+
+	body, err := json.Marshal(request)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+
+	response, err := h.HttpClients.Sokrates().Create(body, requestID)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	var quiz plato.AuthorbasedQuizResponse
+	err = json.NewDecoder(response.Body).Decode(&quiz)
+	if err != nil {
+		return nil, err
+	}
+
+	h.CloseTrace(response, quiz)
+
+	return &quiz, nil
+}
+
+func (h *HomerosHandler) CreateQuiz(theme, set, quizType, order, requestID string, excludeWords []string) (*plato.QuizResponse, error) {
+	request := plato.CreationRequest{
+		Theme:        theme,
+		Set:          set,
+		QuizType:     quizType,
+		Order:        order,
+		ExcludeWords: excludeWords,
 	}
 
 	body, err := json.Marshal(request)
@@ -81,6 +116,30 @@ func (h *HomerosHandler) Check(answerRequest plato.AnswerRequest, requestID stri
 	defer response.Body.Close()
 
 	var answer plato.ComprehensiveResponse
+	err = json.NewDecoder(response.Body).Decode(&answer)
+	if err != nil {
+		return nil, err
+	}
+
+	h.CloseTrace(response, answer)
+
+	return &answer, nil
+}
+
+func (h *HomerosHandler) CheckAuthorBased(answerRequest plato.AnswerRequest, requestID string) (*plato.AuthorBasedResponse, error) {
+	jsonCheck, err := json.Marshal(answerRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	response, err := h.HttpClients.Sokrates().Check(jsonCheck, requestID)
+	if err != nil {
+		h.CloseTraceWithError(err, requestID)
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	var answer plato.AuthorBasedResponse
 	err = json.NewDecoder(response.Body).Decode(&answer)
 	if err != nil {
 		return nil, err

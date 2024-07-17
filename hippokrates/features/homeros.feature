@@ -12,7 +12,7 @@ Feature: Validate Homeros GraphQL Gateway Functionality
     Examples:
       | quizType |
       | media    |
-      | authorbased |
+      | multiplechoice |
 
   @homeros
   Scenario Outline: Alexandros search word

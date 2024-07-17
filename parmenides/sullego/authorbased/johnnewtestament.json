@@ -1,0 +1,129 @@
+[
+  {
+    "quizType": "authorbased",
+    "theme": "John - The New Testament",
+    "reference": "/texts?author=John&book=New+Testament&reference=1",
+    "set": 1,
+    "fullSentence": "ΕΝ ΑΡΧΗ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.",
+    "translation": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+    "content": [
+      {
+        "greek": "ἀρχή",
+        "translation": "a beginning, rule, office, empire",
+        "wordsInText": [
+          "ΑΡΧΗ"
+        ]
+      },
+      {
+        "greek": "θεός",
+        "translation": "god",
+        "wordsInText": [
+          "θεόν",
+          "θεὸς"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "ἦν"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and/also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "λόγος",
+        "translation": "the word",
+        "wordsInText": [
+          "λόγος"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "ὁ",
+          "τὸν"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "(w. gen.) from, (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "(time) in, at, or during the time of",
+        "wordsInText": [
+          "ΕΝ"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "John - The New Testament",
+    "reference": "/texts?author=John&book=New+Testament&reference=1",
+    "set": 2,
+    "fullSentence": "Οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν.",
+    "translation": "The same was in the beginning with God.",
+    "content": [
+      {
+        "greek": "ἀρχή",
+        "translation": "a beginning, rule, office, empire",
+        "wordsInText": [
+          "ἀρχῇ"
+        ]
+      },
+      {
+        "greek": "θεός",
+        "translation": "god",
+        "wordsInText": [
+          "θεόν"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "(time) in, at, or during the time of",
+        "wordsInText": [
+          "ἐν"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "ἦν"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὸν"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "(w. gen.) from, (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "οὗτος",
+        "translation": "this; that",
+        "wordsInText": [
+          "Οὗτος"
+        ]
+      }
+    ]
+  }
+]

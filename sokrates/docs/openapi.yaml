@@ -50,11 +50,13 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/ComprehensiveResponse'
                   - $ref: '#/components/schemas/DialogueQuizAnswer'
+                  - $ref: '#/components/schemas/AuthorBasedResponse'
                 discriminator:
                   propertyName: responseType
                   mapping:
                     comprehensiveResponse: '#/components/schemas/ComprehensiveResponse'
                     dialogueResponse: '#/components/schemas/DialogueQuizAnswer'
+                    authorBasedResponse: '#/components/schemas/AuthorBasedResponse'
         400:
           description: ValidationError
           content:
@@ -96,11 +98,13 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/QuizResponse'
                   - $ref: '#/components/schemas/DialogueQuizResponse'
+                  - $ref: '#/components/schemas/AuthorBasedQuizResponse'
                 discriminator:
                   propertyName: responseType
                   mapping:
                     createQuiz: '#/components/schemas/QuizResponse'
                     dialogueQuiz: '#/components/schemas/DialogueQuizResponse'
+                    authorBasedQuiz: '#/components/schemas/AuthorBasedQuizResponse'
         '400':
           description: ValidationError
           content:
@@ -186,6 +190,14 @@ components:
         quizType:
           type: string
           example: dialogue
+        order:
+          type: string
+          example: gre-eng
+        excludeWords:
+          type: array
+          items:
+            type: string
+            example: "ἀρχή"
       required:
         - quizType
     QuizResponse:
@@ -194,6 +206,9 @@ components:
         quizItem:
           type: string
           example: ὁ λόγος
+        numberOfItems:
+          type: integer
+          example: 20
         options:
           type: array
           items:
@@ -212,6 +227,22 @@ components:
           example: word
       required:
         - quizWord
+
+    AuthorBasedQuizResponse:
+      type: object
+      properties:
+        fullSentence:
+          type: string
+          example: ΕΝ ΑΡΧΗ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος
+        translation:
+          type: string
+          example: In the beginning was the Word, and the Word was with God, and the Word was God.
+        reference:
+          type: string
+          example: /texts?author=John&book=New+Testament&reference=1
+        quiz:
+          $ref: '#/components/schemas/QuizResponse'
+
     DialogueQuizResponse:
       type: object
       properties:
@@ -350,6 +381,21 @@ components:
         - theme
         - set
         - quizType
+
+    AuthorBasedResponse:
+      type: object
+      properties:
+        correct:
+          type: boolean
+          example: false
+        quizWord:
+          type: string
+          example: ἀρχή
+        wordsInText:
+          type: array
+          items:
+            type: string
+            example: ΑΡΧΗ
 
     ComprehensiveResponse:
       type: object
@@ -494,7 +540,6 @@ components:
               example: 6
           required:
             - correctPlace
-            -
     Health:
       type: object
       properties:

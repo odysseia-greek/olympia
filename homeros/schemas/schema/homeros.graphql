@@ -11,23 +11,78 @@ type AggregateResult {
   aggregates: [Aggregate]
 }
 
-union AnswerUnion = ComprehensiveResponse | DialogueAnswer
-
-type Authors {
-  books: [Book]
-  name: String
+type AggregationResult {
+  authors: [ESAuthor]
 }
 
-type Book {
-  book: Int
+type AnalyzeResult {
+  author: String
+  book: String
+  reference: String
+  referenceLink: String
+  text: Rhema
+}
+
+type AnalyzeTextResponse {
+  conjugations: [ConjugationResponse]
+  results: [AnalyzeResult]
+  rootword: String
+}
+
+type AnswerSection {
+  answerSentence: String
+  levenshteinPercentage: String
+  quizSentence: String
+  section: String
+}
+
+union AnswerUnion = ComprehensiveResponse | DialogueAnswer | AuthorBasedAnswer
+
+type AuthorBasedAnswer {
+  correct: Boolean
+  numberOfItems: Int
+  quizWord: String
+  wordsInText: [String]
+}
+
+type AuthorBasedQuizType {
+  fullSentence: String
+  quiz: QuizResponse
+  reference: String
+  translation: String
+}
+
+input CheckTextRequestInput {
+  author: String
+  book: String
+  reference: String
+  translations: [TranslationsInput]
+}
+
+type CheckTextResponse {
+  averageLevenshteinPercentage: String
+  possibleTypos: [Typo]
+  sections: [AnswerSection]
 }
 
 type ComprehensiveResponse {
   correct: Boolean
-  foundInText: FoundInText
+  foundInText: AnalyzeTextResponse
   progress: Progress
   quizWord: String
   similarWords: [Hit]
+}
+
+type ConjugationResponse {
+  rule: String
+  word: String
+}
+
+input CreateTextInput {
+  author: String
+  book: String
+  reference: String
+  section: String
 }
 
 type Database {
@@ -67,10 +122,10 @@ type DialogueCorrection {
 }
 
 input DialogueInput {
-  place: Int
   speaker: String
   translation: String
   greek: String
+  place: Int
 }
 
 type DialogueQuiz {
@@ -82,17 +137,23 @@ type DialogueQuiz {
   theme: String
 }
 
+type ESAuthor {
+  books: [ESBook]
+  key: String
+}
+
+type ESBook {
+  key: String
+  references: [Reference]
+}
+
 type ExtendedDictionary {
   hits: [ExtendedDictionaryEntry]
 }
 
 type ExtendedDictionaryEntry {
-  foundInText: FoundInText
+  foundInText: AnalyzeTextResponse
   hit: Hit
-}
-
-type FoundInText {
-  rhemai: [Rhema]
 }
 
 type Health {
@@ -107,24 +168,6 @@ type Hit {
   greek: String
   linkedWord: String
   original: String
-}
-
-type matches {
-  index: Int
-  word: String
-}
-
-type mistakes {
-  index: Int
-  nonMatches: [nonMatches]
-  word: String
-}
-
-type nonMatches {
-  index: Int
-  levenshtein: Int
-  match: String
-  percentage: String
 }
 
 type Options {
@@ -148,56 +191,56 @@ type QuizResponse {
   quizItem: String
 }
 
-union QuizResponseUnion = QuizResponse | DialogueQuiz
+union QuizResponseUnion = QuizResponse | DialogueQuiz | AuthorBasedQuizType
+
+type Reference {
+  key: String
+  sections: [Section]
+}
 
 type Result {
   rootWord: String
   rule: String
-  translation: String
+  translation: [String]
   word: String
 }
 
 type Rhema {
-  author: String
-  book: Int
-  chapter: Int
   greek: String
-  perseusTextLink: String
-  section: Int
+  section: String
   translations: [String]
 }
 
 type RootQuery {
-  answer(dialogue: [DialogueInput], theme: String, set: String, quizType: String, quizWord: String, answer: String, comprehensive: Boolean): AnswerUnion
+  """analyze text based on a rootword"""
+  analyze(rootword: String): AnalyzeTextResponse
+  answer(answer: String, comprehensive: Boolean, dialogue: [DialogueInput], theme: String, set: String, quizType: String, quizWord: String): AnswerUnion
 
-  """Get the author and books tree from Herodotos"""
-  authors: [Authors]
+  """Check the text given"""
+  check(input: CheckTextRequestInput): CheckTextResponse
+
+  """Create a new Text in Herodotos"""
+  create(input: CreateTextInput): Text
 
   """Search Alexandros dictionary for a word"""
-  dictionary(word: String, language: String = "", mode: String = "", searchInText: Boolean = false): ExtendedDictionary
+  dictionary(language: String = "", mode: String = "", searchInText: Boolean = false, word: String): ExtendedDictionary
 
   """Search Dionysios for grammar results"""
   grammar(word: String): [Result]
 
   """returns the options for a specific quiztype"""
   options(quizType: String): AggregateResult
-  quiz(set: String, quizType: String, theme: String): QuizResponseUnion
-
-  """Create a new Question in Herodotos"""
-  sentence(book: String, author: String): Sentence
+  quiz(theme: String, set: String, quizType: String, order: String, excludeWords: [String]): QuizResponseUnion
 
   """See if the backendApis are healthy"""
   status: Status
 
-  """Check the text given"""
-  text(author: String, answer: String, sentenceId: String): Text
+  """Fetch options from Herodotos"""
+  textOptions: AggregationResult
 }
 
-type Sentence {
-  author: String
-  book: String
-  greek: String
-  id: String
+type Section {
+  key: String
 }
 
 type Speaker {
@@ -216,16 +259,21 @@ type Status {
 }
 
 type Text {
-  input: String
-  levenshtein: String
-  matches: [matches]
-  mistakes: [mistakes]
-  quiz: String
-  splitAnswer: [word]
-  splitQuiz: [word]
+  author: String
+  book: String
+  perseusTextLink: String
+  reference: String
+  rhemai: [Rhema]
+  type: String
 }
 
-type word {
-  word: String
+input TranslationsInput {
+  section: String
+  translation: String
+}
+
+type Typo {
+  provided: String
+  source: String
 }
 

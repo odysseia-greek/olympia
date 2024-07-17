@@ -1,0 +1,226 @@
+[
+  {
+    "quizType": "authorbased",
+    "theme": "Thucydides - History of the Peloponnesian War",
+    "set": 1,
+    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.31",
+    "fullSentence": "τὸν δ’ ἐνιαυτὸν πάντα τὸν μετὰ τὴν ναυμαχίαν καὶ τὸν ὕστερον οἱ Κορίνθιοι ὀργῇ φέροντες τὸν πρὸς Κερκυραίους πόλεμον ἐναυπηγοῦντο καὶ παρεσκευάζοντο τὰ κράτιστα νεῶν στόλον, ἔκ τε αὐτῆς Πελοποννήσου ἀγείροντες καὶ τῆς ἄλλης Ἑλλάδος ἐρέτας, μισθῷ πείθοντες.",
+    "translation": "Corinth, exasperated by the war with the Corcyraeans, spent the whole of the year after the engagement and that succeeding it in building ships, and in straining every nerve to form an efficient fleet; rowers being drawn from Peloponnese and the rest of Hellas by the inducement of large bounties.",
+    "content": [
+      {
+        "greek": "ἀγείρω",
+        "translation": "to bring together, gather together",
+        "wordsInText": [
+          "ἀγείροντες"
+        ]
+      },
+      {
+        "greek": "ἄλλος",
+        "translation": "other, another",
+        "wordsInText": [
+          "ἄλλης"
+        ]
+      },
+      {
+        "greek": "αὐτός",
+        "translation": "the same; unemph. 3rd pers.pronoun; -self",
+        "wordsInText": [
+          "αὐτῆς"
+        ]
+      },
+      {
+        "greek": "ἐκ",
+        "translation": "from out of",
+        "wordsInText": [
+          "ἔκ"
+        ]
+      },
+      {
+        "greek": "Ἑλλάς",
+        "translation": "Hellas",
+        "wordsInText": [
+          "Ἑλλάδος"
+        ]
+      },
+      {
+        "greek": "ἐνιαυτός",
+        "translation": "year",
+        "wordsInText": [
+          "ἐνιαυτὸν"
+        ]
+      },
+      {
+        "greek": "ἐρέτης",
+        "translation": "a rower",
+        "wordsInText": [
+          "ἐρέτας"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "Κερκυραῖος",
+        "translation": "of Corcyra, Corfu",
+        "wordsInText": [
+          "Κερκυραίους"
+        ]
+      },
+      {
+        "greek": "Κορίνθιος",
+        "translation": "Corinthian",
+        "wordsInText": [
+          "Κορίνθιοι"
+        ]
+      },
+      {
+        "greek": "κράτιστος",
+        "translation": "strongest, mightiest",
+        "wordsInText": [
+          "κράτιστα"
+        ]
+      },
+      {
+        "greek": "μετά",
+        "translation": "(w gen) with, among; (w acc) after",
+        "wordsInText": [
+          "μετὰ"
+        ]
+      },
+      {
+        "greek": "μισθός",
+        "translation": "wages, pay, hire",
+        "wordsInText": [
+          "μισθῷ"
+        ]
+      },
+      {
+        "greek": "ναυμαχία",
+        "translation": "a sea-fight",
+        "wordsInText": [
+          "ναυμαχίαν"
+        ]
+      },
+      {
+        "greek": "ναυπηγέω",
+        "translation": "to build ships",
+        "wordsInText": [
+          "ἐναυπηγοῦντο"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὸν",
+          "τὴν",
+          "τῆς",
+          "οἱ",
+          "τὰ"
+        ]
+      },
+      {
+        "greek": "παρασκευάζω",
+        "translation": "to get ready, prepare",
+        "wordsInText": [
+          "παρεσκευάζοντο"
+        ]
+      },
+      {
+        "greek": "παρασκευάζω",
+        "translation": "to get ready, prepare",
+        "wordsInText": [
+          "παρεσκευάζοντο"
+        ]
+      },
+      {
+        "greek": "πᾶς",
+        "translation": "all, the whole",
+        "wordsInText": [
+          "πάντα"
+        ]
+      },
+      {
+        "greek": "πείθω",
+        "translation": "to prevail upon, win over, persuade",
+        "wordsInText": [
+          "πείθοντες"
+        ]
+      },
+      {
+        "greek": "Πελοπόννησος",
+        "translation": "the Peloponnesus",
+        "wordsInText": [
+          "Πελοποννήσου"
+        ]
+      },
+      {
+        "greek": "πόλεμος",
+        "translation": "battle, fight, war",
+        "wordsInText": [
+          "πόλεμον"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "(w. gen.) from; (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "τε",
+        "translation": "and",
+        "wordsInText": [
+          "τε"
+        ]
+      },
+      {
+        "greek": "στόλος",
+        "translation": "an expedition; a voyage; equipment",
+        "wordsInText": [
+          "στόλον"
+        ]
+      },
+      {
+        "greek": "φέρω",
+        "translation": "to bear",
+        "wordsInText": [
+          "φέροντες"
+        ]
+      },
+      {
+        "greek": "ὕστερον",
+        "translation": "later/latter",
+        "wordsInText": [
+          "ὕστερον"
+        ]
+      },
+      {
+        "greek": "ὀργή",
+        "translation": "natural impulse",
+        "wordsInText": [
+          "ὀργῇ"
+        ]
+      },
+      {
+        "greek": "δ’",
+        "translation": "apocopic, used before a vowel to ease pronunciation",
+        "wordsInText": [
+          "δ’"
+        ]
+      },
+      {
+        "greek": "ναῦς",
+        "translation": "a ship",
+        "wordsInText": [
+          "νεῶν"
+        ]
+      }
+    ]
+  }
+]

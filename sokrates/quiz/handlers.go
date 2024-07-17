@@ -39,9 +39,11 @@ type SokratesHandler struct {
 }
 
 const (
-	THEME    string = "theme"
-	SET      string = "set"
-	QUIZTYPE string = "quizType"
+	THEME       string = "theme"
+	SET         string = "set"
+	QUIZTYPE    string = "quizType"
+	GREENGORDER string = "gre-eng"
+	ENGGREORDER string = "eng-gre"
 )
 
 func (s *SokratesHandler) Health(w http.ResponseWriter, req *http.Request) {
@@ -91,9 +93,17 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	if createQuizRequest.Order == "" {
+		createQuizRequest.Order = GREENGORDER
+	}
+
+	if createQuizRequest.Order != GREENGORDER && createQuizRequest.Order != ENGGREORDER {
+		createQuizRequest.Order = GREENGORDER
+	}
+
 	switch createQuizRequest.QuizType {
-	case models.MEDIA:
-		quiz, err := s.mediaQuiz(createQuizRequest.Theme, createQuizRequest.Set, requestId)
+	case models.AUTHORBASED:
+		quiz, err := s.authorBasedQuiz(createQuizRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: requestId},
@@ -110,8 +120,26 @@ func (s *SokratesHandler) Create(w http.ResponseWriter, req *http.Request) {
 
 		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
 		return
-	case models.AUTHORBASED:
-		quiz, err := s.authorBasedQuiz(createQuizRequest.Theme, createQuizRequest.Set, requestId)
+	case models.MEDIA:
+		quiz, err := s.mediaQuiz(createQuizRequest, requestId)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithJson(w, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, http.StatusOK, quiz)
+		return
+	case models.MULTICHOICE:
+		quiz, err := s.multipleChoiceQuiz(createQuizRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: requestId},
@@ -176,6 +204,24 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 	}
 
 	switch answerRequest.QuizType {
+	case models.AUTHORBASED:
+		quiz, err := s.authorBasedAnswer(answerRequest, requestId)
+		if err != nil {
+			e := models.ValidationError{
+				ErrorModel: models.ErrorModel{UniqueCode: requestId},
+				Messages: []models.ValidationMessages{
+					{
+						Field:   "creating quiz error",
+						Message: err.Error(),
+					},
+				},
+			}
+			middleware.ResponseWithCustomCode(w, 400, e)
+			return
+		}
+
+		middleware.ResponseWithCustomCode(w, 200, quiz)
+		return
 	case models.MEDIA:
 		quiz, err := s.mediaQuizAnswer(answerRequest, requestId)
 		if err != nil {
@@ -194,8 +240,8 @@ func (s *SokratesHandler) Check(w http.ResponseWriter, req *http.Request) {
 
 		middleware.ResponseWithCustomCode(w, 200, quiz)
 		return
-	case models.AUTHORBASED:
-		quiz, err := s.authorBasedQuizAnswer(answerRequest, requestId)
+	case models.MULTICHOICE:
+		quiz, err := s.multipleChoiceQuizAnswer(answerRequest, requestId)
 		if err != nil {
 			e := models.ValidationError{
 				ErrorModel: models.ErrorModel{UniqueCode: requestId},
@@ -330,7 +376,7 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 	return &answer, nil
 }
 
-func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
+func (s *SokratesHandler) authorBasedAnswer(req models.AnswerRequest, requestID string) (*models.AuthorBasedResponse, error) {
 	splitID := strings.Split(requestID, "+")
 
 	traceCall := false
@@ -372,7 +418,73 @@ func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, reques
 		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
-	var option models.AuthorBasedQuiz
+	var option models.AuthorbasedQuiz
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
+	}
+
+	answer := models.AuthorBasedResponse{
+		Correct:  false,
+		QuizWord: req.QuizWord,
+	}
+
+	for _, content := range option.Content {
+		if content.Greek == req.QuizWord {
+			if content.Translation == req.Answer {
+				answer.Correct = true
+				answer.WordsInText = content.WordsInText
+			}
+		}
+	}
+
+	return &answer, nil
+}
+
+func (s *SokratesHandler) multipleChoiceQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	mustQuery := []map[string]string{
+		{
+			QUIZTYPE: models.MULTICHOICE,
+		},
+		{
+			THEME: req.Theme,
+		},
+		{
+			SET: req.Set,
+		},
+	}
+
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return nil, err
+	}
+	if len(elasticResponse.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no hits found in Elastic")
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
+	}
+
+	var option models.MultipleChoiceQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
 	if err != nil {
@@ -393,7 +505,7 @@ func (s *SokratesHandler) authorBasedQuizAnswer(req models.AnswerRequest, reques
 		}
 	}
 
-	s.QuizAttempts <- models.QuizAttempt{Correct: answer.Correct, Set: req.Set, Theme: req.Theme}
+	s.QuizAttempts <- models.QuizAttempt{Correct: answer.Correct, Set: req.Set, Theme: req.Theme, QuizType: req.QuizType}
 	answer.Progress.AverageAccuracy = option.Progress.AverageAccuracy
 	answer.Progress.TimesCorrect = option.Progress.TimesCorrect
 	answer.Progress.TimesIncorrect = option.Progress.TimesIncorrect
@@ -613,7 +725,7 @@ func (s *SokratesHandler) gatherComprehensiveData(answer *models.ComprehensiveRe
 	}
 }
 
-func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizResponse, error) {
+func (s *SokratesHandler) authorBasedQuiz(createQuizRequest models.CreationRequest, requestID string) (*models.AuthorbasedQuizResponse, error) {
 	splitID := strings.Split(requestID, "+")
 
 	traceCall := false
@@ -632,10 +744,128 @@ func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizR
 
 	mustQuery := []map[string]string{
 		{
-			THEME: theme,
+			THEME: createQuizRequest.Theme,
 		},
 		{
-			SET: set,
+			SET: createQuizRequest.Set,
+		},
+		{
+			QUIZTYPE: models.AUTHORBASED,
+		},
+	}
+
+	query := s.Elastic.Builder().MultipleMatch(mustQuery)
+	elasticResponse, err := s.Elastic.Query().Match(s.Index, query)
+	if err != nil {
+		return nil, err
+	}
+
+	if elasticResponse.Hits.Hits == nil || len(elasticResponse.Hits.Hits) == 0 {
+		return nil, errors.New("no hits found in query")
+	}
+
+	var option models.AuthorbasedQuiz
+
+	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
+	err = json.Unmarshal(source, &option)
+	if err != nil {
+		return nil, err
+	}
+
+	if traceCall {
+		go s.databaseSpan(elasticResponse, query, traceID, spanID)
+	}
+
+	quiz := models.QuizResponse{
+		NumberOfItems: len(option.Content),
+	}
+
+	var filteredContent []models.AuthorBasedContent
+
+	for _, content := range option.Content {
+		addWord := true
+		for _, word := range createQuizRequest.ExcludeWords {
+			if content.Greek == word {
+				addWord = false
+			}
+		}
+
+		if addWord {
+			filteredContent = append(filteredContent, content)
+		}
+	}
+
+	if len(filteredContent) == 1 {
+		question := filteredContent[0]
+		quiz.QuizItem = question.Greek
+		quiz.Options = append(quiz.Options, models.Options{
+			Option: question.Translation,
+		})
+	} else {
+		randNumber := s.Randomizer.RandomNumberBaseZero(len(filteredContent))
+		question := filteredContent[randNumber]
+		quiz.QuizItem = question.Greek
+		quiz.Options = append(quiz.Options, models.Options{
+			Option: question.Translation,
+		})
+	}
+
+	numberOfNeededAnswers := 4
+
+	if len(option.Content) < numberOfNeededAnswers {
+		numberOfNeededAnswers = len(option.Content)
+	}
+
+	for len(quiz.Options) != numberOfNeededAnswers {
+		randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
+		randEntry := option.Content[randNumber]
+
+		exists := findQuizWord(quiz.Options, randEntry.Translation)
+		if !exists {
+			option := models.Options{
+				Option: randEntry.Translation,
+			}
+			quiz.Options = append(quiz.Options, option)
+		}
+	}
+
+	rand.Shuffle(len(quiz.Options), func(i, j int) {
+		quiz.Options[i], quiz.Options[j] = quiz.Options[j], quiz.Options[i]
+	})
+
+	authorQuiz := models.AuthorbasedQuizResponse{
+		FullSentence: option.FullSentence,
+		Translation:  option.Translation,
+		Reference:    option.Reference,
+		Quiz:         quiz,
+	}
+
+	return &authorQuiz, nil
+}
+
+func (s *SokratesHandler) mediaQuiz(createQuizRequest models.CreationRequest, requestID string) (*models.QuizResponse, error) {
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+
+	mustQuery := []map[string]string{
+		{
+			THEME: createQuizRequest.Theme,
+		},
+		{
+			SET: createQuizRequest.Set,
 		},
 		{
 			QUIZTYPE: models.MEDIA,
@@ -664,15 +894,41 @@ func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizR
 		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
-	var quiz models.QuizResponse
-	randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
+	quiz := models.QuizResponse{
+		NumberOfItems: len(option.Content),
+	}
 
-	question := option.Content[randNumber]
-	quiz.QuizItem = question.Greek
-	quiz.Options = append(quiz.Options, models.Options{
-		Option:   question.Translation,
-		ImageUrl: question.ImageURL,
-	})
+	var filteredContent []models.MediaContent
+
+	for _, content := range option.Content {
+		addWord := true
+		for _, word := range createQuizRequest.ExcludeWords {
+			if content.Greek == word {
+				addWord = false
+			}
+		}
+
+		if addWord {
+			filteredContent = append(filteredContent, content)
+		}
+	}
+
+	if len(filteredContent) == 1 {
+		question := filteredContent[0]
+		quiz.QuizItem = question.Greek
+		quiz.Options = append(quiz.Options, models.Options{
+			Option:   question.Translation,
+			ImageUrl: question.ImageURL,
+		})
+	} else {
+		randNumber := s.Randomizer.RandomNumberBaseZero(len(filteredContent))
+		question := filteredContent[randNumber]
+		quiz.QuizItem = question.Greek
+		quiz.Options = append(quiz.Options, models.Options{
+			Option:   question.Translation,
+			ImageUrl: question.ImageURL,
+		})
+	}
 
 	numberOfNeededAnswers := 4
 
@@ -681,7 +937,7 @@ func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizR
 	}
 
 	for len(quiz.Options) != numberOfNeededAnswers {
-		randNumber = s.Randomizer.RandomNumberBaseZero(len(option.Content))
+		randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
 		randEntry := option.Content[randNumber]
 
 		exists := findQuizWord(quiz.Options, randEntry.Translation)
@@ -701,7 +957,7 @@ func (s *SokratesHandler) mediaQuiz(theme, set, requestID string) (*models.QuizR
 	return &quiz, nil
 }
 
-func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models.QuizResponse, error) {
+func (s *SokratesHandler) multipleChoiceQuiz(createQuizRequest models.CreationRequest, requestID string) (*models.QuizResponse, error) {
 	splitID := strings.Split(requestID, "+")
 
 	traceCall := false
@@ -720,13 +976,13 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models
 
 	mustQuery := []map[string]string{
 		{
-			THEME: theme,
+			THEME: createQuizRequest.Theme,
 		},
 		{
-			SET: set,
+			SET: createQuizRequest.Set,
 		},
 		{
-			QUIZTYPE: models.AUTHORBASED,
+			QUIZTYPE: models.MULTICHOICE,
 		},
 	}
 
@@ -740,7 +996,7 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models
 		return nil, errors.New("no hits found in query")
 	}
 
-	var option models.AuthorBasedQuiz
+	var option models.MultipleChoiceQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
 	if err != nil {
@@ -751,14 +1007,47 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models
 		go s.databaseSpan(elasticResponse, query, traceID, spanID)
 	}
 
-	var quiz models.QuizResponse
-	randNumber := s.Randomizer.RandomNumberBaseZero(len(option.Content))
+	quiz := models.QuizResponse{
+		NumberOfItems: len(option.Content),
+	}
 
-	question := option.Content[randNumber]
-	quiz.QuizItem = question.Greek
-	quiz.Options = append(quiz.Options, models.Options{
-		Option: question.Translation,
-	})
+	var filteredContent []models.MultipleChoiceContent
+
+	for _, content := range option.Content {
+		addWord := true
+		for _, word := range createQuizRequest.ExcludeWords {
+			if content.Greek == word {
+				addWord = false
+			}
+		}
+
+		if addWord {
+			filteredContent = append(filteredContent, content)
+		}
+	}
+
+	var randNumber int
+	if len(filteredContent) == 1 {
+		randNumber = 0
+	} else {
+		randNumber = s.Randomizer.RandomNumberBaseZero(len(filteredContent))
+	}
+
+	question := filteredContent[randNumber]
+
+	if createQuizRequest.Order == GREENGORDER {
+		quiz.QuizItem = question.Greek
+		quiz.Options = append(quiz.Options, models.Options{
+			Option: question.Translation,
+		})
+	}
+
+	if createQuizRequest.Order == ENGGREORDER {
+		quiz.QuizItem = question.Translation
+		quiz.Options = append(quiz.Options, models.Options{
+			Option: question.Greek,
+		})
+	}
 
 	numberOfNeededAnswers := 4
 
@@ -770,11 +1059,25 @@ func (s *SokratesHandler) authorBasedQuiz(theme, set, requestID string) (*models
 		randNumber = s.Randomizer.RandomNumberBaseZero(len(option.Content))
 		randEntry := option.Content[randNumber]
 
-		exists := findQuizWord(quiz.Options, randEntry.Translation)
+		var exists bool
+		if createQuizRequest.Order == GREENGORDER {
+			exists = findQuizWord(quiz.Options, randEntry.Translation)
+		} else if createQuizRequest.Order == ENGGREORDER {
+			exists = findQuizWord(quiz.Options, randEntry.Greek)
+		}
+
 		if !exists {
-			option := models.Options{
-				Option: randEntry.Translation,
+			option := models.Options{}
+			if createQuizRequest.Order == GREENGORDER {
+				option = models.Options{
+					Option: randEntry.Translation,
+				}
+			} else if createQuizRequest.Order == ENGGREORDER {
+				option = models.Options{
+					Option: randEntry.Greek,
+				}
 			}
+
 			quiz.Options = append(quiz.Options, option)
 		}
 	}
@@ -892,7 +1195,7 @@ func (s *SokratesHandler) updateElasticsearch() {
 		select {
 		case <-s.Ticker.C:
 			for key, attempt := range s.AggregatedAttempts {
-				err := s.performUpdate(attempt.Set, attempt.Theme, attempt.Correct)
+				err := s.performUpdate(attempt)
 				if err != nil {
 					logging.Error(err.Error())
 				}
@@ -905,16 +1208,16 @@ func (s *SokratesHandler) updateElasticsearch() {
 	}
 }
 
-func (s *SokratesHandler) performUpdate(set, theme string, correct bool) error {
+func (s *SokratesHandler) performUpdate(attempt models.QuizAttempt) error {
 	mustQuery := []map[string]string{
 		{
-			THEME: theme,
+			THEME: attempt.Theme,
 		},
 		{
-			SET: set,
+			SET: attempt.Set,
 		},
 		{
-			QUIZTYPE: models.AUTHORBASED,
+			QUIZTYPE: attempt.QuizType,
 		},
 	}
 
@@ -924,14 +1227,14 @@ func (s *SokratesHandler) performUpdate(set, theme string, correct bool) error {
 		return err
 	}
 
-	var option models.AuthorBasedQuiz
+	var option models.MultipleChoiceQuiz
 	source, _ := json.Marshal(elasticResponse.Hits.Hits[0].Source)
 	err = json.Unmarshal(source, &option)
 	if err != nil {
 		return err
 	}
 
-	if correct {
+	if attempt.Correct {
 		option.Progress.TimesCorrect += 1
 	} else {
 		option.Progress.TimesIncorrect += 1

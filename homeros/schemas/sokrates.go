@@ -11,11 +11,22 @@ var optionsType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var authorBasedQuizType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AuthorBasedQuizType",
+	Fields: graphql.Fields{
+		"fullSentence": &graphql.Field{Type: graphql.String},
+		"translation":  &graphql.Field{Type: graphql.String},
+		"reference":    &graphql.Field{Type: graphql.String},
+		"quiz":         &graphql.Field{Type: quizResponseType},
+	},
+})
+
 var quizResponseType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "QuizResponse",
 	Fields: graphql.Fields{
-		"quizItem": &graphql.Field{Type: graphql.String},
-		"options":  &graphql.Field{Type: graphql.NewList(optionsType)},
+		"numberOfItems": &graphql.Field{Type: graphql.Int},
+		"quizItem":      &graphql.Field{Type: graphql.String},
+		"options":       &graphql.Field{Type: graphql.NewList(optionsType)},
 	},
 })
 
@@ -135,6 +146,18 @@ var comprehensiveAnswer = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.NewList(dictionary),
 		},
 		"progress": &graphql.Field{Type: progressType},
+	},
+})
+
+var authorBasedAnswer = graphql.NewObject(graphql.ObjectConfig{
+	Name: "AuthorBasedAnswer",
+	Fields: graphql.Fields{
+		"correct":       &graphql.Field{Type: graphql.Boolean},
+		"quizWord":      &graphql.Field{Type: graphql.String},
+		"numberOfItems": &graphql.Field{Type: graphql.Int},
+		"wordsInText": &graphql.Field{
+			Type: graphql.NewList(graphql.String),
+		},
 	},
 })
 

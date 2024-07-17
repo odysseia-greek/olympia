@@ -10,9 +10,9 @@ Feature: Odysseia
     Then the options returned from the grammar api should include "<grammarResponse>"
     And the quizresponse is expanded with text and similar words
     Examples:
-      | word  | fullWord | grammarResponse | set | theme            | quizType    |
-      | ἦν    | εἰμί     | be              | 20  | Plato - Republic | authorbased |
-      | ἱερόν | τό ἱερόν | temple          | 1   | Daily Life       | media       |
+      | word  | fullWord | grammarResponse | set | theme      | quizType       |
+      | ἦν    | εἰμί     | to be           | 18  | Verbs      | multiplechoice |
+      | ἱερόν | τό ἱερόν | temple          | 1   | Daily Life | media          |
 
   @odysseia
   Scenario: A word can be expanded and used

@@ -169,13 +169,16 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		"quiz": &graphql.Field{
 			Type: graphql.NewUnion(graphql.UnionConfig{
 				Name:  "QuizResponseUnion",
-				Types: []*graphql.Object{quizResponseType, dialogueQuizType},
+				Types: []*graphql.Object{quizResponseType, dialogueQuizType, authorBasedQuizType},
 				ResolveType: func(p graphql.ResolveTypeParams) *graphql.Object {
 					if _, ok := p.Value.(*models.QuizResponse); ok {
 						return quizResponseType
 					}
 					if _, ok := p.Value.(*models.DialogueQuiz); ok {
 						return dialogueQuizType
+					}
+					if _, ok := p.Value.(*models.AuthorbasedQuizResponse); ok {
+						return authorBasedQuizType
 					}
 					return nil
 				},
@@ -190,6 +193,12 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				"quizType": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
+				"order": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"excludeWords": &graphql.ArgumentConfig{
+					Type: graphql.NewList(graphql.String),
+				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				ctx := p.Context
@@ -199,6 +208,16 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				}
 
 				theme, _ := p.Args["theme"].(string)
+				order, _ := p.Args["order"].(string)
+				excludeWords, _ := p.Args["excludeWords"].([]interface{})
+				excludeWordsStr := make([]string, len(excludeWords))
+
+				if excludeWords != nil {
+					for i, word := range excludeWords {
+						excludeWordsStr[i], _ = word.(string)
+					}
+				}
+
 				set, isOK := p.Args["set"].(string)
 				if !isOK {
 					return nil, fmt.Errorf("expected argument set")
@@ -210,8 +229,10 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 
 				if quizType == models.DIALOGUE {
 					return handler.CreateDialogueQuiz(theme, set, quizType, traceID)
+				} else if quizType == models.AUTHORBASED {
+					return handler.CreateAuthorBasedQuiz(theme, set, quizType, traceID, excludeWordsStr)
 				} else {
-					return handler.CreateQuiz(theme, set, quizType, traceID)
+					return handler.CreateQuiz(theme, set, quizType, order, traceID, excludeWordsStr)
 				}
 
 			},
@@ -220,13 +241,16 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		"answer": &graphql.Field{
 			Type: graphql.NewUnion(graphql.UnionConfig{
 				Name:  "AnswerUnion",
-				Types: []*graphql.Object{comprehensiveAnswer, dialogueAnswerType},
+				Types: []*graphql.Object{comprehensiveAnswer, dialogueAnswerType, authorBasedAnswer},
 				ResolveType: func(p graphql.ResolveTypeParams) *graphql.Object {
 					if _, ok := p.Value.(*models.ComprehensiveResponse); ok {
 						return comprehensiveAnswer
 					}
 					if _, ok := p.Value.(*models.DialogueAnswer); ok {
 						return dialogueAnswerType
+					}
+					if _, ok := p.Value.(*models.AuthorBasedResponse); ok {
+						return authorBasedAnswer
 					}
 					return nil
 				},
@@ -314,6 +338,8 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 
 				if quizType == models.DIALOGUE {
 					return handler.CheckDialogue(answerRequest, traceID)
+				} else if quizType == models.AUTHORBASED {
+					return handler.CheckAuthorBased(answerRequest, traceID)
 				} else {
 					return handler.Check(answerRequest, traceID)
 				}
