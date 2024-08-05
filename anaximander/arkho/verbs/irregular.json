@@ -443,6 +443,203 @@
       "searchTerm":[
         "εἶδον"
       ]
+    },
+    {
+      "declension": "ἔχω",
+      "ruleName": "1st sing - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχεις",
+      "ruleName": "2nd sing - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχει",
+      "ruleName": "3rd sing - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχομεν",
+      "ruleName": "1st plural - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχετε",
+      "ruleName": "2nd plural - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχουσι",
+      "ruleName": "3rd plural - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔχουσιν",
+      "ruleName": "3rd plural - pres - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχον",
+      "ruleName": "1st sing - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχες",
+      "ruleName": "2nd sing - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχε",
+      "ruleName": "3rd sing - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχεν",
+      "ruleName": "3rd sing - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχομεν",
+      "ruleName": "1st plural - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχετε",
+      "ruleName": "2nd plural - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "εἶχον",
+      "ruleName": "3rd plural - impf - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξω",
+      "ruleName": "1st sing - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξεις",
+      "ruleName": "2nd sing - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξει",
+      "ruleName": "3rd sing - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξομεν",
+      "ruleName": "1st plural - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξετε",
+      "ruleName": "2nd plural - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξουσι",
+      "ruleName": "3rd plural - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἕξουσιν",
+      "ruleName": "3rd plural - fut - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχον",
+      "ruleName": "1st sing - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχες",
+      "ruleName": "2nd sing - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχε",
+      "ruleName": "3rd sing - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχεν",
+      "ruleName": "3rd sing - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχομεν",
+      "ruleName": "1st plural - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχετε",
+      "ruleName": "2nd plural - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
+    },
+    {
+      "declension": "ἔσχον",
+      "ruleName": "3rd plural - aor - ind - act",
+      "searchTerm": [
+        "ἔχω"
+      ]
     }
+
   ]
 }

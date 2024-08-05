@@ -4,6 +4,27 @@
   "dialect": "attic",
     "declensions": [
       {
+        "declension": "-ά",
+        "ruleName": "noun - plural - neut - nom/voc/acc (ionic)",
+        "searchTerm": [
+          "ός"
+        ]
+      },
+      {
+        "declension": "-ά",
+        "ruleName": "noun - dual - fem - nom/voc/acc (ionic)",
+        "searchTerm": [
+          "ός"
+        ]
+      },
+      {
+        "declension": "-ά",
+        "ruleName": "noun - sing - fem - nom/voc (doric ionic aeolic)",
+        "searchTerm": [
+          "ός"
+        ]
+      },
+      {
         "declension": "-ης",
         "ruleName": "noun - sing - masc - nom",
         "searchTerm": [
@@ -145,7 +166,7 @@
         ]
       },
       {
-        "declension": "-ᾱ́ς",
+        "declension": "-ᾱς",
         "ruleName": "noun - plural - masc - acc",
         "searchTerm": [
           "ας",
@@ -164,14 +185,16 @@
         "declension": "-ή",
         "ruleName": "noun - sing - fem - nom",
         "searchTerm": [
-          "η"
+          "η",
+          "ος"
         ]
       },
       {
         "declension": "-η",
         "ruleName": "noun - sing - fem - nom",
         "searchTerm": [
-          "η"
+          "η",
+          "ος"
         ]
       },
       {
@@ -200,14 +223,17 @@
         "ruleName": "noun - sing - fem - gen",
         "searchTerm": [
           "η",
-          "α"
+          "α",
+          "ος"
         ]
       },
       {
         "declension": "-ῆς",
         "ruleName": "noun - sing - fem - gen",
         "searchTerm": [
-          "η"
+          "η",
+          "α",
+          "ος"
         ]
       },
       {
@@ -222,7 +248,8 @@
         "ruleName": "noun - sing - fem - dat",
         "searchTerm": [
           "η",
-          "α"
+          "α",
+          "ος"
         ]
       },
       {
@@ -236,14 +263,18 @@
         "declension": "-ην",
         "ruleName": "noun - sing - fem - acc",
         "searchTerm": [
-          "η"
+          "η",
+          "α",
+          "ος"
         ]
       },
       {
         "declension": "-ήν",
         "ruleName": "noun - sing - fem - acc",
         "searchTerm": [
-          "η"
+          "η",
+          "α",
+          "ος"
         ]
       },
       {
@@ -271,32 +302,36 @@
         "declension": "-αι",
         "ruleName": "noun - plural - fem - nom",
         "searchTerm": [
+          "η",
           "α",
-          "η"
+          "ος"
         ]
       },
       {
         "declension": "-ων",
         "ruleName": "noun - plural - fem - gen",
         "searchTerm": [
+          "η",
           "α",
-          "η"
+          "ος"
         ]
       },
       {
         "declension": "-ῶν",
         "ruleName": "noun - plural - fem - gen",
         "searchTerm": [
+          "η",
           "α",
-          "η"
+          "ος"
         ]
       },
       {
         "declension": "-αις",
         "ruleName": "noun - plural - fem - dat",
         "searchTerm": [
+          "η",
           "α",
-          "η"
+          "ος"
         ]
       },
       {
@@ -304,7 +339,8 @@
         "ruleName": "noun - plural - fem - acc",
         "searchTerm": [
           "η",
-          "α"
+          "α",
+          "ος"
         ]
       },
       {
@@ -312,7 +348,8 @@
         "ruleName": "noun - plural - fem - acc",
         "searchTerm": [
           "η",
-          "α"
+          "α",
+          "ος"
         ]
       }
     ]
