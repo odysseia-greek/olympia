@@ -635,6 +635,132 @@
       "searchTerm": [
         "ς"
       ]
+    },
+    {
+      "declension": "-έος",
+      "ruleName": "noun - sing - masc/fem - gen (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έϊ",
+      "ruleName": "noun - sing - masc/fem - dat (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έα",
+      "ruleName": "noun - sing - masc/fem - acc (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έες",
+      "ruleName": "noun - plural - masc/fem - nom (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έων",
+      "ruleName": "noun - plural - masc/fem - gen (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-ήεσσι",
+      "ruleName": "noun - plural - masc/fem - dat (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-ήεσσιν",
+      "ruleName": "noun - plural - masc/fem - dat (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έεσσι",
+      "ruleName": "noun - plural - masc/fem - dat (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έεσσιν",
+      "ruleName": "noun - plural - masc/fem - dat (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-έας",
+      "ruleName": "noun - plural - masc/fem - acc (epic/ionic)",
+      "searchTerm": [
+        "εύς"
+      ]
+    },
+    {
+      "declension": "-ην",
+      "ruleName": "noun - sing - masc/fem - acc",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ῆνος",
+      "ruleName": "noun - sing - masc/fem - gen",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ῆνι",
+      "ruleName": "noun - sing - masc/fem - dat",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ηνες",
+      "ruleName": "noun - plural - masc/fem - nom",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ήνων",
+      "ruleName": "noun - plural - masc/fem - gen",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ῆσι",
+      "ruleName": "noun - plural - masc/fem - dat",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ῆσιν",
+      "ruleName": "noun - plural - masc/fem - dat",
+      "searchTerm": [
+        "ην"
+      ]
+    },
+    {
+      "declension": "-ῆνας",
+      "ruleName": "noun - plural - masc/fem - acc",
+      "searchTerm": [
+        "ην"
+      ]
     }
 
   ]

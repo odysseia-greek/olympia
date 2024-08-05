@@ -128,6 +128,90 @@
       "searchTerm": [
         "τίς"
       ]
-    }
+    },
+      {
+        "declension": "ἀλλήλων",
+        "ruleName": "pronoun - plural - masc/fem/neut - gen",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλοις",
+        "ruleName": "pronoun - plural - masc/neut - dat",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλας",
+        "ruleName": "pronoun - plural - fem - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλους",
+        "ruleName": "pronoun - plural - masc - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλας",
+        "ruleName": "pronoun - plural - fem - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλα",
+        "ruleName": "pronoun - plural - neut - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλων",
+        "ruleName": "pronoun - plural - masc/fem/neut - gen",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλοισι",
+        "ruleName": "pronoun - plural - masc/neut - dat",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλῃσι",
+        "ruleName": "pronoun - plural - fem - dat",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλους",
+        "ruleName": "pronoun - plural - masc - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλας",
+        "ruleName": "pronoun - plural - fem - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      },
+      {
+        "declension": "ἀλλήλα",
+        "ruleName": "pronoun - plural - neut - acc",
+        "searchTerm": [
+          "ἀλλήλων"
+        ]
+      }
   ]
 }

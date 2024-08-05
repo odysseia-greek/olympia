@@ -8,6 +8,10 @@
       "ruleName": "particle"
     },
     {
+      "declension": "γε",
+      "ruleName": "particle"
+    },
+    {
       "declension": "δʼ",
       "ruleName": "particle",
       "searchTerm": [
@@ -31,7 +35,10 @@
     },
     {
       "declension": "οὐκ",
-      "ruleName": "particle"
+      "ruleName": "particle",
+      "searchTerm": [
+        "οὔ"
+      ]
     },
     {
       "declension": "μὲν",

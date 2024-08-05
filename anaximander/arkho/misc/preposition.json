@@ -105,7 +105,10 @@
     },
     {
       "declension": "ἐξ",
-      "ruleName": "preposition +gen."
+      "ruleName": "preposition +gen.",
+      "searchTerm": [
+        "ἐκ"
+      ]
     },
     {
       "declension": "ἀμφί",

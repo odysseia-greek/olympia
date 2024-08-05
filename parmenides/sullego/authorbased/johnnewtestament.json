@@ -125,5 +125,81 @@
         ]
       }
     ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "John - The New Testament",
+    "reference": "/texts?author=John&book=New+Testament&reference=1",
+    "set": 3,
+    "fullSentence": "καὶ τὸ φῶς ἐν τῇ σκοτίᾳ φαίνει, καὶ ἡ σκοτία αὐτὸ οὐ κατέλαβεν.",
+    "translation": "The light shines in the darkness, and the darkness hasn't overcome it.",
+    "content": [
+      {
+        "greek": "αὐτός",
+        "translation": "self (unemph. 3rd pers.pronoun;); the same",
+        "wordsInText": [
+          "αὐτὸ"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "(time) in, at, or during the time of",
+        "wordsInText": [
+          "ἐν"
+        ]
+      },
+      {
+        "greek": "καταλαμβάνω",
+        "translation": "to seize upon, lay hold of",
+        "wordsInText": [
+          "κατέλαβεν"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὸ",
+          "ἡ",
+          "τῇ"
+        ]
+      },
+      {
+        "greek": "οὐ",
+        "translation": "not",
+        "wordsInText": [
+          "οὐ"
+        ]
+      },
+      {
+        "greek": "σκοτία",
+        "translation": "darkness, gloom",
+        "wordsInText": [
+          "σκοτία",
+          "σκοτίᾳ"
+        ]
+      },
+      {
+        "greek": "φαίνω",
+        "translation": "to bring to light, make to appear",
+        "wordsInText": [
+          "φαίνει"
+        ]
+      },
+      {
+        "greek": "φάος",
+        "translation": "light, daylight",
+        "wordsInText": [
+          "φῶς"
+        ]
+      }
+    ]
   }
 ]

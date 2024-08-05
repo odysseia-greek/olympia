@@ -221,5 +221,362 @@
         ]
       }
     ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Herodotos - Histories",
+    "reference": "/texts?author=Herodotos&book=Histories&reference=7.138",
+    "set": 2,
+    "fullSentence": "ἡ δὲ στρατηλασίη ἡ βασιλέος οὔνομα μὲν εἶχε ὡς ἐπʼ Ἀθήνας ἐλαύνει, κατίετο δὲ ἐς πᾶσαν τὴν Ἑλλάδα. πυνθανόμενοι δὲ ταῦτα πρὸ πολλοῦ οἱ Ἕλληνες οὐκ ἐν ὁμοίῳ πάντες ἐποιεῦντο.",
+    "translation": "The professed intent of the king's march was to attack Athens, but in truth all Greece was his aim. This the Greeks had long since learned, but not all of them regarded the matter alike.",
+    "content": [
+      {
+        "greek": "Ἀθῆναι",
+        "translation": "the city of Athens",
+        "wordsInText": [
+          "Ἀθήνας"
+        ]
+      },
+      {
+        "greek": "βασιλεύς, βασιλέος (Ionic)",
+        "translation": "a king, chief",
+        "wordsInText": [
+          "βασιλέος"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "εἰς",
+        "translation": "into, to c. acc",
+        "wordsInText": [
+          "ἐς"
+        ]
+      },
+      {
+        "greek": "ἐλαύνω",
+        "translation": "to drive, drive on, set in motion",
+        "wordsInText": [
+          "ἐλαύνει"
+        ]
+      },
+      {
+        "greek": "Ἑλλάς",
+        "translation": "Hellas; Greece",
+        "wordsInText": [
+          "Ἑλλάδα"
+        ]
+      },
+      {
+        "greek": "Ἕλλην",
+        "translation": "Hellen; Greek",
+        "wordsInText": [
+          "Ἕλληνες"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "in, among. c. dat.",
+        "wordsInText": [
+          "ἐν"
+        ]
+      },
+      {
+        "greek": "ἐπί",
+        "translation": "on, upon with gen., dat., and acc.",
+        "wordsInText": [
+          "ἐπʼ"
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": [
+          "εἶχε"
+        ]
+      },
+      {
+        "greek": "καθίημι",
+        "translation": "to send down, let fall",
+        "wordsInText": [
+          "κατίετο"
+        ]
+      },
+      {
+        "greek": "μέν",
+        "translation": "on the one hand, on the other hand",
+        "wordsInText": [
+          "μὲν"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "ἡ",
+          "τὴν",
+          "οἱ"
+        ]
+      },
+      {
+        "greek": "ὅμοιος",
+        "translation": "like, resembling",
+        "wordsInText": [
+          "ὁμοίῳ"
+        ]
+      },
+      {
+        "greek": "ὄνομα",
+        "translation": "name",
+        "wordsInText": [
+          "οὔνομα"
+        ]
+      },
+      {
+        "greek": "οὐ",
+        "translation": "not",
+        "wordsInText": [
+          "οὐκ"
+        ]
+      },
+      {
+        "greek": "πᾶς",
+        "translation": "all, the whole",
+        "wordsInText": [
+          "πάντες",
+          "πᾶσαν"
+        ]
+      },
+      {
+        "greek": "ποιέω",
+        "translation": "to make, to do",
+        "wordsInText": [
+          "ἐποιεῦντο"
+        ]
+      },
+      {
+        "greek": "πολύς",
+        "translation": "much, many",
+        "wordsInText": [
+          "πολλοῦ"
+        ]
+      },
+      {
+        "greek": "πρό",
+        "translation": "before",
+        "wordsInText": [
+          "πρὸ"
+        ]
+      },
+      {
+        "greek": "στρατηλασία",
+        "translation": "an expedition, campaign",
+        "wordsInText": [
+          "στρατηλασίη"
+        ]
+      },
+      {
+        "greek": "ὡς",
+        "translation": "as, how",
+        "wordsInText": [
+          "ὡς"
+        ]
+      },
+      {
+        "greek": "πυνθάνομαι",
+        "translation": "to learn by hearsay",
+        "wordsInText": [
+          "πυνθανόμενοι"
+        ]
+      },
+      {
+        "greek": "οὗτος",
+        "translation": "this; that ",
+        "wordsInText": [
+          "ταῦτα"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Herodotos - Histories",
+    "reference": "/texts?author=Herodotos&book=Histories&reference=7.142",
+    "set": 3,
+    "fullSentence": "κατὰ ταῦτα τὰ ἔπεα συνεχέοντο αἱ γνῶμαι τῶν φαμένων τὰς νέας τὸ ξύλινον τεῖχος εἶναι· οἱ γὰρ χρησμολόγοι ταύτῃ ταῦτα ἐλάμβανον, ὡς ἀμφὶ Σαλαμῖνα δεῖ σφεας ἑσσωθῆναι ναυμαχίην παρασκευασαμένους.",
+    "translation": "These verses confounded the opinion of those who said that their ships were the wooden wall, for the readers of oracles took the verses to mean that they should offer battle by sea near Salamis and be there overthrown.",
+    "content": [
+      {
+        "greek": "ἀμφί",
+        "translation": "on both sides",
+        "wordsInText": [
+          "ἀμφὶ"
+        ]
+      },
+      {
+        "greek": "γάρ",
+        "translation": "for",
+        "wordsInText": [
+          "γὰρ"
+        ]
+      },
+      {
+        "greek": "γνώμη",
+        "translation": "a means of knowing, a mark, token, opinion",
+        "wordsInText": [
+          "γνῶμαι"
+        ]
+      },
+      {
+        "greek": "δεῖ",
+        "translation": "it is necessary",
+        "wordsInText": [
+          "δεῖ"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "εἶναι"
+        ]
+      },
+      {
+        "greek": "ἔπος",
+        "translation": "promise; one's word; word as opposed to deed",
+        "wordsInText": [
+          "ἔπεα"
+        ]
+      },
+      {
+        "greek": "ἡσσάομαι",
+        "translation": "to be less than another, inferior to",
+        "wordsInText": [
+          "ἑσσωθῆναι"
+        ]
+      },
+      {
+        "greek": "κατά",
+        "translation": "down, against with gen.; according to, throughout with acc.",
+        "wordsInText": [
+          "κατὰ"
+        ]
+      },
+      {
+        "greek": "λαμβάνω",
+        "translation": "to take, seize, receive",
+        "wordsInText": [
+          "ἐλάμβανον"
+        ]
+      },
+      {
+        "greek": "ναυμαχία",
+        "translation": "a sea-fight",
+        "wordsInText": [
+          "ναυμαχίην"
+        ]
+      },
+      {
+        "greek": "ναῦς",
+        "translation": "a ship",
+        "wordsInText": [
+          "νέας"
+        ]
+      },
+      {
+        "greek": "ξύλινος",
+        "translation": "of wood, wooden",
+        "wordsInText": [
+          "ξύλινον"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "αἱ",
+          "τῶν",
+          "τὰ",
+          "τὰς",
+          "τὸ",
+          "οἱ"
+        ]
+      },
+      {
+        "greek": "οὗτος",
+        "translation": "this; that",
+        "wordsInText": [
+          "ταῦτα"
+        ]
+      },
+      {
+        "greek": "παρασκευάζω",
+        "translation": "to get ready, prepare",
+        "wordsInText": [
+          "παρασκευασαμένους"
+        ]
+      },
+      {
+        "greek": "Σαλαμίς",
+        "translation": "Salamis (island)",
+        "wordsInText": [
+          "Σαλαμῖνα"
+        ]
+      },
+      {
+        "greek": "σφεῖς",
+        "translation": "they (personal pronoun) themselves (reflexive pronoun)",
+        "wordsInText": [
+          "σφεας"
+        ]
+      },
+      {
+        "greek": "ταύτῃ",
+        "translation": "in this way",
+        "wordsInText": [
+          "ταύτῃ"
+        ]
+      },
+      {
+        "greek": "τεῖχος",
+        "translation": "a wall",
+        "wordsInText": [
+          "τεῖχος"
+        ]
+      },
+      {
+        "greek": "φημί",
+        "translation": "to say, to claim",
+        "wordsInText": [
+          "φαμένων"
+        ]
+      },
+      {
+        "greek": "ὡς",
+        "translation": "as, how",
+        "wordsInText": [
+          "ὡς"
+        ]
+      },
+      {
+        "greek": "συγχέω",
+        "translation": "to pour together, commingle, confound",
+        "wordsInText": [
+          "συνεχέοντο"
+        ]
+      },
+      {
+        "greek": "χρησμολόγος",
+        "translation": "uttering oracles, divining",
+        "wordsInText": [
+          "χρησμολόγοι"
+        ]
+      }
+    ]
   }
 ]

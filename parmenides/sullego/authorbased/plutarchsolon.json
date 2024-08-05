@@ -1,0 +1,240 @@
+[
+  {
+    "quizType": "authorbased",
+    "theme": "Plutarch - Solon",
+    "reference": "/texts?author=Ploutarchos&book=Solon&reference=3",
+    "set": 1,
+    "fullSentence": "τὸ δʼ οὖν εὐδάπανον τῷ Σόλωνι καὶ ὑγρὸν πρὸς τὴν δίαιταν, καὶ τὸ φορτικώτερον ἢ φιλοσοφώτερον ἐν τοῖς ποιήμασι διαλέγεσθαι περὶ τῶν ἡδονῶν, τὸν ἐμπορικὸν οἴονται βίον προστετρῖφθαι· πολλοὺς γὰρ ἔχοντα κινδύνους καὶ μεγάλους ἀνταπαιτεῖν πάλιν εὐπαθείας τινὰς καὶ ἀπολαύσεις.",
+    "translation": "Accordingly it Solon’s way of living was expensive and profuse and if in his poems, he speaks of pleasure with more freedom than becomes a philosopher, this is thought to be due to his mercantile life; he encountered manly and great dangers, and sought his reward therefor in sundry luxuries and enjoyments.",
+    "content": [
+      {
+        "greek": "ἀνταπαιτέω",
+        "translation": "to demand in return",
+        "wordsInText": [
+          "ἀνταπαιτεῖν"
+        ]
+      },
+      {
+        "greek": "απόλαυση",
+        "translation": "enjoyment, fruition",
+        "wordsInText": [
+          "ἀπολαύσεις"
+        ]
+      },
+      {
+        "greek": "βίος",
+        "translation": "life",
+        "wordsInText": [
+          "βίον"
+        ]
+      },
+      {
+        "greek": "γάρ",
+        "translation": "for",
+        "wordsInText": [
+          "γὰρ"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δʼ"
+        ]
+      },
+      {
+        "greek": "δίαιτα",
+        "translation": "a way of living, mode of life",
+        "wordsInText": [
+          "δίαιταν"
+        ]
+      },
+      {
+        "greek": "διαλέγω",
+        "translation": "to pick out one from another, to pick out",
+        "wordsInText": [
+          "διαλέγεσθαι"
+        ]
+      },
+      {
+        "greek": "ἐμπορικός",
+        "translation": "commercial, mercantile",
+        "wordsInText": [
+          "ἐμπορικὸν"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "in, among. c. dat.",
+        "wordsInText": [
+          "ἐν"
+        ]
+      },
+      {
+        "greek": "εὐδάπανος",
+        "translation": "of much expense, liberal",
+        "wordsInText": [
+          "εὐδάπανον"
+        ]
+      },
+      {
+        "greek": "εὐπάθεια",
+        "translation": "the enjoyment of good things, comfort, ease",
+        "wordsInText": [
+          "εὐπαθείας"
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": [
+          "ἔχοντα"
+        ]
+      },
+      {
+        "greek": "ἤ",
+        "translation": "either..or; than",
+        "wordsInText": [
+          "ἢ"
+        ]
+      },
+      {
+        "greek": "ἡδονή",
+        "translation": "delight, enjoyment, pleasure",
+        "wordsInText": [
+          "ἡδονῶν"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "κίνδυνος",
+        "translation": "a danger, risk, hazard, venture, enterprise",
+        "wordsInText": [
+          "κινδύνους"
+        ]
+      },
+      {
+        "greek": "μέγας",
+        "translation": "big, great",
+        "wordsInText": [
+          "μεγάλους"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὸ",
+          "τοῖς",
+          "τὴν",
+          "τῶν",
+          "τὸν"
+        ]
+      },
+      {
+        "greek": "οἴομαι",
+        "translation": "to suppose, think, deem, imagine",
+        "wordsInText": [
+          "οἴονται"
+        ]
+      },
+      {
+        "greek": "οὖν",
+        "translation": "so, then, therefore",
+        "wordsInText": [
+          "οὖν"
+        ]
+      },
+      {
+        "greek": "πάλιν",
+        "translation": "back, backwards",
+        "wordsInText": [
+          "πάλιν"
+        ]
+      },
+      {
+        "greek": "περί",
+        "translation": "around, round about with gen., dat., and acc.",
+        "wordsInText": [
+          "περὶ"
+        ]
+      },
+      {
+        "greek": "ποίημα",
+        "translation": "anything made; a work",
+        "wordsInText": [
+          "ποιήμασι"
+        ]
+      },
+      {
+        "greek": "πολύς",
+        "translation": "much, many",
+        "wordsInText": [
+          "πολλοὺς"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "(w. gen.) from; (w. dat.) at, near, in addition to; (w. acc.) to, toward, regarding",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "προστρίβω",
+        "translation": "to rub against",
+        "wordsInText": [
+          "προστετρῖφθαι"
+        ]
+      },
+      {
+        "greek": "Σόλων",
+        "translation": "Solon",
+        "wordsInText": [
+          "Σόλωνι"
+        ]
+      },
+      {
+        "greek": "τις",
+        "translation": "any one, any thing, some one, some thing;",
+        "wordsInText": [
+          "τινὰς"
+        ]
+      },
+      {
+        "greek": "τῷ",
+        "translation": "therefore, in this wise, thereupon",
+        "wordsInText": [
+          "τῷ"
+        ]
+      },
+      {
+        "greek": "ὑγρός",
+        "translation": "wet, moist, running, fluid",
+        "wordsInText": [
+          "ὑγρὸν"
+        ]
+      },
+      {
+        "greek": "φιλόσοφος",
+        "translation": "a lover of wisdom; philosopher",
+        "wordsInText": [
+          "φιλοσοφώτερον"
+        ]
+      },
+      {
+        "greek": "φορτικός",
+        "translation": "of the nature of a burden",
+        "wordsInText": [
+          "φορτικώτερον"
+        ]
+      }
+    ]
+  }
+]

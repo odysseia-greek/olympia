@@ -3,6 +3,143 @@
     "quizType": "authorbased",
     "theme": "Thucydides - History of the Peloponnesian War",
     "set": 1,
+    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.1",
+    "fullSentence": "κίνησις γὰρ αὕτη μεγίστη δὴ τοῖς Ἕλλησιν ἐγένετο καὶ μέρει τινὶ τῶν βαρβάρων, ὡς δὲ εἰπεῖν καὶ ἐπὶ πλεῖστον ἀνθρώπων.",
+    "translation": "For this was the greatest movement that had ever stirred the Hellenes, extending also to some of the Barbarians, one might say even to a very large part of mankind.",
+    "content": [
+      {
+        "greek": "ἄνθρωπος",
+        "translation": "man, person, human",
+        "wordsInText": [
+          "ἀνθρώπων"
+        ]
+      },
+      {
+        "greek": "βάρβαρος",
+        "translation": "barbarous",
+        "wordsInText": [
+          "βαρβάρων"
+        ]
+      },
+      {
+        "greek": "γάρ",
+        "translation": "for",
+        "wordsInText": [
+          "γὰρ"
+        ]
+      },
+      {
+        "greek": "γίγνομαι",
+        "translation": "become, be born",
+        "wordsInText": [
+          "ἐγένετο"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "δή",
+        "translation": "discourse particle. now, already, truly, indeed, in truth etc.",
+        "wordsInText": [
+          "δὴ"
+        ]
+      },
+      {
+        "greek": "Ἕλλην",
+        "translation": "Hellen; Greek",
+        "wordsInText": [
+          "Ἕλλησιν"
+        ]
+      },
+      {
+        "greek": "ἐπί",
+        "translation": "on, upon with gen., dat., and acc.",
+        "wordsInText": [
+          "ἐπὶ"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "κίνησις",
+        "translation": "movement, motion",
+        "wordsInText": [
+          "κίνησις"
+        ]
+      },
+      {
+        "greek": "μέγας",
+        "translation": "big, great",
+        "wordsInText": [
+          "μεγίστη"
+        ]
+      },
+      {
+        "greek": "μέρος",
+        "translation": "a part, share",
+        "wordsInText": [
+          "μέρει"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τοῖς",
+          "τῶν"
+        ]
+      },
+      {
+        "greek": "τις",
+        "translation": "any one, any thing, some one, some thing;",
+        "wordsInText": [
+          "τινὶ"
+        ]
+      },
+      {
+        "greek": "ὡς",
+        "translation": "as, how",
+        "wordsInText": [
+          "ὡς"
+        ]
+      },
+      {
+        "greek": "οὗτος",
+        "translation": "this; that",
+        "wordsInText": [
+          "αὕτη"
+        ]
+      },
+      {
+        "greek": "πλεῖστος",
+        "translation": "most, largest",
+        "wordsInText": [
+          "πλεῖστον"
+        ]
+      },
+      {
+        "greek": "εἶπον",
+        "translation": "to speak, say",
+        "wordsInText": [
+          "εἰπεῖν"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Thucydides - History of the Peloponnesian War",
+    "set": 2,
     "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.31",
     "fullSentence": "τὸν δ’ ἐνιαυτὸν πάντα τὸν μετὰ τὴν ναυμαχίαν καὶ τὸν ὕστερον οἱ Κορίνθιοι ὀργῇ φέροντες τὸν πρὸς Κερκυραίους πόλεμον ἐναυπηγοῦντο καὶ παρεσκευάζοντο τὰ κράτιστα νεῶν στόλον, ἔκ τε αὐτῆς Πελοποννήσου ἀγείροντες καὶ τῆς ἄλλης Ἑλλάδος ἐρέτας, μισθῷ πείθοντες.",
     "translation": "Corinth, exasperated by the war with the Corcyraeans, spent the whole of the year after the engagement and that succeeding it in building ships, and in straining every nerve to form an efficient fleet; rowers being drawn from Peloponnese and the rest of Hellas by the inducement of large bounties.",
@@ -121,13 +258,6 @@
           "τῆς",
           "οἱ",
           "τὰ"
-        ]
-      },
-      {
-        "greek": "παρασκευάζω",
-        "translation": "to get ready, prepare",
-        "wordsInText": [
-          "παρεσκευάζοντο"
         ]
       },
       {

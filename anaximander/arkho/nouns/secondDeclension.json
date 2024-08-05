@@ -116,7 +116,7 @@
         ]
       },
       {
-        "declension": "-οῖς",
+        "declension": "-οισι",
         "ruleName": "noun - plural - masc - dat",
         "searchTerm": [
           "ος",
@@ -143,8 +143,7 @@
         "declension": "-οὺς",
         "ruleName": "noun - plural - masc - acc",
         "searchTerm": [
-          "ος",
-          "ός"
+          "ος"
         ]
       },
       {
@@ -152,8 +151,15 @@
         "ruleName": "noun - sing - neut - nom",
         "searchTerm": [
           "ον",
-          "ος",
-          "ός"
+          "ος"
+        ]
+      },
+      {
+        "declension": "-ό",
+        "ruleName": "noun - sing - neut - nom",
+        "searchTerm": [
+          "ον",
+          "ος"
         ]
       },
       {
@@ -161,8 +167,7 @@
         "ruleName": "noun - sing - neut - gen",
         "searchTerm": [
           "ον",
-          "ος",
-          "ός"
+          "ος"
         ]
       },
       {
@@ -170,15 +175,23 @@
         "ruleName": "noun - sing - neut - dat",
         "searchTerm": [
           "ον",
-          "ος",
-          "ός"
+          "ος"
         ]
       },
       {
         "declension": "-ον",
         "ruleName": "noun - sing - neut - acc",
         "searchTerm": [
-          "ον"
+          "ον",
+          "ος"
+        ]
+      },
+      {
+        "declension": "-ό",
+        "ruleName": "noun - sing - neut - acc",
+        "searchTerm": [
+          "ον",
+          "ος"
         ]
       },
       {
@@ -210,6 +223,15 @@
       },
       {
         "declension": "-οις",
+        "ruleName": "noun - plural - neut - dat",
+        "searchTerm": [
+          "ον",
+          "ος",
+          "ός"
+        ]
+      },
+      {
+        "declension": "-οισι",
         "ruleName": "noun - plural - neut - dat",
         "searchTerm": [
           "ον",
