@@ -42,5 +42,42 @@
         "section":"5"
       }
     ]
+  },
+  {
+    "author":"Ploutarchos",
+    "book":"Solon",
+    "type":"work",
+    "reference":"32",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0007.tlg007.perseus-grc2:32?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "ὡς δὲ χώρας καλῆς ἔδαφος ὁ Πλάτων ἔρημον, αὐτῷ δέ πως κατὰ συγγένειαν προσῆκον, ἐξεργάσασθαι καὶ διακοσμῆσαι φιλοτιμούμενος τὴν Ἀτλαντικὴν ὑπόθεσιν, πρόθυρα μὲν μεγάλα καὶ περιβόλους καὶ αὐλὰς τῇ ἀρχῇ περιέθηκεν, οἷα λόγος οὐδεὶς ἄλλος ἔσχεν οὐδὲ μῦθος οὐδὲ ποίησις,",
+        "translations":[
+          "Plato, ambitious to elaborate and adorn the subject of the lost Atlantis, as if it were the soil of a fair estate unoccupied, but appropriately his by virtue of some kinship with Solon, began the work by laying out great porches, enclosures, and courtyards, such as no story, tale, or poesy ever had before."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "ὀψὲ δὲ ἀρξάμενος προκατέλυσε τοῦ ἔργου τὸν βίον, ὅσῳ μᾶλλον εὐφραίνει τὰ γεγραμμένα, τοσούτῳ μᾶλλον τοῖς ἀπολειφθεῖσιν ἀνιάσας. ὡς γὰρ ἡ πόλις τῶν Ἀθηναίων τὸ Ὀλυμπιεῖον, οὕτως ἡ Πλάτωνος σοφία τὸν Ἀτλαντικὸν ἐν πολλοῖς καλοῖς μόνον ἔργον ἀτελὲς ἔσχηκεν.",
+        "translations":[
+          "But he was late in beginning, and ended his life before his work. Therefore the greater our delight in what he actually wrote, the greater is our distress in view of what he left undone. For as the Olympieium in the city of Athens, so the tale of the lost Atlantis in the wisdom of Plato is the only one among many beautiful works to remain unfinished."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ἐπεβίωσε δʼ οὖν ὁ Σόλων ἀρξαμένου τοῦ Πεισιστράτου τυραννεῖν, ὡς μὲν Ἡρακλείδης ὁ Ποντικὸς ἱστορεῖ, συχνὸν χρόνον, ὡς δὲ Φανίας ὁ Ἐρέσιος, ἐλάττονα δυοῖν ἐτῶν. ἐπὶ Κωμίου μὲν γὰρ ἤρξατο τυραννεῖν Πεισιστρατος, ἐφʼ Ἡγεστράτου δὲ Σόλωνά φησιν ὁ Φανίας ἀποθανεῖν τοῦ μετὰ Κωμίαν ἄρξαντος.",
+        "translations":[
+          "Well, then, Solon lived on after Peisistratus had made himself tyrant, as Hercleides Ponticus states, a long time; but as Phanias of Eresos says, less than two years. For it was in the archonship of Comeas that Peisistratus began his tyranny, and Phanias says that Solon died in the archonship of Hegestratus, the successor of Comeas."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "ἡ δὲ διασπορὰ κατακαυθέντος αὐτοῦ τῆς τέφρας περὶ τὴν Σαλαμινίων νῆσον ἔστι μὲν διὰ τὴν ἀτοπίαν ἀπίθανος παντάπασι καὶ μυθώδης, ἀναγέγραπται δʼ ὑπό τε ἄλλων ἀνδρῶν ἀξιολόγων καὶ Ἀριστοτέλους τοῦ φιλοσόφου.",
+        "translations":[
+          "The story that his body was burned and his ashes scattered on the island of Salamis is strange enough to be altogether incredible and fabulous, and yet it is given by noteworthy authors, and even by Aristotle the philosopher."
+        ],
+        "section":"4"
+      }
+    ]
   }
 ]

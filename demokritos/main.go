@@ -9,7 +9,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/demokritos/seeder"
+	"github.com/odysseia-greek/olympia/demokritos/atomos"
 	"log"
 	"os"
 	"path"
@@ -44,7 +44,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	handler, err := seeder.CreateNewConfig(env)
+	handler, err := atomos.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

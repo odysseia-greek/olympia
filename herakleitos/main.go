@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/herakleitos/seeder"
+	"github.com/odysseia-greek/olympia/herakleitos/flux"
 	"log"
 	"os"
 	"path"
@@ -41,7 +41,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	handler, err := seeder.CreateNewConfig(env)
+	handler, err := flux.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -85,7 +85,7 @@ func main() {
 					for _, f := range files {
 						logging.Debug(fmt.Sprintf("found %s in %s", f.Name(), innerFilePath))
 						plan, _ := rhema.ReadFile(path.Join(innerFilePath, f.Name()))
-						var rhemai []seeder.Text
+						var rhemai []flux.Text
 						err := json.Unmarshal(plan, &rhemai)
 						if err != nil {
 							log.Fatal(err)

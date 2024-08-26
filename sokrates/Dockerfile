@@ -17,7 +17,7 @@ COPY . .
 # Debug build
 FROM base as debug
 # Install Air for live reloading
-RUN go install github.com/cosmtrek/air@latest
+RUN go install github.com/air-verse/air@latest
 # Install Delve for debugging
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 EXPOSE 2345

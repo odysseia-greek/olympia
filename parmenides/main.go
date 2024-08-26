@@ -9,7 +9,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/parmenides/seeder"
+	"github.com/odysseia-greek/olympia/parmenides/aletheia"
 	"log"
 	"os"
 	"path"
@@ -40,7 +40,7 @@ func main() {
 
 	logging.Debug("creating config")
 
-	handler, conn, err := seeder.CreateNewConfig()
+	handler, conn, err := aletheia.CreateNewConfig()
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

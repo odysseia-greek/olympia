@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/melissos/ergon"
+	"github.com/odysseia-greek/olympia/melissos/monos"
 	"log"
 	"os"
 	"strings"
@@ -37,7 +37,7 @@ func main() {
 	minute := time.Minute * 60
 	timeFinished := minute.Milliseconds()
 
-	handler, conn, err := ergon.CreateNewConfig(env, duration, timeFinished)
+	handler, conn, err := monos.CreateNewConfig(env, duration, timeFinished)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

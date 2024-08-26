@@ -161,19 +161,29 @@ var authorBasedAnswer = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
-var aggregateType = graphql.NewObject(graphql.ObjectConfig{
-	Name: "Aggregate",
+var segmentsType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Segments",
 	Fields: graphql.Fields{
-		"highestSet": &graphql.Field{Type: graphql.String},
-		"name":       &graphql.Field{Type: graphql.String},
+		"name":   &graphql.Field{Type: graphql.String},
+		"maxSet": &graphql.Field{Type: graphql.Int},
+	},
+})
+
+var themesType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Themes",
+	Fields: graphql.Fields{
+		"name": &graphql.Field{Type: graphql.String},
+		"segments": &graphql.Field{
+			Type: graphql.NewList(segmentsType),
+		},
 	},
 })
 
 var aggregateResultType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "AggregateResult",
 	Fields: graphql.Fields{
-		"aggregates": &graphql.Field{
-			Type: graphql.NewList(aggregateType),
+		"themes": &graphql.Field{
+			Type: graphql.NewList(themesType),
 		},
 	},
 })

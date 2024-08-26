@@ -5,7 +5,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
-	"github.com/odysseia-greek/olympia/anaximenes/seeder"
+	"github.com/odysseia-greek/olympia/anaximenes/pneuma"
 	"log"
 	"os"
 	"strings"
@@ -32,7 +32,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	handler, err := seeder.CreateNewConfig(env)
+	handler, err := pneuma.CreateNewConfig(env)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

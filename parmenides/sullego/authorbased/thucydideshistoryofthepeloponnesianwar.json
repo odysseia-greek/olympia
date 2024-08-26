@@ -3,6 +3,7 @@
     "quizType": "authorbased",
     "theme": "Thucydides - History of the Peloponnesian War",
     "set": 1,
+    "segment": "1.1.2",
     "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.1",
     "fullSentence": "κίνησις γὰρ αὕτη μεγίστη δὴ τοῖς Ἕλλησιν ἐγένετο καὶ μέρει τινὶ τῶν βαρβάρων, ὡς δὲ εἰπεῖν καὶ ἐπὶ πλεῖστον ἀνθρώπων.",
     "translation": "For this was the greatest movement that had ever stirred the Hellenes, extending also to some of the Barbarians, one might say even to a very large part of mankind.",
@@ -139,7 +140,8 @@
   {
     "quizType": "authorbased",
     "theme": "Thucydides - History of the Peloponnesian War",
-    "set": 2,
+    "set": 1,
+    "segment": "1.31.1",
     "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.31",
     "fullSentence": "τὸν δ’ ἐνιαυτὸν πάντα τὸν μετὰ τὴν ναυμαχίαν καὶ τὸν ὕστερον οἱ Κορίνθιοι ὀργῇ φέροντες τὸν πρὸς Κερκυραίους πόλεμον ἐναυπηγοῦντο καὶ παρεσκευάζοντο τὰ κράτιστα νεῶν στόλον, ἔκ τε αὐτῆς Πελοποννήσου ἀγείροντες καὶ τῆς ἄλλης Ἑλλάδος ἐρέτας, μισθῷ πείθοντες.",
     "translation": "Corinth, exasperated by the war with the Corcyraeans, spent the whole of the year after the engagement and that succeeding it in building ships, and in straining every nerve to form an efficient fleet; rowers being drawn from Peloponnese and the rest of Hellas by the inducement of large bounties.",
@@ -349,6 +351,869 @@
         "translation": "a ship",
         "wordsInText": [
           "νεῶν"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Thucydides - History of the Peloponnesian War",
+    "set": 1,
+    "segment": "2.37.1",
+    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
+    "fullSentence": "‘χρώμεθα γὰρ πολιτείᾳ οὐ ζηλούσῃ τοὺς τῶν πέλας νόμους, παράδειγμα δὲ μᾶλλον αὐτοὶ ὄντες τισὶν ἢ μιμούμενοι ἑτέρους. καὶ ὄνομα μὲν διὰ τὸ μὴ ἐς ὀλίγους ἀλλ’ ἐς πλείονας οἰκεῖν δημοκρατία κέκληται· μέτεστι δὲ κατὰ μὲν τοὺς νόμους πρὸς τὰ ἴδια διάφορα πᾶσι τὸ ἴσον, κατὰ δὲ τὴν ἀξίωσιν, ὡς ἕκαστος ἔν τῳ εὐδοκιμεῖ, οὐκ ἀπὸ μέρους τὸ πλέον ἐς τὰ κοινὰ ἢ ἀπ’ ἀρετῆς προτιμᾶται, οὐδ’ αὖ κατὰ πενίαν, ἔχων γέ τι ἀγαθὸν δρᾶσαι τὴν πόλιν, ἀξιώματος ἀφανείᾳ κεκώλυται.",
+    "translation": "Our constitution does not copy the laws of neighboring states; we are rather a pattern to others than imitators ourselves. Its administration favors the many instead of the few; this is why it is called a democracy. If we look to the laws, they afford equal justice to all in their private differences; if to social standing, advancement in public life falls to reputation for capacity, class considerations not being allowed to interfere with merit; nor again does poverty bar the way, if a man is able to serve the state, he is not hindered by the obscurity of his condition.",
+    "content": [
+      {
+        "greek": "ἄλλος",
+        "translation": "other, another",
+        "wordsInText": [
+          "ἀλλ’"
+        ]
+      },
+      {
+        "greek": "ἀγαθός",
+        "translation": "good, the good",
+        "wordsInText": [
+          "ἀγαθὸν"
+        ]
+      },
+      {
+        "greek": "ἀξίωμα",
+        "translation": "that of which one is thought worthy, an honour ",
+        "wordsInText": [
+          "ἀξιώματος"
+        ]
+      },
+      {
+        "greek": "ἀξίωσις",
+        "translation": "a thinking worthy",
+        "wordsInText": [
+          "ἀξίωσιν"
+        ]
+      },
+      {
+        "greek": "ἀπό",
+        "translation": "from, away from. c. gen.",
+        "wordsInText": [
+          "ἀπ’",
+          "ἀπὸ"
+        ]
+      },
+      {
+        "greek": "ἀρετή",
+        "translation": "goodness, excellence",
+        "wordsInText": [
+          "ἀρετῆς"
+        ]
+      },
+      {
+        "greek": "αὖ",
+        "translation": "again, anew, afresh, once more",
+        "wordsInText": [
+          "αὖ"
+        ]
+      },
+      {
+        "greek": "αὐτός",
+        "translation": "self; [the] same; unemph. 3rd pers.pronoun;",
+        "wordsInText": [
+          "αὐτοὶ"
+        ]
+      },
+      {
+        "greek": "ἀφάνεια",
+        "translation": "obscurity",
+        "wordsInText": [
+          "ἀφανείᾳ"
+        ]
+      },
+      {
+        "greek": "γάρ",
+        "translation": "for",
+        "wordsInText": [
+          "γάρ",
+          "γὰρ"
+        ]
+      },
+      {
+        "greek": "γε",
+        "translation": "at least, at any rate",
+        "wordsInText": [
+          "γέ"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "δημοκρατία",
+        "translation": "democracy, popular government",
+        "wordsInText": [
+          "δημοκρατία"
+        ]
+      },
+      {
+        "greek": "διά",
+        "translation": "through c. gen.; because of c. acc.",
+        "wordsInText": [
+          "διὰ"
+        ]
+      },
+      {
+        "greek": "διάφορος",
+        "translation": "different, unlike",
+        "wordsInText": [
+          "διάφορα"
+        ]
+      },
+      {
+        "greek": "δράω",
+        "translation": "to do",
+        "wordsInText": [
+          "δρᾶσαι"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "ὄντες"
+        ]
+      },
+      {
+        "greek": "εἰς",
+        "translation": "into, to c. acc.",
+        "wordsInText": [
+          "ἐς"
+        ]
+      },
+      {
+        "greek": "ἕκαστος",
+        "translation": "every, every one, each, each one",
+        "wordsInText": [
+          "ἕκαστος"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "in, among. c. dat.",
+        "wordsInText": [
+          "ἔν"
+        ]
+      },
+      {
+        "greek": "ἕτερος",
+        "translation": "the one; the other (of two)",
+        "wordsInText": [
+          "ἑτέρους"
+        ]
+      },
+      {
+        "greek": "εὐδοκιμέω",
+        "translation": "to be of good repute, to be held in esteem, honoured, famous, popular",
+        "wordsInText": [
+          "εὐδοκιμεῖ"
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": [
+          "ἔχων"
+        ]
+      },
+      {
+        "greek": "ζηλόω",
+        "translation": "to rival, vie with, emulate ",
+        "wordsInText": [
+          "ζηλούσῃ"
+        ]
+      },
+      {
+        "greek": "ἤ",
+        "translation": "either..or; than",
+        "wordsInText": [
+          "ἢ"
+        ]
+      },
+      {
+        "greek": "ἴδιος",
+        "translation": "one's own, pertaining to oneself",
+        "wordsInText": [
+          "ἴδια"
+        ]
+      },
+      {
+        "greek": "ἴσος",
+        "translation": "equal to, the same as; adv. perhaps",
+        "wordsInText": [
+          "ἴσον"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "καλέω",
+        "translation": "to call, summon",
+        "wordsInText": [
+          "κέκληται"
+        ]
+      },
+      {
+        "greek": "κατά",
+        "translation": "down, against with gen.; according to, throughout with acc.",
+        "wordsInText": [
+          "κατὰ"
+        ]
+      },
+      {
+        "greek": "κοινός",
+        "translation": "common, shared in common",
+        "wordsInText": [
+          "κοινὰ"
+        ]
+      },
+      {
+        "greek": "κωλύω",
+        "translation": "to let, hinder, check, prevent",
+        "wordsInText": [
+          "κεκώλυται"
+        ]
+      },
+      {
+        "greek": "μᾶλλον",
+        "translation": "more, rather",
+        "wordsInText": [
+          "μᾶλλον"
+        ]
+      },
+      {
+        "greek": "μέν",
+        "translation": "on the one hand, on the other hand",
+        "wordsInText": [
+          "μὲν"
+        ]
+      },
+      {
+        "greek": "μέρος",
+        "translation": "a part, share",
+        "wordsInText": [
+          "μέρους"
+        ]
+      },
+      {
+        "greek": "μέτειμι",
+        "translation": "be among; (+dat and gen) have a share in ",
+        "wordsInText": [
+          "μέτεστι"
+        ]
+      },
+      {
+        "greek": "μή",
+        "translation": "not",
+        "wordsInText": [
+          "μὴ"
+        ]
+      },
+      {
+        "greek": "μιμέομαι",
+        "translation": "to mimic, imitate, represent, portray",
+        "wordsInText": [
+          "μιμούμενοι"
+        ]
+      },
+      {
+        "greek": "νόμος",
+        "translation": "usage, custom, law, ordinance",
+        "wordsInText": [
+          "νόμους"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τῶν",
+          "τοὺς",
+          "τὸ",
+          "τὰ",
+          "τὴν",
+          "τῳ"
+        ]
+      },
+      {
+        "greek": "οἰκέω",
+        "translation": "to inhabit, occupy",
+        "wordsInText": [
+          "οἰκεῖν"
+        ]
+      },
+      {
+        "greek": "ὀλίγος",
+        "translation": "few, little, scanty, small ",
+        "wordsInText": [
+          "ὀλίγους"
+        ]
+      },
+      {
+        "greek": "ὄνομα",
+        "translation": "name",
+        "wordsInText": [
+          "ὄνομα"
+        ]
+      },
+      {
+        "greek": "οὐ",
+        "translation": "not",
+        "wordsInText": [
+          "οὐ",
+          "οὐκ",
+          "οὐδ’"
+        ]
+      },
+      {
+        "greek": "παράδειγμα",
+        "translation": "a pattern",
+        "wordsInText": [
+          "παράδειγμα"
+        ]
+      },
+      {
+        "greek": "πᾶς",
+        "translation": "all, the whole",
+        "wordsInText": [
+          "πᾶσι"
+        ]
+      },
+      {
+        "greek": "πέλας",
+        "translation": "near, hard by, close",
+        "wordsInText": [
+          "πέλας"
+        ]
+      },
+      {
+        "greek": "πενία",
+        "translation": "poverty, need ",
+        "wordsInText": [
+          "πενίαν"
+        ]
+      },
+      {
+        "greek": "πλείων",
+        "translation": "more, larger",
+        "wordsInText": [
+          "πλείονας"
+        ]
+      },
+      {
+        "greek": "πλέως",
+        "translation": "full of",
+        "wordsInText": [
+          "πλέον"
+        ]
+      },
+      {
+        "greek": "πόλις",
+        "translation": "a city",
+        "wordsInText": [
+          "πόλιν"
+        ]
+      },
+      {
+        "greek": "πολιτεία",
+        "translation": "citizenship, citizen body, constitution",
+        "wordsInText": [
+          "πολιτείᾳ"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "from (w. gen.); at, near, in addition to (w. dat.); to, toward, regarding (w. acc.)",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "προτιμάω",
+        "translation": "to honour",
+        "wordsInText": [
+          "προτιμᾶται"
+        ]
+      },
+      {
+        "greek": "τις",
+        "translation": "any one, any thing, some one, some thing;",
+        "wordsInText": [
+          "τι",
+          "τισὶν"
+        ]
+      },
+      {
+        "greek": "ὡς",
+        "translation": "as, how",
+        "wordsInText": [
+          "ὡς"
+        ]
+      },
+      {
+        "greek": "χράομαι",
+        "translation": "use, experience",
+        "wordsInText": [
+          "‘χρώμεθα"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Thucydides - History of the Peloponnesian War",
+    "set": 1,
+    "segment": "2.37.2",
+    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
+    "fullSentence": "ἐλευθέρως δὲ τά τε πρὸς τὸ κοινὸν πολιτεύομεν καὶ ἐς τὴν πρὸς ἀλλήλους τῶν καθ ἡμέραν ἐπιτηδευμάτων ὑποψίαν, οὐ δι’ ὀργῆς τὸν πέλας, εἰ καθ’ ἡδονήν τι δρᾷ, ἔχοντες, οὐδὲ ἀζημίους μέν, λυπηρὰς δὲ τῇ ὄψει ἀχθηδόνας προστιθέμενοι.",
+    "translation": "The freedom which we enjoy in our government extends also to our ordinary life. There, far from exercising a jealous surveillance over each other, we do not feel called upon to be angry with our neighbor for doing what he likes, or even to indulge in those injurious looks which cannot fail to be offensive, although they inflict no positive penalty.",
+    "content": [
+      {
+        "greek": "ἀζήμιος",
+        "translation": "free from further payment: without loss, scot-free",
+        "wordsInText": [
+          "ἀζημίους"
+        ]
+      },
+      {
+        "greek": "ἀλλήλων",
+        "translation": "of one another, to one another, one another",
+        "wordsInText": [
+          "ἀλλήλους"
+        ]
+      },
+      {
+        "greek": "ἀχθηδών",
+        "translation": "a weight, burden",
+        "wordsInText": [
+          "ἀχθηδόνας"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "διά",
+        "translation": "through c. gen.; because of c. acc.",
+        "wordsInText": [
+          "δι’"
+        ]
+      },
+      {
+        "greek": "δράω",
+        "translation": "to do",
+        "wordsInText": [
+          "δρᾷ"
+        ]
+      },
+      {
+        "greek": "εἰ",
+        "translation": "if conj., whether; part. w/wishes, adv. w/imperatives",
+        "wordsInText": [
+          "εἰ"
+        ]
+      },
+      {
+        "greek": "εἰς",
+        "translation": "into, to c. acc.",
+        "wordsInText": [
+          "ἐς"
+        ]
+      },
+      {
+        "greek": "ἐλεύθερος",
+        "translation": "free",
+        "wordsInText": [
+          "ἐλευθέρως"
+        ]
+      },
+      {
+        "greek": "ἐπιτήδευμα",
+        "translation": "a pursuit, business, practice",
+        "wordsInText": [
+          "ἐπιτηδευμάτων"
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": [
+          "ἔχοντες"
+        ]
+      },
+      {
+        "greek": "ἡδονή",
+        "translation": "delight, enjoyment, pleasure",
+        "wordsInText": [
+          "ἡδονήν"
+        ]
+      },
+      {
+        "greek": "ἡμέρα",
+        "translation": "day",
+        "wordsInText": [
+          "ἡμέραν"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "κατά",
+        "translation": "down, against with gen.; according to, throughout with acc.",
+        "wordsInText": [
+          "καθ’",
+          "καθ"
+        ]
+      },
+      {
+        "greek": "κοινός",
+        "translation": "common, shared in common",
+        "wordsInText": [
+          "κοινὸν"
+        ]
+      },
+      {
+        "greek": "λυπηρός",
+        "translation": "painful, distressing ",
+        "wordsInText": [
+          "λυπηρὰς"
+        ]
+      },
+      {
+        "greek": "μέν",
+        "translation": "on the one hand, on the other hand",
+        "wordsInText": [
+          "μέν"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὴν",
+          "τά",
+          "τὸ",
+          "τῶν",
+          "τῇ",
+          "τὸν"
+        ]
+      },
+      {
+        "greek": "ὀργή",
+        "translation": "natural impulse",
+        "wordsInText": [
+          "ὀργῆς"
+        ]
+      },
+      {
+        "greek": "οὐ",
+        "translation": "not",
+        "wordsInText": [
+          "οὐ"
+        ]
+      },
+      {
+        "greek": "οὐδέ",
+        "translation": "and/but not; not even",
+        "wordsInText": [
+          "οὐδὲ"
+        ]
+      },
+      {
+        "greek": "ὄψις",
+        "translation": "look, appearance, aspect",
+        "wordsInText": [
+          "ὄψει"
+        ]
+      },
+      {
+        "greek": "πέλας",
+        "translation": "near, hard by, close",
+        "wordsInText": [
+          "πέλας"
+        ]
+      },
+      {
+        "greek": "πολιτεύω",
+        "translation": "to live as a citizen",
+        "wordsInText": [
+          "πολιτεύομεν"
+        ]
+      },
+      {
+        "greek": "πρός",
+        "translation": "from (w. gen.); at, near, in addition to (w. dat.); to, toward, regarding (w. acc.)",
+        "wordsInText": [
+          "πρὸς"
+        ]
+      },
+      {
+        "greek": "προστίθημι",
+        "translation": "to add, to apply, to close (a door); mid. to join (a group), take as an ally ",
+        "wordsInText": [
+          "προστιθέμενοι"
+        ]
+      },
+      {
+        "greek": "τε",
+        "translation": "and",
+        "wordsInText": [
+          "τε"
+        ]
+      },
+      {
+        "greek": "τις",
+        "translation": "any one, any thing, some one, some thing;",
+        "wordsInText": [
+          "τι"
+        ]
+      },
+      {
+        "greek": "ὑποψία",
+        "translation": "suspicion, jealousy",
+        "wordsInText": [
+          "ὑποψίαν"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType": "authorbased",
+    "theme": "Thucydides - History of the Peloponnesian War",
+    "set": 1,
+    "segment": "2.37.3",
+    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
+    "fullSentence": "ἀνεπαχθῶς δὲ τὰ ἴδια προσομιλοῦντες τὰ δημόσια διὰ δέος μάλιστα οὐ παρανομοῦμεν, τῶν τε αἰεὶ ἐν ἀρχῇ ὄντων ἀκροάσει καὶ τῶν νόμων, καὶ μάλιστα αὐτῶν ὅσοι τε ἐπ’ ὠφελίᾳ τῶν ἀδικουμένων κεῖνται καὶ ὅσοι ἄγραφοι ὄντες αἰσχύνην ὁμολογουμένην φέρουσιν.",
+    "translation": "But all this ease in our private relations does not make us lawless as citizens. Against this fear is our chief safeguard, teaching us to obey the magistrates and the laws, particularly such as regard the protection of the injured, whether they are actually on the statute book, or belong to that code which, although unwritten, yet cannot be broken without acknowledged disgrace.",
+    "content": [
+      {
+        "greek": "ἄγραφος",
+        "translation": "unwritten",
+        "wordsInText": [
+          "ἄγραφοι"
+        ]
+      },
+      {
+        "greek": "ἀδικέω",
+        "translation": "to do wrong",
+        "wordsInText": [
+          "ἀδικουμένων"
+        ]
+      },
+      {
+        "greek": "ἀεί",
+        "translation": "always, for ever",
+        "wordsInText": [
+          "αἰεὶ"
+        ]
+      },
+      {
+        "greek": "αἰσχύνη",
+        "translation": "shame done one, disgrace, dishonour",
+        "wordsInText": [
+          "αἰσχύνην"
+        ]
+      },
+      {
+        "greek": "ἀκρόασις",
+        "translation": "a hearing",
+        "wordsInText": [
+          "ἀκροάσει"
+        ]
+      },
+      {
+        "greek": "ἀνεπαχθής",
+        "translation": "not burdensome, without offence",
+        "wordsInText": [
+          "ἀνεπαχθῶς"
+        ]
+      },
+      {
+        "greek": "ἀρχή",
+        "translation": "a beginning, rule, office, empire",
+        "wordsInText": [
+          "ἀρχῇ"
+        ]
+      },
+      {
+        "greek": "αὐτός",
+        "translation": "the same; unemph. 3rd pers.pronoun; -self",
+        "wordsInText": [
+          "αὐτῶν"
+        ]
+      },
+      {
+        "greek": "δέ",
+        "translation": "but",
+        "wordsInText": [
+          "δὲ"
+        ]
+      },
+      {
+        "greek": "δέος",
+        "translation": "fear, alarm",
+        "wordsInText": [
+          "δέος"
+        ]
+      },
+      {
+        "greek": "δημόσιος",
+        "translation": "belonging to the people",
+        "wordsInText": [
+          "δημόσια"
+        ]
+      },
+      {
+        "greek": "διά",
+        "translation": "through c. gen.; because of c. acc.",
+        "wordsInText": [
+          "διὰ"
+        ]
+      },
+      {
+        "greek": "εἰμί",
+        "translation": "to be",
+        "wordsInText": [
+          "ὄντες",
+          "ὄντων"
+        ]
+      },
+      {
+        "greek": "ἐν",
+        "translation": "in, among. c. dat.",
+        "wordsInText": [
+          "ἐν"
+        ]
+      },
+      {
+        "greek": "ἐπί",
+        "translation": "on, upon with gen., dat., and acc.",
+        "wordsInText": [
+          "ἐπ’"
+        ]
+      },
+      {
+        "greek": "ἴδιος",
+        "translation": "one's own, pertaining to oneself",
+        "wordsInText": [
+          "ἴδια"
+        ]
+      },
+      {
+        "greek": "καί",
+        "translation": "and, also",
+        "wordsInText": [
+          "καὶ"
+        ]
+      },
+      {
+        "greek": "κεῖμαι",
+        "translation": "to lie; to have been set/put (as perf. pass. of τίθημι)",
+        "wordsInText": [
+          "κεῖνται"
+        ]
+      },
+      {
+        "greek": "μάλιστα",
+        "translation": "most",
+        "wordsInText": [
+          "μάλιστα"
+        ]
+      },
+      {
+        "greek": "νόμος",
+        "translation": "usage, custom, law, ordinance",
+        "wordsInText": [
+          "νόμων"
+        ]
+      },
+      {
+        "greek": "ὁ",
+        "translation": "the",
+        "wordsInText": [
+          "τὰ",
+          "τῶν"
+        ]
+      },
+      {
+        "greek": "ὁμολογέω",
+        "translation": "agree, say the same thing as",
+        "wordsInText": [
+          "ὁμολογουμένην"
+        ]
+      },
+      {
+        "greek": "ὅσος",
+        "translation": "as much/many as",
+        "wordsInText": [
+          "ὅσοι"
+        ]
+      },
+      {
+        "greek": "οὐ",
+        "translation": "not",
+        "wordsInText": [
+          "οὐ"
+        ]
+      },
+      {
+        "greek": "παρανομέω",
+        "translation": "to transgress the law, act unlawfully ",
+        "wordsInText": [
+          "παρανομοῦμεν"
+        ]
+      },
+      {
+        "greek": "προσομιλέω",
+        "translation": "to hold intercourse with, live",
+        "wordsInText": [
+          "προσομιλοῦντες"
+        ]
+      },
+      {
+        "greek": "τε",
+        "translation": "and",
+        "wordsInText": [
+          "τε"
+        ]
+      },
+      {
+        "greek": "φέρω",
+        "translation": "to bear",
+        "wordsInText": [
+          "φέρουσιν"
+        ]
+      },
+      {
+        "greek": "ὠφέλεια",
+        "translation": "help, aid, succour, assistance",
+        "wordsInText": [
+          "ὠφελίᾳ"
         ]
       }
     ]

@@ -5,11 +5,15 @@ import (
 	plato "github.com/odysseia-greek/agora/plato/models"
 )
 
-func (h *HomerosHandler) CreateDialogueQuiz(theme, set, quizType, requestID string) (*plato.DialogueQuiz, error) {
+func (h *HomerosHandler) CreateDialogueQuiz(theme, set, segment, quizType, requestID string) (*plato.DialogueQuiz, error) {
 	request := plato.CreationRequest{
 		Theme:    theme,
 		Set:      set,
 		QuizType: quizType,
+	}
+
+	if segment != "" {
+		request.Segment = segment
 	}
 
 	body, err := json.Marshal(request)
@@ -36,10 +40,11 @@ func (h *HomerosHandler) CreateDialogueQuiz(theme, set, quizType, requestID stri
 	return &quiz, nil
 }
 
-func (h *HomerosHandler) CreateAuthorBasedQuiz(theme, set, quizType, requestID string, excludeWords []string) (*plato.AuthorbasedQuizResponse, error) {
+func (h *HomerosHandler) CreateAuthorBasedQuiz(theme, set, segment, quizType, requestID string, excludeWords []string) (*plato.AuthorbasedQuizResponse, error) {
 	request := plato.CreationRequest{
 		Theme:        theme,
 		Set:          set,
+		Segment:      segment,
 		QuizType:     quizType,
 		ExcludeWords: excludeWords,
 		Order:        "",
@@ -69,10 +74,11 @@ func (h *HomerosHandler) CreateAuthorBasedQuiz(theme, set, quizType, requestID s
 	return &quiz, nil
 }
 
-func (h *HomerosHandler) CreateQuiz(theme, set, quizType, order, requestID string, excludeWords []string) (*plato.QuizResponse, error) {
+func (h *HomerosHandler) CreateQuiz(theme, set, segment, quizType, order, requestID string, excludeWords []string) (*plato.QuizResponse, error) {
 	request := plato.CreationRequest{
 		Theme:        theme,
 		Set:          set,
+		Segment:      segment,
 		QuizType:     quizType,
 		Order:        order,
 		ExcludeWords: excludeWords,
@@ -174,7 +180,7 @@ func (h *HomerosHandler) CheckDialogue(answerRequest plato.AnswerRequest, reques
 	return &answer, nil
 }
 
-func (h *HomerosHandler) Options(quizType string, requestID string) (*plato.AggregateResult, error) {
+func (h *HomerosHandler) Options(quizType string, requestID string) (*plato.AggregatedOptions, error) {
 	response, err := h.HttpClients.Sokrates().Options(quizType, requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
@@ -182,7 +188,7 @@ func (h *HomerosHandler) Options(quizType string, requestID string) (*plato.Aggr
 	}
 	defer response.Body.Close()
 
-	var aggregate plato.AggregateResult
+	var aggregate plato.AggregatedOptions
 	err = json.NewDecoder(response.Body).Decode(&aggregate)
 	if err != nil {
 		return nil, err
