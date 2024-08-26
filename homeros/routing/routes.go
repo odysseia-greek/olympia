@@ -21,7 +21,7 @@ func InitRoutes(tracer proto.TraceService_ChorusClient, config *gateway.TraceCon
 		GraphiQL: false,
 	})
 
-	serveMux.HandleFunc("/homeros/v1/health", plato.Adapt(gateway.HealthProbe, plato.ValidateRestMethod("GET")))
+	serveMux.HandleFunc("/homeros/v1/health", plato.Adapt(gateway.HealthProbe, plato.ValidateRestMethod("GET"), plato.SetCorsHeaders()))
 	serveMux.Handle("/graphql", middleware.Adapt(srv, middleware.LogRequestDetails(tracer, config, random), middleware.SetCorsHeaders()))
 
 	return serveMux

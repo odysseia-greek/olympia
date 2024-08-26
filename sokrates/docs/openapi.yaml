@@ -159,11 +159,11 @@ paths:
             format: quizType
       responses:
         200:
-          description: Aggregates
+          description: AggregatedOptions
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Aggregates'
+                $ref: '#/components/schemas/AggregatedOptions'
         405:
           description: MethodError
           content:
@@ -178,6 +178,49 @@ paths:
                 $ref: '#/components/schemas/ElasticSearchError'
 components:
   schemas:
+    Segment:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Animals
+          description: The name of the segment
+        maxSet:
+          type: number
+          format: float
+          example: 1
+          description: The maximum value for the set in the segment
+      required:
+        - name
+        - maxSet
+
+    Theme:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Basic
+          description: The name of the theme
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+          description: List of segments associated with the theme
+      required:
+        - name
+        - segments
+
+    AggregatedOptions:
+      type: object
+      properties:
+        themes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Theme'
+          description: List of themes included in the aggregated options
+      required:
+        - themes
+
     CreateQuiz:
       type: object
       properties:
@@ -187,6 +230,9 @@ components:
         theme:
           type: string
           example: Euripides - Medea
+        segment:
+          type: string
+          example: Economic
         quizType:
           type: string
           example: dialogue
@@ -335,22 +381,7 @@ components:
         translation:
           type: string
           example: Socrates
-    Aggregates:
-      type: object
-      properties:
-        aggregates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Aggregate'
-    Aggregate:
-      type: object
-      properties:
-        highestSet:
-          type: string
-          example: 1
-        name:
-          type: string
-          example: Euripides - Medea
+
 
     AnswerRequest:
       type: object
@@ -364,6 +395,9 @@ components:
         quizType:
           type: string
           example: dialogue
+        segment:
+          type: string
+          example: Social
         comprehensive:
           type: boolean
           example: true

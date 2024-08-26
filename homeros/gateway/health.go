@@ -10,6 +10,7 @@ import (
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/olympia/homeros/models"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 )
@@ -20,8 +21,13 @@ type healthChannel struct {
 }
 
 func HealthProbe(w http.ResponseWriter, req *http.Request) {
+	version := os.Getenv("VERSION")
+	if version == "" {
+		version = "unknown"
+	}
 	health := plato.Health{
 		Healthy: true,
+		Version: version,
 		Time:    time.Now().String(),
 	}
 	middleware.ResponseWithJson(w, health)

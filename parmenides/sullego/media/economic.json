@@ -1,0 +1,133 @@
+[
+  {
+    "quizMetadata":{
+      "language":"English"
+    },
+    "quizType":"media",
+    "theme":"Economy",
+    "set": 1,
+    "segment": "The Market",
+    "content":[
+      {
+        "greek":"ή ἀγορά",
+        "translation":"agora",
+        "imageURL":"agora.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"Ἀθῆναι",
+        "translation":"athens",
+        "imageURL":"athens.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἄρτος",
+        "translation":"bread",
+        "imageURL":"bread.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ χαλκός",
+        "translation":"bronze",
+        "imageURL":"bronze.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ τυρός",
+        "translation":"cheese",
+        "imageURL":"cheese.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τὸ ἀργύριον",
+        "translation":"coin",
+        "imageURL":"coin.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἰχθύς",
+        "translation":"fish",
+        "imageURL":"fish.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ χρυσός",
+        "translation":"gold",
+        "imageURL":"gold.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ λιμήν",
+        "translation":"harbor",
+        "imageURL":"harbor.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό κρέας",
+        "translation":"meat",
+        "imageURL":"meat.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἔμπορος",
+        "translation":"merchant",
+        "imageURL":"merchant.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ἐλαία",
+        "translation":"olive",
+        "imageURL":"olive.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ή ῥόα",
+        "translation":"pomegranate",
+        "imageURL":"pomegranate.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ κέραμος",
+        "translation":"pottery",
+        "imageURL":"pottery.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό πλοῖον",
+        "translation":"ship",
+        "imageURL":"ship.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ ἄργυρος",
+        "translation":"silver",
+        "imageURL":"silver.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ δοῦλος",
+        "translation":"slave",
+        "imageURL":"slave.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"τό ἐμπόριον",
+        "translation":"tradingstation",
+        "imageURL":"tradingstation.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ πλοῦτος",
+        "translation":"wealth",
+        "imageURL":"wealth.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁ οἶνος",
+        "translation":"wine",
+        "imageURL":"wine.webp",
+        "audioFile":""
+      }
+    ]
+  }
+]

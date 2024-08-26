@@ -2,13 +2,8 @@ schema {
   query: RootQuery
 }
 
-type Aggregate {
-  highestSet: String
-  name: String
-}
-
 type AggregateResult {
-  aggregates: [Aggregate]
+  themes: [Themes]
 }
 
 type AggregationResult {
@@ -53,10 +48,10 @@ type AuthorBasedQuizType {
 }
 
 input CheckTextRequestInput {
+  translations: [TranslationsInput]
   author: String
   book: String
   reference: String
-  translations: [TranslationsInput]
 }
 
 type CheckTextResponse {
@@ -122,10 +117,10 @@ type DialogueCorrection {
 }
 
 input DialogueInput {
+  place: Int
   speaker: String
   translation: String
   greek: String
-  place: Int
 }
 
 type DialogueQuiz {
@@ -187,6 +182,7 @@ type QuizMetadata {
 }
 
 type QuizResponse {
+  numberOfItems: Int
   options: [Options]
   quizItem: String
 }
@@ -223,14 +219,14 @@ type RootQuery {
   create(input: CreateTextInput): Text
 
   """Search Alexandros dictionary for a word"""
-  dictionary(language: String = "", mode: String = "", searchInText: Boolean = false, word: String): ExtendedDictionary
+  dictionary(word: String, language: String = "", mode: String = "", searchInText: Boolean = false): ExtendedDictionary
 
   """Search Dionysios for grammar results"""
   grammar(word: String): [Result]
 
   """returns the options for a specific quiztype"""
   options(quizType: String): AggregateResult
-  quiz(theme: String, set: String, quizType: String, order: String, excludeWords: [String]): QuizResponseUnion
+  quiz(set: String, quizType: String, order: String, excludeWords: [String], theme: String): QuizResponseUnion
 
   """See if the backendApis are healthy"""
   status: Status
@@ -241,6 +237,11 @@ type RootQuery {
 
 type Section {
   key: String
+}
+
+type Segments {
+  maxSet: Int
+  name: String
 }
 
 type Speaker {
@@ -265,6 +266,11 @@ type Text {
   reference: String
   rhemai: [Rhema]
   type: String
+}
+
+type Themes {
+  name: String
+  segments: [Segments]
 }
 
 input TranslationsInput {

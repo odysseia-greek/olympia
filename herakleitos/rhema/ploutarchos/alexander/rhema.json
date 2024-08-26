@@ -84,6 +84,50 @@
     "author":"Ploutarchos",
     "book":"Alexander",
     "type":"work",
+    "reference":"6",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0007.tlg047.perseus-grc2:6?right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "ἐπεὶ δὲ Φιλονίκου τοῦ Θεσσαλοῦ τὸν Βουκεφάλαν ἀγαγόντος ὤνιον τῷ Φιλίππῳ τρισκαίδεκα ταλάντων κατέβησαν εἰς τὸ πεδίον δοκιμάσοντες τὸν ἵππον, ἐδόκει τε χαλεπὸς εἶναι καὶ κομιδῇ δύσχρηστος, οὔτε ἀναβάτην προσιέμενος οὔτε φωνὴν ὑπομένων τινὸς τῶν περὶ τὸν Φίλιππον, ἀλλʼ ἁπάντων κατεξανιστάμενος,",
+        "translations":[
+          "Once upon a time Philoneicus the Thessalian brought Bucephalas, offering to sell him to Philip for thirteen talents, and they went down into the plain to try the horse, who appeared to be savage and altogether intractable, neither allowing any one to mount him, nor heeding the voice of any of Philip’s attendants, but rearing up against all of them."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "δυσχεραίνοντος δὲ τοῦ Φιλίππου καὶ κελεύοντος ἀπάγειν ὡς παντάπασιν ἄγριον καὶ ἀκόλαστον, παρὼν Ἀλέξανδρος εἶπεν· οἷον ἵππον ἀπολλύουσι διʼ ἀπειρίαν καὶ μαλακίαν χρήσασθαι μὴ δυνάμενοι, τὸ μὲν οὖν πρῶτον ὁ Φίλιππος ἐσιώπησε· πολλάκις δὲ αὐτοῦ παραφθεγγομένου καὶ περιπαθοῦντος, ἐπιτιμᾷς σύ, ἔφη, πρεσβυτέροις ὥς τι πλέον αὐτὸς εἰδὼς ἢ μᾶλλον ἵππῳ χρήσασθαι δυνάμενος;",
+        "translations":[
+          "Then Philip was vexed and ordered the horse to be led away, believing him to be altogether wild and unbroken; but Alexander, who was near by, said: What a horse they are losing, because, for lack of skill and courage, they cannot manage him! At first, then, Philip held his peace; but as Alexander many times let fall such words and showed great distress, he said: Dost thou find fault with thine elders in the belief that thou knowest more than they do or art better able to manage a horse?"
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "τούτῳ γοῦν, ἔφη, χρησαίμην ἂν ἑτέρου βέλτιον. ἂν δὲ μὴ χρήσῃ, τίνα δίκην τῆς προπετείας ὑφέξεις; ἐγὼ, νὴ Δίʼ, εἶπεν, ἀποτίσω τοῦ ἵππου τὴν τιμήν γενομένου δὲ γέλωτος, εἶτα ὁρισμοῦ πρὸς ἀλλήλους εἰς τὸ ἀργύριον, εὐθὺς προσδραμὼν τῷ ἵππῳ καὶ παραλαβὼν τὴν ἡνίαν ἐπέστρεψε πρὸς τὸν ἥλιον, ὡς ἔοικεν, ἐννοήσας ὅτι τὴν σκιὰν προπίπτουσαν καὶ σαλευομένην ὁρῶν πρὸ αὐτοῦ διαταράττοιτο.",
+        "translations":[
+          "\nThis horse, at any rate, said Alexander, I could manage better than others have. And if thou shouldst not, what penalty wilt thou undergo for thy rashness? Indeed, said Alexander, I will forfeit the price of the horse. There was laughter at this, and then an agreement between father and son as to the forfeiture, and at once Alexander ran to the horse, took hold of his bridle-rein, and turned him towards the sun; for he had noticed, as it would seem, that the horse was greatly disturbed by the sight of his own shadow falling in front of him and dancing about."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "μικρὰ δὲ οὕτω παρακαλπάσας καὶ καταψήσας, ὡς ἑώρα πληρούμενον θυμοῦ καὶ πνεύματος, ἀπορρίψας ἡσυχῇ τὴν χλαμύδα καὶ μετεωρίσας αὑτόν ἀσφαλῶς περιέβη. καὶ μικρὰ μὲν περιλαβὼν ταῖς ἡνίαις τὸν χαλινόν ἄνευ πληγῆς καὶ σπαραγμοῦ , προσανέστειλεν[*] ὡς δὲ ἑώρα τὸν ἵππον ἀφεικότα τὴν ἀπειλήν, ὀργῶντα δὲ πρὸς τὸν δρόμον, ἐφεὶς ἐδίωκεν ἤδη φωνῇ θρασυτέρᾳ καὶ ποδὸς κρούσει χρώμενος.",
+        "translations":[
+          "And after he had calmed the horse a little in this way, and had stroked him with his hand, when he saw that he was full of spirit and courage, he quietly cast aside his mantle and with a light spring safely bestrode him. Then, with a little pressure of the reins on the bit, and without striking him or tearing his mouth, he held him in hand[*] but when he saw that the horse was rid of the fear that had beset him, and was impatient for the course, he gave him his head, and at last urged him on with sterner tone and thrust of foot."
+        ],
+        "section":"4"
+      },
+      {
+        "greek": "τῶν δὲ περὶ τὸν Φίλιππον ἦν ἀγωνία καὶ σιγὴ τὸ πρῶτον ὡς δὲ κάμψας ἐπέστρεψεν ὀρθῶς σοβαρὸς καὶ γεγηθώς, οἱ μὲν ἄλλοι πάντες ἠλάλαξαν, ὁ δὲ πατὴρ καὶ δακρῦσαί τι λέγεται πρὸς τὴν χαράν, καὶ καταβάντος αὐτοῦ τὴν κεφαλὴν φιλήσας, ὦ παῖ, φάναι, ζήτει σεαυτῷ βασιλείαν ἴσην Μακεδονία γάρ σε οὐ χωρεῖ",
+        "translations":[
+          "Philip and his company were speechless with anxiety at first; but when Alexander made the turn in proper fashion and came back towards them proud and exultant, all the rest broke into loud cries, but his father, as we are told, actually shed tears of joy, and when Alexander had dismounted, kissed him, saying: My son, seek thee out a kingdom equal to thyself; Macedonia has not room for thee."
+        ],
+        "section":"5"
+      }
+    ]
+  },
+  {
+    "author":"Ploutarchos",
+    "book":"Alexander",
+    "type":"work",
     "reference":"25",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0007.tlg047.perseus-grc2:25?right=perseus-eng2",
     "rhemai":[
@@ -172,6 +216,71 @@
           "We are told, also, that he listened to the teachings of Psammon the philosopher in Egypt, and accepted most readily this utterance of his, namely, that all mankind are under the kingship of God, since in every case that which gets the mastery and rules is divine. Still more philosophical, however, was his own opinion and utterance on this head, namely that although God was indeed a common father of all mankind, still, He made peculiarly His own the noblest and best of them."
         ],
         "section":"6"
+      }
+    ]
+  },
+  {
+    "author":"Ploutarchos",
+    "book":"Alexander",
+    "type":"work",
+    "reference":"31",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0007.tlg047.perseus-grc2:31?q=&qk=form&right=perseus-eng2",
+    "rhemai":[
+      {
+        "greek": "Ἀλέξανδρος δὲ τὴν ἐντὸς τοῦ Εὐφράτου πᾶσαν ὑφʼ ἑαυτῷ ποιησάμενος ἤλαυνεν ἐπὶ Δαρεῖον ἑκατὸν μυριάσι στρατοῦ καταβαίνοντα. καί τις αὐτῷ φράζει τῶν ἑταίρων, ὡς δὴ γέλωτος ἄξιον πρᾶγμα, τοὺς ἀκολούθους παίζοντας εἰς δύο μέρη διῃρηκέναι σφᾶς αὐτούς, ὧν ἑκατέρου στρατηγὸν εἶναι καὶ ἡγεμόνα, τὸν μὲν Ἀλέξανδρον, τὸν δὲ Δαρεῖον ὑπʼ αὐτῶν προσαγορευόμενον·",
+        "translations":[
+          "But to return to Alexander, when he had subdued all the country on this side of the Euphrates, he marched against Dareius, who was coming down to meet him with a million men. On this march one of his companions told him, as a matter worth laughing at, that the camp-followers, in sport, had divided themselves into two bands, and set a general and commander over each of them, one of whom they called Alexander, and the other Dareius;"
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "ἀρξαμένους δὲ βώλοις ἀκροβολίζεσθαι πρὸς ἀλλήλους, εἶτα πυγμαῖς, τέλος ἐκκεκαῦσθαι τῇ φιλονεικίᾳ καὶ μέχρι λίθων καὶ ξύλων, πολλοὺς καὶ δυσκαταπαύστους γεγονότας. ταῦτα ἀκούσας ἐκέλευσεν αὐτοὺς μονομαχῆσαι τοὺς ἡγεμόνας καὶ τὸν μὲν Ἀλέξανδρον αὐτὸς ὥπλισε, τὸν δὲ Δαρεῖον Φιλώτας, ἐθεᾶτο δὲ ὁ στρατός, ἐν οἰωνῷ τινι τοῦ μέλλοντος τιθέμενος τὸ γιγνόμενον. ἰσχυρᾶς δὲ τῆς μάχης γενομένης ἐνίκησεν ὁ καλούμενος Ἀλέξανδρος, καὶ δωρεὰν ἔλαβε δώδεκα κώμας καὶ στολῇ Περσικῇ χρῆσθαι. ταῦτα μὲν οὖν Ἐρατοσθένης ἱστόρηκε.",
+        "translations":[
+          "and that they had begun by pelting one another with clods of earth, then had fought with their fists, and finally, heated with the desire of battle, had taken to stones and sticks, being now many and hard to quell. When he heard this, Alexander ordered the leaders themselves to fight in single combat; to the one called Alexander he himself gave armour, and to the one called Dareius, Philotas. The army were spectators of the combat, counting the issue as in some measure an omen of the future. After a strenuous battle, the one called Alexander was victorious, and received as a reward twelve villages and the right to wear Persian dress. This, at any rate, is what we are told by Eratosthenes."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "τὴν δὲ μεγάλην μάχην πρὸς Δαρεῖον οὐκ ἐν Ἀρβήλοις, ὥσπερ οἱ πολλοὶ γράφουσιν, ἀλλὰ ἐν Γαυγαμήλοις γενέσθαι συνέπεσε, σημαίνειν δέ φασιν οἶκον καμήλου τὴν διάλεκτον, ἐπεὶ τῶν πάλαι τις βασιλέων ἐκφυγὼν πολεμίους ἐπὶ καμήλου δρομάδος ἐνταῦθα καθίδρυσεν αὐτήν, ἀποτάξας τινὰς κώμας καὶ προσόδους εἰς τὴν ἐπιμέλειαν.",
+        "translations":[
+          "Now, the great battle against Dareius was not fought at Arbela, as most writers state, but at Gaugamela. The word signifies, we are told, camel’s house, since one of the ancient kings of the country, after escaping from his enemies on a swift camel, gave the animal a home here, assigning certain villages and revenues for its maintenance."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "ἡ μὲν οὖν σελήνη τοῦ Βοηδρομιῶνος ἐξέλιπε περὶ τὴν τῶν μυστηρίων τῶν Ἀθήνησιν ἀρχήν, ἑνδεκάτῃ δὲ ἀπὸ τῆς ἐκλείψεως νυκτὶ τῶν στρατοπέδων ἐν ὄψει γεγονότων, Δαρεῖος μὲν ἐν ὅπλοις συνεῖχε τὴν δύναμιν, ὑπὸ λαμπάδων ἐπιπορευόμενος τὰς τάξεις, Ἀλέξανδρος δὲ τῶν Μακεδόνων ἀναπαυομένων αὐτὸς πρὸ τῆς σκηνῆς μετὰ τοῦ μάντεως Ἀριστάνδρου διέτριβεν, ἱερουργίας τινὰς ἀπορρήτους ἱερουργούμενος καὶ τῷ Φόβῳ σφαγιαζόμενος.",
+        "translations":[
+          "It so happened that in the month Boëdromion the moon suffered an eclipse, about the beginning of the Mysteries at Athens, and on the eleventh night after the eclipse, the armies being now in sight of one another, Dareius kept his forces under arms, and held a review of them by torch-light; but Alexander, while his Macedonians slept, himself passed the night in front of his tent with his seer Aristander, celebrating certain mysterious sacred rites and sacrificing to the god Fear."
+        ],
+        "section":"4"
+      },
+      {
+        "greek": "οἱ δὲ πρεσβύτεροι τῶν ἑταίρων, καὶ μάλιστα Παρμενίων, ὡς τὸ μὲν πεδίον τὸ μεταξὺ τοῦ Νιφάτου καὶ τῶν ὀρῶν τῶν Γορδυαίων ἅπαν ἑωρᾶτο καταλαμπόμενον τοῖς βαρβαρικοῖς φέγγεσιν, ἀτέκμαρτος δέ τις φωνὴ συμμεμιγμένη καὶ θόρυβος ἐκ τοῦ στρατοπέδου καθάπερ ἐξ ἀχανοῦς προσήχει πελάγους,",
+        "translations":[
+          "Meanwhile the older of his companions, and particularly Parmenio, when they saw the plain between the Niphates and the Gordyaean mountains all lighted up with the barbarian tires, while an indistinguishably mingled and tumultuous sound of voices arose from their camp as if from a vast ocean,"
+        ],
+        "section":"5"
+      },
+      {
+        "greek": "θαυμάσαντες τὸ πλῆθος καὶ πρὸς ἀλλήλους διαλεχθέντες ὡς μέγα καὶ χαλεπὸν ἔργον εἴη συμπεσόντας ἐκ προφανοῦς τοσοῦτον ὤσασθαι πόλεμον, ἀπὸ τῶν ἱερῶν γενομένῳ τῷ βασιλεῖ προσελθόντες ἔπειθον αὐτὸν ἐπιχειρῆσαι νύκτωρ τοῖς πολεμίοις καὶ τῷ σκότῳ τὸ φοβερώτατον συγκαλύψαι τοῦ μέλλοντος ἀγῶνος.",
+        "translations":[
+          "were astonished at their multitude and argued with one another that it was a great and grievous task to repel such a tide of war by engaging in broad day-light. They therefore waited upon the king when he had finished his sacrifices, and tried to persuade him to attack the enemy by night, and so to cover up with darkness the most fearful aspect of the coming struggle."
+        ],
+        "section":"6"
+      },
+      {
+        "greek": "ὁ δὲ τὸ μνημονευόμενον εἰπὼν, οὐ κλέπτω τὴν νίκην, ἐνίοις μὲν ἔδοξε μειρακιώδη καὶ κενὴν ἀπόκρισιν πεποιῆσθαι, παίζων πρὸς τοσοῦτον κίνδυνον, ἐνίοις δὲ καὶ τῷ παρόντι θαρρεῖν καὶ στοχάζεσθαι τοῦ μέλλοντος ὀρθῶς, μὴ διδοὺς πρόφασιν ἡττηθέντι Δαρείῳ πρὸς ἄλλην αὖθις ἀναθαρρῆσαι πεῖραν, αἰτιωμένῳ τούτων νύκτα καὶ σκότος, ὡς ὄρη καὶ στενὰ καὶ θάλασσαν τῶν προτέρων.",
+        "translations":[
+          "But he gave them the celebrated answer, I will not steal my victory; whereupon some thought that he had made a vainglorious reply, and was jesting in the presence of so great a peril. Others, however, thought that he had confidence in the present situation and estimated the future correctly, not offering Dareius in case of defeat an excuse to pluck up courage again for another attempt, by laying the blame this time upon darkness and night, as he had before upon mountains, defiles, and sea."
+        ],
+        "section":"7"
+      },
+      {
+        "greek": "οὐ γὰρ ὅπλων οὐδὲ σωμάτων ἀπορίᾳ παύσεσθαι πολεμοῦντα Δαρεῖον ἀπὸ τηλικαύτης δυνάμεως καὶ χώρας τοσαύτης, ἀλλʼ ὅταν ἀφῇ τὸ φρόνημα καὶ τὴν ἐλπίδα, διʼ ἐμφανοῦς ἥττης κατὰ κράτος ἐξελεγχθείς.",
+        "translations":[
+          "For Dareius would not give up the war for lack of arms or men when he could draw from so great a host and so vast a territory, but only when he had lost courage and hope, under the conviction brought by a downright defeat in broad day-light."
+        ],
+        "section":"8"
       }
     ]
   },

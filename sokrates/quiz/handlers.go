@@ -19,7 +19,6 @@ import (
 	"math"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -41,6 +40,7 @@ type SokratesHandler struct {
 const (
 	THEME       string = "theme"
 	SET         string = "set"
+	SEGMENT     string = "segment"
 	QUIZTYPE    string = "quizType"
 	GREENGORDER string = "gre-eng"
 	ENGGREORDER string = "eng-gre"
@@ -289,14 +289,27 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 	}
 
 	quizType := req.URL.Query().Get("quizType")
+	query := quizAggregationQuery(quizType)
 
-	options, err := s.options(quizType)
+	elasticResult, err := s.Elastic.Query().MatchRaw(s.Index, query)
+	if err != nil {
+		e := models.ElasticSearchError{
+			ErrorModel: models.ErrorModel{UniqueCode: requestId},
+			Message: models.ElasticErrorMessage{
+				ElasticError: err.Error(),
+			},
+		}
+		middleware.ResponseWithJson(w, e)
+		return
+	}
+
+	result, err := parseAggregationResult(elasticResult, quizType)
 	if err != nil {
 		e := models.ValidationError{
 			ErrorModel: models.ErrorModel{UniqueCode: requestId},
 			Messages: []models.ValidationMessages{
 				{
-					Field:   "creating quiz error",
+					Field:   "querying aggregator failed",
 					Message: err.Error(),
 				},
 			},
@@ -305,9 +318,7 @@ func (s *SokratesHandler) Options(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	middleware.ResponseWithCustomCode(w, http.StatusOK, options)
-	return
-
+	middleware.ResponseWithCustomCode(w, http.StatusOK, result)
 }
 
 func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID string) (*models.ComprehensiveResponse, error) {
@@ -333,6 +344,9 @@ func (s *SokratesHandler) mediaQuizAnswer(req models.AnswerRequest, requestID st
 		},
 		{
 			THEME: req.Theme,
+		},
+		{
+			SEGMENT: req.Segment,
 		},
 		{
 			SET: req.Set,
@@ -399,6 +413,9 @@ func (s *SokratesHandler) authorBasedAnswer(req models.AnswerRequest, requestID 
 		},
 		{
 			THEME: req.Theme,
+		},
+		{
+			SEGMENT: req.Segment,
 		},
 		{
 			SET: req.Set,
@@ -750,6 +767,9 @@ func (s *SokratesHandler) authorBasedQuiz(createQuizRequest models.CreationReque
 			SET: createQuizRequest.Set,
 		},
 		{
+			SEGMENT: createQuizRequest.Segment,
+		},
+		{
 			QUIZTYPE: models.AUTHORBASED,
 		},
 	}
@@ -866,6 +886,9 @@ func (s *SokratesHandler) mediaQuiz(createQuizRequest models.CreationRequest, re
 		},
 		{
 			SET: createQuizRequest.Set,
+		},
+		{
+			SEGMENT: createQuizRequest.Segment,
 		},
 		{
 			QUIZTYPE: models.MEDIA,
@@ -1141,53 +1164,6 @@ func (s *SokratesHandler) dialogueQuiz(theme, set, requestID string) (*models.Di
 	}
 
 	return &quiz, nil
-}
-
-func (s *SokratesHandler) options(quizType string) (*models.AggregateResult, error) {
-	query := s.Elastic.Builder().FilteredAggregate(QUIZTYPE, quizType, THEME, THEME)
-	//if quizType == models.MEDIA {
-	//	query = map[string]interface{}{
-	//		"query": map[string]interface{}{
-	//			"match_phrase": map[string]interface{}{
-	//				QUIZTYPE: quizType,
-	//			},
-	//		},
-	//		"size": 0,
-	//		"aggs": map[string]interface{}{
-	//			SET: map[string]interface{}{
-	//				"max": map[string]interface{}{
-	//					"field": SET,
-	//				},
-	//			},
-	//		},
-	//	}
-	//}
-
-	elasticResult, err := s.Elastic.Query().MatchAggregate(s.Index, query)
-	if err != nil {
-		return nil, err
-	}
-
-	var result models.AggregateResult
-
-	for _, bucket := range elasticResult.Aggregations.ThemeAggregation.Buckets {
-		aggregate := models.Aggregate{
-			HighestSet: strconv.Itoa(int(bucket.DocCount)),
-			Name:       bucket.Key.(string),
-		}
-
-		result.Aggregates = append(result.Aggregates, aggregate)
-	}
-
-	if len(elasticResult.Aggregations.ThemeAggregation.Buckets) == 0 {
-		aggregate := models.Aggregate{
-			HighestSet: fmt.Sprintf("%v", elasticResult.Aggregations.SetAggregation.Value),
-		}
-
-		result.Aggregates = append(result.Aggregates, aggregate)
-	}
-
-	return &result, nil
 }
 
 func (s *SokratesHandler) updateElasticsearch() {

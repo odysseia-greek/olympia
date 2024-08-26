@@ -4,6 +4,7 @@
     "theme": "John - The New Testament",
     "reference": "/texts?author=John&book=New+Testament&reference=1",
     "set": 1,
+    "segment": "1.1",
     "fullSentence": "ΕΝ ΑΡΧΗ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.",
     "translation": "In the beginning was the Word, and the Word was with God, and the Word was God.",
     "content": [
@@ -71,7 +72,8 @@
     "quizType": "authorbased",
     "theme": "John - The New Testament",
     "reference": "/texts?author=John&book=New+Testament&reference=1",
-    "set": 2,
+    "set": 1,
+    "segment": "1.2",
     "fullSentence": "Οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν.",
     "translation": "The same was in the beginning with God.",
     "content": [
@@ -130,7 +132,8 @@
     "quizType": "authorbased",
     "theme": "John - The New Testament",
     "reference": "/texts?author=John&book=New+Testament&reference=1",
-    "set": 3,
+    "set": 1,
+    "segment": "1.5",
     "fullSentence": "καὶ τὸ φῶς ἐν τῇ σκοτίᾳ φαίνει, καὶ ἡ σκοτία αὐτὸ οὐ κατέλαβεν.",
     "translation": "The light shines in the darkness, and the darkness hasn't overcome it.",
     "content": [

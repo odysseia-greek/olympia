@@ -190,6 +190,9 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				"set": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
+				"segment": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
 				"quizType": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
@@ -208,6 +211,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				}
 
 				theme, _ := p.Args["theme"].(string)
+				segment, _ := p.Args["segment"].(string)
 				order, _ := p.Args["order"].(string)
 				excludeWords, _ := p.Args["excludeWords"].([]interface{})
 				excludeWordsStr := make([]string, len(excludeWords))
@@ -228,11 +232,11 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				}
 
 				if quizType == models.DIALOGUE {
-					return handler.CreateDialogueQuiz(theme, set, quizType, traceID)
+					return handler.CreateDialogueQuiz(theme, set, segment, quizType, traceID)
 				} else if quizType == models.AUTHORBASED {
-					return handler.CreateAuthorBasedQuiz(theme, set, quizType, traceID, excludeWordsStr)
+					return handler.CreateAuthorBasedQuiz(theme, set, segment, quizType, traceID, excludeWordsStr)
 				} else {
-					return handler.CreateQuiz(theme, set, quizType, order, traceID, excludeWordsStr)
+					return handler.CreateQuiz(theme, set, segment, quizType, order, traceID, excludeWordsStr)
 				}
 
 			},
@@ -260,6 +264,9 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					Type: graphql.String,
 				},
 				"set": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+				"segment": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 				"quizType": &graphql.ArgumentConfig{
@@ -297,6 +304,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				}
 
 				theme, _ := p.Args["theme"].(string)
+				segment, _ := p.Args["segment"].(string)
 				quizWord, _ := p.Args["quizWord"].(string)
 				answer, _ := p.Args["answer"].(string)
 				comprehensive, _ := p.Args["comprehensive"].(bool)
@@ -329,6 +337,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				answerRequest := models.AnswerRequest{
 					Theme:         theme,
 					Set:           set,
+					Segment:       segment,
 					QuizType:      quizType,
 					Comprehensive: comprehensive,
 					Answer:        answer,
