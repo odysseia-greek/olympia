@@ -107,6 +107,11 @@ func InitTracingConfig() *TraceConfig {
 					Operation: "quiz",
 					Score:     100,
 				},
+				//diogenes
+				{
+					Operation: "convert",
+					Score:     100,
+				},
 				//shared
 				{
 					Operation: "status",

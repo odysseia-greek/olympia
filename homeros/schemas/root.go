@@ -454,5 +454,38 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				return handler.Grammar(word, traceID)
 			},
 		},
+
+		// Diogenes
+		"convert": &graphql.Field{
+			Type:        convertWordResponseType,
+			Description: "convert a rootword from latin script to greek",
+			Args: graphql.FieldConfigArgument{
+				"rootword": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				ctx := p.Context
+
+				// Get the traceID
+				traceID, ok := ctx.Value(plato.HeaderKey).(string)
+				if !ok {
+					return nil, errors.New("failed to get request from context")
+				}
+
+				rootword, isOK := p.Args["rootword"].(string)
+				if !isOK {
+					return nil, fmt.Errorf("expected argument rootword")
+				}
+
+				r := models.EdgecaseRequest{Rootword: rootword}
+				jsonBody, err := json.Marshal(r)
+				if err != nil {
+					return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
+				}
+
+				return handler.Convert(jsonBody, traceID)
+			},
+		},
 	},
 })

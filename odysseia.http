@@ -1,0 +1,21 @@
+### Query with params
+GRAPHQL {{host}}/graphql
+
+query convert($rootword: String) {
+    convert(rootword: $rootword) {
+        greekWord
+        strongPassword
+        originalWord
+        similarWords{
+            greek
+            english
+        }
+    }
+}
+
+
+{
+  "rootword": "ferw"
+}
+
+>> ./eratosthenes/httpclient/response.json

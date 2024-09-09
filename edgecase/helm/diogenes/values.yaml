@@ -1,0 +1,26 @@
+name: diogenes
+namespace: odysseia
+livenessPath: /diogenes/v1/health
+readinessPath: /diogenes/v1/ping
+replicas: 3
+images:
+    odysseiaapi:
+        repo: diogenes
+        tag: v0.1.0
+services:
+    odysseiaapi:
+        access: dictionary
+        limits:
+            cpu: 1000m
+            memory: 128Mi
+        requests:
+            cpu: 300m
+            memory: 64Mi
+        role: api
+#
+tlsConfig:
+    mounts:
+        - name: solon-certs
+          path: /app/config/solon
+          secretName: solon-tls-certs
+    rootPath: /app/config

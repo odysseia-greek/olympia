@@ -59,3 +59,26 @@ profiles:
               image.odysseiaapi.tag: v0.0.14
               image.seeder.repo: demokritos
               image.seeder.tag: dev
+  - name: diogenes
+    build:
+      artifacts:
+        - image: ghcr.io/odysseia-greek/diogenes
+          context: ./diogenes
+          docker:
+            target: prod
+          sync:
+            manual:
+              - src: '**/*.go'
+                dest: '/app'
+    deploy:
+      helm:
+        releases:
+          - name: diogenes
+            chartPath: ../../odysseia-greek/mykenai/themistokles/odysseia/charts/diogenes
+            valuesFiles:
+              - ../../odysseia-greek/mykenai/themistokles/odysseia/values/local.yaml
+              - ../../odysseia-greek/mykenai/themistokles/odysseia/values/skaffold-values.yaml
+            setValues:
+              image.odysseiaapi.repo: diogenes
+              image.odysseiaapi.tag: dev
+
