@@ -27,7 +27,7 @@ func (l *OdysseiaFixture) aGrammarEntryIsMadeForTheWord(word string) error {
 	return nil
 }
 
-func (l *OdysseiaFixture) aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndTheme(fullWord, grammarResponse, quizType, set, theme string) error {
+func (l *OdysseiaFixture) aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndThemeAndSegment(fullWord, grammarResponse, quizType, set, theme, segment string) error {
 	answerRequest := models.AnswerRequest{
 		Theme:         theme,
 		Set:           set,
@@ -35,6 +35,7 @@ func (l *OdysseiaFixture) aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrec
 		Comprehensive: true,
 		Answer:        grammarResponse,
 		Dialogue:      nil,
+		Segment:       segment,
 		QuizWord:      fullWord,
 	}
 

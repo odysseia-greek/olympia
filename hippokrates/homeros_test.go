@@ -8,6 +8,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/stretchr/testify/assert"
 	"net/http"
+	"strconv"
 )
 
 func (l *OdysseiaFixture) theGatewayIsUp() error {
@@ -231,6 +232,7 @@ func (l *OdysseiaFixture) iAnswerTheQuizThroughTheGateway() error {
 	answer(
 		theme: "%s"
 		set: "%s"
+		segment: "%s",
 		quizType: "%s"
 		quizWord: "%s"
 		answer: "%s"
@@ -261,7 +263,7 @@ func (l *OdysseiaFixture) iAnswerTheQuizThroughTheGateway() error {
 	}
 	}
 }
-`, bodyMeta.Theme, bodyMeta.Set, bodyMeta.QuizType, quizWord, answer)
+`, bodyMeta.Theme, bodyMeta.Set, bodyMeta.Segment, bodyMeta.QuizType, quizWord, answer)
 
 	response, err := l.graphqlHelper(query)
 	if err != nil {
@@ -283,9 +285,12 @@ func (l *OdysseiaFixture) iAnswerTheQuizThroughTheGateway() error {
 func (l *OdysseiaFixture) iCreateANewQuizWithQuizType(quizType string) error {
 	optionsQuery := fmt.Sprintf(`query options{
 	options(quizType: "%s") {
-		aggregates{
+		themes{
 			name
-			highestSet
+			segments{
+				name
+				maxSet
+			}
 		}
 	}
 }
@@ -298,23 +303,26 @@ func (l *OdysseiaFixture) iCreateANewQuizWithQuizType(quizType string) error {
 
 	var aggregates struct {
 		Data struct {
-			Options models.AggregateResult `json:"options"`
+			Options models.AggregatedOptions `json:"options"`
 		} `json:"data"`
 	}
 
 	err = json.NewDecoder(optionsResponse.Body).Decode(&aggregates)
-	randomAggregate := aggregates.Data.Options.Aggregates[l.randomizer.RandomNumberBaseZero(len(aggregates.Data.Options.Aggregates))]
+	randomTheme := aggregates.Data.Options.Themes[l.randomizer.RandomNumberBaseZero(len(aggregates.Data.Options.Themes))]
+	randomSegment := randomTheme.Segments[l.randomizer.RandomNumberBaseZero(len(randomTheme.Segments))]
+	randomSet := strconv.Itoa(int(randomSegment.MaxSet))
 
 	bodyModel := models.CreationRequest{
-		Theme:    randomAggregate.Name,
-		Set:      randomAggregate.HighestSet,
+		Theme:    randomTheme.Name,
+		Segment:  randomSegment.Name,
+		Set:      randomSet,
 		QuizType: quizType,
 	}
 
 	l.ctx = context.WithValue(l.ctx, BodyContext, bodyModel)
 
 	query := fmt.Sprintf(`query quiz {
-	quiz(set: "%s", theme: "%s", quizType: "%s",) {
+	quiz(set: "%s", theme: "%s", quizType: "%s", segment: "%s") {
 	... on QuizResponse {
 		quizItem
 		options{
@@ -324,7 +332,7 @@ func (l *OdysseiaFixture) iCreateANewQuizWithQuizType(quizType string) error {
 		}
 	}
 }
-`, randomAggregate.HighestSet, randomAggregate.Name, quizType)
+`, randomSet, randomTheme.Name, quizType, randomSegment.Name)
 	response, err := l.graphqlHelper(query)
 	if err != nil {
 		return err
