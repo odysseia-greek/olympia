@@ -20,24 +20,31 @@ const (
 )
 
 func (l *OdysseiaFixture) aListOfThemesWithTheHighestSetShouldBeReturned() error {
-	aggregates := l.ctx.Value(AggregateContext).(models.AggregateResult)
+	aggregates := l.ctx.Value(AggregateContext).(models.AggregatedOptions)
 	err := assertTrue(
-		assert.True, len(aggregates.Aggregates) >= 1,
-		"aggregates %v when more than 1 expected", len(aggregates.Aggregates),
+		assert.True, len(aggregates.Themes) >= 1,
+		"aggregates %v when more than 1 expected", len(aggregates.Themes),
 	)
 	if err != nil {
 		return err
 	}
 
-	for _, aggregate := range aggregates.Aggregates {
-		highestSet, err := strconv.Atoi(aggregate.HighestSet)
+	for _, aggregate := range aggregates.Themes {
+		err := assertTrue(
+			assert.True, len(aggregate.Segments) >= 1,
+			"segments %v when more than 1 expected", len(aggregates.Themes),
+		)
 		if err != nil {
 			return err
 		}
+		for _, segment := range aggregate.Segments {
+			highestSet := int(segment.MaxSet)
 
-		if highestSet < 1 {
-			return fmt.Errorf("number of sets lower than 1")
+			if highestSet < 1 {
+				return fmt.Errorf("number of sets lower than 1")
+			}
 		}
+
 	}
 
 	return nil
@@ -49,7 +56,7 @@ func (l *OdysseiaFixture) aQueryIsMadeForTheOptionsForTheQuizType(quizType strin
 		return err
 	}
 
-	var aggregates models.AggregateResult
+	var aggregates models.AggregatedOptions
 	err = json.NewDecoder(response.Body).Decode(&aggregates)
 
 	l.ctx = context.WithValue(l.ctx, AggregateContext, aggregates)
@@ -58,12 +65,15 @@ func (l *OdysseiaFixture) aQueryIsMadeForTheOptionsForTheQuizType(quizType strin
 }
 
 func (l *OdysseiaFixture) aNewQuizQuestionIsMadeWithTheQuizType(quizType string) error {
-	aggregates := l.ctx.Value(AggregateContext).(models.AggregateResult)
-	randomAggregate := aggregates.Aggregates[l.randomizer.RandomNumberBaseZero(len(aggregates.Aggregates))]
+	aggregates := l.ctx.Value(AggregateContext).(models.AggregatedOptions)
+	randomTheme := aggregates.Themes[l.randomizer.RandomNumberBaseZero(len(aggregates.Themes))]
+	randomSegment := randomTheme.Segments[l.randomizer.RandomNumberBaseZero(len(randomTheme.Segments))]
+	randomSet := strconv.Itoa(int(randomSegment.MaxSet))
 
 	bodyModel := models.CreationRequest{
-		Theme:    randomAggregate.Name,
-		Set:      randomAggregate.HighestSet,
+		Theme:    randomTheme.Name,
+		Set:      randomSet,
+		Segment:  randomSegment.Name,
 		QuizType: quizType,
 	}
 
@@ -104,6 +114,7 @@ func (l *OdysseiaFixture) theQuestionCanBeAnsweredFromTheResponse() error {
 		Theme:         bodyMeta.Theme,
 		Set:           bodyMeta.Set,
 		QuizType:      bodyMeta.QuizType,
+		Segment:       bodyMeta.Segment,
 		Comprehensive: false,
 		Answer:        "",
 		Dialogue:      nil,
@@ -154,7 +165,7 @@ func (l *OdysseiaFixture) theQuestionCanBeAnsweredFromTheResponse() error {
 			return err
 		}
 
-	case models.AUTHORBASED:
+	case models.MULTICHOICE:
 		var quiz models.QuizResponse
 		quizBytes, err := json.Marshal(quizResponse)
 		if err != nil {
@@ -182,6 +193,39 @@ func (l *OdysseiaFixture) theQuestionCanBeAnsweredFromTheResponse() error {
 		}
 
 		var answerResponse models.ComprehensiveResponse
+		err = json.NewDecoder(answer.Body).Decode(&answerResponse)
+		if err != nil {
+			return err
+		}
+
+	case models.AUTHORBASED:
+		var quiz models.AuthorbasedQuizResponse
+		quizBytes, err := json.Marshal(quizResponse)
+		if err != nil {
+			return fmt.Errorf("failed to marshal quizResponse: %v", err)
+		}
+		if err := json.Unmarshal(quizBytes, &quiz); err != nil {
+			return fmt.Errorf("failed to unmarshal quizResponse into QuizResponse: %v", err)
+		}
+
+		randomQuizItem := quiz.Quiz.Options[l.randomizer.RandomNumberBaseZero(len(quiz.Quiz.Options))]
+		answerRequest.Answer = randomQuizItem.Option
+		answerRequest.QuizWord = quiz.Quiz.QuizItem
+
+		body, err := json.Marshal(answerRequest)
+		if err != nil {
+			return err
+		}
+		answer, err := l.client.Sokrates().Check(body, TraceId)
+		if err != nil {
+			return err
+		}
+
+		if answer.StatusCode != http.StatusOK {
+			return fmt.Errorf("expected 200 but got %v", answer.StatusCode)
+		}
+
+		var answerResponse models.AuthorbasedQuizResponse
 		err = json.NewDecoder(answer.Body).Decode(&answerResponse)
 		if err != nil {
 			return err

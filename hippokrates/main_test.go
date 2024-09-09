@@ -181,7 +181,8 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 
 	//odysseia
 	ctx.Step(`^a grammar entry is made for the word "([^"]*)"$`, odysseia.aGrammarEntryIsMadeForTheWord)
-	ctx.Step(`^a quiz is played in comprehensive mode for the word "([^"]*)" and the correct answer "([^"]*)" with type "([^"]*)" set "([^"]*)" and theme "([^"]*)"$`, odysseia.aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndTheme)
+	ctx.Step(`^a quiz is played in comprehensive mode for the word "([^"]*)" and the correct answer "([^"]*)" with type "([^"]*)" set "([^"]*)" and theme "([^"]*)" and segment "([^"]*)"$`, odysseia.aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndThemeAndSegment)
+
 	ctx.Step(`^the quizresponse is expanded with text and similar words$`, odysseia.theQuizresponseIsExpandedWithTextAndSimilarWords)
 	ctx.Step(`^the options returned from the grammar api should include "([^"]*)"$`, odysseia.theOptionsReturnedFromTheGrammarApiShouldInclude)
 	ctx.Step(`^a response with a rootword is returned$`, odysseia.aResponseWithARootwordIsReturned)
