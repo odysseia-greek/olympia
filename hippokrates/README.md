@@ -15,3 +15,8 @@ System tests for odysseia-greek
 
 
 The most well known medical professional in history. Hippokrates houses tests to see whether the other services are in good health.
+
+
+## Setting a tag in goland:
+
+Program arguments: `-tags=@wip -v`

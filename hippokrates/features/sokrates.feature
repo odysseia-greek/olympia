@@ -26,3 +26,4 @@ Feature: Sokrates
       | sokrates | media          |
       | sokrates | multiplechoice |
       | sokrates | dialogue       |
+      | sokrates | authorbased       |
