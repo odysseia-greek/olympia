@@ -16,7 +16,7 @@ var convertWordResponseType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"similarWords": &graphql.Field{
-				Type: graphql.NewList(dictionary),
+				Type: graphql.NewList(dictionary), // Use existing type for Meros
 			},
 		},
 	},

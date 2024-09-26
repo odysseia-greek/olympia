@@ -454,37 +454,45 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				return handler.Grammar(word, traceID)
 			},
 		},
-
-		// Diogenes
 		"convert": &graphql.Field{
-			Type:        convertWordResponseType,
-			Description: "convert a rootword from latin script to greek",
+			Type:        convertWordResponseType, // The response type
+			Description: "Convert root word to Greek and other details",
 			Args: graphql.FieldConfigArgument{
 				"rootword": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				ctx := p.Context
-
-				// Get the traceID
-				traceID, ok := ctx.Value(plato.HeaderKey).(string)
-				if !ok {
-					return nil, errors.New("failed to get request from context")
-				}
-
+				// Get rootword from args
 				rootword, isOK := p.Args["rootword"].(string)
 				if !isOK {
 					return nil, fmt.Errorf("expected argument rootword")
 				}
 
+				// Create the EdgecaseRequest model from rootword
 				r := models.EdgecaseRequest{Rootword: rootword}
-				jsonBody, err := json.Marshal(r)
+
+				// Convert request to JSON
+				jsonData, err := json.Marshal(r)
 				if err != nil {
-					return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
+					return nil, fmt.Errorf("failed to marshal request: %v", err)
 				}
 
-				return handler.Convert(jsonBody, traceID)
+				// Get the traceID from context
+				ctx := p.Context
+				traceID, ok := ctx.Value(plato.HeaderKey).(string)
+				if !ok {
+					return nil, errors.New("failed to get traceID from context")
+				}
+
+				// Call the Convert method on the handler and pass JSON data
+				response, err := handler.Convert(jsonData, traceID)
+				if err != nil {
+					return nil, fmt.Errorf("failed to convert word: %v", err)
+				}
+
+				// Return the handler response (should be of type EdgecaseResponse)
+				return response, nil
 			},
 		},
 	},
