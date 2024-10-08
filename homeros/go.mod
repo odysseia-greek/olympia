@@ -8,7 +8,7 @@ require (
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.4
 	github.com/odysseia-greek/agora/archytas v0.1.1
-	github.com/odysseia-greek/agora/plato v0.1.41
+	github.com/odysseia-greek/agora/plato v0.1.45-1
 	github.com/odysseia-greek/attike/aristophanes v0.5.9
 )
 

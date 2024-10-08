@@ -422,6 +422,114 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 	return &responsePB, nil
 }
 
+func (a *AggregatorServiceImpl) RetrieveRootFromGrammarForm(ctx context.Context, request *pb.AggregatorRequest) (*pb.FormsResponse, error) {
+	startTime := time.Now()
+	requestID, ok := ctx.Value(config.DefaultTracingName).(string)
+	if !ok {
+		logging.Error("could not extract combinedId")
+		requestID = "donot+trace+0"
+	}
+
+	splitID := strings.Split(requestID, "+")
+
+	traceCall := false
+	var traceID, spanID string
+
+	if len(splitID) >= 3 {
+		traceCall = splitID[2] == "1"
+	}
+
+	if len(splitID) >= 1 {
+		traceID = splitID[0]
+	}
+	if len(splitID) >= 2 {
+		spanID = splitID[1]
+	}
+	var responsePB pb.FormsResponse
+	responsePB.Word = request.RootWord
+	parsedWord := transform.RemoveAccents(request.RootWord)
+	request.RootWord = parsedWord
+	responsePB.UnaccentedWord = parsedWord
+
+	query := a.Elastic.Builder().MatchQuery("categories.forms.word", request.RootWord)
+	response, err := a.Elastic.Query().Match(a.Index, query)
+
+	if err != nil {
+		return nil, err
+	} else if len(response.Hits.Hits) == 0 {
+		return nil, fmt.Errorf("no entry can be found")
+	}
+
+	if traceCall {
+		go func() {
+			parsedQuery, _ := json.Marshal(query)
+			hits := int64(0)
+			took := int64(0)
+			if response != nil {
+				hits = response.Hits.Total.Value
+				took = response.Took
+			}
+
+			dataBaseSpan := &pbar.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: spanID,
+				SpanId:       spanID,
+				RequestType: &pbar.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pbar.DatabaseSpanRequest{
+					Action:   "search",
+					Query:    string(parsedQuery),
+					Hits:     hits,
+					TimeTook: took,
+				}},
+			}
+
+			err := streamer.Send(dataBaseSpan)
+			if err != nil {
+				logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
+			}
+		}()
+	}
+
+	jsonHit, _ := json.Marshal(response.Hits.Hits[0].Source)
+
+	logging.Debug(fmt.Sprintf("only taken the first hit: %s", string(jsonHit)))
+	rootEntry, _ := UnmarshalRootWordEntry(jsonHit)
+
+	responsePB.RootWord = rootEntry.RootWord
+	responsePB.Translation = rootEntry.Translations
+	responsePB.PartOfSpeech = rootEntry.PartOfSpeech
+
+	for _, conj := range rootEntry.Categories {
+		for _, form := range conj.Forms {
+			wordFormForm := transform.RemoveAccents(form.Word)
+			if wordFormForm == parsedWord {
+				responsePB.Rule = form.Rule
+				responsePB.Word = form.Word
+			}
+		}
+	}
+
+	if traceCall {
+		go func() {
+			parabasis := &pbar.ParabasisRequest{
+				TraceId:      traceID,
+				ParentSpanId: spanID,
+				SpanId:       comedy.GenerateSpanID(),
+				RequestType: &pbar.ParabasisRequest_Span{
+					Span: &pbar.SpanRequest{
+						Action: "CloseSpan",
+						Took:   fmt.Sprintf("%v", time.Since(startTime)),
+					},
+				},
+			}
+			if err := streamer.Send(parabasis); err != nil {
+				logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
+			}
+		}()
+	}
+
+	return &responsePB, nil
+}
+
 func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.AggregatorCreationRequest) (*RootWordEntry, error) {
 	// example: 3th sing - impf - ind - act
 	// example: 1st plur - aor - ind - act

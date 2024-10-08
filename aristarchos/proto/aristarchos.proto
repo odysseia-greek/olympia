@@ -7,6 +7,7 @@ package olympia_aristarchos;
 service Aristarchos {
   rpc CreateNewEntry(stream AggregatorCreationRequest) returns (AggregatorStreamResponse);
   rpc RetrieveEntry (AggregatorRequest) returns (RootWordResponse) {}
+  rpc RetrieveRootFromGrammarForm (AggregatorRequest) returns (FormsResponse) {}
   rpc RetrieveSearchWords (AggregatorRequest) returns (SearchWordResponse) {}
   rpc Health (HealthRequest) returns (HealthResponse) {}
 }
@@ -35,6 +36,15 @@ message AggregatorCreationRequest {
   string translation = 4;
   PartOfSpeech part_of_speech = 5;
   string trace_id = 6;
+}
+
+message FormsResponse {
+  string word = 1;
+  string unaccented_word = 2;
+  string rule = 3;
+  string root_word = 4;
+  repeated string translation = 5;
+  string part_of_speech = 6;
 }
 
 message AggregatorCreationResponse {

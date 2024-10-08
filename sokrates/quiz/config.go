@@ -14,6 +14,7 @@ import (
 	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
 	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
 	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -144,6 +145,26 @@ func CreateNewConfig(ctx context.Context) (*SokratesHandler, error) {
 	quizAttempts := make(chan plato.QuizAttempt)
 	aggregatedResult := make(map[string]plato.QuizAttempt)
 
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
+	aggregatorHealthy := aggregator.WaitForHealthyState()
+	if !aggregatorHealthy {
+		logging.Debug("aggregator service not ready - restarting seems the only option")
+		os.Exit(1)
+	}
+
+	// New context for aggregator streamer
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := aggregator.CreateNewEntry(aggrContext)
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, err
+	}
+
 	ctx, cancel := context.WithCancel(ctx)
 
 	return &SokratesHandler{
@@ -157,5 +178,8 @@ func CreateNewConfig(ctx context.Context) (*SokratesHandler, error) {
 		Ticker:             ticker,
 		Streamer:           streamer,
 		Cancel:             cancel,
+		Aggregator:         aristarchosStreamer,
+		AggregatorClient:   aggregator,
+		AggregatorCancel:   aggregatorCancel,
 	}, nil
 }

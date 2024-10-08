@@ -199,6 +199,23 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
+	//check first if the word is part of aristarchos and if it exists there return the result from it
+	aggrCtx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
+	aggregatorRequest := pba.AggregatorRequest{RootWord: queryWord}
+	entries, err := d.AggregatorClient.RetrieveSearchWords(aggrCtx, &aggregatorRequest)
+	if err != nil {
+		logging.Error(err.Error())
+	}
+
+	if entries != nil && len(entries.Word) > 0 {
+		for _, entry := range entries.Word {
+			if entry == queryWord {
+			}
+
+		}
+	}
+
 	declensions, _ := d.StartFindingRules(queryWord, requestId)
 	if len(declensions.Results) == 0 || declensions.Results == nil {
 		e := models.NotFoundError{
@@ -213,6 +230,9 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 	}
 
 	err := d.sendWordsToAggregator(declensions, requestId)
+	if err != nil {
+		logging.Error(fmt.Sprintf("error in aggregator: %s", err.Error()))
+	}
 
 	stringifiedDeclension, _ := json.Marshal(declensions)
 	ttl := time.Hour

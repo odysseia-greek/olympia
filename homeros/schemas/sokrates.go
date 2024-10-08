@@ -18,6 +18,17 @@ var authorBasedQuizType = graphql.NewObject(graphql.ObjectConfig{
 		"translation":  &graphql.Field{Type: graphql.String},
 		"reference":    &graphql.Field{Type: graphql.String},
 		"quiz":         &graphql.Field{Type: quizResponseType},
+		"grammarQuiz":  &graphql.Field{Type: graphql.NewList(grammarQuizAdded)},
+	},
+})
+
+var grammarQuizAdded = graphql.NewObject(graphql.ObjectConfig{
+	Name: "GrammarQuizAdded",
+	Fields: graphql.Fields{
+		"correctAnswer":    &graphql.Field{Type: graphql.String},
+		"wordInText":       &graphql.Field{Type: graphql.String},
+		"extraInformation": &graphql.Field{Type: graphql.String},
+		"options":          &graphql.Field{Type: graphql.NewList(optionsType)},
 	},
 })
 

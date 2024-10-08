@@ -133,6 +133,7 @@ func main() {
 					wg.Add(1)
 					go func(content []byte) {
 						defer wg.Done()
+						logging.Debug(string(content))
 						var quiz []models.AuthorbasedQuiz
 						if err := json.Unmarshal(content, &quiz); err != nil {
 							logging.Error(err.Error())

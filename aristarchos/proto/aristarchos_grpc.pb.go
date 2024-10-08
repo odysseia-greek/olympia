@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AristarchosClient interface {
 	CreateNewEntry(ctx context.Context, opts ...grpc.CallOption) (Aristarchos_CreateNewEntryClient, error)
 	RetrieveEntry(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*RootWordResponse, error)
+	RetrieveRootFromGrammarForm(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*FormsResponse, error)
 	RetrieveSearchWords(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*SearchWordResponse, error)
 	Health(ctx context.Context, in *HealthRequest, opts ...grpc.CallOption) (*HealthResponse, error)
 }
@@ -79,6 +80,15 @@ func (c *aristarchosClient) RetrieveEntry(ctx context.Context, in *AggregatorReq
 	return out, nil
 }
 
+func (c *aristarchosClient) RetrieveRootFromGrammarForm(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*FormsResponse, error) {
+	out := new(FormsResponse)
+	err := c.cc.Invoke(ctx, "/olympia_aristarchos.Aristarchos/RetrieveRootFromGrammarForm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *aristarchosClient) RetrieveSearchWords(ctx context.Context, in *AggregatorRequest, opts ...grpc.CallOption) (*SearchWordResponse, error) {
 	out := new(SearchWordResponse)
 	err := c.cc.Invoke(ctx, "/olympia_aristarchos.Aristarchos/RetrieveSearchWords", in, out, opts...)
@@ -103,6 +113,7 @@ func (c *aristarchosClient) Health(ctx context.Context, in *HealthRequest, opts 
 type AristarchosServer interface {
 	CreateNewEntry(Aristarchos_CreateNewEntryServer) error
 	RetrieveEntry(context.Context, *AggregatorRequest) (*RootWordResponse, error)
+	RetrieveRootFromGrammarForm(context.Context, *AggregatorRequest) (*FormsResponse, error)
 	RetrieveSearchWords(context.Context, *AggregatorRequest) (*SearchWordResponse, error)
 	Health(context.Context, *HealthRequest) (*HealthResponse, error)
 	mustEmbedUnimplementedAristarchosServer()
@@ -117,6 +128,9 @@ func (UnimplementedAristarchosServer) CreateNewEntry(Aristarchos_CreateNewEntryS
 }
 func (UnimplementedAristarchosServer) RetrieveEntry(context.Context, *AggregatorRequest) (*RootWordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RetrieveEntry not implemented")
+}
+func (UnimplementedAristarchosServer) RetrieveRootFromGrammarForm(context.Context, *AggregatorRequest) (*FormsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RetrieveRootFromGrammarForm not implemented")
 }
 func (UnimplementedAristarchosServer) RetrieveSearchWords(context.Context, *AggregatorRequest) (*SearchWordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RetrieveSearchWords not implemented")
@@ -181,6 +195,24 @@ func _Aristarchos_RetrieveEntry_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Aristarchos_RetrieveRootFromGrammarForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AggregatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AristarchosServer).RetrieveRootFromGrammarForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/olympia_aristarchos.Aristarchos/RetrieveRootFromGrammarForm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AristarchosServer).RetrieveRootFromGrammarForm(ctx, req.(*AggregatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Aristarchos_RetrieveSearchWords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AggregatorRequest)
 	if err := dec(in); err != nil {
@@ -227,6 +259,10 @@ var Aristarchos_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RetrieveEntry",
 			Handler:    _Aristarchos_RetrieveEntry_Handler,
+		},
+		{
+			MethodName: "RetrieveRootFromGrammarForm",
+			Handler:    _Aristarchos_RetrieveRootFromGrammarForm_Handler,
 		},
 		{
 			MethodName: "RetrieveSearchWords",
