@@ -20,3 +20,10 @@ Feature: Odysseia
     When a response with a rootword is returned
     And that rootword is queried in Alexandros with "true"
     Then the query result has texts included
+
+  @wip
+  Scenario: A word played in the quiz mode authorbased can be found even if the declension is Ionic for example
+    Given an authorbased quiz is played that includes grammarOptions
+    When a word is found that would normally not be easy to decline
+    And that word is searched for in the grammar component
+    Then a result should be returned

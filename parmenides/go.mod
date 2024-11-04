@@ -1,12 +1,12 @@
 module github.com/odysseia-greek/olympia/parmenides
 
-go 1.22.0
+go 1.23.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/aristoteles v0.1.7
+	github.com/odysseia-greek/agora/aristoteles v0.1.8
 	github.com/odysseia-greek/agora/eupalinos v0.1.0
-	github.com/odysseia-greek/agora/plato v0.1.40
+	github.com/odysseia-greek/agora/plato v0.1.45
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/grpc v1.65.0
@@ -15,8 +15,8 @@ require (
 require (
 	github.com/cenkalti/backoff/v3 v3.2.2 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/elastic/elastic-transport-go/v8 v8.5.0 // indirect
-	github.com/elastic/go-elasticsearch/v8 v8.13.0 // indirect
+	github.com/elastic/elastic-transport-go/v8 v8.6.0 // indirect
+	github.com/elastic/go-elasticsearch/v8 v8.14.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

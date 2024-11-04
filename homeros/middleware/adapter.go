@@ -106,7 +106,7 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
 				Host:          r.Host,
-				RemoteAddress: r.RemoteAddr,
+				RemoteAddress: getRealIP(r),
 				RootQuery:     query,
 				Operation:     operationName,
 			}
@@ -154,4 +154,22 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 
 func shouldTrace(score int, random randomizer.Random) bool {
 	return random.RandomNumberBaseOne(100) < score
+}
+
+func getRealIP(r *http.Request) string {
+	// Check if the X-Real-IP header is set by Traefik or another proxy
+	if realIP := r.Header.Get("X-Real-IP"); realIP != "" {
+		return realIP
+	}
+
+	// If X-Real-IP is not present, check the X-Forwarded-For header
+	if forwarded := r.Header.Get("X-Forwarded-For"); forwarded != "" {
+		// The X-Forwarded-For header can contain a comma-separated list of IP addresses.
+		// The left-most IP address is the original client IP.
+		ips := strings.Split(forwarded, ",")
+		return strings.TrimSpace(ips[0])
+	}
+
+	// If neither header is present, fall back to the standard remote address
+	return r.RemoteAddr
 }

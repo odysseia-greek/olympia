@@ -182,6 +182,10 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	//odysseia
 	ctx.Step(`^a grammar entry is made for the word "([^"]*)"$`, odysseia.aGrammarEntryIsMadeForTheWord)
 	ctx.Step(`^a quiz is played in comprehensive mode for the word "([^"]*)" and the correct answer "([^"]*)" with type "([^"]*)" set "([^"]*)" and theme "([^"]*)" and segment "([^"]*)"$`, odysseia.aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndThemeAndSegment)
+	ctx.Step(`^a result should be returned$`, odysseia.aResultShouldBeReturned)
+	ctx.Step(`^a word is found that would normally not be easy to decline$`, odysseia.aWordIsFoundThatWouldNormallyNotBeEasyToDecline)
+	ctx.Step(`^an authorbased quiz is played that includes grammarOptions$`, odysseia.anAuthorbasedQuizIsPlayedThatIncludesGrammarOptions)
+	ctx.Step(`^that word is searched for in the grammar component$`, odysseia.thatWordIsSearchedForInTheGrammarComponent)
 
 	ctx.Step(`^the quizresponse is expanded with text and similar words$`, odysseia.theQuizresponseIsExpandedWithTextAndSimilarWords)
 	ctx.Step(`^the options returned from the grammar api should include "([^"]*)"$`, odysseia.theOptionsReturnedFromTheGrammarApiShouldInclude)

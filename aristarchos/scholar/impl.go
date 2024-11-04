@@ -14,6 +14,7 @@ type AggregatorService interface {
 	WaitForHealthyState() bool
 	CreateNewEntry(ctx context.Context) (pb.Aristarchos_CreateNewEntryClient, error)
 	RetrieveEntry(ctx context.Context, request *pb.AggregatorRequest) (*pb.RootWordResponse, error)
+	RetrieveRootFromGrammarForm(ctx context.Context, in *pb.AggregatorRequest) (*pb.FormsResponse, error)
 	RetrieveSearchWords(ctx context.Context, in *pb.AggregatorRequest) (*pb.SearchWordResponse, error)
 }
 
@@ -39,7 +40,7 @@ func NewClientAggregator(address string) (*ClientAggregator, error) {
 	if address == "" {
 		address = DEFAULTADDRESS
 	}
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to tracing service: %w", err)
 	}
@@ -78,4 +79,8 @@ func (c *ClientAggregator) RetrieveEntry(ctx context.Context, request *pb.Aggreg
 
 func (c *ClientAggregator) RetrieveSearchWords(ctx context.Context, request *pb.AggregatorRequest) (*pb.SearchWordResponse, error) {
 	return c.scholar.RetrieveSearchWords(ctx, request)
+}
+
+func (c *ClientAggregator) RetrieveRootFromGrammarForm(ctx context.Context, request *pb.AggregatorRequest) (*pb.FormsResponse, error) {
+	return c.scholar.RetrieveRootFromGrammarForm(ctx, request)
 }

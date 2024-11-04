@@ -16,6 +16,8 @@ import (
 	"github.com/odysseia-greek/agora/plato/transform"
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
+	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"math"
 	"math/rand"
 	"net/http"
@@ -35,6 +37,10 @@ type SokratesHandler struct {
 	Ticker             *time.Ticker
 	Streamer           pb.TraceService_ChorusClient
 	Cancel             context.CancelFunc
+	Aggregator         pba.Aristarchos_CreateNewEntryClient
+	StreamerCancel     context.CancelFunc
+	AggregatorCancel   context.CancelFunc
+	AggregatorClient   *aristarchos.ClientAggregator
 }
 
 const (
@@ -800,6 +806,7 @@ func (s *SokratesHandler) authorBasedQuiz(createQuizRequest models.CreationReque
 		NumberOfItems: len(option.Content),
 	}
 
+	var grammarQuiz []models.GrammarQuizAdded
 	var filteredContent []models.AuthorBasedContent
 
 	for _, content := range option.Content {
@@ -824,6 +831,71 @@ func (s *SokratesHandler) authorBasedQuiz(createQuizRequest models.CreationReque
 	} else {
 		randNumber := s.Randomizer.RandomNumberBaseZero(len(filteredContent))
 		question := filteredContent[randNumber]
+		if question.HasGrammarQuestions {
+			//add grammar question
+			for _, grammarQuestion := range question.GrammarQuestions {
+				grammarQuizOption := models.GrammarQuizAdded{
+					CorrectAnswer:    grammarQuestion.CorrectAnswer,
+					WordInText:       grammarQuestion.WordInText,
+					ExtraInformation: grammarQuestion.ExtraInformation,
+					Options:          nil,
+				}
+
+				var setToQuery []string
+				switch grammarQuestion.TypeOfWord {
+				case "noun":
+					setToQuery = option.GrammarQuestionOptions.Nouns
+				case "verb":
+					setToQuery = option.GrammarQuestionOptions.Verbs
+				case "misc":
+					setToQuery = option.GrammarQuestionOptions.Misc
+				default:
+					setToQuery = option.GrammarQuestionOptions.Nouns
+				}
+
+				var grammarOptions []models.Options
+
+				grammarOptions = append(grammarOptions, models.Options{
+					Option: grammarQuizOption.CorrectAnswer,
+				})
+
+				numberOfNeededAnswers := 4
+				for len(grammarOptions) != numberOfNeededAnswers {
+					randNumber := s.Randomizer.RandomNumberBaseZero(len(setToQuery))
+					randEntry := setToQuery[randNumber]
+
+					exists := findQuizWord(grammarOptions, randEntry)
+					if !exists {
+						grammarOption := models.Options{
+							Option: randEntry,
+						}
+						grammarOptions = append(grammarOptions, grammarOption)
+					}
+				}
+
+				grammarQuizOption.Options = grammarOptions
+				rand.Shuffle(len(grammarQuizOption.Options), func(i, j int) {
+					grammarQuizOption.Options[i], grammarQuizOption.Options[j] = grammarQuizOption.Options[j], grammarQuizOption.Options[i]
+				})
+				grammarQuiz = append(grammarQuiz, grammarQuizOption)
+
+				// send word to aggregator
+				partOfSpeech := pba.PartOfSpeech_VERB
+				if grammarQuestion.TypeOfWord == "noun" {
+					partOfSpeech = pba.PartOfSpeech_NOUN
+				} else if grammarQuestion.TypeOfWord == "misc" {
+					partOfSpeech = pba.PartOfSpeech_PARTICIPLE
+				} else if grammarQuestion.TypeOfWord == "verb" {
+					if strings.Contains(grammarQuestion.CorrectAnswer, "part") {
+						partOfSpeech = pba.PartOfSpeech_PARTICLE
+					}
+				}
+				err = s.sendWordsToAggregator(grammarQuizOption.WordInText, question.Greek, grammarQuizOption.CorrectAnswer, question.Translation, requestID, partOfSpeech)
+				if err != nil {
+					logging.Error(fmt.Sprintf("error in aggregator: %s", err.Error()))
+				}
+			}
+		}
 		quiz.QuizItem = question.Greek
 		quiz.Options = append(quiz.Options, models.Options{
 			Option: question.Translation,
@@ -858,6 +930,7 @@ func (s *SokratesHandler) authorBasedQuiz(createQuizRequest models.CreationReque
 		Translation:  option.Translation,
 		Reference:    option.Reference,
 		Quiz:         quiz,
+		GrammarQuiz:  grammarQuiz,
 	}
 
 	return &authorQuiz, nil
@@ -1298,4 +1371,52 @@ func (s *SokratesHandler) databaseSpan(response *elasticmodels.Response, query m
 	if err != nil {
 		logging.Error(fmt.Sprintf("error returned from tracer: %s", err.Error()))
 	}
+}
+
+func (s *SokratesHandler) sendWordsToAggregator(quizWord, rootWord, declension, translation, requestID string, speech pba.PartOfSpeech) error {
+	request := &pba.AggregatorCreationRequest{
+		Word:         quizWord,
+		Rule:         declension,
+		RootWord:     rootWord,
+		Translation:  translation,
+		PartOfSpeech: speech,
+		TraceId:      requestID,
+	}
+
+	if err := s.Aggregator.Send(request); err != nil {
+		s.reestablishStream()
+		if err = s.Aggregator.Send(request); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (s *SokratesHandler) reestablishStream() {
+	logging.Debug("stream is invalid so resetting stream")
+	if s.AggregatorCancel != nil {
+		s.AggregatorCancel()
+	}
+
+	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
+	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
+	if err != nil {
+		logging.Error(err.Error())
+		return
+	}
+	aggregatorHealthy := aggregator.WaitForHealthyState()
+	if !aggregatorHealthy {
+		logging.Error("aggregator service not ready")
+		return
+	}
+
+	aggrContext, aggregatorCancel := context.WithCancel(context.Background())
+	aristarchosStreamer, err := s.AggregatorClient.CreateNewEntry(aggrContext)
+	if err != nil {
+		logging.Error(err.Error())
+		return
+	}
+
+	s.Aggregator = aristarchosStreamer
+	s.AggregatorCancel = aggregatorCancel
 }

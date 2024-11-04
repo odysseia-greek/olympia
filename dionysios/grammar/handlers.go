@@ -15,6 +15,7 @@ import (
 	pb "github.com/odysseia-greek/attike/aristophanes/proto"
 	pba "github.com/odysseia-greek/olympia/aristarchos/proto"
 	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
+	"google.golang.org/grpc/metadata"
 	"net/http"
 	"strings"
 	"time"
@@ -199,6 +200,39 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
+	//check first if the word is part of aristarchos and if it exists there return the result from it
+	aggrCtx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
+	md := metadata.New(map[string]string{service.HeaderKey: requestId})
+	aggrCtx = metadata.NewOutgoingContext(context.Background(), md)
+	aggregatorRequest := pba.AggregatorRequest{RootWord: queryWord}
+	entry, err := d.AggregatorClient.RetrieveRootFromGrammarForm(aggrCtx, &aggregatorRequest)
+	if err != nil {
+		logging.Error(err.Error())
+	}
+
+	if entry != nil {
+		declensionFromAggregator := models.DeclensionTranslationResults{Results: []models.Result{
+			{
+				Word:        entry.Word,
+				Rule:        entry.Rule,
+				RootWord:    entry.RootWord,
+				Translation: entry.Translation,
+			},
+		}}
+
+		stringifiedDeclension, _ := json.Marshal(declensionFromAggregator)
+		ttl := time.Hour
+		err = d.Cache.SetWithTTL(queryWord, string(stringifiedDeclension), ttl)
+
+		if err != nil {
+			logging.Error(fmt.Sprintf("error setting cache: %s", err.Error()))
+		}
+
+		middleware.ResponseWithJson(w, declensionFromAggregator)
+
+	}
+
 	declensions, _ := d.StartFindingRules(queryWord, requestId)
 	if len(declensions.Results) == 0 || declensions.Results == nil {
 		e := models.NotFoundError{
@@ -212,7 +246,10 @@ func (d *DionysosHandler) checkGrammar(w http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	err := d.sendWordsToAggregator(declensions, requestId)
+	err = d.sendWordsToAggregator(declensions, requestId)
+	if err != nil {
+		logging.Error(fmt.Sprintf("error in aggregator: %s", err.Error()))
+	}
 
 	stringifiedDeclension, _ := json.Marshal(declensions)
 	ttl := time.Hour

@@ -208,3 +208,99 @@ func (l *OdysseiaFixture) theQueryResultHasTextsIncluded() error {
 
 	return nil
 }
+
+func (l *OdysseiaFixture) anAuthorbasedQuizIsPlayedThatIncludesGrammarOptions() error {
+	bodyModel := models.CreationRequest{
+		Theme:    "Herodotos - Histories",
+		Set:      "1",
+		Segment:  "7.138.1",
+		QuizType: "authorbased",
+		ExcludeWords: []string{
+			"Ἀθῆναι",
+			"στρατηλασία",
+			"ἔχω",
+			"ἐπί",
+			"ἐλαύνω",
+			"ὡς",
+			"ποιέω",
+			"οὐ",
+			"εἰς",
+			"ὄνομα",
+			"ἐν",
+			"Ἕλλην",
+			"δέ",
+			"οὗτος",
+			"ὁ",
+			"βασιλεύς, βασιλέος (Ionic)",
+			"πολύς",
+			"ὅμοιος",
+			"Ἑλλάς",
+		},
+	}
+
+	body, err := json.Marshal(bodyModel)
+	if err != nil {
+		return err
+	}
+
+	breakOut := true
+	var quizResponse models.AuthorbasedQuizResponse
+
+	for breakOut {
+		quiz, err := l.client.Sokrates().Create(body, TraceId)
+		if err != nil {
+			return err
+		}
+
+		if quiz.StatusCode != http.StatusOK {
+			return fmt.Errorf("expected 200 but got %v", quiz.StatusCode)
+		}
+
+		err = json.NewDecoder(quiz.Body).Decode(&quizResponse)
+		if err != nil {
+			return err
+		}
+
+		if len(quizResponse.GrammarQuiz) > 0 {
+			breakOut = false
+		}
+
+	}
+
+	l.ctx = context.WithValue(l.ctx, QuizContext, quizResponse)
+	return nil
+}
+
+func (l *OdysseiaFixture) aWordIsFoundThatWouldNormallyNotBeEasyToDecline() error {
+	quizResponse := l.ctx.Value(QuizContext).(models.AuthorbasedQuizResponse)
+	if len(quizResponse.GrammarQuiz) == 0 {
+		return fmt.Errorf("expected quizResponse to have grammar quiz but it did not")
+	}
+	l.ctx = context.WithValue(l.ctx, GrammarContext, quizResponse.GrammarQuiz[0].WordInText)
+	return nil
+}
+
+func (l *OdysseiaFixture) aResultShouldBeReturned() error {
+	declensions := l.ctx.Value(ResponseBody).(models.DeclensionTranslationResults)
+
+	if len(declensions.Results) == 0 || declensions.Results == nil {
+		return fmt.Errorf("expected declensions to have results but it did not")
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) thatWordIsSearchedForInTheGrammarComponent() error {
+	grammarWord := l.ctx.Value(GrammarContext).(string)
+	response, err := l.client.Dionysios().Grammar(grammarWord, TraceId)
+	if err != nil {
+		return err
+	}
+
+	var declensions models.DeclensionTranslationResults
+	err = json.NewDecoder(response.Body).Decode(&declensions)
+
+	l.ctx = context.WithValue(l.ctx, ResponseBody, declensions)
+
+	return nil
+}

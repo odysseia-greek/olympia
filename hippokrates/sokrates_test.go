@@ -15,6 +15,7 @@ const (
 	AnswerContext    string = "answerContext"
 	QuizContext      string = "quizContext"
 	BodyContext      string = "bodyContext"
+	GrammarContext   string = "grammarContext"
 	AggregateContext string = "aggregateContext"
 	TraceId          string = "hippokrates-traceid"
 )
