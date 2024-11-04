@@ -40,7 +40,7 @@ func NewClientAggregator(address string) (*ClientAggregator, error) {
 	if address == "" {
 		address = DEFAULTADDRESS
 	}
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to tracing service: %w", err)
 	}

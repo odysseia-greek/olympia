@@ -60,10 +60,33 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 	}
 
 	parsedWord := transform.RemoveAccents(request.RootWord)
-	request.RootWord = parsedWord
 
 	createNewWord := false
-	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
+	shouldQueries := []map[string]interface{}{
+		{"match_phrase": map[string]string{"rootWordEntry": request.RootWord}}, // Match root word
+		{"match_phrase": map[string]string{"unaccented": parsedWord}},          // Match unaccented word
+	}
+
+	// Add a match clause for each variant in the variants array
+	shouldQueries = append(shouldQueries, map[string]interface{}{
+		"nested": map[string]interface{}{
+			"path": "variants",
+			"query": map[string]interface{}{
+				"bool": map[string]interface{}{
+					"should": []map[string]interface{}{
+						{"match_phrase": map[string]string{"variants.searchTerm": request.RootWord}}},
+				},
+			},
+		},
+	})
+
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"bool": map[string]interface{}{
+				"should": shouldQueries,
+			},
+		},
+	}
 	response, err := a.Elastic.Query().Match(a.Index, query)
 
 	if err != nil {
@@ -117,6 +140,11 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 	}
 
 	if createNewWord {
+		variant := Variant{
+			SearchTerm: request.RootWord,
+			Score:      1,
+		}
+		entry.Variants = append(entry.Variants, variant)
 		entryAsJson, _ := json.Marshal(entry)
 		createDocument, err := a.Elastic.Index().CreateDocument(a.Index, entryAsJson)
 		if err != nil {
@@ -124,15 +152,14 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 			return
 		}
 
-		logging.Debug(fmt.Sprintf("created document with id: %s and rootWord: %s", createDocument.ID, request.RootWord))
+		logging.Debug(fmt.Sprintf("created document with id: %s and rootWordEntry: %s", createDocument.ID, request.RootWord))
 		return
 	}
 
 	jsonHit, _ := json.Marshal(response.Hits.Hits[0].Source)
-	rootWord, _ := UnmarshalRootWordEntry(jsonHit)
+	rootWordEntry, _ := UnmarshalRootWordEntry(jsonHit)
 
-	updateNeeded := false
-	for i, conjugation := range rootWord.Categories {
+	for i, conjugation := range rootWordEntry.Categories {
 		formFound := false
 		for _, cform := range conjugation.Forms {
 			if cform.Word == entry.Categories[0].Forms[0].Word {
@@ -141,55 +168,60 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 			}
 		}
 		if !formFound {
-			rootWord.Categories[i].Forms = append(rootWord.Categories[i].Forms, entry.Categories[0].Forms[0])
-			updateNeeded = true
+			rootWordEntry.Categories[i].Forms = append(rootWordEntry.Categories[i].Forms, entry.Categories[0].Forms[0])
 		}
 		break
 	}
 
 	translationFound := false
 
-	for _, trans := range rootWord.Translations {
+	for _, trans := range rootWordEntry.Translations {
 		if trans == request.Translation {
 			translationFound = true
 			break
 		}
 	}
 
-	if !translationFound || rootWord.Translations == nil {
-		rootWord.Translations = append(rootWord.Translations, request.Translation)
-		updateNeeded = true
+	if !translationFound || rootWordEntry.Translations == nil {
+		rootWordEntry.Translations = append(rootWordEntry.Translations, request.Translation)
 	}
 
-	if updateNeeded {
-		entryAsJson, _ := json.Marshal(rootWord)
-		createDocument, err := a.Elastic.Document().Update(a.Index, response.Hits.Hits[0].ID, entryAsJson)
-		if err != nil {
-			logging.Error(err.Error())
-			return
+	if rootWordEntry.UnaccentedWord == "" {
+		rootWordEntry.UnaccentedWord = transform.RemoveAccents(request.RootWord)
+	}
+
+	// see if the current variant exists
+	thisVariantFound := false
+	for i, variant := range rootWordEntry.Variants {
+		if variant.SearchTerm == request.RootWord {
+			rootWordEntry.Variants[i].Score = variant.Score + 1
+			thisVariantFound = true
+		}
+	}
+
+	// if not we add it the array
+	if !thisVariantFound {
+		variant := Variant{
+			SearchTerm: request.RootWord,
+			Score:      1,
 		}
 
-		if traceCall {
-			go func() {
-				parabasis := &pbar.ParabasisRequest{
-					TraceId:      traceID,
-					ParentSpanId: spanID,
-					SpanId:       comedy.GenerateSpanID(),
-					RequestType: &pbar.ParabasisRequest_Span{
-						Span: &pbar.SpanRequest{
-							Action: "CloseSpan",
-							Took:   fmt.Sprintf("%v", time.Since(startTime)),
-							Status: "updated document",
-						},
-					},
-				}
-				if err := streamer.Send(parabasis); err != nil {
-					logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
-				}
-			}()
-		}
+		rootWordEntry.Variants = append(rootWordEntry.Variants, variant)
+	}
 
-		logging.Debug(fmt.Sprintf("updated document with id: %s and rootWord: %s", createDocument.ID, request.RootWord))
+	// now a check is done which word should serve as the rootWord of this entry
+	var highestScore int
+	for _, variant := range rootWordEntry.Variants {
+		if variant.Score > highestScore {
+			highestScore = variant.Score
+			rootWordEntry.RootWord = variant.SearchTerm
+		}
+	}
+
+	entryAsJson, _ := json.Marshal(rootWordEntry)
+	createDocument, err := a.Elastic.Document().Update(a.Index, response.Hits.Hits[0].ID, entryAsJson)
+	if err != nil {
+		logging.Error(err.Error())
 		return
 	}
 
@@ -203,7 +235,7 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 					Span: &pbar.SpanRequest{
 						Action: "CloseSpan",
 						Took:   fmt.Sprintf("%v", time.Since(startTime)),
-						Status: "no update done",
+						Status: "updated document",
 					},
 				},
 			}
@@ -213,8 +245,7 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 		}()
 	}
 
-	logging.Debug(fmt.Sprintf("no action needed since document and grammar exists: %s", rootWord))
-
+	logging.Debug(fmt.Sprintf("updated document with id: %s and rootWordEntry: %s", createDocument.ID, request.RootWord))
 	return
 }
 
@@ -243,9 +274,32 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 	}
 
 	parsedWord := transform.RemoveAccents(request.RootWord)
-	request.RootWord = parsedWord
+	shouldQueries := []map[string]interface{}{
+		{"match_phrase": map[string]string{"rootWordEntry": request.RootWord}}, // Match root word
+		{"match_phrase": map[string]string{"unaccented": parsedWord}},          // Match unaccented word
+	}
 
-	query := a.Elastic.Builder().MatchQuery(ROOTWORD, request.RootWord)
+	// Add a match clause for each variant in the variants array
+	shouldQueries = append(shouldQueries, map[string]interface{}{
+		"nested": map[string]interface{}{
+			"path": "variants",
+			"query": map[string]interface{}{
+				"bool": map[string]interface{}{
+					"should": []map[string]interface{}{
+						{"match_phrase": map[string]string{"variants.searchTerm": request.RootWord}}},
+				},
+			},
+		},
+	})
+
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"bool": map[string]interface{}{
+				"should": shouldQueries,
+			},
+		},
+	}
+
 	response, err := a.Elastic.Query().Match(a.Index, query)
 
 	if traceCall {
@@ -445,13 +499,30 @@ func (a *AggregatorServiceImpl) RetrieveRootFromGrammarForm(ctx context.Context,
 	if len(splitID) >= 2 {
 		spanID = splitID[1]
 	}
+
 	var responsePB pb.FormsResponse
 	responsePB.Word = request.RootWord
 	parsedWord := transform.RemoveAccents(request.RootWord)
-	request.RootWord = parsedWord
 	responsePB.UnaccentedWord = parsedWord
 
-	query := a.Elastic.Builder().MatchQuery("categories.forms.word", request.RootWord)
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"nested": map[string]interface{}{
+				"path": "categories.forms",
+				"query": map[string]interface{}{
+					"bool": map[string]interface{}{
+						"must": []map[string]interface{}{
+							{
+								"match": map[string]interface{}{
+									"categories.forms.word": fmt.Sprintf("%s", request.RootWord),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
 	response, err := a.Elastic.Query().Match(a.Index, query)
 
 	if err != nil {
@@ -497,6 +568,9 @@ func (a *AggregatorServiceImpl) RetrieveRootFromGrammarForm(ctx context.Context,
 	responsePB.RootWord = rootEntry.RootWord
 	responsePB.Translation = rootEntry.Translations
 	responsePB.PartOfSpeech = rootEntry.PartOfSpeech
+	for _, variant := range rootEntry.Variants {
+		responsePB.Variants = append(responsePB.Variants, variant.SearchTerm)
+	}
 
 	for _, conj := range rootEntry.Categories {
 		for _, form := range conj.Forms {
@@ -538,6 +612,7 @@ func (a *AggregatorServiceImpl) mapAndHandleGrammaticalCategories(request *pb.Ag
 	// example: inf - pres - act
 	var entry RootWordEntry
 
+	entry.UnaccentedWord = transform.RemoveAccents(request.RootWord)
 	entry.RootWord = request.RootWord
 	entry.PartOfSpeech = mapEnumToCategory(request.PartOfSpeech)
 	entry.Translations = []string{request.Translation}

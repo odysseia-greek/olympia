@@ -1326,37 +1326,37 @@
     "translation": "The professed intent of the king's march was to attack Athens, but in truth all Greece was his aim. This the Greeks had long since learned, but not all of them regarded the matter alike.",
     "grammarQuestionOptions": {
       "verbs": [
-        "Aorist Participle Passive Neuter Plural",
-        "Present Participle Middle Masc Plural",
-        "Present Active Indicative Third-person Singular",
-        "Imperfect Active Indicative Third-person Singular",
-        "Imperfect Middle/Passive Indicative Third-person Singular",
-        "Imperfect Middle/Passive Indicative Third-person Plural"
+        "aorist psv part - plural - neut",
+        "present mid part - plural - masc",
+        "3rd sing - pres - ind - act",
+        "3rd sing - impf - ind - act",
+        "3rd sing - impf - ind - mid/psv",
+        "3rd plur - impf - ind - mid/psv"
       ],
       "nouns": [
-        "Accusative Singular",
-        "Accusative Plural",
-        "Nominative Plural",
-        "Nominative Singular",
-        "Dative Singular",
-        "Dative Plural",
-        "Genitive Singular",
-        "Genitive Plural"
+        "sing - nom",
+        "sing - fem - acc",
+        "sing - gen",
+        "sing - dat",
+        "sing - acc",
+        "plural - nom",
+        "plural - gen",
+        "plural - neut - nom",
+        "plural - masc/neut - dat",
+        "plural - dat",
+        "plural - nom/acc"
       ],
-      "misc": [
-      ]
+      "misc": []
     },
     "content": [
       {
         "greek": "Ἀθῆναι",
         "translation": "the city of Athens",
-        "wordsInText": [
-          "Ἀθήνας"
-        ],
+        "wordsInText": ["Ἀθήνας"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Genitive Singular",
+            "correctAnswer": "sing - acc",
             "typeOfWord": "noun",
             "wordInText": "Ἀθήνας"
           }
@@ -1365,13 +1365,11 @@
       {
         "greek": "βασιλεύς, βασιλέος (Ionic)",
         "translation": "a king, chief",
-        "wordsInText": [
-          "βασιλέος"
-        ],
+        "wordsInText": ["βασιλέος"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Genitive Singular",
+            "correctAnswer": "sing - gen",
             "typeOfWord": "noun",
             "extraInformation": "Ionic ending",
             "wordInText": "βασιλέος"
@@ -1379,31 +1377,13 @@
         ]
       },
       {
-        "greek": "δέ",
-        "translation": "but",
-        "wordsInText": [
-          "δὲ"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
-        "greek": "εἰς",
-        "translation": "into, to c. acc",
-        "wordsInText": [
-          "ἐς"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "ἐλαύνω",
         "translation": "to drive, drive on, set in motion",
-        "wordsInText": [
-          "ἐλαύνει"
-        ],
+        "wordsInText": ["ἐλαύνει"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Present Active Indicative Third-person Singular",
+            "correctAnswer": "3rd sing - pres - ind - act",
             "typeOfWord": "verb",
             "wordInText": "ἐλαύνει"
           }
@@ -1412,13 +1392,11 @@
       {
         "greek": "Ἑλλάς",
         "translation": "Hellas; Greece",
-        "wordsInText": [
-          "Ἑλλάδα"
-        ],
+        "wordsInText": ["Ἑλλάδα"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Accusative Singular",
+            "correctAnswer": "sing - acc",
             "typeOfWord": "noun",
             "wordInText": "Ἑλλάδα"
           }
@@ -1427,44 +1405,24 @@
       {
         "greek": "Ἕλλην",
         "translation": "Hellen; Greek",
-        "wordsInText": [
-          "Ἕλληνες"
-        ],
+        "wordsInText": ["Ἕλληνες"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Nominative Plural",
+            "correctAnswer": "plural - nom",
             "typeOfWord": "noun",
             "wordInText": "Ἕλληνες"
           }
         ]
       },
       {
-        "greek": "ἐν",
-        "translation": "in, among. c. dat.",
-        "wordsInText": [
-          "ἐν"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
-        "greek": "ἐπί",
-        "translation": "on, upon with gen., dat., and acc.",
-        "wordsInText": [
-          "ἐπʼ"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "ἔχω",
         "translation": "to have",
-        "wordsInText": [
-          "εἶχε"
-        ],
+        "wordsInText": ["εἶχε"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Imperfect Active Indicative Third-person Singular",
+            "correctAnswer": "3rd sing - impf - ind - act",
             "typeOfWord": "verb",
             "wordInText": "εἶχε"
           }
@@ -1473,13 +1431,11 @@
       {
         "greek": "καθίημι",
         "translation": "to send down, let fall",
-        "wordsInText": [
-          "κατίετο"
-        ],
+        "wordsInText": ["κατίετο"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Imperfect Middle/Passive Indicative Third-person Singular",
+            "correctAnswer": "3rd sing - impf - ind - mid/psv",
             "typeOfWord": "verb",
             "wordInText": "κατίετο",
             "extraInformation": "καθῑστᾰτο is the Attic form καθίημι is Ionic"
@@ -1487,33 +1443,13 @@
         ]
       },
       {
-        "greek": "μέν",
-        "translation": "on the one hand, on the other hand",
-        "wordsInText": [
-          "μὲν"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
-        "greek": "ὁ",
-        "translation": "the",
-        "wordsInText": [
-          "ἡ",
-          "τὴν",
-          "οἱ"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "ὅμοιος",
         "translation": "like, resembling",
-        "wordsInText": [
-          "ὁμοίῳ"
-        ],
+        "wordsInText": ["ὁμοίῳ"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Dative Singular",
+            "correctAnswer": "sing - dat",
             "typeOfWord": "noun",
             "wordInText": "ὁμοίῳ"
           }
@@ -1522,13 +1458,11 @@
       {
         "greek": "ὄνομα",
         "translation": "name",
-        "wordsInText": [
-          "οὔνομα"
-        ],
+        "wordsInText": ["οὔνομα"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Nominative Singular",
+            "correctAnswer": "sing - nom",
             "typeOfWord": "noun",
             "wordInText": "οὔνομα",
             "extraInformation": "Ionic form of ὄνομα"
@@ -1536,32 +1470,13 @@
         ]
       },
       {
-        "greek": "οὐ",
-        "translation": "not",
-        "wordsInText": [
-          "οὐκ"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
-        "greek": "πᾶς",
-        "translation": "all, the whole",
-        "wordsInText": [
-          "πάντες",
-          "πᾶσαν"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "ποιέω",
         "translation": "to make, to do",
-        "wordsInText": [
-          "ἐποιεῦντο"
-        ],
+        "wordsInText": ["ἐποιεῦντο"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Imperfect Middle/Passive Indicative Third-person Plural",
+            "correctAnswer": "3rd plur - impf - ind - mid/psv",
             "typeOfWord": "verb",
             "wordInText": "ἐποιεῦντο",
             "extraInformation": "ἐποιοῦντο in Attic Greek. -ῦντο is an Ionic ending"
@@ -1571,59 +1486,37 @@
       {
         "greek": "πολύς",
         "translation": "much, many",
-        "wordsInText": [
-          "πολλοῦ"
-        ],
+        "wordsInText": ["πολλοῦ"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Genitive Singular",
+            "correctAnswer": "sing - gen",
             "typeOfWord": "noun",
             "wordInText": "πολλοῦ"
           }
         ]
       },
       {
-        "greek": "πρό",
-        "translation": "before",
-        "wordsInText": [
-          "πρὸ"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "στρατηλασία",
         "translation": "an expedition, campaign",
-        "wordsInText": [
-          "στρατηλασίη"
-        ],
+        "wordsInText": ["στρατηλασίη"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Nominative Singular",
+            "correctAnswer": "sing - nom",
             "typeOfWord": "noun",
             "wordInText": "στρατηλασίη"
           }
         ]
       },
       {
-        "greek": "ὡς",
-        "translation": "as, how",
-        "wordsInText": [
-          "ὡς"
-        ],
-        "hasGrammarQuestions": false
-      },
-      {
         "greek": "πυνθάνομαι",
         "translation": "to learn by hearsay",
-        "wordsInText": [
-          "πυνθανόμενοι"
-        ],
+        "wordsInText": ["πυνθανόμενοι"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Present Participle Middle Masc Plural",
+            "correctAnswer": "present mid part - plural - masc",
             "typeOfWord": "verb",
             "wordInText": "πυνθανόμενοι"
           }
@@ -1632,18 +1525,77 @@
       {
         "greek": "οὗτος",
         "translation": "this; that",
-        "wordsInText": [
-          "ταῦτα"
-        ],
+        "wordsInText": ["ταῦτα"],
         "hasGrammarQuestions": true,
         "grammarQuestions": [
           {
-            "correctAnswer": "Nom/Acc Plural",
+            "correctAnswer": "plural - nom/acc",
             "typeOfWord": "noun",
             "wordInText": "ταῦτα"
           }
         ]
-      }
+      },
+        {
+          "greek": "δέ",
+          "translation": "but",
+          "wordsInText": ["δὲ"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "εἰς",
+          "translation": "into, to c. acc",
+          "wordsInText": ["ἐς"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "ἐν",
+          "translation": "in, among. c. dat.",
+          "wordsInText": ["ἐν"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "ἐπί",
+          "translation": "on, upon with gen., dat., and acc.",
+          "wordsInText": ["ἐπʼ"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "μέν",
+          "translation": "on the one hand, on the other hand",
+          "wordsInText": ["μὲν"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "ὁ",
+          "translation": "the",
+          "wordsInText": ["ἡ", "τὴν", "οἱ"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "οὐ",
+          "translation": "not",
+          "wordsInText": ["οὐκ"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "πᾶς",
+          "translation": "all, the whole",
+          "wordsInText": ["πάντες", "πᾶσαν"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "πρό",
+          "translation": "before",
+          "wordsInText": ["πρὸ"],
+          "hasGrammarQuestions": false
+        },
+        {
+          "greek": "ὡς",
+          "translation": "as, how",
+          "wordsInText": ["ὡς"],
+          "hasGrammarQuestions": false
+        }
+
     ]
   },
   {

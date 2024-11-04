@@ -653,5 +653,137 @@
         "audioFile":""
       }
     ]
+  },
+  {
+    "quizMetadata":{
+      "language":"English"
+    },
+    "quizType":"media",
+    "theme":"Basic",
+    "segment": "Common Verbs 3",
+    "set": 1,
+    "content":[
+      {
+        "greek":"ἀκούω",
+        "translation":"hear, listen to",
+        "imageURL":"hear.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀποθνῄσκω",
+        "translation":"die, be killed",
+        "imageURL":"die.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀποκτείνω",
+        "translation":"kill, slay",
+        "imageURL":"kill.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ἀπορέω",
+        "translation":"be at a loss",
+        "imageURL":"beataloss.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"βαίνω",
+        "translation":"go, to step",
+        "imageURL":"go.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"βοάω",
+        "translation":"shout",
+        "imageURL":"shout.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"γελάω",
+        "translation":"laugh",
+        "imageURL":"laugh.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"δηλόω",
+        "translation":"to make apparent",
+        "imageURL":"apparent.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"εὑρίσκω",
+        "translation":"find",
+        "imageURL":"find.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ζητέω",
+        "translation":"look for, seek",
+        "imageURL":"seek.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"κλαίω",
+        "translation":"cry, weep",
+        "imageURL":"cry.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"κλέπτω",
+        "translation":"steal",
+        "imageURL":"steal.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"λαμβάνω",
+        "translation":"take, seize",
+        "imageURL":"seize.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"νικάω",
+        "translation":"conquer, win",
+        "imageURL":"conquer.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ὁράω",
+        "translation":"see",
+        "imageURL":"see.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πολιορκέω",
+        "translation":"besiege",
+        "imageURL":"besiege.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"ποιέω",
+        "translation":"make, do",
+        "imageURL":"do.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"πωλέω",
+        "translation":"sell",
+        "imageURL":"sell.webp",
+        "audioFile":""
+      },
+      {
+        "greek":"λέγω ",
+        "translation":"say; speak",
+        "imageURL":"speak.webp",
+        "audioFile":""
+      },
+      {
+        "greek": "παρασκευάζω",
+        "translation": "to get ready, prepare",
+        "imageURL":"prepare.webp",
+        "audioFile":""
+      }
+    ]
   }
+
 ]

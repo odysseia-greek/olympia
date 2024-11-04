@@ -12,10 +12,17 @@ type GrammaticalCategory struct {
 }
 
 type RootWordEntry struct {
-	RootWord     string                `json:"rootWord"`
-	PartOfSpeech string                `json:"partOfSpeech"` //  E.g., "verb", "noun", "participle"
-	Translations []string              `json:"translations"`
-	Categories   []GrammaticalCategory `json:"categories"`
+	RootWord       string                `json:"rootWord"`
+	PartOfSpeech   string                `json:"partOfSpeech"` //  E.g., "verb", "noun", "participle"
+	Translations   []string              `json:"translations"`
+	UnaccentedWord string                `json:"unaccented"`
+	Variants       []Variant             `json:"variants"`
+	Categories     []GrammaticalCategory `json:"categories"`
+}
+
+type Variant struct {
+	SearchTerm string `json:"searchTerm"`
+	Score      int    `json:"score"`
 }
 
 func UnmarshalRootWordEntry(data []byte) (RootWordEntry, error) {

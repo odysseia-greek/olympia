@@ -7,6 +7,8 @@
     - [AggregatorCreationRequest](#olympia_aristarchos-AggregatorCreationRequest)
     - [AggregatorCreationResponse](#olympia_aristarchos-AggregatorCreationResponse)
     - [AggregatorRequest](#olympia_aristarchos-AggregatorRequest)
+    - [AggregatorStreamResponse](#olympia_aristarchos-AggregatorStreamResponse)
+    - [FormsResponse](#olympia_aristarchos-FormsResponse)
     - [GrammaticalCategory](#olympia_aristarchos-GrammaticalCategory)
     - [GrammaticalForm](#olympia_aristarchos-GrammaticalForm)
     - [HealthRequest](#olympia_aristarchos-HealthRequest)
@@ -42,6 +44,7 @@
 | root_word | [string](#string) |  |  |
 | translation | [string](#string) |  |  |
 | part_of_speech | [PartOfSpeech](#olympia_aristarchos-PartOfSpeech) |  |  |
+| trace_id | [string](#string) |  |  |
 
 
 
@@ -79,6 +82,42 @@
 
 
 
+<a name="olympia_aristarchos-AggregatorStreamResponse"></a>
+
+### AggregatorStreamResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ack | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="olympia_aristarchos-FormsResponse"></a>
+
+### FormsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| word | [string](#string) |  |  |
+| unaccented_word | [string](#string) |  |  |
+| rule | [string](#string) |  |  |
+| root_word | [string](#string) |  |  |
+| translation | [string](#string) | repeated |  |
+| part_of_speech | [string](#string) |  |  |
+| variants | [string](#string) | repeated |  |
+
+
+
+
+
+
 <a name="olympia_aristarchos-GrammaticalCategory"></a>
 
 ### GrammaticalCategory
@@ -87,9 +126,6 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tense | [string](#string) |  |  |
-| mood | [string](#string) |  |  |
-| aspect | [string](#string) |  |  |
 | forms | [GrammaticalForm](#olympia_aristarchos-GrammaticalForm) | repeated |  |
 
 
@@ -105,10 +141,6 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| person | [string](#string) |  |  |
-| number | [string](#string) |  |  |
-| gender | [string](#string) |  |  |
-| case | [string](#string) |  |  |
 | word | [string](#string) |  |  |
 | rule | [string](#string) |  |  |
 
@@ -154,6 +186,8 @@
 | part_of_speech | [PartOfSpeech](#olympia_aristarchos-PartOfSpeech) |  |  |
 | translations | [string](#string) | repeated |  |
 | categories | [GrammaticalCategory](#olympia_aristarchos-GrammaticalCategory) | repeated |  |
+| unaccented_word | [string](#string) |  |  |
+| variants | [string](#string) | repeated |  |
 
 
 
@@ -189,6 +223,11 @@
 | NOUN | 2 |  |
 | PARTICIPLE | 3 |  |
 | PREPOSITION | 4 |  |
+| PARTICLE | 5 |  |
+| ADVERB | 6 |  |
+| CONJUNCTION | 7 |  |
+| ARTICLE | 8 |  |
+| PRONOUN | 9 |  |
 
 
  
@@ -203,8 +242,9 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateNewEntry | [AggregatorCreationRequest](#olympia_aristarchos-AggregatorCreationRequest) | [AggregatorCreationResponse](#olympia_aristarchos-AggregatorCreationResponse) |  |
+| CreateNewEntry | [AggregatorCreationRequest](#olympia_aristarchos-AggregatorCreationRequest) stream | [AggregatorStreamResponse](#olympia_aristarchos-AggregatorStreamResponse) |  |
 | RetrieveEntry | [AggregatorRequest](#olympia_aristarchos-AggregatorRequest) | [RootWordResponse](#olympia_aristarchos-RootWordResponse) |  |
+| RetrieveRootFromGrammarForm | [AggregatorRequest](#olympia_aristarchos-AggregatorRequest) | [FormsResponse](#olympia_aristarchos-FormsResponse) |  |
 | RetrieveSearchWords | [AggregatorRequest](#olympia_aristarchos-AggregatorRequest) | [SearchWordResponse](#olympia_aristarchos-SearchWordResponse) |  |
 | Health | [HealthRequest](#olympia_aristarchos-HealthRequest) | [HealthResponse](#olympia_aristarchos-HealthResponse) |  |
 

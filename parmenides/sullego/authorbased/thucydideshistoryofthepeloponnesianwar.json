@@ -356,414 +356,224 @@
     ]
   },
   {
-    "quizType": "authorbased",
-    "theme": "Thucydides - History of the Peloponnesian War",
-    "set": 1,
-    "segment": "2.37.1",
-    "reference": "/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
-    "fullSentence": "‘χρώμεθα γὰρ πολιτείᾳ οὐ ζηλούσῃ τοὺς τῶν πέλας νόμους, παράδειγμα δὲ μᾶλλον αὐτοὶ ὄντες τισὶν ἢ μιμούμενοι ἑτέρους. καὶ ὄνομα μὲν διὰ τὸ μὴ ἐς ὀλίγους ἀλλ’ ἐς πλείονας οἰκεῖν δημοκρατία κέκληται· μέτεστι δὲ κατὰ μὲν τοὺς νόμους πρὸς τὰ ἴδια διάφορα πᾶσι τὸ ἴσον, κατὰ δὲ τὴν ἀξίωσιν, ὡς ἕκαστος ἔν τῳ εὐδοκιμεῖ, οὐκ ἀπὸ μέρους τὸ πλέον ἐς τὰ κοινὰ ἢ ἀπ’ ἀρετῆς προτιμᾶται, οὐδ’ αὖ κατὰ πενίαν, ἔχων γέ τι ἀγαθὸν δρᾶσαι τὴν πόλιν, ἀξιώματος ἀφανείᾳ κεκώλυται.",
-    "translation": "Our constitution does not copy the laws of neighboring states; we are rather a pattern to others than imitators ourselves. Its administration favors the many instead of the few; this is why it is called a democracy. If we look to the laws, they afford equal justice to all in their private differences; if to social standing, advancement in public life falls to reputation for capacity, class considerations not being allowed to interfere with merit; nor again does poverty bar the way, if a man is able to serve the state, he is not hindered by the obscurity of his condition.",
-    "content": [
-      {
-        "greek": "ἄλλος",
-        "translation": "other, another",
-        "wordsInText": [
-          "ἀλλ’"
-        ]
-      },
+    "quizType":"authorbased",
+    "theme":"Thucydides - History of the Peloponnesian War",
+    "set":1,
+    "segment":"2.37.1",
+    "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
+    "fullSentence":"‘χρώμεθα γὰρ πολιτείᾳ οὐ ζηλούσῃ τοὺς τῶν πέλας νόμους, παράδειγμα δὲ μᾶλλον αὐτοὶ ὄντες τισὶν ἢ μιμούμενοι ἑτέρους. καὶ ὄνομα μὲν διὰ τὸ μὴ ἐς ὀλίγους ἀλλ’ ἐς πλείονας οἰκεῖν δημοκρατία κέκληται· μέτεστι δὲ κατὰ μὲν τοὺς νόμους πρὸς τὰ ἴδια διάφορα πᾶσι τὸ ἴσον, κατὰ δὲ τὴν ἀξίωσιν, ὡς ἕκαστος ἔν τῳ εὐδοκιμεῖ, οὐκ ἀπὸ μέρους τὸ πλέον ἐς τὰ κοινὰ ἢ ἀπ’ ἀρετῆς προτιμᾶται, οὐδ’ αὖ κατὰ πενίαν, ἔχων γέ τι ἀγαθὸν δρᾶσαι τὴν πόλιν, ἀξιώματος ἀφανείᾳ κεκώλυται.",
+    "translation":"Our constitution does not copy the laws of neighboring states; we are rather a pattern to others than imitators ourselves. Its administration favors the many instead of the few; this is why it is called a democracy. If we look to the laws, they afford equal justice to all in their private differences; if to social standing, advancement in public life falls to reputation for capacity, class considerations not being allowed to interfere with merit; nor again does poverty bar the way, if a man is able to serve the state, he is not hindered by the obscurity of his condition.",
+    "grammarQuestionOptions":{
+      "verbs":[
+        "pres part - sing - fem - dat",
+        "pres part - plural - masc - nom",
+        "aorist mid part - plural - nom/acc",
+        "3rd plural - fut - ind - act",
+        "3rd plural - aorist - ind - act",
+        "3rd sing - perf - ind - mid",
+        "3rd plural - pres - ind - act",
+        "1st plur - pres - ind - mid",
+        "3rd sing - pres - ind - act",
+        "3rd sing - pres - ind - mid",
+        "1st sing - pres - ind - act",
+        "3rd sing - aorist - ind - mid",
+        "pres - inf - act",
+        "pres - part - act",
+        "aorist inf - act"
+      ],
+      "nouns":[
+        "sing - nom",
+        "sing - fem - acc",
+        "sing - gen",
+        "sing - dat",
+        "sing - acc",
+        "plural - nom",
+        "plural - gen",
+        "plural - neut - nom",
+        "plural - masc/neut - dat",
+        "plural - dat"
+      ],
+      "misc":[ ]
+    },
+    "content":[
       {
         "greek": "ἀγαθός",
         "translation": "good, the good",
         "wordsInText": [
           "ἀγαθὸν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"neut nom/acc | sing - acc - masc",
+            "typeOfWord":"noun",
+            "wordInText":"ἀγαθὸν"
+          }
         ]
       },
       {
-        "greek": "ἀξίωμα",
-        "translation": "that of which one is thought worthy, an honour ",
-        "wordsInText": [
-          "ἀξιώματος"
-        ]
-      },
-      {
-        "greek": "ἀξίωσις",
-        "translation": "a thinking worthy",
-        "wordsInText": [
-          "ἀξίωσιν"
-        ]
-      },
-      {
-        "greek": "ἀπό",
-        "translation": "from, away from. c. gen.",
-        "wordsInText": [
-          "ἀπ’",
-          "ἀπὸ"
-        ]
-      },
-      {
-        "greek": "ἀρετή",
-        "translation": "goodness, excellence",
-        "wordsInText": [
-          "ἀρετῆς"
-        ]
-      },
-      {
-        "greek": "αὖ",
-        "translation": "again, anew, afresh, once more",
-        "wordsInText": [
-          "αὖ"
-        ]
-      },
-      {
-        "greek": "αὐτός",
-        "translation": "self; [the] same; unemph. 3rd pers.pronoun;",
-        "wordsInText": [
-          "αὐτοὶ"
-        ]
-      },
-      {
-        "greek": "ἀφάνεια",
-        "translation": "obscurity",
-        "wordsInText": [
-          "ἀφανείᾳ"
-        ]
-      },
-      {
-        "greek": "γάρ",
-        "translation": "for",
-        "wordsInText": [
-          "γάρ",
-          "γὰρ"
-        ]
-      },
-      {
-        "greek": "γε",
-        "translation": "at least, at any rate",
-        "wordsInText": [
-          "γέ"
-        ]
-      },
-      {
-        "greek": "δέ",
-        "translation": "but",
-        "wordsInText": [
-          "δὲ"
-        ]
-      },
-      {
-        "greek": "δημοκρατία",
-        "translation": "democracy, popular government",
-        "wordsInText": [
+        "greek":"δημοκρατία",
+        "translation":"democracy, popular government",
+        "wordsInText":[
           "δημοκρατία"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"sing - nom",
+            "typeOfWord":"noun",
+            "wordInText":"δημοκρατία"
+          }
         ]
       },
       {
-        "greek": "διά",
-        "translation": "through c. gen.; because of c. acc.",
-        "wordsInText": [
-          "διὰ"
-        ]
-      },
-      {
-        "greek": "διάφορος",
-        "translation": "different, unlike",
-        "wordsInText": [
-          "διάφορα"
-        ]
-      },
-      {
-        "greek": "δράω",
-        "translation": "to do",
-        "wordsInText": [
-          "δρᾶσαι"
-        ]
-      },
-      {
-        "greek": "εἰμί",
-        "translation": "to be",
-        "wordsInText": [
+        "greek":"εἰμί",
+        "translation":"to be",
+        "wordsInText":[
           "ὄντες"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"aorist mid part - plural - nom/acc",
+            "typeOfWord":"verb",
+            "wordInText":"ὄντες"
+          }
         ]
       },
       {
-        "greek": "εἰς",
-        "translation": "into, to c. acc.",
-        "wordsInText": [
-          "ἐς"
-        ]
-      },
-      {
-        "greek": "ἕκαστος",
-        "translation": "every, every one, each, each one",
-        "wordsInText": [
-          "ἕκαστος"
-        ]
-      },
-      {
-        "greek": "ἐν",
-        "translation": "in, among. c. dat.",
-        "wordsInText": [
-          "ἔν"
-        ]
-      },
-      {
-        "greek": "ἕτερος",
-        "translation": "the one; the other (of two)",
-        "wordsInText": [
-          "ἑτέρους"
-        ]
-      },
-      {
-        "greek": "εὐδοκιμέω",
-        "translation": "to be of good repute, to be held in esteem, honoured, famous, popular",
-        "wordsInText": [
-          "εὐδοκιμεῖ"
-        ]
-      },
-      {
-        "greek": "ἔχω",
-        "translation": "to have",
-        "wordsInText": [
-          "ἔχων"
-        ]
-      },
-      {
-        "greek": "ζηλόω",
-        "translation": "to rival, vie with, emulate ",
-        "wordsInText": [
-          "ζηλούσῃ"
-        ]
-      },
-      {
-        "greek": "ἤ",
-        "translation": "either..or; than",
-        "wordsInText": [
-          "ἢ"
-        ]
-      },
-      {
-        "greek": "ἴδιος",
-        "translation": "one's own, pertaining to oneself",
-        "wordsInText": [
-          "ἴδια"
-        ]
-      },
-      {
-        "greek": "ἴσος",
-        "translation": "equal to, the same as; adv. perhaps",
-        "wordsInText": [
-          "ἴσον"
-        ]
-      },
-      {
-        "greek": "καί",
-        "translation": "and, also",
-        "wordsInText": [
-          "καὶ"
-        ]
-      },
-      {
-        "greek": "καλέω",
-        "translation": "to call, summon",
-        "wordsInText": [
-          "κέκληται"
-        ]
-      },
-      {
-        "greek": "κατά",
-        "translation": "down, against with gen.; according to, throughout with acc.",
-        "wordsInText": [
-          "κατὰ"
-        ]
-      },
-      {
-        "greek": "κοινός",
-        "translation": "common, shared in common",
-        "wordsInText": [
-          "κοινὰ"
-        ]
-      },
-      {
-        "greek": "κωλύω",
-        "translation": "to let, hinder, check, prevent",
-        "wordsInText": [
-          "κεκώλυται"
-        ]
-      },
-      {
-        "greek": "μᾶλλον",
-        "translation": "more, rather",
-        "wordsInText": [
-          "μᾶλλον"
-        ]
-      },
-      {
-        "greek": "μέν",
-        "translation": "on the one hand, on the other hand",
-        "wordsInText": [
-          "μὲν"
-        ]
-      },
-      {
-        "greek": "μέρος",
-        "translation": "a part, share",
-        "wordsInText": [
-          "μέρους"
-        ]
-      },
-      {
-        "greek": "μέτειμι",
-        "translation": "be among; (+dat and gen) have a share in ",
-        "wordsInText": [
-          "μέτεστι"
-        ]
-      },
-      {
-        "greek": "μή",
-        "translation": "not",
-        "wordsInText": [
-          "μὴ"
-        ]
-      },
-      {
-        "greek": "μιμέομαι",
-        "translation": "to mimic, imitate, represent, portray",
-        "wordsInText": [
-          "μιμούμενοι"
-        ]
-      },
-      {
-        "greek": "νόμος",
-        "translation": "usage, custom, law, ordinance",
-        "wordsInText": [
-          "νόμους"
-        ]
-      },
-      {
-        "greek": "ὁ",
-        "translation": "the",
-        "wordsInText": [
-          "τῶν",
-          "τοὺς",
-          "τὸ",
-          "τὰ",
-          "τὴν",
-          "τῳ"
-        ]
-      },
-      {
-        "greek": "οἰκέω",
-        "translation": "to inhabit, occupy",
-        "wordsInText": [
+        "greek":"οἰκέω",
+        "translation":"to inhabit, occupy",
+        "wordsInText":[
           "οἰκεῖν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"pres - inf - act",
+            "typeOfWord":"verb",
+            "wordInText":"οἰκεῖν"
+          }
         ]
       },
       {
-        "greek": "ὀλίγος",
-        "translation": "few, little, scanty, small ",
-        "wordsInText": [
-          "ὀλίγους"
+        "greek":"καλέω",
+        "translation":"to call, summon",
+        "wordsInText":[
+          "κέκληται"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - perf - ind - mid",
+            "typeOfWord":"verb",
+            "wordInText":"κέκληται"
+          }
         ]
       },
       {
-        "greek": "ὄνομα",
-        "translation": "name",
-        "wordsInText": [
-          "ὄνομα"
-        ]
-      },
-      {
-        "greek": "οὐ",
-        "translation": "not",
-        "wordsInText": [
-          "οὐ",
-          "οὐκ",
-          "οὐδ’"
-        ]
-      },
-      {
-        "greek": "παράδειγμα",
-        "translation": "a pattern",
-        "wordsInText": [
-          "παράδειγμα"
-        ]
-      },
-      {
-        "greek": "πᾶς",
-        "translation": "all, the whole",
-        "wordsInText": [
-          "πᾶσι"
-        ]
-      },
-      {
-        "greek": "πέλας",
-        "translation": "near, hard by, close",
-        "wordsInText": [
-          "πέλας"
-        ]
-      },
-      {
-        "greek": "πενία",
-        "translation": "poverty, need ",
-        "wordsInText": [
-          "πενίαν"
-        ]
-      },
-      {
-        "greek": "πλείων",
-        "translation": "more, larger",
-        "wordsInText": [
-          "πλείονας"
-        ]
-      },
-      {
-        "greek": "πλέως",
-        "translation": "full of",
-        "wordsInText": [
-          "πλέον"
-        ]
-      },
-      {
-        "greek": "πόλις",
-        "translation": "a city",
-        "wordsInText": [
-          "πόλιν"
-        ]
-      },
-      {
-        "greek": "πολιτεία",
-        "translation": "citizenship, citizen body, constitution",
-        "wordsInText": [
-          "πολιτείᾳ"
-        ]
-      },
-      {
-        "greek": "πρός",
-        "translation": "from (w. gen.); at, near, in addition to (w. dat.); to, toward, regarding (w. acc.)",
-        "wordsInText": [
-          "πρὸς"
-        ]
-      },
-      {
-        "greek": "προτιμάω",
-        "translation": "to honour",
-        "wordsInText": [
+        "greek":"προτιμάω",
+        "translation":"to honour",
+        "wordsInText":[
           "προτιμᾶται"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - pres - ind - mid",
+            "typeOfWord":"verb",
+            "wordInText":"προτιμᾶται"
+          }
         ]
       },
       {
-        "greek": "τις",
-        "translation": "any one, any thing, some one, some thing;",
-        "wordsInText": [
-          "τι",
-          "τισὶν"
+        "greek":"κωλύω",
+        "translation":"to let, hinder, check, prevent",
+        "wordsInText":[
+          "κεκώλυται"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - perf - ind - mid",
+            "typeOfWord":"verb",
+            "wordInText":"κεκώλυται"
+          }
         ]
       },
       {
-        "greek": "ὡς",
-        "translation": "as, how",
-        "wordsInText": [
-          "ὡς"
+        "greek":"ἔχω",
+        "translation":"to have",
+        "wordsInText":[
+          "ἔχων"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"pres - part - act",
+            "typeOfWord":"verb",
+            "wordInText":"ἔχων"
+          }
+        ]
+      },
+      {
+        "greek":"ζηλόω",
+        "translation":"to rival, vie with, emulate",
+        "wordsInText":[
+          "ζηλούσῃ"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"pres part - sing - fem - dat",
+            "typeOfWord":"verb",
+            "wordInText":"ζηλούσῃ"
+          }
+        ]
+      },
+      {
+        "greek":"μιμέομαι",
+        "translation":"to mimic, imitate, represent, portray",
+        "wordsInText":[
+          "μιμούμενοι"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"pres part - plural - masc - nom",
+            "typeOfWord":"verb",
+            "wordInText":"μιμούμενοι"
+          }
+        ]
+      },
+      {
+        "greek":"μέτειμι",
+        "translation":"be among; (+dat and gen) have a share in",
+        "wordsInText":[
+          "μέτεστι"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - pres - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"μέτεστι"
+          }
+        ]
+      },
+      {
+        "greek":"δράω",
+        "translation":"to do",
+        "wordsInText":[
+          "δρᾶσαι"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"aorist inf - act",
+            "typeOfWord":"verb",
+            "wordInText":"δρᾶσαι"
+          }
         ]
       },
       {
@@ -771,7 +581,384 @@
         "translation": "use, experience",
         "wordsInText": [
           "‘χρώμεθα"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "1st plur - pres - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "‘χρώμεθα"
+          }
         ]
+      },
+      {
+        "greek":"ἄλλος",
+        "translation":"other, another",
+        "wordsInText":[
+          "ἀλλ’"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἀπό",
+        "translation":"from, away from. c. gen.",
+        "wordsInText":[
+          "ἀπ’",
+          "ἀπὸ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἀρετή",
+        "translation":"goodness, excellence",
+        "wordsInText":[
+          "ἀρετῆς"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"αὖ",
+        "translation":"again, anew, afresh, once more",
+        "wordsInText":[
+          "αὖ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"αὐτός",
+        "translation":"self; [the] same; unemph. 3rd pers.pronoun;",
+        "wordsInText":[
+          "αὐτοὶ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἀφάνεια",
+        "translation":"obscurity",
+        "wordsInText":[
+          "ἀφανείᾳ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"γάρ",
+        "translation":"for",
+        "wordsInText":[
+          "γάρ",
+          "γὰρ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"γε",
+        "translation":"at least, at any rate",
+        "wordsInText":[
+          "γέ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"δέ",
+        "translation":"but",
+        "wordsInText":[
+          "δὲ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"διά",
+        "translation":"through c. gen.; because of c. acc.",
+        "wordsInText":[
+          "διὰ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"διάφορος",
+        "translation":"different, unlike",
+        "wordsInText":[
+          "διάφορα"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"εἰς",
+        "translation":"into, to c. acc.",
+        "wordsInText":[
+          "ἐς"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἕκαστος",
+        "translation":"every, every one, each, each one",
+        "wordsInText":[
+          "ἕκαστος"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἐν",
+        "translation":"in, among. c. dat.",
+        "wordsInText":[
+          "ἔν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἕτερος",
+        "translation":"the one; the other (of two)",
+        "wordsInText":[
+          "ἑτέρους"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek": "εὐδοκιμέω",
+        "translation": "to be of good repute, to be held in esteem, honoured, famous, popular",
+        "wordsInText": [
+          "εὐδοκιμεῖ"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd sing - pres - ind - act",
+            "typeOfWord": "verb",
+            "wordInText": "εὐδοκιμεῖ"
+          }
+        ]
+      },
+      {
+        "greek":"ἤ",
+        "translation":"either..or; than",
+        "wordsInText":[
+          "ἢ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἴδιος",
+        "translation":"one's own, pertaining to oneself",
+        "wordsInText":[
+          "ἴδια"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ἴσος",
+        "translation":"equal to, the same as; adv. perhaps",
+        "wordsInText":[
+          "ἴσον"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"καί",
+        "translation":"and, also",
+        "wordsInText":[
+          "καὶ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"κατά",
+        "translation":"down, against with gen.; according to, throughout with acc.",
+        "wordsInText":[
+          "κατὰ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"κοινός",
+        "translation":"common, shared in common",
+        "wordsInText":[
+          "κοινὰ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"μᾶλλον",
+        "translation":"more, rather",
+        "wordsInText":[
+          "μᾶλλον"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"μέν",
+        "translation":"on the one hand, on the other hand",
+        "wordsInText":[
+          "μὲν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"μέρος",
+        "translation":"a part, share",
+        "wordsInText":[
+          "μέρους"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"μή",
+        "translation":"not",
+        "wordsInText":[
+          "μὴ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"νόμος",
+        "translation":"usage, custom, law, ordinance",
+        "wordsInText":[
+          "νόμους"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ὁ",
+        "translation":"the",
+        "wordsInText":[
+          "τῶν",
+          "τοὺς",
+          "τὸ",
+          "τὰ",
+          "τὴν",
+          "τῳ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ὀλίγος",
+        "translation":"few, little, scanty, small",
+        "wordsInText":[
+          "ὀλίγους"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ὄνομα",
+        "translation":"name",
+        "wordsInText":[
+          "ὄνομα"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"οὐ",
+        "translation":"not",
+        "wordsInText":[
+          "οὐ",
+          "οὐκ",
+          "οὐδ’"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"παράδειγμα",
+        "translation":"a pattern",
+        "wordsInText":[
+          "παράδειγμα"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πᾶς",
+        "translation":"all, the whole",
+        "wordsInText":[
+          "πᾶσι"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πέλας",
+        "translation":"near, hard by, close",
+        "wordsInText":[
+          "πέλας"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πενία",
+        "translation":"poverty, need",
+        "wordsInText":[
+          "πενίαν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πλείων",
+        "translation":"more, larger",
+        "wordsInText":[
+          "πλείονας"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πλέως",
+        "translation":"full of",
+        "wordsInText":[
+          "πλέον"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πόλις",
+        "translation":"a city",
+        "wordsInText":[
+          "πόλιν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πολιτεία",
+        "translation":"citizenship, citizen body, constitution",
+        "wordsInText":[
+          "πολιτείᾳ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"πρός",
+        "translation":"from (w. gen.); at, near, in addition to (w. dat.); to, toward, regarding (w. acc.)",
+        "wordsInText":[
+          "πρὸς"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"τις",
+        "translation":"any one, any thing, some one, some thing;",
+        "wordsInText":[
+          "τι",
+          "τισὶν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"ὡς",
+        "translation":"as, how",
+        "wordsInText":[
+          "ὡς"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek": "ἀξίωμα",
+        "translation": "that of which one is thought worthy, an honour",
+        "wordsInText": [
+          "ἀξιώματος"
+        ],
+        "hasGrammarQuestions": false
+      },
+      {
+        "greek": "ἀξίωσις",
+        "translation": "a thinking worthy",
+        "wordsInText": [
+          "ἀξίωσιν"
+        ],
+        "hasGrammarQuestions": false
       }
     ]
   },
