@@ -140,6 +140,12 @@ func (h *HerodotosHandler) create(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
+	q := h.Elastic.Builder().MatchAll()
+	test, err := h.Elastic.Query().Match("grammar", q)
+	if err != nil {
+		logging.Error(err.Error())
+	}
+	logging.Debug(fmt.Sprintf("%+v", test))
 	response, err := h.Elastic.Query().Match(h.Index, query)
 
 	if err != nil {
