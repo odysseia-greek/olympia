@@ -64,6 +64,22 @@ func (a *AlexandrosHandler) pingPong(w http.ResponseWriter, req *http.Request) {
 // health returns the health of the API
 // The `health` function is used to check the health status of the API. It checks if the underlying infrastructure, such as the database and Elasticsearch, is healthy.
 func (a *AlexandrosHandler) health(w http.ResponseWriter, req *http.Request) {
+	// swagger:route GET /health status health
+	//
+	// Checks if api is healthy
+	//
+	//	Consumes:
+	//	- application/json
+	//
+	//	Produces:
+	//	- application/json
+	//
+	//	Schemes: http, https
+	//
+	//	Responses:
+	//	  200: Health
+	//	  502: Health
+
 	elasticHealth := a.Elastic.Health().Info()
 	dbHealth := models.DatabaseHealth{
 		Healthy:       elasticHealth.Healthy,

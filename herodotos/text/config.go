@@ -27,7 +27,7 @@ const (
 func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	tracer, err := aristophanes.NewClientTracer()
+	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
 	if err != nil {
 		logging.Error(err.Error())
 	}
@@ -113,8 +113,8 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 
 	cfg := models.Config{
 		Service:     elasticService,
-		Username:    "elastic",
-		Password:    "F4w6xKrp185468uSIeAh31Yf",
+		Username:    vaultConfig.ElasticUsername,
+		Password:    vaultConfig.ElasticPassword,
 		ElasticCERT: vaultConfig.ElasticCERT,
 	}
 
