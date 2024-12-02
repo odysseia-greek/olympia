@@ -27,7 +27,7 @@ var streamer pbar.TraceService_ChorusClient
 func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	tracer, err := aristophanes.NewClientTracer()
+	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
 	healthy := tracer.WaitForHealthyState()
 	if !healthy {
 		logging.Error("tracing service not ready - restarting seems the only option")
