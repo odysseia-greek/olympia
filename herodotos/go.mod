@@ -10,7 +10,7 @@ require (
 	github.com/odysseia-greek/agora/plato v0.1.48
 	github.com/odysseia-greek/attike/aristophanes v0.6.2
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
-	github.com/odysseia-greek/olympia/aristarchos v0.0.10
+	github.com/odysseia-greek/olympia/aristarchos v0.0.12
 	github.com/stretchr/testify v1.10.0
 	google.golang.org/grpc v1.68.0
 )

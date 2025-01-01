@@ -130,7 +130,7 @@ func (a *AggregatorServiceImpl) createOrUpdate(request *pb.AggregatorCreationReq
 
 	entry, err := a.mapAndHandleGrammaticalCategories(request)
 	if err != nil {
-		logging.Error(err.Error())
+		logging.Error(fmt.Sprintf("error returned from mapping: %s", err.Error()))
 		return
 	}
 
@@ -253,7 +253,6 @@ func (a *AggregatorServiceImpl) RetrieveEntry(ctx context.Context, request *pb.A
 	startTime := time.Now()
 	requestID, ok := ctx.Value(config.DefaultTracingName).(string)
 	if !ok {
-		logging.Error("could not extract combinedId")
 		requestID = "donot+trace+0"
 	}
 
@@ -383,7 +382,6 @@ func (a *AggregatorServiceImpl) RetrieveSearchWords(ctx context.Context, request
 	startTime := time.Now()
 	requestID, ok := ctx.Value(config.DefaultTracingName).(string)
 	if !ok {
-		logging.Error("could not extract combinedId")
 		requestID = "donot+trace+0"
 	}
 

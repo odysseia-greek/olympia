@@ -4,12 +4,12 @@ go 1.23.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/aristoteles v0.1.10
+	github.com/odysseia-greek/agora/aristoteles v0.1.12
 	github.com/odysseia-greek/agora/plato v0.1.48
 	github.com/odysseia-greek/attike/aristophanes v0.6.2
 	github.com/odysseia-greek/delphi/ptolemaios v0.0.4
 	github.com/stretchr/testify v1.10.0
-	google.golang.org/grpc v1.68.0
+	google.golang.org/grpc v1.68.1
 	google.golang.org/protobuf v1.35.2
 )
 

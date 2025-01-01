@@ -269,8 +269,35 @@ func (a *AlexandrosHandler) searchWord(w http.ResponseWriter, req *http.Request)
 			endTime := time.Since(startTime)
 
 			if err != nil {
-				logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", hit.Hit.Greek, err.Error()))
-			} else {
+				logging.Error(fmt.Sprintf("could not query any texts for word: %s error: %s", baseWord, err.Error()))
+				logging.Debug(fmt.Sprintf("trying with unparsed word: %s", hit.Hit.Greek))
+
+				backUp := models.AnalyzeTextRequest{Rootword: hit.Hit.Greek}
+				backUpBody, err := json.Marshal(backUp)
+				if err != nil {
+					e := models.ValidationError{
+						ErrorModel: models.ErrorModel{UniqueCode: traceID},
+						Messages: []models.ValidationMessages{
+							{
+								Field:   "unmarshal json",
+								Message: err.Error(),
+							},
+						},
+					}
+
+					middleware.ResponseWithJson(w, e)
+					return
+				}
+
+				foundInText, err = a.Client.Herodotos().Analyze(backUpBody, requestId)
+				endTime = time.Since(startTime)
+
+				if err != nil {
+					logging.Error(fmt.Sprintf("could not query any texts for backup word: %s error: %s", hit.Hit.Greek, err.Error()))
+				}
+			}
+
+			if foundInText != nil {
 				var source models.AnalyzeTextResponse
 				defer foundInText.Body.Close()
 				err = json.NewDecoder(foundInText.Body).Decode(&source)

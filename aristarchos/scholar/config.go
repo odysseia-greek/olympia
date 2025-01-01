@@ -130,7 +130,7 @@ func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 
 	err = createIndexAtStartup(elastic, index)
 	if err != nil {
-		logging.Error(fmt.Sprintf("index creation returned an error, this most likely means the index already exists and this function should be moved to a job: %s", err.Error()))
+		return nil, err
 	}
 
 	return &AggregatorServiceImpl{
@@ -139,8 +139,14 @@ func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 	}, nil
 }
 
-// perhaps it would be best to move this to a different job so that an index is created and aristarchos can be switched from hybrid to a regular api
 func createIndexAtStartup(elastic aristoteles.Client, indexName string) error {
+	//this method needs a change in the drakon role
+	//exists, data, err := elastic.Index().IndexExists(indexName)
+	//if exists {
+	//	logging.Info(fmt.Sprintf("index %s already exists", indexName))
+	//	logging.Debug(fmt.Sprintf("%v", data))
+	//	return nil
+	//}
 	policyName := fmt.Sprintf("%s_policy", indexName)
 	logging.Info(fmt.Sprintf("creating policy: %s", policyName))
 	err := createPolicyAtStartup(elastic, policyName)
@@ -151,7 +157,8 @@ func createIndexAtStartup(elastic aristoteles.Client, indexName string) error {
 	indexMapping := createScholarIndexMapping()
 	created, err := elastic.Index().Create(indexName, indexMapping)
 	if err != nil {
-		return err
+		logging.Warn(fmt.Sprintf("index creation returned an error, this most likely means the index already exists: %s", err.Error()))
+		return nil
 	}
 
 	logging.Info(fmt.Sprintf("created index: %s %v", indexName, created.Acknowledged))
