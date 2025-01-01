@@ -140,6 +140,12 @@ func (h *HerodotosHandler) create(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
+	q := h.Elastic.Builder().MatchAll()
+	test, err := h.Elastic.Query().Match("grammar", q)
+	if err != nil {
+		logging.Error(err.Error())
+	}
+	logging.Debug(fmt.Sprintf("%+v", test))
 	response, err := h.Elastic.Query().Match(h.Index, query)
 
 	if err != nil {
@@ -597,44 +603,35 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 	aggregatorRequest := pab.AggregatorRequest{RootWord: analyzeTextRequest.Rootword}
 	entry, err := h.Aggregator.RetrieveEntry(ctx, &aggregatorRequest)
 	if err != nil {
-		e := models.ValidationError{
-			ErrorModel: models.ErrorModel{UniqueCode: traceID},
-			Messages: []models.ValidationMessages{
-				{
-					Field:   "querying aggregator failed",
-					Message: err.Error(),
-				},
-			},
-		}
-		middleware.ResponseWithJson(w, e)
-		return
+		logging.Error(fmt.Sprintf("failed to retrieve entry: %s", err.Error()))
 	}
 
+	var rootWordfound bool
 	var conjugations []models.Conjugations
 	var words []string
-	var rootWordfound bool
 
-	for _, category := range entry.Categories {
-		for _, form := range category.Forms {
-			if form.Word == entry.RootWord {
-				rootWordfound = true
+	if entry != nil {
+		for _, category := range entry.Categories {
+			for _, form := range category.Forms {
+				if form.Word == entry.RootWord {
+					rootWordfound = true
+				}
+				words = append(words, form.Word)
+				conjugation := models.Conjugations{
+					Word: form.Word,
+					Rule: form.Rule,
+				}
+				conjugations = append(conjugations, conjugation)
 			}
-			words = append(words, form.Word)
-			conjugation := models.Conjugations{
-				Word: form.Word,
-				Rule: form.Rule,
-			}
-			conjugations = append(conjugations, conjugation)
 		}
 	}
 
 	if !rootWordfound {
-		words = append(words, entry.RootWord)
+		words = append(words, analyzeTextRequest.Rootword)
 	}
 
 	query := createGreekTextQuery(words)
 
-	logging.Debug(fmt.Sprintf("%v", query))
 	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
@@ -899,3 +896,38 @@ func streamlineSentenceBeforeCompare(matchingWords []string, sentence string) st
 
 	return newSentence
 }
+
+//
+//curl -X POST "http://aristoteles-es-http:9200/text/_search" \
+//-u "elastic:iQB12t11l113L75EfQZp0kQI" \
+//-H "Content-Type: application/json" \
+//-d '{
+//"query" : {
+//"bool" : {
+//"should" : [ {
+//"nested" : {
+//"path" : "rhemai",
+//"query" : {
+//"bool" : {
+//"should" : [ {
+//"match" : {
+//"rhemai.greek" : "λογος"
+//}
+//} ]
+//}
+//}
+//}
+//} ]
+//}
+//}
+//}'
+//
+//curl -X POST "http://aristoteles-es-http:9200/text/_search" \
+//-u "elastic:iQB12t11l113L75EfQZp0kQI" \
+//-H "Content-Type: application/json" \
+//-d '{
+//"query": {
+//"match_all": {}
+//},
+//"size": 1
+//}'

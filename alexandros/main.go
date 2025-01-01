@@ -11,6 +11,7 @@ import (
 )
 
 const standardPort = ":5000"
+const defaultHttpsPort = ":5443"
 
 func main() {
 	port := os.Getenv("PORT")

@@ -27,15 +27,15 @@ const (
 func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	tracer, err := aristophanes.NewClientTracer()
+	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
 	if err != nil {
 		logging.Error(err.Error())
 	}
 
 	healthy := tracer.WaitForHealthyState()
 	if !healthy {
-		logging.Error("tracing service not ready - restarting seems the only option")
-		os.Exit(1)
+		logging.Error("tracing service not ready - setting tracer to nil and starting backup process")
+		tracer = nil
 	}
 
 	streamer, err := tracer.Chorus(ctx)
@@ -46,7 +46,7 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	ambassador := diplomat.NewClientAmbassador()
 	ambassadorHealthy := ambassador.WaitForHealthyState()
 	if !ambassadorHealthy {
-		logging.Info("tracing service not ready - restarting seems the only option")
+		logging.Info("ambassador service not ready - restarting seems the only option")
 		os.Exit(1)
 	}
 
