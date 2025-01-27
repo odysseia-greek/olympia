@@ -359,6 +359,500 @@
     "quizType":"authorbased",
     "theme":"Thucydides - History of the Peloponnesian War",
     "set":1,
+    "segment":"1.93.3",
+    "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.93",
+    "fullSentence":"ἔπεισε δὲ καὶ τοῦ Πειραιῶς τὰ λοιπὰ ὁ Θεμιστοκλῆς οἰκοδομεῖν, ὑπῆρκτο δ’ αὐτοῦ πρότερον ἐπὶ τῆς ἐκείνου ἀρχῆς ἧς κατ’ ἐνιαυτὸν Ἀθηναίοις ἦρξε, νομίζων τό τε χωρίον καλὸν εἶναι, λιμένας ἔχον τρεῖς αὐτοφυεῖς, καὶ αὐτοὺς ναυτικοὺς γεγενημένους μέγα προφέρειν ἐς τὸ κτήσασθαι δύναμιν, τῆς γὰρ δὴ θαλάσσης πρῶτος ἐτόλμησεν εἰπεῖν ὡς ἀνθεκτέα ἐστί, καὶ τὴν ἀρχὴν εὐθὺς ξυγκατεσκεύαζεν.",
+    "translation":"Themistocles also persuaded them to finish the walls of Piraeus, which had been begun before, in his year of office as archon; being influenced alike by the fineness of a locality that has three natural harbors, and by the great start which the Athenians would gain in the acquisition of power by becoming a naval people. For he first ventured to tell them to stick to the sea and forthwith began to lay the foundations of the empire.",
+    "grammarQuestionOptions":{
+      "verbs":[
+        "pres part - sing - fem - dat",
+        "pres part - plural - masc - nom",
+        "aorist mid part - plural - nom/acc",
+        "3rd plural - fut - ind - act",
+        "3rd plural - aorist - ind - act",
+        "3rd sing - perf - ind - mid",
+        "3rd plural - pres - ind - act",
+        "1st plur - pres - ind - mid",
+        "1st sing - imperf - ind - act (Epic)",
+        "3rd sing - pres - ind - act",
+        "3rd sing - pres - ind - mid",
+        "1st sing - pres - ind - act",
+        "3rd sing - aorist - ind - mid",
+        "pres - inf - act",
+        "pres - part - act",
+        "aorist inf - act",
+        "aorist - part - act",
+        "pres - part - pass",
+        "perf - inf - act",
+        "perf - inf - mid",
+        "pres - inf - mid",
+        "2nd sing - pres - ind - act",
+        "2nd sing - aorist - ind - act",
+        "1st sing - aorist - ind - act",
+        "2nd plur - pres - ind - mid",
+        "imperf - sing - ind - act",
+        "imperf - plur - ind - act",
+        "aorist - sing - ind - mid",
+        "fut - sing - ind - act",
+        "fut - plur - ind - act",
+        "3rd sing - fut - ind - mid",
+        "imperf - pres - ind - act",
+        "imperf - pres - ind - mid",
+        "aorist - inf - pass",
+        "aorist - part - pass",
+        "imperf - part - act"
+      ],
+      "nouns":[ ],
+      "misc":[ ]
+    },
+    "content":[
+      {
+        "greek":"ἀρχή",
+        "translation":"a beginning, rule, office, empire",
+        "wordsInText":[
+          "ἀρχῆς",
+          "ἀρχὴν"
+        ]
+      },
+      {
+        "greek":"ἄρχω",
+        "translation":"(to be first) to rule, to begin",
+        "wordsInText":[
+          "ἦρξε"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - aor - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"ἦρξε"
+          }
+        ]
+      },
+      {
+        "greek":"αὐτοῦ",
+        "translation":"at the very place, just here, just there",
+        "wordsInText":[
+          "αὐτοὺς"
+        ]
+      },
+      {
+        "greek":"Ἀθηναῖος",
+        "translation":"Athenian, of Athens",
+        "wordsInText":[
+          "Ἀθηναίοις"
+        ]
+      },
+      {
+        "greek": "ἀντέχω",
+        "translation": "to hold out against, withstand",
+        "wordsInText": ["ἀνθεκτέα"],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "pres - part - pass",
+            "typeOfWord": "verb",
+            "wordInText": "ἀνθεκτέα"
+          }
+        ]
+      },
+      {
+        "greek":"αὐτοφυής",
+        "translation":"self-grown",
+        "wordsInText":[
+          "αὐτοφυεῖς"
+        ]
+      },
+      {
+        "greek":"αὐτός",
+        "translation":"the same; unemph. 3rd pers.pronoun; -self",
+        "wordsInText":[
+          "αὐτοῦ"
+        ]
+      },
+      {
+        "greek":"γάρ",
+        "translation":"for",
+        "wordsInText":[
+          "γὰρ"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"γίγνομαι",
+        "translation":"to become, be born",
+        "wordsInText":[
+          "γεγενημένους"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd plur - aor - ind - pass",
+            "typeOfWord":"verb",
+            "wordInText":"γεγενημένους"
+          }
+        ]
+      },
+      {
+        "greek":"δέ",
+        "translation":"but",
+        "wordsInText":[
+          "δὲ",
+          "δ’"
+        ]
+      },
+      {
+        "greek":"δή",
+        "translation":"indeed, truly",
+        "wordsInText":[
+          "δὴ"
+        ]
+      },
+      {
+        "greek":"δύναμις",
+        "translation":"power, might, strength",
+        "wordsInText":[
+          "δύναμιν"
+        ]
+      },
+      {
+        "greek":"ἐκείνος",
+        "translation":"that (over there)",
+        "wordsInText":[
+          "ἐκείνου"
+        ]
+      },
+      {
+        "greek":"ἐπὶ",
+        "translation":"on, upon",
+        "wordsInText":[
+          "ἐπὶ"
+        ]
+      },
+      {
+        "greek":"εἰμί",
+        "translation":"to be",
+        "wordsInText":[
+          "ἐστί",
+          "εἶναι"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - pres - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"ἐστί"
+          },
+          {
+            "correctAnswer":"pres - inf",
+            "typeOfWord":"verb",
+            "wordInText":"εἶναι"
+          }
+        ]
+      },
+      {
+        "greek":"εἶπον",
+        "translation":"to speak, say",
+        "wordsInText":[
+          "εἰπεῖν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"aor - inf - act",
+            "typeOfWord":"verb",
+            "wordInText":"εἰπεῖν"
+          }
+        ]
+      },
+      {
+        "greek":"εἰς",
+        "translation":"into, to",
+        "wordsInText":[
+          "ἐς"
+        ]
+      },
+      {
+        "greek":"ἐνιαυτός",
+        "translation":"year",
+        "wordsInText":[
+          "ἐνιαυτὸν"
+        ]
+      },
+      {
+        "greek":"εὐθύς",
+        "translation":"straight, direct",
+        "wordsInText":[
+          "εὐθὺς"
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": ["ἔχον"],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "1st sing - imperf - ind - act (Epic)",
+            "typeOfWord": "verb",
+            "wordInText": "ἔχον"
+          }
+        ]
+      },
+      {
+        "greek":"καί",
+        "translation":"and, also",
+        "wordsInText":[
+          "καὶ"
+        ]
+      },
+      {
+        "greek":"καλός",
+        "translation":"beautiful",
+        "wordsInText":[
+          "καλὸν"
+        ]
+      },
+      {
+        "greek": "κτάομαι",
+        "translation": "to procure for oneself, to get, acquire",
+        "wordsInText": ["κτήσασθαι"],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "aor - inf - act",
+            "typeOfWord": "verb",
+            "wordInText": "κτήσασθαι"
+          }
+        ]
+      },
+      {
+        "greek":"λιμήν",
+        "translation":"a harbour, haven, creek",
+        "wordsInText":[
+          "λιμένας"
+        ]
+      },
+      {
+        "greek":"λοιπός",
+        "translation":"remaining, the rest",
+        "wordsInText":[
+          "λοιπὰ"
+        ]
+      },
+      {
+        "greek":"μέγας",
+        "translation":"big, great",
+        "wordsInText":[
+          "μέγα"
+        ]
+      },
+      {
+        "greek": "νομίζω",
+        "translation": "to have as a custom; to believe",
+        "wordsInText": ["νομίζων"],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "pres - part - act",
+            "typeOfWord": "verb",
+            "wordInText": "νομίζων"
+          }
+        ]
+      },
+      {
+        "greek":"ναυτικός",
+        "translation":"seafaring, naval",
+        "wordsInText":[
+          "ναυτικοὺς"
+        ]
+      },
+      {
+        "greek":"οἰκοδομέω",
+        "translation":"to build a house",
+        "wordsInText":[
+          "οἰκοδομεῖν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"pres - inf",
+            "typeOfWord":"verb",
+            "wordInText":"οἰκοδομεῖν"
+          }
+        ]
+      },
+      {
+        "greek":"ὅς",
+        "translation":"who, that, which",
+        "wordsInText":[
+          "ἧς"
+        ]
+      },
+      {
+        "greek":"ὁ",
+        "translation":"the",
+        "wordsInText":[
+          "τοῦ",
+          "τὰ",
+          "ὁ",
+          "τῆς",
+          "τό",
+          "τὸ",
+          "τὴν"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"κατά",
+        "translation":"down, against with gen.; according to, throughout with acc.",
+        "wordsInText":[
+          "κατ’"
+        ],
+        "hasGrammarQuestions":false
+      },
+      {
+        "greek":"Πειραιεύς",
+        "translation":"Peiraeus",
+        "wordsInText":[
+          "Πειραιῶς"
+        ]
+      },
+      {
+        "greek":"πείθω",
+        "translation":"to prevail upon, win over, persuade",
+        "wordsInText":[
+          "ἔπεισε"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - aor - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"ἔπεισε"
+          }
+        ]
+      },
+      {
+        "greek":"προφέρω",
+        "translation":"to bring before",
+        "wordsInText":[
+          "προφέρειν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - pres - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"προφέρειν"
+          }
+        ]
+      },
+      {
+        "greek":"πρότερος",
+        "translation":"before, earlier",
+        "wordsInText":[
+          "πρότερον"
+        ]
+      },
+      {
+        "greek":"πρῶτος",
+        "translation":"first",
+        "wordsInText":[
+          "πρῶτος"
+        ]
+      },
+      {
+        "greek":"συγκατασκευάζω",
+        "translation":"to help in establishing",
+        "wordsInText":[
+          "ξυγκατεσκεύαζεν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - imperf - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"ξυγκατεσκεύαζεν"
+          }
+        ]
+      },
+      {
+        "greek":"τε",
+        "translation":"and",
+        "wordsInText":[
+          "τε"
+        ]
+      },
+      {
+        "greek":"Θεμιστοκλέης",
+        "translation":"Themistocles",
+        "wordsInText":[
+          "Θεμιστοκλῆς"
+        ]
+      },
+      {
+        "greek": "ὑπάρχω",
+        "translation": "to begin, make a beginning, take initiative, be first",
+        "wordsInText": ["ὑπῆρκτο"],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd sing - imperf - ind - act",
+            "typeOfWord": "verb",
+            "wordInText": "ὑπῆρκτο"
+          }
+        ]
+      },
+      {
+        "greek":"τόλμαω",
+        "translation":"to undertake, take heart",
+        "wordsInText":[
+          "ἐτόλμησεν"
+        ],
+        "hasGrammarQuestions":true,
+        "grammarQuestions":[
+          {
+            "correctAnswer":"3rd sing - aor - ind - act",
+            "typeOfWord":"verb",
+            "wordInText":"ἐτόλμησεν"
+          }
+        ]
+      },
+      {
+        "greek":"τρεῖς",
+        "translation":"three",
+        "wordsInText":[
+          "τρεῖς"
+        ]
+      },
+      {
+        "greek":"χώριον",
+        "translation":"a particular place, a place, spot, district",
+        "wordsInText":[
+          "χωρίον"
+        ]
+      },
+      {
+        "greek":"θαλάσσα",
+        "translation":"the sea",
+        "wordsInText":[
+          "θαλάσσης"
+        ]
+      },
+      {
+        "greek":"ὡς",
+        "translation":"as, how",
+        "wordsInText":[
+          "ὡς"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType":"authorbased",
+    "theme":"Thucydides - History of the Peloponnesian War",
+    "set":1,
     "segment":"2.37.1",
     "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=2.37",
     "fullSentence":"‘χρώμεθα γὰρ πολιτείᾳ οὐ ζηλούσῃ τοὺς τῶν πέλας νόμους, παράδειγμα δὲ μᾶλλον αὐτοὶ ὄντες τισὶν ἢ μιμούμενοι ἑτέρους. καὶ ὄνομα μὲν διὰ τὸ μὴ ἐς ὀλίγους ἀλλ’ ἐς πλείονας οἰκεῖν δημοκρατία κέκληται· μέτεστι δὲ κατὰ μὲν τοὺς νόμους πρὸς τὰ ἴδια διάφορα πᾶσι τὸ ἴσον, κατὰ δὲ τὴν ἀξίωσιν, ὡς ἕκαστος ἔν τῳ εὐδοκιμεῖ, οὐκ ἀπὸ μέρους τὸ πλέον ἐς τὰ κοινὰ ἢ ἀπ’ ἀρετῆς προτιμᾶται, οὐδ’ αὖ κατὰ πενίαν, ἔχων γέ τι ἀγαθὸν δρᾶσαι τὴν πόλιν, ἀξιώματος ἀφανείᾳ κεκώλυται.",

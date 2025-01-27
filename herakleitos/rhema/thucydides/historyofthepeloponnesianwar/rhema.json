@@ -330,6 +330,71 @@
     "book":"History of the Peloponnesian War",
     "author":"Thucydides",
     "type":"work",
+    "reference":"1.93",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0003.tlg001.perseus-grc2:1.93?right=perseus-eng6",
+    "rhemai":[
+      {
+        "greek": "τούτῳ τῷ τρόπῳ οἱ Ἀθηναῖοι τὴν πόλιν ἐτείχισαν ἐν ὀλίγῳ χρόνῳ.",
+        "translations":[
+          "In this way the Athenians walled their city in a little while."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "καὶ δήλη ἡ οἰκοδομία ἔτι καὶ νῦν ἐστὶν ὅτι κατὰ σπουδὴν ἐγένετο· οἱ γὰρ θεμέλιοι παντοίων λίθων ὑπόκεινται καὶ οὐ ξυνειργασμένων ἔστιν ᾗ, ἀλλ’ ὡς ἕκαστόν ποτε προσέφερον, πολλαί τε στῆλαι ἀπὸ σημάτων καὶ λίθοι εἰργασμένοι ἐγκατελέγησαν. μείζων γὰρ ὁ περίβολος πανταχῇ ἐξήχθη τῆς πόλεως, καὶ διὰ τοῦτο πάντα ὁμοίως κινοῦντες ἠπείγοντο.",
+        "translations":[
+          "To this day the building shows signs of the haste of its execution; the foundations are laid of stones of all kinds, and in some places not wrought or fitted, but placed just in the order in which they were brought by the different hands; and many columns, too, from tombs and sculptured stones were put in with the rest. For the bounds of the city were extended at every point of the circumference; and so they laid hands on everything without exception in their haste."
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ἔπεισε δὲ καὶ τοῦ Πειραιῶς τὰ λοιπὰ ὁ Θεμιστοκλῆς οἰκοδομεῖν (ὑπῆρκτο δ’ αὐτοῦ πρότερον ἐπὶ τῆς ἐκείνου ἀρχῆς ἧς κατ’ ἐνιαυτὸν Ἀθηναίοις ἦρξε) νομίζων τό τε χωρίον καλὸν εἶναι, λιμένας ἔχον τρεῖς αὐτοφυεῖς, καὶ αὐτοὺς ναυτικοὺς γεγενημένους μέγα προφέρειν ἐς τὸ",
+        "translations":[
+          "Themistocles also persuaded them to finish the walls of Piraeus, which had been begun before, in his year of office as archon; being influenced alike by the fineness of a locality that has three natural harbors, and by the great start which the Athenians would gain in the acquisition of power by becoming a naval people."
+        ],
+        "section":"3"
+      },
+      {
+        "greek": "κτήσασθαι δύναμιν (τῆς γὰρ δὴ θαλάσσης πρῶτος ἐτόλμησεν εἰπεῖν ὡς ἀνθεκτέα ἐστί), καὶ τὴν ἀρχὴν εὐθὺς ξυγκατεσκεύαζεν.",
+        "translations":[
+          "For he first ventured to tell them to stick to the sea and forthwith began to lay the foundations of the empire."
+        ],
+        "section":"4"
+      },
+      {
+        "greek": "καὶ ᾠκοδόμησαν τῇ ἐκείνου γνώμῃ τὸ πάχος τοῦ τείχους ὅπερ νῦν ἔτι δῆλόν ἐστι περὶ τὸν Πειραιᾶ· δύο γὰρ ἅμαξαι ἐναντίαι ἀλλήλαις τοὺς λίθους ἐπῆγον. ἐντὸς δὲ οὔτε χάλιξ οὔτε πηλὸς ἦν, ἀλλὰ ξυνῳκοδομημένοι μεγάλοι λίθοι καὶ ἐντομῇ ἐγγώνιοι, σιδήρῳ πρὸς ἀλλήλους τὰ ἔξωθεν καὶ μολύβδῳ δεδεμένοι. τὸ δὲ ὕψος ἥμισυ μάλιστα ἐτελέσθη οὗ διενοεῖτο.",
+        "translations":[
+          "It was by his advice, too, that they built the walls of that thickness which can still be discerned round Piraeus, the stones being brought up by two wagons meeting each other. Between the walls thus formed there was neither rubble nor mortar, but great stones hewn square and fitted together, cramped to each other on the outside with iron and lead. About half the height that he intended was finished."
+        ],
+        "section":"5"
+      },
+      {
+        "greek": "ἐβούλετο γὰρ τῷ μεγέθει καὶ τῷ πάχει ἀφιστάναι τὰς τῶν πολεμίων ἐπιβουλάς, ἀνθρώπων τε ἐνόμιζεν ὀλίγων καὶ τῶν ἀχρειοτάτων ἀρκέσειν τὴν φυλακήν, τοὺς δ’ ἄλλους ἐς τὰς ναῦς ἐσβήσεσθαι.",
+        "translations":[
+          "His idea was by their size and thickness to keep off the attacks of an enemy; he thought that they might be adequately defended by a small garrison of invalids, and the rest be freed for service in the fleet."
+        ],
+        "section":"6"
+      },
+      {
+        "greek": "ταῖς γὰρ ναυσὶ μάλιστα προσέκειτο, ἰδών, ὡς ἐμοὶ δοκεῖ, τῆς βασιλέως στρατιᾶς τὴν κατὰ θάλασσαν ἔφοδον εὐπορωτέραν τῆς κατὰ γῆν οὖσαν· τόν τε Πειραιᾶ ὠφελιμώτερον ἐνόμιζε τῆς ἄνω πόλεως, καὶ πολλάκις τοῖς Ἀθηναίοις παρῄνει, ἢν ἄρα ποτὲ κατὰ γῆν βιασθῶσι, καταβάντας ἐς αὐτὸν ταῖς ναυσὶ πρὸς ἅπαντας ἀνθίστασθαι.",
+        "translations":[
+          "For the fleet claimed most of his attention. He saw, as I think, that the approach by sea was easier for the king's army than that by land: he also thought Piraeus more valuable than the upper city; indeed, he was always advising the Athenians, if a day should come when they were hard pressed by land, to go down into Piraeus, and defy the world with their fleet."
+        ],
+        "section":"7"
+      },
+      {
+        "greek": "Ἀθηναῖοι μὲν οὖν οὕτως ἐτειχίσθησαν καὶ τἆλλα κατεσκευάζοντο εὐθὺς μετὰ τὴν Μήδων ἀναχώρησιν.",
+        "translations":[
+          "Thus, therefore, the Athenians completed their wall, and commenced their other buildings immediately after the retreat of the Mede."
+        ],
+        "section":"8"
+      }
+    ]
+  },
+  {
+    "book":"History of the Peloponnesian War",
+    "author":"Thucydides",
+    "type":"work",
     "reference":"1.142",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0003.tlg001.perseus-grc2:1.142",
     "rhemai":[
@@ -425,7 +490,7 @@
           "But all this ease in our private relations does not make us lawless as citizens. Against this fear is our chief safeguard, teaching us to obey the magistrates and the laws, particularly such as regard the protection of the injured, whether they are actually on the statute book, or belong to that code which, although unwritten, yet cannot be broken without acknowledged disgrace."
         ],
         "section":"3"
-      },
+      }
     ]
   },
   {
