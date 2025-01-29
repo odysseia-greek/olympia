@@ -784,6 +784,136 @@
         "audioFile":""
       }
     ]
+  },
+  {
+    "quizMetadata": {
+      "language": "English"
+    },
+    "quizType": "media",
+    "theme": "Basic",
+    "segment": "Common Verbs 4",
+    "set": 1,
+    "content": [
+      {
+        "greek": "τόλμαω",
+        "translation": "to dare, to undertake, take heart",
+        "imageURL": "dare.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ὑπάρχω",
+        "translation": "to begin, make a beginning, take initiative, be first",
+        "imageURL": "begin.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "πιέζω",
+        "translation": "to press, squeeze, oppress, distress",
+        "imageURL": "squeeze.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "προφέρω",
+        "translation": "to bring before",
+        "imageURL": "bringbefore.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "πείθω",
+        "translation": "to prevail upon, win over, persuade",
+        "imageURL": "persuade.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "νομίζω",
+        "translation": "to have as a custom; to believe",
+        "imageURL": "believe.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "κτάομαι",
+        "translation": "to procure for oneself, to get, acquire",
+        "imageURL": "acquire.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "εἶπον",
+        "translation": "to speak, say",
+        "imageURL": "speak.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ἀπαγινέω",
+        "translation": "paying tribute",
+        "imageURL": "paytribute.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ἀφικνέομαι",
+        "translation": "to come to",
+        "imageURL": "tocometo.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "εἰσαφικνέομαι",
+        "translation": "to come into",
+        "imageURL": "comeinto.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "καταλαμβάνω",
+        "translation": "to seize upon, lay hold of",
+        "imageURL": "seize.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "φαίνω",
+        "translation": "to bring to light, make to appear",
+        "imageURL": "appear.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ἀντέχω",
+        "translation": "to hold out against, withstand",
+        "imageURL": "withstand.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ἥκω",
+        "translation": "to have come, be present, be here",
+        "imageURL": "bepresent.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "ἐάω",
+        "translation": "a",
+        "imageURL": "allow.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "μένω",
+        "translation": "to stay at home, stay where one is, not stir",
+        "imageURL": "staywhereoneis.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "φεύγω",
+        "translation": "to flee, take flight, run away",
+        "imageURL": "flee.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "φαράω",
+        "translation": "plough",
+        "imageURL": "plough.webp",
+        "audioFile": ""
+      },
+      {
+        "greek": "λείπω",
+        "translation": "to leave, quit",
+        "imageURL": "leave.webp",
+        "audioFile": ""
+      }
+    ]
   }
-
 ]
