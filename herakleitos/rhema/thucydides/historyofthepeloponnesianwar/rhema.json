@@ -392,6 +392,87 @@
     ]
   },
   {
+    "book": "History of the Peloponnesian War",
+    "author": "Thucydides",
+    "type": "work",
+    "reference": "1.94",
+    "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0003.tlg001.perseus-grc2:1.94?right=perseus-eng6",
+    "rhemai": [
+      {
+        "greek": "Παυσανίας δὲ ὁ Κλεομβρότου ἐκ Λακεδαίμονος στρατηγὸς τῶν Ἑλλήνων ἐξεπέμφθη μετὰ εἴκοσι νεῶν ἀπὸ Πελοποννήσου· ξυνέπλεον δὲ καὶ Ἀθηναῖοι τριάκοντα ναυσὶ καὶ τῶν ἄλλων ξυμμάχων πλῆθος.",
+        "translations": [
+          "Meanwhile Pausanias, son of Cleombrotus, was sent out from Lacedaemon as commander-in-chief of the Hellenes, with twenty ships from Peloponnese. With him sailed the Athenians with thirty ships, and a number of the other allies."
+        ],
+        "section": "1"
+      },
+      {
+        "greek": "καὶ ἐστράτευσαν ἐς Κύπρον καὶ αὐτῆς τὰ πολλὰ κατεστρέψαντο, καὶ ὕστερον ἐς Βυζάντιον Μήδων ἐχόντων, καὶ ἐξεπολιόρκησαν ἐν τῇδε τῇ ἡγεμονίᾳ.",
+        "translations": [
+          "They made an expedition against Cyprus and subdued most of the island, and afterwards against Byzantium, which was in the hands of the Medes, and compelled it to surrender. This event took place while the Spartans were still supreme."
+        ],
+        "section": "2"
+      }
+    ]
+  },
+  {
+    "book": "History of the Peloponnesian War",
+    "author": "Thucydides",
+    "type": "work",
+    "reference": "1.95",
+    "perseusTextLink": "https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0003.tlg001.perseus-grc2:1.95/?right=perseus-eng6",
+    "rhemai": [
+      {
+        "greek": "ἤδη δὲ βιαίου ὄντος αὐτοῦ οἵ τε ἄλλοι Ἕλληνες ἤχθοντο καὶ οὐχ ἥκιστα οἱ Ἴωνες καὶ ὅσοι ἀπὸ βασιλέως νεωστὶ ἠλευθέρωντο· φοιτῶντές τε πρὸς τοὺς Ἀθηναίους ἠξίουν αὐτοὺς ἡγεμόνας σφῶν γίγνεσθαι κατὰ τὸ ξυγγενὲς καὶ Παυσανίᾳ μὴ ἐπιτρέπειν, ἤν που βιάζηται.",
+        "translations": [
+          "But the violence of Pausanias had already begun to be disagreeable to the Hellenes, particularly to the Ionians and the newly liberated populations. These resorted to the Athenians and requested them as their kinsmen to become their leaders, and to stop any attempt at violence on the part of Pausanias."
+        ],
+        "section": "1"
+      },
+      {
+        "greek": "οἱ δὲ Ἀθηναῖοι ἐδέξαντό τε τοὺς λόγους καὶ προσεῖχον τὴν γνώμην ὡς οὐ περιοψόμενοι τἆλλά τε καταστησόμενοι ᾗ φαίνοιτο ἄριστα αὐτοῖς.",
+        "translations": [
+          "The Athenians accepted their overtures, and determined to put down any attempt of the kind and to settle everything else as their interests might seem to demand."
+        ],
+        "section": "2"
+      },
+      {
+        "greek": "ἐν τούτῳ δὲ οἱ Λακεδαιμόνιοι μετεπέμποντο Παυσανίαν ἀνακρινοῦντες ὧν πέρι ἐπυνθάνοντο· καὶ γὰρ ἀδικία πολλὴ κατηγορεῖτο αὐτοῦ ὑπὸ τῶν Ἑλλήνων τῶν ἀφικνουμένων, καὶ τυραννίδος μᾶλλον ἐφαίνετο μίμησις ἢ στρατηγία.",
+        "translations": [
+          "In the meantime the Lacedaemonians recalled Pausanias for an investigation of the reports which had reached them. Manifold and grave accusations had been brought against him by Hellenes arriving in Sparta; and, to all appearance, there had been in him more of the mimicry of a despot than of the attitude of a general."
+        ],
+        "section": "3"
+      },
+      {
+        "greek": "ξυνέβη τε αὐτῷ καλεῖσθαί τε ἅμα καὶ τοὺς ξυμμάχους τῷ ἐκείνου ἔχθει παρ’ Ἀθηναίους μετατάξασθαι πλὴν τῶν ἀπὸ Πελοποννήσου στρατιωτῶν.",
+        "translations": [
+          "As it happened, his recall came just at the time when the hatred which he had inspired had induced the allies to desert him, the soldiers from Peloponnese excepted, and to range themselves by the side of the Athenians."
+        ],
+        "section": "4"
+      },
+      {
+        "greek": "ἐλθὼν δὲ ἐς Λακεδαίμονα τῶν μὲν ἰδίᾳ πρός τινα ἀδικημάτων ηὐθύνθη, τὰ δὲ μέγιστα ἀπολύεται μὴ ἀδικεῖν· κατηγορεῖτο δὲ αὐτοῦ οὐχ ἥκιστα μηδισμὸς καὶ ἐδόκει σαφέστατον εἶναι.",
+        "translations": [
+          "On his arrival at Lacedaemon, he was censured for his private acts of oppression, but was acquitted on the heaviest counts and pronounced not guilty; it must be known that the charge of Medism formed one of the principal, and to all appearance one of the best-founded articles against him."
+        ],
+        "section": "5"
+      },
+      {
+        "greek": "καὶ ἐκεῖνον μὲν οὐκέτι ἐκπέμπουσιν ἄρχοντα, Δόρκιν δὲ καὶ ἄλλους τινὰς μετ’ αὐτοῦ στρατιὰν ἔχοντας οὐ πολλήν· οἷς οὐκέτι ἐφίεσαν οἱ ξύμμαχοι τὴν ἡγεμονίαν.",
+        "translations": [
+          "The Lacedaemonians did not, however, restore him to his command, but sent out Dorkis and certain others with a small force; who found the allies no longer inclined to concede to them the supremacy."
+        ],
+        "section": "6"
+      },
+      {
+        "greek": "οἱ δὲ αἰσθόμενοι ἀπῆλθον, καὶ ἄλλους οὐκέτι ὕστερον ἐξέπεμψαν οἱ Λακεδαιμόνιοι, φοβούμενοι μὴ σφίσιν οἱ ἐξιόντες χείρους γίγνωνται, ὅπερ καὶ ἐν τῷ Παυσανίᾳ ἐνεῖδον, ἀπαλλαξείοντες δὲ καὶ τοῦ Μηδικοῦ πολέμου καὶ τοὺς Ἀθηναίους νομίζοντες ἱκανοὺς ἐξηγεῖσθαι καὶ σφίσιν ἐν τῷ τότε παρόντι ἐπιτηδείους.",
+        "translations": [
+          "Perceiving this they departed, and the Lacedaemonians did not send out any to succeed them. They feared for those who went out a deterioration similar to that observable in Pausanias; besides, they desired to be rid of the Median war, and were satisfied of the competency of the Athenians for the position, and of their friendship at the time towards themselves."
+        ],
+        "section": "7"
+      }
+    ]
+  },
+  {
     "book":"History of the Peloponnesian War",
     "author":"Thucydides",
     "type":"work",

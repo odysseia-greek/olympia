@@ -39,9 +39,7 @@ func main() {
 
 	logging.Debug("creating config")
 
-	env := os.Getenv("ENV")
-
-	handler, err := flux.CreateNewConfig(env)
+	handler, err := flux.CreateNewConfig()
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")

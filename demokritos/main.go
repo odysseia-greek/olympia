@@ -42,9 +42,7 @@ func main() {
 
 	logging.Debug("creating config")
 
-	env := os.Getenv("ENV")
-
-	handler, err := atomos.CreateNewConfig(env)
+	handler, err := atomos.CreateNewConfig()
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
