@@ -44,7 +44,11 @@ func main() {
 		log.Fatal("death has found me")
 	}
 
-	declensionConfig, _ := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
+	declensionConfig, err := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
+	if err != nil {
+		logging.Error(err.Error())
+		log.Fatal("death has found me")
+	}
 	dionysiosConfig.DeclensionConfig = *declensionConfig
 
 	// Start a goroutine to periodically update the grammar config

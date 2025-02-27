@@ -383,7 +383,6 @@
         "aorist inf - act",
         "aorist - part - act",
         "pres - part - pass",
-        "perf - inf - act",
         "perf - inf - mid",
         "pres - inf - mid",
         "2nd sing - pres - ind - act",
@@ -845,6 +844,722 @@
         "translation":"as, how",
         "wordsInText":[
           "ὡς"
+        ]
+      }
+    ]
+  },
+  {
+    "quizType":"authorbased",
+    "theme":"Thucydides - History of the Peloponnesian War",
+    "set":1,
+    "segment":"1.94.1",
+    "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.94",
+    "fullSentence":"Παυσανίας δὲ ὁ Κλεομβρότου ἐκ Λακεδαίμονος στρατηγὸς τῶν Ἑλλήνων ἐξεπέμφθη μετὰ εἴκοσι νεῶν ἀπὸ Πελοποννήσου· ξυνέπλεον δὲ καὶ Ἀθηναῖοι τριάκοντα ναυσὶ καὶ τῶν ἄλλων ξυμμάχων πλῆθος.",
+    "translation":"Meanwhile Pausanias, son of Cleombrotus, was sent out from Lacedaemon as commander-in-chief of the Hellenes, with twenty ships from Peloponnese. With him sailed the Athenians with thirty ships, and a number of the other allies.",
+    "grammarQuestionOptions":{
+      "verbs":[
+        "pres part - sing - fem - dat",
+        "pres part - plural - masc - nom",
+        "aorist mid part - plural - nom/acc",
+        "3rd plural - fut - ind - act",
+        "3rd plural - aorist - ind - act",
+        "3rd sing - perf - ind - mid",
+        "3rd plural - pres - ind - act",
+        "1st plural - pres - ind - mid",
+        "1st sing - imperf - ind - act (Epic)",
+        "3rd sing - pres - ind - act",
+        "3rd sing - pres - ind - mid",
+        "1st sing - pres - ind - act",
+        "3rd sing - aorist - ind - mid",
+        "3rd plural - imperf - ind - mid",
+        "3rd plural - imperf - ind - act",
+        "3rd plural - aorist - ind - mid",
+        "pres - inf - act",
+        "pres - part - act",
+        "aorist inf - act",
+        "aorist - part - act",
+        "pres - part - pass",
+        "perf - inf - mid",
+        "pres - inf - mid",
+        "futur part - plural - act - nom",
+        "2nd sing - pres - ind - act",
+        "2nd sing - aorist - ind - act",
+        "1st sing - aorist - ind - act",
+        "2nd plur - pres - ind - mid",
+        "imperf - sing - ind - act",
+        "imperf - plur - ind - act",
+        "aorist - sing - ind - mid",
+        "fut - sing - ind - act",
+        "fut - plur - ind - act",
+        "3rd sing - fut - ind - mid",
+        "imperf - pres - ind - act",
+        "imperf - pres - ind - mid",
+        "aorist - inf - pass",
+        "aorist - part - pass",
+        "imperf - part - act",
+        "aor part - plural - mid - gen",
+        "3rd sing - imperf - ind - mid",
+        "pres part - plural - masc - gen",
+        "3rd sing - aorist - ind - pass"
+      ],
+      "nouns":[ ],
+      "misc":[ ]
+    },
+    "content":[
+      {
+        "greek":"Παυσανίας",
+        "translation":"Pausanias",
+        "wordsInText":[
+          "Παυσανίας"
+        ]
+      },
+      {
+        "greek":"Κλεόμβροτος",
+        "translation":"Cleombrotus",
+        "wordsInText":[
+          "Κλεομβρότου"
+        ]
+      },
+      {
+        "greek":"ἐκ",
+        "translation":"from out of",
+        "wordsInText":[
+          "ἐκ"
+        ]
+      },
+      {
+        "greek":"δέ",
+        "translation":"but",
+        "wordsInText":[
+          "δὲ"
+        ]
+      },
+      {
+        "greek":"ἀπό",
+        "translation":"from, away from. c. gen.",
+        "wordsInText":[
+          "ἀπὸ"
+        ]
+      },
+      {
+        "greek":"Πελοπόννησος",
+        "translation":"the Peloponnesus",
+        "wordsInText":[
+          "Πελοποννήσου"
+        ]
+      },
+      {
+        "greek":"Ἕλλην",
+        "translation":"Hellen; Greek",
+        "wordsInText":[
+          "Ἑλλήνων"
+        ]
+      },
+      {
+        "greek":"εἴκοσι",
+        "translation":"twenty",
+        "wordsInText":[
+          "εἴκοσι"
+        ]
+      },
+      {
+        "greek":"Λακεδαίμων",
+        "translation":"Lacedaemon",
+        "wordsInText":[
+          "Λακεδαίμονος"
+        ]
+      },
+      {
+        "greek":"καί",
+        "translation":"and, also",
+        "wordsInText":[
+          "καὶ"
+        ]
+      },
+      {
+        "greek":"Ἀθηναῖος",
+        "translation":"Athenian, of Athens",
+        "wordsInText":[
+          "Ἀθηναῖοι"
+        ]
+      },
+      {
+        "greek":"ἄλλος",
+        "translation":"other, another",
+        "wordsInText":[
+          "ἄλλων"
+        ]
+      },
+      {
+        "greek":"μετά",
+        "translation":"(w gen) with, among; (w acc) after",
+        "wordsInText":[
+          "μετὰ"
+        ]
+      },
+      {
+        "greek":"ὁ",
+        "translation":"the",
+        "wordsInText":[
+          "ὁ",
+          "τῶν"
+        ]
+      },
+      {
+        "greek":"πλῆθος",
+        "translation":"a great number, a throng, crowd, multitude",
+        "wordsInText":[
+          "πλῆθος"
+        ]
+      },
+      {
+        "greek":"στρατηγός",
+        "translation":"A leader or commander of an army (general)",
+        "wordsInText":[
+          "στρατηγὸς"
+        ]
+      },
+      {
+        "greek":"τριάκοντα",
+        "translation":"thirty",
+        "wordsInText":[
+          "τριάκοντα"
+        ]
+      },
+      {
+        "greek":"ξύμμαχος (old Attic form of σύμμαχος)",
+        "translation":"fighting along with, allied with",
+        "wordsInText":[
+          "ξυμμάχων"
+        ]
+      },
+      {
+        "greek":"ναῦς",
+        "translation":"a ship",
+        "wordsInText":[
+          "νεῶν",
+          "ναυσὶ"
+        ]
+      },
+      {
+        "greek": "ἐκπέμπω",
+        "translation": "to send out",
+        "wordsInText": [
+          "ἐξεπέμφθη"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd sing - aorist - ind - pass",
+            "typeOfWord": "verb",
+            "wordInText": "ἐξεπέμφθη"
+          }
+        ]
+      },
+      {
+        "greek": "συμπλέω",
+        "translation": "to sail in company with",
+        "wordsInText": [
+          "ξυνέπλεον"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - imperf - ind - act",
+            "typeOfWord": "verb",
+            "extraInformation": "alternatively: συνέπλεον",
+            "wordInText": "ξυνέπλεον"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "quizType":"authorbased",
+    "theme":"Thucydides - History of the Peloponnesian War",
+    "set":1,
+    "segment":"1.94.2",
+    "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.94",
+    "fullSentence":"καὶ ἐστράτευσαν ἐς Κύπρον καὶ αὐτῆς τὰ πολλὰ κατεστρέψαντο, καὶ ὕστερον ἐς Βυζάντιον Μήδων ἐχόντων, καὶ ἐξεπολιόρκησαν ἐν τῇδε τῇ ἡγεμονίᾳ.",
+    "translation":"They made an expedition against Cyprus and subdued most of the island, and afterwards against Byzantium, which was in the hands of the Medes, and compelled it to surrender. This event took place while the Spartans were still supreme.",
+    "grammarQuestionOptions":{
+      "verbs":[
+        "pres part - sing - fem - dat",
+        "pres part - plural - masc - nom",
+        "aorist mid part - plural - nom/acc",
+        "3rd plural - fut - ind - act",
+        "3rd plural - aorist - ind - act",
+        "3rd sing - perf - ind - mid",
+        "3rd plural - pres - ind - act",
+        "1st plural - pres - ind - mid",
+        "1st sing - imperf - ind - act (Epic)",
+        "3rd sing - pres - ind - act",
+        "3rd sing - pres - ind - mid",
+        "1st sing - pres - ind - act",
+        "3rd sing - aorist - ind - mid",
+        "3rd plural - imperf - ind - mid",
+        "3rd plural - aorist - ind - mid",
+        "pres - inf - act",
+        "pres - part - act",
+        "aorist inf - act",
+        "aorist - part - act",
+        "pres - part - pass",
+        "perf - inf - mid",
+        "pres - inf - mid",
+        "futur part - plural - act - nom",
+        "2nd sing - pres - ind - act",
+        "2nd sing - aorist - ind - act",
+        "1st sing - aorist - ind - act",
+        "2nd plur - pres - ind - mid",
+        "imperf - sing - ind - act",
+        "imperf - plur - ind - act",
+        "aorist - sing - ind - mid",
+        "fut - sing - ind - act",
+        "fut - plur - ind - act",
+        "3rd sing - fut - ind - mid",
+        "imperf - pres - ind - act",
+        "imperf - pres - ind - mid",
+        "aorist - inf - pass",
+        "aorist - part - pass",
+        "imperf - part - act",
+        "aor part - plural - mid - gen",
+        "3rd sing - imperf - ind - mid",
+        "pres part - plural - masc - gen"
+      ],
+      "nouns":[ ],
+      "misc":[ ]
+    },
+    "content":[
+      {
+        "greek":"ἐν",
+        "translation":"in, among. c. dat.",
+        "wordsInText":[
+          "ἐν"
+        ]
+      },
+      {
+        "greek":"εἰς",
+        "translation":"into, to (acc.).",
+        "wordsInText":[
+          "ἐς"
+        ]
+      },
+      {
+        "greek":"καί",
+        "translation":"and, also",
+        "wordsInText":[
+          "καὶ"
+        ]
+      },
+      {
+        "greek":"αὐτός",
+        "translation":"self; (the) same unemph. 3rd pers.pronoun",
+        "wordsInText":[
+          "αὐτῆς"
+        ]
+      },
+      {
+        "greek":"Βυζάντιον",
+        "translation":"Byzantium",
+        "wordsInText":[
+          "Βυζάντιον"
+        ]
+      },
+      {
+        "greek":"Κύπρος",
+        "translation":"Cyprus",
+        "wordsInText":[
+          "Κύπρον"
+        ]
+      },
+      {
+        "greek":"πολύς",
+        "translation":"much, many",
+        "wordsInText":[
+          "πολλὰ"
+        ]
+      },
+      {
+        "greek":"Μῆδος",
+        "translation":"a Mede, Median, Persian",
+        "wordsInText":[
+          "Μήδων"
+        ]
+      },
+      {
+        "greek":"ὅδε",
+        "translation":"this",
+        "wordsInText":[
+          "τῇδε"
+        ]
+      },
+      {
+        "greek":"ὁ",
+        "translation":"the",
+        "wordsInText":[
+          "τὰ",
+          "τῇ"
+        ]
+      },
+      {
+        "greek":"ἡγεμονία",
+        "translation":"a leading the way, going first",
+        "wordsInText":[
+          "ἡγεμονίᾳ"
+        ]
+      },
+      {
+        "greek":"ὕστερον",
+        "translation":"the afterbirth",
+        "wordsInText":[
+          "ὕστερον"
+        ]
+      },
+      {
+        "greek": "στρατεύω",
+        "translation": "to serve in war, serve as a soldier, do military service, take the field, march",
+        "wordsInText": [
+          "ἐστράτευσαν"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - aorist - ind - act",
+            "typeOfWord": "verb",
+            "wordInText": "ἐστράτευσαν"
+          }
+        ]
+      },
+      {
+        "greek": "ἔχω",
+        "translation": "to have",
+        "wordsInText": [
+          "ἐχόντων"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "pres part - plural - masc - gen",
+            "typeOfWord": "verb",
+            "wordInText": "ἐχόντων"
+          }
+        ]
+      },
+      {
+        "greek": "καταστρέφω",
+        "translation": "to turn down, trample on",
+        "wordsInText": [
+          "κατεστρέψαντο"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - aorist - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "κατεστρέψαντο"
+          }
+        ]
+      },
+      {
+        "greek": "ἐκπολιορκέω",
+        "translation": "to force a besieged town to surrender",
+        "wordsInText": [
+          "ἐξεπολιόρκησαν"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - aorist - ind - act",
+            "typeOfWord": "verb",
+            "wordInText": "ἐξεπολιόρκησαν"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "quizType":"authorbased",
+    "theme":"Thucydides - History of the Peloponnesian War",
+    "set":1,
+    "segment":"1.95.3",
+    "reference":"/texts?author=Thucydides&book=History+of+the+Peloponnesian+War&reference=1.95",
+    "fullSentence":"ἐν τούτῳ δὲ οἱ Λακεδαιμόνιοι μετεπέμποντο Παυσανίαν ἀνακρινοῦντες ὧν πέρι ἐπυνθάνοντο· καὶ γὰρ ἀδικία πολλὴ κατηγορεῖτο αὐτοῦ ὑπὸ τῶν Ἑλλήνων τῶν ἀφικνουμένων, καὶ τυραννίδος μᾶλλον ἐφαίνετο μίμησις ἢ στρατηγία.",
+    "translation":"In the meantime the Lacedaemonians recalled Pausanias for an investigation of the reports which had reached them. Manifold and grave accusations had been brought against him by Hellenes arriving in Sparta; and, to all appearance, there had been in him more of the mimicry of a despot than of the attitude of a general.",
+    "grammarQuestionOptions":{
+      "verbs":[
+        "pres part - sing - fem - dat",
+        "pres part - plural - masc - nom",
+        "aorist mid part - plural - nom/acc",
+        "3rd plural - fut - ind - act",
+        "3rd plural - aorist - ind - act",
+        "3rd sing - perf - ind - mid",
+        "3rd plural - pres - ind - act",
+        "1st plural - pres - ind - mid",
+        "1st sing - imperf - ind - act (Epic)",
+        "3rd sing - pres - ind - act",
+        "3rd sing - pres - ind - mid",
+        "1st sing - pres - ind - act",
+        "3rd sing - aorist - ind - mid",
+        "3rd plural - imperf - ind - mid",
+        "pres - inf - act",
+        "pres - part - act",
+        "aorist inf - act",
+        "aorist - part - act",
+        "pres - part - pass",
+        "perf - inf - mid",
+        "pres - inf - mid",
+        "futur part - plural - act - nom",
+        "2nd sing - pres - ind - act",
+        "2nd sing - aorist - ind - act",
+        "1st sing - aorist - ind - act",
+        "2nd plur - pres - ind - mid",
+        "imperf - sing - ind - act",
+        "imperf - plur - ind - act",
+        "aorist - sing - ind - mid",
+        "fut - sing - ind - act",
+        "fut - plur - ind - act",
+        "3rd sing - fut - ind - mid",
+        "imperf - pres - ind - act",
+        "imperf - pres - ind - mid",
+        "aorist - inf - pass",
+        "aorist - part - pass",
+        "imperf - part - act",
+        "aor part - plural - mid - gen",
+        "3rd sing - imperf - ind - mid"
+      ],
+      "nouns":[ ],
+      "misc":[ ]
+    },
+    "content":[
+      {
+        "greek":"ἐν",
+        "translation":"in, among. c. dat.",
+        "wordsInText":[
+          "ἐν"
+        ]
+      },
+      {
+        "greek":"οὗτος",
+        "translation":"this; that",
+        "wordsInText":[
+          "τούτῳ"
+        ]
+      },
+      {
+        "greek":"δέ",
+        "translation":"but",
+        "wordsInText":[
+          "δὲ"
+        ]
+      },
+      {
+        "greek":"καί",
+        "translation":"and, also",
+        "wordsInText":[
+          "καὶ"
+        ]
+      },
+      {
+        "greek":"γάρ",
+        "translation":"for, since",
+        "wordsInText":[
+          "γὰρ"
+        ]
+      },
+      {
+        "greek":"ἀδικία",
+        "translation":"injustice",
+        "wordsInText":[
+          "ἀδικία"
+        ]
+      },
+      {
+        "greek":"Λακεδαιμόνιος",
+        "translation":"Spartan",
+        "wordsInText":[
+          "Λακεδαιμόνιοι"
+        ]
+      },
+      {
+        "greek":"Ἕλλην",
+        "translation":"Hellen; Greek",
+        "wordsInText":[
+          "Ἑλλήνων"
+        ]
+      },
+      {
+        "greek":"Παυσανίας",
+        "translation":"Pausanias",
+        "wordsInText":[
+          "Παυσανίαν"
+        ]
+      },
+      {
+        "greek":"μᾶλλον",
+        "translation":"more, rather",
+        "wordsInText":[
+          "μᾶλλον"
+        ]
+      },
+      {
+        "greek":"περί",
+        "translation":"around, round about with gen.",
+        "wordsInText":[
+          "πέρι"
+        ]
+      },
+      {
+        "greek":"πολύς",
+        "translation":"much, many",
+        "wordsInText":[
+          "πολλὴ"
+        ]
+      },
+      {
+        "greek":"τυραννίς",
+        "translation":"kingly power, sovereignty",
+        "wordsInText":[
+          "τυραννίδος"
+        ]
+      },
+      {
+        "greek":"ὑπό",
+        "translation":"from under, by, c. gen. under, c. dat., towards c. acc.",
+        "wordsInText":[
+          "ὑπὸ"
+        ]
+      },
+      {
+        "greek":"στρατηγία",
+        "translation":"the office, dignity",
+        "wordsInText":[
+          "στρατηγία"
+        ]
+      },
+      {
+        "greek":"μίμησις",
+        "translation":"imitation",
+        "wordsInText":[
+          "μίμησις"
+        ]
+      },
+      {
+        "greek":"ὅς",
+        "translation":"who, that, which: relative pronoun",
+        "wordsInText":[
+          "ὧν"
+        ]
+      },
+      {
+        "greek":"αὐτός",
+        "translation":"self; (the) same unemph. 3rd pers.pronoun",
+        "wordsInText":[
+          "αὐτοῦ"
+        ]
+      },
+      {
+        "greek":"ἤ",
+        "translation":"or, than, as",
+        "wordsInText":[
+          "ἢ"
+        ]
+      },
+      {
+        "greek":"ὁ",
+        "translation":"the",
+        "wordsInText":[
+          "οἱ",
+          "τῶν"
+        ]
+      },
+      {
+        "greek": "μεταπέμπω",
+        "translation": "to send after",
+        "wordsInText": [
+          "μετεπέμποντο"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - imperf - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "μετεπέμποντο"
+          }
+        ]
+      },
+      {
+        "greek": "ἀνακρίνω",
+        "translation": "to examine closely, to question, interrogate",
+        "wordsInText": [
+          "ἀνακρινοῦντες"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "futur part - plural - act - nom",
+            "typeOfWord": "verb",
+            "wordInText": "ἀνακρινοῦντες"
+          }
+        ]
+      },
+      {
+        "greek": "πυνθάνομαι",
+        "translation": "to learn by hearsay",
+        "wordsInText": [
+          "ἐπυνθάνοντο"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd plural - imperf - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "ἐπυνθάνοντο"
+          }
+        ]
+      },
+      {
+        "greek": "κατηγορέω",
+        "translation": "to speak against, to accuse",
+        "wordsInText": [
+          "κατηγορεῖτο"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd sing - pres - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "κατηγορεῖτο"
+          }
+        ]
+      },
+      {
+        "greek": "ἀφικνέομαι",
+        "translation": "to come to",
+        "wordsInText": [
+          "ἀφικνουμένων"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "aor part - plural - mid - gen",
+            "typeOfWord": "verb",
+            "wordInText": "ἀφικνουμένων"
+          }
+        ]
+      },
+      {
+        "greek": "φαίνω",
+        "translation": "to bring to light, make to appear",
+        "wordsInText": [
+          "ἐφαίνετο"
+        ],
+        "hasGrammarQuestions": true,
+        "grammarQuestions": [
+          {
+            "correctAnswer": "3rd sing - imperf - ind - mid",
+            "typeOfWord": "verb",
+            "wordInText": "ἐφαίνετο"
+          }
         ]
       }
     ]
