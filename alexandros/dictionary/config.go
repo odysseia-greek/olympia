@@ -11,8 +11,8 @@ import (
 	"github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -45,7 +45,7 @@ const (
 func CreateNewConfig(ctx context.Context) (*AlexandrosHandler, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	tracer, err := aristophanes.NewClientTracer()
+	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
 	if err != nil {
 		logging.Error(err.Error())
 	}
@@ -61,7 +61,7 @@ func CreateNewConfig(ctx context.Context) (*AlexandrosHandler, error) {
 		logging.Error(err.Error())
 	}
 
-	ambassador := diplomat.NewClientAmbassador()
+	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
 	ambassadorHealthy := ambassador.WaitForHealthyState()
 	if !ambassadorHealthy {
 		logging.Info("ambassador service not ready - restarting seems the only option")

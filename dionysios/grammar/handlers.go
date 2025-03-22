@@ -360,6 +360,7 @@ func (d *DionysosHandler) reestablishStream() {
 	aristarchosStreamer, err := d.AggregatorClient.CreateNewEntry(aggrContext)
 	if err != nil {
 		logging.Error(err.Error())
+		aggregatorCancel()
 		return
 	}
 

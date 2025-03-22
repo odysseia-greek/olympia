@@ -8,8 +8,11 @@ import (
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
-	"log"
 	"os"
+)
+
+const (
+	defaultSokratesAddress = "http://sokrates:8080/sokrates/graphql"
 )
 
 func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
@@ -28,10 +31,12 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		return nil, err
 	}
 
-	tracer, err := aristophanes.NewClientTracer()
+	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
 	if err != nil {
 		logging.Error(err.Error())
 	}
+
+	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
 
 	streamer, err := tracer.Chorus(ctx)
 	if err != nil {
@@ -47,11 +52,12 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 	ctx, cancel := context.WithCancel(ctx)
 
 	return &HomerosHandler{
-		Cache:       cache,
-		HttpClients: service,
-		Streamer:    streamer,
-		Randomizer:  randomizer,
-		Cancel:      cancel,
+		Cache:              cache,
+		HttpClients:        service,
+		Streamer:           streamer,
+		Randomizer:         randomizer,
+		Cancel:             cancel,
+		SokratesGraphqlUrl: sokratesGraphqlAddress,
 	}, nil
 }
 
@@ -65,63 +71,85 @@ type TraceConfig struct {
 }
 
 func InitTracingConfig() *TraceConfig {
-	var traceConfig TraceConfig
+	defaultTraceConfig := &TraceConfig{
+		OperationScores: []OperationScore{
+			// alexandros
+			{
+				Operation: "dictionary",
+				Score:     100,
+			},
+			// dionysios
+			{
+				Operation: "grammar",
+				Score:     100,
+			},
+			//herodotos
+			{
+				Operation: "authors",
+				Score:     100,
+			},
+			{
+				Operation: "sentence",
+				Score:     100,
+			},
+			{
+				Operation: "text",
+				Score:     100,
+			},
+			//sokrates
+			{
+				Operation: "authorBasedAnswer",
+				Score:     100,
+			},
+			{
+				Operation: "authorBasedQuiz",
+				Score:     100,
+			},
+			{
+				Operation: "dialogueQuiz",
+				Score:     100,
+			}, {
+				Operation: "dialogueAnswer",
+				Score:     100,
+			},
+			{
+				Operation: "multipleChoiceAnswer",
+				Score:     100,
+			},
+			{
+				Operation: "multipleChoiceQuiz",
+				Score:     100,
+			},
+			{
+				Operation: "mediaQuiz",
+				Score:     100,
+			},
+			{
+				Operation: "mediaAnswer",
+				Score:     100,
+			},
+			//shared
+			{
+				Operation: "status",
+				Score:     50,
+			},
+		},
+	}
+	var traceConfig *TraceConfig
 
 	traceConfigPath := os.Getenv("TRACE_CONFIG_PATH")
 	if traceConfigPath == "" {
-		traceConfig = TraceConfig{
-			OperationScores: []OperationScore{
-				// alexandros
-				{
-					Operation: "dictionary",
-					Score:     100,
-				},
-				// dionysios
-				{
-					Operation: "grammar",
-					Score:     100,
-				},
-				//herodotos
-				{
-					Operation: "authors",
-					Score:     100,
-				},
-				{
-					Operation: "sentence",
-					Score:     100,
-				},
-				{
-					Operation: "text",
-					Score:     100,
-				},
-				//sokrates
-				{
-					Operation: "methods",
-					Score:     100,
-				},
-				{
-					Operation: "answer",
-					Score:     100,
-				},
-				{
-					Operation: "quiz",
-					Score:     100,
-				},
-				//shared
-				{
-					Operation: "status",
-					Score:     50,
-				},
-			},
-		}
+		traceConfig = defaultTraceConfig
 	} else {
 		traceConfigData, err := os.ReadFile(traceConfigPath)
 		if err != nil {
-			log.Print("could not load trace config...")
+			logging.Warn("could not load trace config. Returning Default")
+			traceConfig = defaultTraceConfig
 		}
 
 		if err := json.Unmarshal(traceConfigData, &traceConfig); err != nil {
-			log.Print("error unmarshalling data...")
+			logging.Error("error unmarshalling data")
+			traceConfig = defaultTraceConfig
 		}
 	}
 
@@ -129,5 +157,5 @@ func InitTracingConfig() *TraceConfig {
 
 	logging.Debug(fmt.Sprintf("found the following trace config: %s", string(jsonPayload)))
 
-	return &traceConfig
+	return traceConfig
 }

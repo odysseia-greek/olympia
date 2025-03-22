@@ -72,7 +72,7 @@ func updateGrammarConfig(dionysiosConfig *grammar.DionysosHandler) {
 		case <-ticker.C:
 			declensionConfig, err := grammar.QueryRuleSet(dionysiosConfig.Elastic, dionysiosConfig.Index)
 			if err != nil {
-				logging.Debug(fmt.Sprint("failed to fetch updated declension config: %s", err.Error()))
+				logging.Debug(fmt.Sprintf("failed to fetch updated declension config: %s", err.Error()))
 				continue // Retry on the next tick
 			}
 

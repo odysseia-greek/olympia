@@ -6,7 +6,7 @@ import (
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/logging"
-	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	"strings"
 	"sync"
 )
@@ -16,7 +16,7 @@ type HerakleitosHandler struct {
 	Created    int
 	Elastic    elastic.Client
 	PolicyName string
-	Ambassador *ptolemaios.ClientAmbassador
+	Ambassador *diplomat.ClientAmbassador
 }
 
 func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {

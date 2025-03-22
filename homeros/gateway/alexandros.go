@@ -2,12 +2,13 @@ package gateway
 
 import (
 	"encoding/json"
-	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
+	"github.com/odysseia-greek/olympia/homeros/graph/model"
+
 	"strconv"
 )
 
-func (h *HomerosHandler) Dictionary(word, language, mode, traceID string, searchInText bool) (*plato.ExtendedResponse, error) {
+func (h *HomerosHandler) Dictionary(word, language, mode, traceID string, searchInText bool) (*model.ExtendedDictionary, error) {
 	searchInTextAsString := strconv.FormatBool(searchInText)
 	formattedWord := transform.RemoveAccents(word)
 	response, err := h.HttpClients.Alexandros().Search(formattedWord, language, mode, searchInTextAsString, traceID)
@@ -16,7 +17,7 @@ func (h *HomerosHandler) Dictionary(word, language, mode, traceID string, search
 		return nil, err
 	}
 
-	var extendedResponse plato.ExtendedResponse
+	var extendedResponse model.ExtendedDictionary
 	err = json.NewDecoder(response.Body).Decode(&extendedResponse)
 	if err != nil {
 		return nil, err

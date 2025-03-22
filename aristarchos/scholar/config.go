@@ -11,8 +11,8 @@ import (
 	"github.com/odysseia-greek/agora/plato/service"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -40,7 +40,7 @@ func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 	}
 
 	var cfg models.Config
-	ambassador := diplomat.NewClientAmbassador()
+	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
 
 	healthy = ambassador.WaitForHealthyState()
 	if !healthy {

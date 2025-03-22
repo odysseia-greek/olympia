@@ -1,11 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"github.com/odysseia-greek/olympia/homeros/routing"
-	"github.com/odysseia-greek/olympia/homeros/schemas"
+	"log"
 	"net/http"
 	"os"
 )
@@ -36,14 +37,17 @@ func main() {
 
 	//# this configmap sets tls to true which means the service will try and create tls connctiosn while it shouldnt
 	//# probably a fix needed in plato. Good time to see if it can be trimmed down a bit
-	handler := schemas.HomerosHandler()
-	tracingConfig := gateway.InitTracingConfig()
 
-	logging.Debug(fmt.Sprintf("%v", handler))
-	srv := routing.InitRoutes(handler.Streamer, tracingConfig, handler.Randomizer)
+	tracingConfig := gateway.InitTracingConfig()
+	handler, err := gateway.CreateNewConfig(context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	graphqlServer := routing.InitRoutes(handler, tracingConfig, handler.Randomizer)
 
 	logging.System(fmt.Sprintf("running on port %s", port))
-	err := http.ListenAndServe(port, srv)
+	err = http.ListenAndServe(port, graphqlServer)
 	if err != nil {
 		panic(err)
 	}

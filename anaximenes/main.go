@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"github.com/odysseia-greek/olympia/anaximenes/pneuma"
 	"log"
 	"os"
@@ -28,11 +28,7 @@ func main() {
 	logging.System("\"Just as our soul, being air, constrains us, so breath and air envelops the whole kosmos.\"")
 	logging.System(strings.Repeat("~", 37))
 
-	logging.Debug("creating config")
-
-	env := os.Getenv("ENV")
-
-	handler, err := pneuma.CreateNewConfig(env)
+	handler, err := pneuma.CreateNewConfig()
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -40,7 +36,7 @@ func main() {
 
 	handler.CreateAttikeIndices()
 
-	logging.Debug("closing ptolemaios because job is done")
+	logging.Debug("closing Ambassador because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service
 	uuidCode := uuid.New().String()
 	_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})

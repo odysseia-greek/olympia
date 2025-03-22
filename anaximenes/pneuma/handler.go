@@ -5,7 +5,7 @@ import (
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	"strings"
 )
 

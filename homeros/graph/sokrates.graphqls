@@ -1,0 +1,184 @@
+type ComprehensiveResponse {
+  correct: Boolean
+  foundInText: AnalyzeTextResponse
+  quizWord: String
+  similarWords: [Hit]
+}
+
+type MediaOptions {
+  audioUrl: String
+  imageUrl: String
+  option: String
+}
+
+type Options {
+  option: String
+}
+
+type MediaQuizResponse {
+  numberOfItems: Int
+  options: [MediaOptions]
+  quizItem: String
+}
+
+type MultipleChoiceResponse {
+  numberOfItems: Int
+  options: [Options]
+  quizItem: String
+}
+
+type AuthorBasedAnswerResponse {
+  correct: Boolean
+  quizWord: String
+  wordsInText: [String]
+}
+
+type AuthorBasedResponse {
+  fullSentence: String
+  translation: String
+  reference: String
+  quiz: AuthorBasedQuiz
+  grammarQuiz: [GrammarQuizAdded]
+}
+
+type AuthorBasedQuiz {
+  quizItem: String
+  numberOfItems: Int
+  options: [AuthorBasedOptions]
+}
+
+type AuthorBasedOptions {
+  quizWord: String
+}
+
+type GrammarQuizAdded {
+  correctAnswer: String
+  wordInText: String
+  extraInformation: String
+  options: [AuthorBasedOptions]
+}
+
+type DialogueQuizResponse {
+  quizMetadata: QuizMetadata
+  theme: String
+  set: String
+  segment: String
+  reference: String
+  dialogue: Dialogue
+  content: [DialogueContent]
+}
+
+type QuizMetadata {
+  language: String
+}
+
+type Dialogue {
+  introduction: String
+  speakers: [Speaker]
+  section: String
+  linkToPerseus: String
+}
+
+type Speaker {
+  name: String
+  shorthand: String
+  translation: String
+}
+
+type DialogueAnswer {
+  percentage: Float
+  input: [DialogueContent]
+  answer: [DialogueContent]
+  wronglyPlaced: [DialogueCorrection]
+}
+
+type DialogueContent {
+  translation: String
+  greek: String
+  place: Int
+  speaker: String
+}
+
+type DialogueCorrection {
+  translation: String
+  greek: String
+  place: Int
+  speaker: String
+  correctPlace: Int
+}
+
+input MediaAnswerInput {
+  theme: String
+  set: String
+  segment: String
+  quizWord: String
+  answer: String
+  comprehensive: Boolean
+}
+
+input AuthorBasedAnswerInput {
+  theme: String
+  set: String
+  segment: String
+  quizWord: String
+  answer: String
+}
+
+input MediaQuizInput {
+  excludeWords: [String]
+  theme: String
+  set: String
+  segment: String
+  order: String
+}
+
+input AuthorBasedInput {
+  excludeWords: [String]
+  theme: String
+  set: String
+  segment: String
+}
+
+input MultipleChoiceAnswerInput {
+  theme: String
+  set: String
+  quizWord: String
+  answer: String
+  comprehensive: Boolean
+}
+
+input MultipleQuizInput {
+  excludeWords: [String]
+  theme: String
+  set: String
+  order: String
+}
+
+input DialogueQuizInput {
+  theme: String
+  set: String
+}
+
+input DialogueAnswerInput {
+  theme: String
+  set: String
+  content: [DialogueInputContent]
+}
+
+input DialogueInputContent {
+  translation: String
+  greek: String
+  place: Int
+  speaker: String
+}
+
+type Query {
+  mediaAnswer(input: MediaAnswerInput): ComprehensiveResponse
+  mediaQuiz(input: MediaQuizInput): MediaQuizResponse
+  multipleChoiceAnswer(input: MultipleChoiceAnswerInput): ComprehensiveResponse
+  multipleChoiceQuiz(input: MultipleQuizInput): MultipleChoiceResponse
+  authorBasedAnswer(input: AuthorBasedAnswerInput): AuthorBasedAnswerResponse
+  authorBasedQuiz(input: AuthorBasedInput): AuthorBasedResponse
+  dialogueAnswer(input: DialogueAnswerInput): DialogueAnswer
+  dialogueQuiz(input: DialogueQuizInput): DialogueQuizResponse
+}

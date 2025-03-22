@@ -10,9 +10,10 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/service"
 	"github.com/odysseia-greek/agora/thales"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
-	pbp "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
+	pbp "github.com/odysseia-greek/delphi/aristides/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -29,59 +30,50 @@ type EupalinosClient interface {
 	GetQueueLength(ctx context.Context, in *pb.ChannelInfo, opts ...grpc.CallOption) (*pb.QueueLength, error)
 }
 
-func CreateNewConfig(env string, duration time.Duration, finished int64) (*MelissosHandler, *grpc.ClientConn, error) {
-	healthCheck := true
-	outOfClusterKube := false
-	if env == "DEVELOPMENT" {
-		healthCheck = false
-		outOfClusterKube = true
-	}
-	testOverWrite := config.BoolFromEnv(config.EnvTestOverWrite)
+func CreateNewConfig(duration time.Duration, finished int64) (*MelissosHandler, *grpc.ClientConn, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
-	var cfg models.Config
-
-	kube, err := thales.CreateKubeClient(outOfClusterKube)
+	kube, err := thales.CreateKubeClient(false)
 	if err != nil {
 		return nil, nil, err
 	}
 	ns := config.StringFromEnv(config.EnvNamespace, config.DefaultNamespace)
 	job := config.StringFromEnv(config.EnvJobName, config.DefaultJobName)
 
-	ambassador := diplomat.NewClientAmbassador()
-	if healthCheck {
-		if healthCheck {
-			healthy := ambassador.WaitForHealthyState()
-			if !healthy {
-				logging.Info("tracing service not ready - restarting seems the only option")
-				os.Exit(1)
-			}
-		}
+	var cfg models.Config
+	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
+	healthy := ambassador.WaitForHealthyState()
+	if !healthy {
+		logging.Info("tracing service not ready - restarting seems the only option")
+		os.Exit(1)
+	}
 
-		traceId := uuid.New().String()
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		defer cancel()
-		md := metadata.New(map[string]string{service.HeaderKey: traceId})
-		ctx = metadata.NewOutgoingContext(context.Background(), md)
-		vaultConfig, err := ambassador.GetSecret(ctx, &pbp.VaultRequest{})
-		if err != nil {
-			logging.Error(err.Error())
-			return nil, nil, err
-		}
+	traceId := uuid.New().String()
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+	defer cancel()
+	md := metadata.New(map[string]string{service.HeaderKey: traceId})
+	ctx = metadata.NewOutgoingContext(context.Background(), md)
+	vaultConfig, err := ambassador.GetSecret(ctx, &pbp.VaultRequest{})
+	if err != nil {
+		logging.Error(err.Error())
+		return nil, nil, err
+	}
 
-		elasticService := aristoteles.ElasticService(tls)
+	elasticService := aristoteles.ElasticService(tls)
 
-		cfg = models.Config{
-			Service:     elasticService,
-			Username:    vaultConfig.ElasticUsername,
-			Password:    vaultConfig.ElasticPassword,
-			ElasticCERT: vaultConfig.ElasticCERT,
-		}
-	} else {
-		cfg = aristoteles.ElasticConfig(env, testOverWrite, tls)
+	cfg = models.Config{
+		Service:     elasticService,
+		Username:    vaultConfig.ElasticUsername,
+		Password:    vaultConfig.ElasticPassword,
+		ElasticCERT: vaultConfig.ElasticCERT,
 	}
 
 	elastic, err := aristoteles.NewClient(cfg)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	err = aristoteles.HealthCheck(elastic)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -126,9 +118,9 @@ func CreateNewConfig(env string, duration time.Duration, finished int64) (*Melis
 }
 
 func createEupalinosClient(serverAddress string) (pb.EupalinosClient, *grpc.ClientConn, error) {
-	logging.Debug("creating client config")
+	logging.Debug("creating client config for Eupalinos")
 	logging.Debug(serverAddress)
-	conn, err := grpc.Dial(serverAddress, grpc.WithInsecure())
+	conn, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, nil, err
 	}

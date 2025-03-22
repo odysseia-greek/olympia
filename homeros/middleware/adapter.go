@@ -91,8 +91,9 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 			if operationName == "" {
 				splitQuery := strings.Split(query, "{")
 				if len(splitQuery) != 0 {
-					if strings.Contains(splitQuery[0], " ") {
-						operationName = strings.Split(splitQuery[0], " ")[1]
+					if strings.Contains(splitQuery[1], "(") {
+						splitsStringPart := strings.Split(splitQuery[1], "(")[0]
+						operationName = strings.TrimSpace(splitsStringPart)
 						logging.Debug(fmt.Sprintf("extracted operationName from query: %s", operationName))
 					}
 				}

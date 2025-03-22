@@ -10,7 +10,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
 	"github.com/odysseia-greek/agora/thales"
-	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"strings"
 	"sync"
@@ -32,7 +32,7 @@ type MelissosHandler struct {
 	Kube         *thales.KubeClient
 	Namespace    string
 	Job          string
-	Ambassador   *ptolemaios.ClientAmbassador
+	Ambassador   *diplomat.ClientAmbassador
 }
 
 func (m *MelissosHandler) HandleParmenides() bool {
