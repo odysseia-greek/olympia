@@ -7,7 +7,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
-	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	"strings"
 	"sync"
 )
@@ -21,7 +21,7 @@ type DemokritosHandler struct {
 	MaxNGram   int
 	PolicyName string
 	Buf        bytes.Buffer
-	Ambassador *ptolemaios.ClientAmbassador
+	Ambassador *diplomat.ClientAmbassador
 }
 
 func (d *DemokritosHandler) DeleteIndexAtStartUp() error {

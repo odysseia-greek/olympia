@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"github.com/odysseia-greek/olympia/herakleitos/flux"
 	"log"
 	"os"
@@ -109,7 +109,7 @@ func main() {
 	logging.Info(fmt.Sprintf("created: %s", strconv.Itoa(handler.Created)))
 	logging.Info(fmt.Sprintf("texts found in rhema: %s", strconv.Itoa(documents)))
 
-	logging.Debug("closing ptolemaios because job is done")
+	logging.Debug("closing Ambassador because job is done")
 	// just setting a code that could be used later to check is if it was sent from an actual service
 	uuidCode := uuid.New().String()
 	_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})

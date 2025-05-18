@@ -9,9 +9,10 @@ import (
 )
 
 type HomerosHandler struct {
-	HttpClients service.OdysseiaClient
-	Cache       archytas.Client
-	Streamer    pb.TraceService_ChorusClient
-	Cancel      context.CancelFunc
-	Randomizer  randomizer.Random
+	HttpClients        service.OdysseiaClient
+	Cache              archytas.Client
+	Streamer           pb.TraceService_ChorusClient
+	Cancel             context.CancelFunc
+	Randomizer         randomizer.Random
+	SokratesGraphqlUrl string
 }

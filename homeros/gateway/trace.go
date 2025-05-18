@@ -36,7 +36,22 @@ func (h *HomerosHandler) CloseTrace(response *http.Response, body interface{}) {
 	requestId := response.Header.Get(config.HeaderKey)
 	traceID, parentspanID, traceCall := ParseHeaderID(requestId)
 
-	jsonBody, _ := json.Marshal(body)
+	var jsonBody []byte
+	var err error
+
+	// Handle body based on its type
+	switch v := body.(type) {
+	case []byte:
+		jsonBody = v
+	case json.RawMessage:
+		jsonBody = []byte(v)
+	default:
+		jsonBody, err = json.Marshal(v)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to marshal response body: %v", err))
+			jsonBody = []byte(`{"error": "failed to serialize response body"}`)
+		}
+	}
 
 	logging.Info(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d", traceID, response.StatusCode))
 

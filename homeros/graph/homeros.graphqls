@@ -1,0 +1,132 @@
+type AggregateResult {
+  themes: [Themes]
+}
+
+type AggregationResult {
+  authors: [ESAuthor]
+}
+
+type AnswerSection {
+  answerSentence: String
+  levenshteinPercentage: String
+  quizSentence: String
+  section: String
+}
+
+input CheckTextRequestInput {
+  translations: [TranslationsInput]
+  author: String
+  book: String
+  reference: String
+}
+
+type CheckTextResponse {
+  averageLevenshteinPercentage: String
+  possibleTypos: [Typo]
+  sections: [AnswerSection]
+}
+
+input CreateTextInput {
+  author: String
+  book: String
+  reference: String
+  section: String
+}
+
+type Database {
+  clusterName: String
+  healthy: Boolean
+  serverName: String
+  serverVersion: String
+}
+
+type ESAuthor {
+  books: [ESBook]
+  key: String
+}
+
+type ESBook {
+  key: String
+  references: [Reference]
+}
+
+type ExtendedDictionary {
+  hits: [ExtendedDictionaryEntry]
+}
+
+type ExtendedDictionaryEntry {
+  foundInText: AnalyzeTextResponse
+  hit: Hit
+}
+
+type Health {
+  database: Database
+  healthy: Boolean
+  time: String
+}
+
+type Reference {
+  key: String
+  sections: [Section]
+}
+
+type DeclensionTranslationResult {
+  results: [Result]
+}
+type Result {
+  rootWord: String
+  rule: String
+  translations: [String]
+  word: String
+}
+
+extend type Query {
+  analyze(rootword: String): AnalyzeTextResponse
+  check(input: CheckTextRequestInput): CheckTextResponse
+  create(input: CreateTextInput): Text
+  dictionary(language: String = "", mode: String = "", searchInText: Boolean = false, word: String): ExtendedDictionary
+  grammar(word: String): DeclensionTranslationResult
+  status: Status
+  textOptions: AggregationResult
+}
+
+type Section {
+  key: String
+}
+
+type Segments {
+  maxSet: Int
+  name: String
+}
+
+"""The way to check whether backend apis are available"""
+type Status {
+  alexandros: Health
+  dionysios: Health
+  herodotos: Health
+  overallHealth: Boolean
+}
+
+type Text {
+  author: String
+  book: String
+  perseusTextLink: String
+  reference: String
+  rhemai: [Rhema]
+  type: String
+}
+
+type Themes {
+  name: String
+  segments: [Segments]
+}
+
+input TranslationsInput {
+  section: String
+  translation: String
+}
+
+type Typo {
+  provided: String
+  source: String
+}

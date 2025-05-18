@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"github.com/odysseia-greek/olympia/melissos/monos"
 	"log"
 	"os"
@@ -32,12 +32,11 @@ func main() {
 
 	logging.Debug("creating config")
 
-	env := os.Getenv("ENV")
 	duration := time.Millisecond * 5000
 	minute := time.Minute * 60
 	timeFinished := minute.Milliseconds()
 
-	handler, conn, err := monos.CreateNewConfig(env, duration, timeFinished)
+	handler, conn, err := monos.CreateNewConfig(duration, timeFinished)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -64,7 +63,7 @@ func main() {
 			logging.System("Finished Run")
 			conn.Close()
 
-			logging.Debug("closing Ptolemaios because job is done")
+			logging.Debug("closing Ambassador because job is done")
 			// just setting a code that could be used later to check is if it was sent from an actual service
 			uuidCode := uuid.New().String()
 			_, err = handler.Ambassador.ShutDown(context.Background(), &pb.ShutDownRequest{Code: uuidCode})

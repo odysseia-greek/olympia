@@ -1,12 +1,12 @@
 module github.com/odysseia-greek/olympia/hippokrates
 
-go 1.22.0
+go 1.24.0
 
 require (
-	github.com/cucumber/godog v0.14.1
+	github.com/cucumber/godog v0.15.0
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/plato v0.1.45
-	github.com/stretchr/testify v1.9.0
+	github.com/odysseia-greek/agora/plato v0.2.5
+	github.com/stretchr/testify v1.10.0
 )
 
 require (

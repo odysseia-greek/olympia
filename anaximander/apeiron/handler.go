@@ -1,11 +1,12 @@
 package apeiron
 
 import (
+	"encoding/json"
 	"fmt"
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
-	ptolemaios "github.com/odysseia-greek/delphi/ptolemaios/diplomat"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	"strings"
 	"time"
 )
@@ -15,7 +16,7 @@ type AnaximanderHandler struct {
 	Created    int
 	PolicyName string
 	Elastic    elastic.Client
-	Ambassador *ptolemaios.ClientAmbassador
+	Ambassador *diplomat.ClientAmbassador
 }
 
 func (a *AnaximanderHandler) DeleteIndexAtStartUp() error {
@@ -66,9 +67,13 @@ func (a *AnaximanderHandler) createPolicyAtStartup() error {
 }
 
 func (a *AnaximanderHandler) AddToElastic(declension models.Declension) error {
-	upload, _ := declension.Marshal()
+	upload, err := json.Marshal(declension)
+	if err != nil {
+		return err
+	}
 
-	_, err := a.Elastic.Index().CreateDocument(a.Index, upload)
+	doc, err := a.Elastic.Index().CreateDocument(a.Index, upload)
+	logging.Info(fmt.Sprintf("created document: %s %v", a.Index, doc))
 	a.Created++
 	if err != nil {
 		return err

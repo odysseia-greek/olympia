@@ -2,10 +2,10 @@ package gateway
 
 import (
 	"encoding/json"
-	plato "github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/olympia/homeros/graph/model"
 )
 
-func (h *HomerosHandler) CreateText(body []byte, requestID string) (*plato.Text, error) {
+func (h *HomerosHandler) CreateText(body []byte, requestID string) (*model.Text, error) {
 	response, err := h.HttpClients.Herodotos().Create(body, requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
@@ -14,7 +14,7 @@ func (h *HomerosHandler) CreateText(body []byte, requestID string) (*plato.Text,
 
 	defer response.Body.Close()
 
-	var sentence plato.Text
+	var sentence model.Text
 	err = json.NewDecoder(response.Body).Decode(&sentence)
 	if err != nil {
 		return nil, err
@@ -25,7 +25,7 @@ func (h *HomerosHandler) CreateText(body []byte, requestID string) (*plato.Text,
 	return &sentence, nil
 }
 
-func (h *HomerosHandler) CheckText(body []byte, requestID string) (*plato.CheckTextResponse, error) {
+func (h *HomerosHandler) CheckText(body []byte, requestID string) (*model.CheckTextResponse, error) {
 	response, err := h.HttpClients.Herodotos().Check(body, requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
@@ -33,7 +33,7 @@ func (h *HomerosHandler) CheckText(body []byte, requestID string) (*plato.CheckT
 	}
 	defer response.Body.Close()
 
-	var sentence plato.CheckTextResponse
+	var sentence model.CheckTextResponse
 	err = json.NewDecoder(response.Body).Decode(&sentence)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (h *HomerosHandler) CheckText(body []byte, requestID string) (*plato.CheckT
 	return &sentence, nil
 }
 
-func (h *HomerosHandler) HerodotosOptions(requestID string) (*plato.AggregationResult, error) {
+func (h *HomerosHandler) HerodotosOptions(requestID string) (*model.AggregationResult, error) {
 	response, err := h.HttpClients.Herodotos().Options(requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
@@ -52,7 +52,7 @@ func (h *HomerosHandler) HerodotosOptions(requestID string) (*plato.AggregationR
 	}
 	defer response.Body.Close()
 
-	var aggregate plato.AggregationResult
+	var aggregate model.AggregationResult
 	err = json.NewDecoder(response.Body).Decode(&aggregate)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (h *HomerosHandler) HerodotosOptions(requestID string) (*plato.AggregationR
 	return &aggregate, nil
 }
 
-func (h *HomerosHandler) Analyze(body []byte, requestID string) (*plato.AnalyzeTextResponse, error) {
+func (h *HomerosHandler) Analyze(body []byte, requestID string) (*model.AnalyzeTextResponse, error) {
 	response, err := h.HttpClients.Herodotos().Analyze(body, requestID)
 	if err != nil {
 		h.CloseTraceWithError(err, requestID)
@@ -71,7 +71,7 @@ func (h *HomerosHandler) Analyze(body []byte, requestID string) (*plato.AnalyzeT
 	}
 	defer response.Body.Close()
 
-	var analyzeResult plato.AnalyzeTextResponse
+	var analyzeResult model.AnalyzeTextResponse
 	err = json.NewDecoder(response.Body).Decode(&analyzeResult)
 	if err != nil {
 		return nil, err

@@ -9,8 +9,8 @@ import (
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/service"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -24,7 +24,7 @@ func CreateNewConfig() (*HerakleitosHandler, error) {
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
-	ambassador := diplomat.NewClientAmbassador()
+	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
 	healthy := ambassador.WaitForHealthyState()
 	if !healthy {
 		logging.Info("tracing service not ready - restarting seems the only option")

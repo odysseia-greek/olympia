@@ -3,18 +3,6 @@ Feature: Validate Homeros GraphQL Gateway Functionality
   I want to ensure the proper functioning of the Homeros GraphQL gateway
 
   @homeros
-  Scenario Outline: Using the gateway it should be possible to create and answer a quiz
-    Given the gateway is up
-    When I create a new quiz with quizType "<quizType>"
-    And I answer the quiz through the gateway
-    Then the gateway should respond with a correctness
-    And other possibilities should be included in the response
-    Examples:
-      | quizType |
-      | media    |
-      | multiplechoice |
-
-  @homeros
   Scenario Outline: Alexandros search word
     Given the gateway is up
     When the word "<word>" is queried using "<mode>" and "<language>" through the gateway

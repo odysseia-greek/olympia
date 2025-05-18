@@ -2,10 +2,10 @@ package gateway
 
 import (
 	"encoding/json"
-	plato "github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/olympia/homeros/graph/model"
 )
 
-func (h *HomerosHandler) Grammar(word, traceID string) ([]plato.Result, error) {
+func (h *HomerosHandler) Grammar(word, traceID string) (*model.DeclensionTranslationResult, error) {
 	response, err := h.HttpClients.Dionysios().Grammar(word, traceID)
 	if err != nil {
 		h.CloseTraceWithError(err, traceID)
@@ -14,7 +14,7 @@ func (h *HomerosHandler) Grammar(word, traceID string) ([]plato.Result, error) {
 
 	defer response.Body.Close()
 
-	var results plato.DeclensionTranslationResults
+	var results model.DeclensionTranslationResult
 	err = json.NewDecoder(response.Body).Decode(&results)
 	if err != nil {
 		return nil, err
@@ -22,5 +22,5 @@ func (h *HomerosHandler) Grammar(word, traceID string) ([]plato.Result, error) {
 
 	h.CloseTrace(response, results)
 
-	return results.Results, nil
+	return &results, nil
 }

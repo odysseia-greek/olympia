@@ -15,17 +15,18 @@ import (
 )
 
 const (
-	sokratesApi   = "sokrates"
-	herodotosApi  = "herodotos"
-	alexandrosApi = "alexandros"
-	dionysiosApi  = "dionysios"
-	ResponseBody  = "responseBody"
-	ErrorBody     = "errorBody"
-	ContextAuthor = "contextAuthor"
-	ContextId     = "contextId"
-	UpdatedAnswer = "updateAnswer"
-	AnswerBody    = "answerBody"
-	Rootword      = "rootWord"
+	sokratesApi             = "sokrates"
+	herodotosApi            = "herodotos"
+	alexandrosApi           = "alexandros"
+	dionysiosApi            = "dionysios"
+	ResponseBody            = "responseBody"
+	ErrorBody               = "errorBody"
+	Rootword                = "rootWord"
+	TraceId          string = "hippokrates-traceid"
+	QuizContext      string = "quizContext"
+	BodyContext      string = "bodyContext"
+	GrammarContext   string = "grammarContext"
+	AggregateContext string = "aggregateContext"
 )
 
 var opts = godog.Options{
@@ -53,15 +54,6 @@ func (l *OdysseiaFixture) theIsRunning(service string) error {
 
 		defer response.Body.Close()
 		err = json.NewDecoder(response.Body).Decode(&healthy)
-	case sokratesApi:
-		response, err := l.client.Sokrates().Health(uuid)
-		if err != nil {
-			return err
-		}
-
-		defer response.Body.Close()
-		err = json.NewDecoder(response.Body).Decode(&healthy)
-
 	case herodotosApi:
 		response, err := l.client.Herodotos().Health(uuid)
 		if err != nil {
@@ -145,12 +137,6 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the response should include possibleTypos$`, odysseia.theResponseShouldIncludePossibleTypos)
 	ctx.Step(`^the text with author "([^"]*)" and book "([^"]*)" and reference "([^"]*)" and section "([^"]*)" is checked with typos$`, odysseia.theTextWithAuthorAndBookAndReferenceAndSectionIsCheckedWithTypos)
 
-	//sokrates
-	ctx.Step(`^a list of themes with the highest set should be returned$`, odysseia.aListOfThemesWithTheHighestSetShouldBeReturned)
-	ctx.Step(`^a query is made for the options for the quizType "([^"]*)"$`, odysseia.aQueryIsMadeForTheOptionsForTheQuizType)
-	ctx.Step(`^a new quiz question is made with the quizType "([^"]*)"$`, odysseia.aNewQuizQuestionIsMadeWithTheQuizType)
-	ctx.Step(`^the question can be answered from the response$`, odysseia.theQuestionCanBeAnsweredFromTheResponse)
-
 	//dionysios
 	ctx.Step(`^the grammar is checked for word "([^"]*)"$`, odysseia.theGrammarIsCheckedForWord)
 	ctx.Step(`^the grammar for word "([^"]*)" is queried with an error$`, odysseia.theGrammarForWordIsQueriedWithAnError)
@@ -168,9 +154,6 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the grammar is checked for word "([^"]*)" through the gateway$`, odysseia.theGrammarIsCheckedForWordThroughTheGateway)
 	ctx.Step(`^the declension "([^"]*)" should be included in the response as a gateway struct$`, odysseia.theDeclensionShouldBeIncludedInTheResponseAsAGatewayStruct)
 	ctx.Step(`^the word "([^"]*)" is queried using "([^"]*)" and "([^"]*)" through the gateway$`, odysseia.theWordIsQueriedUsingAndThroughTheGateway)
-	ctx.Step(`^I create a new quiz with quizType "([^"]*)"$`, odysseia.iCreateANewQuizWithQuizType)
-	ctx.Step(`^other possibilities should be included in the response$`, odysseia.otherPossibilitiesShouldBeIncludedInTheResponse)
-	ctx.Step(`^I answer the quiz through the gateway$`, odysseia.iAnswerTheQuizThroughTheGateway)
 	ctx.Step(`^the gateway should respond with a correctness$`, odysseia.theGatewayShouldRespondWithACorrectness)
 	ctx.Step(`^a query is made for all text options$`, odysseia.aQueryIsMadeForAllTextOptions)
 	ctx.Step(`^that response is used to create a new text$`, odysseia.thatResponseIsUsedToCreateANewText)
@@ -181,13 +164,8 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 
 	//odysseia
 	ctx.Step(`^a grammar entry is made for the word "([^"]*)"$`, odysseia.aGrammarEntryIsMadeForTheWord)
-	ctx.Step(`^a quiz is played in comprehensive mode for the word "([^"]*)" and the correct answer "([^"]*)" with type "([^"]*)" set "([^"]*)" and theme "([^"]*)" and segment "([^"]*)"$`, odysseia.aQuizIsPlayedInComprehensiveModeForTheWordAndTheCorrectAnswerWithTypeSetAndThemeAndSegment)
 	ctx.Step(`^a result should be returned$`, odysseia.aResultShouldBeReturned)
-	ctx.Step(`^a word is found that would normally not be easy to decline$`, odysseia.aWordIsFoundThatWouldNormallyNotBeEasyToDecline)
-	ctx.Step(`^an authorbased quiz is played that includes grammarOptions$`, odysseia.anAuthorbasedQuizIsPlayedThatIncludesGrammarOptions)
 	ctx.Step(`^that word is searched for in the grammar component$`, odysseia.thatWordIsSearchedForInTheGrammarComponent)
-
-	ctx.Step(`^the quizresponse is expanded with text and similar words$`, odysseia.theQuizresponseIsExpandedWithTextAndSimilarWords)
 	ctx.Step(`^the options returned from the grammar api should include "([^"]*)"$`, odysseia.theOptionsReturnedFromTheGrammarApiShouldInclude)
 	ctx.Step(`^a response with a rootword is returned$`, odysseia.aResponseWithARootwordIsReturned)
 	ctx.Step(`^that rootword is queried in Alexandros with "([^"]*)"$`, odysseia.thatRootwordIsQueriedInAlexandrosWith)

@@ -1,14 +1,14 @@
 module github.com/odysseia-greek/olympia/herakleitos
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/google/uuid v1.6.0
 	github.com/odysseia-greek/agora/aristoteles v0.1.13
-	github.com/odysseia-greek/agora/plato v0.1.49
-	github.com/odysseia-greek/delphi/ptolemaios v0.0.5
+	github.com/odysseia-greek/agora/plato v0.2.5
+	github.com/odysseia-greek/delphi/aristides v0.0.1
 	github.com/stretchr/testify v1.10.0
-	google.golang.org/grpc v1.70.0
+	google.golang.org/grpc v1.71.0
 )
 
 require (
@@ -30,22 +30,22 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/vault/api v1.15.0 // indirect
 	github.com/hashicorp/vault/api/auth/kubernetes v0.8.0 // indirect
-	github.com/kr/text v0.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/odysseia-greek/agora/diogenes v0.1.15 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
-	go.opentelemetry.io/otel v1.32.0 // indirect
-	go.opentelemetry.io/otel/metric v1.32.0 // indirect
-	go.opentelemetry.io/otel/trace v1.32.0 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
-	golang.org/x/net v0.32.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
+	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
+	go.opentelemetry.io/otel v1.34.0 // indirect
+	go.opentelemetry.io/otel/metric v1.34.0 // indirect
+	go.opentelemetry.io/otel/trace v1.34.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241202173237-19429a94021a // indirect
-	google.golang.org/protobuf v1.36.4 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
+	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

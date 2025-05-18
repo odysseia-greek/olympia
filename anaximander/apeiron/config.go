@@ -9,8 +9,8 @@ import (
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/service"
-	"github.com/odysseia-greek/delphi/ptolemaios/diplomat"
-	pb "github.com/odysseia-greek/delphi/ptolemaios/proto"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"google.golang.org/grpc/metadata"
 	"os"
 	"time"
@@ -20,14 +20,16 @@ const (
 	defaultIndex string = "grammar"
 )
 
-func CreateNewConfig(env string) (*AnaximanderHandler, error) {
+func CreateNewConfig() (*AnaximanderHandler, error) {
+	logging.Debug("creating config")
+
 	tls := config.BoolFromEnv(config.EnvTlSKey)
 
 	var cfg models.Config
-	ambassador := diplomat.NewClientAmbassador()
+	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
 	healthy := ambassador.WaitForHealthyState()
 	if !healthy {
-		logging.Info("tracing service not ready - restarting seems the only option")
+		logging.Info("ambassador service not ready - restarting seems the only option")
 		os.Exit(1)
 	}
 
