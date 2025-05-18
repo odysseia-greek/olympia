@@ -2,8 +2,23 @@
 
 package model
 
+type QuizSection interface {
+	IsQuizSection()
+}
+
 type AggregateResult struct {
 	Themes []*Themes `json:"themes,omitempty"`
+}
+
+type AggregatedHealthResponse struct {
+	Healthy  *bool            `json:"healthy,omitempty"`
+	Time     *string          `json:"time,omitempty"`
+	Version  *string          `json:"version,omitempty"`
+	Services []*ServiceHealth `json:"services,omitempty"`
+}
+
+type AggregatedOptions struct {
+	Themes []*Theme `json:"themes,omitempty"`
 }
 
 type AggregationResult struct {
@@ -32,24 +47,29 @@ type AnswerSection struct {
 }
 
 type AuthorBasedAnswerInput struct {
-	Theme    *string `json:"theme,omitempty"`
-	Set      *string `json:"set,omitempty"`
-	Segment  *string `json:"segment,omitempty"`
-	QuizWord *string `json:"quizWord,omitempty"`
-	Answer   *string `json:"answer,omitempty"`
+	DoneAfter *int32  `json:"doneAfter,omitempty"`
+	Theme     *string `json:"theme,omitempty"`
+	Set       *string `json:"set,omitempty"`
+	Segment   *string `json:"segment,omitempty"`
+	QuizWord  *string `json:"quizWord,omitempty"`
+	Answer    *string `json:"answer,omitempty"`
 }
 
 type AuthorBasedAnswerResponse struct {
-	Correct     *bool     `json:"correct,omitempty"`
-	QuizWord    *string   `json:"quizWord,omitempty"`
-	WordsInText []*string `json:"wordsInText,omitempty"`
+	Correct     *bool            `json:"correct,omitempty"`
+	QuizWord    *string          `json:"quizWord,omitempty"`
+	WordsInText []*string        `json:"wordsInText,omitempty"`
+	Progress    []*ProgressEntry `json:"progress,omitempty"`
+	Finished    *bool            `json:"finished,omitempty"`
 }
 
 type AuthorBasedInput struct {
-	ExcludeWords []*string `json:"excludeWords,omitempty"`
-	Theme        *string   `json:"theme,omitempty"`
-	Set          *string   `json:"set,omitempty"`
-	Segment      *string   `json:"segment,omitempty"`
+	Theme           *string `json:"theme,omitempty"`
+	Set             *string `json:"set,omitempty"`
+	Segment         *string `json:"segment,omitempty"`
+	DoneAfter       *int32  `json:"doneAfter,omitempty"`
+	ResetProgress   *bool   `json:"resetProgress,omitempty"`
+	ArchiveProgress *bool   `json:"archiveProgress,omitempty"`
 }
 
 type AuthorBasedOptions struct {
@@ -68,6 +88,22 @@ type AuthorBasedResponse struct {
 	Reference    *string             `json:"reference,omitempty"`
 	Quiz         *AuthorBasedQuiz    `json:"quiz,omitempty"`
 	GrammarQuiz  []*GrammarQuizAdded `json:"grammarQuiz,omitempty"`
+	Progress     []*ProgressEntry    `json:"progress,omitempty"`
+}
+
+type AuthorBasedWordForm struct {
+	DictionaryForm *string   `json:"dictionaryForm,omitempty"`
+	WordsInText    []*string `json:"wordsInText,omitempty"`
+}
+
+type AuthorBasedWordFormsInput struct {
+	Theme   *string `json:"theme,omitempty"`
+	Segment *string `json:"segment,omitempty"`
+	Set     *string `json:"set,omitempty"`
+}
+
+type AuthorBasedWordFormsResponse struct {
+	Forms []*AuthorBasedWordForm `json:"forms,omitempty"`
 }
 
 type CheckTextRequestInput struct {
@@ -88,11 +124,18 @@ type ComprehensiveResponse struct {
 	FoundInText  *AnalyzeTextResponse `json:"foundInText,omitempty"`
 	QuizWord     *string              `json:"quizWord,omitempty"`
 	SimilarWords []*Hit               `json:"similarWords,omitempty"`
+	Progress     []*ProgressEntry     `json:"progress,omitempty"`
+	Finished     *bool                `json:"finished,omitempty"`
 }
 
 type ConjugationResponse struct {
 	Rule *string `json:"rule,omitempty"`
 	Word *string `json:"word,omitempty"`
+}
+
+type Coordinates struct {
+	X *float64 `json:"x,omitempty"`
+	Y *float64 `json:"y,omitempty"`
 }
 
 type CreateTextInput struct {
@@ -105,6 +148,13 @@ type CreateTextInput struct {
 type Database struct {
 	ClusterName   *string `json:"clusterName,omitempty"`
 	Healthy       *bool   `json:"healthy,omitempty"`
+	ServerName    *string `json:"serverName,omitempty"`
+	ServerVersion *string `json:"serverVersion,omitempty"`
+}
+
+type DatabaseInfo struct {
+	Healthy       *bool   `json:"healthy,omitempty"`
+	ClusterName   *string `json:"clusterName,omitempty"`
 	ServerName    *string `json:"serverName,omitempty"`
 	ServerVersion *string `json:"serverVersion,omitempty"`
 }
@@ -189,11 +239,80 @@ type ExtendedDictionaryEntry struct {
 	Hit         *Hit                 `json:"hit,omitempty"`
 }
 
+type FinalTranslationQuiz struct {
+	Instruction string   `json:"instruction"`
+	Options     []string `json:"options"`
+	Answer      string   `json:"answer"`
+}
+
+func (FinalTranslationQuiz) IsQuizSection() {}
+
+type GrammarAnswer struct {
+	Correct      *bool                `json:"correct,omitempty"`
+	QuizWord     *string              `json:"quizWord,omitempty"`
+	Progress     []*ProgressEntry     `json:"progress,omitempty"`
+	SimilarWords []*Hit               `json:"similarWords,omitempty"`
+	FoundInText  *AnalyzeTextResponse `json:"foundInText,omitempty"`
+	Finished     *bool                `json:"finished,omitempty"`
+}
+
+type GrammarAnswerInput struct {
+	Theme          *string `json:"theme,omitempty"`
+	Set            *string `json:"set,omitempty"`
+	Segment        *string `json:"segment,omitempty"`
+	QuizWord       *string `json:"quizWord,omitempty"`
+	Answer         *string `json:"answer,omitempty"`
+	Comprehensive  *bool   `json:"comprehensive,omitempty"`
+	DoneAfter      *int32  `json:"doneAfter,omitempty"`
+	DictionaryForm *string `json:"dictionaryForm,omitempty"`
+}
+
+type GrammarOption struct {
+	Option *string `json:"option,omitempty"`
+}
+
+type GrammarOptions struct {
+	Themes []*GrammarThemes `json:"themes,omitempty"`
+}
+
 type GrammarQuizAdded struct {
 	CorrectAnswer    *string               `json:"correctAnswer,omitempty"`
 	WordInText       *string               `json:"wordInText,omitempty"`
 	ExtraInformation *string               `json:"extraInformation,omitempty"`
 	Options          []*AuthorBasedOptions `json:"options,omitempty"`
+}
+
+type GrammarQuizInput struct {
+	Theme           *string `json:"theme,omitempty"`
+	Set             *string `json:"set,omitempty"`
+	Segment         *string `json:"segment,omitempty"`
+	DoneAfter       *int32  `json:"doneAfter,omitempty"`
+	ResetProgress   *bool   `json:"resetProgress,omitempty"`
+	ArchiveProgress *bool   `json:"archiveProgress,omitempty"`
+}
+
+type GrammarQuizResponse struct {
+	QuizItem        *string          `json:"quizItem,omitempty"`
+	DictionaryForm  *string          `json:"dictionaryForm,omitempty"`
+	Stem            *string          `json:"stem,omitempty"`
+	Translation     *string          `json:"translation,omitempty"`
+	NumberOfItems   *int32           `json:"numberOfItems,omitempty"`
+	Description     *string          `json:"description,omitempty"`
+	Difficulty      *string          `json:"difficulty,omitempty"`
+	ContractionRule *string          `json:"contractionRule,omitempty"`
+	Options         []*GrammarOption `json:"options,omitempty"`
+	Progress        []*ProgressEntry `json:"progress,omitempty"`
+}
+
+type GrammarSegment struct {
+	Name       *string `json:"name,omitempty"`
+	Difficulty *string `json:"difficulty,omitempty"`
+	MaxSet     *int32  `json:"maxSet,omitempty"`
+}
+
+type GrammarThemes struct {
+	Name     *string           `json:"name,omitempty"`
+	Segments []*GrammarSegment `json:"segments,omitempty"`
 }
 
 type Health struct {
@@ -210,6 +329,45 @@ type Hit struct {
 	Original   *string `json:"original,omitempty"`
 }
 
+type JourneyOptions struct {
+	Themes []*JourneyThemes `json:"themes,omitempty"`
+}
+
+type JourneyQuizInput struct {
+	Theme   *string `json:"theme,omitempty"`
+	Segment *string `json:"segment,omitempty"`
+}
+
+type JourneySegment struct {
+	Name        *string      `json:"name,omitempty"`
+	Number      *int32       `json:"number,omitempty"`
+	Location    *string      `json:"location,omitempty"`
+	Coordinates *Coordinates `json:"coordinates,omitempty"`
+}
+
+type JourneySegmentQuiz struct {
+	Theme       string        `json:"theme"`
+	Segment     string        `json:"segment"`
+	Number      int32         `json:"number"`
+	Sentence    string        `json:"sentence"`
+	Translation string        `json:"translation"`
+	ContextNote *string       `json:"contextNote,omitempty"`
+	Intro       *QuizIntro    `json:"intro,omitempty"`
+	Quiz        []QuizSection `json:"quiz"`
+}
+
+type JourneyThemes struct {
+	Name     *string           `json:"name,omitempty"`
+	Segments []*JourneySegment `json:"segments,omitempty"`
+}
+
+type MatchQuiz struct {
+	Instruction string      `json:"instruction"`
+	Pairs       []*QuizPair `json:"pairs"`
+}
+
+func (MatchQuiz) IsQuizSection() {}
+
 type MediaAnswerInput struct {
 	Theme         *string `json:"theme,omitempty"`
 	Set           *string `json:"set,omitempty"`
@@ -217,6 +375,7 @@ type MediaAnswerInput struct {
 	QuizWord      *string `json:"quizWord,omitempty"`
 	Answer        *string `json:"answer,omitempty"`
 	Comprehensive *bool   `json:"comprehensive,omitempty"`
+	DoneAfter     *int32  `json:"doneAfter,omitempty"`
 }
 
 type MediaOptions struct {
@@ -225,18 +384,33 @@ type MediaOptions struct {
 	Option   *string `json:"option,omitempty"`
 }
 
+type MediaPair struct {
+	Word   string `json:"word"`
+	Answer string `json:"answer"`
+}
+
+type MediaQuiz struct {
+	Instruction string       `json:"instruction"`
+	MediaFiles  []*MediaPair `json:"mediaFiles"`
+}
+
+func (MediaQuiz) IsQuizSection() {}
+
 type MediaQuizInput struct {
-	ExcludeWords []*string `json:"excludeWords,omitempty"`
-	Theme        *string   `json:"theme,omitempty"`
-	Set          *string   `json:"set,omitempty"`
-	Segment      *string   `json:"segment,omitempty"`
-	Order        *string   `json:"order,omitempty"`
+	DoneAfter       *int32  `json:"doneAfter,omitempty"`
+	Theme           *string `json:"theme,omitempty"`
+	Set             *string `json:"set,omitempty"`
+	Segment         *string `json:"segment,omitempty"`
+	Order           *string `json:"order,omitempty"`
+	ResetProgress   *bool   `json:"resetProgress,omitempty"`
+	ArchiveProgress *bool   `json:"archiveProgress,omitempty"`
 }
 
 type MediaQuizResponse struct {
-	NumberOfItems *int32          `json:"numberOfItems,omitempty"`
-	Options       []*MediaOptions `json:"options,omitempty"`
-	QuizItem      *string         `json:"quizItem,omitempty"`
+	NumberOfItems *int32           `json:"numberOfItems,omitempty"`
+	Options       []*MediaOptions  `json:"options,omitempty"`
+	QuizItem      *string          `json:"quizItem,omitempty"`
+	Progress      []*ProgressEntry `json:"progress,omitempty"`
 }
 
 type MultipleChoiceAnswerInput struct {
@@ -248,27 +422,55 @@ type MultipleChoiceAnswerInput struct {
 }
 
 type MultipleChoiceResponse struct {
-	NumberOfItems *int32     `json:"numberOfItems,omitempty"`
-	Options       []*Options `json:"options,omitempty"`
-	QuizItem      *string    `json:"quizItem,omitempty"`
+	NumberOfItems *int32           `json:"numberOfItems,omitempty"`
+	Options       []*Options       `json:"options,omitempty"`
+	QuizItem      *string          `json:"quizItem,omitempty"`
+	Progress      []*ProgressEntry `json:"progress,omitempty"`
 }
 
 type MultipleQuizInput struct {
-	ExcludeWords []*string `json:"excludeWords,omitempty"`
-	Theme        *string   `json:"theme,omitempty"`
-	Set          *string   `json:"set,omitempty"`
-	Order        *string   `json:"order,omitempty"`
+	DoneAfter       *int32  `json:"doneAfter,omitempty"`
+	Theme           *string `json:"theme,omitempty"`
+	Set             *string `json:"set,omitempty"`
+	Order           *string `json:"order,omitempty"`
+	ResetProgress   *bool   `json:"resetProgress,omitempty"`
+	ArchiveProgress *bool   `json:"archiveProgress,omitempty"`
+}
+
+type MultipleTheme struct {
+	Name   *string  `json:"name,omitempty"`
+	MaxSet *float64 `json:"maxSet,omitempty"`
 }
 
 type Options struct {
 	Option *string `json:"option,omitempty"`
 }
 
+type ProgressEntry struct {
+	Greek          *string `json:"greek,omitempty"`
+	Translation    *string `json:"translation,omitempty"`
+	PlayCount      *int32  `json:"playCount,omitempty"`
+	CorrectCount   *int32  `json:"correctCount,omitempty"`
+	IncorrectCount *int32  `json:"incorrectCount,omitempty"`
+	LastPlayed     *string `json:"lastPlayed,omitempty"`
+}
+
 type Query struct {
+}
+
+type QuizIntro struct {
+	Author     string `json:"author"`
+	Work       string `json:"work"`
+	Background string `json:"background"`
 }
 
 type QuizMetadata struct {
 	Language *string `json:"language,omitempty"`
+}
+
+type QuizPair struct {
+	Greek  string `json:"greek"`
+	Answer string `json:"answer"`
 }
 
 type Reference struct {
@@ -293,9 +495,21 @@ type Section struct {
 	Key *string `json:"key,omitempty"`
 }
 
+type Segment struct {
+	Name   *string  `json:"name,omitempty"`
+	MaxSet *float64 `json:"maxSet,omitempty"`
+}
+
 type Segments struct {
 	MaxSet *int32  `json:"maxSet,omitempty"`
 	Name   *string `json:"name,omitempty"`
+}
+
+type ServiceHealth struct {
+	Name         *string       `json:"name,omitempty"`
+	Healthy      *bool         `json:"healthy,omitempty"`
+	Version      *string       `json:"version,omitempty"`
+	DatabaseInfo *DatabaseInfo `json:"databaseInfo,omitempty"`
 }
 
 type Speaker struct {
@@ -312,6 +526,17 @@ type Status struct {
 	OverallHealth *bool   `json:"overallHealth,omitempty"`
 }
 
+type StructureQuiz struct {
+	Title    string   `json:"title"`
+	Text     string   `json:"text"`
+	Question string   `json:"question"`
+	Options  []string `json:"options"`
+	Answer   string   `json:"answer"`
+	Note     *string  `json:"note,omitempty"`
+}
+
+func (StructureQuiz) IsQuizSection() {}
+
 type Text struct {
 	Author          *string  `json:"author,omitempty"`
 	Book            *string  `json:"book,omitempty"`
@@ -319,6 +544,15 @@ type Text struct {
 	Reference       *string  `json:"reference,omitempty"`
 	Rhemai          []*Rhema `json:"rhemai,omitempty"`
 	Type            *string  `json:"type,omitempty"`
+}
+
+type Theme struct {
+	Name     *string    `json:"name,omitempty"`
+	Segments []*Segment `json:"segments,omitempty"`
+}
+
+type ThemedOptions struct {
+	Themes []*MultipleTheme `json:"themes,omitempty"`
 }
 
 type Themes struct {
@@ -330,6 +564,15 @@ type TranslationsInput struct {
 	Section     *string `json:"section,omitempty"`
 	Translation *string `json:"translation,omitempty"`
 }
+
+type TriviaQuiz struct {
+	Question string   `json:"question"`
+	Options  []string `json:"options"`
+	Answer   string   `json:"answer"`
+	Note     *string  `json:"note,omitempty"`
+}
+
+func (TriviaQuiz) IsQuizSection() {}
 
 type Typo struct {
 	Provided *string `json:"provided,omitempty"`

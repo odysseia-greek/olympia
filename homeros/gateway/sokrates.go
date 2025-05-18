@@ -13,6 +13,7 @@ import (
 
 func (h *HomerosHandler) ForwardToSokrates(ctx context.Context) (json.RawMessage, error) {
 	requestID, _ := ctx.Value(config.HeaderKey).(string)
+	sessionID, _ := ctx.Value(config.SessionIdKey).(string)
 	requestContext := graphql.GetOperationContext(ctx)
 	if requestContext == nil {
 		return nil, fmt.Errorf("failed to retrieve GraphQL operation context")
@@ -32,6 +33,7 @@ func (h *HomerosHandler) ForwardToSokrates(ctx context.Context) (json.RawMessage
 	}
 
 	req.Header.Set(config.HeaderKey, requestID)
+	req.Header.Set(config.SessionIdKey, sessionID)
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := http.DefaultClient.Do(req)

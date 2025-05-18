@@ -11,6 +11,8 @@ GREEN := \033[1;32m
 YELLOW := \033[1;33m
 NC := \033[0m  # No Color
 
+GQLGEN = go run github.com/99designs/gqlgen generate
+
 # Ensure the graph directory exists
 ensure_dirs:
 	@mkdir -p $(dir $(SOKRATES_SCHEMA_DEST)) $(dir $(SHARED_SCHEMA_DEST))
@@ -33,6 +35,12 @@ shared_schema: ensure_dirs
 		cp $(SHARED_SCHEMA_SRC) $(SHARED_SCHEMA_DEST); \
 		echo "$(GREEN)[UPDATED]$(NC) Shared schema copied successfully!"; \
 	fi
+
+.PHONY: gqlgen
+gqlgen:
+	@echo "🔄 Regenerating GraphQL code with gqlgen..."
+	@$(GQLGEN)
+	@echo "✅ GraphQL code regeneration complete!"
 
 # Full sync: Runs both tasks
 sync_schemas: shared_schema sokrates_schema

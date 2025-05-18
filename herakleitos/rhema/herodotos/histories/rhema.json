@@ -285,6 +285,59 @@
     "author":"Herodotos",
     "book":"Histories",
     "type":"work",
+    "reference":"6.106",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:6.106?",
+    "rhemai":[
+      {
+        "greek": "τότε δὲ πεμφθεὶς ὑπὸ τῶν στρατηγῶν ὁ Φειδιππίδης οὗτος, ὅτε πέρ οἱ ἔφη καὶ τὸν Πᾶνα φανῆναι, δευτεραῖος ἐκ τοῦ Ἀθηναίων ἄστεος ἦν ἐν Σπάρτῃ, ἀπικόμενος δὲ ἐπὶ τοὺς ἄρχοντας ἔλεγε",
+        "translations":[
+          "This Philippides was in Sparta on the day after leaving the city of Athens, that time when he was sent by the generals and said that Pan had appeared to him. He came to the magistrates and said,"
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "ὦ Λακεδαιμόνιοι, Ἀθηναῖοι ὑμέων δέονται σφίσι βοηθῆσαι καὶ μὴ περιιδεῖν πόλιν ἀρχαιοτάτην ἐν τοῖσι Ἕλλησι δουλοσύνῃ περιπεσοῦσαν πρὸς ἀνδρῶν βαρβάρων· καὶ γὰρ νῦν Ἐρέτριά τε ἠνδραπόδισται καὶ πόλι λογίμῳ ἡ Ἑλλὰς γέγονε ἀσθενεστέρη.",
+        "translations":[
+          "'Lacedaemonians, the Athenians ask you to come to their aid and not allow the most ancient city among the Hellenes to fall into slavery at the hands of the foreigners. Even now Eretria has been enslaved, and Hellas has become weaker by an important city.'"
+        ],
+        "section":"2"
+      },
+      {
+        "greek": "ὃ μὲν δή σφι τὰ ἐντεταλμένα ἀπήγγελλε, τοῖσι δὲ ἕαδε μὲν βοηθέειν Ἀθηναίοισι, ἀδύνατα δέ σφι ἦν τὸ παραυτίκα ποιέειν ταῦτα, οὐ βουλομένοισι λύειν τὸν νόμον· ἦν γὰρ ἱσταμένου τοῦ μηνὸς εἰνάτη, εἰνάτῃ δὲ οὐκ ἐξελεύσεσθαι ἔφασαν μὴ οὐ πλήρεος ἐόντος τοῦ κύκλου.",
+        "translations":[
+          "He told them what he had been ordered to say, and they resolved to send help to the Athenians, but they could not do this immediately, for they were unwilling to break the law. It was the ninth day of the rising month, and they said that on the ninth they could not go out to war until the moon's circle was full."
+        ],
+        "section":"3"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
+    "reference":"6.113",
+    "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:6.113",
+    "rhemai":[
+      {
+        "greek": "μαχομένων δὲ ἐν τῷ Μαραθῶνι χρόνος ἐγίνετο πολλός, καὶ τὸ μὲν μέσον τοῦ στρατοπέδου ἐνίκων οἱ βάρβαροι, τῇ Πέρσαι τε αὐτοὶ καὶ Σάκαι ἐτετάχατο· κατὰ τοῦτο μὲν δὴ ἐνίκων οἱ βάρβαροι καὶ ῥήξαντες ἐδίωκον ἐς τὴν μεσόγαιαν, τὸ δὲ κέρας ἑκάτερον ἐνίκων Ἀθηναῖοί τε καὶ Πλαταιέες·",
+        "translations":[
+          "They fought a long time at Marathon. In the center of the line the foreigners prevailed, where the Persians and Sacae were arrayed. The foreigners prevailed there and broke through in pursuit inland, but on each wing the Athenians and Plataeans prevailed."
+        ],
+        "section":"1"
+      },
+      {
+        "greek": "νικῶντες δὲ τὸ μὲν τετραμμένον τῶν βαρβάρων φεύγειν ἔων, τοῖσι δὲ τὸ μέσον ῥήξασι αὐτῶν συναγαγόντες τὰ κέρεα ἀμφότερα ἐμάχοντο, καὶ ἐνίκων Ἀθηναῖοι. φεύγουσι δὲ τοῖσι Πέρσῃσι εἵποντο κόπτοντες, ἐς ὃ ἐς τὴν θάλασσαν ἀπικόμενοι πῦρ τε αἴτεον καὶ ἐπελαμβάνοντο τῶν νεῶν.",
+        "translations":[
+          "In victory they let the routed foreigners flee, and brought the wings together to fight those who had broken through the center. The Athenians prevailed, then followed the fleeing Persians and struck them down. When they reached the sea they demanded fire and laid hold of the Persian ships.\n\n"
+        ],
+        "section":"2"
+      }
+    ]
+  },
+  {
+    "author":"Herodotos",
+    "book":"Histories",
+    "type":"work",
     "reference":"7.138",
     "perseusTextLink":"https://scaife.perseus.org/reader/urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:7.138",
     "rhemai":[

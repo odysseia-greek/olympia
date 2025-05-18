@@ -29,7 +29,7 @@ func CreateNewConfig() (*AnaximanderHandler, error) {
 	ambassador, err := diplomat.NewClientAmbassador(diplomat.DEFAULTADDRESS)
 	healthy := ambassador.WaitForHealthyState()
 	if !healthy {
-		logging.Info("tracing service not ready - restarting seems the only option")
+		logging.Info("ambassador service not ready - restarting seems the only option")
 		os.Exit(1)
 	}
 

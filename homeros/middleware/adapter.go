@@ -39,7 +39,7 @@ func SetCorsHeaders() Adapter {
 				if strings.Contains(origin, o) {
 					logging.Debug(fmt.Sprintf("setting CORS header for origin: %s", origin))
 					w.Header().Set("Access-Control-Allow-Origin", origin)
-					w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+					w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Boule")
 					w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 					w.Header().Set("Access-Control-Allow-Credentials", "true")
 					if r.Method == "OPTIONS" {
@@ -71,6 +71,7 @@ func SetCorsHeaders() Adapter {
 func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			sessionId := r.Header.Get(config.SessionIdKey)
 			bodyBytes, err := io.ReadAll(r.Body)
 			if err != nil {
 				http.Error(w, "Failed to read request body", http.StatusInternalServerError)
@@ -147,7 +148,12 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 				logging.Info(logLine)
 			}
 
+			w.Header().Set(config.HeaderKey, requestID)
+			w.Header().Set(config.SessionIdKey, sessionId)
+
 			ctx := context.WithValue(r.Context(), config.HeaderKey, requestID)
+			ctx = context.WithValue(ctx, config.SessionIdKey, sessionId)
+
 			f.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
