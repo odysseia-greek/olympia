@@ -432,29 +432,3 @@ func (r *queryResolver) JourneyQuiz(ctx context.Context, input *model.JourneyQui
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//  - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//    it when you're done.
-//  - You have helper methods in this file. Move them out to keep these resolver files clean.
-/*
-	type RawQuizSection struct {
-	Match            *model.MatchQuiz            `json:"match,omitempty"`
-	Trivia           *model.TriviaQuiz           `json:"trivia,omitempty"`
-	Structure        *model.StructureQuiz        `json:"structure,omitempty"`
-	Media            *model.MediaQuiz            `json:"media,omitempty"`
-	FinalTranslation *model.FinalTranslationQuiz `json:"final_translation,omitempty"`
-}
-type RawJourneySegmentQuiz struct {
-	Theme       string            `json:"theme"`
-	Segment     string            `json:"segment"`
-	Number      int32             `json:"number"`
-	Sentence    string            `json:"sentence"`
-	Translation string            `json:"translation"`
-	ContextNote *string           `json:"contextNote"`
-	Intro       *model.QuizIntro  `json:"intro"`
-	Quiz        []json.RawMessage `json:"quiz"`
-}
-*/

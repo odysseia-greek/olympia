@@ -17088,7 +17088,7 @@ func (ec *executionContext) unmarshalInputMultipleChoiceAnswerInput(ctx context.
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"theme", "set", "quizWord", "answer", "comprehensive"}
+	fieldsInOrder := [...]string{"theme", "set", "quizWord", "answer", "comprehensive", "doneAfter"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -17130,6 +17130,13 @@ func (ec *executionContext) unmarshalInputMultipleChoiceAnswerInput(ctx context.
 				return it, err
 			}
 			it.Comprehensive = data
+		case "doneAfter":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("doneAfter"))
+			data, err := ec.unmarshalOInt2ᚖint32(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.DoneAfter = data
 		}
 	}
 
