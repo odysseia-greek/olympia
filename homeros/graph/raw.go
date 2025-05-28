@@ -1,6 +1,9 @@
 package graph
 
-import "github.com/odysseia-greek/olympia/homeros/graph/model"
+import (
+	"encoding/json"
+	"github.com/odysseia-greek/olympia/homeros/graph/model"
+)
 
 type RawQuizSection struct {
 	Match            *model.MatchQuiz            `json:"match,omitempty"`
