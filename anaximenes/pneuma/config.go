@@ -31,7 +31,7 @@ func CreateNewConfig() (*AnaximenesHandler, error) {
 		logging.Info("ambassador service not ready - restarting seems the only option")
 		os.Exit(1)
 	}
-	
+
 	traceId := uuid.New().String()
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
 	defer cancel()
@@ -69,10 +69,13 @@ func CreateNewConfig() (*AnaximenesHandler, error) {
 
 	indices := []string{config.TracingElasticIndex, config.MetricsElasticIndex}
 
+	policyName := config.StringFromEnv("HOT_POLICY_NAME", "hot_30d")
+
 	return &AnaximenesHandler{
 		Indices:    indices,
 		Elastic:    elastic,
 		Ambassador: ambassador,
 		MaxAge:     maxAge,
+		PolicyName: policyName,
 	}, nil
 }

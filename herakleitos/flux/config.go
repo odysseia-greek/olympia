@@ -2,7 +2,6 @@ package flux
 
 import (
 	"context"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
@@ -63,7 +62,7 @@ func CreateNewConfig() (*HerakleitosHandler, error) {
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
-	policyName := fmt.Sprintf("%s_policy", index)
+	policyName := config.StringFromEnv("HOT_POLICY_NAME", "hot_plain")
 
 	return &HerakleitosHandler{
 		Index:      index,

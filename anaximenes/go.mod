@@ -4,8 +4,8 @@ go 1.24.0
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/odysseia-greek/agora/aristoteles v0.1.13
-	github.com/odysseia-greek/agora/plato v0.2.7
+	github.com/odysseia-greek/agora/aristoteles v0.1.15
+	github.com/odysseia-greek/agora/plato v0.2.9
 	github.com/odysseia-greek/delphi/aristides v0.0.1
 	google.golang.org/grpc v1.72.0
 )
@@ -13,8 +13,8 @@ require (
 require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/elastic/elastic-transport-go/v8 v8.6.0 // indirect
-	github.com/elastic/go-elasticsearch/v8 v8.14.0 // indirect
+	github.com/elastic/elastic-transport-go/v8 v8.7.0 // indirect
+	github.com/elastic/go-elasticsearch/v8 v8.18.1 // indirect
 	github.com/go-jose/go-jose/v4 v4.0.4 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect

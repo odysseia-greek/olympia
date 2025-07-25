@@ -38,12 +38,6 @@ func (a *AnaximanderHandler) DeleteIndexAtStartUp() error {
 }
 
 func (a *AnaximanderHandler) CreateIndexAtStartup() error {
-	logging.Info(fmt.Sprintf("creating policy: %s", a.PolicyName))
-	err := a.createPolicyAtStartup()
-	if err != nil {
-		return err
-	}
-
 	indexMapping := a.Elastic.Builder().GrammarIndex(a.PolicyName)
 	created, err := a.Elastic.Index().Create(a.Index, indexMapping)
 	if err != nil {
@@ -51,17 +45,6 @@ func (a *AnaximanderHandler) CreateIndexAtStartup() error {
 	}
 
 	logging.Info(fmt.Sprintf("created index: %s %v", a.Index, created.Acknowledged))
-
-	return nil
-}
-
-func (a *AnaximanderHandler) createPolicyAtStartup() error {
-	policyCreated, err := a.Elastic.Policy().CreateWarmPolicy(a.PolicyName)
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", a.PolicyName, policyCreated.Acknowledged))
 
 	return nil
 }

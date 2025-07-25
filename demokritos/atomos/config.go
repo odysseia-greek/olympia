@@ -3,7 +3,6 @@ package atomos
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/aristoteles/models"
@@ -82,7 +81,7 @@ func CreateNewConfig() (*DemokritosHandler, error) {
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 	searchWord := config.StringFromEnv(config.EnvSearchWord, config.DefaultSearchWord)
-	policyName := fmt.Sprintf("%s_policy", index)
+	policyName := config.StringFromEnv("HOT_POLICY_NAME", "hot_plain")
 
 	var buf bytes.Buffer
 

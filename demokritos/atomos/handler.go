@@ -43,11 +43,6 @@ func (d *DemokritosHandler) DeleteIndexAtStartUp() error {
 }
 
 func (d *DemokritosHandler) CreateIndexAtStartup() error {
-	logging.Info(fmt.Sprintf("creating policy: %s", d.PolicyName))
-	err := d.createPolicyAtStartup()
-	if err != nil {
-		return err
-	}
 	logging.Info(fmt.Sprintf("creating index: %s with min: %v and max: %v ngram", d.Index, d.MinNGram, d.MaxNGram))
 	query := dictionaryIndex(d.MinNGram, d.MaxNGram, d.PolicyName)
 	res, err := d.Elastic.Index().Create(d.Index, query)
@@ -56,17 +51,6 @@ func (d *DemokritosHandler) CreateIndexAtStartup() error {
 	}
 
 	logging.Info(fmt.Sprintf("created index: %s", res.Index))
-	return nil
-}
-
-func (d *DemokritosHandler) createPolicyAtStartup() error {
-	policyCreated, err := d.Elastic.Policy().CreateHotPolicy(d.PolicyName)
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", d.PolicyName, policyCreated.Acknowledged))
-
 	return nil
 }
 

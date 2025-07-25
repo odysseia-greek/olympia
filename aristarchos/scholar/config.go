@@ -128,99 +128,11 @@ func CreateNewConfig(ctx context.Context) (*AggregatorServiceImpl, error) {
 
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
-	err = createIndexAtStartup(elastic, index)
-	if err != nil {
-		return nil, err
-	}
+	policyName := config.StringFromEnv("HOT_POLICY_NAME", "hot_plain")
 
 	return &AggregatorServiceImpl{
-		Index:   index,
-		Elastic: elastic,
+		Index:      index,
+		Elastic:    elastic,
+		PolicyName: policyName,
 	}, nil
-}
-
-func createIndexAtStartup(elastic aristoteles.Client, indexName string) error {
-	//this method needs a change in the drakon role
-	//exists, data, err := elastic.Index().IndexExists(indexName)
-	//if exists {
-	//	logging.Info(fmt.Sprintf("index %s already exists", indexName))
-	//	logging.Debug(fmt.Sprintf("%v", data))
-	//	return nil
-	//}
-	policyName := fmt.Sprintf("%s_policy", indexName)
-	logging.Info(fmt.Sprintf("creating policy: %s", policyName))
-	err := createPolicyAtStartup(elastic, policyName)
-	if err != nil {
-		return err
-	}
-
-	indexMapping := createScholarIndexMapping()
-	created, err := elastic.Index().Create(indexName, indexMapping)
-	if err != nil {
-		logging.Warn(fmt.Sprintf("index creation returned an error, this most likely means the index already exists: %s", err.Error()))
-		return nil
-	}
-
-	logging.Info(fmt.Sprintf("created index: %s %v", indexName, created.Acknowledged))
-
-	return nil
-}
-
-func createPolicyAtStartup(elastic aristoteles.Client, policyName string) error {
-	policyCreated, err := elastic.Policy().CreateHotPolicy(policyName)
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", policyName, policyCreated.Acknowledged))
-
-	return nil
-}
-
-func createScholarIndexMapping() map[string]interface{} {
-	return map[string]interface{}{
-		"mappings": map[string]interface{}{
-			"properties": map[string]interface{}{
-				"rootWord": map[string]interface{}{
-					"type": "text",
-				},
-				"unaccented": map[string]interface{}{
-					"type": "text",
-				},
-				"variants": map[string]interface{}{
-					"type": "nested",
-					"properties": map[string]interface{}{
-						"searchTerm": map[string]interface{}{
-							"type": "text",
-						},
-						"score": map[string]interface{}{
-							"type": "integer",
-						},
-					},
-				},
-				"partOfSpeech": map[string]interface{}{
-					"type": "keyword",
-				},
-				"translations": map[string]interface{}{
-					"type": "text",
-				},
-				"categories": map[string]interface{}{
-					"type": "nested",
-					"properties": map[string]interface{}{
-						"forms": map[string]interface{}{
-							"type": "nested",
-							"properties": map[string]interface{}{
-								"rule": map[string]interface{}{
-									"type": "text",
-								},
-								"word": map[string]interface{}{
-									"type": "text",
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	}
 }

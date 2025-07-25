@@ -23,8 +23,9 @@ const (
 )
 
 type AggregatorServiceImpl struct {
-	Elastic aristoteles.Client
-	Index   string
+	Elastic    aristoteles.Client
+	Index      string
+	PolicyName string
 	pb.UnimplementedAristarchosServer
 }
 

@@ -37,24 +37,7 @@ func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {
 	return nil
 }
 
-func (h *HerakleitosHandler) createPolicyAtStartup() error {
-	policyCreated, err := h.Elastic.Policy().CreateWarmPolicy(h.PolicyName)
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", h.PolicyName, policyCreated.Acknowledged))
-
-	return nil
-}
-
 func (h *HerakleitosHandler) CreateIndexAtStartup() error {
-	logging.Info(fmt.Sprintf("creating policy: %s", h.PolicyName))
-	err := h.createPolicyAtStartup()
-	if err != nil {
-		return err
-	}
-
 	indexMapping := textIndex(h.PolicyName)
 	created, err := h.Elastic.Index().Create(h.Index, indexMapping)
 	if err != nil {

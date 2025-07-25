@@ -12,6 +12,7 @@ import (
 type AnaximenesHandler struct {
 	Indices    []string
 	MaxAge     string
+	PolicyName string
 	Elastic    elastic.Client
 	Ambassador *diplomat.ClientAmbassador
 }
@@ -19,48 +20,36 @@ type AnaximenesHandler struct {
 func (a *AnaximenesHandler) CreateAttikeIndices() {
 	for _, index := range a.Indices {
 		deleted, err := a.Elastic.Index().Delete(index)
-		logging.Info(fmt.Sprintf("deleted index: %s success: %v", index, deleted))
+
+		logging.Info(fmt.Sprintf("delete response for %s: success=%v, err=%v",
+			index, deleted, err))
+
 		if err != nil {
-			logging.Error(err.Error())
 			if strings.Contains(err.Error(), "index_not_found_exception") {
+				logging.Info(fmt.Sprintf("index %s not found, creating it", index))
 				err = a.createIndexAtStartup(index)
 				if err != nil {
-					logging.Error(err.Error())
+					logging.Error(fmt.Sprintf("failed to create index: %v", err))
 				}
 				continue
 			}
-			logging.Debug(fmt.Sprintf("cannot delete index: %s which means an aliased version exist and should not be deleted", index))
+
+			// Log any other error in detail
+			logging.Debug(fmt.Sprintf("error deleting index %s: %v", index, err))
 		}
 
 		if deleted {
+			logging.Info(fmt.Sprintf("recreating index %s after deletion", index))
 			err = a.createIndexAtStartup(index)
 			if err != nil {
-				logging.Error(err.Error())
+				logging.Error(fmt.Sprintf("failed to recreate index: %v", err))
 			}
-			continue
 		}
 	}
 }
 
-func (a *AnaximenesHandler) createPolicyAtStartup(policyName string) error {
-	policyCreated, err := a.Elastic.Policy().CreatePolicyWithRollOver(policyName, a.MaxAge, "hot")
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", policyName, policyCreated.Acknowledged))
-
-	return nil
-}
-
 func (a *AnaximenesHandler) createIndexAtStartup(index string) error {
-	policyName := fmt.Sprintf("%s_policy", index)
-	err := a.createPolicyAtStartup(policyName)
-	if err != nil {
-		return err
-	}
-
-	request := a.createMapping(index, policyName)
+	request := a.createMapping(index, a.PolicyName)
 	created, err := a.Elastic.Index().CreateWithAlias(index, request)
 	if err != nil {
 		return err

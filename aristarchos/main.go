@@ -43,6 +43,10 @@ func main() {
 		log.Fatal("death has found me")
 	}
 
+	err = scholar.CreateIndexAtStartup(config.PolicyName, config.Index, config.Elastic)
+	if err != nil {
+		logging.Error(err.Error())
+	}
 	listener, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
