@@ -4,6 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"strings"
+	"time"
+
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/config"
@@ -11,21 +15,18 @@ import (
 	"github.com/odysseia-greek/agora/plato/middleware"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
+	ariv1 "github.com/odysseia-greek/alexandreia/aristarchos/gen/go/v1"
+	aristarchos "github.com/odysseia-greek/alexandreia/aristarchos/scholar"
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
-	pb "github.com/odysseia-greek/attike/aristophanes/proto"
-	pab "github.com/odysseia-greek/olympia/aristarchos/proto"
-	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
+	arv1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"google.golang.org/grpc/metadata"
-	"net/http"
-	"strings"
-	"time"
 )
 
 type HerodotosHandler struct {
 	Aggregator *aristarchos.ClientAggregator
 	Elastic    aristoteles.Client
 	Index      string
-	Streamer   pb.TraceService_ChorusClient
+	Streamer   arv1.TraceService_ChorusClient
 	Cancel     context.CancelFunc
 	Cache      archytas.Client
 }
@@ -140,12 +141,6 @@ func (h *HerodotosHandler) create(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
-	q := h.Elastic.Builder().MatchAll()
-	test, err := h.Elastic.Query().Match("grammar", q)
-	if err != nil {
-		logging.Error(err.Error())
-	}
-	logging.Debug(fmt.Sprintf("%+v", test))
 	response, err := h.Elastic.Query().Match(h.Index, query)
 
 	if err != nil {
@@ -454,12 +449,12 @@ func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
 		}
 
 		if traceCall {
-			parabasis := &pb.ParabasisRequest{
+			parabasis := &arv1.ObserveRequest{
 				TraceId:      traceID,
 				ParentSpanId: spanID,
 				SpanId:       comedy.GenerateSpanID(),
-				RequestType: &pb.ParabasisRequest_Span{
-					Span: &pb.SpanRequest{
+				Kind: &arv1.ObserveRequest_Action{
+					Action: &arv1.ObserveAction{
 						Action: "TakenFromCache",
 						Status: fmt.Sprintf("status code: %d", http.StatusOK),
 					},
@@ -600,7 +595,7 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 	md := metadata.New(map[string]string{service.HeaderKey: requestId})
 	ctx = metadata.NewOutgoingContext(context.Background(), md)
 
-	aggregatorRequest := pab.AggregatorRequest{RootWord: analyzeTextRequest.Rootword}
+	aggregatorRequest := ariv1.AggregatorRequest{RootWord: analyzeTextRequest.Rootword}
 	entry, err := h.Aggregator.RetrieveEntry(ctx, &aggregatorRequest)
 	if err != nil {
 		logging.Error(fmt.Sprintf("failed to retrieve entry: %s", err.Error()))
@@ -729,15 +724,15 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 func (h *HerodotosHandler) databaseSpan(hits, took int64, query map[string]interface{}, traceID, spanID string) {
 	parsedQuery, _ := json.Marshal(query)
 
-	dataBaseSpan := &pb.ParabasisRequest{
+	dataBaseSpan := &arv1.ObserveRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,
 		SpanId:       spanID,
-		RequestType: &pb.ParabasisRequest_DatabaseSpan{DatabaseSpan: &pb.DatabaseSpanRequest{
-			Action:   "search",
-			Query:    string(parsedQuery),
-			Hits:     hits,
-			TimeTook: took,
+		Kind: &arv1.ObserveRequest_DbSpan{DbSpan: &arv1.ObserveDbSpan{
+			Action: "search",
+			Query:  string(parsedQuery),
+			Hits:   hits,
+			TookMs: took,
 		}},
 	}
 

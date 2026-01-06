@@ -4,18 +4,23 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
-	"os"
+	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 )
 
 const (
-	defaultSokratesAddress = "http://sokrates:8080/sokrates/graphql"
+	defaultSokratesAddress   = "http://sokrates.apologia.svc:8080/sokrates/graphql"
+	defaultAlexandrosAddress = "http://alexandros.makedonia.svc:8080/alexandros/graphql"
 )
 
 func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
+	start := time.Now()
 	cache, err := archytas.CreateBadgerClient()
 	if err != nil {
 		return nil, err
@@ -31,33 +36,65 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		return nil, err
 	}
 
-	tracer, err := aristophanes.NewClientTracer(aristophanes.DefaultAddress)
-	if err != nil {
-		logging.Error(err.Error())
+	var tracer *aristophanes.ClientTracer
+	var streamer v1.TraceService_ChorusClient
+
+	maxRetries := 10
+	retryDelay := 3 * time.Second
+
+	for i := 1; i <= maxRetries; i++ {
+		tracer, err = aristophanes.NewClientTracer(aristophanes.DefaultAddress)
+		if err == nil {
+			break
+		}
+
+		logging.Error(fmt.Sprintf("failed to create tracer (attempt %d/%d): %s", i, maxRetries, err.Error()))
+
+		if i < maxRetries {
+			time.Sleep(retryDelay)
+		}
+	}
+
+	for i := 1; i <= maxRetries; i++ {
+		streamer, err = tracer.Chorus(ctx)
+		if err == nil {
+			break
+		}
+
+		logging.Error(fmt.Sprintf("failed to create chorus streamer (attempt %d/%d): %s", i, maxRetries, err.Error()))
+		if i < maxRetries {
+			time.Sleep(retryDelay)
+		}
+	}
+
+	healthyTracer := false
+	if tracer != nil {
+		healthyTracer = tracer.WaitForHealthyState()
 	}
 
 	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
 
-	streamer, err := tracer.Chorus(ctx)
-	if err != nil {
-		logging.Error(err.Error())
-	}
-
-	healthy := tracer.WaitForHealthyState()
-	if !healthy {
-		logging.Error("tracing service not ready - restarting seems the only option")
-		os.Exit(1)
-	}
+	alexandrosGraphqlAddress := config.StringFromEnv("ALEXANDROS_GRAPHQL_ADDRESS", defaultAlexandrosAddress)
 
 	ctx, cancel := context.WithCancel(ctx)
+	elapsed := time.Since(start)
+
+	logging.System(fmt.Sprintf(`Homeros Configuration Overview:
+- Initialization Time: %s
+- Tracer Service:      %v (Address: %s)
+`,
+		elapsed,
+		healthyTracer, aristophanes.DefaultAddress,
+	))
 
 	return &HomerosHandler{
-		Cache:              cache,
-		HttpClients:        service,
-		Streamer:           streamer,
-		Randomizer:         randomizer,
-		Cancel:             cancel,
-		SokratesGraphqlUrl: sokratesGraphqlAddress,
+		Cache:                cache,
+		HttpClients:          service,
+		Streamer:             streamer,
+		Randomizer:           randomizer,
+		Cancel:               cancel,
+		SokratesGraphqlUrl:   sokratesGraphqlAddress,
+		AlexandrosGraphqlUrl: alexandrosGraphqlAddress,
 	}, nil
 }
 
@@ -131,7 +168,7 @@ func InitTracingConfig() *TraceConfig {
 			//shared
 			{
 				Operation: "status",
-				Score:     50,
+				Score:     10,
 			},
 		},
 	}

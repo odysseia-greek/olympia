@@ -5,9 +5,18 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"strconv"
+	"strings"
+
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/stretchr/testify/assert"
-	"net/http"
+)
+
+const (
+	AnalyzeContext string = "analyzeContext"
+	TextContext    string = "textContext"
+	CheckedContext string = "checkedContext"
 )
 
 func (l *OdysseiaFixture) theGatewayIsUp() error {
@@ -29,12 +38,14 @@ func (l *OdysseiaFixture) theGatewayIsUp() error {
 
 func (l *OdysseiaFixture) theGrammarIsCheckedForWordThroughTheGateway(word string) error {
 	// Define your GraphQL query
-	query := fmt.Sprintf(`query grammar {
+	query := fmt.Sprintf(`query {
 	grammar(word: "%s") {
-		translation
-		word
-		rule
-		rootWord
+		results {
+			translations
+			word
+			rule
+			rootWord
+		}
 	}
 }`, word)
 	response, err := l.graphqlHelper(query)
@@ -44,107 +55,15 @@ func (l *OdysseiaFixture) theGrammarIsCheckedForWordThroughTheGateway(word strin
 
 	var dionysiosResponse struct {
 		Data struct {
-			Response []models.Result `json:"grammar"`
+			Grammar struct {
+				Results []models.Result `json:"results"`
+			} `json:"grammar"`
 		} `json:"data"`
 	}
 
 	err = json.NewDecoder(response.Body).Decode(&dionysiosResponse)
 
-	l.ctx = context.WithValue(l.ctx, ResponseBody, dionysiosResponse.Data.Response)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) theWordIsQueriedUsingAndThroughTheGateway(word, mode, language string) error {
-	// Define your GraphQL query
-	query := fmt.Sprintf(`query dictionary {
-	dictionary(word: "%s", language: "%s", mode: "%s", searchInText: false) {
-			hits{
-				hit{
-					english
-					greek
-					dutch
-					linkedWord
-					original
-				}
-		}
-	}
-}
-`, word, language, mode)
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var alexandrosResponse struct {
-		Data struct {
-			Response models.ExtendedResponse `json:"dictionary"`
-		} `json:"data"`
-	}
-
-	err = json.NewDecoder(response.Body).Decode(&alexandrosResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, alexandrosResponse.Data.Response)
-
-	return nil
-}
-
-func (l *OdysseiaFixture) theWordIsQueriedUsingAndAndSearchInTextThroughTheGateway(word, mode, language string) error {
-	// Define your GraphQL query
-	query := fmt.Sprintf(`query dictionary {
-	dictionary(word: "%s", language: "%s", mode: "%s", searchInText: true) {
-			hits{
-				hit{
-					english
-					greek
-					dutch
-					linkedWord
-					original
-				}
-		foundInText{
-					rootword
-					conjugations {
-						word
-						rule
-					}
-					results{
-						author
-						book
-						reference
-						referenceLink
-						text{
-							translations
-							greek
-						}
-					}
-		}
-		}
-	}
-}
-`, word, language, mode)
-	response, err := l.graphqlHelper(query)
-	if err != nil {
-		return err
-	}
-
-	var alexandrosResponse struct {
-		Data struct {
-			Response struct {
-				Hits []struct {
-					FoundInText struct {
-						Conjugations []models.Conjugations  `json:"conjugations"`
-						Results      []models.AnalyzeResult `json:"results"`
-						Rootword     string                 `json:"rootword"`
-					}
-					Hit models.Meros `json:"hit"`
-				} `json:"hits"`
-			} `json:"dictionary"`
-		} `json:"data"`
-	}
-
-	err = json.NewDecoder(response.Body).Decode(&alexandrosResponse)
-
-	l.ctx = context.WithValue(l.ctx, ResponseBody, alexandrosResponse.Data.Response.Hits[0].FoundInText.Results)
+	l.ctx = context.WithValue(l.ctx, ResponseBody, dionysiosResponse.Data.Grammar.Results)
 
 	return nil
 }
@@ -190,7 +109,7 @@ func (l *OdysseiaFixture) theGatewayShouldRespondWithACorrectness() error {
 }
 
 func (l *OdysseiaFixture) aQueryIsMadeForAllTextOptions() error {
-	query := `query textOptions {
+	query := `query {
 	textOptions {
 		authors {
 			key
@@ -235,7 +154,7 @@ func (l *OdysseiaFixture) thatResponseIsUsedToCreateANewText() error {
 	randomRef := randomBook.References[l.randomizer.RandomNumberBaseZero(len(randomBook.References))]
 	randomSection := randomRef.Sections[l.randomizer.RandomNumberBaseZero(len(randomRef.Sections))]
 
-	query := fmt.Sprintf(`query create {
+	query := fmt.Sprintf(`query {
   create(input: {author: "%s", book: "%s", reference: "%s", section: "%s"}) {
     author
     book
@@ -272,7 +191,7 @@ func (l *OdysseiaFixture) theTextIsCheckedAgainstTheOfficialTranslation() error 
 		return fmt.Errorf("failed to assert Text type")
 	}
 
-	query := fmt.Sprintf(`query check {
+	query := fmt.Sprintf(`query {
   check(input: {author: "%s", 
 		book: "%s",
 		reference: "%s",
@@ -316,14 +235,14 @@ func (l *OdysseiaFixture) theTextIsCheckedAgainstTheOfficialTranslation() error 
 }
 
 func (l *OdysseiaFixture) theWordIsAnalyzedThroughTheGateway(word string) error {
-	query := fmt.Sprintf(`query analyze {
+	query := fmt.Sprintf(`query {
 	analyze(rootword: "%s") {
 		rootword
 		conjugations{
 			word
 			rule
 		}
-		results{
+		texts{
 			text{
 				greek
 				section
@@ -346,7 +265,7 @@ func (l *OdysseiaFixture) theWordIsAnalyzedThroughTheGateway(word string) error 
 		Data struct {
 			Response struct {
 				Conjugations []models.Conjugations  `json:"conjugations"`
-				Results      []models.AnalyzeResult `json:"results"`
+				Results      []models.AnalyzeResult `json:"texts"`
 				Rootword     string                 `json:"rootword"`
 			} `json:"analyze"`
 		} `json:"data"`
@@ -362,6 +281,50 @@ func (l *OdysseiaFixture) theWordIsAnalyzedThroughTheGateway(word string) error 
 	}
 
 	l.ctx = context.WithValue(l.ctx, AnalyzeContext, analyzeContextResponse)
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theResponseHasACompleteAnalyzesIncluded() error {
+	analyse := l.ctx.Value(AnalyzeContext).(models.AnalyzeTextResponse)
+	err := assertTrue(
+		assert.True, len(analyse.Results) >= 1,
+		"analyse.Results %v when more than 1 expected", len(analyse.Results),
+	)
+	if err != nil {
+		return err
+	}
+
+	err = assertTrue(
+		assert.True, len(analyse.Conjugations) >= 1,
+		"analyse.Conjugations %v when more than 1 expected", len(analyse.Conjugations),
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) theAverageLevenshteinShouldBePerfect() error {
+	checked := l.ctx.Value(CheckedContext).(models.CheckTextResponse)
+	levhenstein, err := strconv.ParseFloat(checked.AverageLevenshteinPercentage, 32)
+	if err != nil {
+		return err
+	}
+
+	if levhenstein != 100.0 {
+		return fmt.Errorf("expected %v to be 100", levhenstein)
+	}
+
+	return nil
+}
+
+func (l *OdysseiaFixture) anErrorContainingIsReturned(message string) error {
+	errorText := l.ctx.Value(ErrorBody).(string)
+	if !strings.Contains(errorText, message) {
+		return fmt.Errorf("expected %v to contain %v", errorText, message)
+	}
 
 	return nil
 }

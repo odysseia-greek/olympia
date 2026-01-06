@@ -3,6 +3,9 @@ package text
 import (
 	"context"
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/aristoteles"
@@ -10,14 +13,12 @@ import (
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/service"
+	aristarchos "github.com/odysseia-greek/alexandreia/aristarchos/scholar"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
-	pbar "github.com/odysseia-greek/attike/aristophanes/proto"
+	arv1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"github.com/odysseia-greek/delphi/aristides/diplomat"
 	pb "github.com/odysseia-greek/delphi/aristides/proto"
-	aristarchos "github.com/odysseia-greek/olympia/aristarchos/scholar"
 	"google.golang.org/grpc/metadata"
-	"os"
-	"time"
 )
 
 const (
@@ -57,7 +58,7 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	ambassadorCtx, ctxCancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer ctxCancel()
 
-	payload := &pbar.StartTraceRequest{
+	payload := &arv1.ObserveTraceStart{
 		Method:        "GetSecret",
 		Url:           diplomat.DEFAULTADDRESS,
 		Host:          "",
@@ -66,12 +67,12 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	}
 
 	go func() {
-		parabasis := &pbar.ParabasisRequest{
+		parabasis := &arv1.ObserveRequest{
 			TraceId:      traceID,
 			ParentSpanId: spanID,
 			SpanId:       spanID,
-			RequestType: &pbar.ParabasisRequest_StartTrace{
-				StartTrace: payload,
+			Kind: &arv1.ObserveRequest_TraceStart{
+				TraceStart: payload,
 			},
 		}
 		if err := streamer.Send(parabasis); err != nil {
@@ -90,12 +91,12 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	}
 
 	go func() {
-		parabasis := &pbar.ParabasisRequest{
+		parabasis := &arv1.ObserveRequest{
 			TraceId:      traceID,
 			ParentSpanId: spanID,
 			SpanId:       spanID,
-			RequestType: &pbar.ParabasisRequest_CloseTrace{
-				CloseTrace: &pbar.CloseTraceRequest{
+			Kind: &arv1.ObserveRequest_TraceStop{
+				TraceStop: &arv1.ObserveTraceStop{
 					ResponseBody: fmt.Sprintf("user retrieved from vault: %s", vaultConfig.ElasticUsername),
 				},
 			},
@@ -134,6 +135,8 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 	}
 	index := config.StringFromEnv(config.EnvIndex, defaultIndex)
 
+	logging.Debug("creating new aggregator client")
+
 	aggregatorAddress := config.StringFromEnv(config.EnvAggregatorAddress, config.DefaultAggregatorAddress)
 	aggregator, err := aristarchos.NewClientAggregator(aggregatorAddress)
 	if err != nil {
@@ -145,6 +148,8 @@ func CreateNewConfig(ctx context.Context) (*HerodotosHandler, error) {
 		logging.Debug("aggregator service not ready - restarting seems the only option")
 		os.Exit(1)
 	}
+
+	logging.Debug("aggregator client created and healthy")
 
 	ctx, cancel := context.WithCancel(ctx)
 

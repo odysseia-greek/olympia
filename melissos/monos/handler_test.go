@@ -1,16 +1,13 @@
 package monos
 
 import (
-	"context"
-	elastic "github.com/odysseia-greek/agora/aristoteles"
-	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/agora/thales"
-	"github.com/stretchr/testify/assert"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"os"
 	"sync"
 	"testing"
-	"time"
+
+	elastic "github.com/odysseia-greek/agora/aristoteles"
+	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHandlerHandle(t *testing.T) {
@@ -311,69 +308,5 @@ func TestHandlerParser(t *testing.T) {
 		sut := "δοῦλος"
 		parsedWord := testHandler.stripMouseionWords(pronounSplitTwo)
 		assert.Equal(t, sut, parsedWord)
-	})
-}
-
-func TestJobExit(t *testing.T) {
-	ns := "odysseia"
-	expectedName := "testpod"
-	duration := 10 * time.Millisecond
-	timeFinished := int64(1000)
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-	defer cancel()
-
-	t.Run("JobFinished", func(t *testing.T) {
-		testClient := thales.NewFakeKubeClient()
-
-		jobSpec := thales.TestJobObject(expectedName, ns, true)
-		job, err := testClient.BatchV1().Jobs(ns).Create(ctx, jobSpec, metav1.CreateOptions{})
-		assert.Nil(t, err)
-		assert.Equal(t, job.Name, expectedName)
-
-		testHandler := MelissosHandler{
-			Kube:         testClient,
-			Job:          expectedName,
-			Namespace:    ns,
-			Duration:     duration,
-			TimeFinished: timeFinished,
-		}
-
-		jobExit := make(chan bool, 1)
-		go testHandler.WaitForJobsToFinish(jobExit)
-
-		select {
-
-		case <-jobExit:
-			exitStatus := <-jobExit
-			assert.True(t, exitStatus)
-		}
-	})
-
-	t.Run("JobNotFinished", func(t *testing.T) {
-		testClient := thales.NewFakeKubeClient()
-
-		jobSpec := thales.TestJobObject(expectedName, ns, false)
-		job, err := testClient.BatchV1().Jobs(ns).Create(ctx, jobSpec, metav1.CreateOptions{})
-		assert.Nil(t, err)
-		assert.Equal(t, job.Name, expectedName)
-
-		testHandler := MelissosHandler{
-			Duration:  duration,
-			Kube:      testClient,
-			Job:       expectedName,
-			Namespace: ns,
-		}
-
-		timeFinished = duration.Milliseconds() * 2
-
-		jobExit := make(chan bool, 1)
-		go testHandler.WaitForJobsToFinish(jobExit)
-
-		select {
-
-		case <-jobExit:
-			exitStatus := <-jobExit
-			assert.False(t, exitStatus)
-		}
 	})
 }

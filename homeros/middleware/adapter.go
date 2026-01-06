@@ -5,15 +5,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+	"strings"
+
 	"github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/randomizer"
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
-	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
-	"io"
-	"net/http"
-	"strings"
 
 	"github.com/odysseia-greek/agora/plato/logging"
 )
@@ -68,7 +69,7 @@ func SetCorsHeaders() Adapter {
 //
 // Returns:
 // An Adapter that wraps an http.Handler and performs the described middleware actions.
-func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
+func LogRequestDetails(tracer v1.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			sessionId := r.Header.Get(config.SessionIdKey)
@@ -104,7 +105,7 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 			spanID := comedy.GenerateSpanID()
 			traceRequest := 0
 
-			payload := &pb.StartTraceRequest{
+			payload := &v1.ObserveTraceStart{
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
 				Host:          r.Host,
@@ -118,14 +119,13 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 					traceRequest = 1
 
 					go func() {
-						parabasis := &pb.ParabasisRequest{
+						parabasis := &v1.ObserveRequest{
 							TraceId:      traceID,
 							ParentSpanId: spanID,
 							SpanId:       spanID,
-							RequestType: &pb.ParabasisRequest_StartTrace{
-								StartTrace: payload,
-							},
+							Kind:         &v1.ObserveRequest_TraceStart{TraceStart: payload},
 						}
+
 						if err := tracer.Send(parabasis); err != nil {
 							logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
 						}

@@ -4,35 +4,33 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	elastic "github.com/odysseia-greek/agora/aristoteles"
-	pb "github.com/odysseia-greek/agora/eupalinos/proto"
-	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/agora/plato/transform"
-	"github.com/odysseia-greek/agora/thales"
-	"github.com/odysseia-greek/delphi/aristides/diplomat"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"strings"
 	"sync"
 	"time"
+
+	elastic "github.com/odysseia-greek/agora/aristoteles"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
+	"github.com/odysseia-greek/agora/eupalinos/stomion"
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/transform"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 )
 
 type MelissosHandler struct {
-	Duration     time.Duration
-	TimeFinished int64
-	Index        string
-	Created      int
-	Updated      int
-	Processed    int
-	Elastic      elastic.Client
-	Eupalinos    EupalinosClient
-	Channel      string
-	DutchChannel string
-	WaitTime     time.Duration
-	Kube         *thales.KubeClient
-	Namespace    string
-	Job          string
-	Ambassador   *diplomat.ClientAmbassador
+	Duration             time.Duration
+	TimeFinished         int64
+	Index                string
+	Created              int
+	Updated              int
+	Processed            int
+	Elastic              elastic.Client
+	Eupalinos            *stomion.QueueClient
+	Channel              string
+	JobCompletionChannel string
+	DutchChannel         string
+	WaitTime             time.Duration
+	Ambassador           *diplomat.ClientAmbassador
 }
 
 func (m *MelissosHandler) HandleParmenides() bool {
@@ -40,12 +38,13 @@ func (m *MelissosHandler) HandleParmenides() bool {
 
 	//handle Parmenides channel
 	for {
+		ctx := context.Background()
 		payload := &pb.ChannelInfo{Name: m.Channel}
-		msg, err := m.Eupalinos.DequeueMessage(context.Background(), payload)
+		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
 		if err != nil {
 			logging.Info("Queue is empty. Waiting...")
 			time.Sleep(m.WaitTime)
-			queueLength, _ := m.Eupalinos.GetQueueLength(context.Background(), payload)
+			queueLength, _ := m.Eupalinos.GetQueueLength(ctx, payload)
 			if queueLength.Length == 0 {
 				finished = true
 				break
@@ -298,7 +297,6 @@ func (m *MelissosHandler) PrintProgress() {
 		time.Sleep(20 * time.Second)
 	}
 }
-
 func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
 	start := time.Now()
 	ticker := time.NewTicker(m.Duration)
@@ -307,27 +305,23 @@ func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
 	for ts := range ticker.C {
 		if ts.Sub(start).Milliseconds() >= m.TimeFinished {
 			c <- false
+			return
 		}
 
 		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		defer cancel()
+		payload := &pb.ChannelInfo{Name: m.JobCompletionChannel}
+		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
+		cancel()
 
-		job, err := m.Kube.BatchV1().Jobs(m.Namespace).Get(ctx, m.Job, metav1.GetOptions{})
 		if err != nil {
-			logging.Error(err.Error())
+			logging.Debug("No completion message yet, continuing to wait...")
+			continue
 		}
 
-		conditionFound := false
-		if job.Status.Active == 0 {
-			for _, condition := range job.Status.Conditions {
-				if condition.Type == "Complete" {
-					conditionFound = true
-				}
-			}
-		}
-
-		if conditionFound {
+		if msg.Data == "completed" {
+			logging.Info(fmt.Sprintf("Job %s completed successfully", m.JobCompletionChannel))
 			c <- true
+			return
 		}
 	}
 }

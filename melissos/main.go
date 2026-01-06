@@ -3,14 +3,16 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/aristides/proto"
-	"github.com/odysseia-greek/olympia/melissos/monos"
 	"log"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
+	pbe "github.com/odysseia-greek/agora/eupalinos/proto"
+	"github.com/odysseia-greek/agora/plato/logging"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
+	"github.com/odysseia-greek/olympia/melissos/monos"
 )
 
 func main() {
@@ -36,7 +38,7 @@ func main() {
 	minute := time.Minute * 60
 	timeFinished := minute.Milliseconds()
 
-	handler, conn, err := monos.CreateNewConfig(duration, timeFinished)
+	handler, err := monos.CreateNewConfig(duration, timeFinished)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
@@ -51,7 +53,7 @@ func main() {
 	select {
 
 	case <-done:
-		logging.Info(fmt.Sprintf("%s job finished", handler.Job))
+		logging.Info(fmt.Sprintf("%s job finished", handler.JobCompletionChannel))
 	}
 
 	go handler.PrintProgress()
@@ -61,7 +63,15 @@ func main() {
 		finishedDutch := handler.HandleDutch()
 		if finishedDutch {
 			logging.System("Finished Run")
-			conn.Close()
+
+			logging.Debug("setting message back so that it can be picked up by the next job")
+			ctx := context.Background()
+			msg := &pbe.Epistello{
+				Id:      uuid.New().String(),
+				Data:    "completed",
+				Channel: handler.JobCompletionChannel,
+			}
+			_, err = handler.Eupalinos.EnqueueMessage(ctx, msg)
 
 			logging.Debug("closing Ambassador because job is done")
 			// just setting a code that could be used later to check is if it was sent from an actual service

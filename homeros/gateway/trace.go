@@ -3,9 +3,11 @@ package gateway
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/attike/aristophanes/proto"
+	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
+
 	"net/http"
 	"regexp"
 	"strconv"
@@ -56,16 +58,14 @@ func (h *HomerosHandler) CloseTrace(response *http.Response, body interface{}) {
 	logging.Info(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d", traceID, response.StatusCode))
 
 	if traceCall {
-		parabasis := &pb.ParabasisRequest{
+		parabasis := &v1.ObserveRequest{
 			TraceId:      traceID,
-			ParentSpanId: parentspanID,
 			SpanId:       parentspanID,
-			RequestType: &pb.ParabasisRequest_CloseTrace{
-				CloseTrace: &pb.CloseTraceRequest{
-					ResponseCode: int32(response.StatusCode),
-					ResponseBody: string(jsonBody),
-				},
-			},
+			ParentSpanId: parentspanID,
+			Kind: &v1.ObserveRequest_TraceStop{TraceStop: &v1.ObserveTraceStop{
+				ResponseCode: int32(response.StatusCode),
+				ResponseBody: string(jsonBody),
+			}},
 		}
 
 		err := h.Streamer.Send(parabasis)
@@ -85,16 +85,14 @@ func (h *HomerosHandler) CloseTraceWithError(err error, requestId string) {
 	logging.Error(fmt.Sprintf("RESPONSE | traceID: %s | responseCode: %d | error: %s", traceID, statusCode, err.Error()))
 
 	if traceCall {
-		parabasis := &pb.ParabasisRequest{
+		parabasis := &v1.ObserveRequest{
 			TraceId:      traceID,
-			ParentSpanId: parentspanID,
 			SpanId:       parentspanID,
-			RequestType: &pb.ParabasisRequest_CloseTrace{
-				CloseTrace: &pb.CloseTraceRequest{
-					ResponseCode: int32(statusCode),
-					ResponseBody: err.Error(),
-				},
-			},
+			ParentSpanId: parentspanID,
+			Kind: &v1.ObserveRequest_TraceStop{TraceStop: &v1.ObserveTraceStop{
+				ResponseCode: int32(statusCode),
+				ResponseBody: err.Error(),
+			}},
 		}
 
 		err := h.Streamer.Send(parabasis)
