@@ -5,10 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/99designs/gqlgen/graphql"
-	"github.com/odysseia-greek/agora/plato/config"
 	"io"
 	"net/http"
+
+	"github.com/99designs/gqlgen/graphql"
+	"github.com/odysseia-greek/agora/plato/config"
 )
 
 func (h *HomerosHandler) ForwardToSokrates(ctx context.Context) (json.RawMessage, error) {
@@ -46,8 +47,6 @@ func (h *HomerosHandler) ForwardToSokrates(ctx context.Context) (json.RawMessage
 	if err != nil {
 		return nil, fmt.Errorf("failed to read Sokrates response: %w", err)
 	}
-
-	h.CloseTrace(resp, body)
 
 	return body, nil
 }

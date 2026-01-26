@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/olympia/homeros/gateway"
-	"github.com/odysseia-greek/olympia/homeros/routing"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/olympia/homeros/gateway"
+	"github.com/odysseia-greek/olympia/homeros/routing"
 )
 
 const standardPort = ":8080"
@@ -34,10 +35,7 @@ func main() {
 	logging.System("Hardship can age a person overnight..")
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
-
-	//# this configmap sets tls to true which means the service will try and create tls connctiosn while it shouldnt
-	//# probably a fix needed in plato. Good time to see if it can be trimmed down a bit
-
+	
 	tracingConfig := gateway.InitTracingConfig()
 	handler, err := gateway.CreateNewConfig(context.Background())
 	if err != nil {

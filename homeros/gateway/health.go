@@ -12,6 +12,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/middleware"
 	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	arv1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"github.com/odysseia-greek/olympia/homeros/graph/model"
 )
@@ -151,13 +152,13 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 		}
 	}
 
-	traceID, parentSpanID, traceCall := ParseHeaderID(requestId)
+	traceID, spanID, traceCall := comedy.TraceFromString(requestId)
 	if traceCall {
 		health, err := json.Marshal(healthy)
 		parabasis := &arv1.ObserveRequest{
 			TraceId:      traceID,
-			ParentSpanId: parentSpanID,
-			SpanId:       parentSpanID,
+			ParentSpanId: spanID,
+			SpanId:       spanID,
 			Kind: &arv1.ObserveRequest_TraceStop{
 				TraceStop: &arv1.ObserveTraceStop{
 					ResponseCode: 200,

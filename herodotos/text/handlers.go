@@ -727,9 +727,9 @@ func (h *HerodotosHandler) databaseSpan(hits, took int64, query map[string]inter
 	dataBaseSpan := &arv1.ObserveRequest{
 		TraceId:      traceID,
 		ParentSpanId: spanID,
-		SpanId:       spanID,
+		SpanId:       comedy.GenerateSpanID(),
 		Kind: &arv1.ObserveRequest_DbSpan{DbSpan: &arv1.ObserveDbSpan{
-			Action: "search",
+			Action: "elasticQuery",
 			Query:  string(parsedQuery),
 			Hits:   hits,
 			TookMs: took,

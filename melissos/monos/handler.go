@@ -297,34 +297,6 @@ func (m *MelissosHandler) PrintProgress() {
 		time.Sleep(20 * time.Second)
 	}
 }
-func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
-	start := time.Now()
-	ticker := time.NewTicker(m.Duration)
-	defer ticker.Stop()
-
-	for ts := range ticker.C {
-		if ts.Sub(start).Milliseconds() >= m.TimeFinished {
-			c <- false
-			return
-		}
-
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		payload := &pb.ChannelInfo{Name: m.JobCompletionChannel}
-		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
-		cancel()
-
-		if err != nil {
-			logging.Debug("No completion message yet, continuing to wait...")
-			continue
-		}
-
-		if msg.Data == "completed" {
-			logging.Info(fmt.Sprintf("Job %s completed successfully", m.JobCompletionChannel))
-			c <- true
-			return
-		}
-	}
-}
 
 func (m *MelissosHandler) extractBaseWord(queryWord string) string {
 	// Normalize and split the input

@@ -48,7 +48,5 @@ func (h *HomerosHandler) ForwardToAlexandros(ctx context.Context) (json.RawMessa
 		return nil, fmt.Errorf("failed to read Sokrates response: %w", err)
 	}
 
-	h.CloseTrace(resp, body)
-
 	return body, nil
 }

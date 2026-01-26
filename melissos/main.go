@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -13,6 +12,14 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"github.com/odysseia-greek/olympia/melissos/monos"
+)
+
+const (
+	DefaultPollEvery   = 10 * time.Second
+	DefaultStableFor   = 1 * time.Minute
+	DefaultMaxWait     = 5 * time.Minute
+	DefaultMinDocs     = int64(500)
+	DefaultCountReqTTL = 10 * time.Second
 )
 
 func main() {
@@ -44,16 +51,31 @@ func main() {
 		log.Fatal("death has found me")
 	}
 
-	done := make(chan bool)
+	done := make(chan bool, 1) // buffered so send never blocks
 
 	go func() {
-		handler.WaitForJobsToFinish(done)
+		defer close(done)
+
+		ctx := context.Background()
+		ok := handler.WaitForDictionarySettled(
+			ctx,
+			DefaultMinDocs,
+			DefaultPollEvery,
+			DefaultStableFor,
+			DefaultMaxWait,
+		)
+
+		done <- ok
 	}()
 
 	select {
-
-	case <-done:
-		logging.Info(fmt.Sprintf("%s job finished", handler.JobCompletionChannel))
+	case ok := <-done:
+		if ok {
+			logging.Info("Dictionary settled; starting work")
+		} else {
+			logging.Info("Dictionary did not settle in time; aborting or fallback")
+			os.Exit(1)
+		}
 	}
 
 	go handler.PrintProgress()

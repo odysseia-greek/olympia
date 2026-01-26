@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/olympia/herodotos/text"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/olympia/herodotos/text"
 )
 
 const standardPort = ":5000"

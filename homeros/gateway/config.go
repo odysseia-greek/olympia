@@ -73,18 +73,28 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 	}
 
 	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
-
 	alexandrosGraphqlAddress := config.StringFromEnv("ALEXANDROS_GRAPHQL_ADDRESS", defaultAlexandrosAddress)
 
 	ctx, cancel := context.WithCancel(ctx)
 	elapsed := time.Since(start)
 
+	version := os.Getenv(config.EnvVersion)
+	env := os.Getenv(config.EnvKey)
+
 	logging.System(fmt.Sprintf(`Homeros Configuration Overview:
 - Initialization Time: %s
 - Tracer Service:      %v (Address: %s)
+- Sokrates GraphQL:    %s
+- Alexandros GraphQL:  %s
+- Homeros Version:     %s
+- Environment:         %s
 `,
 		elapsed,
 		healthyTracer, aristophanes.DefaultAddress,
+		sokratesGraphqlAddress,
+		alexandrosGraphqlAddress,
+		version,
+		env,
 	))
 
 	return &HomerosHandler{
@@ -95,6 +105,8 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		Cancel:               cancel,
 		SokratesGraphqlUrl:   sokratesGraphqlAddress,
 		AlexandrosGraphqlUrl: alexandrosGraphqlAddress,
+		Version:              version,
+		Environment:          env,
 	}, nil
 }
 

@@ -21,7 +21,7 @@ import (
 const (
 	defaultIndex    string = "dictionary"
 	EnvWaitTime     string = "WAIT_TIME"
-	DefaultWaitTime string = "120"
+	DefaultWaitTime string = "30"
 )
 
 func CreateNewConfig(duration time.Duration, finished int64) (*MelissosHandler, error) {

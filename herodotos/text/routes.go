@@ -13,10 +13,10 @@ func InitRoutes(herodotosHandler *HerodotosHandler) *mux.Router {
 	serveMux.HandleFunc("/herodotos/v1/ping", middleware.Adapt(herodotosHandler.pingPong, middleware.ValidateRestMethod("GET")))
 	serveMux.HandleFunc("/herodotos/v1/health", middleware.Adapt(herodotosHandler.health, middleware.ValidateRestMethod("GET")))
 
-	serveMux.HandleFunc("/herodotos/v1/texts/_create", middleware.Adapt(herodotosHandler.create, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/texts/_analyze", middleware.Adapt(herodotosHandler.analyze, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/texts/_check", middleware.Adapt(herodotosHandler.check, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
-	serveMux.HandleFunc("/herodotos/v1/texts/options", middleware.Adapt(herodotosHandler.options, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithLogAndSpan(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/_create", middleware.Adapt(herodotosHandler.create, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithHopStop(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/_analyze", middleware.Adapt(herodotosHandler.analyze, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithHopStop(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/_check", middleware.Adapt(herodotosHandler.check, middleware.ValidateRestMethod("POST"), middleware.Adapter(comedy.TraceWithHopStop(herodotosHandler.Streamer))))
+	serveMux.HandleFunc("/herodotos/v1/texts/options", middleware.Adapt(herodotosHandler.options, middleware.ValidateRestMethod("GET"), middleware.Adapter(comedy.TraceWithHopStop(herodotosHandler.Streamer))))
 
 	return serveMux
 }

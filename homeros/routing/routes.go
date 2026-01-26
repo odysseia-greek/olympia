@@ -33,11 +33,15 @@ func InitRoutes(handlerConfig *gateway.HomerosHandler, config *gateway.TraceConf
 		Cache: lru.New[string](100),
 	})
 
-	graphqlHandler := middleware.Adapt(
-		srv,
+	adapters := []plato.GraphqlAdapter{
 		middleware.LogRequestDetails(handlerConfig.Streamer, config, random),
-		middleware.SetCorsHeaders(),
-	)
+	}
+
+	if handlerConfig.Environment == "romaioi" {
+		adapters = append(adapters, plato.SetCorsHeadersLocal())
+	}
+
+	graphqlHandler := plato.GraphqlAdapt(srv, adapters...)
 
 	serveMux.HandleFunc("/homeros/v1/health", plato.Adapt(gateway.HealthProbe, plato.ValidateRestMethod("GET"), plato.SetCorsHeaders()))
 	serveMux.Handle("/graphql", graphqlHandler)
