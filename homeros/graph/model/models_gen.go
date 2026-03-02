@@ -2,6 +2,13 @@
 
 package model
 
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"strconv"
+)
+
 type QuizSection interface {
 	IsQuizSection()
 }
@@ -163,6 +170,11 @@ type DeclensionTranslationResult struct {
 	Results []*Result `json:"results,omitempty"`
 }
 
+type Definition struct {
+	Grade    int32      `json:"grade"`
+	Meanings []*Meaning `json:"meanings"`
+}
+
 type Dialogue struct {
 	Introduction  *string    `json:"introduction,omitempty"`
 	Speakers      []*Speaker `json:"speakers,omitempty"`
@@ -230,13 +242,30 @@ type ESBook struct {
 	References []*Reference `json:"references,omitempty"`
 }
 
-type ExtendedDictionary struct {
-	Hits []*ExtendedDictionaryEntry `json:"hits,omitempty"`
+type EukleidesTopFive struct {
+	ServiceName string  `json:"serviceName"`
+	Word        string  `json:"word"`
+	LastUsed    *string `json:"lastUsed,omitempty"`
+	Count       int32   `json:"count"`
 }
 
-type ExtendedDictionaryEntry struct {
-	FoundInText *AnalyzeTextResponse `json:"foundInText,omitempty"`
-	Hit         *Hit                 `json:"hit,omitempty"`
+type EukleidesTopFiveResponse struct {
+	TopFive []*EukleidesTopFive `json:"topFive"`
+}
+
+type ExpandableSearchQueryInput struct {
+	Word     string    `json:"word"`
+	Language *Language `json:"language,omitempty"`
+	Expand   bool      `json:"expand"`
+	Page     *int32    `json:"page,omitempty"`
+	Size     *int32    `json:"size,omitempty"`
+}
+
+type ExtendedResponse struct {
+	Results      []*Lemma             `json:"results"`
+	PageInfo     *PageInfo            `json:"pageInfo"`
+	SimilarWords []*Hit               `json:"similarWords,omitempty"`
+	FoundInText  *AnalyzeTextResponse `json:"foundInText,omitempty"`
 }
 
 type FinalTranslationQuiz struct {
@@ -321,6 +350,12 @@ type Health struct {
 	Time     *string   `json:"time,omitempty"`
 }
 
+type HealthResponse struct {
+	Healthy bool    `json:"healthy"`
+	Time    *string `json:"time,omitempty"`
+	Version *string `json:"version,omitempty"`
+}
+
 type Hit struct {
 	Dutch      *string `json:"dutch,omitempty"`
 	English    *string `json:"english,omitempty"`
@@ -361,12 +396,39 @@ type JourneyThemes struct {
 	Segments []*JourneySegment `json:"segments,omitempty"`
 }
 
+type Lemma struct {
+	ID                *string             `json:"id,omitempty"`
+	Headword          string              `json:"headword"`
+	Normalized        *string             `json:"normalized,omitempty"`
+	LinkedWord        *string             `json:"linkedWord,omitempty"`
+	PartOfSpeech      *string             `json:"partOfSpeech,omitempty"`
+	Article           *string             `json:"article,omitempty"`
+	Gender            *string             `json:"gender,omitempty"`
+	Noun              *NounInfo           `json:"noun,omitempty"`
+	Verb              *VerbInfo           `json:"verb,omitempty"`
+	QuickGlosses      []*LocalizedGloss   `json:"quickGlosses"`
+	Definitions       []*Definition       `json:"definitions"`
+	ModernConnections []*ModernConnection `json:"modernConnections"`
+}
+
+type LocalizedGloss struct {
+	Language string `json:"language"`
+	Gloss    string `json:"gloss"`
+}
+
 type MatchQuiz struct {
 	Instruction string      `json:"instruction"`
 	Pairs       []*QuizPair `json:"pairs"`
 }
 
 func (MatchQuiz) IsQuizSection() {}
+
+type Meaning struct {
+	Language   string   `json:"language"`
+	Definition string   `json:"definition"`
+	Notes      []string `json:"notes"`
+	Example    *string  `json:"example,omitempty"`
+}
 
 type MediaAnswerInput struct {
 	Theme         *string `json:"theme,omitempty"`
@@ -413,6 +475,11 @@ type MediaQuizResponse struct {
 	Progress      []*ProgressEntry `json:"progress,omitempty"`
 }
 
+type ModernConnection struct {
+	Term string  `json:"term"`
+	Note *string `json:"note,omitempty"`
+}
+
 type MultipleChoiceAnswerInput struct {
 	Theme         *string `json:"theme,omitempty"`
 	Set           *string `json:"set,omitempty"`
@@ -443,8 +510,19 @@ type MultipleTheme struct {
 	MaxSet *float64 `json:"maxSet,omitempty"`
 }
 
+type NounInfo struct {
+	Declension *string `json:"declension,omitempty"`
+	Genitive   *string `json:"genitive,omitempty"`
+}
+
 type Options struct {
 	Option *string `json:"option,omitempty"`
+}
+
+type PageInfo struct {
+	Page  int32 `json:"page"`
+	Size  int32 `json:"size"`
+	Total int32 `json:"total"`
 }
 
 type ProgressEntry struct {
@@ -492,6 +570,18 @@ type Rhema struct {
 	Translations []*string `json:"translations,omitempty"`
 }
 
+type SearchQueryInput struct {
+	Word     string    `json:"word"`
+	Language *Language `json:"language,omitempty"`
+	Page     *int32    `json:"page,omitempty"`
+	Size     *int32    `json:"size,omitempty"`
+}
+
+type SearchResponse struct {
+	Results  []*Lemma  `json:"results"`
+	PageInfo *PageInfo `json:"pageInfo"`
+}
+
 type Section struct {
 	Key *string `json:"key,omitempty"`
 }
@@ -521,7 +611,6 @@ type Speaker struct {
 
 // The way to check whether backend apis are available
 type Status struct {
-	Alexandros    *Health `json:"alexandros,omitempty"`
 	Dionysios     *Health `json:"dionysios,omitempty"`
 	Herodotos     *Health `json:"herodotos,omitempty"`
 	OverallHealth *bool   `json:"overallHealth,omitempty"`
@@ -578,4 +667,67 @@ func (TriviaQuiz) IsQuizSection() {}
 type Typo struct {
 	Provided *string `json:"provided,omitempty"`
 	Source   *string `json:"source,omitempty"`
+}
+
+type VerbInfo struct {
+	PrincipalParts []string `json:"principalParts"`
+}
+
+type Language string
+
+const (
+	LanguageLanguageUnspecified Language = "LANGUAGE_UNSPECIFIED"
+	LanguageLangGreek           Language = "LANG_GREEK"
+	LanguageLangEnglish         Language = "LANG_ENGLISH"
+	LanguageLangDutch           Language = "LANG_DUTCH"
+)
+
+var AllLanguage = []Language{
+	LanguageLanguageUnspecified,
+	LanguageLangGreek,
+	LanguageLangEnglish,
+	LanguageLangDutch,
+}
+
+func (e Language) IsValid() bool {
+	switch e {
+	case LanguageLanguageUnspecified, LanguageLangGreek, LanguageLangEnglish, LanguageLangDutch:
+		return true
+	}
+	return false
+}
+
+func (e Language) String() string {
+	return string(e)
+}
+
+func (e *Language) UnmarshalGQL(v any) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = Language(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid Language", str)
+	}
+	return nil
+}
+
+func (e Language) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+func (e *Language) UnmarshalJSON(b []byte) error {
+	s, err := strconv.Unquote(string(b))
+	if err != nil {
+		return err
+	}
+	return e.UnmarshalGQL(s)
+}
+
+func (e Language) MarshalJSON() ([]byte, error) {
+	var buf bytes.Buffer
+	e.MarshalGQL(&buf)
+	return buf.Bytes(), nil
 }

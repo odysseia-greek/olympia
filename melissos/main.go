@@ -2,15 +2,24 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"github.com/google/uuid"
-	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/aristides/proto"
-	"github.com/odysseia-greek/olympia/melissos/monos"
 	"log"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
+	pbe "github.com/odysseia-greek/agora/eupalinos/proto"
+	"github.com/odysseia-greek/agora/plato/logging"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
+	"github.com/odysseia-greek/olympia/melissos/monos"
+)
+
+const (
+	DefaultPollEvery   = 10 * time.Second
+	DefaultStableFor   = 1 * time.Minute
+	DefaultMaxWait     = 5 * time.Minute
+	DefaultMinDocs     = int64(500)
+	DefaultCountReqTTL = 10 * time.Second
 )
 
 func main() {
@@ -36,22 +45,37 @@ func main() {
 	minute := time.Minute * 60
 	timeFinished := minute.Milliseconds()
 
-	handler, conn, err := monos.CreateNewConfig(duration, timeFinished)
+	handler, err := monos.CreateNewConfig(duration, timeFinished)
 	if err != nil {
 		logging.Error(err.Error())
 		log.Fatal("death has found me")
 	}
 
-	done := make(chan bool)
+	done := make(chan bool, 1) // buffered so send never blocks
 
 	go func() {
-		handler.WaitForJobsToFinish(done)
+		defer close(done)
+
+		ctx := context.Background()
+		ok := handler.WaitForDictionarySettled(
+			ctx,
+			DefaultMinDocs,
+			DefaultPollEvery,
+			DefaultStableFor,
+			DefaultMaxWait,
+		)
+
+		done <- ok
 	}()
 
 	select {
-
-	case <-done:
-		logging.Info(fmt.Sprintf("%s job finished", handler.Job))
+	case ok := <-done:
+		if ok {
+			logging.Info("Dictionary settled; starting work")
+		} else {
+			logging.Info("Dictionary did not settle in time; aborting or fallback")
+			os.Exit(1)
+		}
 	}
 
 	go handler.PrintProgress()
@@ -61,7 +85,15 @@ func main() {
 		finishedDutch := handler.HandleDutch()
 		if finishedDutch {
 			logging.System("Finished Run")
-			conn.Close()
+
+			logging.Debug("setting message back so that it can be picked up by the next job")
+			ctx := context.Background()
+			msg := &pbe.Epistello{
+				Id:      uuid.New().String(),
+				Data:    "completed",
+				Channel: handler.JobCompletionChannel,
+			}
+			_, err = handler.Eupalinos.EnqueueMessage(ctx, msg)
 
 			logging.Debug("closing Ambassador because job is done")
 			// just setting a code that could be used later to check is if it was sent from an actual service

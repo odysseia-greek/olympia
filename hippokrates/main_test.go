@@ -4,20 +4,19 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
+	"testing"
+
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"
 	uuid2 "github.com/google/uuid"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
-	"os"
-	"strings"
-	"testing"
 )
 
 const (
-	sokratesApi             = "sokrates"
 	herodotosApi            = "herodotos"
-	alexandrosApi           = "alexandros"
 	dionysiosApi            = "dionysios"
 	ResponseBody            = "responseBody"
 	ErrorBody               = "errorBody"
@@ -46,14 +45,6 @@ func (l *OdysseiaFixture) theIsRunning(service string) error {
 	uuid := uuid2.New().String()
 
 	switch service {
-	case alexandrosApi:
-		response, err := l.client.Alexandros().Health(uuid)
-		if err != nil {
-			return err
-		}
-
-		defer response.Body.Close()
-		err = json.NewDecoder(response.Body).Decode(&healthy)
 	case herodotosApi:
 		response, err := l.client.Herodotos().Health(uuid)
 		if err != nil {
@@ -115,62 +106,19 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	//general
 	ctx.Step(`^the "([^"]*)" is running$`, odysseia.theIsRunning)
 
-	//alexandros
-	ctx.Step(`^the word "([^"]*)" is queried$`, odysseia.theWordIsQueried)
-	ctx.Step(`^the word "([^"]*)" is stripped of accents$`, odysseia.theWordIsStrippedOfAccents)
-	ctx.Step(`^the partial "([^"]*)" is queried$`, odysseia.thePartialIsQueried)
-	ctx.Step(`^the word "([^"]*)" is queried and not found$`, odysseia.theWordIsQueriedWithAndNotFound)
-	ctx.Step(`^the word "([^"]*)" should be included in the response$`, odysseia.theWordShouldBeIncludedInTheResponse)
-	ctx.Step(`^an error containing "([^"]*)" is returned$`, odysseia.anErrorContainingIsReturned)
-	ctx.Step(`^the word "([^"]*)" is queried using "([^"]*)" and "([^"]*)" and "([^"]*)"$`, odysseia.theWordIsQueriedUsingAndAnd)
-	ctx.Step(`^a Greek translation should be included in the response$`, odysseia.aGreekTranslationShouldBeIncludedInTheResponse)
-
-	//herodotos
-	ctx.Step(`^a query is made for options$`, odysseia.aQueryIsMadeForOptions)
-	ctx.Step(`^a the word "([^"]*)" is analyzed$`, odysseia.aTheWordIsAnalyzed)
-	ctx.Step(`^the response has a complete analyzes included$`, odysseia.theResponseHasACompleteAnalyzesIncluded)
-	ctx.Step(`^a list of books, authors and references should be returned$`, odysseia.aListOfBooksAuthorsAndReferencesShouldBeReturned)
-	ctx.Step(`^the average levenshtein should be perfect$`, odysseia.theAverageLevenshteinShouldBePerfect)
-	ctx.Step(`^the response is used to create a new text$`, odysseia.theResponseIsUsedToCreateANewText)
-	ctx.Step(`^the sentence is checked against the official translation$`, odysseia.theSentenceIsCheckedAgainstTheOfficialTranslation)
-	ctx.Step(`^the average levenshtein should be less than perfect$`, odysseia.theAverageLevenshteinShouldBeLessThanPerfect)
-	ctx.Step(`^the response should include possibleTypos$`, odysseia.theResponseShouldIncludePossibleTypos)
-	ctx.Step(`^the text with author "([^"]*)" and book "([^"]*)" and reference "([^"]*)" and section "([^"]*)" is checked with typos$`, odysseia.theTextWithAuthorAndBookAndReferenceAndSectionIsCheckedWithTypos)
-
-	//dionysios
-	ctx.Step(`^the grammar is checked for word "([^"]*)"$`, odysseia.theGrammarIsCheckedForWord)
-	ctx.Step(`^the grammar for word "([^"]*)" is queried with an error$`, odysseia.theGrammarForWordIsQueriedWithAnError)
-	ctx.Step(`^the declension "([^"]*)" should be included in the response$`, odysseia.theDeclensionShouldBeIncludedInTheResponse)
-	ctx.Step(`^the number of results should be equal to or exceed "([^"]*)"$`, odysseia.theNumberOfResultsShouldBeEqualToOrExceed)
-	ctx.Step(`^the number of translations should be equal to er exceed "([^"]*)"$`, odysseia.theNumberOfTranslationsShouldBeEqualToErExceed)
-	ctx.Step(`^the number of declensions should be equal to or exceed "([^"]*)"$`, odysseia.theNumberOfDeclensionsShouldBeEqualToOrExceed)
-	ctx.Step(`^the result should just be "([^"]*)" as a rule$`, odysseia.theResultShouldJustBeAsARule)
-	ctx.Step(`^the rootWord should include "([^"]*)"$`, odysseia.theRootWordShouldInclude)
-	ctx.Step(`^the rootWord should not include "([^"]*)"$`, odysseia.theRootWordShouldNotInclude)
-	ctx.Step(`^not "([^"]*)" as a rule$`, odysseia.notAsARule)
-
 	//homeros
+	ctx.Step(`^the response has a complete analyzes included$`, odysseia.theResponseHasACompleteAnalyzesIncluded)
+	ctx.Step(`^the average levenshtein should be perfect$`, odysseia.theAverageLevenshteinShouldBePerfect)
+	ctx.Step(`^an error containing "([^"]*)" is returned$`, odysseia.anErrorContainingIsReturned)
 	ctx.Step(`^the gateway is up$`, odysseia.theGatewayIsUp)
 	ctx.Step(`^the grammar is checked for word "([^"]*)" through the gateway$`, odysseia.theGrammarIsCheckedForWordThroughTheGateway)
 	ctx.Step(`^the declension "([^"]*)" should be included in the response as a gateway struct$`, odysseia.theDeclensionShouldBeIncludedInTheResponseAsAGatewayStruct)
-	ctx.Step(`^the word "([^"]*)" is queried using "([^"]*)" and "([^"]*)" through the gateway$`, odysseia.theWordIsQueriedUsingAndThroughTheGateway)
 	ctx.Step(`^the gateway should respond with a correctness$`, odysseia.theGatewayShouldRespondWithACorrectness)
 	ctx.Step(`^a query is made for all text options$`, odysseia.aQueryIsMadeForAllTextOptions)
 	ctx.Step(`^that response is used to create a new text$`, odysseia.thatResponseIsUsedToCreateANewText)
 	ctx.Step(`^the text is checked against the official translation$`, odysseia.theTextIsCheckedAgainstTheOfficialTranslation)
 	ctx.Step(`^the word "([^"]*)" is analyzed through the gateway$`, odysseia.theWordIsAnalyzedThroughTheGateway)
-	ctx.Step(`^the word "([^"]*)" is queried using "([^"]*)" and "([^"]*)" and searchInText through the gateway$`, odysseia.theWordIsQueriedUsingAndAndSearchInTextThroughTheGateway)
 	ctx.Step(`^a foundInText response should include results$`, odysseia.aFoundInTextResponseShouldIncludeResults)
-
-	//odysseia
-	ctx.Step(`^a grammar entry is made for the word "([^"]*)"$`, odysseia.aGrammarEntryIsMadeForTheWord)
-	ctx.Step(`^a result should be returned$`, odysseia.aResultShouldBeReturned)
-	ctx.Step(`^that word is searched for in the grammar component$`, odysseia.thatWordIsSearchedForInTheGrammarComponent)
-	ctx.Step(`^the options returned from the grammar api should include "([^"]*)"$`, odysseia.theOptionsReturnedFromTheGrammarApiShouldInclude)
-	ctx.Step(`^a response with a rootword is returned$`, odysseia.aResponseWithARootwordIsReturned)
-	ctx.Step(`^that rootword is queried in Alexandros with "([^"]*)"$`, odysseia.thatRootwordIsQueriedInAlexandrosWith)
-	ctx.Step(`^the grammar is checked for a random word in the list$`, odysseia.theGrammarIsCheckedForARandomWordInTheList)
-	ctx.Step(`^the query result has texts included$`, odysseia.theQueryResultHasTextsIncluded)
 }
 
 func TestMain(m *testing.M) {

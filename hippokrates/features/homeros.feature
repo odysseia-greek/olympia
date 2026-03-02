@@ -3,27 +3,6 @@ Feature: Validate Homeros GraphQL Gateway Functionality
   I want to ensure the proper functioning of the Homeros GraphQL gateway
 
   @homeros
-  Scenario Outline: Alexandros search word
-    Given the gateway is up
-    When the word "<word>" is queried using "<mode>" and "<language>" through the gateway
-    Then a Greek translation should be included in the response
-    Examples:
-      | word     | mode     | language |
-      | ἰδιώτης  | exact    | greek    |
-      | ἄλλος    | extended | greek    |
-      | ομαι     | partial  | greek    |
-      | αλλας    | fuzzy    | greek    |
-      | house    | exact    | english  |
-      | round    | extended | english  |
-      | so       | partial  | english  |
-
-  @homeros
-  Scenario: Alexandros search word with expanded results
-    Given the gateway is up
-    When the word "λογός" is queried using "exact" and "greek" and searchInText through the gateway
-    Then a foundInText response should include results
-
-  @homeros
   Scenario Outline: Dionysios search grammar results
     Given the gateway is up
     When the grammar is checked for word "<word>" through the gateway

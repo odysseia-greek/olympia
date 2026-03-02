@@ -2,13 +2,16 @@ package flux
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
+	"sync"
+	"time"
+
 	elastic "github.com/odysseia-greek/agora/aristoteles"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/delphi/aristides/diplomat"
-	"strings"
-	"sync"
 )
 
 type HerakleitosHandler struct {
@@ -20,7 +23,10 @@ type HerakleitosHandler struct {
 }
 
 func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {
-	deleted, err := h.Elastic.Index().Delete(h.Index)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	deleted, err := h.Elastic.Index().DeleteWithContext(ctx, h.Index)
 	logging.Info(fmt.Sprintf("deleted index: %s success: %v", h.Index, deleted))
 	if err != nil {
 		if deleted {
@@ -37,26 +43,12 @@ func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {
 	return nil
 }
 
-func (h *HerakleitosHandler) createPolicyAtStartup() error {
-	policyCreated, err := h.Elastic.Policy().CreateWarmPolicy(h.PolicyName)
-	if err != nil {
-		return err
-	}
-
-	logging.Info(fmt.Sprintf("created policy: %s %v", h.PolicyName, policyCreated.Acknowledged))
-
-	return nil
-}
-
 func (h *HerakleitosHandler) CreateIndexAtStartup() error {
-	logging.Info(fmt.Sprintf("creating policy: %s", h.PolicyName))
-	err := h.createPolicyAtStartup()
-	if err != nil {
-		return err
-	}
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
 	indexMapping := textIndex(h.PolicyName)
-	created, err := h.Elastic.Index().Create(h.Index, indexMapping)
+	created, err := h.Elastic.Index().CreateWithContext(ctx, h.Index, indexMapping)
 	if err != nil {
 		return err
 	}
@@ -70,26 +62,27 @@ func (h *HerakleitosHandler) Add(rhemai []Text, wg *sync.WaitGroup) error {
 	defer wg.Done()
 	var buf bytes.Buffer
 
-	var currBatch int
-
 	for _, rhema := range rhemai {
-		currBatch++
-
 		meta := []byte(fmt.Sprintf(`{ "index": {} }%s`, "\n"))
-		jsonifiedText, _ := json.Marshal(rhema)
+		jsonifiedText, err := json.Marshal(rhema)
+		if err != nil {
+			return err
+		}
 		jsonifiedText = append(jsonifiedText, "\n"...)
 		buf.Grow(len(meta) + len(jsonifiedText))
 		buf.Write(meta)
 		buf.Write(jsonifiedText)
-
-		if currBatch == len(rhemai) {
-			res, err := h.Elastic.Document().Bulk(buf, h.Index)
-			if err != nil {
-				return err
-			}
-
-			h.Created = h.Created + len(res.Items)
-		}
 	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	res, err := h.Elastic.Document().BulkWithContext(ctx, buf, h.Index)
+	if err != nil {
+		return err
+	}
+
+	h.Created = h.Created + len(res.Items)
+
 	return nil
 }

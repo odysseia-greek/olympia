@@ -1,0 +1,174 @@
+/* global.css */
+
+.scroll-indicator {
+    animation: bounce 2s infinite;
+}
+
+.scroll-icon {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.scroll-icon:hover {
+    transform: scale(1.2);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+
+.paper-card {
+    background: #fefcf5; /* A light, papyrus-like color */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: "Roboto", serif;
+}
+
+.answer-correct {
+    border: 2px solid #1de9b6;
+    animation: running-border 2s infinite;
+}
+
+.answer-incorrect {
+    border: 2px solid #e9501d;
+    animation: running-border-error 2s infinite;
+}
+
+.card-correct {
+    animation: running-border 1s infinite;
+    border: 8px solid transparent;
+}
+
+.card-incorrect {
+    animation: running-border-error 1s infinite;
+    border: 8px solid transparent;
+}
+
+@keyframes running-border {
+    0% {
+        border-color: #1cbcd1;
+    }
+    50% {
+        border-color: #1de9b6;
+    }
+    100% {
+        border-color: #1cd18c;
+    }
+}
+
+@keyframes running-border-error {
+    0% {
+        border-color: #982110;
+    }
+    50% {
+        border-color: #ff0000;
+    }
+    100% {
+        border-color: #f6624c;
+    }
+}
+
+.quiz-word-container {
+    border: 2px solid #1c61d1; /* Optional border */
+    border-radius: 10px; /* Rounded corners for the border */
+    background-color: #1cd18c; /* Light background color */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.quiz-word-container h2 {
+    font-size: 2em; /* Larger font size */
+    font-weight: bold; /* Make it bold */
+    color: #333; /* Darker color for emphasis */
+}
+
+.quiz-word-container:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+}
+
+.quiz-word {
+    font-size: 2em; /* Larger font size */
+    font-weight: bold; /* Make it bold */
+    color: #333; /* Darker color for emphasis */
+    animation: fadeIn 1s ease-in; /* Fade-in animation */
+}
+
+.quiz-container {
+    margin: auto; /* Center the container */
+}
+
+/* Media query for screens wider than 820px */
+@media (min-width: 900px) {
+    .quiz-container {
+        max-width: 820px; /* Fixed max-width for larger screens */
+    }
+    .inner-quiz-area {
+        max-width: 820px;
+    }
+
+    .quiz-word-container {
+        max-width: 820px;
+    }
+}
+
+.quiz-instructions {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 10px;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.no-bullets {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.pulsate {
+    animation: pulse-border 2s infinite;
+}
+
+.quiz-button {
+    margin: 1em;
+}
+
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}

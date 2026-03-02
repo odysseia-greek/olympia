@@ -50,15 +50,6 @@ type ESBook {
   references: [Reference]
 }
 
-type ExtendedDictionary {
-  hits: [ExtendedDictionaryEntry]
-}
-
-type ExtendedDictionaryEntry {
-  foundInText: AnalyzeTextResponse
-  hit: Hit
-}
-
 type Health {
   database: Database
   healthy: Boolean
@@ -84,7 +75,6 @@ extend type Query {
   analyze(rootword: String): AnalyzeTextResponse
   check(input: CheckTextRequestInput): CheckTextResponse
   create(input: CreateTextInput): Text
-  dictionary(language: String = "", mode: String = "", searchInText: Boolean = false, word: String): ExtendedDictionary
   grammar(word: String): DeclensionTranslationResult
   status: Status
   textOptions: AggregationResult
@@ -101,7 +91,6 @@ type Segments {
 
 """The way to check whether backend apis are available"""
 type Status {
-  alexandros: Health
   dionysios: Health
   herodotos: Health
   overallHealth: Boolean

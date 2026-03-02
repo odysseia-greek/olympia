@@ -4,35 +4,39 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	elastic "github.com/odysseia-greek/agora/aristoteles"
-	pb "github.com/odysseia-greek/agora/eupalinos/proto"
-	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/agora/plato/transform"
-	"github.com/odysseia-greek/agora/thales"
-	"github.com/odysseia-greek/delphi/aristides/diplomat"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"strings"
 	"sync"
 	"time"
+
+	elastic "github.com/odysseia-greek/agora/aristoteles"
+	pb "github.com/odysseia-greek/agora/eupalinos/proto"
+	"github.com/odysseia-greek/agora/eupalinos/stomion"
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/transform"
+	"github.com/odysseia-greek/delphi/aristides/diplomat"
 )
 
 type MelissosHandler struct {
-	Duration     time.Duration
-	TimeFinished int64
-	Index        string
-	Created      int
-	Updated      int
-	Processed    int
-	Elastic      elastic.Client
-	Eupalinos    EupalinosClient
-	Channel      string
-	DutchChannel string
-	WaitTime     time.Duration
-	Kube         *thales.KubeClient
-	Namespace    string
-	Job          string
-	Ambassador   *diplomat.ClientAmbassador
+	Duration             time.Duration
+	TimeFinished         int64
+	Index                string
+	Created              int
+	Updated              int
+	Processed            int
+	Elastic              elastic.Client
+	Eupalinos            *stomion.QueueClient
+	Channel              string
+	JobCompletionChannel string
+	DutchChannel         string
+	WaitTime             time.Duration
+	Ambassador           *diplomat.ClientAmbassador
+}
+
+const elasticTimeout = 10 * time.Second
+
+func elasticContext() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), elasticTimeout)
 }
 
 func (m *MelissosHandler) HandleParmenides() bool {
@@ -40,12 +44,13 @@ func (m *MelissosHandler) HandleParmenides() bool {
 
 	//handle Parmenides channel
 	for {
+		ctx := context.Background()
 		payload := &pb.ChannelInfo{Name: m.Channel}
-		msg, err := m.Eupalinos.DequeueMessage(context.Background(), payload)
+		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
 		if err != nil {
 			logging.Info("Queue is empty. Waiting...")
 			time.Sleep(m.WaitTime)
-			queueLength, _ := m.Eupalinos.GetQueueLength(context.Background(), payload)
+			queueLength, _ := m.Eupalinos.GetQueueLength(ctx, payload)
 			if queueLength.Length == 0 {
 				finished = true
 				break
@@ -142,7 +147,10 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 		},
 		"size": 100,
 	}
-	response, err := m.Elastic.Query().MatchWithScroll(m.Index, query)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	response, err := m.Elastic.Query().MatchWithScrollWithContext(ctx, m.Index, query)
 
 	if err != nil {
 		return err
@@ -156,13 +164,15 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 			if baseWord != strippedWord && baseWord != s {
 				continue
 			}
-		}
-		meros.Dutch = word.Dutch
-		jsonifiedLogos, _ := meros.Marshal()
-		_, err := m.Elastic.Document().Update(m.Index, hit.ID, jsonifiedLogos)
-		if err != nil {
-			return err
-		}
+			}
+			meros.Dutch = word.Dutch
+			jsonifiedLogos, _ := meros.Marshal()
+			updateCtx, updateCancel := elasticContext()
+			_, err := m.Elastic.Document().UpdateWithContext(updateCtx, m.Index, hit.ID, jsonifiedLogos)
+			updateCancel()
+			if err != nil {
+				return err
+			}
 
 		m.Updated++
 	}
@@ -177,7 +187,10 @@ func (m *MelissosHandler) queryWord(word models.Meros) (bool, error) {
 
 	term := "greek"
 	query := m.Elastic.Builder().MatchQuery(term, strippedWord)
-	response, err := m.Elastic.Query().Match(m.Index, query)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	response, err := m.Elastic.Query().MatchWithContext(ctx, m.Index, query)
 
 	if err != nil {
 		logging.Error(err.Error())
@@ -222,7 +235,10 @@ func (m *MelissosHandler) queryWord(word models.Meros) (bool, error) {
 func (m *MelissosHandler) addWord(word models.Meros) {
 	var innerWaitGroup sync.WaitGroup
 	jsonifiedLogos, _ := word.Marshal()
-	_, err := m.Elastic.Index().CreateDocument(m.Index, jsonifiedLogos)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
 		logging.Error(err.Error())
@@ -245,7 +261,10 @@ func (m *MelissosHandler) transformWord(word models.Meros, wg *sync.WaitGroup) {
 	}
 
 	jsonifiedLogos, _ := meros.Marshal()
-	_, err := m.Elastic.Index().CreateDocument(m.Index, jsonifiedLogos)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
 		logging.Error(err.Error())
@@ -296,39 +315,6 @@ func (m *MelissosHandler) PrintProgress() {
 	for {
 		logging.Info(fmt.Sprintf("documents processed: %d | documents created: %d | documents updated: %d", m.Processed, m.Created, m.Updated))
 		time.Sleep(20 * time.Second)
-	}
-}
-
-func (m *MelissosHandler) WaitForJobsToFinish(c chan bool) {
-	start := time.Now()
-	ticker := time.NewTicker(m.Duration)
-	defer ticker.Stop()
-
-	for ts := range ticker.C {
-		if ts.Sub(start).Milliseconds() >= m.TimeFinished {
-			c <- false
-		}
-
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
-		defer cancel()
-
-		job, err := m.Kube.BatchV1().Jobs(m.Namespace).Get(ctx, m.Job, metav1.GetOptions{})
-		if err != nil {
-			logging.Error(err.Error())
-		}
-
-		conditionFound := false
-		if job.Status.Active == 0 {
-			for _, condition := range job.Status.Conditions {
-				if condition.Type == "Complete" {
-					conditionFound = true
-				}
-			}
-		}
-
-		if conditionFound {
-			c <- true
-		}
 	}
 }
 

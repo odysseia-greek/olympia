@@ -5,53 +5,52 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/odysseia-greek/agora/plato/config"
-	"github.com/odysseia-greek/agora/plato/randomizer"
-	"github.com/odysseia-greek/attike/aristophanes/comedy"
-	pb "github.com/odysseia-greek/attike/aristophanes/proto"
-	"github.com/odysseia-greek/olympia/homeros/gateway"
 	"io"
 	"net/http"
 	"strings"
+	"time"
+
+	"github.com/google/uuid"
+	"github.com/odysseia-greek/agora/plato/config"
+	"github.com/odysseia-greek/agora/plato/middleware"
+	"github.com/odysseia-greek/agora/plato/randomizer"
+	"github.com/odysseia-greek/attike/aristophanes/comedy"
+	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
+	"github.com/odysseia-greek/olympia/homeros/gateway"
 
 	"github.com/odysseia-greek/agora/plato/logging"
 )
 
-type Adapter func(http.Handler) http.Handler
-
-// Adapt Iterate over adapters and run them one by one
-func Adapt(h http.Handler, adapters ...Adapter) http.Handler {
-	for _, adapter := range adapters {
-		h = adapter(h)
-	}
-	return h
+type bodyRecorder struct {
+	http.ResponseWriter
+	status int
+	buf    bytes.Buffer
+	limit  int // max bytes to store (0 = no limit)
 }
 
-func SetCorsHeaders() Adapter {
-	return func(f http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			origin := r.Header.Get("Origin")
-			// Allow any origin in the allowedOrigins slice
-			allowedOrigins := []string{"localhost"}
+func (r *bodyRecorder) WriteHeader(code int) {
+	r.status = code
+	r.ResponseWriter.WriteHeader(code)
+}
 
-			for _, o := range allowedOrigins {
-				if strings.Contains(origin, o) {
-					logging.Debug(fmt.Sprintf("setting CORS header for origin: %s", origin))
-					w.Header().Set("Access-Control-Allow-Origin", origin)
-					w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Boule")
-					w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-					w.Header().Set("Access-Control-Allow-Credentials", "true")
-					if r.Method == "OPTIONS" {
-						w.WriteHeader(http.StatusOK)
-						return
-					}
-					break
-				}
-			}
-			f.ServeHTTP(w, r)
-		})
+func (r *bodyRecorder) Write(b []byte) (int, error) {
+	if r.status == 0 {
+		r.status = http.StatusOK
 	}
+
+	// capture body (bounded)
+	if r.limit == 0 {
+		r.buf.Write(b)
+	} else if r.buf.Len() < r.limit {
+		remain := r.limit - r.buf.Len()
+		if len(b) > remain {
+			r.buf.Write(b[:remain])
+		} else {
+			r.buf.Write(b)
+		}
+	}
+
+	return r.ResponseWriter.Write(b)
 }
 
 // LogRequestDetails is a middleware function that captures and logs details of incoming requests,
@@ -68,7 +67,7 @@ func SetCorsHeaders() Adapter {
 //
 // Returns:
 // An Adapter that wraps an http.Handler and performs the described middleware actions.
-func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) Adapter {
+func LogRequestDetails(tracer v1.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) middleware.GraphqlAdapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			sessionId := r.Header.Get(config.SessionIdKey)
@@ -104,7 +103,7 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 			spanID := comedy.GenerateSpanID()
 			traceRequest := 0
 
-			payload := &pb.StartTraceRequest{
+			payload := &v1.ObserveTraceStart{
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
 				Host:          r.Host,
@@ -118,14 +117,13 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 					traceRequest = 1
 
 					go func() {
-						parabasis := &pb.ParabasisRequest{
+						parabasis := &v1.ObserveRequest{
 							TraceId:      traceID,
 							ParentSpanId: spanID,
 							SpanId:       spanID,
-							RequestType: &pb.ParabasisRequest_StartTrace{
-								StartTrace: payload,
-							},
+							Kind:         &v1.ObserveRequest_TraceStart{TraceStart: payload},
 						}
+
 						if err := tracer.Send(parabasis); err != nil {
 							logging.Error(fmt.Sprintf("failed to send trace data: %v", err))
 						}
@@ -135,26 +133,50 @@ func LogRequestDetails(tracer pb.TraceService_ChorusClient, traceConfig *gateway
 					break
 				}
 			}
-
 			requestID := fmt.Sprintf("%s+%s+%d", traceID, spanID, traceRequest)
 
-			if operationName != "IntrospectionQuery" {
-				jsonPayload, err := json.MarshalIndent(payload, "", "  ")
-				if err != nil {
-					logging.Error(err.Error())
-				}
-
-				logLine := fmt.Sprintf("REQUEST | traceId: %s and params:\n%s", traceID, string(jsonPayload))
-				logging.Info(logLine)
-			}
-
+			// set headers + ctx as you do
 			w.Header().Set(config.HeaderKey, requestID)
 			w.Header().Set(config.SessionIdKey, sessionId)
-
 			ctx := context.WithValue(r.Context(), config.HeaderKey, requestID)
 			ctx = context.WithValue(ctx, config.SessionIdKey, sessionId)
 
-			f.ServeHTTP(w, r.WithContext(ctx))
+			rec := &bodyRecorder{
+				ResponseWriter: w,
+				limit:          64 * 1024, // 64KB cap so you don't blow memory on giant responses
+			}
+
+			start := time.Now()
+			f.ServeHTTP(rec, r.WithContext(ctx))
+			dur := time.Since(start)
+
+			status := rec.status
+			if status == 0 {
+				status = http.StatusOK
+			}
+
+			if traceRequest == 1 {
+				stop := &v1.ObserveRequest{
+					TraceId:      traceID,
+					SpanId:       spanID, // root span
+					ParentSpanId: spanID, // root parent == root
+					Kind: &v1.ObserveRequest_TraceStop{
+						TraceStop: &v1.ObserveTraceStop{
+							ResponseBody: rec.buf.String(),
+							ResponseCode: int32(status),
+						},
+					},
+				}
+
+				if err := tracer.Send(stop); err != nil {
+					logging.Error(fmt.Sprintf("failed to send trace stop: %v", err))
+				}
+
+				logging.Trace(fmt.Sprintf(
+					"trace closed | traceId=%s span=%s status=%d tookMs=%d",
+					traceID, spanID, status, dur.Milliseconds(),
+				))
+			}
 		})
 	}
 }

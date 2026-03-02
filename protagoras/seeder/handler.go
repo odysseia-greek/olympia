@@ -3,13 +3,14 @@ package seeder
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/odysseia-greek/agora/plato/logging"
-	"github.com/odysseia-greek/agora/plato/models"
-	"github.com/odysseia-greek/agora/plato/service"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/odysseia-greek/agora/plato/logging"
+	"github.com/odysseia-greek/agora/plato/models"
+	"github.com/odysseia-greek/agora/plato/service"
 )
 
 type ProtagorasHandler struct {
@@ -129,6 +130,9 @@ func (p *ProtagorasHandler) loopOverAndDeclineWords(text models.Text) error {
 			p.wordsNotFound = append(p.wordsNotFound, word)
 			logging.Error(fmt.Sprintf("no result found for word: %s", word))
 		}
+
+		// add a delay to avoid hitting the API too hard
+		time.Sleep(50 * time.Millisecond)
 	}
 
 	percentageDone := float64(doneInText) / float64(len(greekWords)) * 100
