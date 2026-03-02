@@ -22,6 +22,22 @@ var NumberOfDequeue int
 type MockEupalinosClient struct {
 }
 
+func (m *MockEupalinosClient) Health(ctx context.Context, in *pb.HealthRequest, opts ...grpc.CallOption) (*pb.HealthResponse, error) {
+	return &pb.HealthResponse{Healthy: true}, nil
+}
+
+func (m *MockEupalinosClient) StreamQueueUpdates(ctx context.Context, opts ...grpc.CallOption) (pb.Eupalinos_StreamQueueUpdatesClient, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (m *MockEupalinosClient) EnqueueMessage(ctx context.Context, in *pb.Epistello, opts ...grpc.CallOption) (*pb.EnqueueResponse, error) {
+	return &pb.EnqueueResponse{}, nil
+}
+
+func (m *MockEupalinosClient) EnqueueMessageBytes(ctx context.Context, in *pb.EpistelloBytes, opts ...grpc.CallOption) (*pb.EnqueueResponse, error) {
+	return &pb.EnqueueResponse{}, nil
+}
+
 // DequeueMessage is the mock implementation for the EnqueueMessage method
 func (m *MockEupalinosClient) DequeueMessage(ctx context.Context, in *pb.ChannelInfo, opts ...grpc.CallOption) (*pb.Epistello, error) {
 	uuid := uuid2.New()
@@ -41,6 +57,10 @@ func (m *MockEupalinosClient) DequeueMessage(ctx context.Context, in *pb.Channel
 		Data:    data,
 		Channel: in.Name,
 	}, nil
+}
+
+func (m *MockEupalinosClient) DequeueMessageBytes(ctx context.Context, in *pb.ChannelInfo, opts ...grpc.CallOption) (*pb.EpistelloBytes, error) {
+	return nil, fmt.Errorf("not implemented")
 }
 
 // EnqueueMessage is the mock implementation for the EnqueueMessage method

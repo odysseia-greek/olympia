@@ -5,16 +5,18 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/odysseia-greek/agora/plato/logging"
-	pb "github.com/odysseia-greek/delphi/aristides/proto"
-	"github.com/odysseia-greek/olympia/herakleitos/flux"
+	"io/fs"
 	"log"
 	"os"
 	"path"
 	"strconv"
 	"strings"
 	"sync"
+
+	"github.com/google/uuid"
+	"github.com/odysseia-greek/agora/plato/logging"
+	pb "github.com/odysseia-greek/delphi/aristides/proto"
+	"github.com/odysseia-greek/olympia/herakleitos/flux"
 )
 
 //go:embed rhema
@@ -46,10 +48,6 @@ func main() {
 	}
 
 	root := "rhema"
-	rootDir, err := rhema.ReadDir(root)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	err = handler.DeleteIndexAtStartUp()
 	if err != nil {
@@ -63,46 +61,50 @@ func main() {
 	var wg sync.WaitGroup
 	documents := 0
 
-	for _, dir := range rootDir {
-		logging.Debug("working on the following directory: " + dir.Name())
-		if dir.IsDir() {
-			filePath := path.Join(root, dir.Name())
-			authorDir, err := rhema.ReadDir(filePath)
+	err = fs.WalkDir(rhema, root, func(filePath string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			logging.Error(walkErr.Error())
+			return nil
+		}
+		if d.IsDir() {
+			return nil
+		}
+		if !strings.HasSuffix(strings.ToLower(d.Name()), ".json") {
+			return nil
+		}
+
+		logging.Debug(fmt.Sprintf("found %s in %s", d.Name(), path.Dir(filePath)))
+		plan, err := rhema.ReadFile(filePath)
+		if err != nil {
+			logging.Error(err.Error())
+			return nil
+		}
+
+		var rhemai []flux.Text
+		err = json.Unmarshal(plan, &rhemai)
+		if err != nil {
+			logging.Error(fmt.Sprintf("failed to parse %s: %s", filePath, err.Error()))
+			return nil
+		}
+		if len(rhemai) == 0 {
+			logging.Debug(fmt.Sprintf("no texts found in %s", filePath))
+			return nil
+		}
+
+		documents += 1
+
+		wg.Add(1)
+		go func(texts []flux.Text) {
+			err := handler.Add(texts, &wg)
 			if err != nil {
 				logging.Error(err.Error())
-				continue
 			}
-			for _, innerDir := range authorDir {
-				if innerDir.IsDir() {
-					innerFilePath := path.Join(filePath, innerDir.Name())
-					files, err := rhema.ReadDir(innerFilePath)
-					if err != nil {
-						logging.Error(err.Error())
-						continue
-					}
-					for _, f := range files {
-						logging.Debug(fmt.Sprintf("found %s in %s", f.Name(), innerFilePath))
-						plan, _ := rhema.ReadFile(path.Join(innerFilePath, f.Name()))
-						var rhemai []flux.Text
-						err := json.Unmarshal(plan, &rhemai)
-						if err != nil {
-							log.Fatal(err)
-						}
+		}(rhemai)
 
-						documents += 1
-
-						wg.Add(1)
-						go func() {
-							err := handler.Add(rhemai, &wg)
-							if err != nil {
-								logging.Error(err.Error())
-							}
-						}()
-					}
-				}
-			}
-
-		}
+		return nil
+	})
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	wg.Wait()

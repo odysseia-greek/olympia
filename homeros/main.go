@@ -35,7 +35,7 @@ func main() {
 	logging.System("Hardship can age a person overnight..")
 	logging.System("starting up.....")
 	logging.System("starting up and getting env variables")
-	
+
 	tracingConfig := gateway.InitTracingConfig()
 	handler, err := gateway.CreateNewConfig(context.Background())
 	if err != nil {

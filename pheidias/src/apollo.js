@@ -17,12 +17,8 @@ if (process.env.NODE_ENV === 'development') {
     url = 'http://localhost:8080/graphql';
 }
 
-if (process.env.NODE_ENV === 'k3d') {
-    url = 'http://k3d-odysseia.greek:8080/graphql';
-}
-
 if (process.env.NODE_ENV === 'local') {
-    url = 'http://byzantium.odysseia-greek:8080/graphql';
+    url = 'http://byzantium.odysseia-greek:4900/graphql';
 }
 
 // Create the HTTP link for the Apollo client

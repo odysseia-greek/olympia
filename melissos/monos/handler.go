@@ -33,6 +33,12 @@ type MelissosHandler struct {
 	Ambassador           *diplomat.ClientAmbassador
 }
 
+const elasticTimeout = 10 * time.Second
+
+func elasticContext() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), elasticTimeout)
+}
+
 func (m *MelissosHandler) HandleParmenides() bool {
 	finished := false
 
@@ -141,7 +147,10 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 		},
 		"size": 100,
 	}
-	response, err := m.Elastic.Query().MatchWithScroll(m.Index, query)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	response, err := m.Elastic.Query().MatchWithScrollWithContext(ctx, m.Index, query)
 
 	if err != nil {
 		return err
@@ -155,13 +164,15 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 			if baseWord != strippedWord && baseWord != s {
 				continue
 			}
-		}
-		meros.Dutch = word.Dutch
-		jsonifiedLogos, _ := meros.Marshal()
-		_, err := m.Elastic.Document().Update(m.Index, hit.ID, jsonifiedLogos)
-		if err != nil {
-			return err
-		}
+			}
+			meros.Dutch = word.Dutch
+			jsonifiedLogos, _ := meros.Marshal()
+			updateCtx, updateCancel := elasticContext()
+			_, err := m.Elastic.Document().UpdateWithContext(updateCtx, m.Index, hit.ID, jsonifiedLogos)
+			updateCancel()
+			if err != nil {
+				return err
+			}
 
 		m.Updated++
 	}
@@ -176,7 +187,10 @@ func (m *MelissosHandler) queryWord(word models.Meros) (bool, error) {
 
 	term := "greek"
 	query := m.Elastic.Builder().MatchQuery(term, strippedWord)
-	response, err := m.Elastic.Query().Match(m.Index, query)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	response, err := m.Elastic.Query().MatchWithContext(ctx, m.Index, query)
 
 	if err != nil {
 		logging.Error(err.Error())
@@ -221,7 +235,10 @@ func (m *MelissosHandler) queryWord(word models.Meros) (bool, error) {
 func (m *MelissosHandler) addWord(word models.Meros) {
 	var innerWaitGroup sync.WaitGroup
 	jsonifiedLogos, _ := word.Marshal()
-	_, err := m.Elastic.Index().CreateDocument(m.Index, jsonifiedLogos)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
 		logging.Error(err.Error())
@@ -244,7 +261,10 @@ func (m *MelissosHandler) transformWord(word models.Meros, wg *sync.WaitGroup) {
 	}
 
 	jsonifiedLogos, _ := meros.Marshal()
-	_, err := m.Elastic.Index().CreateDocument(m.Index, jsonifiedLogos)
+	ctx, cancel := elasticContext()
+	defer cancel()
+
+	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
 		logging.Error(err.Error())

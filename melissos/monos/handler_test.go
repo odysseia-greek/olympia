@@ -31,7 +31,7 @@ func TestHandlerHandle(t *testing.T) {
 	dutchChannel := "testkanaal"
 
 	t.Run("OneRunWithoutAction", func(t *testing.T) {
-		mockClient := &MockEupalinosClient{}
+		mockClient := newMockQueueClient(&MockEupalinosClient{})
 		bodyString, err := body.Marshal()
 		assert.Nil(t, err)
 		os.Setenv("WAIT_TIME", "1")
@@ -59,7 +59,7 @@ func TestHandlerHandle(t *testing.T) {
 	})
 
 	t.Run("DutchUpdate", func(t *testing.T) {
-		mockClient := &MockEupalinosClient{}
+		mockClient := newMockQueueClient(&MockEupalinosClient{})
 		bodyString, err := bodyDutch.Marshal()
 		assert.Nil(t, err)
 		os.Setenv("WAIT_TIME", "1")

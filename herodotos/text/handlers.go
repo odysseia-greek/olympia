@@ -32,13 +32,14 @@ type HerodotosHandler struct {
 }
 
 const (
-	AuthorReq    string = "author"
-	BookReq      string = "book"
-	ReferenceReq string = "reference"
-	SectionReq   string = "section"
-	RootWord     string = "rootword"
-	Options      string = "texts/options"
-	Id           string = "_id"
+	AuthorReq      string        = "author"
+	BookReq        string        = "book"
+	ReferenceReq   string        = "reference"
+	SectionReq     string        = "section"
+	RootWord       string        = "rootword"
+	Options        string        = "texts/options"
+	Id             string        = "_id"
+	elasticTimeout time.Duration = 10 * time.Second
 )
 
 // PingPong pongs the ping
@@ -141,7 +142,10 @@ func (h *HerodotosHandler) create(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
-	response, err := h.Elastic.Query().Match(h.Index, query)
+	ctx, cancel := context.WithTimeout(req.Context(), elasticTimeout)
+	defer cancel()
+
+	response, err := h.Elastic.Query().MatchWithContext(ctx, h.Index, query)
 
 	if err != nil {
 		e := models.ElasticSearchError{
@@ -299,7 +303,10 @@ func (h *HerodotosHandler) check(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
-	response, err := h.Elastic.Query().Match(h.Index, query)
+	ctx, cancel := context.WithTimeout(req.Context(), elasticTimeout)
+	defer cancel()
+
+	response, err := h.Elastic.Query().MatchWithContext(ctx, h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},
@@ -471,7 +478,10 @@ func (h *HerodotosHandler) options(w http.ResponseWriter, req *http.Request) {
 
 	query := textAggregationQuery()
 
-	elasticResult, err := h.Elastic.Query().MatchRaw(h.Index, query)
+	ctx, cancel := context.WithTimeout(req.Context(), elasticTimeout)
+	defer cancel()
+
+	elasticResult, err := h.Elastic.Query().MatchRawWithContext(ctx, h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: requestId},
@@ -590,10 +600,10 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	ctx, cancel := context.WithTimeout(req.Context(), 60*time.Second)
 	defer cancel()
 	md := metadata.New(map[string]string{service.HeaderKey: requestId})
-	ctx = metadata.NewOutgoingContext(context.Background(), md)
+	ctx = metadata.NewOutgoingContext(ctx, md)
 
 	aggregatorRequest := ariv1.AggregatorRequest{RootWord: analyzeTextRequest.Rootword}
 	entry, err := h.Aggregator.RetrieveEntry(ctx, &aggregatorRequest)
@@ -627,7 +637,7 @@ func (h *HerodotosHandler) analyze(w http.ResponseWriter, req *http.Request) {
 
 	query := createGreekTextQuery(words)
 
-	response, err := h.Elastic.Query().MatchWithScroll(h.Index, query)
+	response, err := h.Elastic.Query().MatchWithScrollWithContext(ctx, h.Index, query)
 	if err != nil {
 		e := models.ElasticSearchError{
 			ErrorModel: models.ErrorModel{UniqueCode: traceID},

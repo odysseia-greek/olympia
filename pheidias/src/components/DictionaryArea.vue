@@ -123,6 +123,8 @@
 
           <v-divider></v-divider>
 
+          <DictionaryTopFive :refresh-token="topFiveRefreshToken" />
+
           <v-expand-transition>
             <v-card light color="background">
               <v-card-text>
@@ -321,6 +323,7 @@ import { ref, computed, watch, onMounted, getCurrentInstance, nextTick } from 'v
 import { useApolloClient } from '@vue/apollo-composable';
 
 import AnalyzeResults from '../components/AnalyzeResults.vue';
+import DictionaryTopFive from '../components/DictionaryTopFive.vue';
 
 import {
   DictionaryExact,
@@ -377,7 +380,7 @@ function isRichRaw(r) {
 
 export default {
   name: 'DictionaryArea',
-  components: { AnalyzeResults },
+  components: { AnalyzeResults, DictionaryTopFive },
   setup() {
     const { proxy } = getCurrentInstance();
     const { client } = useApolloClient();
@@ -413,6 +416,7 @@ export default {
     const analyzeResults = ref([]);
     const infoDialogVisible = ref(false);
     const resultsContainerRef = ref();
+    const topFiveRefreshToken = ref(0);
 
     const canSearchInText = computed(() =>
         selectedLanguage.value.toLowerCase() === 'greek' &&
@@ -563,6 +567,8 @@ export default {
             ];
           }
         }
+
+        topFiveRefreshToken.value += 1;
       } catch (e) {
         console.log(e);
       } finally {
@@ -669,6 +675,7 @@ export default {
       infoDialogVisible,
       headers,
       resultsContainerRef,
+      topFiveRefreshToken,
       onSearchInput,
       commitSearch,
     };
@@ -676,7 +683,7 @@ export default {
 };
 </script>
 
-<style scoped>
+  <style scoped>
 h4 { margin-top: 2em; }
 h3 { margin-top: 0.5em; }
 a { cursor: pointer; }
