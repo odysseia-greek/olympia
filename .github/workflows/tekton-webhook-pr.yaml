@@ -39,12 +39,13 @@ jobs:
             payload="$(
               jq -n \
                 --arg clone_url "https://github.com/${REPOSITORY}.git" \
+                --arg repo "${REPOSITORY}" \
                 --arg ref "${REF_NAME}" \
                 --arg sha "${SHA}" \
                 --arg actor "${ACTOR}" \
                 --arg url "${RUN_URL}" \
                 '{
-                  repository: { clone_url: $clone_url },
+                  repository: { clone_url: $clone_url, full_name: $repo },
                   pull_request: {
                     head: { ref: $ref, sha: $sha },
                     title: "manual workflow_dispatch",

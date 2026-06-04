@@ -38,6 +38,7 @@ func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {
 		}
 
 		return err
+
 	}
 
 	return nil
