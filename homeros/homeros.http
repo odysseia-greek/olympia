@@ -1,0 +1,141 @@
+# Homeros GraphQL HTTP client requests.
+# Switch endpoint by changing @host to {{productionHost}} or {{hellasHost}}.
+
+@productionHost = https://odysseia-greek.com/graphql
+@hellasHost = http://hellas.odysseia-greek:30080/graphql
+@host = {{productionHost}}
+@requestId = homeros-http-client
+
+### Health
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Health { health { healthy time version services { name healthy version databaseInfo { healthy clusterName serverName serverVersion } } } }"
+}
+
+### Gateway status
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Status { status { overallHealth dionysios { healthy time database { healthy clusterName serverName serverVersion } } herodotos { healthy time database { healthy clusterName serverName serverVersion } } } }"
+}
+
+### Text options
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query TextOptions { textOptions { authors { key books { key references { key sections { key } } } } } }"
+}
+
+### Analyze root word
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Analyze($rootword: String) { analyze(rootword: $rootword) { rootword conjugations { rule word } texts { author book reference referenceLink text { greek section translations } } } }",
+  "variables": {
+    "rootword": "λογος"
+  }
+}
+
+### Grammar
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Grammar($word: String) { grammar(word: $word) { results { rootWord rule translations word } } }",
+  "variables": {
+    "word": "λογος"
+  }
+}
+
+### Create text
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query CreateText($input: CreateTextInput) { create(input: $input) { author book reference perseusTextLink type rhemai { greek section translations } } }",
+  "variables": {
+    "input": {
+      "author": "homer",
+      "book": "iliad",
+      "reference": "1",
+      "section": "1"
+    }
+  }
+}
+
+### Check translations
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query CheckText($input: CheckTextRequestInput) { check(input: $input) { averageLevenshteinPercentage possibleTypos { provided source } sections { answerSentence levenshteinPercentage quizSentence section } } }",
+  "variables": {
+    "input": {
+      "author": "homer",
+      "book": "iliad",
+      "reference": "1",
+      "translations": [
+        {
+          "section": "1",
+          "translation": "Sing, goddess, the anger of Peleus' son Achilles."
+        }
+      ]
+    }
+  }
+}
+
+### Exact lexicon search
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Exact($input: ExpandableSearchQueryInput!) { exact(input: $input) { results { id headword normalized linkedWord partOfSpeech article gender quickGlosses { language gloss } definitions { grade meanings { language definition notes example } } modernConnections { term note } } pageInfo { page size total } similarWords { greek original linkedWord english dutch } foundInText { rootword texts { author book reference text { greek section translations } } } } }",
+  "variables": {
+    "input": {
+      "word": "λογος",
+      "language": "LANG_GREEK",
+      "expand": true,
+      "page": 1,
+      "size": 10
+    }
+  }
+}
+
+### Fuzzy lexicon search
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Fuzzy($input: SearchQueryInput!) { fuzzy(input: $input) { results { id headword normalized linkedWord partOfSpeech article gender quickGlosses { language gloss } definitions { grade meanings { language definition notes example } } modernConnections { term note } } pageInfo { page size total } } }",
+  "variables": {
+    "input": {
+      "word": "λογος",
+      "language": "LANG_GREEK",
+      "page": 1,
+      "size": 10
+    }
+  }
+}
+
+### Quiz options
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query QuizOptions { mediaOptions { themes { name segments { name maxSet } } } multipleChoiceOptions { themes { name maxSet } } authorBasedOptions { themes { name segments { name maxSet } } } dialogueOptions { themes { name maxSet } } grammarOptions { themes { name segments { name difficulty maxSet } } } journeyOptions { themes { name segments { name number location coordinates { x y } } } } }"
+}
