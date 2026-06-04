@@ -1,0 +1,62 @@
+name: Tekton PR Webhook
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  workflow_dispatch:
+
+jobs:
+  notify-tekton:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Connect to tailnet
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Send event to Tekton
+        env:
+          WEBHOOK_URL: http://pella-hellenistike.tailcf9d9a.ts.net:30080/olympia
+          GITHUB_EVENT_JSON: ${{ toJson(github.event) }}
+          REPOSITORY: ${{ github.repository }}
+          REF_NAME: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+          ACTOR: ${{ github.actor }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+
+          if jq -e '.pull_request? != null' >/dev/null <<<"${GITHUB_EVENT_JSON}"; then
+            payload="${GITHUB_EVENT_JSON}"
+          else
+            payload="$(
+              jq -n \
+                --arg clone_url "https://github.com/${REPOSITORY}.git" \
+                --arg ref "${REF_NAME}" \
+                --arg sha "${SHA}" \
+                --arg actor "${ACTOR}" \
+                --arg url "${RUN_URL}" \
+                '{
+                  repository: { clone_url: $clone_url },
+                  pull_request: {
+                    head: { ref: $ref, sha: $sha },
+                    title: "manual workflow_dispatch",
+                    user: { login: $actor },
+                    html_url: $url
+                  }
+                }'
+            )"
+          fi
+
+          curl --fail --show-error --silent \
+            --request POST \
+            --header 'Content-Type: application/json' \
+            --data "${payload}" \
+            "${WEBHOOK_URL}"
