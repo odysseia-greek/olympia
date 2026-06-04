@@ -164,15 +164,15 @@ func (m *MelissosHandler) addDutchWord(word models.Meros) error {
 			if baseWord != strippedWord && baseWord != s {
 				continue
 			}
-			}
-			meros.Dutch = word.Dutch
-			jsonifiedLogos, _ := meros.Marshal()
-			updateCtx, updateCancel := elasticContext()
-			_, err := m.Elastic.Document().UpdateWithContext(updateCtx, m.Index, hit.ID, jsonifiedLogos)
-			updateCancel()
-			if err != nil {
-				return err
-			}
+		}
+		meros.Dutch = word.Dutch
+		jsonifiedLogos, _ := meros.Marshal()
+		updateCtx, updateCancel := elasticContext()
+		_, err := m.Elastic.Document().UpdateWithContext(updateCtx, m.Index, hit.ID, jsonifiedLogos)
+		updateCancel()
+		if err != nil {
+			return err
+		}
 
 		m.Updated++
 	}
