@@ -36,7 +36,6 @@ func (h *HerakleitosHandler) DeleteIndexAtStartUp() error {
 			logging.Error(err.Error())
 			return nil
 		}
-
 		return err
 	}
 
