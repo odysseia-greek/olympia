@@ -23,6 +23,7 @@ const numberOfAnswersNeeded = ref(2);
 const attemptMade = ref(false);
 const analyzeResults = ref([]);
 const quizContainerRef = ref(null);
+const selectThemeRef = ref(null);
 const finished = ref(false);
 
 const themes = ref([]);
@@ -289,7 +290,11 @@ const truncateText = (text) => {
 const scrollMeTo = (refName) => {
   nextTick(() => {
     if (refName === 'quiz' && quizContainerRef.value) {
-      quizContainerRef.value.scrollIntoView({ behavior: 'smooth' });
+      quizContainerRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (refName === 'selectTheme' && selectThemeRef.value) {
+      selectThemeRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 };
@@ -323,9 +328,14 @@ const initializeFromRoute = () => {
 </script>
 
 <template>
-  <v-container class="quiz-container text-center">
-    <v-card class="paper-card pa-6" elevation="4">
-      <div class="text-right">
+  <v-container class="quiz-container multiple-choice-setup-container text-center">
+    <v-card class="paper-card multiple-choice-setup-card pa-6" elevation="4">
+      <div class="setup-toolbar">
+        <div class="setup-status" v-if="theme || setupStep >= 10">
+          <v-chip v-if="theme" color="primary" variant="tonal">{{ theme }}</v-chip>
+          <v-chip v-if="setupStep >= 10" color="triadic" variant="tonal">Set {{ set }} / {{ maxSet }}</v-chip>
+        </div>
+        <div>
         <v-btn
             v-if="setupStep >= 10"
             icon="mdi-minus"
@@ -340,20 +350,21 @@ const initializeFromRoute = () => {
             variant="text"
             @click="randomize"
         ></v-btn>
+        </div>
       </div>
 
       <div v-if="!minimized" ref="selectThemeRef">
-        <v-card-title class="text-h5">Mutliple Choice Quiz</v-card-title>
+        <v-card-title class="text-h5 multiple-choice-title">Multiple Choice Quiz</v-card-title>
         <!-- Thematic quote always visible -->
-        <p class="ma-4">
-          Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.
+        <p class="multiple-choice-quote">
+          <span>Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.</span>
           <v-divider class="my-4" />
-          The beginning of every action is the choice.
+          <span>The beginning of every action is the choice.</span>
         </p>
 
         <!-- Only show this part if setupStep === 0 -->
         <template v-if="setupStep === 0">
-          <v-card class="ma-5">
+          <v-card class="multiple-choice-intro-card ma-5" variant="flat">
             <v-card-title class="headline">How would you like to begin?</v-card-title>
             <v-card-text>
               <v-list>
@@ -399,6 +410,7 @@ const initializeFromRoute = () => {
                 <br>
               </v-list>
             </v-card-text>
+            <div class="intro-actions">
             <v-btn
                 class="ma-5"
                 color="secondary"
@@ -417,6 +429,7 @@ const initializeFromRoute = () => {
             >
               Random Quiz
             </v-btn>
+            </div>
           </v-card>
 
         </template>
@@ -439,7 +452,7 @@ const initializeFromRoute = () => {
           />
 
           <!-- Toggles -->
-          <v-row class="mt-4" v-if="setupStep === 10">
+          <v-row class="quiz-options-row mt-4" v-if="setupStep === 10">
 
 
               <v-col class="text-left">
@@ -541,7 +554,7 @@ const initializeFromRoute = () => {
     <v-container
         v-if="finished"
     >
-      <v-card flat class="mb-3 paper-card">
+      <v-card flat class="mb-3 paper-card completion-card">
         <v-card-text>
           <h3> Well Done! You have finished this section! </h3>
           <p>
@@ -589,8 +602,8 @@ const initializeFromRoute = () => {
       </v-card>
     </v-container>
 
-    <v-card class="quiz-word-container" height="10em" v-if="!finished">
-      <h2 class="quiz-word" style="margin-top: 1em" v-if="!showNextQuestionIndicator">
+    <v-card class="quiz-word-container multiple-choice-word-card" v-if="!finished">
+      <h2 class="quiz-word" v-if="!showNextQuestionIndicator">
         {{ quizWord }}
       </h2>
       <div
@@ -608,12 +621,12 @@ const initializeFromRoute = () => {
       <p
           class="quiz-instructions"
       >
-        Match the word to the image.
+        Choose the matching answer.
       </p>
     </v-card>
   </v-container>
   <v-container v-if="theme && quizWord && setupStep >= 10 && !finished" class="inner-quiz-area">
-    <v-row>
+    <v-row class="answer-grid">
       <v-col
           v-for="item in answers"
           :key="item.option"
@@ -622,7 +635,7 @@ const initializeFromRoute = () => {
       >
         <v-btn
             @click="checkAnswer(item);"
-            class="ma-1"
+            class="multiple-choice-answer-button ma-1"
             :class="{
             'answer-correct': answerStates[item.option]?.isCorrect,
             'answer-incorrect': !answerStates[item.option]?.isCorrect && answerStates[item.option]?.selected
@@ -646,3 +659,142 @@ const initializeFromRoute = () => {
   </v-container>
 
 </template>
+
+<style scoped>
+.multiple-choice-setup-container,
+.inner-quiz-area {
+  scroll-margin-top: 80px;
+}
+
+.multiple-choice-setup-card {
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  color: #20334f;
+  background:
+      linear-gradient(145deg, rgba(254, 252, 245, 0.98), rgba(253, 246, 227, 0.92)),
+      #fdf6e3;
+}
+
+.setup-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  gap: 16px;
+}
+
+.setup-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.multiple-choice-title {
+  color: #20334f;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.multiple-choice-quote {
+  max-width: 680px;
+  margin: 16px auto 26px;
+  color: #536987;
+  line-height: 1.7;
+}
+
+.multiple-choice-quote span:first-child {
+  color: #20334f;
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.multiple-choice-intro-card {
+  border: 1px solid rgba(28, 188, 209, 0.18);
+  background: rgba(255, 255, 255, 0.58);
+  color: #20334f;
+  text-align: left;
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quiz-options-row {
+  justify-content: center;
+  text-align: left;
+}
+
+.completion-card {
+  color: #20334f;
+}
+
+.multiple-choice-word-card {
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 97, 209, 0.22);
+  background:
+      radial-gradient(circle at 18% 24%, rgba(28, 209, 140, 0.2), transparent 30%),
+      linear-gradient(135deg, rgba(28, 188, 209, 0.18), rgba(253, 246, 227, 0.96));
+  box-shadow: 0 14px 34px rgba(28, 97, 209, 0.14);
+}
+
+.multiple-choice-word-card .quiz-word {
+  margin: 0 0 8px;
+  color: #10284b;
+  letter-spacing: 0.01em;
+}
+
+.multiple-choice-word-card .quiz-instructions {
+  margin: 0;
+  color: #536987;
+}
+
+.answer-grid {
+  row-gap: 14px;
+}
+
+.multiple-choice-answer-button {
+  min-height: 56px;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(28, 97, 209, 0.1);
+  text-transform: none;
+  white-space: normal;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.multiple-choice-answer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(28, 97, 209, 0.16);
+}
+
+.multiple-choice-answer-button.answer-correct {
+  animation: none;
+  border: 3px solid #1cd18c;
+  box-shadow: 0 0 0 6px rgba(28, 209, 140, 0.16);
+}
+
+.multiple-choice-answer-button.answer-incorrect {
+  animation: none;
+  border: 3px solid #d1311c;
+  box-shadow: 0 0 0 6px rgba(209, 49, 28, 0.14);
+}
+
+@media (max-width: 700px) {
+  .multiple-choice-setup-card {
+    padding: 18px !important;
+  }
+
+  .setup-toolbar {
+    align-items: flex-start;
+  }
+
+  .multiple-choice-intro-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+</style>

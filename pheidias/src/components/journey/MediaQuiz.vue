@@ -1,14 +1,15 @@
 <template>
   <div class="media-match-area">
+    <div class="journey-section-kicker">Image match step</div>
     <h3 class="mb-4">{{ section.instruction }}</h3>
-    <v-row dense>
+    <v-row class="media-grid" dense>
       <v-col
           v-for="(item, i) in shuffledWords"
           :key="i"
           cols="6"
       >
         <v-card
-            class="pa-2 text-center text-greek"
+            class="media-choice-card pa-2 text-center text-greek"
             :color="getCardColor(item.word, 'left')"
             @click="selectItem(item.word, 'left')"
             v-show="!matched[item.word]"
@@ -23,7 +24,7 @@
         cols="6"
     >
       <v-card
-          class="pa-2 text-center"
+          class="media-choice-card image-choice-card pa-2 text-center"
           :color="getCardColor(item.answer, 'right')"
           @click="selectItem(item.answer, 'right')"
           v-show="!matchedByAnswer[item.answer]"
@@ -130,8 +131,8 @@ function checkMatch() {
 
 function getCardColor(word, side) {
   if (feedback.value[word] === 'correct') return 'secondary'
-  if (feedback.value[word] === 'error') return 'red'
-  if (selected.value[side] === word) return 'triadic'
+  if (feedback.value[word] === 'error') return 'error'
+  if (selected.value[side] === word) return 'primary'
   return '#fefcf5'
 }
 
@@ -151,7 +152,50 @@ onMounted(() => {
   position: relative;
   max-width: 820px;
   margin: auto;
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  border-radius: 18px;
+  background: #fefcf5;
+  color: #20334f;
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: 0 12px 28px rgba(28, 97, 209, 0.1);
 }
+
+.journey-section-kicker {
+  color: #1c61d1;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.media-match-area h3 {
+  color: #10284b;
+  font-weight: 900;
+}
+
+.media-grid {
+  row-gap: 12px;
+}
+
+.media-choice-card {
+  min-height: 56px;
+  border: 1px solid rgba(28, 188, 209, 0.16);
+  border-radius: 12px;
+  color: #20334f;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(28, 97, 209, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.media-choice-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(28, 97, 209, 0.14);
+}
+
+.image-choice-card {
+  overflow: hidden;
+}
+
 .text-greek {
   font-family: "EB Garamond", serif;
   font-size: 1.25rem;

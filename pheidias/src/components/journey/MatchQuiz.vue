@@ -1,13 +1,13 @@
 <template>
   <div class="match-game-area">
-    <h3 class="ma-5">{{ section.instruction }}</h3>
-      <br>
-    <v-row class="ma-5">
+    <div class="journey-section-kicker">Match step</div>
+    <h3>{{ section.instruction }}</h3>
+    <v-row class="match-grid">
       <!-- Greek words -->
         <v-col cols="6">
           <div v-for="(item, i) in leftItems" :key="i">
               <v-card
-                  class="pa-3 text-center text-greek mb-10"
+                  class="match-card pa-3 text-center text-greek mb-5"
                   :color="getCardColor(item.greek, 'left')"
                   @click="selectItem(item.greek, 'left')"
                   v-show="!matched[item.greek]"
@@ -21,7 +21,7 @@
       <v-col cols="6">
         <div v-for="(item, i) in rightItems" :key="i">
             <v-card
-                class="pa-3 text-center text-greek mb-10"
+                class="match-card pa-3 text-center text-greek mb-5"
                 :color="getCardColor(item.answer, 'right')"
                 @click="selectItem(item.answer, 'right')"
                 v-show="!matchedByAnswer[item.answer]"
@@ -103,9 +103,9 @@ function checkMatch() {
 }
 
 function getCardColor(word, side) {
-  if (feedback.value[word] === 'correct') return '#1de9b6'
-  if (feedback.value[word] === 'error') return 'red'
-  if (selected.value[side] === word) return 'triadic'
+  if (feedback.value[word] === 'correct') return 'secondary'
+  if (feedback.value[word] === 'error') return 'error'
+  if (selected.value[side] === word) return 'primary'
   return '#fefcf5'
 }
 
@@ -122,7 +122,47 @@ onMounted(() => {
 }
 
 .match-game-area {
-  min-height: 35em; /* or 400px, based on your tallest layout */
+  min-height: 35em;
   position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  border-radius: 18px;
+  background: #fefcf5;
+  color: #20334f;
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: 0 12px 28px rgba(28, 97, 209, 0.1);
+}
+
+.journey-section-kicker {
+  color: #1c61d1;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.match-game-area h3 {
+  margin: 8px 0 22px;
+  color: #10284b;
+  font-weight: 900;
+}
+
+.match-grid {
+  row-gap: 10px;
+}
+
+.match-card {
+  border: 1px solid rgba(28, 188, 209, 0.16);
+  border-radius: 12px;
+  color: #20334f;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(28, 97, 209, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.match-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(28, 97, 209, 0.14);
 }
 </style>

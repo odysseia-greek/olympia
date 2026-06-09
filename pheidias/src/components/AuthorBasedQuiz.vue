@@ -43,6 +43,7 @@ const selectedSectionIndex = ref(-1);
 const selectedBookReferences = ref([]);
 const selectedReferenceSections = ref([]);
 const quizContainerRef = ref(null);
+const selectThemeRef = ref(null);
 const translation = ref('');
 const splitAuthorSentence = ref({});
 const clickedWord = ref('');
@@ -452,7 +453,11 @@ const checkGrammarAnswer = async (answer) => {
 const scrollMeTo = (refName) => {
   nextTick(() => {
     if (refName === 'quiz' && quizContainerRef.value) {
-      quizContainerRef.value.scrollIntoView({ behavior: 'smooth' });
+      quizContainerRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (refName === 'selectTheme' && selectThemeRef.value) {
+      selectThemeRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 };
@@ -544,9 +549,15 @@ const initializeFromRoute = () => {
 </script>
 
 <template>
-  <v-container class="quiz-container text-center">
-    <v-card class="paper-card pa-6" elevation="4">
-      <div class="text-right">
+  <v-container class="quiz-container author-setup-container text-center">
+    <v-card class="paper-card author-setup-card pa-6" elevation="4">
+      <div class="setup-toolbar">
+        <div class="setup-status" v-if="selectedAuthor || selectedBook || selectedSegment">
+          <v-chip v-if="selectedAuthor" color="primary" variant="tonal">{{ selectedAuthor }}</v-chip>
+          <v-chip v-if="selectedBook" color="secondary" variant="tonal">{{ selectedBook }}</v-chip>
+          <v-chip v-if="selectedSegment" color="triadic" variant="tonal">{{ selectedSegment }}</v-chip>
+        </div>
+        <div>
         <v-btn
             icon="mdi-minus"
             variant="text"
@@ -554,21 +565,22 @@ const initializeFromRoute = () => {
         >
           <v-icon>{{ minimized ? 'mdi-plus' : 'mdi-minus' }}</v-icon>
         </v-btn>
+        </div>
       </div>
 
       <div ref="selectThemeRef" v-if="!minimized">
-        <v-card-title class="text-h5">Author Based Quiz</v-card-title>
+        <v-card-title class="text-h5 author-title">Author Based Quiz</v-card-title>
         <!-- Thematic quote always visible -->
-        <p class="ma-4">
-          Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.
+        <p class="author-quote">
+          <span>Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.</span>
           <v-divider class="my-4" />
-          The beginning of every action is the choice.
+          <span>The beginning of every action is the choice.</span>
         </p>
 
         <!-- Show quiz setup options only after choosing/shuffling -->
-          <v-container>
+          <v-container class="author-library-panel">
             <!-- Autocomplete Search -->
-            <v-card class="mx-auto" color="primary" dark>
+            <v-card class="author-search-card mx-auto" variant="flat">
               <v-container>
                 <v-row>
                   <v-col>
@@ -599,7 +611,7 @@ const initializeFromRoute = () => {
             <!-- Author & Book Selection -->
             <v-row v-if="filteredAuthors.length">
               <v-col>
-                <v-expansion-panels v-model="expandedPanels" multiple color="secondaryPapyrus">
+                <v-expansion-panels v-model="expandedPanels" multiple class="author-panels">
                   <v-expansion-panel
                       v-for="author in filteredAuthors"
                       :key="author.key"
@@ -607,14 +619,13 @@ const initializeFromRoute = () => {
                     <v-expansion-panel-title>
                       {{ author.key }}
                     </v-expansion-panel-title>
-                    <v-expansion-panel-text style="background-color: #fefcf5">
-                      <v-list style="background-color: #fefcf5">
+                    <v-expansion-panel-text>
+                      <v-list class="author-book-list">
                         <v-list-item
                             v-for="book in author.filteredBooks.length ? author.filteredBooks : author.books"
                             :key="book.key"
-                            :style="selectedAuthor === author.key && selectedBook === book.key
-                      ? 'color: white; background-color: #1c61d1'
-                      : 'color: black; background-color: #fefcf5'"
+                            class="author-book-item"
+                            :class="{ 'is-selected': selectedAuthor === author.key && selectedBook === book.key }"
                             @click="onBookSelected(author.key, book.key)"
                         >
                           {{ book.key }}
@@ -627,7 +638,7 @@ const initializeFromRoute = () => {
             </v-row>
 
             <!-- References -->
-            <v-row v-if="selectedBookReferences.length">
+            <v-row v-if="selectedBookReferences.length" class="segment-selection">
               <v-col>
                 <v-row>
                   <v-col
@@ -638,7 +649,7 @@ const initializeFromRoute = () => {
                   <v-btn
                       v-for="reference in selectedBookReferences"
                       :key="reference.key"
-                      class="quiz-button"
+                      class="quiz-button segment-button"
                       :class="{ 'pulsate': selectedSegment === reference.key }"
                       :color="selectedSegment === reference.key ? 'primary' : 'triadic'"
                       @click="onReferenceSelected(selectedBook, reference.key)"
@@ -648,7 +659,7 @@ const initializeFromRoute = () => {
                 </v-row>
               </v-col>
             </v-row>
-            <v-row class="mt-4">
+            <v-row class="quiz-options-row mt-4">
               <v-col cols="12" sm="6">
                 <v-switch
                     v-model="showHistoryIndicator"
@@ -658,7 +669,7 @@ const initializeFromRoute = () => {
               </v-col>
             </v-row>
           </v-container>
-          <div>
+          <div class="completion-target-panel">
             <p>Correct answers needed before marked complete</p>
             <v-slider
                 :label="String(numberOfAnswersNeeded)"
@@ -694,7 +705,7 @@ const initializeFromRoute = () => {
       <v-container
           v-if="finished"
       >
-        <v-card flat class="mb-3 paper-card">
+        <v-card flat class="mb-3 paper-card completion-card">
           <v-card-text>
             <h3> Well Done! You have finished this section! </h3>
             <p>
@@ -737,11 +748,11 @@ const initializeFromRoute = () => {
         </v-card>
       </v-container>
 
-      <v-card class="quiz-word-container" height="10em" v-if="!finished">
-        <h2 class="quiz-word" style="margin-top: 1em" v-if="!showNextQuestionIndicator && !grammarQuizMode">
+      <v-card class="quiz-word-container author-word-card" v-if="!finished">
+        <h2 class="quiz-word" v-if="!showNextQuestionIndicator && !grammarQuizMode">
           {{ quizWord }}
         </h2>
-        <h2 class="quiz-word" style="margin-top: 1em" v-if="!showNextQuestionIndicator && grammarQuizMode">
+        <h2 class="quiz-word" v-if="!showNextQuestionIndicator && grammarQuizMode">
           {{ grammarQuizzes[currentGrammarIndex].wordInText }}
         </h2>
 
@@ -775,7 +786,7 @@ const initializeFromRoute = () => {
         :clickedWord="clickedWord"
         :forceUpdate="forceUpdate"
     />
-      <v-row v-if="!finished && !grammarQuizMode">
+      <v-row v-if="!finished && !grammarQuizMode" class="answer-grid">
         <v-col
             v-for="item in answers"
             :key="item.quizWord"
@@ -784,7 +795,7 @@ const initializeFromRoute = () => {
         >
           <v-btn
               @click="checkAnswer(item);"
-              class="ma-1"
+              class="author-answer-button ma-1"
               :class="{
             'answer-correct': answerStates[item.quizWord]?.isCorrect,
             'answer-incorrect': !answerStates[item.quizWord]?.isCorrect && answerStates[item.quizWord]?.selected
@@ -800,7 +811,7 @@ const initializeFromRoute = () => {
           </v-btn>
         </v-col>
       </v-row>
-      <v-row v-if="!finished && grammarQuizMode">
+      <v-row v-if="!finished && grammarQuizMode" class="answer-grid">
         <v-col
             v-for="item in grammarQuizzes[currentGrammarIndex].options"
             :key="item.quizWord"
@@ -809,7 +820,7 @@ const initializeFromRoute = () => {
         >
           <v-btn
               @click="checkGrammarAnswer(item);"
-              class="ma-1"
+              class="author-answer-button ma-1"
               :class="{
             'answer-correct': answerStates[item.quizWord]?.isCorrect,
             'answer-incorrect': !answerStates[item.quizWord]?.isCorrect && answerStates[item.quizWord]?.selected
@@ -825,7 +836,7 @@ const initializeFromRoute = () => {
           </v-btn>
         </v-col>
       </v-row>
-      <v-card class="paper-card ma-3" v-if="quizWord">
+      <v-card class="paper-card author-passage-card ma-3" v-if="quizWord">
         <v-card-title
             v-if="!finished"
             class="text-wrap white-space-normal break-words"
@@ -865,4 +876,224 @@ const initializeFromRoute = () => {
     </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+.author-setup-container,
+.quiz-container,
+.answer-grid {
+  scroll-margin-top: 80px;
+}
+
+.author-setup-card {
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  color: #20334f;
+  background:
+      linear-gradient(145deg, rgba(254, 252, 245, 0.98), rgba(253, 246, 227, 0.92)),
+      #fdf6e3;
+}
+
+.setup-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  gap: 16px;
+}
+
+.setup-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.author-title {
+  color: #20334f;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.author-quote {
+  max-width: 680px;
+  margin: 16px auto 26px;
+  color: #536987;
+  line-height: 1.7;
+}
+
+.author-quote span:first-child {
+  color: #20334f;
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.author-library-panel {
+  padding: 0;
+}
+
+.author-search-card {
+  border: 1px solid rgba(28, 188, 209, 0.18);
+  background:
+      radial-gradient(circle at top left, rgba(28, 209, 140, 0.14), transparent 30%),
+      linear-gradient(135deg, rgba(28, 97, 209, 0.08), rgba(255, 255, 255, 0.58));
+  color: #20334f;
+}
+
+.author-search-card :deep(.v-field),
+.author-search-card :deep(.v-label),
+.author-search-card :deep(.v-icon) {
+  color: #20334f;
+}
+
+.author-panels {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.author-panels :deep(.v-expansion-panel) {
+  border: 1px solid rgba(28, 97, 209, 0.12);
+  background: rgba(253, 246, 227, 0.9);
+  color: #20334f;
+}
+
+.author-panels :deep(.v-expansion-panel-title) {
+  font-weight: 800;
+}
+
+.author-book-list {
+  background: #fefcf5;
+  color: #20334f;
+}
+
+.author-book-item {
+  border-radius: 10px;
+  margin: 4px 0;
+  color: #20334f;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.author-book-item:hover {
+  background: rgba(28, 188, 209, 0.12);
+  transform: translateX(2px);
+}
+
+.author-book-item.is-selected {
+  background: #1c61d1;
+  color: #fff;
+}
+
+.segment-selection {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.segment-button {
+  min-height: 44px;
+  margin: 6px;
+  text-transform: none;
+  white-space: normal;
+}
+
+.quiz-options-row {
+  justify-content: center;
+  text-align: left;
+}
+
+.completion-target-panel {
+  max-width: 760px;
+  margin: 20px auto 0;
+}
+
+.completion-card {
+  color: #20334f;
+}
+
+.author-word-card {
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 97, 209, 0.22);
+  background:
+      radial-gradient(circle at 18% 24%, rgba(28, 209, 140, 0.2), transparent 30%),
+      linear-gradient(135deg, rgba(28, 188, 209, 0.18), rgba(253, 246, 227, 0.96));
+  box-shadow: 0 14px 34px rgba(28, 97, 209, 0.14);
+}
+
+.author-word-card .quiz-word {
+  margin: 0 0 8px;
+  color: #10284b;
+  letter-spacing: 0.01em;
+}
+
+.author-word-card .quiz-instructions {
+  margin: 0;
+  color: #536987;
+}
+
+.answer-grid {
+  row-gap: 14px;
+}
+
+.author-answer-button {
+  min-height: 56px;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(28, 97, 209, 0.1);
+  text-transform: none;
+  white-space: normal;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.author-answer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(28, 97, 209, 0.16);
+}
+
+.author-answer-button.answer-correct {
+  animation: none;
+  border: 3px solid #1cd18c;
+  box-shadow: 0 0 0 6px rgba(28, 209, 140, 0.16);
+}
+
+.author-answer-button.answer-incorrect {
+  animation: none;
+  border: 3px solid #d1311c;
+  box-shadow: 0 0 0 6px rgba(209, 49, 28, 0.14);
+}
+
+.author-passage-card {
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  background:
+      linear-gradient(145deg, rgba(254, 252, 245, 0.98), rgba(253, 246, 227, 0.92)),
+      #fefcf5;
+  color: #20334f;
+  line-height: 1.9;
+}
+
+.author-passage-card h2 {
+  color: #10284b;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  line-height: 1.8;
+}
+
+.author-passage-card span {
+  transition: opacity 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.author-passage-card span:hover {
+  color: #1c61d1;
+  text-shadow: 0 0 18px rgba(28, 188, 209, 0.22);
+}
+
+@media (max-width: 700px) {
+  .author-setup-card {
+    padding: 18px !important;
+  }
+
+  .setup-toolbar {
+    align-items: flex-start;
+  }
+
+  .segment-button {
+    width: 100%;
+  }
+}
+</style>

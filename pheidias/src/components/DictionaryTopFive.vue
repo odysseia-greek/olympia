@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-4" color="background" variant="outlined">
+  <v-card class="top-search-card" variant="flat">
     <v-card-title class="d-flex align-center">
       <span>Recent Top Searches</span>
       <v-spacer />
@@ -23,7 +23,7 @@
         {{ errorMessage }}
       </v-alert>
 
-      <v-table v-else-if="entries.length" density="comfortable">
+      <v-table v-else-if="entries.length" class="top-search-table" density="comfortable">
         <thead>
         <tr>
           <th>Word</th>
@@ -136,3 +136,28 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.top-search-card {
+  background: transparent;
+  color: #20334f;
+}
+
+.top-search-table {
+  background: transparent;
+  color: #20334f;
+}
+
+.top-search-table :deep(th) {
+  color: #536987;
+  font-weight: 800;
+}
+
+.top-search-table :deep(td) {
+  color: #20334f;
+}
+
+.text-medium-emphasis {
+  color: #536987 !important;
+}
+</style>

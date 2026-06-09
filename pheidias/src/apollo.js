@@ -14,7 +14,7 @@ const inMemoryCache = new InMemoryCache({
 // Define the URL for the GraphQL server
 let url = document.location.origin + '/graphql';
 if (process.env.NODE_ENV === 'development') {
-    url = 'http://localhost:8080/graphql';
+    url = 'https://odysseia-greek.com/graphql';
 }
 
 if (process.env.NODE_ENV === 'local') {

@@ -25,6 +25,7 @@ const numberOfAnswersNeeded = ref(2);
 const attemptMade = ref(false);
 const analyzeResults = ref([]);
 const quizContainerRef = ref(null);
+const selectThemeRef = ref(null);
 const finished = ref(false);
 
 const themes = ref([]);
@@ -309,7 +310,11 @@ const randomize = () => {
 const scrollMeTo = (refName) => {
   nextTick(() => {
     if (refName === 'quiz' && quizContainerRef.value) {
-      quizContainerRef.value.scrollIntoView({ behavior: 'smooth' });
+      quizContainerRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (refName === 'selectTheme' && selectThemeRef.value) {
+      selectThemeRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 };
@@ -347,9 +352,14 @@ const initializeFromRoute = () => {
 </script>
 
 <template>
-  <v-container class="quiz-container text-center">
-    <v-card class="paper-card pa-6" elevation="4">
-      <div class="text-right">
+  <v-container class="quiz-container media-setup-container text-center">
+    <v-card class="paper-card media-setup-card pa-6" elevation="4">
+      <div class="setup-toolbar">
+        <div class="setup-status" v-if="theme || segment">
+          <v-chip v-if="theme" color="primary" variant="tonal">{{ theme }}</v-chip>
+          <v-chip v-if="segment" color="secondary" variant="tonal">{{ segment }}</v-chip>
+        </div>
+        <div>
       <v-btn
           v-if="setupStep >= 10"
           icon="mdi-minus"
@@ -364,20 +374,21 @@ const initializeFromRoute = () => {
           variant="text"
           @click="randomize"
       ></v-btn>
+        </div>
       </div>
 
       <div v-if="!minimized" ref="selectThemeRef">
-        <v-card-title class="text-h5">Media Quiz</v-card-title>
+        <v-card-title class="text-h5 media-title">Media Quiz</v-card-title>
         <!-- Thematic quote always visible -->
-        <p class="ma-4">
-          Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.
+        <p class="media-quote">
+          <span>Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.</span>
           <v-divider class="my-4" />
-          The beginning of every action is the choice.
+          <span>The beginning of every action is the choice.</span>
         </p>
 
       <!-- Only show this part if setupStep === 0 -->
       <template v-if="setupStep === 0">
-        <v-card class="ma-5">
+        <v-card class="media-intro-card ma-5" variant="flat">
           <v-card-title class="headline">How would you like to begin?</v-card-title>
           <v-card-text>
             <v-list>
@@ -434,6 +445,7 @@ const initializeFromRoute = () => {
               <br>
             </v-list>
           </v-card-text>
+          <div class="intro-actions">
             <v-btn
                 class="ma-5"
                 color="secondary"
@@ -452,6 +464,7 @@ const initializeFromRoute = () => {
           >
             Random Quiz
           </v-btn>
+          </div>
         </v-card>
 
       </template>
@@ -474,7 +487,7 @@ const initializeFromRoute = () => {
         />
 
         <!-- Segment Buttons -->
-        <v-row v-if="segments.length > 0 && setupStep === 2 || setupStep === 10" class="mt-4">
+        <v-row v-if="segments.length > 0 && setupStep === 2 || setupStep === 10" class="segment-grid mt-4">
           <v-col cols="12">
             <h4>Choose a Segment</h4>
           </v-col>
@@ -497,7 +510,7 @@ const initializeFromRoute = () => {
           </v-col>
         </v-row>
         <!-- Toggles -->
-        <v-row class="mt-4" v-if="setupStep === 10">
+        <v-row class="quiz-options-row mt-4" v-if="setupStep === 10">
           <v-col cols="12" sm="6">
             <v-switch
                 v-model="comprehensive"
@@ -604,8 +617,8 @@ const initializeFromRoute = () => {
       </v-card>
     </v-container>
 
-    <v-card class="quiz-word-container" height="10em" v-if="!finished">
-      <h2 class="quiz-word" style="margin-top: 1em" v-if="!showNextQuestionIndicator">
+    <v-card class="quiz-word-container media-word-card" v-if="!finished">
+      <h2 class="quiz-word" v-if="!showNextQuestionIndicator">
         {{ quizWord }}
       </h2>
       <div
@@ -628,20 +641,23 @@ const initializeFromRoute = () => {
     </v-card>
   </v-container>
   <v-container v-if="theme && segment && quizWord && setupStep >= 10 && !finished" class="inner-quiz-area">
-      <v-row>
+      <v-row class="answer-grid">
         <v-col v-for="item in answers" :key="item.option" cols="6">
           <v-card
+              class="media-answer-card"
               flat
               @click="checkAnswer(item)"
               :class="{
               'card-correct': answerStates[item.option]?.isCorrect,
               'card-incorrect': !answerStates[item.option]?.isCorrect && answerStates[item.option]?.selected,
+              'is-waiting': !nextAnswerSelectable,
             }"
           >
             <v-img
                 :src="loadedImages[item.imageUrl] || ''"
-                class="mb-2"
+                class="media-answer-image mb-2"
                 aspect-ratio="1"
+                cover
             />
             <v-card-text v-if="showTextWithImage" class="text-center">
               {{ item.option }}
@@ -657,3 +673,163 @@ const initializeFromRoute = () => {
     </v-container>
 
 </template>
+
+<style scoped>
+.media-setup-container,
+.inner-quiz-area {
+  scroll-margin-top: 80px;
+}
+
+.media-setup-card {
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  color: #20334f;
+  background:
+      linear-gradient(145deg, rgba(254, 252, 245, 0.98), rgba(253, 246, 227, 0.92)),
+      #fdf6e3;
+}
+
+.setup-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  gap: 16px;
+}
+
+.setup-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.media-title {
+  color: #20334f;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.media-quote {
+  max-width: 680px;
+  margin: 16px auto 26px;
+  color: #536987;
+  line-height: 1.7;
+}
+
+.media-quote span:first-child {
+  color: #20334f;
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.media-intro-card {
+  border: 1px solid rgba(28, 188, 209, 0.18);
+  background: rgba(255, 255, 255, 0.58);
+  color: #20334f;
+  text-align: left;
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.segment-grid .v-btn {
+  min-height: 44px;
+  text-transform: none;
+  white-space: normal;
+}
+
+.quiz-options-row {
+  justify-content: center;
+  text-align: left;
+}
+
+.media-word-card {
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 97, 209, 0.22);
+  background:
+      radial-gradient(circle at 18% 24%, rgba(28, 209, 140, 0.2), transparent 30%),
+      linear-gradient(135deg, rgba(28, 188, 209, 0.18), rgba(253, 246, 227, 0.96));
+  box-shadow: 0 14px 34px rgba(28, 97, 209, 0.14);
+}
+
+.media-word-card .quiz-word {
+  margin: 0 0 8px;
+  color: #10284b;
+  letter-spacing: 0.01em;
+}
+
+.media-word-card .quiz-instructions {
+  margin: 0;
+  color: #536987;
+}
+
+.answer-grid {
+  row-gap: 14px;
+}
+
+.media-answer-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  border-radius: 10px;
+  background: #fefcf5;
+  box-shadow: 0 10px 24px rgba(28, 97, 209, 0.1);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.media-answer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(28, 97, 209, 0.16);
+}
+
+.media-answer-card.is-waiting {
+  cursor: default;
+}
+
+.media-answer-card.is-waiting:not(.card-correct):not(.card-incorrect) {
+  filter: saturate(0.78) opacity(0.72);
+}
+
+.media-answer-image {
+  background: #fdf6e3;
+}
+
+.media-answer-card :deep(.v-card-text) {
+  color: #20334f;
+  font-weight: 800;
+}
+
+.card-correct {
+  animation: none;
+  border: 3px solid #1cd18c;
+  box-shadow: 0 0 0 6px rgba(28, 209, 140, 0.16);
+}
+
+.card-incorrect {
+  animation: none;
+  border: 3px solid #d1311c;
+  box-shadow: 0 0 0 6px rgba(209, 49, 28, 0.14);
+}
+
+@media (max-width: 700px) {
+  .media-setup-card {
+    padding: 18px !important;
+  }
+
+  .setup-toolbar {
+    align-items: flex-start;
+  }
+
+  .media-intro-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+</style>
