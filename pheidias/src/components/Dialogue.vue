@@ -1,98 +1,141 @@
 <template>
-  <v-container v-if="dialogueOptions">
+  <v-container v-if="dialogueOptions" class="dialogue-stage">
     <!-- Introduction -->
-    <v-card class="paper-card mb-4" elevation="4">
-      <v-card-title>Introduction</v-card-title>
-      <v-card-text>{{ dialogueOptions.introduction }}</v-card-text>
+    <v-card class="paper-card dialogue-intro-card mb-4" elevation="4">
+      <div class="intro-grid">
+        <div>
+          <v-card-title class="intro-title">Set The Scene</v-card-title>
+          <v-card-text class="intro-text">{{ dialogueOptions.introduction }}</v-card-text>
+        </div>
 
-      <v-card-title>Text Information</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col cols="12" sm="6">
-            <strong>Section:</strong> {{ dialogueOptions.section }}
-          </v-col>
-          <v-col cols="12" sm="6">
-            <strong>Perseus:</strong>
-            <a :href="dialogueOptions.linkToPerseus" target="_blank" rel="noopener">
-              Link
-            </a>
-          </v-col>
-        </v-row>
-      </v-card-text>
+        <div class="text-facts">
+          <span>Section</span>
+          <strong>{{ dialogueOptions.section }}</strong>
+          <a :href="dialogueOptions.linkToPerseus" target="_blank" rel="noopener">
+            Open Perseus
+            <v-icon size="16">mdi-open-in-new</v-icon>
+          </a>
+        </div>
+      </div>
 
-      <v-card-title>What role do you want to play?</v-card-title>
-      <v-card-text>
-        <v-row>
+      <div class="role-panel">
+        <div class="role-copy">
+          <span>Step 1</span>
+          <strong>Choose your speaker</strong>
+          <small>Your lines become selectable responses; the other speaker is typed in automatically.</small>
+        </div>
+        <v-row class="role-grid">
           <v-col v-for="(speaker, index) in dialogueOptions.speakers" :key="index" cols="12" sm="6">
             <v-btn
-                class="ma-1"
+                class="role-button"
                 :color="selectedSpeaker === speaker.shorthand ? 'primary' : 'triadic'"
+                :variant="selectedSpeaker === speaker.shorthand ? 'flat' : 'tonal'"
                 block
+                rounded="xl"
                 @click="setSpeaker(speaker);scrollMeTo('dialogueRef');"
             >
-              {{ speaker.shorthand }} {{ speaker.translation }}
+              <span class="role-shorthand">{{ speaker.shorthand }}</span>
+              <span>{{ speaker.translation }}</span>
             </v-btn>
           </v-col>
         </v-row>
-      </v-card-text>
+      </div>
     </v-card>
-    <v-card v-if="selectedSpeaker !== ''" class="mb-3 paper-card">
-      <v-card-title ref="dialogueRef">Dialogue</v-card-title>
-      <v-switch
-          v-model="showDialogueTranslation"
-          color="primary"
-          label="Show Translation"
-      ></v-switch>
+    <v-card v-if="selectedSpeaker !== ''" class="mb-3 paper-card dialogue-play-card">
+      <div class="dialogue-card-header" ref="dialogueRef">
+        <div>
+          <v-card-title class="dialogue-title">Dialogue</v-card-title>
+          <p class="dialogue-help">
+            Select responses below, then reorder only your own lines before checking the conversation.
+          </p>
+        </div>
+        <div class="dialogue-controls">
+          <v-chip color="secondary" variant="flat" size="small">Playing {{ selectedSpeaker }}</v-chip>
+          <v-switch
+              v-model="showDialogueTranslation"
+              color="primary"
+              label="Translation"
+              density="compact"
+              hide-details
+          ></v-switch>
+        </div>
+      </div>
       <v-card-text>
-        <div
-            v-for="(line, index) in dialogueText"
-            :key="index"
-            class="dialogue-line"
-            :class="{
-              'user-speaker': line.speaker === selectedSpeaker,
-              'other-speaker': line.speaker !== selectedSpeaker,
-              'wrongly-placed': line.isWronglyPlaced,
-              'correctly-placed': line.isCorrectlyPlaced
-            }"
-        >
-          <div class="dialogue-bubble" :ref="el => setDialogueOptionRef(el, index)">
-            <strong>{{ line.speaker }}:</strong>
-            {{ line.greek }}
-            <div v-if="line.speaker === selectedSpeaker" class="move-buttons">
-              <v-btn icon="mdi-chevron-up" small @click="moveBubbleUp(index)">
-              </v-btn>
-              <v-btn icon="mdi-chevron-down" small @click="moveBubbleDown(index)">
-              </v-btn>
+        <div class="dialogue-thread">
+          <div
+              v-for="(line, index) in dialogueText"
+              :key="index"
+              class="dialogue-line"
+              :class="{
+                'user-speaker': line.speaker === selectedSpeaker,
+                'other-speaker': line.speaker !== selectedSpeaker,
+                'wrongly-placed': line.isWronglyPlaced,
+                'correctly-placed': line.isCorrectlyPlaced
+              }"
+          >
+            <div class="dialogue-bubble" :ref="el => setDialogueOptionRef(el, index)">
+              <span class="speaker-pill">{{ line.speaker }}</span>
+              <span class="greek-line">{{ line.greek }}</span>
+              <div v-if="line.speaker === selectedSpeaker" class="move-buttons">
+                <v-btn icon="mdi-chevron-up" size="x-small" variant="text" @click="moveBubbleUp(index)">
+                </v-btn>
+                <v-btn icon="mdi-chevron-down" size="x-small" variant="text" @click="moveBubbleDown(index)">
+                </v-btn>
+              </div>
+            </div>
+            <div v-if="showDialogueTranslation && !hideTranslation" class="translation-text">
+              <strong>{{ line.speaker }}:</strong>
+              {{ line.translation }}
             </div>
           </div>
-          <div v-if="showDialogueTranslation && !hideTranslation" class="translation-text">
-            <strong>{{ line.speaker }}:</strong>
-            {{ line.translation }}
+        </div>
+        <div class="response-dock" ref="responseDockRef">
+          <div class="response-dock-header">
+            <div>
+              <v-card-title class="response-title">
+                {{ responseOptions.length > 0 ? 'Choose Your Next Line' : 'Ready To Check' }}
+              </v-card-title>
+              <p class="response-help">
+                {{ responseOptions.length > 0 ? 'Pick the reply that should come next. This list shrinks as the conversation grows.' : 'All of your responses have been placed. Review the order above.' }}
+              </p>
+            </div>
+            <v-chip color="triadic" variant="flat" size="small">
+              {{ responseOptions.length }} left
+            </v-chip>
+          </div>
+          <v-row v-if="responseOptions.length > 0" class="response-grid">
+            <v-col v-for="(response, index) in responseOptions" :key="index" cols="12" md="6">
+              <v-card class="response-card" @click="setDialogue(response)">
+                <v-card-text>
+                  <span class="response-greek">{{ response.greek }}</span>
+                  <span v-if="showDialogueTranslation && !hideTranslation" class="translation-text"> <em><br>{{ response.translation }}</em></span>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+          <div class="dialogue-check-row">
+            <v-btn
+                v-if="!hideTranslation"
+                class="check-button"
+                color="primary"
+                prepend-icon="mdi-check-circle-outline"
+                rounded="xl"
+                @click="checkDialogueAnswer();"
+            >
+              Check Order
+            </v-btn>
+            <span v-if="wronglyPlaced.length > 0" class="check-hint">
+              Move the marked lines and check again.
+            </span>
           </div>
         </div>
-        <v-btn v-if="!hideTranslation" @click="checkDialogueAnswer();" color="primary">Check</v-btn>
-      </v-card-text>
-    </v-card>
-    <v-card  class="mb-3 paper-card">
-      <v-card-text>
-      <v-card-title v-if="responseOptions.length > 0">Possible Responses</v-card-title>
-        <v-row>
-          <v-col v-for="(response, index) in responseOptions" :key="index" cols="12" sm="6">
-            <v-card class="ma-2 response-card" @click="setDialogue(response)">
-              <v-card-text>
-                {{ response.greek }}
-                <span v-if="showDialogueTranslation && !hideTranslation" class="translation-text"> <em><br>{{ response.translation }}</em></span>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import { ref, watch, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 import {DialogueBasedAnswer} from "@/constants/dialogueBasedGraphql";
 import {apolloClient} from "@/apollo";
 
@@ -113,15 +156,22 @@ export default {
     const wronglyPlaced = ref([]);
     const showDialogueTranslation = ref(true);
     const hideTranslation = ref(false);
+    const dialogueRef = ref(null);
+    const responseDockRef = ref(null);
 
     const setSpeaker = (value) => {
       selectedSpeaker.value = value.shorthand;
       dialogueText.value = [];
+      wronglyPlaced.value = [];
       scrollToLatestLine();
       initializeDialogue();
     };
 
     const initializeDialogue = async () => {
+      if (!Array.isArray(props.dialogueContent) || props.dialogueContent.length === 0) {
+        return;
+      }
+
       const firstSpeaker = props.dialogueContent[0].speaker;
 
       if (selectedSpeaker.value === firstSpeaker) {
@@ -133,6 +183,7 @@ export default {
       const responses = props.dialogueContent.filter((line) => line.speaker === selectedSpeaker.value && line.place !== 1);
 
       responseOptions.value = await createNewArray(responses);
+      scrollToResponseDock();
     };
 
     const setDialogue = (selectedDialogue) => {
@@ -143,26 +194,31 @@ export default {
       }
 
       updateResponseOptions(selectedDialogue);
-      scrollToLatestLine();
+
+      const restoreTranslationAndFocusResponses = () => {
+        const finish = () => {
+          scrollToResponseDock();
+        };
+
+        if (setTranslationBack) {
+          setTimeout(() => {
+            hideTranslation.value = false;
+            finish();
+          }, 500);
+          return;
+        }
+
+        finish();
+      };
 
       typeDialogue(selectedDialogue, () => {
         const nextIndex = dialogueText.value.length;
         if (nextIndex < props.dialogueContent.length && props.dialogueContent[nextIndex].speaker !== selectedSpeaker.value) {
           setTimeout(() => {
-            typeDialogue(props.dialogueContent[nextIndex], () => {
-              if (setTranslationBack) {
-                setTimeout(() => {
-                  hideTranslation.value = false
-                }, 500);
-              }
-            });
+            typeDialogue(props.dialogueContent[nextIndex], restoreTranslationAndFocusResponses);
           }, 500);
         } else {
-          if (setTranslationBack) {
-            setTimeout(() => {
-              hideTranslation.value = false
-            }, 500);
-          }
+          restoreTranslationAndFocusResponses();
         }
       });
     };
@@ -176,6 +232,7 @@ export default {
       const typingSpeed = 50;
       const newLine = { ...line, greek: '' };
       dialogueText.value.push(newLine);
+      scrollToLatestLine();
 
       const index = dialogueText.value.length - 1;
 
@@ -184,6 +241,7 @@ export default {
           typedText += line.greek[i];
           dialogueText.value[index].greek = typedText; // Directly modify the array element
           if (i === line.greek.length - 1 && callback) {
+            scrollToLatestLine();
             callback();
           }
         }, i * typingSpeed);
@@ -193,12 +251,19 @@ export default {
 
     const scrollToLatestLine = () => {
       nextTick(() => {
-        const targetIndex = Math.max(dialogueText.value.length - 5, 0);
+        const targetIndex = Math.max(dialogueText.value.length - 1, 0);
         const targetElement = dialogueOptionsRefs.value[targetIndex];
 
         if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
+      });
+    };
+
+    const scrollToResponseDock = () => {
+      nextTick(() => {
+        const target = responseDockRef.value?.$el || responseDockRef.value;
+        target?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
       });
     };
 
@@ -215,9 +280,12 @@ export default {
         return { ...rest, place: index + 1 };
       });
 
+      wronglyPlaced.value = [];
       dialogueText.value = dialogueText.value.map((text) => {
         return {
           ...text,
+          isWronglyPlaced: false,
+          isCorrectlyPlaced: false,
         };
       });
 
@@ -276,8 +344,9 @@ export default {
 
     const scrollMeTo = (refName) => {
       nextTick(() => {
-        if (refName === 'quiz') {
-          quizContainerRef.value.scrollIntoView({ behavior: 'smooth' });
+        if (refName === 'dialogueRef') {
+          const target = dialogueRef.value?.$el || dialogueRef.value;
+          target?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
         }
       });
     };
@@ -334,10 +403,13 @@ export default {
       wronglyPlaced,
       showDialogueTranslation,
       hideTranslation,
+      dialogueRef,
+      responseDockRef,
       setSpeaker,
       setDialogue,
       initializeDialogue,
       scrollToLatestLine,
+      scrollToResponseDock,
       setDialogueOptionRef,
       checkDialogueAnswer,
       scrollMeTo,
@@ -349,82 +421,373 @@ export default {
 </script>
 
 <style scoped>
+.dialogue-stage {
+  max-width: 1180px;
+  padding-inline: 0;
+}
+
 .paper-card {
-  background: #fdf6e3; /* A light, papyrus-like color */
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(119, 86, 37, 0.14);
+  border-radius: 26px;
+  background:
+      radial-gradient(circle at top right, rgba(28, 188, 209, 0.1), transparent 30%),
+      linear-gradient(145deg, #fff9e9 0%, #eedfb7 100%);
+  box-shadow: 0 20px 42px rgba(54, 43, 23, 0.12);
+  color: #283650;
   padding: 20px;
-  font-family: 'Roboto', serif;
+}
+
+.dialogue-intro-card {
+  overflow: hidden;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.intro-title,
+.dialogue-title,
+.response-title {
+  color: #17345f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.intro-text {
+  color: #41506b;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.text-facts {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  border-radius: 22px;
+  background: rgba(255, 252, 242, 0.72);
+  text-align: left;
+}
+
+.text-facts span {
+  color: #69768d;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.text-facts strong {
+  color: #17345f;
+  font-size: 1.25rem;
+}
+
+.text-facts a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  color: #1c61d1;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.role-panel {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(28, 97, 209, 0.08);
+}
+
+.role-copy {
+  display: grid;
+  gap: 5px;
+  align-content: center;
+  text-align: left;
+}
+
+.role-copy span {
+  color: #1c61d1;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.role-copy strong {
+  color: #17345f;
+  font-size: 1.3rem;
+}
+
+.role-copy small {
+  color: #46546c;
+  line-height: 1.5;
+}
+
+.role-grid {
+  align-items: center;
+}
+
+.role-button {
+  min-height: 56px;
+  justify-content: flex-start;
+  text-transform: none;
+}
+
+.role-shorthand {
+  margin-right: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.dialogue-play-card {
+  background:
+      linear-gradient(160deg, rgba(255, 249, 233, 0.96), rgba(240, 224, 188, 0.96)),
+      radial-gradient(circle at top left, rgba(28, 209, 140, 0.14), transparent 30%);
+}
+
+.dialogue-card-header {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 4px 4px 0;
+  scroll-margin-top: 84px;
+}
+
+.dialogue-help,
+.response-help {
+  margin: 0 16px;
+  color: #566177;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.dialogue-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 230px;
+}
+
+.dialogue-thread {
+  display: grid;
+  gap: 10px;
+  padding: 18px 10px 8px;
+  scroll-behavior: smooth;
 }
 
 .dialogue-line {
-  margin-bottom: 10px;
   transition: all 0.3s ease;
 }
 
-.response-card {
-  background-color: #fefcf5;
-}
-
 .dialogue-bubble {
-  background-color: #fefcf5;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  position: relative;
+  display: grid;
+  gap: 8px;
+  width: fit-content;
   max-width: 80%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  border: 1px solid #e0e0e0; /* Add a light border for contrast */
-  transition: transform 0.2s, box-shadow 0.2s; /* Add transitions for lift effect */
+  margin-bottom: 8px;
+  padding: 15px 50px 15px 16px;
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  border-radius: 18px;
+  background-color: #fffdfa;
+  box-shadow: 0 12px 24px rgba(42, 32, 16, 0.1);
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .dialogue-bubble:hover {
-  transform: translateY(-4px); /* Lift the bubble on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance the shadow on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(42, 32, 16, 0.16);
 }
 
-.dialogue-bubble:hover .move-buttons {
-  display: flex;
-  flex-direction: row;
+.speaker-pill {
+  width: fit-content;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(28, 97, 209, 0.1);
+  color: #1c61d1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.greek-line,
+.response-greek {
+  color: #263149;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.55;
 }
 
 .move-buttons {
-  display: none;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 2px;
+  opacity: 0.22;
+  transition: opacity 0.2s ease;
+}
+
+.dialogue-bubble:hover .move-buttons,
+.dialogue-bubble:focus-within .move-buttons {
+  opacity: 1;
 }
 
 @keyframes flash-green {
-  0% { border-color: green; }
-  50% { border-color: transparent; }
-  100% { border-color: green; }
+  0% { border-color: #1cd18c; box-shadow: 0 0 0 0 rgba(28, 209, 140, 0.32); }
+  50% { border-color: rgba(28, 209, 140, 0.26); box-shadow: 0 0 0 8px rgba(28, 209, 140, 0); }
+  100% { border-color: #1cd18c; box-shadow: 0 0 0 0 rgba(28, 209, 140, 0.32); }
 }
 
 .correctly-placed .dialogue-bubble {
-  animation: flash-green 2s infinite;
-  border-width: 4px; /* Increase the border width */
-  border-style: solid; /* Ensure the border style is solid */
-  padding: 10px; /* Optional: add padding to make space for the border */
-  box-sizing: border-box; /* Ensure the border is included in the element's dimensions */
+  animation: flash-green 1.8s ease-in-out infinite;
+  border-color: #1cd18c;
 }
 
 .wrongly-placed .dialogue-bubble {
-  background-color: #f6624c; /* Light red background */
+  border-color: rgba(202, 56, 40, 0.72);
+  background: #ffe8df;
 }
 
 .user-speaker .dialogue-bubble {
-  margin-left: auto; /* Aligns to the right */
-  border-top-right-radius: 0; /* Optional: for speech bubble effect */
+  margin-left: auto;
+  border-top-right-radius: 4px;
+  background:
+      linear-gradient(145deg, rgba(28, 97, 209, 0.12), rgba(28, 188, 209, 0.1)),
+      #fffdfa;
 }
 
 .other-speaker .dialogue-bubble {
-  margin-right: auto; /* Aligns to the left */
-  border-top-left-radius: 0; /* Optional: for speech bubble effect */
+  margin-right: auto;
+  border-top-left-radius: 4px;
 }
 
 .translation-text {
-  color: #666;
+  max-width: 76%;
+  color: #5c6680;
   font-style: italic;
-  margin-top: 5px;
+  margin-top: 4px;
+  text-align: left;
+}
+
+.user-speaker .translation-text {
+  margin-left: auto;
+  text-align: right;
+}
+
+.dialogue-check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.check-button {
+  min-width: 150px;
+  text-transform: none;
+}
+
+.check-hint {
+  color: #a2432c;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.response-dock {
+  position: relative;
+  margin: 18px 6px 4px;
+  padding: 18px;
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  border-radius: 24px;
+  background:
+      radial-gradient(circle at top right, rgba(28, 209, 140, 0.18), transparent 30%),
+      linear-gradient(145deg, rgba(255, 253, 250, 0.95), rgba(242, 229, 197, 0.95));
+  box-shadow: 0 18px 34px rgba(42, 32, 16, 0.12);
+  scroll-margin-block: 120px;
+}
+
+.response-dock::before {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid rgba(28, 97, 209, 0.16);
+  border-left: 1px solid rgba(28, 97, 209, 0.16);
+  background: rgba(255, 253, 250, 0.95);
+  content: "";
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.response-dock-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.response-grid {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+}
+
+.response-card {
+  height: 100%;
+  border: 1px solid rgba(28, 97, 209, 0.12);
+  border-radius: 18px;
+  background-color: rgba(255, 253, 250, 0.88);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.response-card:hover {
+  border-color: rgba(28, 97, 209, 0.36);
+  box-shadow: 0 16px 28px rgba(42, 32, 16, 0.14);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 760px) {
+  .intro-grid,
+  .role-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .dialogue-card-header {
+    display: grid;
+  }
+
+  .dialogue-controls {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .response-dock-header {
+    display: grid;
+  }
+
+  .dialogue-bubble,
+  .translation-text {
+    max-width: 92%;
+  }
 }
 </style>

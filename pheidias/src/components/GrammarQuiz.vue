@@ -25,6 +25,7 @@ const numberOfAnswersNeeded = ref(2);
 const attemptMade = ref(false);
 const analyzeResults = ref([]);
 const quizContainerRef = ref(null);
+const selectThemeRef = ref(null);
 
 const finished = ref(false);
 const quizWord = ref('');
@@ -333,7 +334,11 @@ const truncateText = (text) => {
 const scrollMeTo = (refName) => {
   nextTick(() => {
     if (refName === 'quiz' && quizContainerRef.value) {
-      quizContainerRef.value.scrollIntoView({ behavior: 'smooth' });
+      quizContainerRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (refName === 'selectTheme' && selectThemeRef.value) {
+      selectThemeRef.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 };
@@ -382,9 +387,15 @@ const initializeFromRoute = () => {
 </script>
 
 <template>
-  <v-container class="quiz-container text-center">
-    <v-card class="paper-card pa-6" elevation="4">
-      <div class="text-right">
+  <v-container class="quiz-container grammar-setup-container text-center">
+    <v-card class="paper-card grammar-setup-card pa-6" elevation="4">
+      <div class="setup-toolbar">
+        <div class="setup-status" v-if="theme || segment || setupStep >= 10">
+          <v-chip v-if="theme" color="primary" variant="tonal">{{ theme }}</v-chip>
+          <v-chip v-if="segment" color="secondary" variant="tonal">{{ segment }}</v-chip>
+          <v-chip v-if="setupStep >= 10" color="triadic" variant="tonal">Set {{ set }} / {{ maxSet }}</v-chip>
+        </div>
+        <div>
         <v-btn
             v-if="setupStep >= 10"
             icon="mdi-minus"
@@ -399,20 +410,21 @@ const initializeFromRoute = () => {
             variant="text"
             @click="randomize"
         ></v-btn>
+        </div>
       </div>
 
       <div v-if="!minimized" ref="selectThemeRef">
-        <v-card-title class="text-h5">Grammar Quiz</v-card-title>
+        <v-card-title class="text-h5 grammar-title">Grammar Quiz</v-card-title>
         <!-- Thematic quote always visible -->
-        <p class="ma-4">
-          Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.
+        <p class="grammar-quote">
+          <span>Ἀρχὴ πάσης πράξεως ἐστὶν ἡ τοῦ αἱρεῖσθαι ἀρχή.</span>
           <v-divider class="my-4" />
-          The beginning of every action is the choice.
+          <span>The beginning of every action is the choice.</span>
         </p>
 
         <!-- Only show this part if setupStep === 0 -->
         <template v-if="setupStep === 0">
-          <v-card class="ma-5">
+          <v-card class="grammar-intro-card ma-5" variant="flat">
             <v-card-title class="headline">How would you like to begin?</v-card-title>
             <v-card-text>
               <v-list>
@@ -469,6 +481,7 @@ const initializeFromRoute = () => {
                 <br>
               </v-list>
             </v-card-text>
+            <div class="intro-actions">
             <v-btn
                 class="ma-5"
                 color="secondary"
@@ -487,6 +500,7 @@ const initializeFromRoute = () => {
             >
               Random Quiz
             </v-btn>
+            </div>
           </v-card>
 
         </template>
@@ -509,7 +523,7 @@ const initializeFromRoute = () => {
           />
 
           <!-- Segment Buttons -->
-          <v-row v-if="segments.length > 0 && setupStep === 2 || setupStep === 10" class="mt-4">
+          <v-row v-if="segments.length > 0 && setupStep === 2 || setupStep === 10" class="segment-grid mt-4">
             <v-col cols="12">
               <h4>Choose a Segment</h4>
             </v-col>
@@ -534,7 +548,7 @@ const initializeFromRoute = () => {
           </v-row>
 
           <!-- Toggles -->
-          <v-row class="mt-4" v-if="setupStep === 10">
+          <v-row class="quiz-options-row mt-4" v-if="setupStep === 10">
               <v-col class="text-left">
                           <span class="subheading font-weight-light me-1"
                           >Set
@@ -625,8 +639,8 @@ const initializeFromRoute = () => {
               totalMistakes = val.totalMistakes;
             }"
           />
-            <v-expansion-panels flat class="my-6" variant="accordion" v-if="setupStep === 10 && quizWord !== ''">
-              <v-expansion-panel style="background: #fdf6e3;">
+            <v-expansion-panels flat class="grammar-details-panel my-6" variant="accordion" v-if="setupStep === 10 && quizWord !== ''">
+              <v-expansion-panel>
                 <v-expansion-panel-title>
                   <v-icon start icon="mdi-book-open-page-variant"></v-icon>
                   {{ headerInfo.description }}
@@ -635,14 +649,14 @@ const initializeFromRoute = () => {
                 <v-expansion-panel-text>
                   <v-row dense>
                     <v-col cols="12" sm="4">
-                      <v-card flat style="background: #fefcf5;">
+                      <v-card flat class="grammar-detail-card">
                         <v-card-subtitle>Dictionary Form</v-card-subtitle>
                         <v-card-text class="text-h6">{{ headerInfo.dictionaryForm }}</v-card-text>
                       </v-card>
                     </v-col>
 
                     <v-col cols="12" sm="4">
-                      <v-card flat style="background: #fefcf5;">
+                      <v-card flat class="grammar-detail-card">
                         <v-card-subtitle>Translation</v-card-subtitle>
                         <v-card-text class="text-h6">{{ headerInfo.translation }}</v-card-text>
                       </v-card>
@@ -650,14 +664,14 @@ const initializeFromRoute = () => {
 
 
                     <v-col cols="12" sm="4" v-if="headerInfo.stem">
-                      <v-card flat style="background: #fefcf5;">
+                      <v-card flat class="grammar-detail-card">
                         <v-card-subtitle>Stem</v-card-subtitle>
                         <v-card-text class="text-h6">{{ headerInfo.stem }}</v-card-text>
                       </v-card>
                     </v-col>
 
                     <v-col cols="12" sm="4" v-if="headerInfo.contractionRule">
-                      <v-card flat style="background: #fefcf5;">
+                      <v-card flat class="grammar-detail-card">
                         <v-card-subtitle>Rule</v-card-subtitle>
                         <v-card-text class="text-body-2">
                           {{ headerInfo.contractionRule }}
@@ -677,7 +691,7 @@ const initializeFromRoute = () => {
     <v-container
         v-if="finished"
     >
-      <v-card flat class="mb-3 paper-card">
+      <v-card flat class="mb-3 paper-card completion-card">
         <v-card-text>
           <h3> Well Done! You have finished this section! </h3>
           <p>
@@ -723,8 +737,8 @@ const initializeFromRoute = () => {
       </v-card>
     </v-container>
 
-    <v-card class="quiz-word-container" height="10em" v-if="!finished">
-      <h2 class="quiz-word" style="margin-top: 1em" v-if="!showNextQuestionIndicator">
+    <v-card class="quiz-word-container grammar-word-card" v-if="!finished">
+      <h2 class="quiz-word" v-if="!showNextQuestionIndicator">
         {{ quizWord }}
       </h2>
       <div
@@ -742,12 +756,12 @@ const initializeFromRoute = () => {
       <p
           class="quiz-instructions"
       >
-        Match the word to the image.
+        Choose the correct grammatical answer.
       </p>
     </v-card>
   </v-container>
   <v-container v-if="theme && quizWord && setupStep >= 10 && !finished" class="inner-quiz-area">
-    <v-row>
+    <v-row class="answer-grid">
       <v-col
           v-for="item in answers"
           :key="item.option"
@@ -756,7 +770,7 @@ const initializeFromRoute = () => {
       >
         <v-btn
             @click="checkAnswer(item);"
-            class="ma-1"
+            class="grammar-answer-button ma-1"
             :class="{
             'answer-correct': answerStates[item.option]?.isCorrect,
             'answer-incorrect': !answerStates[item.option]?.isCorrect && answerStates[item.option]?.selected
@@ -780,3 +794,161 @@ const initializeFromRoute = () => {
   </v-container>
 
 </template>
+
+<style scoped>
+.grammar-setup-container,
+.inner-quiz-area {
+  scroll-margin-top: 80px;
+}
+
+.grammar-setup-card {
+  border: 1px solid rgba(28, 97, 209, 0.16);
+  color: #20334f;
+  background:
+      linear-gradient(145deg, rgba(254, 252, 245, 0.98), rgba(253, 246, 227, 0.92)),
+      #fdf6e3;
+}
+
+.setup-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  gap: 16px;
+}
+
+.setup-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.grammar-title {
+  color: #20334f;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.grammar-quote {
+  max-width: 680px;
+  margin: 16px auto 26px;
+  color: #536987;
+  line-height: 1.7;
+}
+
+.grammar-quote span:first-child {
+  color: #20334f;
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.grammar-intro-card {
+  border: 1px solid rgba(28, 188, 209, 0.18);
+  background: rgba(255, 255, 255, 0.58);
+  color: #20334f;
+  text-align: left;
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.segment-grid .v-btn {
+  min-height: 44px;
+  text-transform: none;
+  white-space: normal;
+}
+
+.quiz-options-row {
+  justify-content: center;
+  text-align: left;
+}
+
+.grammar-details-panel :deep(.v-expansion-panel) {
+  border: 1px solid rgba(28, 97, 209, 0.12);
+  background: rgba(253, 246, 227, 0.86);
+  color: #20334f;
+}
+
+.grammar-detail-card {
+  min-height: 100%;
+  border: 1px solid rgba(28, 188, 209, 0.14);
+  background: #fefcf5;
+  color: #20334f;
+}
+
+.completion-card {
+  color: #20334f;
+}
+
+.grammar-word-card {
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 97, 209, 0.22);
+  background:
+      radial-gradient(circle at 18% 24%, rgba(28, 209, 140, 0.2), transparent 30%),
+      linear-gradient(135deg, rgba(28, 188, 209, 0.18), rgba(253, 246, 227, 0.96));
+  box-shadow: 0 14px 34px rgba(28, 97, 209, 0.14);
+}
+
+.grammar-word-card .quiz-word {
+  margin: 0 0 8px;
+  color: #10284b;
+  letter-spacing: 0.01em;
+}
+
+.grammar-word-card .quiz-instructions {
+  margin: 0;
+  color: #536987;
+}
+
+.answer-grid {
+  row-gap: 14px;
+}
+
+.grammar-answer-button {
+  min-height: 56px;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(28, 97, 209, 0.1);
+  text-transform: none;
+  white-space: normal;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.grammar-answer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(28, 97, 209, 0.16);
+}
+
+.grammar-answer-button.answer-correct {
+  animation: none;
+  border: 3px solid #1cd18c;
+  box-shadow: 0 0 0 6px rgba(28, 209, 140, 0.16);
+}
+
+.grammar-answer-button.answer-incorrect {
+  animation: none;
+  border: 3px solid #d1311c;
+  box-shadow: 0 0 0 6px rgba(209, 49, 28, 0.14);
+}
+
+@media (max-width: 700px) {
+  .grammar-setup-card {
+    padding: 18px !important;
+  }
+
+  .setup-toolbar {
+    align-items: flex-start;
+  }
+
+  .grammar-intro-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+</style>

@@ -26,9 +26,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-row v-if="analyzeResults && analyzeResults.length" style="margin-top: 10px">
-    <v-col>
-      <v-card class="mx-auto paper-card" v-for="(result, index) in analyzeResults" :key="`result-${index}`">
+  <v-row v-if="analyzeResults && analyzeResults.length" class="analyze-results-row">
+    <v-col cols="12" class="analyze-results-col">
+      <v-card class="paper-card" v-for="(result, index) in analyzeResults" :key="`result-${index}`">
         <v-card-title v-if="result.rootword">Rootword: {{ result.rootword }}</v-card-title>
         <v-card-title v-if="result.conjugations && result.conjugations.length">Conjugations</v-card-title>
         <v-card-text v-if="result.conjugations && result.conjugations.length">
@@ -64,16 +64,27 @@ export default defineComponent({
 <style scoped>
 .paper-card {
   background: #fdf6e3; /* A light, papyrus-like color */
+  color: #20334f;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   font-family: 'Roboto', serif;
+  width: 100%;
 }
 
 .section-content {
   background: #fefcf5; /* A slightly different shade for sections */
+  color: #20334f;
   padding: 10px;
   border-radius: 4px;
+}
+
+.analyze-results-row {
+  margin: 0;
+}
+
+.analyze-results-col {
+  padding: 0;
 }
 
 .aligned-list {

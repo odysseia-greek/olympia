@@ -1,9 +1,9 @@
 <template>
-  <div class="pa-4">
+  <div class="journey-area pa-4">
       <div v-if="finished">
         <transition name="fade">
-        <v-card class="paper-card text-center pa-6 mb-4">
-          <h2 class="mb-2">🎉 Well Done!</h2>
+        <v-card class="journey-complete-card text-center pa-6 mb-4">
+          <h2 class="mb-2">Well Done</h2>
           <p class="mb-4">
             You’ve completed this challenge. Time to press forward.
           </p>
@@ -21,17 +21,17 @@
                 v-if="showNext"
                 color="primary"
                 size="large"
-                @click="$emit('next')"
+                @click="props.isLastStep ? $emit('finishSegment') : $emit('next')"
                 class="mt-2"
             >
-              Next
+              {{ props.isLastStep ? 'Return to Map' : 'Next' }}
             </v-btn>
         </v-card>
         </transition>
       </div>
       <div v-if="finishedSegment">
-        <v-card class="paper-card text-center mb-4">
-          <h2 class="mb-2">🎉 Section Complete!</h2>
+        <v-card class="journey-complete-card text-center mb-4">
+          <h2 class="mb-2">Section Complete</h2>
           <p class="mb-4">
             You’ve finished <strong>{{ section.name }}</strong>. Onward, adventurer.
           </p>
@@ -94,7 +94,7 @@
     <FinalQuiz
         v-else-if="section.__typename === 'FinalTranslationQuiz' && !finishedSegment"
         :section="section"
-        @finishSegment="finishedSegment = true"
+        @finishSegment="setFinishedSegmentState"
     />
 
     </div>
@@ -113,9 +113,10 @@ import TypingText from "@/components/TypingText.vue";
 const props = defineProps({
   section: Object,
   text: String,
-  translation: String
+  translation: String,
+  isLastStep: Boolean,
 })
-const emit = defineEmits(['next'])
+const emit = defineEmits(['next', 'finishSegment'])
 const loadedImages = ref({})
 const finished = ref(false)
 const finishedSegment = ref(false)
@@ -143,10 +144,19 @@ function setFinishedState() {
   }, 800)
 }
 
+function setFinishedSegmentState() {
+  finishedSegment.value = true
+  setTimeout(() => {
+    showNext.value = true
+  }, 800)
+}
+
 watch(
     () => props.section,
     () => {
       finished.value = false;
+      finishedSegment.value = false;
+      showNext.value = false;
       // Also reload images if necessary for media quizzes
       if (props.section && props.section.mediaFiles) {
         loadImages(props.section.mediaFiles);
@@ -155,3 +165,43 @@ watch(
     { immediate: true }
 )
 </script>
+
+<style scoped>
+.journey-area {
+  border-radius: 18px;
+  background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.48), rgba(253, 246, 227, 0.52));
+}
+
+.journey-complete-card {
+  border: 1px solid rgba(28, 209, 140, 0.2);
+  border-radius: 18px;
+  background:
+      radial-gradient(circle at 18% 18%, rgba(28, 209, 140, 0.18), transparent 34%),
+      #fefcf5;
+  color: #20334f;
+  box-shadow: 0 14px 34px rgba(28, 97, 209, 0.12);
+}
+
+.journey-complete-card h2 {
+  color: #10284b;
+  font-weight: 900;
+}
+
+.text-greek {
+  font-family: "EB Garamond", serif;
+  font-size: 1.2rem;
+  color: #10284b;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+</style>
