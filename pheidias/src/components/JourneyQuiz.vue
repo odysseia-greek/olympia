@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from 'vue'
+import {computed, onMounted, onUnmounted, ref} from 'vue'
 
 import {JourneyCreateQuestion, JourneyOptions} from '@/constants/journeyBasedGraphql'
 import {useQuery} from "@vue/apollo-composable";
@@ -20,6 +20,15 @@ const boule = useBouleId();
 const currentStep = ref(0)
 const showIntro = ref(true)
 const completedQuizSteps = ref([])
+const mapContainer = ref(null)
+const debugMarkerMode = ref(false)
+const debugCoordinateOverrides = ref({})
+const activeDebugMarker = ref(null)
+const selectedDebugMarker = ref(null)
+const copiedDebugCoordinates = ref(false)
+
+const isLocalDevelopment = import.meta.env.DEV
+const debugCoordinatesStorageKey = 'pheidias.journey.debugCoordinates'
 
 
 const { result: optionsResult, loading, onResult } = useQuery(JourneyOptions)
@@ -28,6 +37,24 @@ onResult(({ data }) => {
   if (data && data.journeyOptions) {
     journeyThemes.value = data.journeyOptions.themes
   }
+})
+
+onMounted(() => {
+  if (!isLocalDevelopment) return
+  if (typeof window === 'undefined') return
+
+  const savedDebugCoordinates = window.localStorage.getItem(debugCoordinatesStorageKey)
+  if (!savedDebugCoordinates) return
+
+  try {
+    debugCoordinateOverrides.value = JSON.parse(savedDebugCoordinates)
+  } catch {
+    window.localStorage.removeItem(debugCoordinatesStorageKey)
+  }
+})
+
+onUnmounted(() => {
+  stopDebugMarkerDrag()
 })
 
 const quizProgressPercent = computed(() =>
@@ -51,11 +78,34 @@ const hotspots = computed(() => {
       id: `theme-${theme.name}`,
       title: theme.name,
       summary: `Begin your journey at ${firstSegment.location}`,
-      coordinates: firstSegment.coordinates,
+      coordinates: getDebugCoordinates(theme.name, firstSegment),
       theme,
+      segment: firstSegment,
       completed: isJourneyComplete(theme),
     }
   })
+})
+
+const selectedDebugCoordinateText = computed(() => {
+  if (!selectedDebugMarker.value) return ''
+
+  const { themeName, segment } = selectedDebugMarker.value
+  const coordinates = getDebugCoordinates(themeName, segment)
+
+  return `"coordinates": { "x": ${formatCoordinate(coordinates.x)}, "y": ${formatCoordinate(coordinates.y)} }`
+})
+
+const allDebugCoordinateText = computed(() => {
+  const lines = []
+
+  journeyThemes.value.forEach(theme => {
+    theme.segments.forEach(segment => {
+      const coordinates = getDebugCoordinates(theme.name, segment)
+      lines.push(`${theme.name} / ${segment.number}. ${segment.name}: "coordinates": { "x": ${formatCoordinate(coordinates.x)}, "y": ${formatCoordinate(coordinates.y)} }`)
+    })
+  })
+
+  return lines.join('\n')
 })
 
 function getStyle({ x, y }) {
@@ -67,6 +117,20 @@ function getStyle({ x, y }) {
   }
 }
 
+function getDebugCoordinateKey(themeName, segment) {
+  return `${themeName}::${segment.name}`
+}
+
+function getDebugCoordinates(themeName, segment) {
+  if (!isLocalDevelopment) return segment.coordinates
+
+  return debugCoordinateOverrides.value[getDebugCoordinateKey(themeName, segment)] || segment.coordinates
+}
+
+function formatCoordinate(value) {
+  return Number(value).toFixed(3).replace(/0+$/, '').replace(/\.$/, '')
+}
+
 function getHotspotLabelClass({ x, y }) {
   return {
     'label-left-edge': x < 0.16,
@@ -76,6 +140,8 @@ function getHotspotLabelClass({ x, y }) {
 }
 
 function selectThemePoint(point) {
+  if (isLocalDevelopment && debugMarkerMode.value) return
+
   const progress = getJourneyProgress(point.theme.name)
   completedSegments.value[point.theme.name] = progress.completed
   lastUnlocked.value = progress.current
@@ -112,6 +178,79 @@ function getColorForSegment(segment) {
 function isSegmentSelectable(segment) {
   const status = getCompletionStatus(segment)
   return status === 'current' || status === 'finished'
+}
+
+function handleSegmentClick(segment) {
+  if (isLocalDevelopment && debugMarkerMode.value) return
+  if (isSegmentSelectable(segment)) getJourneyQuiz(segment)
+}
+
+function startDebugMarkerDrag(event, themeName, segment) {
+  if (!isLocalDevelopment || !debugMarkerMode.value) return
+
+  event.preventDefault()
+  selectedDebugMarker.value = { themeName, segment }
+  activeDebugMarker.value = { themeName, segment }
+
+  window.addEventListener('pointermove', updateDebugMarkerDrag)
+  window.addEventListener('pointerup', stopDebugMarkerDrag, { once: true })
+  updateDebugMarkerDrag(event)
+}
+
+function updateDebugMarkerDrag(event) {
+  if (!activeDebugMarker.value || !mapContainer.value) return
+
+  const rect = mapContainer.value.getBoundingClientRect()
+  const x = clamp((event.clientX - rect.left) / rect.width)
+  const y = clamp((event.clientY - rect.top) / rect.height)
+  const key = getDebugCoordinateKey(activeDebugMarker.value.themeName, activeDebugMarker.value.segment)
+
+  debugCoordinateOverrides.value = {
+    ...debugCoordinateOverrides.value,
+    [key]: { x, y },
+  }
+
+  persistDebugCoordinates()
+}
+
+function stopDebugMarkerDrag() {
+  activeDebugMarker.value = null
+
+  if (typeof window === 'undefined') return
+
+  window.removeEventListener('pointermove', updateDebugMarkerDrag)
+  window.removeEventListener('pointerup', stopDebugMarkerDrag)
+}
+
+function clamp(value) {
+  return Math.min(Math.max(value, 0), 1)
+}
+
+function persistDebugCoordinates() {
+  if (!isLocalDevelopment) return
+  if (typeof window === 'undefined') return
+
+  window.localStorage.setItem(debugCoordinatesStorageKey, JSON.stringify(debugCoordinateOverrides.value))
+}
+
+async function copyDebugCoordinates(text = selectedDebugCoordinateText.value) {
+  if (!text) return
+
+  await navigator.clipboard.writeText(text)
+  copiedDebugCoordinates.value = true
+
+  window.setTimeout(() => {
+    copiedDebugCoordinates.value = false
+  }, 1500)
+}
+
+function resetDebugCoordinates() {
+  debugCoordinateOverrides.value = {}
+  selectedDebugMarker.value = null
+
+  if (typeof window !== 'undefined') {
+    window.localStorage.removeItem(debugCoordinatesStorageKey)
+  }
 }
 
 const getJourneyQuiz = async (segment) => {
@@ -249,20 +388,69 @@ function markSegmentAsComplete() {
       >
         Back to Overview
       </v-btn>
+      <div v-if="isLocalDevelopment" class="marker-debug-panel mt-4">
+        <div class="marker-debug-actions">
+          <v-btn
+              :color="debugMarkerMode ? 'secondary' : 'primary'"
+              variant="tonal"
+              prepend-icon="mdi-crosshairs-gps"
+              @click="debugMarkerMode = !debugMarkerMode"
+          >
+            {{ debugMarkerMode ? 'Stop moving markers' : 'Move markers' }}
+          </v-btn>
+          <v-btn
+              variant="text"
+              color="primary"
+              prepend-icon="mdi-content-copy"
+              :disabled="!selectedDebugCoordinateText"
+              @click="copyDebugCoordinates()"
+          >
+            Copy selected
+          </v-btn>
+          <v-btn
+              variant="text"
+              color="primary"
+              prepend-icon="mdi-format-list-bulleted"
+              :disabled="!allDebugCoordinateText"
+              @click="copyDebugCoordinates(allDebugCoordinateText)"
+          >
+            Copy all visible data
+          </v-btn>
+          <v-btn
+              variant="text"
+              color="error"
+              prepend-icon="mdi-restore"
+              :disabled="Object.keys(debugCoordinateOverrides).length === 0"
+              @click="resetDebugCoordinates"
+          >
+            Reset local moves
+          </v-btn>
+        </div>
+        <div v-if="debugMarkerMode" class="marker-debug-help">
+          Drag a marker on the map. These positions are local debug overrides; paste the copied coordinates into the backend when they look right.
+        </div>
+        <code v-if="selectedDebugCoordinateText" class="marker-debug-output">
+          {{ selectedDebugCoordinateText }}
+        </code>
+        <div v-if="copiedDebugCoordinates" class="marker-debug-copied">
+          Copied coordinates.
+        </div>
+      </div>
     </v-card>
 
     <!-- Map with Hotspots -->
         <div class="map-shell" v-if="mapMode">
-        <div class="map-container">
+        <div class="map-container" ref="mapContainer">
           <img src="@/assets/ancient_greece.svg" class="map-image" alt="Map of Ancient Greece" />
               <div
                   v-if="!selectedJourney"
                   v-for="point in hotspots"
                   :key="point.id"
                   class="hotspot theme-hotspot"
-                  :class="{ 'is-complete': point.completed }"
+                  :class="{ 'is-complete': point.completed, 'is-debugging': isLocalDevelopment && debugMarkerMode }"
                   :style="getStyle(point.coordinates)"
                   @click="selectThemePoint(point)"
+                  @pointerdown="startDebugMarkerDrag($event, point.theme.name, point.segment)"
           >
             <v-icon color="primary" size="44">mdi-map-marker</v-icon>
             <!-- Show label only for the first segment -->
@@ -281,18 +469,19 @@ function markSegmentAsComplete() {
           v-for="segment in selectedJourney.segments"
           :key="segment.name"
           class="hotspot segment-hotspot"
-          :class="`is-${getCompletionStatus(segment)}`"
-          :style="getStyle(segment.coordinates)"
+          :class="[`is-${getCompletionStatus(segment)}`, { 'is-debugging': isLocalDevelopment && debugMarkerMode }]"
+          :style="getStyle(getDebugCoordinates(selectedJourney.name, segment))"
+          @pointerdown="startDebugMarkerDrag($event, selectedJourney.name, segment)"
       >
         <v-icon
             size="44"
             :color="getColorForSegment(segment)"
             :class="{ 'clickable': isSegmentSelectable(segment) }"
-            @click="isSegmentSelectable(segment) && getJourneyQuiz(segment)"
+            @click="handleSegmentClick(segment)"
         >
           mdi-map-marker
         </v-icon>
-        <div class="hotspot-label" :class="getHotspotLabelClass(segment.coordinates)">{{segment.number}}. {{ segment.name }}</div>
+        <div class="hotspot-label" :class="getHotspotLabelClass(getDebugCoordinates(selectedJourney.name, segment))">{{segment.number}}. {{ segment.name }}</div>
       </div>
     </div>
   </div>
@@ -393,6 +582,16 @@ function markSegmentAsComplete() {
   position: absolute;
   cursor: pointer;
   z-index: 2;
+  touch-action: none;
+  user-select: none;
+}
+
+.hotspot.is-debugging {
+  cursor: grab;
+}
+
+.hotspot.is-debugging:active {
+  cursor: grabbing;
 }
 
 .hotspot :deep(.v-icon) {
@@ -469,6 +668,46 @@ function markSegmentAsComplete() {
 .theme-hotspot.is-complete .hotspot-label {
   border-color: rgba(28, 209, 140, 0.34);
   box-shadow: 0 0 0 5px rgba(28, 209, 140, 0.12), 0 10px 24px rgba(16, 40, 75, 0.14);
+}
+
+.marker-debug-panel {
+  display: grid;
+  gap: 10px;
+  border: 1px dashed rgba(28, 97, 209, 0.28);
+  border-radius: 14px;
+  background: rgba(254, 252, 245, 0.72);
+  padding: 12px;
+}
+
+.marker-debug-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.marker-debug-help {
+  color: #536987;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.marker-debug-output {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(28, 97, 209, 0.14);
+  border-radius: 10px;
+  background: #10284b;
+  color: #fefcf5;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.marker-debug-copied {
+  color: #17885e;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .paper-card {

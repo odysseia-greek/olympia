@@ -1,6 +1,6 @@
 module github.com/odysseia-greek/olympia/hippokrates
 
-go 1.25.5
+go 1.26.4
 
 require (
 	github.com/cucumber/godog v0.15.1
