@@ -90,20 +90,20 @@ async function refresh() {
   const button = document.getElementById("refresh");
   button.disabled = true;
   try {
-    const [summary, events, paths, sessions] = await Promise.all([
+    const [summary, events, paths, visitors] = await Promise.all([
       getJSON("/api/summary"),
       getJSON("/api/events?limit=50"),
       getJSON("/api/paths?limit=8"),
-      getJSON("/api/sessions?limit=8"),
+      getJSON("/api/visitors?limit=8"),
     ]);
     text("events", number.format(summary.events));
-    text("sessions", number.format(summary.sessions));
+    text("visitors", number.format(summary.visitors));
     text("paths", number.format(summary.paths));
     text("traced", number.format(summary.tracedEvents));
     text("updated", new Date(summary.generatedAt).toLocaleTimeString());
     renderEvents(events);
     renderRanking("pathRows", paths, "No path data yet.");
-    renderRanking("sessionRows", sessions, "No session data yet.");
+    renderRanking("visitorRows", visitors, "No visitor data yet.");
   } catch (error) {
     const rows = document.getElementById("eventRows");
     rows.innerHTML = "";

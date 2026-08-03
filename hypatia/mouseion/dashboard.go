@@ -34,6 +34,7 @@ type dashboardEvent struct {
 
 type dashboardSummary struct {
 	Events       int            `json:"events"`
+	Visitors     int            `json:"visitors"`
 	Sessions     int            `json:"sessions"`
 	Paths        int            `json:"paths"`
 	TracedEvents int            `json:"tracedEvents"`
@@ -53,6 +54,7 @@ func (h *HypatiaServiceImpl) DashboardHandler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /api/summary", h.dashboardSummary)
 	mux.HandleFunc("GET /api/events", h.dashboardEvents)
+	mux.HandleFunc("GET /api/visitors", h.dashboardVisitors)
 	mux.HandleFunc("GET /api/sessions", h.dashboardSessions)
 	mux.HandleFunc("GET /api/paths", h.dashboardPaths)
 
@@ -77,12 +79,16 @@ func (h *HypatiaServiceImpl) dashboardSummary(w http.ResponseWriter, _ *http.Req
 	}
 
 	sessions := make(map[string]struct{})
+	visitors := make(map[string]struct{})
 	paths := make(map[string]struct{})
 	statusCounts := make(map[string]int)
 	traced := 0
 	for _, event := range events {
 		if event.SessionId != "" {
 			sessions[event.SessionId] = struct{}{}
+		}
+		if event.Ip != "" {
+			visitors[event.Ip] = struct{}{}
 		}
 		if event.Path != "" {
 			paths[event.Path] = struct{}{}
@@ -95,12 +101,23 @@ func (h *HypatiaServiceImpl) dashboardSummary(w http.ResponseWriter, _ *http.Req
 
 	writeDashboardJSON(w, dashboardSummary{
 		Events:       len(events),
+		Visitors:     len(visitors),
 		Sessions:     len(sessions),
 		Paths:        len(paths),
 		TracedEvents: traced,
 		StatusCounts: statusCounts,
 		GeneratedAt:  time.Now().UTC().Format(time.RFC3339Nano),
 	})
+}
+
+func (h *HypatiaServiceImpl) dashboardVisitors(w http.ResponseWriter, r *http.Request) {
+	events, err := h.store.GetRecent(0)
+	if err != nil {
+		writeDashboardError(w, err)
+		return
+	}
+	counts := aggregateDashboard(events, func(event *pb.RequestEvent) string { return event.Ip })
+	writeDashboardJSON(w, limitCounts(counts, dashboardLimit(r)))
 }
 
 func (h *HypatiaServiceImpl) dashboardEvents(w http.ResponseWriter, r *http.Request) {

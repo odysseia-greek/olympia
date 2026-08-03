@@ -64,3 +64,19 @@ func TestLogRequestDetailsTracksCompletedRequest(t *testing.T) {
 		t.Fatal("timed out waiting for Hypatia event")
 	}
 }
+
+func TestLogRequestDetailsIgnoresInternalUnidentifiedRequest(t *testing.T) {
+	tracker := &eventTrackerStub{events: make(chan *pb.RequestEvent, 1)}
+	handler := LogRequestDetails(nil, tracker, &gateway.TraceConfig{}, randomStub{})(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
+	request := httptest.NewRequest(http.MethodPost, "/graphql", strings.NewReader(`{"operationName":"status","query":"query status { status { healthy } }"}`))
+
+	handler.ServeHTTP(httptest.NewRecorder(), request)
+
+	select {
+	case event := <-tracker.events:
+		t.Fatalf("unexpected event for internal request: %+v", event)
+	case <-time.After(50 * time.Millisecond):
+	}
+}

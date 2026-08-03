@@ -13,9 +13,9 @@ func newDashboardTestService(t *testing.T) *HypatiaServiceImpl {
 	t.Helper()
 	store := NewInMemoryStore()
 	if err := store.Add([]*pb.RequestEvent{
-		{Timestamp: "2026-08-03T08:00:00Z", Path: "/search", Method: "GET", Status: 200, SessionId: "visitor-1", TraceId: "trace-1"},
-		{Timestamp: "2026-08-03T08:01:00Z", Path: "/search", Method: "GET", Status: 404, SessionId: "visitor-1"},
-		{Timestamp: "2026-08-03T08:02:00Z", Path: "/health", Method: "GET", Status: 200, SessionId: "visitor-2"},
+		{Timestamp: "2026-08-03T08:00:00Z", Path: "/search", Method: "GET", Status: 200, Ip: "203.0.113.7", SessionId: "session-1", TraceId: "trace-1"},
+		{Timestamp: "2026-08-03T08:01:00Z", Path: "/search", Method: "GET", Status: 404, Ip: "203.0.113.7", SessionId: "session-2"},
+		{Timestamp: "2026-08-03T08:02:00Z", Path: "/health", Method: "GET", Status: 200, Ip: "198.51.100.9", SessionId: "session-3"},
 	}); err != nil {
 		t.Fatalf("Add() error = %v", err)
 	}
@@ -34,7 +34,7 @@ func TestDashboardSummary(t *testing.T) {
 	if err := json.NewDecoder(response.Body).Decode(&summary); err != nil {
 		t.Fatalf("decode response: %v", err)
 	}
-	if summary.Events != 3 || summary.Sessions != 2 || summary.Paths != 2 || summary.TracedEvents != 1 {
+	if summary.Events != 3 || summary.Visitors != 2 || summary.Sessions != 3 || summary.Paths != 2 || summary.TracedEvents != 1 {
 		t.Fatalf("summary = %+v", summary)
 	}
 	if summary.StatusCounts["2xx"] != 2 || summary.StatusCounts["4xx"] != 1 {
@@ -58,6 +58,15 @@ func TestDashboardEventsAreNewestFirstAndLimited(t *testing.T) {
 
 func TestDashboardAggregatesAndServesEmbeddedUI(t *testing.T) {
 	handler := newDashboardTestService(t).DashboardHandler()
+	visitorsResponse := httptest.NewRecorder()
+	handler.ServeHTTP(visitorsResponse, httptest.NewRequest(http.MethodGet, "/api/visitors", nil))
+	var visitors []dashboardCount
+	if err := json.NewDecoder(visitorsResponse.Body).Decode(&visitors); err != nil {
+		t.Fatalf("decode visitors: %v", err)
+	}
+	if len(visitors) != 2 || visitors[0].Value != "203.0.113.7" || visitors[0].Count != 2 {
+		t.Fatalf("visitors = %+v", visitors)
+	}
 
 	pathsResponse := httptest.NewRecorder()
 	handler.ServeHTTP(pathsResponse, httptest.NewRequest(http.MethodGet, "/api/paths", nil))

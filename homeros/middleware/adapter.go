@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"strings"
 	"time"
@@ -184,11 +185,11 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, tracker EventTracker
 				))
 			}
 
-			if tracker != nil {
-				traceEventID := ""
-				if traceRequest == 1 {
-					traceEventID = traceID
-				}
+			traceEventID := ""
+			if traceRequest == 1 {
+				traceEventID = traceID
+			}
+			if tracker != nil && (sessionId != "" || traceEventID != "") {
 				eventPath := r.URL.Path
 				if operationName != "" {
 					eventPath = operationName
@@ -237,5 +238,8 @@ func getRealIP(r *http.Request) string {
 	}
 
 	// If neither header is present, fall back to the standard remote address
+	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return host
+	}
 	return r.RemoteAddr
 }
