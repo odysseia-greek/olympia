@@ -7,12 +7,14 @@ import (
 	"github.com/odysseia-greek/agora/plato/randomizer"
 	"github.com/odysseia-greek/agora/plato/service"
 	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
+	"github.com/odysseia-greek/olympia/hypatia/mouseion"
 )
 
 type HomerosHandler struct {
 	HttpClients          service.OdysseiaClient
 	Cache                archytas.Client
 	Streamer             v1.TraceService_ChorusClient
+	Hypatia              *mouseion.HypatiaClient
 	Cancel               context.CancelFunc
 	Randomizer           randomizer.Random
 	SokratesGraphqlUrl   string

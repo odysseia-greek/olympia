@@ -12,11 +12,13 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
+	"github.com/odysseia-greek/olympia/hypatia/mouseion"
 )
 
 const (
 	defaultSokratesAddress   = "http://sokrates.apologia.svc:8080/sokrates/graphql"
 	defaultAlexandrosAddress = "http://alexandros.makedonia.svc:8080/alexandros/graphql"
+	defaultHypatiaAddress    = "hypatia.olympia.svc:50061"
 )
 
 func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
@@ -74,6 +76,11 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 
 	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
 	alexandrosGraphqlAddress := config.StringFromEnv("ALEXANDROS_GRAPHQL_ADDRESS", defaultAlexandrosAddress)
+	hypatiaAddress := config.StringFromEnv("HYPATIA_ADDRESS", defaultHypatiaAddress)
+	hypatia, err := mouseion.NewHypatiaClient(hypatiaAddress)
+	if err != nil {
+		return nil, err
+	}
 
 	ctx, cancel := context.WithCancel(ctx)
 	elapsed := time.Since(start)
@@ -86,6 +93,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 - Tracer Service:      %v (Address: %s)
 - Sokrates GraphQL:    %s
 - Alexandros GraphQL:  %s
+- Hypatia:             %s
 - Homeros Version:     %s
 - Environment:         %s
 `,
@@ -93,6 +101,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		healthyTracer, aristophanes.DefaultAddress,
 		sokratesGraphqlAddress,
 		alexandrosGraphqlAddress,
+		hypatiaAddress,
 		version,
 		env,
 	))
@@ -101,6 +110,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		Cache:                cache,
 		HttpClients:          service,
 		Streamer:             streamer,
+		Hypatia:              hypatia,
 		Randomizer:           randomizer,
 		Cancel:               cancel,
 		SokratesGraphqlUrl:   sokratesGraphqlAddress,
