@@ -67,10 +67,11 @@ func TestLogRequestDetailsTracksCompletedRequest(t *testing.T) {
 
 func TestLogRequestDetailsIgnoresInternalUnidentifiedRequest(t *testing.T) {
 	tracker := &eventTrackerStub{events: make(chan *pb.RequestEvent, 1)}
-	handler := LogRequestDetails(nil, tracker, &gateway.TraceConfig{}, randomStub{})(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+	handler := LogRequestDetails(nil, tracker, &gateway.TraceConfig{OperationScores: []gateway.OperationScore{{Operation: "status", Score: 101}}}, randomStub{})(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	}))
 	request := httptest.NewRequest(http.MethodPost, "/graphql", strings.NewReader(`{"operationName":"status","query":"query status { status { healthy } }"}`))
+	request.RemoteAddr = "10.244.2.72:38412"
 
 	handler.ServeHTTP(httptest.NewRecorder(), request)
 
@@ -78,5 +79,28 @@ func TestLogRequestDetailsIgnoresInternalUnidentifiedRequest(t *testing.T) {
 	case event := <-tracker.events:
 		t.Fatalf("unexpected event for internal request: %+v", event)
 	case <-time.After(50 * time.Millisecond):
+	}
+}
+
+func TestIsInternalRequest(t *testing.T) {
+	tests := []struct {
+		name string
+		ip   string
+		want bool
+	}{
+		{name: "kubernetes pod", ip: "10.244.2.72", want: true},
+		{name: "private 172 range", ip: "172.16.4.2", want: true},
+		{name: "private 192 range", ip: "192.168.1.20", want: true},
+		{name: "loopback", ip: "127.0.0.1", want: true},
+		{name: "public caller", ip: "86.83.9.204", want: false},
+		{name: "invalid address", ip: "unknown", want: false},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if got := isInternalRequest(test.ip); got != test.want {
+				t.Fatalf("isInternalRequest(%q) = %v, want %v", test.ip, got, test.want)
+			}
+		})
 	}
 }

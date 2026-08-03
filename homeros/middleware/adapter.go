@@ -77,6 +77,8 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, tracker EventTracker
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			sessionId := r.Header.Get(config.SessionIdKey)
+			callerIP := getRealIP(r)
+			internalRequest := isInternalRequest(callerIP)
 			startedAt := time.Now().UTC()
 			bodyBytes, err := io.ReadAll(r.Body)
 			if err != nil {
@@ -114,13 +116,13 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, tracker EventTracker
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
 				Host:          r.Host,
-				RemoteAddress: getRealIP(r),
+				RemoteAddress: callerIP,
 				RootQuery:     query,
 				Operation:     operationName,
 			}
 
 			for _, service := range traceConfig.OperationScores {
-				if service.Operation == operationName && shouldTrace(service.Score, randomizer) {
+				if !internalRequest && service.Operation == operationName && shouldTrace(service.Score, randomizer) {
 					traceRequest = 1
 
 					go func() {
@@ -199,7 +201,7 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, tracker EventTracker
 					Path:      eventPath,
 					Method:    r.Method,
 					Status:    int32(status),
-					Ip:        getRealIP(r),
+					Ip:        callerIP,
 					UserAgent: r.UserAgent(),
 					Referrer:  r.Referer(),
 					SessionId: sessionId,
@@ -223,10 +225,15 @@ func shouldTrace(score int, random randomizer.Random) bool {
 	return random.RandomNumberBaseOne(100) < score
 }
 
+func isInternalRequest(callerIP string) bool {
+	ip := net.ParseIP(callerIP)
+	return ip != nil && (ip.IsPrivate() || ip.IsLoopback() || ip.IsLinkLocalUnicast())
+}
+
 func getRealIP(r *http.Request) string {
 	// Check if the X-Real-IP header is set by Traefik or another proxy
 	if realIP := r.Header.Get("X-Real-IP"); realIP != "" {
-		return realIP
+		return strings.TrimSpace(realIP)
 	}
 
 	// If X-Real-IP is not present, check the X-Forwarded-For header
