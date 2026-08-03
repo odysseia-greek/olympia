@@ -487,10 +487,22 @@ export default {
     const resultsContainerRef = ref();
     const topFiveRefreshToken = ref(0);
 
-    const canSearchInText = computed(() =>
-        selectedLanguage.value.toLowerCase() === 'greek' &&
-        dictionaryMode.value.toLowerCase() === 'exact'
-    );
+    function canUseExtendedMode(language = selectedLanguage.value, mode = dictionaryMode.value) {
+      return (
+          (language || '').toLowerCase() === 'greek' &&
+          normalizeMode(mode) === 'exact'
+      );
+    }
+
+    function effectiveExtendedMode() {
+      return canUseExtendedMode() && extendedMode.value;
+    }
+
+    function resetExtendedModeIfUnavailable() {
+      if (!canUseExtendedMode()) extendedMode.value = false;
+    }
+
+    const canSearchInText = computed(() => canUseExtendedMode());
 
     const headers = computed(() => {
       const base = [];
@@ -589,7 +601,7 @@ export default {
         return;
       }
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
 
       const requestId = activeRequestId.value + 1;
       activeRequestId.value = requestId;
@@ -606,7 +618,7 @@ export default {
 
         const input =
             mode === 'exact'
-                ? { word: value, expand: true, size: 10, language: languageEnum }
+                ? { word: value, expand: effectiveExtendedMode(), size: 10, language: languageEnum }
                 : { word: value, size: 10, language: languageEnum };
 
         const { data } = await client.query({
@@ -647,7 +659,7 @@ export default {
         // foundInText only on exact
         if (
             mode === 'exact' &&
-            extendedMode.value &&
+            effectiveExtendedMode() &&
             selectedLanguage.value.toLowerCase() === 'greek'
         ) {
           const fit = payload?.foundInText;
@@ -694,7 +706,7 @@ export default {
       updateUrl({
         mode: dictionaryMode.value,
         language: selectedLanguage.value,
-        extended: extendedMode.value,
+        extended: effectiveExtendedMode(),
         word: v,
       });
 
@@ -717,7 +729,7 @@ export default {
       updateUrl({
         mode: dictionaryMode.value,
         language: selectedLanguage.value,
-        extended: extendedMode.value,
+        extended: effectiveExtendedMode(),
         word: v,
       });
 
@@ -758,14 +770,14 @@ export default {
     watch(dictionaryMode, () => {
       if (suppressAutoSearch.value) return;
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
       if (search.value) commitSearch(search.value);
     });
 
     watch(selectedLanguage, () => {
       if (suppressAutoSearch.value) return;
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
       if (search.value) commitSearch(search.value);
     });
 
@@ -781,6 +793,7 @@ export default {
       if (language) selectedLanguage.value = language;
       if (mode) dictionaryMode.value = mode;
       if (extended) extendedMode.value = String(extended).toLowerCase() === 'true';
+      resetExtendedModeIfUnavailable();
 
       if (word) {
         search.value = word;
