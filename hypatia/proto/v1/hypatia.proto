@@ -20,6 +20,8 @@ message RequestEvent {
   string user_agent = 6;
   string referrer   = 7;
   string session_id = 8;
+  // Trace ID associated with the request, when tracing was sampled.
+  string trace_id   = 9;
 }
 
 message RequestEventBatch {

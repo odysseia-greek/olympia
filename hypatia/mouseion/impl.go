@@ -35,6 +35,7 @@ type HypatiaServiceImpl struct {
 // HypatiaClient wraps the gRPC client for use by other services.
 type HypatiaClient struct {
 	client pb.HypatiaClient
+	conn   *grpc.ClientConn
 }
 
 func NewHypatiaClient(address string) (*HypatiaClient, error) {
@@ -45,7 +46,12 @@ func NewHypatiaClient(address string) (*HypatiaClient, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to hypatia: %w", err)
 	}
-	return &HypatiaClient{client: pb.NewHypatiaClient(conn)}, nil
+	return &HypatiaClient{client: pb.NewHypatiaClient(conn), conn: conn}, nil
+}
+
+// Close releases the underlying gRPC connection.
+func (c *HypatiaClient) Close() error {
+	return c.conn.Close()
 }
 
 func (c *HypatiaClient) WaitForHealthyState() bool {
