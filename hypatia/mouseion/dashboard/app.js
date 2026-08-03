@@ -10,11 +10,6 @@ function text(id, value) {
   document.getElementById(id).textContent = value;
 }
 
-function short(value, length = 14) {
-  if (!value) return "—";
-  return value.length > length ? `${value.slice(0, length)}…` : value;
-}
-
 function statusClass(status) {
   if (status >= 500) return "status error";
   if (status >= 400) return "status warn";
@@ -51,13 +46,13 @@ function renderEvents(events) {
     const session = document.createElement("span");
     session.className = "session";
     session.title = event.sessionId || "";
-    session.textContent = short(event.sessionId);
+    session.textContent = event.sessionId || "—";
     row.insertCell().append(session);
 
     const trace = document.createElement("span");
     trace.className = "trace";
     trace.title = event.traceId || "";
-    trace.textContent = short(event.traceId);
+    trace.textContent = event.traceId || "—";
     row.insertCell().append(trace);
   }
 }
