@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Hypatia · Request Observatory</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">ὙΠΑΤΊΑ · REQUEST OBSERVATORY</p>
+        <h1>Traffic, in focus.</h1>
+        <p class="subtitle">A live view of the requests moving through Odysseia.</p>
+      </div>
+      <div class="live"><span></span> LIVE <time id="updated">—</time></div>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="Request summary">
+        <article><span>Events retained</span><strong id="events">—</strong></article>
+        <article><span>Unique visitors</span><strong id="visitors">—</strong></article>
+        <article><span>Paths observed</span><strong id="paths">—</strong></article>
+        <article><span>Traced events</span><strong id="traced">—</strong></article>
+      </section>
+
+      <section class="grid">
+        <article class="panel span-2">
+          <div class="panel-heading"><div><p class="label">ACTIVITY STREAM</p><h2>Recent requests</h2></div><button id="refresh">Refresh</button></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Time</th><th>Request</th><th>Status</th><th>Visitor</th><th>Trace</th></tr></thead>
+              <tbody id="eventRows"><tr><td colspan="5" class="empty">Waiting for observations…</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading"><div><p class="label">ROUTES</p><h2>Most visited</h2></div></div>
+          <ol class="ranking" id="pathRows"><li class="empty">No path data yet.</li></ol>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading"><div><p class="label">VISITORS</p><h2>Caller addresses</h2></div></div>
+          <ol class="ranking" id="visitorRows"><li class="empty">No visitor data yet.</li></ol>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

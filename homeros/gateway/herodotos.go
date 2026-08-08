@@ -54,19 +54,3 @@ func (h *HomerosHandler) HerodotosOptions(requestID string) (*model.AggregationR
 
 	return &aggregate, nil
 }
-
-func (h *HomerosHandler) Analyze(body []byte, requestID string) (*model.AnalyzeTextResponse, error) {
-	response, err := h.HttpClients.Herodotos().Analyze(body, requestID)
-	if err != nil {
-		return nil, err
-	}
-	defer response.Body.Close()
-
-	var analyzeResult model.AnalyzeTextResponse
-	err = json.NewDecoder(response.Body).Decode(&analyzeResult)
-	if err != nil {
-		return nil, err
-	}
-
-	return &analyzeResult, nil
-}

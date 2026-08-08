@@ -2,9 +2,11 @@
 # Switch endpoint by changing @host to {{productionHost}} or {{hellasHost}}.
 
 @productionHost = https://odysseia-greek.com/graphql
-@hellasHost = http://hellas.odysseia-greek:30080/graphql
+@hellasHost = http://hellas.odysseia-greek:4900/graphql
 @host = {{productionHost}}
 @requestId = homeros-http-client
+# Stable UUID, matching the boule value created by Pheidias quiz mode.
+@sessionId = 6fb24c4c-e001-4f78-a530-1335e0fc350c
 
 ### Health
 POST {{host}}
@@ -33,7 +35,7 @@ X-Request-ID: {{requestId}}
   "query": "query TextOptions { textOptions { authors { key books { key references { key sections { key } } } } } }"
 }
 
-### Analyze root word
+### Analyze root word with Dionysios Research
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
@@ -41,19 +43,55 @@ X-Request-ID: {{requestId}}
 {
   "query": "query Analyze($rootword: String) { analyze(rootword: $rootword) { rootword conjugations { rule word } texts { author book reference referenceLink text { greek section translations } } } }",
   "variables": {
-    "rootword": "λογος"
+    "rootword": "λόγος"
   }
 }
 
-### Grammar
+### Check grammar with Dionysios
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
 
 {
-  "query": "query Grammar($word: String) { grammar(word: $word) { results { rootWord rule translations word } } }",
+  "query": "query Grammar($word: String, $includeAudit: Boolean) { grammar(word: $word, includeAudit: $includeAudit) { results { rootWord rule translations word } audit { requestId word outcome source reason events { step status reason source rule rootWord searchTerm resultCount candidateCount details } } } }",
   "variables": {
-    "word": "λογος"
+    "word": "λόγου",
+    "includeAudit": true
+  }
+}
+
+### Analyze a sentence with Dionysios TextMode
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+boule: {{sessionId}}
+
+{
+  "query": "query Sentence($text: String!, $includeAudit: Boolean) { sentence(text: $text, includeAudit: $includeAudit) { sessionId originalText literalTranslation rateLimit { upstreamIp windowSeconds nextAllowedTime } tokens { token position gloss resolved message results { rootWord rule translations word } } textSearch { searched found status message matchCount query matches { author book reference referenceLink text { greek section translations } } } } }",
+  "variables": {
+    "text": "μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται",
+    "includeAudit": false
+  }
+}
+
+### Dictionary metadata from Alexandros
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query DictionaryMeta { dictionaryMeta { totalRecords updatedRecords legacyRecords } }"
+}
+
+### Random extended words from Alexandros
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query RandomExtendedWords($amount: Int) { randomExtendedWords(amount: $amount) { greek } }",
+  "variables": {
+    "amount": 10
   }
 }
 

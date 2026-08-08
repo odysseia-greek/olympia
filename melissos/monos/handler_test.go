@@ -1,8 +1,7 @@
 package monos
 
 import (
-	"os"
-	"sync"
+	"encoding/json"
 	"testing"
 
 	elastic "github.com/odysseia-greek/agora/aristoteles"
@@ -20,23 +19,13 @@ func TestHandlerHandle(t *testing.T) {
 		Original:   "",
 	}
 
-	bodyDutch := models.Meros{
-		Greek:      "ἀγορά",
-		Dutch:      "marktplaats",
-		LinkedWord: "",
-		Original:   "",
-	}
-
 	channel := "testchannel"
 	dutchChannel := "testkanaal"
 
 	t.Run("OneRunWithoutAction", func(t *testing.T) {
-		mockClient := newMockQueueClient(&MockEupalinosClient{})
 		bodyString, err := body.Marshal()
 		assert.Nil(t, err)
-		os.Setenv("WAIT_TIME", "1")
-		os.Setenv(TestData, string(bodyString))
-		os.Setenv(TestLength, "0")
+		queueService := &MockEupalinosClient{Data: string(bodyString)}
 		file := "thalesSingleHit"
 		status := 200
 		mockElasticClient, err := elastic.NewMockClient(file, status)
@@ -46,7 +35,7 @@ func TestHandlerHandle(t *testing.T) {
 			Elastic:      mockElasticClient,
 			Index:        index,
 			Created:      0,
-			Eupalinos:    mockClient,
+			Eupalinos:    queueService,
 			Channel:      channel,
 			DutchChannel: dutchChannel,
 		}
@@ -54,17 +43,14 @@ func TestHandlerHandle(t *testing.T) {
 		exitCode := testHandler.HandleParmenides()
 		assert.True(t, exitCode)
 		assert.Nil(t, err)
-
-		os.Clearenv()
+		assert.True(t, queueService.LastDequeue.AckMode)
+		assert.Equal(t, channel, queueService.LastAck.Channel)
+		assert.NotEmpty(t, queueService.LastAck.Id)
+		assert.Nil(t, queueService.LastNack)
 	})
 
 	t.Run("DutchUpdate", func(t *testing.T) {
-		mockClient := newMockQueueClient(&MockEupalinosClient{})
-		bodyString, err := bodyDutch.Marshal()
-		assert.Nil(t, err)
-		os.Setenv("WAIT_TIME", "1")
-		os.Setenv(TestData, string(bodyString))
-		os.Setenv(TestLength, "0")
+		queueService := &MockEupalinosClient{Data: `{"greek":"ἀγορά","dutch":"de, het"}`}
 		file := "thalesSingleHit"
 		status := 200
 		mockElasticClient, err := elastic.NewMockClient(file, status)
@@ -74,7 +60,7 @@ func TestHandlerHandle(t *testing.T) {
 			Elastic:      mockElasticClient,
 			Index:        index,
 			Created:      0,
-			Eupalinos:    mockClient,
+			Eupalinos:    queueService,
 			Channel:      channel,
 			DutchChannel: dutchChannel,
 		}
@@ -82,10 +68,30 @@ func TestHandlerHandle(t *testing.T) {
 		exitCode := testHandler.HandleDutch()
 		assert.True(t, exitCode)
 		assert.Nil(t, err)
-
-		os.Clearenv()
+		assert.True(t, queueService.LastDequeue.AckMode)
+		assert.Equal(t, dutchChannel, queueService.LastAck.Channel)
+		assert.NotEmpty(t, queueService.LastAck.Id)
+		assert.Nil(t, queueService.LastNack)
 	})
 
+}
+
+func TestExpandedLemmaAlwaysWinsOverLegacyWord(t *testing.T) {
+	var expanded map[string]interface{}
+	err := json.Unmarshal([]byte(`{
+		"greek":"λόγος",
+		"english":"word",
+		"partOfSpeech":"noun",
+		"definitions":[{"grade":3,"meanings":[{"language":"en","definition":"word; speech"}]}],
+		"modernConnections":[{"term":"logic","note":"from λόγος"}]
+	}`), &expanded)
+	assert.NoError(t, err)
+	assert.True(t, isExpandedLemma(expanded))
+	assert.True(t, matchesExistingWord(expanded, "an account", "an account"), "an expanded lemma must win even when its English gloss differs")
+
+	legacy := models.Meros{Greek: "λόγος", English: "an account"}
+	assert.False(t, isExpandedLemma(legacy))
+	assert.False(t, matchesExistingWord(legacy, "word", "a word"), "legacy entries must still compare their English gloss")
 }
 
 func TestHandlerCreateDocuments(t *testing.T) {
@@ -246,17 +252,14 @@ func TestHandlerTransform(t *testing.T) {
 		mockElasticClient, err := elastic.NewMockClient(file, status)
 		assert.Nil(t, err)
 
-		var wait sync.WaitGroup
-
 		testHandler := MelissosHandler{
 			Elastic: mockElasticClient,
 			Index:   index,
 			Created: 0,
 		}
 
-		wait.Add(1)
-
-		testHandler.transformWord(body, &wait)
+		err = testHandler.transformWord(body)
+		assert.NoError(t, err)
 		assert.Equal(t, testHandler.Created, 1)
 	})
 
@@ -266,17 +269,14 @@ func TestHandlerTransform(t *testing.T) {
 		mockElasticClient, err := elastic.NewMockClient(file, status)
 		assert.Nil(t, err)
 
-		var wait sync.WaitGroup
-
 		testHandler := MelissosHandler{
 			Elastic: mockElasticClient,
 			Index:   index,
 			Created: 0,
 		}
 
-		wait.Add(1)
-
-		testHandler.transformWord(body, &wait)
+		err = testHandler.transformWord(body)
+		assert.Error(t, err)
 		assert.Equal(t, testHandler.Created, 0)
 	})
 

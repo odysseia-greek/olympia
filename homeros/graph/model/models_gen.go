@@ -167,7 +167,8 @@ type DatabaseInfo struct {
 }
 
 type DeclensionTranslationResult struct {
-	Results []*Result `json:"results,omitempty"`
+	Results []*Result     `json:"results,omitempty"`
+	Audit   *GrammarAudit `json:"audit,omitempty"`
 }
 
 type Definition struct {
@@ -232,6 +233,46 @@ type DialogueQuizResponse struct {
 	Content      []*DialogueContent `json:"content,omitempty"`
 }
 
+type DictionaryMeta struct {
+	TotalRecords   int32 `json:"totalRecords"`
+	UpdatedRecords int32 `json:"updatedRecords"`
+	LegacyRecords  int32 `json:"legacyRecords"`
+}
+
+type DionysiosRateLimit struct {
+	UpstreamIP      string `json:"upstreamIp"`
+	WindowSeconds   int32  `json:"windowSeconds"`
+	NextAllowedTime string `json:"nextAllowedTime"`
+}
+
+type DionysiosSentenceResponse struct {
+	SessionID          string                `json:"sessionId"`
+	OriginalText       string                `json:"originalText"`
+	LiteralTranslation string                `json:"literalTranslation"`
+	RateLimit          *DionysiosRateLimit   `json:"rateLimit,omitempty"`
+	Tokens             []*DionysiosTextToken `json:"tokens"`
+	TextSearch         *DionysiosTextSearch  `json:"textSearch,omitempty"`
+}
+
+type DionysiosTextSearch struct {
+	Searched   bool             `json:"searched"`
+	Found      bool             `json:"found"`
+	Status     string           `json:"status"`
+	Message    string           `json:"message"`
+	MatchCount int32            `json:"matchCount"`
+	Query      string           `json:"query"`
+	Matches    []*AnalyzeResult `json:"matches"`
+}
+
+type DionysiosTextToken struct {
+	Token    string    `json:"token"`
+	Position int32     `json:"position"`
+	Results  []*Result `json:"results"`
+	Gloss    string    `json:"gloss"`
+	Resolved bool      `json:"resolved"`
+	Message  string    `json:"message"`
+}
+
 type ESAuthor struct {
 	Books []*ESBook `json:"books,omitempty"`
 	Key   *string   `json:"key,omitempty"`
@@ -294,6 +335,28 @@ type GrammarAnswerInput struct {
 	Comprehensive  *bool   `json:"comprehensive,omitempty"`
 	DoneAfter      *int32  `json:"doneAfter,omitempty"`
 	DictionaryForm *string `json:"dictionaryForm,omitempty"`
+}
+
+type GrammarAudit struct {
+	RequestID string               `json:"requestId"`
+	Word      string               `json:"word"`
+	Outcome   string               `json:"outcome"`
+	Source    string               `json:"source"`
+	Reason    string               `json:"reason"`
+	Events    []*GrammarAuditEvent `json:"events"`
+}
+
+type GrammarAuditEvent struct {
+	Step           string   `json:"step"`
+	Status         string   `json:"status"`
+	Reason         string   `json:"reason"`
+	Source         string   `json:"source"`
+	Rule           string   `json:"rule"`
+	RootWord       string   `json:"rootWord"`
+	SearchTerm     string   `json:"searchTerm"`
+	ResultCount    int32    `json:"resultCount"`
+	CandidateCount int32    `json:"candidateCount"`
+	Details        []string `json:"details"`
 }
 
 type GrammarOption struct {
@@ -550,6 +613,10 @@ type QuizMetadata struct {
 type QuizPair struct {
 	Greek  string `json:"greek"`
 	Answer string `json:"answer"`
+}
+
+type RandomExtendedWords struct {
+	Greek []string `json:"greek"`
 }
 
 type Reference struct {

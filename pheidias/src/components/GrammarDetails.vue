@@ -1,6 +1,6 @@
 <script>
 import { useQuery } from "@vue/apollo-composable";
-import { CheckGrammar } from "@/constants/graphql";
+import { CheckGrammar } from '@/constants/grammarGraphql';
 import { ref, watch } from "vue";
 
 export default {

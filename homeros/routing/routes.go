@@ -34,7 +34,7 @@ func InitRoutes(handlerConfig *gateway.HomerosHandler, config *gateway.TraceConf
 	})
 
 	adapters := []plato.GraphqlAdapter{
-		middleware.LogRequestDetails(handlerConfig.Streamer, config, random),
+		middleware.LogRequestDetails(handlerConfig.Streamer, handlerConfig.Hypatia, config, random),
 	}
 
 	if handlerConfig.Environment == "romaioi" {

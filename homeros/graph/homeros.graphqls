@@ -63,6 +63,7 @@ type Reference {
 
 type DeclensionTranslationResult {
   results: [Result]
+  audit: GrammarAudit
 }
 type Result {
   rootWord: String
@@ -71,11 +72,68 @@ type Result {
   word: String
 }
 
+type GrammarAudit {
+  requestId: String!
+  word: String!
+  outcome: String!
+  source: String!
+  reason: String!
+  events: [GrammarAuditEvent!]!
+}
+
+type GrammarAuditEvent {
+  step: String!
+  status: String!
+  reason: String!
+  source: String!
+  rule: String!
+  rootWord: String!
+  searchTerm: String!
+  resultCount: Int!
+  candidateCount: Int!
+  details: [String!]!
+}
+
+type DionysiosRateLimit {
+  upstreamIp: String!
+  windowSeconds: Int!
+  nextAllowedTime: String!
+}
+
+type DionysiosTextToken {
+  token: String!
+  position: Int!
+  results: [Result!]!
+  gloss: String!
+  resolved: Boolean!
+  message: String!
+}
+
+type DionysiosTextSearch {
+  searched: Boolean!
+  found: Boolean!
+  status: String!
+  message: String!
+  matchCount: Int!
+  query: String!
+  matches: [AnalyzeResult!]!
+}
+
+type DionysiosSentenceResponse {
+  sessionId: String!
+  originalText: String!
+  literalTranslation: String!
+  rateLimit: DionysiosRateLimit
+  tokens: [DionysiosTextToken!]!
+  textSearch: DionysiosTextSearch
+}
+
 extend type Query {
   analyze(rootword: String): AnalyzeTextResponse
   check(input: CheckTextRequestInput): CheckTextResponse
   create(input: CreateTextInput): Text
-  grammar(word: String): DeclensionTranslationResult
+  grammar(word: String, includeAudit: Boolean = false): DeclensionTranslationResult
+  sentence(text: String!, includeAudit: Boolean = false): DionysiosSentenceResponse!
   status: Status
   textOptions: AggregationResult
 }

@@ -119,6 +119,13 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the text is checked against the official translation$`, odysseia.theTextIsCheckedAgainstTheOfficialTranslation)
 	ctx.Step(`^the word "([^"]*)" is analyzed through the gateway$`, odysseia.theWordIsAnalyzedThroughTheGateway)
 	ctx.Step(`^a foundInText response should include results$`, odysseia.aFoundInTextResponseShouldIncludeResults)
+	ctx.Step(`^the dictionary endpoint "([^"]*)" is searched for "([^"]*)" in "([^"]*)"$`, odysseia.theDictionaryEndpointIsSearchedForIn)
+	ctx.Step(`^the dictionary endpoint "([^"]*)" is searched for "([^"]*)" in "([^"]*)" with text expansion$`, odysseia.theDictionaryEndpointIsSearchedForInWithTextExpansion)
+	ctx.Step(`^the dictionary response should contain results$`, odysseia.theDictionaryResponseShouldContainResults)
+	ctx.Step(`^the dictionary response should contain text occurrences$`, odysseia.theDictionaryResponseShouldContainTextOccurrences)
+	ctx.Step(`^the media quiz options are requested$`, odysseia.theMediaQuizOptionsAreRequested)
+	ctx.Step(`^a media quiz is created from those options$`, odysseia.aMediaQuizIsCreatedFromThoseOptions)
+	ctx.Step(`^the first media quiz option is answered$`, odysseia.theFirstMediaQuizOptionIsAnswered)
 }
 
 func TestMain(m *testing.M) {

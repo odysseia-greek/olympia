@@ -1,0 +1,57 @@
+syntax = "proto3";
+option go_package = "github.com/odysseia-greek/olympia/hypatia/proto/v1";
+
+package olympia_hypatia;
+
+service Hypatia {
+  rpc TrackEvents(RequestEventBatch) returns (TrackResponse) {}
+  rpc GetEventsBySession(SessionRequest) returns (EventsResponse) {}
+  rpc GetEventsByPath(PathRequest) returns (EventsResponse) {}
+  rpc GetRecentEvents(RecentRequest) returns (EventsResponse) {}
+  rpc Health(HealthRequest) returns (HealthResponse) {}
+}
+
+message RequestEvent {
+  string timestamp  = 1;
+  string path       = 2;
+  string method     = 3;
+  int32  status     = 4;
+  string ip         = 5;
+  string user_agent = 6;
+  string referrer   = 7;
+  string session_id = 8;
+  // Trace ID associated with the request, when tracing was sampled.
+  string trace_id   = 9;
+}
+
+message RequestEventBatch {
+  repeated RequestEvent events = 1;
+}
+
+message TrackResponse {
+  string ack = 1;
+}
+
+message SessionRequest {
+  string session_id = 1;
+}
+
+message PathRequest {
+  string path = 1;
+}
+
+message RecentRequest {
+  int32 limit = 1;
+}
+
+message EventsResponse {
+  repeated RequestEvent events = 1;
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  bool   healthy = 1;
+  string time    = 2;
+  string version = 3;
+}

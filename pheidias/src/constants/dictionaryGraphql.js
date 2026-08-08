@@ -1,5 +1,23 @@
 import gql from 'graphql-tag';
 
+export const DictionaryMeta = gql`
+  query DictionaryMeta {
+    dictionaryMeta {
+      totalRecords
+      updatedRecords
+      legacyRecords
+    }
+  }
+`;
+
+export const RandomExtendedWords = gql`
+  query RandomExtendedWords($amount: Int) {
+    randomExtendedWords(amount: $amount) {
+      greek
+    }
+  }
+`;
+
 export const DictionaryExact = gql`
   query DictionaryExact($input: ExpandableSearchQueryInput!) {
     exact(input: $input) {

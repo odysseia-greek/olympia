@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"strings"
 	"time"
@@ -17,6 +18,7 @@ import (
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"github.com/odysseia-greek/olympia/homeros/gateway"
+	pb "github.com/odysseia-greek/olympia/hypatia/proto/v1"
 
 	"github.com/odysseia-greek/agora/plato/logging"
 )
@@ -26,6 +28,10 @@ type bodyRecorder struct {
 	status int
 	buf    bytes.Buffer
 	limit  int // max bytes to store (0 = no limit)
+}
+
+type EventTracker interface {
+	TrackEvents(ctx context.Context, in *pb.RequestEventBatch) (*pb.TrackResponse, error)
 }
 
 func (r *bodyRecorder) WriteHeader(code int) {
@@ -67,10 +73,13 @@ func (r *bodyRecorder) Write(b []byte) (int, error) {
 //
 // Returns:
 // An Adapter that wraps an http.Handler and performs the described middleware actions.
-func LogRequestDetails(tracer v1.TraceService_ChorusClient, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) middleware.GraphqlAdapter {
+func LogRequestDetails(tracer v1.TraceService_ChorusClient, tracker EventTracker, traceConfig *gateway.TraceConfig, randomizer randomizer.Random) middleware.GraphqlAdapter {
 	return func(f http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			sessionId := r.Header.Get(config.SessionIdKey)
+			callerIP := getRealIP(r)
+			internalRequest := isInternalRequest(callerIP)
+			startedAt := time.Now().UTC()
 			bodyBytes, err := io.ReadAll(r.Body)
 			if err != nil {
 				http.Error(w, "Failed to read request body", http.StatusInternalServerError)
@@ -107,13 +116,13 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, traceConfig *gateway
 				Method:        r.Method,
 				Url:           r.URL.RequestURI(),
 				Host:          r.Host,
-				RemoteAddress: getRealIP(r),
+				RemoteAddress: callerIP,
 				RootQuery:     query,
 				Operation:     operationName,
 			}
 
 			for _, service := range traceConfig.OperationScores {
-				if service.Operation == operationName && shouldTrace(service.Score, randomizer) {
+				if !internalRequest && service.Operation == operationName && shouldTrace(service.Score, randomizer) {
 					traceRequest = 1
 
 					go func() {
@@ -177,7 +186,38 @@ func LogRequestDetails(tracer v1.TraceService_ChorusClient, traceConfig *gateway
 					traceID, spanID, status, dur.Milliseconds(),
 				))
 			}
+
+			traceEventID := ""
+			if traceRequest == 1 {
+				traceEventID = traceID
+			}
+			if tracker != nil && (sessionId != "" || traceEventID != "") {
+				eventPath := r.URL.Path
+				if operationName != "" {
+					eventPath = operationName
+				}
+				event := &pb.RequestEvent{
+					Timestamp: startedAt.Format(time.RFC3339Nano),
+					Path:      eventPath,
+					Method:    r.Method,
+					Status:    int32(status),
+					Ip:        callerIP,
+					UserAgent: r.UserAgent(),
+					Referrer:  r.Referer(),
+					SessionId: sessionId,
+					TraceId:   traceEventID,
+				}
+				go sendEvent(tracker, event)
+			}
 		})
+	}
+}
+
+func sendEvent(tracker EventTracker, event *pb.RequestEvent) {
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	if _, err := tracker.TrackEvents(ctx, &pb.RequestEventBatch{Events: []*pb.RequestEvent{event}}); err != nil {
+		logging.Error(fmt.Sprintf("failed to send request event to hypatia: %v", err))
 	}
 }
 
@@ -185,10 +225,15 @@ func shouldTrace(score int, random randomizer.Random) bool {
 	return random.RandomNumberBaseOne(100) < score
 }
 
+func isInternalRequest(callerIP string) bool {
+	ip := net.ParseIP(callerIP)
+	return ip != nil && (ip.IsPrivate() || ip.IsLoopback() || ip.IsLinkLocalUnicast())
+}
+
 func getRealIP(r *http.Request) string {
 	// Check if the X-Real-IP header is set by Traefik or another proxy
 	if realIP := r.Header.Get("X-Real-IP"); realIP != "" {
-		return realIP
+		return strings.TrimSpace(realIP)
 	}
 
 	// If X-Real-IP is not present, check the X-Forwarded-For header
@@ -200,5 +245,8 @@ func getRealIP(r *http.Request) string {
 	}
 
 	// If neither header is present, fall back to the standard remote address
+	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return host
+	}
 	return r.RemoteAddr
 }

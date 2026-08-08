@@ -1,32 +1,49 @@
-Feature: Validate Homeros GraphQL Gateway Functionality
-  As a Greek enthusiast
-  I want to ensure the proper functioning of the Homeros GraphQL gateway
+Feature: Smoke test the Homeros GraphQL gateway
+  As a client of Homeros
+  I want one small end-to-end check for each area of the application
+  So that broken gateway wiring is detected without duplicating service integration tests
 
-  @homeros
-  Scenario Outline: Dionysios search grammar results
+  Background:
     Given the gateway is up
-    When the grammar is checked for word "<word>" through the gateway
-    Then the declension "<declension>" should be included in the response as a gateway struct
-    Examples:
-      | declension                     | word    |
-      | 2nd plural - pres - mid - ind  | μάχεσθε |
-      | 2nd sing - pres - mid - ind    | μάχει   |
-      | inf - aorist - pas             | ἀγορευθῆναι  |
 
-  @homeros
-  Scenario: Using the gateway it should be possible to get all the options for text creation, create and answer a text
-    Given the gateway is up
+  @homeros @text
+  Scenario: Create and check a text
     When a query is made for all text options
     And that response is used to create a new text
     And the text is checked against the official translation
     Then the average levenshtein should be perfect
 
-  @homeros
-  Scenario Outline: Using the gateway words can be analysed
-    Given the gateway is up
-    When the word "<word>" is analyzed through the gateway
-    Then the response has a complete analyzes included
+  @homeros @dictionary
+  Scenario Outline: Search the dictionary through every Homeros search endpoint
+    When the dictionary endpoint "<endpoint>" is searched for "<word>" in "<language>"
+    Then the dictionary response should contain results
     Examples:
-      | word  |
-      | λόγος    |
-      | Ἀθηναῖος |
+      | endpoint | word    | language |
+      | exact    | λόγος   | Greek    |
+      | text     | λόγος   | Greek    |
+      | fuzzy    | λογος   | Greek    |
+      | partial  | λογ     | Greek    |
+      | phrase   | λόγος   | Greek    |
+      | exact    | word    | English  |
+
+  @homeros @dictionary
+  Scenario: An exact dictionary match can include occurrences in texts
+    When the dictionary endpoint "exact" is searched for "λόγος" in "Greek" with text expansion
+    Then the dictionary response should contain text occurrences
+
+  @homeros @grammar
+  Scenario Outline: Check grammar through Homeros
+    When the grammar is checked for word "<word>" through the gateway
+    Then the declension "<declension>" should be included in the response as a gateway struct
+    Examples:
+      | declension                    | word         |
+      | 2nd plural - pres - mid - ind | μάχεσθε      |
+      | 2nd sing - pres - mid - ind   | μάχει        |
+      | inf - aorist - pas            | ἀγορευθῆναι  |
+
+  @homeros @quiz
+  Scenario: Create and answer a media quiz
+    When the media quiz options are requested
+    And a media quiz is created from those options
+    And the first media quiz option is answered
+    Then the gateway should respond with a correctness

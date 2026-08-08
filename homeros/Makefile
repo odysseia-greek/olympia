@@ -15,7 +15,7 @@ GREEN := \033[1;32m
 YELLOW := \033[1;33m
 NC := \033[0m  # No Color
 
-GQLGEN = go run github.com/99designs/gqlgen generate
+GQLGEN = go tool gqlgen generate
 
 # Ensure the graph directory exists
 ensure_dirs:

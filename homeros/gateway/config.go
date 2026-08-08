@@ -10,13 +10,19 @@ import (
 	"github.com/odysseia-greek/agora/archytas"
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
+	dionysiosv1 "github.com/odysseia-greek/alexandreia/dionysios/gen/go/v1"
 	aristophanes "github.com/odysseia-greek/attike/aristophanes/comedy"
 	v1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
+	"github.com/odysseia-greek/olympia/hypatia/mouseion"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 const (
 	defaultSokratesAddress   = "http://sokrates.apologia.svc:8080/sokrates/graphql"
 	defaultAlexandrosAddress = "http://alexandros.makedonia.svc:8080/alexandros/graphql"
+	defaultHypatiaAddress    = "hypatia.olympia.svc:50061"
+	defaultDionysiosAddress  = "dionysios.alexandreia.svc:50060"
 )
 
 func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
@@ -74,6 +80,17 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 
 	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
 	alexandrosGraphqlAddress := config.StringFromEnv("ALEXANDROS_GRAPHQL_ADDRESS", defaultAlexandrosAddress)
+	hypatiaAddress := config.StringFromEnv("HYPATIA_ADDRESS", defaultHypatiaAddress)
+	hypatia, err := mouseion.NewHypatiaClient(hypatiaAddress)
+	if err != nil {
+		return nil, err
+	}
+	dionysiosAddress := config.StringFromEnv("DIONYSIOS_GRPC_ADDRESS", defaultDionysiosAddress)
+	dionysiosConnection, err := grpc.NewClient(dionysiosAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return nil, err
+	}
+	dionysios := dionysiosv1.NewDionysiosServiceClient(dionysiosConnection)
 
 	ctx, cancel := context.WithCancel(ctx)
 	elapsed := time.Since(start)
@@ -86,6 +103,8 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 - Tracer Service:      %v (Address: %s)
 - Sokrates GraphQL:    %s
 - Alexandros GraphQL:  %s
+- Dionysios gRPC:      %s
+- Hypatia:             %s
 - Homeros Version:     %s
 - Environment:         %s
 `,
@@ -93,6 +112,8 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		healthyTracer, aristophanes.DefaultAddress,
 		sokratesGraphqlAddress,
 		alexandrosGraphqlAddress,
+		dionysiosAddress,
+		hypatiaAddress,
 		version,
 		env,
 	))
@@ -100,7 +121,9 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 	return &HomerosHandler{
 		Cache:                cache,
 		HttpClients:          service,
+		Dionysios:            dionysios,
 		Streamer:             streamer,
+		Hypatia:              hypatia,
 		Randomizer:           randomizer,
 		Cancel:               cancel,
 		SokratesGraphqlUrl:   sokratesGraphqlAddress,

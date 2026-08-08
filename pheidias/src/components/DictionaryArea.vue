@@ -14,6 +14,17 @@
                   <div class="section-label">Dictionary</div>
                   <h1 id="dictionary-search-heading">Alexandros</h1>
                   <p>Search Ancient Greek, English, or Dutch entries with lexical detail, glosses, and text references.</p>
+                  <div v-if="dictionaryMetadata" class="dictionary-counts">
+                    <v-chip color="secondary" prepend-icon="mdi-book-open-page-variant" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.totalRecords) }} total
+                    </v-chip>
+                    <v-chip color="primary" prepend-icon="mdi-book-check-outline" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.updatedRecords) }} extended
+                    </v-chip>
+                    <v-chip color="triadic" prepend-icon="mdi-book-clock-outline" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.legacyRecords) }} legacy
+                    </v-chip>
+                  </div>
                 </div>
                 <v-btn
                     aria-label="Dictionary information"
@@ -42,6 +53,20 @@
                   @click:clear="clearSearch"
                   clearable
               ></v-autocomplete>
+
+              <div class="suggestion-controls">
+                <span>{{ searchHistory.length }} suggested Greek words</span>
+                <v-btn
+                    :loading="loadingRandomWords"
+                    color="secondary"
+                    prepend-icon="mdi-refresh"
+                    size="small"
+                    variant="tonal"
+                    @click="loadRandomWords"
+                >
+                  Refresh suggestions
+                </v-btn>
+              </div>
 
               <v-row dense>
                 <v-col cols="12" md="5">
@@ -384,6 +409,8 @@ import {
   DictionaryPartial,
   DictionaryFuzzy,
   DictionaryPhrase,
+  DictionaryMeta,
+  RandomExtendedWords,
 } from '../constants/dictionaryGraphql';
 
 function debounce(fn, waitMs) {
@@ -458,7 +485,7 @@ export default {
     const search = ref('');
     const selectedSearchItem = ref(null);
     const searchInputFocused = ref(false);
-    const searchHistory = ref([
+    const fallbackSearchWords = [
       'Λακεδαιμονιος',
       'λόγος',
       'ποταμός',
@@ -472,7 +499,14 @@ export default {
       'λέγω',
       'γράφω',
       'ποιέω',
-    ]);
+    ];
+    const searchHistory = ref([...fallbackSearchWords]);
+    const dictionaryMetadata = ref(null);
+    const loadingRandomWords = ref(false);
+
+    function formatRecordCount(value) {
+      return Number.isFinite(value) ? value.toLocaleString() : '0';
+    }
 
     const loading = ref(false);
     const activeRequestId = ref(0);
@@ -487,10 +521,22 @@ export default {
     const resultsContainerRef = ref();
     const topFiveRefreshToken = ref(0);
 
-    const canSearchInText = computed(() =>
-        selectedLanguage.value.toLowerCase() === 'greek' &&
-        dictionaryMode.value.toLowerCase() === 'exact'
-    );
+    function canUseExtendedMode(language = selectedLanguage.value, mode = dictionaryMode.value) {
+      return (
+          (language || '').toLowerCase() === 'greek' &&
+          normalizeMode(mode) === 'exact'
+      );
+    }
+
+    function effectiveExtendedMode() {
+      return canUseExtendedMode() && extendedMode.value;
+    }
+
+    function resetExtendedModeIfUnavailable() {
+      if (!canUseExtendedMode()) extendedMode.value = false;
+    }
+
+    const canSearchInText = computed(() => canUseExtendedMode());
 
     const headers = computed(() => {
       const base = [];
@@ -552,6 +598,33 @@ export default {
       });
     }
 
+    async function loadDictionaryMetadata() {
+      const { data } = await client.query({ query: DictionaryMeta, fetchPolicy: 'no-cache' });
+      dictionaryMetadata.value = data?.dictionaryMeta || null;
+    }
+
+    async function loadRandomWords() {
+      loadingRandomWords.value = true;
+      try {
+        const { data } = await client.query({
+          query: RandomExtendedWords,
+          variables: { amount: 10 },
+          fetchPolicy: 'no-cache',
+        });
+        const words = data?.randomExtendedWords?.greek || [];
+        const uniqueWords = [...new Set(words.filter(Boolean))];
+        if (uniqueWords.length) searchHistory.value = uniqueWords;
+      } catch (error) {
+        console.warn('Unable to refresh dictionary suggestions', error);
+      } finally {
+        loadingRandomWords.value = false;
+      }
+    }
+
+    function loadDictionaryOverview() {
+      return Promise.allSettled([loadDictionaryMetadata(), loadRandomWords()]);
+    }
+
     function updateUrl(query) {
       const currentQuery = proxy.$route.query;
       const newQuery = { ...currentQuery, ...query };
@@ -589,7 +662,7 @@ export default {
         return;
       }
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
 
       const requestId = activeRequestId.value + 1;
       activeRequestId.value = requestId;
@@ -606,7 +679,7 @@ export default {
 
         const input =
             mode === 'exact'
-                ? { word: value, expand: true, size: 10, language: languageEnum }
+                ? { word: value, expand: effectiveExtendedMode(), size: 10, language: languageEnum }
                 : { word: value, size: 10, language: languageEnum };
 
         const { data } = await client.query({
@@ -647,7 +720,7 @@ export default {
         // foundInText only on exact
         if (
             mode === 'exact' &&
-            extendedMode.value &&
+            effectiveExtendedMode() &&
             selectedLanguage.value.toLowerCase() === 'greek'
         ) {
           const fit = payload?.foundInText;
@@ -694,7 +767,7 @@ export default {
       updateUrl({
         mode: dictionaryMode.value,
         language: selectedLanguage.value,
-        extended: extendedMode.value,
+        extended: effectiveExtendedMode(),
         word: v,
       });
 
@@ -717,7 +790,7 @@ export default {
       updateUrl({
         mode: dictionaryMode.value,
         language: selectedLanguage.value,
-        extended: extendedMode.value,
+        extended: effectiveExtendedMode(),
         word: v,
       });
 
@@ -758,14 +831,14 @@ export default {
     watch(dictionaryMode, () => {
       if (suppressAutoSearch.value) return;
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
       if (search.value) commitSearch(search.value);
     });
 
     watch(selectedLanguage, () => {
       if (suppressAutoSearch.value) return;
 
-      if (!canSearchInText.value) extendedMode.value = false;
+      resetExtendedModeIfUnavailable();
       if (search.value) commitSearch(search.value);
     });
 
@@ -781,6 +854,7 @@ export default {
       if (language) selectedLanguage.value = language;
       if (mode) dictionaryMode.value = mode;
       if (extended) extendedMode.value = String(extended).toLowerCase() === 'true';
+      resetExtendedModeIfUnavailable();
 
       if (word) {
         search.value = word;
@@ -804,6 +878,7 @@ export default {
 
     onMounted(() => {
       loadHeroImage();
+      loadDictionaryOverview();
       initializeFromURL();
     });
 
@@ -823,6 +898,8 @@ export default {
       selectedSearchItem,
       searchInputFocused,
       searchHistory,
+      dictionaryMetadata,
+      loadingRandomWords,
       loading,
       rawResults,     // optional (debug)
       searchResults,
@@ -838,6 +915,8 @@ export default {
       searchLinkedWord,
       clearSearch,
       commitSearch,
+      formatRecordCount,
+      loadRandomWords,
       scrollMeTo,
     };
   },
@@ -864,6 +943,24 @@ a {
 
 .italic-text {
   font-style: italic;
+}
+
+.dictionary-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.suggestion-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  color: var(--dictionary-muted);
+  font-size: 0.875rem;
 }
 
 .dictionary-hero {

@@ -12,7 +12,7 @@ export default defineComponent({
   setup(props) {
     const { analyzeResults } = toRefs(props);
 
-    const highlightWord = (text) => {
+    const highlightWord = (text = '') => {
       const regex = /&&&(.*?)&&&/g;
       return text.replace(regex, '<span style="background-color: yellow;">$1</span>');
     };
@@ -43,7 +43,7 @@ export default defineComponent({
           </ul>
         </v-card-text>
         <v-carousel hide-delimiters show-arrows="hover" height="100%">
-          <v-carousel-item v-for="(res, resIndex) in result.results" :key="`res-${index}-${resIndex}`">
+          <v-carousel-item v-for="(res, resIndex) in (result.texts || result.results || [])" :key="`res-${index}-${resIndex}`">
             <v-card class="section-content">
               <v-card-title>{{ res.author }} - {{res.book}} Reference: {{ res.reference }}</v-card-title>
               <v-card-text>

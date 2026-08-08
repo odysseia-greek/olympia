@@ -11,7 +11,12 @@ import (
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
+	dionysiosv1 "github.com/odysseia-greek/alexandreia/dionysios/gen/go/v1"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
+
+const defaultDionysiosAddress = "dionysios.alexandreia.svc:50060"
 
 func CreateNewConfig() (*ProtagorasHandler, error) {
 	client, err := config.CreateOdysseiaClient()
@@ -19,6 +24,13 @@ func CreateNewConfig() (*ProtagorasHandler, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	dionysiosAddress := config.StringFromEnv("DIONYSIOS_GRPC_ADDRESS", defaultDionysiosAddress)
+	dionysiosConnection, err := grpc.NewClient(dionysiosAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return nil, fmt.Errorf("create Dionysios gRPC client: %w", err)
+	}
+	dionysios := dionysiosv1.NewDionysiosServiceClient(dionysiosConnection)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
@@ -35,15 +47,7 @@ func CreateNewConfig() (*ProtagorasHandler, error) {
 		case <-ticker.C:
 			elapsed := time.Since(startTime).Seconds()
 			logging.Debug(fmt.Sprintf("%vs", elapsed))
-			dionysiosResponse, err := client.Dionysios().Health("")
-			if err != nil {
-				continue
-			}
-
-			defer dionysiosResponse.Body.Close()
-
-			var healthDionysios models.Health
-			err = json.NewDecoder(dionysiosResponse.Body).Decode(&healthDionysios)
+			dionysiosResponse, err := dionysios.Health(ctx, &dionysiosv1.HealthRequest{})
 			if err != nil {
 				continue
 			}
@@ -60,12 +64,13 @@ func CreateNewConfig() (*ProtagorasHandler, error) {
 				continue
 			}
 
-			logging.Debug(fmt.Sprintf("elapsed Time: %vs, Dionysios Healthy: %v, Herodotos Healthy: %v", elapsed, healthDionysios.Healthy, healthHerodotos.Healthy))
+			logging.Debug(fmt.Sprintf("elapsed Time: %vs, Dionysios Healthy: %v, Herodotos Healthy: %v", elapsed, dionysiosResponse.GetHealthy(), healthHerodotos.Healthy))
 
-			if healthDionysios.Healthy && healthHerodotos.Healthy {
+			if dionysiosResponse.GetHealthy() && healthHerodotos.Healthy {
 				return &ProtagorasHandler{
-					Client: client,
-					Save:   saveToDisk,
+					Client:    client,
+					Dionysios: dionysios,
+					Save:      saveToDisk,
 				}, nil
 			}
 		}
