@@ -132,11 +132,25 @@ type ExtendedResponse {
     foundInText: AnalyzeTextResponse
 }
 
+type DictionaryMeta {
+    totalRecords: Int!
+    updatedRecords: Int!
+    legacyRecords: Int!
+}
+
+type RandomExtendedWords {
+    greek: [String!]!
+}
+
 # -------------------------
 # Root Query
 # -------------------------
 
 extend type Query {
+	# Dictionary size and structured-definition migration progress.
+	dictionaryMeta: DictionaryMeta!
+	# Random enriched Greek headwords for frontend previews.
+	randomExtendedWords(amount: Int = 20): RandomExtendedWords!
     # Passthrough to EukleidesService/RetrieveTopFive (global)
     counterTopFive: EukleidesTopFiveResponse!
     counterService(name: String!): EukleidesTopFive!

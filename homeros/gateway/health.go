@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 	"github.com/odysseia-greek/agora/plato/middleware"
 	plato "github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
+	dionysiosv1 "github.com/odysseia-greek/alexandreia/dionysios/gen/go/v1"
 	"github.com/odysseia-greek/attike/aristophanes/comedy"
 	arv1 "github.com/odysseia-greek/attike/aristophanes/gen/go/v1"
 	"github.com/odysseia-greek/olympia/homeros/graph/model"
@@ -35,7 +37,7 @@ func HealthProbe(w http.ResponseWriter, req *http.Request) {
 	middleware.ResponseWithJson(w, health)
 }
 
-func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
+func (h *HomerosHandler) Health(ctx context.Context, requestId string) (*model.Status, error) {
 	var waitGroup sync.WaitGroup
 	c := make(chan *healthChannel)
 
@@ -51,7 +53,7 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 		response, err := h.HttpClients.Herodotos().Health(requestId)
 		if err != nil {
 			msg := healthChannel{
-				name: "dionysios",
+				name: "herodotos",
 				apiHealth: &model.Health{
 					Healthy: BoolPtr(false),
 				},
@@ -81,7 +83,7 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 		response, err := h.HttpClients.Alexandros().Health(requestId)
 		if err != nil {
 			msg := healthChannel{
-				name: "dionysios",
+				name: "alexandros",
 				apiHealth: &model.Health{
 					Healthy: BoolPtr(false),
 				},
@@ -108,8 +110,12 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 
 	go func() {
 		defer waitGroup.Done()
-		response, err := h.HttpClients.Dionysios().Health(requestId)
-		if err != nil {
+		if h.Dionysios == nil {
+			c <- &healthChannel{name: "dionysios", apiHealth: &model.Health{Healthy: BoolPtr(false)}}
+			return
+		}
+		response, err := h.Dionysios.Health(dionysiosContext(ctx, requestId), &dionysiosv1.HealthRequest{})
+		if err != nil || response == nil {
 			msg := healthChannel{
 				name: "dionysios",
 				apiHealth: &model.Health{
@@ -119,19 +125,20 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 			c <- &msg
 			return
 		}
-		id := response.Header.Get(service.HeaderKey)
-		logging.Info(fmt.Sprintf("route: %s | %s: %s |", response.Request.URL.RequestURI(), service.HeaderKey, id))
-		defer response.Body.Close()
-
-		var health model.Health
-		err = json.NewDecoder(response.Body).Decode(&health)
-		if err != nil {
-			c <- nil
+		health := &model.Health{
+			Healthy: BoolPtr(response.GetHealthy()),
+			Time:    stringPointer(response.GetTime()),
+		}
+		if database := response.GetDatabaseHealth(); database != nil {
+			health.Database = &model.Database{
+				Healthy: BoolPtr(database.GetHealthy()), ClusterName: stringPointer(database.GetClusterName()),
+				ServerName: stringPointer(database.GetServerName()), ServerVersion: stringPointer(database.GetServerVersion()),
+			}
 		}
 
 		msg := healthChannel{
 			name:      "dionysios",
-			apiHealth: &health,
+			apiHealth: health,
 		}
 		c <- &msg
 	}()
@@ -141,6 +148,10 @@ func (h *HomerosHandler) Health(requestId string) (*model.Status, error) {
 	}
 
 	for apiHealth := range c {
+		if apiHealth == nil || apiHealth.apiHealth == nil || apiHealth.apiHealth.Healthy == nil {
+			healthy.OverallHealth = BoolPtr(false)
+			continue
+		}
 		if !*apiHealth.apiHealth.Healthy {
 			healthy.OverallHealth = BoolPtr(false)
 		}

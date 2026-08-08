@@ -5,12 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
-	"sync"
 	"time"
 
 	elastic "github.com/odysseia-greek/agora/aristoteles"
-	pb "github.com/odysseia-greek/agora/eupalinos/proto"
-	"github.com/odysseia-greek/agora/eupalinos/stomion"
+	pb "github.com/odysseia-greek/agora/eupalinos/v1"
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/transform"
@@ -25,12 +23,20 @@ type MelissosHandler struct {
 	Updated              int
 	Processed            int
 	Elastic              elastic.Client
-	Eupalinos            *stomion.QueueClient
+	Eupalinos            QueueClient
 	Channel              string
 	JobCompletionChannel string
 	DutchChannel         string
 	WaitTime             time.Duration
 	Ambassador           *diplomat.ClientAmbassador
+}
+
+type QueueClient interface {
+	EnqueueMessage(context.Context, *pb.Epistello) (*pb.EnqueueResponse, error)
+	DequeueMessage(context.Context, *pb.ChannelInfo) (*pb.Epistello, error)
+	GetQueueLength(context.Context, *pb.ChannelInfo) (*pb.QueueLength, error)
+	AcknowledgeMessage(context.Context, *pb.AcknowledgeRequest) (*pb.AcknowledgeResponse, error)
+	NackMessage(context.Context, *pb.NackRequest) (*pb.NackResponse, error)
 }
 
 const elasticTimeout = 10 * time.Second
@@ -45,7 +51,7 @@ func (m *MelissosHandler) HandleParmenides() bool {
 	//handle Parmenides channel
 	for {
 		ctx := context.Background()
-		payload := &pb.ChannelInfo{Name: m.Channel}
+		payload := &pb.ChannelInfo{Name: m.Channel, AckMode: true}
 		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
 		if err != nil {
 			logging.Info("Queue is empty. Waiting...")
@@ -63,18 +69,29 @@ func (m *MelissosHandler) HandleParmenides() bool {
 		err = json.Unmarshal([]byte(msg.Data), &word)
 		if err != nil {
 			logging.Error(err.Error())
+			m.nackMessage(ctx, m.Channel, msg.Id)
+			continue
 		}
-
-		m.Processed++
 
 		found, err := m.queryWord(word)
 		if err != nil {
 			logging.Error(err.Error())
+			m.nackMessage(ctx, m.Channel, msg.Id)
+			continue
 		}
 
 		if !found {
-			m.addWord(word)
+			if err = m.addWord(word); err != nil {
+				logging.Error(err.Error())
+				m.nackMessage(ctx, m.Channel, msg.Id)
+				continue
+			}
 		}
+
+		if !m.acknowledgeMessage(ctx, m.Channel, msg.Id) {
+			continue
+		}
+		m.Processed++
 	}
 
 	return finished
@@ -84,8 +101,9 @@ func (m *MelissosHandler) HandleDutch() bool {
 	finished := false
 	//handle Dutch channel
 	for {
-		payload := &pb.ChannelInfo{Name: m.DutchChannel}
-		msg, err := m.Eupalinos.DequeueMessage(context.Background(), payload)
+		ctx := context.Background()
+		payload := &pb.ChannelInfo{Name: m.DutchChannel, AckMode: true}
+		msg, err := m.Eupalinos.DequeueMessage(ctx, payload)
 		if err != nil {
 			logging.Info("Queue is empty. Waiting...")
 			time.Sleep(m.WaitTime)
@@ -102,17 +120,44 @@ func (m *MelissosHandler) HandleDutch() bool {
 		err = json.Unmarshal([]byte(msg.Data), &word)
 		if err != nil {
 			logging.Error(err.Error())
+			m.nackMessage(ctx, m.DutchChannel, msg.Id)
+			continue
 		}
 
 		err = m.addDutchWord(word)
 		if err != nil {
 			logging.Error(err.Error())
+			m.nackMessage(ctx, m.DutchChannel, msg.Id)
+			continue
+		}
+
+		if !m.acknowledgeMessage(ctx, m.DutchChannel, msg.Id) {
+			continue
 		}
 
 		m.Processed++
 	}
 
 	return finished
+}
+
+func (m *MelissosHandler) acknowledgeMessage(ctx context.Context, channel, id string) bool {
+	response, err := m.Eupalinos.AcknowledgeMessage(ctx, &pb.AcknowledgeRequest{Channel: channel, Id: id})
+	if err != nil {
+		logging.Error(err.Error())
+		return false
+	}
+	if !response.Acknowledged {
+		logging.Error(fmt.Sprintf("message %s was not acknowledged", id))
+		return false
+	}
+	return true
+}
+
+func (m *MelissosHandler) nackMessage(ctx context.Context, channel, id string) {
+	if _, err := m.Eupalinos.NackMessage(ctx, &pb.NackRequest{Channel: channel, Id: id}); err != nil {
+		logging.Error(err.Error())
+	}
 }
 
 func (m *MelissosHandler) addDutchWord(word models.Meros) error {
@@ -220,20 +265,58 @@ func (m *MelissosHandler) queryWord(word models.Meros) (bool, error) {
 	}
 
 	for _, hit := range response.Hits.Hits {
-		jsonHit, _ := json.Marshal(hit.Source)
-		meros, _ := models.UnmarshalMeros(jsonHit)
-		if meros.English == parsedEnglishWord || meros.English == word.English {
+		if matchesExistingWord(hit.Source, parsedEnglishWord, word.English) {
 			return true, nil
-		} else {
-			found = false
 		}
+		found = false
 	}
 
 	return found, nil
 }
 
-func (m *MelissosHandler) addWord(word models.Meros) {
-	var innerWaitGroup sync.WaitGroup
+func matchesExistingWord(source interface{}, parsedEnglishWord, originalEnglishWord string) bool {
+	// Structured lemmas are canonical. Their graded definitions are richer than
+	// the legacy top-level gloss, so a gloss mismatch must not create a duplicate.
+	if isExpandedLemma(source) {
+		return true
+	}
+
+	jsonSource, err := json.Marshal(source)
+	if err != nil {
+		return false
+	}
+	meros, err := models.UnmarshalMeros(jsonSource)
+	if err != nil {
+		return false
+	}
+	return meros.English == parsedEnglishWord || meros.English == originalEnglishWord
+}
+
+func isExpandedLemma(source interface{}) bool {
+	jsonSource, err := json.Marshal(source)
+	if err != nil {
+		return false
+	}
+
+	var lemma struct {
+		Definitions []struct {
+			Grade *int `json:"grade"`
+		} `json:"definitions"`
+	}
+	if err := json.Unmarshal(jsonSource, &lemma); err != nil {
+		return false
+	}
+
+	for _, definition := range lemma.Definitions {
+		if definition.Grade != nil {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (m *MelissosHandler) addWord(word models.Meros) error {
 	jsonifiedLogos, _ := word.Marshal()
 	ctx, cancel := elasticContext()
 	defer cancel()
@@ -241,16 +324,13 @@ func (m *MelissosHandler) addWord(word models.Meros) {
 	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
-		logging.Error(err.Error())
-		return
-	} else {
-		innerWaitGroup.Add(1)
-		go m.transformWord(word, &innerWaitGroup)
+		return err
 	}
+
+	return m.transformWord(word)
 }
 
-func (m *MelissosHandler) transformWord(word models.Meros, wg *sync.WaitGroup) {
-	defer wg.Done()
+func (m *MelissosHandler) transformWord(word models.Meros) error {
 	strippedWord := transform.RemoveAccents(word.Greek)
 	meros := models.Meros{
 		Greek:      strippedWord,
@@ -267,13 +347,11 @@ func (m *MelissosHandler) transformWord(word models.Meros, wg *sync.WaitGroup) {
 	_, err := m.Elastic.Index().CreateDocumentWithContext(ctx, m.Index, jsonifiedLogos)
 
 	if err != nil {
-		logging.Error(err.Error())
-		return
+		return err
 	}
 
 	m.Created++
-
-	return
+	return nil
 }
 
 func (m *MelissosHandler) stripMouseionWords(word string) string {

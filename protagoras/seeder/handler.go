@@ -1,6 +1,7 @@
 package seeder
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -11,13 +12,21 @@ import (
 	"github.com/odysseia-greek/agora/plato/logging"
 	"github.com/odysseia-greek/agora/plato/models"
 	"github.com/odysseia-greek/agora/plato/service"
+	dionysiosv1 "github.com/odysseia-greek/alexandreia/dionysios/gen/go/v1"
+	"google.golang.org/grpc"
 )
+
+type DionysiosClient interface {
+	Health(context.Context, *dionysiosv1.HealthRequest, ...grpc.CallOption) (*dionysiosv1.HealthResponse, error)
+	CheckGrammar(context.Context, *dionysiosv1.CheckGrammarRequest, ...grpc.CallOption) (*dionysiosv1.CheckGrammarResponse, error)
+}
 
 type ProtagorasHandler struct {
 	Save          bool
 	wordsDone     []string
 	wordsNotFound []string
 	Client        service.OdysseiaClient
+	Dionysios     DionysiosClient
 }
 
 func (p *ProtagorasHandler) Start() error {
@@ -110,20 +119,14 @@ func (p *ProtagorasHandler) loopOverAndDeclineWords(text models.Text) error {
 	doneInText := 0
 
 	for _, word := range greekWords {
-		response, err := p.Client.Dionysios().Grammar(word, "")
+		response, err := p.Dionysios.CheckGrammar(context.Background(), &dionysiosv1.CheckGrammarRequest{Word: word})
 		if err != nil {
 			p.wordsNotFound = append(p.wordsNotFound, word)
 			logging.Error(fmt.Sprintf("no result found for word: %s", word))
 			continue
 		}
 
-		var declensions models.DeclensionTranslationResults
-		err = json.NewDecoder(response.Body).Decode(&declensions)
-		if err != nil {
-			return err
-		}
-
-		if len(declensions.Results) > 0 {
+		if len(response.GetResults()) > 0 {
 			p.wordsDone = append(p.wordsDone, word)
 			doneInText++
 		} else {

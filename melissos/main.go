@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	pbe "github.com/odysseia-greek/agora/eupalinos/proto"
+	pbe "github.com/odysseia-greek/agora/eupalinos/v1"
 	"github.com/odysseia-greek/agora/plato/logging"
 	pb "github.com/odysseia-greek/delphi/aristides/proto"
 	"github.com/odysseia-greek/olympia/melissos/monos"

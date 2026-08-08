@@ -14,6 +14,17 @@
                   <div class="section-label">Dictionary</div>
                   <h1 id="dictionary-search-heading">Alexandros</h1>
                   <p>Search Ancient Greek, English, or Dutch entries with lexical detail, glosses, and text references.</p>
+                  <div v-if="dictionaryMetadata" class="dictionary-counts">
+                    <v-chip color="secondary" prepend-icon="mdi-book-open-page-variant" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.totalRecords) }} total
+                    </v-chip>
+                    <v-chip color="primary" prepend-icon="mdi-book-check-outline" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.updatedRecords) }} extended
+                    </v-chip>
+                    <v-chip color="triadic" prepend-icon="mdi-book-clock-outline" variant="tonal">
+                      {{ formatRecordCount(dictionaryMetadata.legacyRecords) }} legacy
+                    </v-chip>
+                  </div>
                 </div>
                 <v-btn
                     aria-label="Dictionary information"
@@ -42,6 +53,20 @@
                   @click:clear="clearSearch"
                   clearable
               ></v-autocomplete>
+
+              <div class="suggestion-controls">
+                <span>{{ searchHistory.length }} suggested Greek words</span>
+                <v-btn
+                    :loading="loadingRandomWords"
+                    color="secondary"
+                    prepend-icon="mdi-refresh"
+                    size="small"
+                    variant="tonal"
+                    @click="loadRandomWords"
+                >
+                  Refresh suggestions
+                </v-btn>
+              </div>
 
               <v-row dense>
                 <v-col cols="12" md="5">
@@ -384,6 +409,8 @@ import {
   DictionaryPartial,
   DictionaryFuzzy,
   DictionaryPhrase,
+  DictionaryMeta,
+  RandomExtendedWords,
 } from '../constants/dictionaryGraphql';
 
 function debounce(fn, waitMs) {
@@ -458,7 +485,7 @@ export default {
     const search = ref('');
     const selectedSearchItem = ref(null);
     const searchInputFocused = ref(false);
-    const searchHistory = ref([
+    const fallbackSearchWords = [
       'Λακεδαιμονιος',
       'λόγος',
       'ποταμός',
@@ -472,7 +499,14 @@ export default {
       'λέγω',
       'γράφω',
       'ποιέω',
-    ]);
+    ];
+    const searchHistory = ref([...fallbackSearchWords]);
+    const dictionaryMetadata = ref(null);
+    const loadingRandomWords = ref(false);
+
+    function formatRecordCount(value) {
+      return Number.isFinite(value) ? value.toLocaleString() : '0';
+    }
 
     const loading = ref(false);
     const activeRequestId = ref(0);
@@ -562,6 +596,33 @@ export default {
       import('@/assets/alexander.webp').then((module) => {
         dictionaryHeroImage.value = module.default;
       });
+    }
+
+    async function loadDictionaryMetadata() {
+      const { data } = await client.query({ query: DictionaryMeta, fetchPolicy: 'no-cache' });
+      dictionaryMetadata.value = data?.dictionaryMeta || null;
+    }
+
+    async function loadRandomWords() {
+      loadingRandomWords.value = true;
+      try {
+        const { data } = await client.query({
+          query: RandomExtendedWords,
+          variables: { amount: 10 },
+          fetchPolicy: 'no-cache',
+        });
+        const words = data?.randomExtendedWords?.greek || [];
+        const uniqueWords = [...new Set(words.filter(Boolean))];
+        if (uniqueWords.length) searchHistory.value = uniqueWords;
+      } catch (error) {
+        console.warn('Unable to refresh dictionary suggestions', error);
+      } finally {
+        loadingRandomWords.value = false;
+      }
+    }
+
+    function loadDictionaryOverview() {
+      return Promise.allSettled([loadDictionaryMetadata(), loadRandomWords()]);
     }
 
     function updateUrl(query) {
@@ -817,6 +878,7 @@ export default {
 
     onMounted(() => {
       loadHeroImage();
+      loadDictionaryOverview();
       initializeFromURL();
     });
 
@@ -836,6 +898,8 @@ export default {
       selectedSearchItem,
       searchInputFocused,
       searchHistory,
+      dictionaryMetadata,
+      loadingRandomWords,
       loading,
       rawResults,     // optional (debug)
       searchResults,
@@ -851,6 +915,8 @@ export default {
       searchLinkedWord,
       clearSearch,
       commitSearch,
+      formatRecordCount,
+      loadRandomWords,
       scrollMeTo,
     };
   },
@@ -877,6 +943,24 @@ a {
 
 .italic-text {
   font-style: italic;
+}
+
+.dictionary-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.suggestion-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  color: var(--dictionary-muted);
+  font-size: 0.875rem;
 }
 
 .dictionary-hero {
