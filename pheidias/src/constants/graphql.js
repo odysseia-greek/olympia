@@ -1,17 +1,15 @@
 import gql from "graphql-tag";
 
 export const HerodotosOptions = gql`
-    query textOptions {
-        textOptions {
+    query CorpusOptions {
+        corpusOptions {
             authors {
-                key
+                name
                 books {
-                    key
+                    name
                     references {
-                        key
-                        sections {
-                            key
-                        }
+                        name
+                        sections
                     }
                 }
             }
@@ -20,12 +18,14 @@ export const HerodotosOptions = gql`
 `
 
 export const HerodotosCreate = gql`
-    query create($input: CreateTextInput!) {
-        create(input: $input) {
+    query CorpusText($input: TextInput!) {
+        corpusText(input: $input) {
             author
             book
+            type
             reference
-            rhemai {
+            perseusTextLink
+            passages {
                 greek
                 section
                 translations
@@ -35,8 +35,8 @@ export const HerodotosCreate = gql`
 `
 
 export const HerodotosCheck = gql`
-    query check($input: CheckTextRequestInput!) {
-        check(input: $input) {
+    query CheckText($input: CheckTextInput!) {
+        checkText(input: $input) {
             averageLevenshteinPercentage
             sections {
                 section
@@ -48,6 +48,56 @@ export const HerodotosCheck = gql`
                 source
                 provided
             }
+        }
+    }
+`
+
+export const HerodotosChapterOptions = gql`
+    query ChapterOptions {
+        chapterOptions {
+            chapters {
+                chapter
+                title
+                order
+                level
+            }
+        }
+    }
+`
+
+export const HerodotosChapter = gql`
+    query Chapter($chapter: String!) {
+        chapter(chapter: $chapter) {
+            chapter
+            title
+            description
+            context
+            order
+            level
+            grammar {
+                grammar
+                title
+                explanation
+                example { greek translation note }
+            }
+            vocabulary { greek translation }
+            texts {
+                text
+                title
+                type
+                greek
+                readingHints
+                source { author work reference dialect }
+            }
+        }
+    }
+`
+
+export const HerodotosCheckChapter = gql`
+    query CheckChapter($input: CheckChapterInput!) {
+        checkChapter(input: $input) {
+            chapter
+            texts { text sourceText actualText learnerText }
         }
     }
 `

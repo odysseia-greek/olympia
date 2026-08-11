@@ -21,6 +21,7 @@ import (
 const (
 	defaultSokratesAddress   = "http://sokrates.apologia.svc:8080/sokrates/graphql"
 	defaultAlexandrosAddress = "http://alexandros.makedonia.svc:8080/alexandros/graphql"
+	defaultHerodotosAddress  = "http://herodotos.ionia.svc:8080/herodotos/graphql"
 	defaultHypatiaAddress    = "hypatia.olympia.svc:50061"
 	defaultDionysiosAddress  = "dionysios.alexandreia.svc:50060"
 )
@@ -80,6 +81,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 
 	sokratesGraphqlAddress := config.StringFromEnv("SOKRATES_GRAPHQL_ADDRESS", defaultSokratesAddress)
 	alexandrosGraphqlAddress := config.StringFromEnv("ALEXANDROS_GRAPHQL_ADDRESS", defaultAlexandrosAddress)
+	herodotosGraphqlAddress := config.StringFromEnv("HERODOTOS_GRAPHQL_ADDRESS", defaultHerodotosAddress)
 	hypatiaAddress := config.StringFromEnv("HYPATIA_ADDRESS", defaultHypatiaAddress)
 	hypatia, err := mouseion.NewHypatiaClient(hypatiaAddress)
 	if err != nil {
@@ -103,6 +105,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 - Tracer Service:      %v (Address: %s)
 - Sokrates GraphQL:    %s
 - Alexandros GraphQL:  %s
+- Herodotos GraphQL:   %s
 - Dionysios gRPC:      %s
 - Hypatia:             %s
 - Homeros Version:     %s
@@ -112,6 +115,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		healthyTracer, aristophanes.DefaultAddress,
 		sokratesGraphqlAddress,
 		alexandrosGraphqlAddress,
+		herodotosGraphqlAddress,
 		dionysiosAddress,
 		hypatiaAddress,
 		version,
@@ -128,6 +132,7 @@ func CreateNewConfig(ctx context.Context) (*HomerosHandler, error) {
 		Cancel:               cancel,
 		SokratesGraphqlUrl:   sokratesGraphqlAddress,
 		AlexandrosGraphqlUrl: alexandrosGraphqlAddress,
+		HerodotosGraphqlUrl:  herodotosGraphqlAddress,
 		Version:              version,
 		Environment:          env,
 	}, nil

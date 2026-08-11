@@ -46,7 +46,7 @@ const routerOptions = [
         path: "/texts",
         view: "Herodotos",
         name: "Herodotos",
-        query: ["author", "book", "reference"],
+        query: ["mode", "chapter", "author", "book", "reference"],
     },
     {
         path: "/dictionary",

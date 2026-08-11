@@ -186,7 +186,7 @@
                   <v-card-subtitle><v-icon>mdi-information</v-icon>Did you know? You can click each Greek word!</v-card-subtitle>
                 </div>
                 <GrammarDetails :clickedWord="clickedWord" :forceUpdate="forceUpdate" />
-                <v-row v-for="rhema in resultData.create.rhemai" :key="rhema.section" class="rhema-section" v-bind:align="mobileView ? 'center' : undefined">
+                <v-row v-for="rhema in resultData.corpusText.passages" :key="rhema.section" class="rhema-section" v-bind:align="mobileView ? 'center' : undefined">
                   <v-col :cols="12" :md="6">
                     <p><strong>Section {{ rhema.section }}</strong></p>
                     <p>
@@ -357,7 +357,19 @@ export default {
 
     watchEffect(() => {
       if (result.value) {
-        authors.value = result.value.textOptions.authors;
+        authors.value = result.value.corpusOptions.authors.map((author) => ({
+          ...author,
+          key: author.name,
+          books: author.books.map((book) => ({
+            ...book,
+            key: book.name,
+            references: book.references.map((reference) => ({
+              ...reference,
+              key: reference.name,
+              sections: reference.sections.map((section) => ({ key: section })),
+            })),
+          })),
+        }));
 
         if (selectedAuthor.value) {
           const index = authors.value.findIndex((authorList) =>
@@ -402,10 +414,10 @@ export default {
           });
 
           onResult((response) => {
-            if (response.data && response.data.create) {
+            if (response.data && response.data.corpusText) {
               resultData.value = response.data;
               translations.value = {};
-              response.data.create.rhemai.forEach((rhema) => {
+              response.data.corpusText.passages.forEach((rhema) => {
                 translations.value[rhema.section] = '';
               });
               if (pendingScrollTarget.value) {
@@ -513,7 +525,7 @@ export default {
     };
 
     const totalGreekTextLength = computed(() => {
-      return (resultData.value?.create?.rhemai || [])
+      return (resultData.value?.corpusText?.passages || [])
           .map((rhema) => rhema.greek || '')
           .join(' ')
           .replace(/\s+/g, '')
@@ -574,7 +586,7 @@ export default {
         const { onResult, onError } = useQuery(HerodotosCheck, variables);
         onResult((response) => {
           if (response.data) {
-            translationResults.value = response.data.check;
+            translationResults.value = response.data.checkText;
           } else {
             translationResults.value = null;
           }
