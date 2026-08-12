@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV === 'local') {
-    url = 'http://byzantium.odysseia-greek:4900/graphql';
+    url = 'http://byzantion.odysseia-greek:4900/graphql';
 }
 
 // Create the HTTP link for the Apollo client

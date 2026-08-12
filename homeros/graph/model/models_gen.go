@@ -13,10 +13,6 @@ type QuizSection interface {
 	IsQuizSection()
 }
 
-type AggregateResult struct {
-	Themes []*Themes `json:"themes,omitempty"`
-}
-
 type AggregatedHealthResponse struct {
 	Healthy  *bool            `json:"healthy,omitempty"`
 	Time     *string          `json:"time,omitempty"`
@@ -26,10 +22,6 @@ type AggregatedHealthResponse struct {
 
 type AggregatedOptions struct {
 	Themes []*Theme `json:"themes,omitempty"`
-}
-
-type AggregationResult struct {
-	Authors []*ESAuthor `json:"authors,omitempty"`
 }
 
 type AnalyzeResult struct {
@@ -47,10 +39,10 @@ type AnalyzeTextResponse struct {
 }
 
 type AnswerSection struct {
-	AnswerSentence        *string `json:"answerSentence,omitempty"`
-	LevenshteinPercentage *string `json:"levenshteinPercentage,omitempty"`
-	QuizSentence          *string `json:"quizSentence,omitempty"`
-	Section               *string `json:"section,omitempty"`
+	Section               string `json:"section"`
+	LevenshteinPercentage string `json:"levenshteinPercentage"`
+	QuizSentence          string `json:"quizSentence"`
+	AnswerSentence        string `json:"answerSentence"`
 }
 
 type AuthorBasedAnswerInput struct {
@@ -113,17 +105,78 @@ type AuthorBasedWordFormsResponse struct {
 	Forms []*AuthorBasedWordForm `json:"forms,omitempty"`
 }
 
-type CheckTextRequestInput struct {
-	Translations []*TranslationsInput `json:"translations,omitempty"`
-	Author       *string              `json:"author,omitempty"`
-	Book         *string              `json:"book,omitempty"`
-	Reference    *string              `json:"reference,omitempty"`
+type Chapter struct {
+	Chapter     string         `json:"chapter"`
+	Title       string         `json:"title"`
+	Description string         `json:"description"`
+	Context     string         `json:"context"`
+	Order       int32          `json:"order"`
+	Level       int32          `json:"level"`
+	Grammar     []*Grammar     `json:"grammar"`
+	Vocabulary  []*Vocabulary  `json:"vocabulary"`
+	Texts       []*ChapterText `json:"texts"`
 }
 
-type CheckTextResponse struct {
-	AverageLevenshteinPercentage *string          `json:"averageLevenshteinPercentage,omitempty"`
-	PossibleTypos                []*Typo          `json:"possibleTypos,omitempty"`
-	Sections                     []*AnswerSection `json:"sections,omitempty"`
+type ChapterAnswerInput struct {
+	Text        string `json:"text"`
+	LearnerText string `json:"learnerText"`
+}
+
+type ChapterOption struct {
+	Chapter string `json:"chapter"`
+	Title   string `json:"title"`
+	Order   int32  `json:"order"`
+	Level   int32  `json:"level"`
+}
+
+type ChapterOptions struct {
+	Chapters []*ChapterOption `json:"chapters"`
+}
+
+type ChapterText struct {
+	Text         string             `json:"text"`
+	Title        string             `json:"title"`
+	Type         string             `json:"type"`
+	Source       *ChapterTextSource `json:"source"`
+	Greek        string             `json:"greek"`
+	ReadingHints []string           `json:"readingHints"`
+}
+
+type ChapterTextSource struct {
+	Author    string `json:"author"`
+	Work      string `json:"work"`
+	Reference string `json:"reference"`
+	Dialect   string `json:"dialect"`
+}
+
+type CheckChapterInput struct {
+	Chapter string                `json:"chapter"`
+	Answers []*ChapterAnswerInput `json:"answers"`
+}
+
+type CheckChapterResult struct {
+	Chapter string                `json:"chapter"`
+	Texts   []*CheckedChapterText `json:"texts"`
+}
+
+type CheckTextInput struct {
+	Author       string                    `json:"author"`
+	Book         string                    `json:"book"`
+	Reference    string                    `json:"reference"`
+	Translations []*TranslationAnswerInput `json:"translations"`
+}
+
+type CheckTextResult struct {
+	AverageLevenshteinPercentage string           `json:"averageLevenshteinPercentage"`
+	Sections                     []*AnswerSection `json:"sections"`
+	PossibleTypos                []*Typo          `json:"possibleTypos"`
+}
+
+type CheckedChapterText struct {
+	Text        string `json:"text"`
+	SourceText  string `json:"sourceText"`
+	ActualText  string `json:"actualText"`
+	LearnerText string `json:"learnerText"`
 }
 
 type ComprehensiveResponse struct {
@@ -145,18 +198,23 @@ type Coordinates struct {
 	Y *float64 `json:"y,omitempty"`
 }
 
-type CreateTextInput struct {
-	Author    *string `json:"author,omitempty"`
-	Book      *string `json:"book,omitempty"`
-	Reference *string `json:"reference,omitempty"`
-	Section   *string `json:"section,omitempty"`
+type CorpusAuthor struct {
+	Name  string        `json:"name"`
+	Books []*CorpusBook `json:"books"`
 }
 
-type Database struct {
-	ClusterName   *string `json:"clusterName,omitempty"`
-	Healthy       *bool   `json:"healthy,omitempty"`
-	ServerName    *string `json:"serverName,omitempty"`
-	ServerVersion *string `json:"serverVersion,omitempty"`
+type CorpusBook struct {
+	Name       string             `json:"name"`
+	References []*CorpusReference `json:"references"`
+}
+
+type CorpusOptions struct {
+	Authors []*CorpusAuthor `json:"authors"`
+}
+
+type CorpusReference struct {
+	Name     string   `json:"name"`
+	Sections []string `json:"sections"`
 }
 
 type DatabaseInfo struct {
@@ -273,16 +331,6 @@ type DionysiosTextToken struct {
 	Message  string    `json:"message"`
 }
 
-type ESAuthor struct {
-	Books []*ESBook `json:"books,omitempty"`
-	Key   *string   `json:"key,omitempty"`
-}
-
-type ESBook struct {
-	Key        *string      `json:"key,omitempty"`
-	References []*Reference `json:"references,omitempty"`
-}
-
 type EukleidesTopFive struct {
 	ServiceName string  `json:"serviceName"`
 	Word        string  `json:"word"`
@@ -316,6 +364,13 @@ type FinalTranslationQuiz struct {
 }
 
 func (FinalTranslationQuiz) IsQuizSection() {}
+
+type Grammar struct {
+	Grammar     string          `json:"grammar"`
+	Title       string          `json:"title"`
+	Explanation string          `json:"explanation"`
+	Example     *GrammarExample `json:"example,omitempty"`
+}
 
 type GrammarAnswer struct {
 	Correct      *bool                `json:"correct,omitempty"`
@@ -357,6 +412,12 @@ type GrammarAuditEvent struct {
 	ResultCount    int32    `json:"resultCount"`
 	CandidateCount int32    `json:"candidateCount"`
 	Details        []string `json:"details"`
+}
+
+type GrammarExample struct {
+	Greek       string `json:"greek"`
+	Translation string `json:"translation"`
+	Note        string `json:"note"`
 }
 
 type GrammarOption struct {
@@ -408,9 +469,9 @@ type GrammarThemes struct {
 }
 
 type Health struct {
-	Database *Database `json:"database,omitempty"`
-	Healthy  *bool     `json:"healthy,omitempty"`
-	Time     *string   `json:"time,omitempty"`
+	Healthy bool   `json:"healthy"`
+	Time    string `json:"time"`
+	Version string `json:"version"`
 }
 
 type HealthResponse struct {
@@ -588,6 +649,12 @@ type PageInfo struct {
 	Total int32 `json:"total"`
 }
 
+type Passage struct {
+	Greek        string   `json:"greek"`
+	Translations []string `json:"translations"`
+	Section      string   `json:"section"`
+}
+
 type ProgressEntry struct {
 	Greek          *string `json:"greek,omitempty"`
 	Translation    *string `json:"translation,omitempty"`
@@ -619,11 +686,6 @@ type RandomExtendedWords struct {
 	Greek []string `json:"greek"`
 }
 
-type Reference struct {
-	Key      *string    `json:"key,omitempty"`
-	Sections []*Section `json:"sections,omitempty"`
-}
-
 type Result struct {
 	RootWord     *string   `json:"rootWord,omitempty"`
 	Rule         *string   `json:"rule,omitempty"`
@@ -649,18 +711,9 @@ type SearchResponse struct {
 	PageInfo *PageInfo `json:"pageInfo"`
 }
 
-type Section struct {
-	Key *string `json:"key,omitempty"`
-}
-
 type Segment struct {
 	Name   *string  `json:"name,omitempty"`
 	MaxSet *float64 `json:"maxSet,omitempty"`
-}
-
-type Segments struct {
-	MaxSet *int32  `json:"maxSet,omitempty"`
-	Name   *string `json:"name,omitempty"`
 }
 
 type ServiceHealth struct {
@@ -676,13 +729,6 @@ type Speaker struct {
 	Translation *string `json:"translation,omitempty"`
 }
 
-// The way to check whether backend apis are available
-type Status struct {
-	Dionysios     *Health `json:"dionysios,omitempty"`
-	Herodotos     *Health `json:"herodotos,omitempty"`
-	OverallHealth *bool   `json:"overallHealth,omitempty"`
-}
-
 type StructureQuiz struct {
 	Title    string   `json:"title"`
 	Text     string   `json:"text"`
@@ -695,12 +741,19 @@ type StructureQuiz struct {
 func (StructureQuiz) IsQuizSection() {}
 
 type Text struct {
-	Author          *string  `json:"author,omitempty"`
-	Book            *string  `json:"book,omitempty"`
-	PerseusTextLink *string  `json:"perseusTextLink,omitempty"`
-	Reference       *string  `json:"reference,omitempty"`
-	Rhemai          []*Rhema `json:"rhemai,omitempty"`
-	Type            *string  `json:"type,omitempty"`
+	Author          string     `json:"author"`
+	Book            string     `json:"book"`
+	Type            string     `json:"type"`
+	Reference       string     `json:"reference"`
+	PerseusTextLink string     `json:"perseusTextLink"`
+	Passages        []*Passage `json:"passages"`
+}
+
+type TextInput struct {
+	Author    string  `json:"author"`
+	Book      string  `json:"book"`
+	Reference *string `json:"reference,omitempty"`
+	Section   *string `json:"section,omitempty"`
 }
 
 type Theme struct {
@@ -712,14 +765,9 @@ type ThemedOptions struct {
 	Themes []*MultipleTheme `json:"themes,omitempty"`
 }
 
-type Themes struct {
-	Name     *string     `json:"name,omitempty"`
-	Segments []*Segments `json:"segments,omitempty"`
-}
-
-type TranslationsInput struct {
-	Section     *string `json:"section,omitempty"`
-	Translation *string `json:"translation,omitempty"`
+type TranslationAnswerInput struct {
+	Section     string `json:"section"`
+	Translation string `json:"translation"`
 }
 
 type TriviaQuiz struct {
@@ -732,12 +780,17 @@ type TriviaQuiz struct {
 func (TriviaQuiz) IsQuizSection() {}
 
 type Typo struct {
-	Provided *string `json:"provided,omitempty"`
-	Source   *string `json:"source,omitempty"`
+	Source   string `json:"source"`
+	Provided string `json:"provided"`
 }
 
 type VerbInfo struct {
 	PrincipalParts []string `json:"principalParts"`
+}
+
+type Vocabulary struct {
+	Greek       string `json:"greek"`
+	Translation string `json:"translation"`
 }
 
 type Language string

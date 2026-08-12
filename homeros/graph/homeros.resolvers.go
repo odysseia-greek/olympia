@@ -7,8 +7,6 @@ package graph
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 
 	"github.com/odysseia-greek/agora/plato/config"
 	"github.com/odysseia-greek/olympia/homeros/graph/model"
@@ -18,26 +16,6 @@ import (
 func (r *queryResolver) Analyze(ctx context.Context, rootword *string) (*model.AnalyzeTextResponse, error) {
 	requestID, _ := ctx.Value(config.HeaderKey).(string)
 	return r.Resolver.Handler.Analyze(ctx, *rootword, requestID)
-}
-
-// Check is the resolver for the check field.
-func (r *queryResolver) Check(ctx context.Context, input *model.CheckTextRequestInput) (*model.CheckTextResponse, error) {
-	requestID, _ := ctx.Value(config.HeaderKey).(string)
-	jsonBody, err := json.Marshal(input)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
-	}
-	return r.Resolver.Handler.CheckText(jsonBody, requestID)
-}
-
-// Create is the resolver for the create field.
-func (r *queryResolver) Create(ctx context.Context, input *model.CreateTextInput) (*model.Text, error) {
-	requestID, _ := ctx.Value(config.HeaderKey).(string)
-	jsonBody, err := json.Marshal(input)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal input to JSON: %v", err)
-	}
-	return r.Resolver.Handler.CreateText(jsonBody, requestID)
 }
 
 // Grammar is the resolver for the grammar field.
@@ -53,16 +31,4 @@ func (r *queryResolver) Sentence(ctx context.Context, text string, includeAudit 
 	sessionID, _ := ctx.Value(config.SessionIdKey).(string)
 	audit := includeAudit != nil && *includeAudit
 	return r.Resolver.Handler.Sentence(ctx, text, sessionID, requestID, audit)
-}
-
-// Status is the resolver for the status field.
-func (r *queryResolver) Status(ctx context.Context) (*model.Status, error) {
-	requestID, _ := ctx.Value(config.HeaderKey).(string)
-	return r.Resolver.Handler.Health(ctx, requestID)
-}
-
-// TextOptions is the resolver for the textOptions field.
-func (r *queryResolver) TextOptions(ctx context.Context) (*model.AggregationResult, error) {
-	requestID, _ := ctx.Value(config.HeaderKey).(string)
-	return r.Resolver.Handler.HerodotosOptions(requestID)
 }

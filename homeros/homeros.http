@@ -2,9 +2,12 @@
 # Switch endpoint by changing @host to {{productionHost}} or {{hellasHost}}.
 
 @productionHost = https://odysseia-greek.com/graphql
+@localHost = http://byzantion.odysseia-greek:4900/graphql
 @hellasHost = http://hellas.odysseia-greek:4900/graphql
-@host = {{productionHost}}
+@host = {{localHost}}
 @requestId = homeros-http-client
+@chapter = chapter-02
+@chapterText = john-1-1
 # Stable UUID, matching the boule value created by Pheidias quiz mode.
 @sessionId = 6fb24c4c-e001-4f78-a530-1335e0fc350c
 
@@ -17,22 +20,22 @@ X-Request-ID: {{requestId}}
   "query": "query Health { health { healthy time version services { name healthy version databaseInfo { healthy clusterName serverName serverVersion } } } }"
 }
 
-### Gateway status
+### Herodotos service health
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
 
 {
-  "query": "query Status { status { overallHealth dionysios { healthy time database { healthy clusterName serverName serverVersion } } herodotos { healthy time database { healthy clusterName serverName serverVersion } } } }"
+  "query": "query HerodotosHealth { herodotosHealth { healthy time version } corpusHealth { healthy time version } }"
 }
 
-### Text options
+### Herodotos corpus options
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
 
 {
-  "query": "query TextOptions { textOptions { authors { key books { key references { key sections { key } } } } } }"
+  "query": "query CorpusOptions { corpusOptions { authors { name books { name references { name sections } } } } }"
 }
 
 ### Analyze root word with Dionysios Research
@@ -95,39 +98,96 @@ X-Request-ID: {{requestId}}
   }
 }
 
-### Create text
+### Herodotos chapter options
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
 
 {
-  "query": "query CreateText($input: CreateTextInput) { create(input: $input) { author book reference perseusTextLink type rhemai { greek section translations } } }",
+  "query": "query ChapterOptions { chapterOptions { chapters { chapter title order level } } }"
+}
+
+### Herodotos chapter
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query Chapter($chapter: String!) { chapter(chapter: $chapter) { chapter title description context order level grammar { grammar title explanation example { greek translation note } } vocabulary { greek translation } texts { text title type greek readingHints source { author work reference dialect } } } }",
+  "variables": {
+    "chapter": "{{chapter}}"
+  }
+}
+
+### Check a Herodotos chapter answer
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query CheckChapter($input: CheckChapterInput!) { checkChapter(input: $input) { chapter texts { text sourceText actualText learnerText } } }",
   "variables": {
     "input": {
-      "author": "homer",
-      "book": "iliad",
-      "reference": "1",
-      "section": "1"
+      "chapter": "{{chapter}}",
+      "answers": [
+        {
+          "text": "{{chapterText}}",
+          "learnerText": "In the beginning was the Word"
+        }
+      ]
     }
   }
 }
 
-### Check translations
+### Retrieve a complete corpus text
 POST {{host}}
 Content-Type: application/json
 X-Request-ID: {{requestId}}
 
 {
-  "query": "query CheckText($input: CheckTextRequestInput) { check(input: $input) { averageLevenshteinPercentage possibleTypos { provided source } sections { answerSentence levenshteinPercentage quizSentence section } } }",
+  "query": "query CorpusText($input: TextInput!) { corpusText(input: $input) { author book type reference perseusTextLink passages { section greek translations } } }",
   "variables": {
     "input": {
-      "author": "homer",
-      "book": "iliad",
-      "reference": "1",
+      "author": "Herodotos",
+      "book": "Histories",
+      "reference": "1.1"
+    }
+  }
+}
+
+### Retrieve one corpus section
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query CorpusSection($input: TextInput!) { corpusText(input: $input) { author book type reference perseusTextLink passages { section greek translations } } }",
+  "variables": {
+    "input": {
+      "author": "Herodotos",
+      "book": "Histories",
+      "reference": "1.1",
+      "section": "a"
+    }
+  }
+}
+
+### Check a corpus translation
+POST {{host}}
+Content-Type: application/json
+X-Request-ID: {{requestId}}
+
+{
+  "query": "query CheckText($input: CheckTextInput!) { checkText(input: $input) { averageLevenshteinPercentage sections { section levenshteinPercentage quizSentence answerSentence } possibleTypos { source provided } } }",
+  "variables": {
+    "input": {
+      "author": "Herodotos",
+      "book": "Histories",
+      "reference": "1.1",
       "translations": [
         {
-          "section": "1",
-          "translation": "Sing, goddess, the anger of Peleus' son Achilles."
+          "section": "a",
+          "translation": "This is a sentence"
         }
       ]
     }

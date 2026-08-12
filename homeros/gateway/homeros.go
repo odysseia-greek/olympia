@@ -29,6 +29,7 @@ type HomerosHandler struct {
 	Randomizer           randomizer.Random
 	SokratesGraphqlUrl   string
 	AlexandrosGraphqlUrl string
+	HerodotosGraphqlUrl  string
 	Version              string
 	Environment          string
 }
